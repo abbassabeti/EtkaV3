@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/etkaThemeColor</color>
+    <color name="colorPrimaryDark">@color/etkaThemeDarkColor</color>
+    <!--<color name="colorAccent">#88CE4619</color>-->
+    <color name="colorAccent">@color/white</color>
+
+    <color name="etkaThemeColor">#EC4F1B</color>
+    <color name="etkaThemeDarkColor">#CE4619</color>
+
+    <color name="mainBackgeoundColor">#F1F1F1</color>
+
+    <color name="white">@android:color/white</color>
+    <color name="black">@android:color/black</color>
+    <color name="transparrent">@android:color/transparent</color>
+
+    <color name="lightGray">#e5e5e5</color>
+    <color name="darkGray">#626262</color>
+
+    <color name="lightYellow">#FFFAE4</color>
+
+
+</resources>

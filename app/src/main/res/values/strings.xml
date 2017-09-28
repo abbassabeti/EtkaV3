@@ -1,0 +1,38 @@
+<resources>
+    <string name="applicationName">EtkaV3</string>
+
+    <string name="home">خانه</string>
+    <string name="search">جستجو</string>
+    <string name="map">نقشه</string>
+    <string name="profile">پروفایل</string>
+    <string name="registerWithyourEmail">با ایمیل خود ثبت نام کنید</string>
+    <string name="ifRegisteredThenLogin">اگر کارت باشگاه مشتریان اتکا دارید و یا قبلا ثبت نام کرده اید، وارد شوید</string>
+    <string name="performSearchLikeChamranStore">جستجو کنید... مثلا فروشگاه چمران</string>
+    <string name="sorting">مرتب سازی</string>
+    <string name="filtering">فیلتر کردن</string>
+    <string name="brandOrdered">بر اساس برند</string>
+    <string name="topRate">بیشترین امتیاز</string>
+    <string name="topOffer">بیشترین تخفیف(فروش ویژه)</string>
+    <string name="topSales">پر فروش ترین</string>
+    <string name="newest">جدید ترین</string>
+    <string name="profileBarcodeMessage">برای دریافت امتیاز اقلام موجود در سبد خرید خود، پس از پرداخت مبلغ، بارکد زیر را به صندوق دار ارائه دهید</string>
+    <string name="profileConvertRateMessage">شما می توانید اعتبار کارت باشگاه مشتریان خود را به مبلغی متناسب با امتیاز خود افزایش داده و در خرید بعدی از آن استفاده کنید</string>
+    <string name="resetPassword">بازگردانی رمز عبور</string>
+    <string name="custumerClubCardNumber">شماره کارت باشگاه مشتریان</string>
+    <string name="mobilePhoneNumber">شماره موبایل</string>
+    <string name="yourEmailAddress">آدرس ایمیل شما</string>
+    <string name="send">ارسال</string>
+    <string name="enter">ورود</string>
+    <string name="iHaveEtkaClubCard">کارت باشگاه مشتریان اتکا دارم</string>
+    <string name="notRegistered_registerNow">هنوز عضو نیستید؟ ثبت نام کنید</string>
+    <string name="forgotYourPassword_resetNow">رمز عبور خود را فراموش کرده اید؟ بازگردانی رمز عبور</string>
+    <string name="register">ثبت نام</string>
+    <string name="ifRegisteredOrHaveClubCardThenLogin">اگر کارت باشگاه مشتریان اتکا دارید و یا قبلا ثبت نام کرده اید، وارد شوید</string>
+    <string name="withRegisterInApplicationYouAcceptPolicyAndLicense">با ثبت نام در اپلیکیشن، شما شرایط استفاده را پذیرفته و قوانین و مقررات را مطالعه کرده اید.</string>
+    <string name="firstName">نام</string>
+    <string name="lastName">نام خانوادگی</string>
+    <string name="passwort_atLeast8Char">رمز عبور (حد اقل ۸ کاراکتر)</string>
+    <string name="presenterCode">کد معرف (اختیاری)</string>
+    <string name="cardPassword">رمز عبور کارت</string>
+
+</resources>
