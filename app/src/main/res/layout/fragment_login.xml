@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:animateLayoutChanges="true">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
         android:id="@+id/toolbar"
@@ -21,6 +22,7 @@
             android:padding="16dp">
 
             <RelativeLayout
+                android:id="@+id/clubCardCheckBoxHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -48,13 +50,13 @@
                 android:layout_height="16dp" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_password"
+                android:id="@+id/emailAddressInputHolder"
                 style="@style/loginRegisterEditTextLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/input_password"
+                    android:id="@+id/emailAddressInput"
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,28 +65,47 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/passwordInputHolder"
                 style="@style/loginRegisterEditTextLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/passwordInput"
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/yourEmailAddress" />
+                    android:hint="@string/passwort_atLeast8Char" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/clubCardNumberInputHolder"
                 style="@style/loginRegisterEditTextLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/clubCardNumberInput"
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/yourEmailAddress" />
+                    android:hint="@string/custumerClubCardNumber" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/clubCardPasswordInputHolder"
+                style="@style/loginRegisterEditTextLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/clubCardPasswordInput"
+                    style="@style/loginRegisterEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/cardPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
