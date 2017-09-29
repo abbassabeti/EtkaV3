@@ -5,31 +5,19 @@ import android.os.Bundle;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.Fragments.IntroFragments.IntroFragment;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Dialogs.ResetPasswordDialog;
+import ir.etkastores.app.Utils.ActivityUtils;
 
 public class IntroActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
+        setContentView(R.layout.fragment_intro);
         ButterKnife.bind(this);
-
-        new ResetPasswordDialog().show(getSupportFragmentManager(),"");
-
+        ActivityUtils.addFragment(this,R.id.introFragmentsHolder,new IntroFragment(),IntroFragment.TAG,false);
     }
 
-    @OnClick(R.id.registerButton)
-    public void onRegisterClick(){
-        Intent intent = new Intent(this,RegisterActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.loginButton)
-    public void onLoginClick(){
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
-    }
 
 }
