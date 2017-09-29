@@ -31,12 +31,12 @@ public class IntroFragment extends Fragment {
 
     @OnClick(R.id.registerButton)
     public void onRegisterClick(){
-        ActivityUtils.replaceFragment(getActivity(),R.id.introFragmentsHolder,new RegisterFragment(),"",true);
+        ActivityUtils.replaceFragment(getActivity(),R.id.introFragmentsHolder,new RegisterFragment(),RegisterFragment.TAG,true);
     }
 
     @OnClick(R.id.loginButton)
     public void onLoginClick(){
-        ActivityUtils.replaceFragment(getActivity(),R.id.introFragmentsHolder,new LoginFragment(),"",true);
+        ActivityUtils.replaceFragment(getActivity(),R.id.introFragmentsHolder,new LoginFragment(),LoginFragment.TAG,true);
     }
 
 }

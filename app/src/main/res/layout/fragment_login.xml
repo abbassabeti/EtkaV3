@@ -114,6 +114,7 @@
                 android:layout_height="24dp" />
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/loginButton"
                 style="@style/whiteLoginRegisterButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,6 +126,7 @@
                 android:layout_height="32dp" />
 
             <TextView
+                android:id="@+id/registerButton"
                 style="@style/loginRegisterTextsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,6 +137,7 @@
                 android:layout_height="32dp" />
 
             <TextView
+                android:id="@+id/forgotPasswordButton"
                 style="@style/loginRegisterTextsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

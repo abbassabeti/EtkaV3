@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.Utils.ActivityUtils;
 
 /**
  * Created by Sajad on 9/29/17.
@@ -42,6 +44,11 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
     private void initToolbar(){
         toolbar.setTitle(R.string.register);
         toolbar.setActionListeners(this);
+    }
+
+    @OnClick(R.id.loginButton)
+    public void onLoginClick(){
+        ActivityUtils.replaceFragment(getActivity(),R.id.introFragmentsHolder,new LoginFragment(),LoginFragment.TAG,true);
     }
 
     @Override

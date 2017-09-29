@@ -1,9 +1,9 @@
 package ir.etkastores.app.Fragments.IntroFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.LayoutInflater;
@@ -14,8 +14,11 @@ import android.widget.CompoundButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.Activities.MainActivity;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Dialogs.ResetPasswordDialog;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.Utils.ActivityUtils;
 
 /**
  * Created by Sajad on 9/29/17.
@@ -79,6 +82,22 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     @OnClick(R.id.clubCardCheckBoxHolder)
     public void onClubCardCheckBoxHolderClick() {
         clubCardCheckBox.performClick();
+    }
+
+    @OnClick(R.id.registerButton)
+    public void onRegisterClick(){
+        ActivityUtils.replaceFragment(getActivity(),R.id.introFragmentsHolder,new RegisterFragment(),RegisterFragment.TAG,true);
+    }
+
+    @OnClick(R.id.loginButton)
+    public void onLoginClick(){
+        getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+        getActivity().finish();
+    }
+
+    @OnClick(R.id.forgotPasswordButton)
+    public void onForgotPasswordClick(){
+        new ResetPasswordDialog().show(getActivity().getSupportFragmentManager(),ResetPasswordDialog.TAG);
     }
 
     @Override

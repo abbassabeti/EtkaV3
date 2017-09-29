@@ -20,6 +20,8 @@ import ir.etkastores.app.R;
 
 public class ResetPasswordDialog extends BaseDialog {
 
+    public static final String TAG = "RESET_PASSWORD_DIALOG_FRAGMENT_TAG";
+
     @BindView(R.id.customerClubCardNumberInputHolder)
     View customerCardHolder;
 
