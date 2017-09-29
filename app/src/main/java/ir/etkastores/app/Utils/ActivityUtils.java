@@ -14,13 +14,13 @@ public class ActivityUtils {
     public static void replaceFragment(FragmentActivity activity, int fragmentHolder, Fragment fragment, String tag, boolean addToBackStack){
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction().replace(fragmentHolder,fragment,tag);
         if (addToBackStack) transaction.addToBackStack("");
-        transaction.commitNowAllowingStateLoss();
+        transaction.commitAllowingStateLoss();
     }
 
     public static void addFragment(FragmentActivity activity,int fragmentHolder, Fragment fragment,String tag,boolean addToBackStack){
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction().add(fragmentHolder,fragment,tag);
         if (addToBackStack) transaction.addToBackStack("");
-        transaction.commitNowAllowingStateLoss();
+        transaction.commitAllowingStateLoss();
     }
 
 }
