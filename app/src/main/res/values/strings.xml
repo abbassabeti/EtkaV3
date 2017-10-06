@@ -34,5 +34,12 @@
     <string name="passwort_atLeast8Char">رمز عبور (حد اقل ۸ کاراکتر)</string>
     <string name="presenterCode">کد معرف (اختیاری)</string>
     <string name="cardPassword">رمز عبور کارت</string>
+    <string name="nextShoppingList">لیست خرید بعدی</string>
+    <string name="yourShoppingHistory">سابقه سفارش های شما</string>
+    <string name="inviteFriends">دعوت از دوستان</string>
+    <string name="faq">سوالات متداول</string>
+    <string name="supportAndSendRequest">پشتیبانی و ارسال درخواست</string>
+    <string name="youHaveXScore">شما %d امتیاز دارید.</string>
+    <string name="score5">۵ امتیاز</string>
 
 </resources>

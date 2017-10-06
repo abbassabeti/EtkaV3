@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        app:srcCompat="@drawable/ic_arrow_right_24dp_white"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/leftIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        app:srcCompat="@drawable/ic_left_dark_gray_32dp"/>
+
+    <LinearLayout
+        android:id="@+id/scoreHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/leftIcon"
+        android:layout_centerVertical="true"
+        android:paddingLeft="4dp">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="16dp"
+            android:background="@color/lightGray"
+            android:layout_gravity="center_vertical"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/starIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp"
+            app:srcCompat="@drawable/ic_star_circle_gold_24dp"/>
+
+        <TextView
+            android:id="@+id/scoreText"
+            android:layout_marginLeft="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text"
+        android:textSize="@dimen/textSizeSmall"
+        android:textColor="@color/darkGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/icon"
+        android:layout_toRightOf="@id/scoreHolder"
+        android:paddingRight="8dp"
+        android:gravity="right"/>
+
+</RelativeLayout>
