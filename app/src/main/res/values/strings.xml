@@ -41,5 +41,10 @@
     <string name="supportAndSendRequest">پشتیبانی و ارسال درخواست</string>
     <string name="youHaveXScore">شما %d امتیاز دارید.</string>
     <string name="score5">۵ امتیاز</string>
-
+    <string name="editProfileInfo">ویرایش اطلاعات کاربری</string>
+    <string name="otherPages">سایر صفحات</string>
+    <string name="profileSetting">تنظیمات حساب کاربری</string>
+    <string name="yourScore">امتیاز شما</string>
+    <string name="sendNewRequest">ارسال درخواست جدید</string>
+    <string name="support">پشتیبانی</string>
 </resources>

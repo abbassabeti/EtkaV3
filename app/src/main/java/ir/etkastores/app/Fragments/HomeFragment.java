@@ -38,8 +38,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViews(){
-        toolbar.setTitle(R.string.home);
-        toolbar.hideBack();
+
     }
 
 }

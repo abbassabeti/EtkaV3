@@ -9,6 +9,13 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import ir.etkastores.app.Activities.ProfileActivities.FAQActivity;
+import ir.etkastores.app.Activities.ProfileActivities.InviteFriendsActivity;
+import ir.etkastores.app.Activities.ProfileActivities.NextShoppingListActivity;
+import ir.etkastores.app.Activities.ProfileActivities.ScoresActivity;
+import ir.etkastores.app.Activities.ProfileActivities.ShoppingHistoryActivity;
+import ir.etkastores.app.Activities.ProfileActivities.SupportActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 
@@ -37,8 +44,37 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initViews(){
-        toolbar.hideBack();
-        toolbar.setTitle(R.string.profile);
+
+    }
+
+    @OnClick(R.id.scoreMenu)
+    public void onScoreMenuClick(){
+        ScoresActivity.start(getActivity());
+    }
+
+    @OnClick(R.id.nextShoppingListMenu)
+    public void onNextShoppingListMenuClick(){
+        NextShoppingListActivity.start(getActivity());
+    }
+
+    @OnClick(R.id.shoppingHistoryMenu)
+    public void onShoppingHistoryMenuClick(){
+        ShoppingHistoryActivity.start(getActivity());
+    }
+
+    @OnClick(R.id.inviteFriendsMenu)
+    public void onInviteFriendsMenuClick(){
+        InviteFriendsActivity.start(getActivity());
+    }
+
+    @OnClick(R.id.faqMenu)
+    public void onFAQMenuClick(){
+        FAQActivity.start(getActivity());
+    }
+
+    @OnClick(R.id.supportMenu)
+    public void onSupportMenuClick(){
+        SupportActivity.start(getActivity());
     }
 
 }

@@ -37,8 +37,7 @@ public class SearchFragment extends Fragment {
     }
 
     private void initViews(){
-        toolbar.setTitle(R.string.search);
-        toolbar.hideBack();
+
     }
 
 

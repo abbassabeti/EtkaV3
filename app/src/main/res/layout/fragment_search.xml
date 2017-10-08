@@ -8,11 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <ir.etkastores.app.UI.Views.EtkaToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:showBack="false"
+            app:title="@string/search" />
 
     </RelativeLayout>
 
@@ -49,8 +50,8 @@
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/sortingIcon"
                         android:paddingRight="16dp"
-                        android:textSize="@dimen/textSizeSmall"
-                        android:text="@string/sorting" />
+                        android:text="@string/sorting"
+                        android:textSize="@dimen/textSizeSmall" />
 
                 </RelativeLayout>
 
@@ -64,82 +65,82 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rect_round4dp_white"
-                        android:padding="8dp"
-                        android:gravity="right">
+                        android:gravity="right"
+                        android:padding="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/topRate"
-                            android:paddingRight="8dp"/>
+                            android:paddingRight="8dp"
+                            android:text="@string/topRate" />
 
                         <android.support.v7.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_adjust_black_24dp"/>
+                            app:srcCompat="@drawable/ic_adjust_black_24dp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/rect_round4dp_white"
-                        android:padding="8dp"
                         android:gravity="right"
-                        android:layout_marginTop="8dp">
+                        android:padding="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/topOffer"
-                            android:paddingRight="8dp"/>
+                            android:paddingRight="8dp"
+                            android:text="@string/topOffer" />
 
                         <android.support.v7.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_adjust_black_24dp"/>
+                            app:srcCompat="@drawable/ic_adjust_black_24dp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/rect_round4dp_white"
-                        android:padding="8dp"
                         android:gravity="right"
-                        android:layout_marginTop="8dp">
+                        android:padding="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/topSales"
-                            android:paddingRight="8dp"/>
+                            android:paddingRight="8dp"
+                            android:text="@string/topSales" />
 
                         <android.support.v7.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_adjust_black_24dp"/>
+                            app:srcCompat="@drawable/ic_adjust_black_24dp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:background="@drawable/rect_round4dp_white"
-                        android:padding="8dp"
                         android:gravity="right"
-                        android:layout_marginTop="8dp">
+                        android:padding="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/newest"
-                            android:paddingRight="8dp"/>
+                            android:paddingRight="8dp"
+                            android:text="@string/newest" />
 
                         <android.support.v7.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_adjust_black_24dp"/>
+                            app:srcCompat="@drawable/ic_adjust_black_24dp" />
 
                     </LinearLayout>
 
@@ -167,8 +168,8 @@
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/filteringIcon"
                         android:paddingRight="16dp"
-                        android:textSize="@dimen/textSizeSmall"
-                        android:text="@string/filtering" />
+                        android:text="@string/filtering"
+                        android:textSize="@dimen/textSizeSmall" />
 
                 </RelativeLayout>
 
@@ -176,9 +177,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:paddingRight="16dp"
                     android:paddingLeft="16dp"
-                    android:text="@string/brandOrdered"/>
+                    android:paddingRight="16dp"
+                    android:text="@string/brandOrdered" />
 
             </LinearLayout>
 

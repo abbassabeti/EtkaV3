@@ -1,12 +1,14 @@
 package ir.etkastores.app.UI.Views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +26,7 @@ import ir.etkastores.app.R;
 public class EtkaToolbar extends Toolbar {
 
     @BindView(R.id.toolbarTitle)
-    PersianTextView titleTv;
+    TextView titleTv;
 
     @BindView(R.id.toolbarBackButton)
     AppCompatImageView backButton;
@@ -33,24 +35,30 @@ public class EtkaToolbar extends Toolbar {
 
     public EtkaToolbar(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public EtkaToolbar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public EtkaToolbar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
-    private void init() {
+    private void init(AttributeSet attrs) {
         View.inflate(getContext(), R.layout.toolbar_layout, this);
         ButterKnife.bind(this);
         setPadding(0, 0, 0, 0);
         setContentInsetsAbsolute(0, 0);
+        if (attrs != null){
+            TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.EtkaToolbar, 0, 0);
+            setTitle(a.getString(R.styleable.EtkaToolbar_title));
+            showBack(a.getBoolean(R.styleable.EtkaToolbar_showBack,true));
+            a.recycle();
+        }
     }
 
     @OnClick(R.id.toolbarBackButton)
@@ -58,12 +66,12 @@ public class EtkaToolbar extends Toolbar {
         if (callback != null) callback.onToolbarBackClick();
     }
 
-    public void hideBack() {
-        backButton.setVisibility(GONE);
-    }
-
-    public void showBack(){
-        backButton.setVisibility(GONE);
+    public void showBack(boolean state){
+        if (state){
+            backButton.setVisibility(VISIBLE);
+        }else{
+            backButton.setVisibility(GONE);
+        }
     }
 
     public void setTitle(String title) {

@@ -43,6 +43,39 @@
         <activity
             android:name=".Activities.IntroActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.EditProfileActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.ProfileSettingActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.FAQActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.InviteFriendsActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.SendNewRequestActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.NextShoppingListActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.ShoppingHistoryActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.OtherPagesActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.ScoresActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.SupportActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.RequestsActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
     </application>
 
 </manifest>

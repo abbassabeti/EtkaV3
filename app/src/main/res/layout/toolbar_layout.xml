@@ -19,7 +19,7 @@
             android:layout_alignParentEnd="true"
             app:srcCompat="@drawable/ic_arrow_right_24dp_white"/>
 
-        <ir.etkastores.app.UI.Views.PersianTextView
+        <TextView
             android:id="@+id/toolbarTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
