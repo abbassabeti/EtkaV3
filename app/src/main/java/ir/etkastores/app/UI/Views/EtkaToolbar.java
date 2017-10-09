@@ -31,6 +31,12 @@ public class EtkaToolbar extends Toolbar {
     @BindView(R.id.toolbarBackButton)
     AppCompatImageView backButton;
 
+    @BindView(R.id.toolbarMoreButton)
+    AppCompatImageView moreButton;
+
+    @BindView(R.id.toolbarSettingButton)
+    AppCompatImageView settingButton;
+
     private EtkaToolbarActionsListener callback;
 
     public EtkaToolbar(Context context) {
@@ -57,6 +63,8 @@ public class EtkaToolbar extends Toolbar {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.EtkaToolbar, 0, 0);
             setTitle(a.getString(R.styleable.EtkaToolbar_title));
             showBack(a.getBoolean(R.styleable.EtkaToolbar_showBack,true));
+            showMoreButton(a.getBoolean(R.styleable.EtkaToolbar_showMoreButton,false));
+            showSettingButton(a.getBoolean(R.styleable.EtkaToolbar_showSettingButton,false));
             a.recycle();
         }
     }
@@ -66,11 +74,37 @@ public class EtkaToolbar extends Toolbar {
         if (callback != null) callback.onToolbarBackClick();
     }
 
+    @OnClick(R.id.toolbarMoreButton)
+    void onMoreButtonClick(){
+        if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.MORE_BUTTON);
+    }
+
+    @OnClick(R.id.toolbarSettingButton)
+    void onSettingButtonClick(){
+        if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.SETTING_BUTTON);
+    }
+
     public void showBack(boolean state){
         if (state){
             backButton.setVisibility(VISIBLE);
         }else{
             backButton.setVisibility(GONE);
+        }
+    }
+
+    public void showMoreButton(boolean state){
+        if (state){
+            moreButton.setVisibility(VISIBLE);
+        }else{
+            moreButton.setVisibility(GONE);
+        }
+    }
+
+    public void showSettingButton(boolean state){
+        if (state){
+            settingButton.setVisibility(VISIBLE);
+        }else{
+            settingButton.setVisibility(GONE);
         }
     }
 
@@ -87,6 +121,9 @@ public class EtkaToolbar extends Toolbar {
     }
 
     public interface EtkaToolbarActionsListener{
+        int MORE_BUTTON = 1;
+        int SETTING_BUTTON = 2;
+
         void onToolbarBackClick();
         void onActionClick(int actionCode);
     }

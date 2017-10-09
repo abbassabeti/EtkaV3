@@ -6,13 +6,19 @@
     android:padding="16dp"
     android:background="?attr/selectableItemBackground">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        app:srcCompat="@drawable/ic_arrow_right_24dp_white"/>
+    <RelativeLayout
+        android:id="@+id/iconHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/leftIcon"
@@ -61,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/icon"
+        android:layout_toLeftOf="@id/iconHolder"
         android:layout_toRightOf="@id/scoreHolder"
         android:paddingRight="8dp"
         android:gravity="right"/>

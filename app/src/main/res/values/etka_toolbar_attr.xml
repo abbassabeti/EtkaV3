@@ -4,6 +4,8 @@
     <declare-styleable name="EtkaToolbar">
         <attr name="showBack" format="boolean" />
         <attr name="title" format="string" />
+        <attr name="showMoreButton" format="boolean"/>
+        <attr name="showSettingButton" format="boolean"/>
     </declare-styleable>
 
 </resources>

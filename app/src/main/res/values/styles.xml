@@ -28,6 +28,10 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="commonLayoutRootStyle.themeColor">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
     <style name="editTextHolderStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>

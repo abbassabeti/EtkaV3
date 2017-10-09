@@ -52,6 +52,7 @@ public class ProfileMenuRowItem extends RelativeLayout {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ProfileMenuRowItem, 0, 0);
             setText(a.getString(R.styleable.ProfileMenuRowItem_rowText));
             setScoreText(a.getString(R.styleable.ProfileMenuRowItem_scoreText));
+            showIcon(a.getBoolean(R.styleable.ProfileMenuRowItem_showIcon,false));
             setIcon(a.getResourceId(R.styleable.ProfileMenuRowItem_rowIcon,0));
             showScore(a.getBoolean(R.styleable.ProfileMenuRowItem_showScore,false));
             showScoreStar(a.getBoolean(R.styleable.ProfileMenuRowItem_showScoreStar,false));
@@ -87,7 +88,16 @@ public class ProfileMenuRowItem extends RelativeLayout {
 
     public void setIcon(int iconResId){
         if (iconResId == 0 ) return;
+        showIcon(true);
         icon.setImageResource(iconResId);
+    }
+
+    public void showIcon(boolean state){
+        if (state){
+            icon.setVisibility(VISIBLE);
+        }else{
+            icon.setVisibility(GONE);
+        }
     }
 
 }

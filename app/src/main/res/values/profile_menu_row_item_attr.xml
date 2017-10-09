@@ -7,6 +7,7 @@
         <attr name="showScore" format="boolean" />
         <attr name="showScoreStar" format="boolean"/>
         <attr name="rowIcon" format="reference" />
+        <attr name="showIcon" format="boolean"/>
     </declare-styleable>
 
 </resources>

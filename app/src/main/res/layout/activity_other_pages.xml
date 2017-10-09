@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    style="@style/commonLayoutRootStyle"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
@@ -9,5 +8,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/otherPages"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                        android:id="@+id/termAndConditionsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowText="@string/termAndConditions"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightGray"/>
+
+                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                        android:id="@+id/userPrivacyButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowText="@string/userPrivacy"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightGray"/>
+
+                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                        android:id="@+id/aboutEtkaStoresButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowText="@string/aboutEtkaStores"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

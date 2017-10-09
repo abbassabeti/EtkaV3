@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/profile"
-        app:showBack="false"/>
+        app:showBack="false"
+        app:showMoreButton="true"
+        app:showSettingButton="true"/>
 
     <ScrollView
         android:layout_width="match_parent"

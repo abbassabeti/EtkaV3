@@ -13,6 +13,8 @@ import butterknife.OnClick;
 import ir.etkastores.app.Activities.ProfileActivities.FAQActivity;
 import ir.etkastores.app.Activities.ProfileActivities.InviteFriendsActivity;
 import ir.etkastores.app.Activities.ProfileActivities.NextShoppingListActivity;
+import ir.etkastores.app.Activities.ProfileActivities.OtherPagesActivity;
+import ir.etkastores.app.Activities.ProfileActivities.ProfileSettingActivity;
 import ir.etkastores.app.Activities.ProfileActivities.ScoresActivity;
 import ir.etkastores.app.Activities.ProfileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.Activities.ProfileActivities.SupportActivity;
@@ -23,7 +25,7 @@ import ir.etkastores.app.UI.Views.EtkaToolbar;
  * Created by Sajad on 9/1/17.
  */
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public final static int IN_TABBAR_POSITION = 0;
 
@@ -44,7 +46,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initViews(){
-
+        toolbar.setActionListeners(this);
     }
 
     @OnClick(R.id.scoreMenu)
@@ -75,6 +77,25 @@ public class ProfileFragment extends Fragment {
     @OnClick(R.id.supportMenu)
     public void onSupportMenuClick(){
         SupportActivity.start(getActivity());
+    }
+
+    @Override
+    public void onToolbarBackClick() {
+        getActivity().onBackPressed();
+    }
+
+    @Override
+    public void onActionClick(int actionCode) {
+        switch (actionCode){
+
+            case MORE_BUTTON:
+                OtherPagesActivity.start(getActivity());
+                break;
+
+            case SETTING_BUTTON:
+                ProfileSettingActivity.start(getActivity());
+                break;
+        }
     }
 
 }

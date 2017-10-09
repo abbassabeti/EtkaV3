@@ -50,5 +50,8 @@
     <string name="inviteFriendsHeaderMessage">کافیست دوستانتان با کد معرف شما در اپلیکیشن همراه فروشگاه اتکا ثبت نام کنند تا شما به ازای هر یک، ۲۰ امتیاز دریافت کنید.</string>
     <string name="yourInvitationCode_endWithColon">کد معرف شما:</string>
     <string name="sharing">اشتراک گذاری</string>
+    <string name="aboutEtkaStores">درباره شرکت فروشگاه های زنجیره ای اتکا</string>
+    <string name="userPrivacy">حریم خصوصی کاربران</string>
+    <string name="termAndConditions">شرایط، قوانین و مقررات استفاده</string>
 
 </resources>

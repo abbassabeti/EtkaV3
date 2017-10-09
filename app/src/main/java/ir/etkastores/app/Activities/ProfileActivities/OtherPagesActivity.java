@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.Activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
@@ -37,4 +38,21 @@ public class OtherPagesActivity extends BaseActivity implements EtkaToolbar.Etka
     public void onActionClick(int actionCode) {
 
     }
+
+    @OnClick(R.id.termAndConditionsButton)
+    void onTermAndConditionsButtonClick(){
+
+    }
+
+    @OnClick(R.id.userPrivacyButton)
+    void onUserPrivacyButtonClick(){
+
+    }
+
+    @OnClick(R.id.aboutEtkaStoresButton)
+    void onAboutEtkaStoresbuttonClick(){
+
+    }
+
+
 }
