@@ -53,5 +53,7 @@
     <string name="aboutEtkaStores">درباره شرکت فروشگاه های زنجیره ای اتکا</string>
     <string name="userPrivacy">حریم خصوصی کاربران</string>
     <string name="termAndConditions">شرایط، قوانین و مقررات استفاده</string>
+    <string name="otherPagesFooterLicense">استفاده از تمامی مطالب اپلیکیشن همراه فروشگاه اتکا فقط برای مقاصد غیر تجاری و با ذکر منبع بلامانع است. کلیه حقوق این سرویس مطعلق به شرکت فروشگاه های زنجیره ای اتکا می باشد.</string>
+    <string name="copyrightEn">Copyright ® 2018-2019 Etkastores.ir</string>
 
 </resources>
