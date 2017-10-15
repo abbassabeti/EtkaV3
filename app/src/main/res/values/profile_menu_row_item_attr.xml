@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="ProfileMenuRowItem">
+    <declare-styleable name="CustomRowMenuItem">
         <attr name="rowText" format="string" />
         <attr name="scoreText" format="string" />
         <attr name="showScore" format="boolean" />
         <attr name="showScoreStar" format="boolean"/>
         <attr name="rowIcon" format="reference" />
         <attr name="showIcon" format="boolean"/>
+        <attr name="leftText" format="string"/>
+        <attr name="hideLeftIcon" format="boolean"/>
     </declare-styleable>
 
 </resources>

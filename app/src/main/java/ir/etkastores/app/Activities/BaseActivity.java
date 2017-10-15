@@ -1,8 +1,11 @@
 package ir.etkastores.app.Activities;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import ir.etkastores.app.R;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
@@ -10,6 +13,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setBackgroundDrawableResource(R.color.mainBackgeoundColor);
+    }
 
     @Override
     protected void attachBaseContext(Context context) {

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
-    android:background="?attr/selectableItemBackground">
+    android:background="?attr/selectableItemBackground"
+    android:padding="16dp">
 
     <RelativeLayout
         android:id="@+id/iconHolder"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/icon"
@@ -20,28 +21,36 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/leftIcon"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_centerVertical="true"
+
+    <RelativeLayout
+        android:id="@+id/leftIconHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        app:srcCompat="@drawable/ic_left_dark_gray_32dp"/>
+        android:layout_centerVertical="true">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/leftIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:srcCompat="@drawable/ic_left_dark_gray_32dp" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/scoreHolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_toRightOf="@id/leftIcon"
         android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/leftIconHolder"
+        android:orientation="horizontal"
         android:paddingLeft="4dp">
 
         <View
             android:layout_width="1dp"
             android:layout_height="16dp"
-            android:background="@color/lightGray"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:background="@color/lightGray" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/starIcon"
@@ -49,27 +58,40 @@
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="4dp"
-            app:srcCompat="@drawable/ic_star_circle_gold_24dp"/>
+            app:srcCompat="@drawable/ic_star_circle_gold_24dp" />
 
         <TextView
             android:id="@+id/scoreText"
-            android:layout_marginLeft="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp" />
 
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/text"
-        android:textSize="@dimen/textSizeSmall"
-        android:textColor="@color/darkGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/iconHolder"
         android:layout_toRightOf="@id/scoreHolder"
+        android:gravity="right"
         android:paddingRight="8dp"
-        android:gravity="right"/>
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeSmall" />
+
+    <TextView
+        android:id="@+id/leftText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSizeSmall"
+        android:visibility="gone"/>
 
 </RelativeLayout>

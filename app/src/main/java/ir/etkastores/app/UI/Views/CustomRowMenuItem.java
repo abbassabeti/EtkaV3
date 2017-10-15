@@ -16,30 +16,34 @@ import ir.etkastores.app.R;
  * Created by Sajad on 10/6/17.
  */
 
-public class ProfileMenuRowItem extends RelativeLayout {
+public class CustomRowMenuItem extends RelativeLayout {
 
     @BindView(R.id.starIcon)
     AppCompatImageView starIcon;
     @BindView(R.id.icon)
     AppCompatImageView icon;
+    @BindView(R.id.leftIcon)
+    AppCompatImageView leftIcon;
     @BindView(R.id.text)
     TextView text;
     @BindView(R.id.scoreText)
     TextView scoreText;
+    @BindView(R.id.leftText)
+    TextView leftText;
     @BindView(R.id.scoreHolder)
     View scoreHolder;
 
-    public ProfileMenuRowItem(Context context) {
+    public CustomRowMenuItem(Context context) {
         super(context);
         init(null);
     }
 
-    public ProfileMenuRowItem(Context context, AttributeSet attrs) {
+    public CustomRowMenuItem(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public ProfileMenuRowItem(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomRowMenuItem(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
@@ -49,13 +53,15 @@ public class ProfileMenuRowItem extends RelativeLayout {
         ButterKnife.bind(this);
 
         if (attrs !=null){
-            TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.ProfileMenuRowItem, 0, 0);
-            setText(a.getString(R.styleable.ProfileMenuRowItem_rowText));
-            setScoreText(a.getString(R.styleable.ProfileMenuRowItem_scoreText));
-            showIcon(a.getBoolean(R.styleable.ProfileMenuRowItem_showIcon,false));
-            setIcon(a.getResourceId(R.styleable.ProfileMenuRowItem_rowIcon,0));
-            showScore(a.getBoolean(R.styleable.ProfileMenuRowItem_showScore,false));
-            showScoreStar(a.getBoolean(R.styleable.ProfileMenuRowItem_showScoreStar,false));
+            TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.CustomRowMenuItem, 0, 0);
+            setText(a.getString(R.styleable.CustomRowMenuItem_rowText));
+            setScoreText(a.getString(R.styleable.CustomRowMenuItem_scoreText));
+            showIcon(a.getBoolean(R.styleable.CustomRowMenuItem_showIcon,false));
+            setIcon(a.getResourceId(R.styleable.CustomRowMenuItem_rowIcon,0));
+            showScore(a.getBoolean(R.styleable.CustomRowMenuItem_showScore,false));
+            showScoreStar(a.getBoolean(R.styleable.CustomRowMenuItem_showScoreStar,false));
+            hideLeftIcon(a.getBoolean(R.styleable.CustomRowMenuItem_hideLeftIcon,false));
+            setLeftText(a.getString(R.styleable.CustomRowMenuItem_leftText));
             a.recycle();
         }
     }
@@ -97,6 +103,23 @@ public class ProfileMenuRowItem extends RelativeLayout {
             icon.setVisibility(VISIBLE);
         }else{
             icon.setVisibility(GONE);
+        }
+    }
+
+    public void setLeftText(String text){
+        if (text == null) return;
+        leftIcon.setVisibility(GONE);
+        scoreHolder.setVisibility(GONE);
+        leftText.setText(text);
+        leftText.setVisibility(VISIBLE);
+        icon.setVisibility(GONE);
+    }
+
+    public void hideLeftIcon(boolean state){
+        if (state){
+            leftIcon.setVisibility(GONE);
+        }else{
+            leftIcon.setVisibility(VISIBLE);
         }
     }
 

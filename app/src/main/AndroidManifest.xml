@@ -76,6 +76,9 @@
         <activity
             android:name=".Activities.ProfileActivities.RequestsActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.ProfileActivities.TextInfoActivity"
+            android:theme="@style/AppTheme.SolidSystemBar"></activity>
     </application>
 
 </manifest>

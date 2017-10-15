@@ -30,29 +30,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/termAndConditionsButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:rowText="@string/termAndConditions" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightGray" />
+                    <View style="@style/lightDividerMatchWidthStyle"/>
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/userPrivacyButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:rowText="@string/userPrivacy" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightGray" />
+                    <View style="@style/lightDividerMatchWidthStyle"/>
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/aboutEtkaStoresButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

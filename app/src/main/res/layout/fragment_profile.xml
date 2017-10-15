@@ -72,7 +72,7 @@
                 app:cardBackgroundColor="@color/lightYellow"
                 app:cardCornerRadius="4dp">
 
-                <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                <ir.etkastores.app.UI.Views.CustomRowMenuItem
                     android:id="@+id/scoreMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/nextShoppingListMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
 
                     <View style="@style/profileMenuDividerViewStyle"/>
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/shoppingHistoryMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
 
                     <View style="@style/profileMenuDividerViewStyle"/>
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/inviteFriendsMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
 
                     <View style="@style/profileMenuDividerViewStyle"/>
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/faqMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
 
                     <View style="@style/profileMenuDividerViewStyle"/>
 
-                    <ir.etkastores.app.UI.Views.ProfileMenuRowItem
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/supportMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

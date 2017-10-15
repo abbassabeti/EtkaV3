@@ -1,13 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/profileSetting"/>
+        app:title="@string/profileSetting" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/profileInfo"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/editButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/edit"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/textSizeSmall" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                            android:id="@+id/firstNameAndLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:leftText="سجاد گرشاسبی"
+                            app:rowText="@string/firstNameAndLastName" />
+
+                        <View style="@style/lightDividerMatchWidthStyle" />
+
+                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                            android:id="@+id/email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:leftText="sajadgarshasbi@gmail.com"
+                            app:rowText="@string/email" />
+
+                        <View style="@style/lightDividerMatchWidthStyle" />
+
+                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                            android:id="@+id/mobilePhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:leftText="09354018630"
+                            app:rowText="@string/mobilePhoneNumber" />
+
+                        <View style="@style/lightDividerMatchWidthStyle" />
+
+                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                            android:id="@+id/gender"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:leftText="مرد"
+                            app:rowText="@string/gender" />
+
+                        <View style="@style/lightDividerMatchWidthStyle" />
+
+                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                            android:id="@+id/education"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:leftText="کارشناسی ارشد"
+                            app:rowText="@string/firstNameAndLastName" />
+
+                        <View style="@style/lightDividerMatchWidthStyle" />
+
+                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                            android:id="@+id/birthDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:leftText="۲۶ فروردین ۱۳۷۲"
+                            app:rowText="@string/firstNameAndLastName" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="@color/lightYellow"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/get20ScoreWithCompletingProfileInfo"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/textSizeSmall" />
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_marginLeft="4dp"
+                                app:srcCompat="@drawable/ic_star_circle_gold_24dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="4dp">
+
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        android:id="@+id/changePasswordButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowText="@string/changePassword" />
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/receiveSpecialOffersNotifications"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:textColor="@color/darkGray"
+                            android:textSize="@dimen/textSizeSmall" />
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:id="@+id/specialOfferNotificationSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/colorPrimary" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_margin="8dp"
+                    android:background="@color/lightGray" />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/logoutButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/logout"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/textSizeSmall" />
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
 
 </LinearLayout>

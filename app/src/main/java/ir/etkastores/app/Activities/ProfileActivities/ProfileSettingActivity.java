@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.Activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
@@ -37,4 +38,22 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
     public void onActionClick(int actionCode) {
 
     }
+
+    @OnClick(R.id.editButton)
+    public void onEditClick(){
+        EditProfileActivity.start(this);
+    }
+
+    @OnClick(R.id.logoutButton)
+    public void onLogoutButtonClick(){
+
+    }
+
+    @OnClick(R.id.changePasswordButton)
+    public void onChangePasswordButtonClick(){
+
+    }
+
+
+
 }
