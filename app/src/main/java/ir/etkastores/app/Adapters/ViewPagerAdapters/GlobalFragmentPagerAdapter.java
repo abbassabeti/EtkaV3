@@ -29,4 +29,9 @@ public class GlobalFragmentPagerAdapter extends FragmentPagerAdapter {
         return pages.size();
     }
 
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return "پشتیبانی" + (position + 1);
+    }
+
 }

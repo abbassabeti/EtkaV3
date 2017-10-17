@@ -52,7 +52,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="16dp"
             android:background="?attr/selectableItemBackground"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             app:srcCompat="@drawable/ic_arrow_right_24dp_white"/>
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_centerVertical="true"
             android:textColor="@color/white"
             android:paddingRight="8dp"
-            android:layout_toStartOf="@id/toolbarBackButton"/>
+            android:layout_toLeftOf="@id/toolbarBackButton"/>
 
     </RelativeLayout>
 
