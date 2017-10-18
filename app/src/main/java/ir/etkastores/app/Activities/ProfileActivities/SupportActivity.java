@@ -3,10 +3,8 @@ package ir.etkastores.app.Activities.ProfileActivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +17,7 @@ import ir.etkastores.app.Fragments.SupportFragments.ContactUsFramgment;
 import ir.etkastores.app.Fragments.SupportFragments.RequestsFragment;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.UI.Views.RTLTabLayout;
 
 public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -33,7 +32,7 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     @BindView(R.id.pager)
     ViewPager pager;
     @BindView(R.id.tabs)
-    TabLayout tabLayout;
+    RTLTabLayout tabLayout;
 
     GlobalFragmentPagerAdapter adapter;
 
