@@ -3,15 +3,22 @@ package ir.etkastores.app.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.Adapters.ViewPagerAdapters.FragmentTitleModel;
+import ir.etkastores.app.Adapters.ViewPagerAdapters.GlobalFragmentPagerAdapter;
+import ir.etkastores.app.Fragments.SupportFragments.ContactUsFramgment;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.UI.Views.RTLTabLayout;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -19,12 +26,18 @@ import ir.etkastores.app.UI.Views.EtkaToolbar;
 
 public class HomeFragment extends Fragment {
 
-    public final static int IN_TABBAR_POSITION = 3;
-
     private View view;
 
     @BindView(R.id.homeToolbar)
     EtkaToolbar toolbar;
+
+    @BindView(R.id.tabs)
+    RTLTabLayout tabLayout;
+
+    @BindView(R.id.pager)
+    ViewPager viewPager;
+
+    GlobalFragmentPagerAdapter pagerAdapter;
 
     @Nullable
     @Override
@@ -38,6 +51,26 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViews(){
+        createDummyPages();
+    }
+
+    private void createDummyPages(){
+        List<FragmentTitleModel> pages = new ArrayList<>();
+
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب اول"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب دوم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب سوم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب چهارم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب پنجم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب ششم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب هفتم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب هشتم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب نهم"));
+        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب دهم"));
+
+        pagerAdapter = new GlobalFragmentPagerAdapter(getChildFragmentManager(),pages);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
