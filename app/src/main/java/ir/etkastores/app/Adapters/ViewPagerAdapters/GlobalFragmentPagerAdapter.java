@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,16 +13,17 @@ import java.util.List;
 
 public class GlobalFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> pages;
+    private List<FragmentTitleModel> pages;
 
-    public GlobalFragmentPagerAdapter(FragmentManager fm, List<Fragment> pages) {
+    public GlobalFragmentPagerAdapter(FragmentManager fm, List<FragmentTitleModel> pages) {
         super(fm);
         this.pages = pages;
+        Collections.reverse(this.pages);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return pages.get(position);
+        return pages.get(position).getFragment();
     }
 
     @Override
@@ -31,7 +33,7 @@ public class GlobalFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "پشتیبانی" + (position + 1);
+        return pages.get(position).getTitle();
     }
 
 }

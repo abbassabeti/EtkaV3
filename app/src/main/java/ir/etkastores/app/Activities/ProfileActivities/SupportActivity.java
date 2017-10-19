@@ -3,7 +3,6 @@ package ir.etkastores.app.Activities.ProfileActivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.Activities.BaseActivity;
+import ir.etkastores.app.Adapters.ViewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.Adapters.ViewPagerAdapters.GlobalFragmentPagerAdapter;
 import ir.etkastores.app.Fragments.SupportFragments.ContactUsFramgment;
 import ir.etkastores.app.Fragments.SupportFragments.RequestsFragment;
@@ -46,10 +46,9 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
     private void initViews(){
         toolbar.setActionListeners(this);
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new ContactUsFramgment());
-        fragments.add(new RequestsFragment());
-        fragments.add(new ContactUsFramgment());
+        List<FragmentTitleModel> fragments = new ArrayList<>();
+        fragments.add(new FragmentTitleModel(RequestsFragment.newInstance(),R.string.requests));
+        fragments.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),R.string.contactUs));
         adapter = new GlobalFragmentPagerAdapter(getSupportFragmentManager(),fragments);
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager);

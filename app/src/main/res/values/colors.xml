@@ -20,5 +20,34 @@
     <color name="lightYellow">#FFFAE4</color>
     <color name="gold">#FBBC15</color>
 
+    <color name="transWhite1">#11FFFFFF</color>
+    <color name="transWhite2">#22FFFFFF</color>
+    <color name="transWhite3">#33FFFFFF</color>
+    <color name="transWhite4">#44FFFFFF</color>
+    <color name="transWhite5">#55FFFFFF</color>
+    <color name="transWhite6">#66FFFFFF</color>
+    <color name="transWhite7">#77FFFFFF</color>
+    <color name="transWhite8">#88FFFFFF</color>
+    <color name="transWhite9">#99FFFFFF</color>
+    <color name="transWhiteA">#AAFFFFFF</color>
+    <color name="transWhiteB">#BBFFFFFF</color>
+    <color name="transWhiteC">#CCFFFFFF</color>
+    <color name="transWhiteD">#DDFFFFFF</color>
+    <color name="transWhiteE">#EEFFFFFF</color>
+
+    <color name="transBlack1">#11000000</color>
+    <color name="transBlack2">#22000000</color>
+    <color name="transBlack3">#33000000</color>
+    <color name="transBlack4">#44000000</color>
+    <color name="transBlack5">#55000000</color>
+    <color name="transBlack6">#66000000</color>
+    <color name="transBlack7">#77000000</color>
+    <color name="transBlack8">#88000000</color>
+    <color name="transBlack9">#99000000</color>
+    <color name="transBlackA">#AA000000</color>
+    <color name="transBlackB">#BB000000</color>
+    <color name="transBlackC">#CC000000</color>
+    <color name="transBlackD">#DD000000</color>
+    <color name="transBlackE">#EE000000</color>
 
 </resources>

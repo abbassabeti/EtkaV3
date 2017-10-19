@@ -16,6 +16,10 @@ import ir.etkastores.app.R;
 
 public class RequestsFragment extends Fragment {
 
+    public static RequestsFragment newInstance(){
+        return new RequestsFragment();
+    }
+
     View view;
 
     @Nullable

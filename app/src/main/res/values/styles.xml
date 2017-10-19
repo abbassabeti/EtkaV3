@@ -120,4 +120,8 @@
         <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
+    <style name="tabStripTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/textSizeSmall</item>
+    </style>
+
 </resources>

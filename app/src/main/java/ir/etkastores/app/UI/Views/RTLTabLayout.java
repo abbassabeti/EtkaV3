@@ -45,7 +45,8 @@ public class RTLTabLayout extends TabLayout {
 
     @Override
     public void addTab(@NonNull Tab tab) {
-        super.addTab(tab);
+        super.addTab(tab,0);
+//        super.addTab(tab);
         updateTypeface(tab);
     }
 

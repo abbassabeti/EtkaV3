@@ -16,6 +16,10 @@ import ir.etkastores.app.R;
 
 public class ContactUsFramgment extends Fragment {
 
+    public static ContactUsFramgment newInstance() {
+        return new ContactUsFramgment();
+    }
+
     View view;
 
     @Nullable
