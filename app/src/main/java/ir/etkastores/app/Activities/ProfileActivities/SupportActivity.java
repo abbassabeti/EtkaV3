@@ -63,4 +63,5 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     public void onActionClick(int actionCode) {
 
     }
+
 }

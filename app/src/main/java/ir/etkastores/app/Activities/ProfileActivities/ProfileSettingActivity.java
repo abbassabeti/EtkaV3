@@ -3,6 +3,7 @@ package ir.etkastores.app.Activities.ProfileActivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.SwitchCompat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,9 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
+
+    @BindView(R.id.specialOfferNotificationSwitch)
+    SwitchCompat specialOfferSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,11 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
     @OnClick(R.id.changePasswordButton)
     public void onChangePasswordButtonClick(){
 
+    }
+
+    @OnClick(R.id.specialOfferNotificationButton)
+    public void onSpecialOfferNotificationButtonClick(){
+        specialOfferSwitch.performClick();
     }
 
 
