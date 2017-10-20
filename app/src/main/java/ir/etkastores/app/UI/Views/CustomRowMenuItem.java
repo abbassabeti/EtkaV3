@@ -62,6 +62,7 @@ public class CustomRowMenuItem extends RelativeLayout {
             showScoreStar(a.getBoolean(R.styleable.CustomRowMenuItem_showScoreStar,false));
             hideLeftIcon(a.getBoolean(R.styleable.CustomRowMenuItem_hideLeftIcon,false));
             setLeftText(a.getString(R.styleable.CustomRowMenuItem_leftText));
+            setLeftIcon(a.getResourceId(R.styleable.CustomRowMenuItem_leftIcon,0));
             a.recycle();
         }
     }
@@ -121,6 +122,10 @@ public class CustomRowMenuItem extends RelativeLayout {
         }else{
             leftIcon.setVisibility(VISIBLE);
         }
+    }
+
+    public void setLeftIcon(int icon){
+        if (icon>0) leftIcon.setImageResource(icon);
     }
 
 }

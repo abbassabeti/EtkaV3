@@ -10,6 +10,7 @@
         <attr name="showIcon" format="boolean"/>
         <attr name="leftText" format="string"/>
         <attr name="hideLeftIcon" format="boolean"/>
+        <attr name="leftIcon" format="reference"/>
     </declare-styleable>
 
 </resources>

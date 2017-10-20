@@ -63,12 +63,8 @@ public class HomeFragment extends Fragment {
         pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب چهارم"));
         pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب پنجم"));
         pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب ششم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب هفتم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب هشتم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب نهم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب دهم"));
 
-        pagerAdapter = new GlobalFragmentPagerAdapter(getChildFragmentManager(),pages);
+        pagerAdapter = new GlobalFragmentPagerAdapter(getFragmentManager(),pages);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 

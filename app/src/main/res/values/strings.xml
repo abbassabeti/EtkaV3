@@ -66,7 +66,10 @@
     <string name="edit">ویرایش</string>
     <string name="requests">درخواست ها</string>
     <string name="contactUs">تماس با ما</string>
-
+    <string name="youContactUsByFollowingMethods">شما کاربران گرامی می توانید از طریق یکی از روش های زیر با ما در تماس باشید.</string>
+    <string name="directCallToEtkaPR">تماس مستقیم با روابط عمومی اتکا</string>
+    <string name="sendEmail">ارسال میل</string>
+    <string name="webSite">وب سایت</string>
 
 
     <string name="aboutEtkaStoresText">نیازمند متن از طرف شرکت</string>

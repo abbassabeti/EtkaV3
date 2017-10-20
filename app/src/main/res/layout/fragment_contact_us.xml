@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="@dimen/textSizeSmall"
+                android:textColor="@color/darkGray"
+                android:padding="8dp"
+                android:text="@string/youContactUsByFollowingMethods"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="4dp"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        android:id="@+id/directCallToPRButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowText="@string/directCallToEtkaPR"
+                        app:leftIcon="@drawable/ic_phone_dark_gray_24dp"
+                        app:showIcon="false"/>
+
+                    <View style="@style/lightDividerMatchWidthStyle"/>
+
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        android:id="@+id/sendMailButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowText="@string/sendEmail"
+                        app:leftIcon="@drawable/ic_mail_outline_dark_gray_24dp"
+                        app:showIcon="false"/>
+
+                    <View style="@style/lightDividerMatchWidthStyle"/>
+
+                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        android:id="@+id/webSiteButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowText="@string/webSite"
+                        app:leftIcon="@drawable/ic_globe_dark_gray_24dp"
+                        app:showIcon="false"/>
+
+                    <View style="@style/lightDividerMatchWidthStyle"/>
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

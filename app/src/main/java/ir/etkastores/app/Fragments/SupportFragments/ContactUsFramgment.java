@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.R;
 
 /**
@@ -32,6 +33,21 @@ public class ContactUsFramgment extends Fragment {
     }
 
     private void initViews(){
+
+    }
+
+    @OnClick(R.id.directCallToPRButton)
+    public void onDirectCallToPRButtonClick(){
+
+    }
+
+    @OnClick(R.id.sendMailButton)
+    public void sendMailButtonClick(){
+
+    }
+
+    @OnClick(R.id.webSiteButton)
+    public void webSiteButtonClick(){
 
     }
 }

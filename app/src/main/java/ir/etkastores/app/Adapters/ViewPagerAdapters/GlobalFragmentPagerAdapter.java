@@ -3,6 +3,7 @@ package ir.etkastores.app.Adapters.ViewPagerAdapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,6 +35,15 @@ public class GlobalFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return pages.get(position).getTitle();
+    }
+
+    @Override
+    public void finishUpdate(ViewGroup container) {
+        try{
+            super.finishUpdate(container);
+        } catch (NullPointerException nullPointerException){
+            System.out.println("Catch the NullPointerException in FragmentPagerAdapter.finishUpdate");
+        }
     }
 
 }
