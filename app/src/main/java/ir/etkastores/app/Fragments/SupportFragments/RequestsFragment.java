@@ -3,10 +3,12 @@ package ir.etkastores.app.Fragments.SupportFragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
 
@@ -21,6 +23,9 @@ public class RequestsFragment extends Fragment {
     }
 
     View view;
+
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
     @Nullable
     @Override

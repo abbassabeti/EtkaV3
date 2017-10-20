@@ -58,6 +58,8 @@
     <string name="firstNameAndLastName">نام و نام خانوادگی</string>
     <string name="email">ایمیل</string>
     <string name="gender">جنسیت</string>
+    <string name="education">تحصیلات</string>
+    <string name="birthDate">تاریخ تولد</string>
     <string name="get20ScoreWithCompletingProfileInfo">با تکمیل اطلاعات کاربری ۲۰ امتیاز دریافت می کنید</string>
     <string name="changePassword">تغییر رمز عبور</string>
     <string name="receiveSpecialOffersNotifications">دریافت اعلان های فروش ویژه</string>
@@ -70,6 +72,8 @@
     <string name="directCallToEtkaPR">تماس مستقیم با روابط عمومی اتکا</string>
     <string name="sendEmail">ارسال میل</string>
     <string name="webSite">وب سایت</string>
+    <string name="youCanIncreaseYourCardClubeCashByFollowingMethods">شما می توانید به یکی از حالت های زیر اعتبار کارت باشگاه مشتریان خود را افزایش داده و در خرید بعدی از آن استفاده کنید.</string>
+    <string name="inThisSectionYouCanSendRequests">در این بخش شما می توانید پیشنهاد، انتقاد، گزارش مشکل و یا درخواست کالای مورد نیاز خود را ثبت کنید.</string>
 
 
     <string name="aboutEtkaStoresText">نیازمند متن از طرف شرکت</string>

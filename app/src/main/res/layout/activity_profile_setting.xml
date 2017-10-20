@@ -102,7 +102,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:leftText="کارشناسی ارشد"
-                            app:rowText="@string/firstNameAndLastName" />
+                            app:rowText="@string/education" />
 
                         <View style="@style/lightDividerMatchWidthStyle" />
 
@@ -111,7 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:leftText="۲۶ فروردین ۱۳۷۲"
-                            app:rowText="@string/firstNameAndLastName" />
+                            app:rowText="@string/birthDate" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
