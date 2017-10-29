@@ -71,6 +71,15 @@
                         <View style="@style/lightDividerMatchWidthStyle" />
 
                         <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                            android:id="@+id/nationalCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:leftText="0123456789"
+                            app:rowText="@string/nationalCode" />
+
+                        <View style="@style/lightDividerMatchWidthStyle" />
+
+                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
                             android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

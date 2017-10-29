@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/commonLayoutRootStyle.themeColor"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/commonLayoutRootStyle.themeColor">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/editProfileInfo"/>
+        app:title="@string/editProfileInfo" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,9 +20,218 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/lastNameInputHolder"
+                        style="@style/loginRegisterEditTextLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/lastNameInput"
+                            style="@style/loginRegisterEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/lastName" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/firstNameInputInputHolder"
+                        style="@style/loginRegisterEditTextLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_weight="1">
+
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/firstNameInputInput"
+                            style="@style/loginRegisterEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/firstName" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/nationalCodeInputHolder"
+                    style="@style/loginRegisterEditTextLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/nationalCodeInput"
+                        style="@style/loginRegisterEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/nationalCode" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/emailInputHolder"
+                    style="@style/loginRegisterEditTextLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/emailInput"
+                        style="@style/loginRegisterEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/yourEmailAddress" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/mobilePhoneInputHolder"
+                    style="@style/loginRegisterEditTextLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/mobilePhoneInput"
+                        style="@style/loginRegisterEditTextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mobilePhoneNumber" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/genderSpinner"
+                    style="@style/loginRegisterEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layoutDirection="rtl"
+                    android:popupBackground="@color/colorPrimaryDark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.95dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/white" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/educationSpinner"
+                    style="@style/loginRegisterEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layoutDirection="rtl"
+                    android:popupBackground="@color/colorPrimaryDark" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.95dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/daySpinner"
+                            style="@style/loginRegisterEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layoutDirection="rtl"
+                            android:popupBackground="@color/colorPrimaryDark" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.95dp"
+                            android:background="@color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/monthSpinner"
+                            style="@style/loginRegisterEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layoutDirection="rtl"
+                            android:popupBackground="@color/colorPrimaryDark" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.95dp"
+                            android:background="@color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/yearSpinner"
+                            style="@style/loginRegisterEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="?attr/actionBarSize"
+                            android:layoutDirection="rtl"
+                            android:popupBackground="@color/colorPrimaryDark" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.95dp"
+                            android:background="@color/white" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <android.support.v4.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp" />
                 
+                <Button
+                    android:id="@+id/saveChangesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rect_round4dp_white"
+                    android:paddingLeft="64dp"
+                    android:paddingRight="64dp"
+                    android:layout_margin="8dp"
+                    android:text="@string/saveChanges"
+                    android:textColor="@color/darkGray"
+                    android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
 

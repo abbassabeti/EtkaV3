@@ -3,7 +3,6 @@ package ir.etkastores.app.UI.Views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -13,10 +12,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ir.etkastores.app.Fragments.HomeFragment;
-import ir.etkastores.app.Fragments.MapFragment;
-import ir.etkastores.app.Fragments.ProfileFragment;
-import ir.etkastores.app.Fragments.SearchFragment;
 import ir.etkastores.app.R;
 
 /**
