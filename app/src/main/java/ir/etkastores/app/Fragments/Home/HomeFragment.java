@@ -1,4 +1,4 @@
-package ir.etkastores.app.Fragments;
+package ir.etkastores.app.Fragments.Home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.Adapters.ViewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.Adapters.ViewPagerAdapters.GlobalFragmentPagerAdapter;
-import ir.etkastores.app.Fragments.SupportFragments.ContactUsFramgment;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.UI.Views.RTLTabLayout;
@@ -42,11 +41,11 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (view == null){
+//        if (view == null){
             view = inflater.inflate(R.layout.fragment_home,container,false);
             ButterKnife.bind(this,view);
             initViews();
-        }
+//        }
         return view;
     }
 
@@ -57,15 +56,15 @@ public class HomeFragment extends Fragment {
     private void createDummyPages(){
         List<FragmentTitleModel> pages = new ArrayList<>();
 
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب اول"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب دوم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب سوم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب چهارم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب پنجم"));
-        pages.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),"تب ششم"));
+        pages.add(new FragmentTitleModel(HomeSlidesFragment.newInstance(HomeSlidesFragment.FOR_YOU),R.string.forYou));
+        pages.add(new FragmentTitleModel(HomeSlidesFragment.newInstance(HomeSlidesFragment.SPECIAL_OFFERS),R.string.specialOffers));
+        pages.add(new FragmentTitleModel(HomeSlidesFragment.newInstance(HomeSlidesFragment.TOP_SALES),R.string.topSales));
+        pages.add(new FragmentTitleModel(HomeSlidesFragment.newInstance(HomeSlidesFragment.ETKA_EXCLUSIVE_WARES),R.string.etkaٰExclusiveWares));
+        pages.add(new FragmentTitleModel(HomeSlidesFragment.newInstance(HomeSlidesFragment.HEKMAT_WARES),R.string.hekmatWares));
 
-        pagerAdapter = new GlobalFragmentPagerAdapter(getFragmentManager(),pages);
+        pagerAdapter = new GlobalFragmentPagerAdapter(getChildFragmentManager(),pages);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(pages.size());
         tabLayout.setupWithViewPager(viewPager);
 
     }

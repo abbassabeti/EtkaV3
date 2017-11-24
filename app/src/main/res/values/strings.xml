@@ -81,4 +81,8 @@
     <string name="userPrivacyText">نیازمند متن از طرف شرکت</string>
     <string name="termAndConditionsText">نیازمند متن از طرف شرکت</string>
     <string name="nationalCode">کد ملی</string>
+    <string name="forYou">برای‌شما</string>
+    <string name="specialOffers">فروش‌ویژه</string>
+    <string name="hekmatWares">کالاهای‌طرح‌حکمت</string>
+    <string name="etkaٰExclusiveWares">کالاهای‌انحصاری‌اتکا</string>
 </resources>
