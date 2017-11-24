@@ -3,20 +3,12 @@ package ir.etkastores.app.Fragments.Home;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.Adapters.ViewPagerAdapters.HomeCategorySliderPagerAdapter;
-import ir.etkastores.app.Fragments.Home.HomeSlideSections.SliderSection;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Widgets.ViewPager16X9;
 
 /**
  * Created by Sajad on 11/24/17.
@@ -34,9 +26,6 @@ public class HomeSlidesFragment extends Fragment {
         return new HomeSlidesFragment();
     }
 
-    @BindView(R.id.testPager)
-    ViewPager16X9 pager;
-
     View view;
 
     @Nullable
@@ -51,19 +40,7 @@ public class HomeSlidesFragment extends Fragment {
     }
 
     private void initViews(){
-        List<String> items = new ArrayList<>();
-        items.add("4");
-        items.add("3");
-        items.add("2");
-        items.add("1");
 
-        HomeCategorySliderPagerAdapter adapter = new HomeCategorySliderPagerAdapter(getActivity(),items);
-        pager.setAdapter(adapter);
-        pager.setCurrentItem(items.size()-1);
-        pager.setOffscreenPageLimit(items.size());
-
-//        SliderSection sliderSection = SliderSection.newInstance();
-//        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.headerFrameLayout,sliderSection).commit();
     }
 
 }

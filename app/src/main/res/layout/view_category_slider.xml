@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ir.etkastores.app.UI.Widgets.ViewPager16X9
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.rd.PageIndicatorView
+        android:id="@+id/categoryPageIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        app:piv_radius="6dp"
+        app:piv_selectedColor="@color/colorPrimary"
+        app:piv_unselectedColor="@color/lightGray"
+        app:piv_animationType="worm" />
+
+</LinearLayout>

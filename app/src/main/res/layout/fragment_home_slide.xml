@@ -3,15 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="TEST" />
 
-    <ir.etkastores.app.UI.Widgets.ViewPager16X9
-        android:id="@+id/testPager"
+    <ir.etkastores.app.UI.Views.CategorySliderView
+        android:id="@+id/sliderView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
