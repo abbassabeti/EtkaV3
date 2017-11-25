@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Widgets.ViewPager16X9;
+import ir.etkastores.app.UI.Widgets.HomeHeaderSliderPager;
 
 /**
  * Created by Sajad on 11/24/17.
@@ -29,7 +29,7 @@ import ir.etkastores.app.UI.Widgets.ViewPager16X9;
 public class CategorySliderView extends LinearLayout {
 
     @BindView(R.id.pager)
-    ViewPager16X9 pager;
+    HomeHeaderSliderPager pager;
 
     @BindView(R.id.categoryPageIndicatorView)
     PageIndicatorView indicatorView;

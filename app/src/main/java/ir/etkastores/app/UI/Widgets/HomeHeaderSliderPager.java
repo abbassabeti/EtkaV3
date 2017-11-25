@@ -8,19 +8,19 @@ import android.util.AttributeSet;
  * Created by Sajad on 11/24/17.
  */
 
-public class ViewPager16X9 extends ViewPager {
+public class HomeHeaderSliderPager extends ViewPager {
 
-    public ViewPager16X9(Context context) {
+    public HomeHeaderSliderPager(Context context) {
         super(context);
     }
 
-    public ViewPager16X9(Context context, AttributeSet attrs) {
+    public HomeHeaderSliderPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int h = Math.round((getMeasuredWidth()/16)*9);
+        int h = Math.round((getMeasuredWidth()/16)*6);
         super.onMeasure(widthMeasureSpec, h);
         setMeasuredDimension(getMeasuredWidth(),h);
     }

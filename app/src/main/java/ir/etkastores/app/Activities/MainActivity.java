@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.enableShiftingMode(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
 
-        bottomNavigationView.setCurrentItem(0);
+        bottomNavigationView.setCurrentItem(3);
 
     }
 

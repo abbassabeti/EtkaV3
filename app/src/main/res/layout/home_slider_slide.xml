@@ -4,10 +4,10 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <ir.etkastores.app.UI.Widgets.ImageView16X9
+    <android.support.v7.widget.AppCompatImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/testLable"

@@ -4,9 +4,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ir.etkastores.app.UI.Views.CategorySliderView
-        android:id="@+id/sliderView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ir.etkastores.app.UI.Views.CategorySliderView
+                android:id="@+id/sliderView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
