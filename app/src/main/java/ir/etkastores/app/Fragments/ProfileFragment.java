@@ -27,8 +27,6 @@ import ir.etkastores.app.UI.Views.EtkaToolbar;
 
 public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public final static int IN_TABBAR_POSITION = 0;
-
     private View view;
 
     @BindView(R.id.toolbar)

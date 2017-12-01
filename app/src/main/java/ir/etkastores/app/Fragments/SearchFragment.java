@@ -18,8 +18,6 @@ import ir.etkastores.app.UI.Views.EtkaToolbar;
 
 public class SearchFragment extends Fragment {
 
-    public final static int IN_TABBAR_POSITION = 2;
-
     private View view;
 
     @BindView(R.id.toolbar)

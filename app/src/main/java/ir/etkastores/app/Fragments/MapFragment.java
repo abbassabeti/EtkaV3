@@ -23,8 +23,6 @@ import ir.etkastores.app.R;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
-    public final static int IN_TABBAR_POSITION = 1;
-
     private View view;
 
     private GoogleMap map;

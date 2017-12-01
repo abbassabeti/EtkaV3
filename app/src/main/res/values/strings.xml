@@ -8,6 +8,7 @@
     <string name="registerWithyourEmail">با ایمیل خود ثبت نام کنید</string>
     <string name="ifRegisteredThenLogin">اگر کارت باشگاه مشتریان اتکا دارید و یا قبلا ثبت نام کرده اید، وارد شوید</string>
     <string name="performSearchLikeChamranStore">جستجو کنید... مثلا فروشگاه چمران</string>
+    <string name="performSearchLikeGreenTea">جستجو کنید... مثلا چای سبز</string>
     <string name="sorting">مرتب سازی</string>
     <string name="filtering">فیلتر کردن</string>
     <string name="brandOrdered">بر اساس برند</string>
