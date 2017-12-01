@@ -6,27 +6,30 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Views.CategoryGroupHorizontalView;
+import ir.etkastores.app.UI.Views.CategorySliderView;
 
 /**
- * Created by Sajad on 11/24/17.
+ * Created by Sajad on 12/2/17.
  */
 
-public class HomeSlidesFragment extends Fragment {
+public class EtkaExclusiveWaresSlide extends Fragment implements PageTrigger {
 
-    public final static int FOR_YOU = 1;
-    public final static int SPECIAL_OFFERS = 2;
-    public final static int TOP_SALES = 3;
-    public final static int ETKA_EXCLUSIVE_WARES = 4;
-    public final static int HEKMAT_WARES = 5;
-
-    public static HomeSlidesFragment newInstance(int type){
-        return new HomeSlidesFragment();
+    public static EtkaExclusiveWaresSlide newInstance(){
+        return new EtkaExclusiveWaresSlide();
     }
 
     View view;
+
+    @BindView(R.id.itemsHolder)
+    LinearLayout itemsHolder;
+
+    boolean isFirstSelect = true;
 
     @Nullable
     @Override
@@ -34,13 +37,18 @@ public class HomeSlidesFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_home_slide, container, false);
             ButterKnife.bind(this, view);
-            initViews();
         }
         return view;
     }
 
     private void initViews(){
-
+        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
     }
 
+    @Override
+    public void onPageSelected() {
+        if (!isFirstSelect) return;
+        isFirstSelect = false;
+        initViews();
+    }
 }

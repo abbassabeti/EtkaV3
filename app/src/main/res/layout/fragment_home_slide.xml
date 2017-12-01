@@ -9,30 +9,10 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/itemsHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <ir.etkastores.app.UI.Views.CategorySliderView
-                android:id="@+id/sliderView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.CategoryGroupHorizontalView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
