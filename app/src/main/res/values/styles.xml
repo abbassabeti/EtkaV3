@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="android:configChanges">keyboardHidden|orientation</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+
     </style>
 
     <style name="AppTheme.Translucent">
@@ -17,6 +22,10 @@
     <style name="AppTheme.SolidSystemBar">
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.SolidSystemBar.WhiteParrentStyle">
+        <item name="colorControlActivated">@color/colorPrimary</item>
     </style>
 
     <!--Layout styles-->
@@ -74,10 +83,6 @@
         <item name="android:textColorHint">@color/white</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:layout_marginBottom">4dp</item>
-    </style>
-
-    <style name="EtkaEditTextStyle" parent="@style/Widget.AppCompat.EditText">
-        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="loginRegisterEditTextStyle">

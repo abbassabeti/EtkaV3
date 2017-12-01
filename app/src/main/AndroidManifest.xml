@@ -39,7 +39,7 @@
         </activity>
         <activity
             android:name=".Activities.MainActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParrentStyle" />
         <activity
             android:name=".Activities.IntroActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />

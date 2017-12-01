@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">@color/etkaThemeColor</color>
     <color name="colorPrimaryDark">@color/etkaThemeDarkColor</color>
-    <!--<color name="colorAccent">#88CE4619</color>-->
-    <color name="colorAccent">@color/white</color>
+    <color name="colorAccent">#88CE4619</color>
+    <!--<color name="colorAccent">@color/white</color>-->
 
     <color name="etkaThemeColor">#EC4F1B</color>
     <color name="etkaThemeDarkColor">#CE4619</color>
