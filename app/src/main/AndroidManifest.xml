@@ -79,6 +79,9 @@
         <activity
             android:name=".Activities.ProfileActivities.TextInfoActivity"
             android:theme="@style/AppTheme.SolidSystemBar"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="0eeca3d3f63bb0a30e6a1d10a66becb964f4863d" />
     </application>
 
 </manifest>

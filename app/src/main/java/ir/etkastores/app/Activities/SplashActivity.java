@@ -16,7 +16,6 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         initMap();
-
     }
 
     private void showLogin() {
