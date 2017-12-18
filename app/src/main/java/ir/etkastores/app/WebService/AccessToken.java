@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Sajad on 9/4/17.
  */
 
-public class TokenResponse {
+public class AccessToken {
 
     @SerializedName("access_token")
     private String accessToken;
@@ -39,10 +39,11 @@ public class TokenResponse {
     }
 
     public String getTokenType() {
-        return tokenType;
+        return "bearer";
     }
 
     public String getRefreshToken() {
+        if (refreshToken == null) return "";
         return refreshToken;
     }
 

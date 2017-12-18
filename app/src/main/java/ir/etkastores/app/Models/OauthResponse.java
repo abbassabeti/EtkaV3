@@ -15,13 +15,29 @@ public class OauthResponse<T> {
     @SerializedName("meta")
     public Meta meta;
 
-    public class Meta{
+    public class Meta {
 
         @SerializedName("statusCode")
         public int statusCode;
 
         @SerializedName("message")
         public String message;
+
+        public int getStatusCode() {
+            return statusCode;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+    }
+
+    public boolean isSuccessful() {
+        if (meta.getStatusCode() == 200) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

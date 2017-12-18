@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.UserProfileModel;
-import ir.etkastores.app.WebService.TokenResponse;
+import ir.etkastores.app.WebService.AccessToken;
 
 /**
  * Created by Sajad on 9/8/17.
@@ -54,15 +54,15 @@ public class DiskDataHelper {
     private final static String LAST_TOKEN_KEY = "LAST_TOKEN_KEY";
     private final static String USER_PROFILE_KEY = "USER_PROFILE_KEY";
 
-    public static void saveLastToken(TokenResponse token){
+    public static void saveLastToken(AccessToken token){
         if (token!=null){
             putString(LAST_TOKEN_KEY,new Gson().toJson(token));
         }
     }
 
-    public static TokenResponse getLastToken(){
+    public static AccessToken getLastToken(){
         try {
-            return new Gson().fromJson(getString(LAST_TOKEN_KEY),TokenResponse.class);
+            return new Gson().fromJson(getString(LAST_TOKEN_KEY),AccessToken.class);
         }catch (Exception err){
             return null;
         }

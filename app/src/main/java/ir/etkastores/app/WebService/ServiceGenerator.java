@@ -25,7 +25,7 @@ public class ServiceGenerator {
     private static OkHttpClient.Builder httpClient;
     private static Retrofit.Builder builder;
 
-    public static TokenResponse lastToken;
+    public static AccessToken lastToken;
 
     public static <S> S createService(Class<S> serviceClass) {
         httpClient = new OkHttpClient.Builder();
@@ -38,19 +38,19 @@ public class ServiceGenerator {
         return retrofit.create(serviceClass);
     }
 
-    public static <S> S createService(Class<S> serviceClass, TokenResponse accessToken) {
+    public static <S> S createService(Class<S> serviceClass, AccessToken accessToken) {
         httpClient = new OkHttpClient.Builder();
         builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
 
         if (accessToken == null){
-            accessToken = new TokenResponse();
+            accessToken = new AccessToken();
         }
 
         if(accessToken != null) {
             lastToken = accessToken;
-            final TokenResponse token = accessToken;
+            final AccessToken token = accessToken;
             httpClient.addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
@@ -75,15 +75,16 @@ public class ServiceGenerator {
                         return null;
                     }
                     EtkaApi tokenClient = createService(EtkaApi.class);
-                    Call<TokenResponse> call = tokenClient.getToken("password",
-                            "USER_NAME",
-                            "PASSWORD",
+                    Call<AccessToken> call = tokenClient.getToken("refresh_token",
+                            "",
+                            "",
                             ApiStatics.CLIENT_ID,
-                            ApiStatics.CLINET_SECRET);
+                            "",
+                            lastToken.getRefreshToken());
                     try {
-                        retrofit2.Response<TokenResponse> tokenResponse = call.execute();
+                        retrofit2.Response<AccessToken> tokenResponse = call.execute();
                         if(tokenResponse.code() == 200) {
-                            TokenResponse newToken = tokenResponse.body();
+                            AccessToken newToken = tokenResponse.body();
                             lastToken = newToken;
                             DiskDataHelper.saveLastToken(newToken);
                             return response.request().newBuilder()
