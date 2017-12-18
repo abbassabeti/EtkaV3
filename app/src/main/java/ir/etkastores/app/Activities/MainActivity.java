@@ -4,8 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
@@ -14,7 +16,14 @@ import ir.etkastores.app.Fragments.Home.HomeFragment;
 import ir.etkastores.app.Fragments.MapFragment;
 import ir.etkastores.app.Fragments.ProfileFragment;
 import ir.etkastores.app.Fragments.SearchFragment;
+import ir.etkastores.app.Models.OauthResponse;
+import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
+import ir.etkastores.app.Models.profile.UserGender;
 import ir.etkastores.app.R;
+import ir.etkastores.app.WebService.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 
@@ -34,6 +43,8 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
 
         bottomNavigationView.setCurrentItem(3);
+
+        testRegister();
 
     }
 
@@ -66,6 +77,34 @@ public class MainActivity extends BaseActivity {
 
     private void replaceFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder,fragment).commitNowAllowingStateLoss();
+    }
+
+    private void testRegister(){
+        RegisterUserRequestModel requestModel = new RegisterUserRequestModel();
+        requestModel.setFirstName("سجاد");
+        requestModel.setLastName("گرشاسبی");
+        requestModel.setGender(UserGender.MALE);
+        requestModel.setCellPhone("09354018630");
+        requestModel.setPassword("#abcd1234#");
+        requestModel.setEmail("sajadgarshasbi@gmail.com");
+        Log.e("requestModel",""+new Gson().toJson(requestModel));
+        ApiProvider.getApi().registerNewUser(requestModel).enqueue(new Callback<OauthResponse<String>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+                        Log.e("registered User ID",""+response.body().getData());
+                    }else{
+                        Log.e("registered User error",""+response.body().getMeta().getMessage());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
+                Log.e("registered failed",""+t.getLocalizedMessage());
+            }
+        });
     }
 
 }

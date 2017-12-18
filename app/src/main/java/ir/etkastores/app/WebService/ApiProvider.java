@@ -20,7 +20,7 @@ import static ir.etkastores.app.WebService.ApiStatics.BASE_URL;
  * Created by Sajad on 9/3/17.
  */
 
-public class ServiceGenerator {
+public class ApiProvider {
 
     private static OkHttpClient.Builder httpClient;
     private static Retrofit.Builder builder;
@@ -111,6 +111,14 @@ public class ServiceGenerator {
             result++;
         }
         return result;
+    }
+
+    public static EtkaApi getApi(){
+        return createService(EtkaApi.class);
+    }
+
+    public static EtkaApi getAuthorizedApi(){
+        return createService(EtkaApi.class,DiskDataHelper.getLastToken());
     }
 
 }

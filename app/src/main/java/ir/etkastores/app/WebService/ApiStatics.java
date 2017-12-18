@@ -6,7 +6,7 @@ package ir.etkastores.app.WebService;
 
 public class ApiStatics {
 
-    public static final String BASE_URL = "http://217.147.92.168";
+    public static final String BASE_URL = "http://217.147.92.168:8008";
 
     public static final String END_POINT_TOKEN = "/Token";
     public static final String END_POINT_REGISTER = "/api/v1/Account/Register";

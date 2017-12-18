@@ -33,7 +33,7 @@ public class OauthResponse<T> {
     }
 
     public boolean isSuccessful() {
-        if (meta.getStatusCode() == 200) {
+        if (getMeta().getStatusCode() == 200) {
             return true;
         } else {
             return false;
@@ -41,4 +41,11 @@ public class OauthResponse<T> {
 
     }
 
+    public T getData() {
+        return data;
+    }
+
+    public Meta getMeta() {
+        return meta;
+    }
 }
