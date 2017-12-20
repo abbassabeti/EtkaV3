@@ -38,20 +38,24 @@ public class CategorySliderView extends LinearLayout {
 
     public CategorySliderView(Context context) {
         super(context);
-        init(null);
+        init();
     }
 
     public CategorySliderView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
     }
 
     public CategorySliderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs);
     }
 
-    private void init(AttributeSet attrs){
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        init();
+    }
+
+    private void init(){
         View.inflate(getContext(), R.layout.view_category_slider,this);
         ButterKnife.bind(this);
 
@@ -68,10 +72,6 @@ public class CategorySliderView extends LinearLayout {
         indicatorView.setViewPager(pager);
         indicatorView.setSelection(items.size()-1);
         pager.setCurrentItem(items.size()-1);
-
-        if (attrs != null){
-
-        }
     }
 
     private class CategoryAdapter extends PagerAdapter{

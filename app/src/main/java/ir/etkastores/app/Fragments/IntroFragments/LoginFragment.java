@@ -1,5 +1,6 @@
 package ir.etkastores.app.Fragments.IntroFragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import ir.etkastores.app.UI.Dialogs.ResetPasswordDialog;
 import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.ActivityUtils;
+import ir.etkastores.app.Utils.DialogHelper;
 import ir.etkastores.app.WebService.AccessToken;
 import ir.etkastores.app.WebService.ApiProvider;
 import ir.etkastores.app.WebService.ApiStatics;
@@ -67,6 +69,8 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     AppCompatEditText clubCardPasswordInput;
 
     View view;
+
+    AlertDialog loadingDialog;
 
     @Nullable
     @Override
@@ -152,6 +156,8 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     private void showManualLoginControl() {
         loginType = LOGIN_TYPE_EMAIL;
+        passwordInput.setText("#abcE1234#");
+        emailAddressInput.setText("sajadgarshasbi@gmail.com");
         emailAddressInputHolder.setVisibility(View.VISIBLE);
         passwordInputHolder.setVisibility(View.VISIBLE);
         clubCardNumberInputHolder.setVisibility(View.GONE);
@@ -168,11 +174,13 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     Call<AccessToken> loginRequest;
     private void login(String userName,String password){
+        loadingDialog = DialogHelper.showLoading(getActivity(),"please wait....");
         loginRequest = ApiProvider.getLogin(userName,password);
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (response.isSuccessful()){
+                    loadingDialog.cancel();
                     ApiStatics.saveToken(response.body());
                     goToApp();
                 }else{
@@ -182,7 +190,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
-
+                loadingDialog.cancel();
             }
         });
     }
