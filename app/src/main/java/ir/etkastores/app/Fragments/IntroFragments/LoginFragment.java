@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,15 @@ import butterknife.OnClick;
 import ir.etkastores.app.Activities.MainActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.ResetPasswordDialog;
+import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.ActivityUtils;
+import ir.etkastores.app.WebService.AccessToken;
+import ir.etkastores.app.WebService.ApiProvider;
+import ir.etkastores.app.WebService.ApiStatics;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Sajad on 9/29/17.
@@ -28,6 +36,11 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         AppCompatCheckBox.OnCheckedChangeListener {
 
     public static final String TAG = "LOGIN_FRAGMENT_TAG";
+
+    private final int LOGIN_TYPE_EMAIL = 1;
+    private final int LOGIN_TYPE_CLUBE_CARD = 2;
+
+    private int loginType;
 
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
@@ -91,8 +104,27 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     @OnClick(R.id.loginButton)
     public void onLoginClick(){
-        getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
-        getActivity().finish();
+        String userName, password;
+
+        if (loginType == LOGIN_TYPE_CLUBE_CARD){
+            userName = clubCardNumberInput.getText().toString();
+            password = clubCardPasswordInput.getText().toString();
+        }else{
+            userName = emailAddressInput.getText().toString();
+            password = passwordInput.getText().toString();
+        }
+
+        if (TextUtils.isEmpty(userName)){
+            Toaster.show(getActivity(),"userName is empty");
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)){
+            Toaster.show(getActivity(),"password is empty");
+            return;
+        }
+
+        login(userName,password);
     }
 
     @OnClick(R.id.forgotPasswordButton)
@@ -119,6 +151,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     }
 
     private void showManualLoginControl() {
+        loginType = LOGIN_TYPE_EMAIL;
         emailAddressInputHolder.setVisibility(View.VISIBLE);
         passwordInputHolder.setVisibility(View.VISIBLE);
         clubCardNumberInputHolder.setVisibility(View.GONE);
@@ -126,10 +159,47 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     }
 
     private void showClubCardLoginControl() {
+        loginType = LOGIN_TYPE_CLUBE_CARD;
         emailAddressInputHolder.setVisibility(View.GONE);
         passwordInputHolder.setVisibility(View.GONE);
         clubCardNumberInputHolder.setVisibility(View.VISIBLE);
         clubCardPasswordInputHolder.setVisibility(View.VISIBLE);
+    }
+
+    Call<AccessToken> loginRequest;
+    private void login(String userName,String password){
+        loginRequest = ApiProvider.getLogin(userName,password);
+        loginRequest.enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (response.isSuccessful()){
+                    ApiStatics.saveToken(response.body());
+                    goToApp();
+                }else{
+                    onFailure(null,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void goToApp(){
+        getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+        getActivity().finish();
+    }
+
+    @Override
+    public void onPause() {
+        cancelRequest();
+        super.onPause();
+    }
+
+    private void cancelRequest(){
+        if (loginRequest != null) loginRequest.cancel();
     }
 
 }

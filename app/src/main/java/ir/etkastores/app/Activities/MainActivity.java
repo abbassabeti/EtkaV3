@@ -20,7 +20,9 @@ import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.Models.profile.UserGender;
 import ir.etkastores.app.R;
+import ir.etkastores.app.WebService.AccessToken;
 import ir.etkastores.app.WebService.ApiProvider;
+import ir.etkastores.app.WebService.ApiStatics;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +46,8 @@ public class MainActivity extends BaseActivity {
 
         bottomNavigationView.setCurrentItem(3);
 
-        testRegister();
+        //testRegister();
+        testLogin();
 
     }
 
@@ -85,7 +88,7 @@ public class MainActivity extends BaseActivity {
         requestModel.setLastName("گرشاسبی");
         requestModel.setGender(UserGender.MALE);
         requestModel.setCellPhone("09354018630");
-        requestModel.setPassword("#abcd1234#");
+        requestModel.setPassword("abcd1234#");
         requestModel.setEmail("sajadgarshasbi@gmail.com");
         Log.e("requestModel",""+new Gson().toJson(requestModel));
         ApiProvider.getApi().registerNewUser(requestModel).enqueue(new Callback<OauthResponse<String>>() {
@@ -105,6 +108,32 @@ public class MainActivity extends BaseActivity {
                 Log.e("registered failed",""+t.getLocalizedMessage());
             }
         });
+    }
+
+    private void testLogin(){
+        ApiProvider.getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD,"sajadgarshasbi@gmail.com","#abcE1234#", ApiStatics.CLIENT_ID,ApiStatics.CLINET_SECRET,"").enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (response.isSuccessful()){
+                    Log.e("login...","success");
+                }else{
+                    onFailure(null,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+                Log.e("login...","failed");
+            }
+        });
+    }
+
+    private void testEditProfile(){
+
+    }
+
+    private void testChangePassword(){
+
     }
 
 }
