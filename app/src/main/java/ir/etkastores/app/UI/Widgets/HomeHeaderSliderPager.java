@@ -20,8 +20,8 @@ public class HomeHeaderSliderPager extends ViewPager {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int h = Math.round((getMeasuredWidth()/16)*6);
-        super.onMeasure(widthMeasureSpec, h);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int h = Math.round((getMeasuredWidth()/16)*9);
         setMeasuredDimension(getMeasuredWidth(),h);
     }
 }

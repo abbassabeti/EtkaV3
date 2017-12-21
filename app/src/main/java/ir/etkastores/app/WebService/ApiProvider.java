@@ -90,6 +90,7 @@ public class ApiProvider {
                         if(tokenResponse.code() == 200) {
                             AccessToken newToken = tokenResponse.body();
                             lastToken = newToken;
+                            ApiStatics.saveToken(newToken);
                             DiskDataHelper.saveLastToken(newToken);
                             return response.request().newBuilder()
                                     .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())

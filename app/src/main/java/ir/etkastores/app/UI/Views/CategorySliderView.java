@@ -3,12 +3,14 @@ package ir.etkastores.app.UI.Views;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rd.PageIndicatorView;
@@ -36,9 +38,10 @@ public class CategorySliderView extends LinearLayout {
 
     private CategoryAdapter adapter;
 
+    List<String> items;
+
     public CategorySliderView(Context context) {
         super(context);
-        init();
     }
 
     public CategorySliderView(Context context, @Nullable AttributeSet attrs) {
@@ -56,10 +59,13 @@ public class CategorySliderView extends LinearLayout {
     }
 
     private void init(){
-        View.inflate(getContext(), R.layout.view_category_slider,this);
+        inflate(getContext(), R.layout.view_category_slider,this);
         ButterKnife.bind(this);
+        fillView();
+    }
 
-        List<String> items = new ArrayList<>();
+    private void fillView(){
+        items = new ArrayList<>();
         items.add("یک");
         items.add("دو");
         items.add("سه");
@@ -91,7 +97,7 @@ public class CategorySliderView extends LinearLayout {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view.equals(object);
+            return view == (RelativeLayout) object;
         }
 
         @Override
@@ -101,13 +107,13 @@ public class CategorySliderView extends LinearLayout {
             TextView testLable = (TextView) view.findViewById(R.id.testLable);
             testLable.setText(items.get(position));
             imageView.setImageResource(R.drawable.etka_logo_wide);
-            container.addView(view,0);
+            container.addView(view);
             return view;
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
+            container.removeView((RelativeLayout) object);
         }
     }
 
