@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setCurrentItem(3);
 
         //testRegister();
-        testLogin();
+//        testLogin();
 
     }
 
