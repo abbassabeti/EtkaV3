@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:animateLayoutChanges="true"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    android:animateLayoutChanges="true">
+    android:orientation="vertical">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
         android:id="@+id/toolbar"
@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    app:buttonTint="@color/white"/>
+                    app:buttonTint="@color/white" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -76,7 +76,8 @@
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/passwort_atLeast8Char" />
+                    android:hint="@string/passwort_atLeast8Char"
+                    android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -106,7 +107,8 @@
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/cardPassword" />
+                    android:hint="@string/cardPassword"
+                    android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 

@@ -10,9 +10,15 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.Models.OauthResponse;
+import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.ActivityUtils;
+import ir.etkastores.app.WebService.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Sajad on 9/29/17.
@@ -59,6 +65,31 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
     @Override
     public void onActionClick(int actionCode) {
 
+    }
+
+    Call<OauthResponse<String>> registerApi;
+    private void register(){
+        RegisterUserRequestModel requestModel = new RegisterUserRequestModel();
+        registerApi = ApiProvider.getApi().registerNewUser(requestModel);
+        registerApi.enqueue(new Callback<OauthResponse<String>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+
+                    }else{
+
+                    }
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
+
+            }
+        });
     }
 
 }
