@@ -76,7 +76,8 @@
     <string name="youCanIncreaseYourCardClubeCashByFollowingMethods">شما می توانید به یکی از حالت های زیر اعتبار کارت باشگاه مشتریان خود را افزایش داده و در خرید بعدی از آن استفاده کنید.</string>
     <string name="inThisSectionYouCanSendRequests">در این بخش شما می توانید پیشنهاد، انتقاد، گزارش مشکل و یا درخواست کالای مورد نیاز خود را ثبت کنید.</string>
     <string name="saveChanges">ذخیره تغییرات</string>
-
+    <string name="inLogin">در حال ورود به حساب کاربری...</string>
+    <string name="inSendingData">در حال ارسال اطلاعات...</string>
 
     <string name="aboutEtkaStoresText">نیازمند متن از طرف شرکت</string>
     <string name="userPrivacyText">نیازمند متن از طرف شرکت</string>

@@ -174,7 +174,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     Call<AccessToken> loginRequest;
     private void login(String userName,String password){
-        loadingDialog = DialogHelper.showLoading(getActivity(),"please wait....");
+        loadingDialog = DialogHelper.showLoading(getActivity(),R.string.inLogin);
         loginRequest = ApiProvider.getLogin(userName,password);
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override

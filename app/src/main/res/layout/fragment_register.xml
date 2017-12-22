@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content">
 
                     <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/lastNameInput"
                         style="@style/loginRegisterEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
                     android:layout_height="wrap_content">
 
                     <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/firstNameInput"
                         style="@style/loginRegisterEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -62,6 +64,7 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/emailAddressInput"
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -75,6 +78,7 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/passwordInput"
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -88,6 +92,7 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/presenterCodeInput"
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,6 +105,7 @@
                 android:layout_height="24dp" />
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/registerButton"
                 style="@style/whiteLoginRegisterButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
