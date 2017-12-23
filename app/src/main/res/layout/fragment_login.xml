@@ -76,8 +76,7 @@
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/passwort_atLeast8Char"
-                    android:inputType="textPassword" />
+                    android:hint="@string/passwort_atLeast8Char" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -107,8 +106,7 @@
                     style="@style/loginRegisterEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/cardPassword"
-                    android:inputType="textPassword" />
+                    android:hint="@string/cardPassword" />
 
             </android.support.design.widget.TextInputLayout>
 

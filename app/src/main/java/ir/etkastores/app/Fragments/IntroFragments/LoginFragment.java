@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -162,6 +163,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         passwordInputHolder.setVisibility(View.VISIBLE);
         clubCardNumberInputHolder.setVisibility(View.GONE);
         clubCardPasswordInputHolder.setVisibility(View.GONE);
+        passwordInput.setTransformationMethod(new PasswordTransformationMethod());
     }
 
     private void showClubCardLoginControl() {
@@ -170,6 +172,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         passwordInputHolder.setVisibility(View.GONE);
         clubCardNumberInputHolder.setVisibility(View.VISIBLE);
         clubCardPasswordInputHolder.setVisibility(View.VISIBLE);
+        clubCardPasswordInput.setTransformationMethod(new PasswordTransformationMethod());
     }
 
     Call<AccessToken> loginRequest;

@@ -62,7 +62,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         initViews();
     }
 
-    private LatLng chamranPosition = new LatLng(35.686176,51.406575);
+    private LatLng chamranPosition = new LatLng(35.686169,51.4065863);
 
     private void initViews() {
         map.getUiSettings().setRotateGesturesEnabled(false);
@@ -79,7 +79,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(position);
         markerOptions.icon(bitmapDescriptorFromVector(R.drawable.store_map_marker));
-        markerOptions.anchor(0,0);
+        markerOptions.anchor(0.5f, 0.5f);
         map.addMarker(markerOptions);
 
     }
