@@ -1,5 +1,8 @@
 package ir.etkastores.app.WebService;
 
+import java.util.List;
+
+import ir.etkastores.app.Models.CategoryModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
@@ -8,7 +11,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by Sajad on 9/3/17.
@@ -33,5 +38,11 @@ public interface EtkaApi {
 
     @POST(ApiStatics.END_POINT_RESET_PASSWORD)
     Call<OauthResponse<String>> resetPassword(@Body ResetPasswordRequestModel resetPasswordRequestModel);
+
+    @GET(ApiStatics.END_POINT_PRODUCT_CATEGORY)
+    Call<OauthResponse<List<CategoryModel>>> getCategory();
+
+    @GET(ApiStatics.END_POINT_PRODUCT_CATEGORY)
+    Call<OauthResponse<List<CategoryModel>>> getCategory(@Query("id") int id);
 
 }

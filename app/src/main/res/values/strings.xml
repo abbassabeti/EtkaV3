@@ -78,6 +78,9 @@
     <string name="saveChanges">ذخیره تغییرات</string>
     <string name="inLogin">در حال ورود به حساب کاربری...</string>
     <string name="inSendingData">در حال ارسال اطلاعات...</string>
+    <string name="contactToBranch">تماس با شعبه</string>
+    <string name="showDirections">نمایش مسیرها</string>
+    <string name="share">اشتراک گذاری</string>
 
     <string name="aboutEtkaStoresText">نیازمند متن از طرف شرکت</string>
     <string name="userPrivacyText">نیازمند متن از طرف شرکت</string>
