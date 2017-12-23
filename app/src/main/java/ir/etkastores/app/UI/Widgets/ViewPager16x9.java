@@ -8,13 +8,13 @@ import android.util.AttributeSet;
  * Created by Sajad on 11/24/17.
  */
 
-public class HomeHeaderSliderPager extends ViewPager {
+public class ViewPager16x9 extends ViewPager {
 
-    public HomeHeaderSliderPager(Context context) {
+    public ViewPager16x9(Context context) {
         super(context);
     }
 
-    public HomeHeaderSliderPager(Context context, AttributeSet attrs) {
+    public ViewPager16x9(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
