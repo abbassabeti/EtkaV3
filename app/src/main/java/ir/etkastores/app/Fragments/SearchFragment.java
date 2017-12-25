@@ -47,27 +47,51 @@ public class SearchFragment extends Fragment {
 
     private void initViews(){
 
-        categoryRequest = ApiProvider.getAuthorizedApi().getCategory();
+        categoryRequest = ApiProvider.getAuthorizedApi().getCategoryAtLevel(1);
         categoryRequest.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
                 if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
-                        Log.e("response",""+response.body().getData().size());
+                    if (response.body().isSuccessful()) {
+                        Log.e("response success","size:"+response.body().getData().size());
+                        requestLevel2();
                     }else{
-                        Log.e("response error",""+response.body().getMeta().getMessage());
+                        Log.e("response error","message:"+response.body().getMeta().getMessage());
                     }
                 }else{
-                    onFailure(null,null);
+                    Log.e("response unsuccessful","response code:"+response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
-                Log.e("request failure","...");
+                Log.e("request failure","message:"+t.getLocalizedMessage());
             }
         });
 
+    }
+
+    private void requestLevel2(){
+        categoryRequest = ApiProvider.getAuthorizedApi().getCategory(1);
+        categoryRequest.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()) {
+                        Log.e("response success","size:"+response.body().getData().size());
+                    }else{
+                        Log.e("response error","message:"+response.body().getMeta().getMessage());
+                    }
+                }else{
+                    Log.e("response unsuccessful","response code:"+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
+                Log.e("request failure","message:"+t.getLocalizedMessage());
+            }
+        });
     }
 
 

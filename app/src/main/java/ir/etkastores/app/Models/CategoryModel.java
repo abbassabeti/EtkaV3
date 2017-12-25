@@ -23,6 +23,9 @@ public class CategoryModel {
     @SerializedName("parentId")
     long parentId;
 
+    @SerializedName("hasChild")
+    boolean hasChild;
+
     public long getId() {
         return id;
     }
@@ -43,4 +46,7 @@ public class CategoryModel {
         return parentId;
     }
 
+    public boolean isHasChild() {
+        return hasChild;
+    }
 }

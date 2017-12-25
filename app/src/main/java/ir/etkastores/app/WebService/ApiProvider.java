@@ -135,7 +135,7 @@ public class ApiProvider {
     }
 
     public static Call<AccessToken> getLogin(String userName, String password){
-        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD,userName,password,ApiStatics.CLIENT_ID,ApiStatics.CLINET_SECRET,"");
+        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD,userName,password,ApiStatics.CLIENT_ID,ApiStatics.CLIENT_SECRET,"");
     }
 
 }

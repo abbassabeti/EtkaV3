@@ -111,7 +111,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void testLogin(){
-        ApiProvider.getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD,"sajadgarshasbi@gmail.com","#abcE1234#", ApiStatics.CLIENT_ID,ApiStatics.CLINET_SECRET,"").enqueue(new Callback<AccessToken>() {
+        ApiProvider.getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD,"sajadgarshasbi@gmail.com","#abcE1234#", ApiStatics.CLIENT_ID,ApiStatics.CLIENT_SECRET,"").enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (response.isSuccessful()){

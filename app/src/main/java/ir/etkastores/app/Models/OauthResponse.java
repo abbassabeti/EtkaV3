@@ -10,10 +10,10 @@ import com.google.gson.annotations.SerializedName;
 public class OauthResponse<T> {
 
     @SerializedName("data")
-    public T data;
+    T data;
 
     @SerializedName("meta")
-    public Meta meta;
+    Meta meta;
 
     public class Meta {
 

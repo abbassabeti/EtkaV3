@@ -12,10 +12,13 @@ public class ApiStatics {
     public static final String END_POINT_REGISTER = "/api/v1/Account/Register";
     public static final String END_POINT_EDIT_PROFILE = "/api/v1/Account/EditProfile";
     public static final String END_POINT_RESET_PASSWORD = "/api/v1/Account/ResetPassword";
-    public static final String END_POINT_PRODUCT_CATEGORY = "/api/v1/ProductCategory/get";
+    public static final String END_POINT_PRODUCT_CATEGORY_LEVEL = "/api/v1/ProductCategory/Level";
+    public static final String END_POINT_PRODUCT_CATEGORY_CHILD = "/api/v1/ProductCategory/child";
+    public static final String END_POINT_PRODUCT_SEARCH = "/api/v1/Product/search";
+    public static final String END_POINT_PRODUCT = "/api/v1/Product/get";
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
-    public static final String CLINET_SECRET = "AS85dwD5asd8E4ESD85";
+    public static final String CLIENT_SECRET = "AS85dwD5asd8E4ESD85";
 
     public static final String GRAND_TYPE_PASSWORD = "password";
     public static final String GRAND_TYPE_REFRESH_TOKEN = "refresh_token";
