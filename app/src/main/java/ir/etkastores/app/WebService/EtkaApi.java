@@ -23,6 +23,7 @@ import retrofit2.http.Query;
 
 public interface EtkaApi {
 
+    //1
     @FormUrlEncoded
     @POST(ApiStatics.END_POINT_TOKEN)
     Call<AccessToken> getToken(@Field("grant_type")String grant_type,
@@ -31,25 +32,31 @@ public interface EtkaApi {
                                @Field("client_id")String client_id,
                                @Field("client_secret")String client_secret,
                                @Field("refresh_token") String refreshToken);
-
+    //2
     @POST(ApiStatics.END_POINT_REGISTER)
     Call<OauthResponse<String>> registerNewUser(@Body RegisterUserRequestModel userRequestModel);
 
+    //3
     @POST(ApiStatics.END_POINT_EDIT_PROFILE)
     Call<OauthResponse<String>> editUserProfile(@Body UserProfileModel userProfileModel);
 
+    //4
     @POST(ApiStatics.END_POINT_RESET_PASSWORD)
     Call<OauthResponse<String>> resetPassword(@Body ResetPasswordRequestModel resetPasswordRequestModel);
 
+    //5
     @GET(ApiStatics.END_POINT_PRODUCT_CATEGORY_CHILD)
     Call<OauthResponse<List<CategoryModel>>> getCategory(@Query("ParentId") long parentId);
 
+    //6
     @GET(ApiStatics.END_POINT_PRODUCT_CATEGORY_LEVEL)
     Call<OauthResponse<List<CategoryModel>>> getCategoryAtLevel(@Query("Level") int id);
 
+    //7
     @GET(ApiStatics.END_POINT_PRODUCT_SEARCH)
     Call<OauthResponse<List<ProductModel>>> searchProduct(@Body SearchProductRequestModel request);
 
+    //8
     @GET(ApiStatics.END_POINT_PRODUCT)
     Call<OauthResponse<ProductModel>> getProduct(@Query("id") long id,@Query("Barcode") String barcode);
 
