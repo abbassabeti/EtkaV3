@@ -9,6 +9,7 @@ import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.Models.profile.ResetPasswordRequestModel;
+import ir.etkastores.app.Models.store.StoreModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -59,5 +60,10 @@ public interface EtkaApi {
     //8
     @GET(ApiStatics.END_POINT_PRODUCT)
     Call<OauthResponse<ProductModel>> getProduct(@Query("id") long id,@Query("Barcode") String barcode);
+
+    //9
+    @GET(ApiStatics.END_POINT_STORE)
+    Call<OauthResponse<List<StoreModel>>> getStores();
+
 
 }

@@ -24,11 +24,20 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.StoreActivity;
+import ir.etkastores.app.Models.OauthResponse;
+import ir.etkastores.app.Models.store.StoreModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.WebService.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -45,6 +54,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @BindView(R.id.storeInfoHolder)
     View storeInfoHolder;
+
+    @BindView(R.id.infoStoreName)
+    TextView storeName;
+
+    private StoreModel selectedStore;
+    private HashMap<Marker,StoreModel> storesHashMap;
 
     @Nullable
     @Override
@@ -71,26 +86,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         map.setOnMarkerClickListener(this);
         map.setOnMapClickListener(this);
 
-        addMarker(chamranPosition);
+        loadStores();
+
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(chamranPosition,15));
     }
 
-    private void addMarker(LatLng position){
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(position);
-        markerOptions.icon(bitmapDescriptorFromVector(R.drawable.store_map_marker));
-        markerOptions.anchor(0.5f, 0.5f);
-        map.addMarker(markerOptions);
-
-    }
-
-    private void showStoreInfo(){
-        storeInfoHolder.setVisibility(View.VISIBLE);
+    private void addMarker(StoreModel store){
+        MarkerOptions marker = new MarkerOptions();
+        marker.position(new LatLng(store.getLatitude(),store.getLongitude()));
+        marker.icon(bitmapDescriptorFromVector(R.drawable.store_map_marker));
+        marker.anchor(0.5f, 0.5f);
+        storesHashMap.put(map.addMarker(marker),store);;
     }
 
     @OnClick(R.id.storeInfoHolder)
     void onStoreInfoClick(){
-        StoreActivity.show(getActivity());
+        StoreActivity.show(getActivity(),selectedStore);
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(int vectorResId) {
@@ -102,14 +113,41 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+    Call<OauthResponse<List<StoreModel>>> storesRequest;
+    private void loadStores(){
+        storesRequest = ApiProvider.getAuthorizedApi().getStores();
+        storesRequest.enqueue(new Callback<OauthResponse<List<StoreModel>>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<List<StoreModel>>> call, Response<OauthResponse<List<StoreModel>>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+                        for (StoreModel store: response.body().getData()) addMarker(store);
+                    }else{
+
+                    }
+                }else{
+                    onFailure(null,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<List<StoreModel>>> call, Throwable t) {
+
+            }
+        });
+    }
+
     @Override
     public boolean onMarkerClick(Marker marker) {
-        showStoreInfo();
+        selectedStore = storesHashMap.get(marker);
+        storeName.setText(selectedStore.getName());
+        storeInfoHolder.setVisibility(View.VISIBLE);
         return false;
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
+        selectedStore = null;
         storeInfoHolder.setVisibility(View.GONE);
     }
 
