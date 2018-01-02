@@ -71,6 +71,11 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true;
     }
+    compile("com.google.android:flexbox:0.3.1") {
+        exclude module: "support-compat"
+        exclude module: "recyclerview-v7"
+    }
+
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.1'
     compile 'com.android.support:mediarouter-v7:25.3.1'
@@ -79,7 +84,6 @@ dependencies {
     compile 'com.android.support:support-vector-drawable:25.3.1'
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
@@ -88,11 +92,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.romandanylyk:pageindicatorview:0.0.9'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
-    compile ("com.google.android:flexbox:0.3.1"){
-        exclude module: "support-compat"
-        exclude module: "recyclerview-v7"
-    }
-
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'

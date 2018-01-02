@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class FeatureModel {
 
-    @SerializedName("Name")
+    @SerializedName("name")
     String name;
 
-    @SerializedName("Value")
+    @SerializedName("value")
     String value;
 
     public String getName() {

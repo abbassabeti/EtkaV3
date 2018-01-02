@@ -46,7 +46,7 @@ public class CategoryModel {
         return parentId;
     }
 
-    public boolean isHasChild() {
+    public boolean hasChild() {
         return hasChild;
     }
 }

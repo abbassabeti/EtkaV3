@@ -10,17 +10,17 @@ import java.util.List;
 
 public class ContactInfoModel {
 
-    @SerializedName("Address")
-    public String address;
+    @SerializedName("address")
+    String address;
 
-    @SerializedName("PhoneNumbers")
-    public List<String> phoneNumbers;
+    @SerializedName("phoneNumbers")
+    List<String> phoneNumbers;
 
-    @SerializedName("CellPhoneNumbers")
-    public List<String> cellPhoneNumbers;
+    @SerializedName("cellPhoneNumbers")
+    List<String> cellPhoneNumbers;
 
-    @SerializedName("ManagerPhoneNumber")
-    public String managerPhoneNumber;
+    @SerializedName("managerPhoneNumber")
+    String managerPhoneNumber;
 
     public String getAddress() {
         return address;

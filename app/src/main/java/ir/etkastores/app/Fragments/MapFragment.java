@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private LatLng chamranPosition = new LatLng(35.686169,51.4065863);
 
     private void initViews() {
+        storesHashMap = new HashMap<>();
         map.getUiSettings().setRotateGesturesEnabled(false);
         map.getUiSettings().setCompassEnabled(true);
         map.getUiSettings().setMapToolbarEnabled(false);
@@ -132,7 +134,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
             @Override
             public void onFailure(Call<OauthResponse<List<StoreModel>>> call, Throwable t) {
-
+                Log.e("failure","map stores");
             }
         });
     }

@@ -10,47 +10,47 @@ import java.util.List;
 
 public class StoreModel {
 
-    @SerializedName("Id")
-    public long id;
+    @SerializedName("id")
+    long id;
 
-    @SerializedName("Code")
-    public long code;
+    @SerializedName("code")
+    long code;
 
-    @SerializedName("Name")
-    public String name;
+    @SerializedName("name")
+    String name;
 
-    @SerializedName("ParentName")
-    public String parentName;
+    @SerializedName("parentName")
+    String parentName;
 
-    @SerializedName("ManagerName")
-    public String managerName;
+    @SerializedName("managerName")
+    String managerName;
 
-    @SerializedName("ProvinceName")
-    public String provinceName;
+    @SerializedName("provinceName")
+    String provinceName;
 
-    @SerializedName("ContactInfo")
-    public ContactInfoModel contactInfo;
+    @SerializedName("contactInfo")
+    ContactInfoModel contactInfo;
 
-    @SerializedName("OpeningHours")
-    public OpeningHoursModel openingHours;
+    @SerializedName("openingHours")
+    OpeningHoursModel openingHours;
 
-    @SerializedName("Features")
-    public List<FeatureModel> features;
+    @SerializedName("features")
+    List<FeatureModel> features;
 
-    @SerializedName("Latitude")
-    public long latitude;
+    @SerializedName("latitude")
+    double latitude;
 
-    @SerializedName("Longitude")
-    public long longitude;
+    @SerializedName("longitude")
+    double longitude;
 
-    @SerializedName("Ranking")
-    public String ranking;
+    @SerializedName("ranking")
+    String ranking;
 
-    @SerializedName("StoreImage")
-    public String storeImage;
+    @SerializedName("storeImage")
+    String storeImage;
 
-    @SerializedName("ManagerImage")
-    public String managerImage;
+    @SerializedName("managerImage")
+    String managerImage;
 
     public long getId() {
         return id;
@@ -88,11 +88,11 @@ public class StoreModel {
         return features;
     }
 
-    public long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 

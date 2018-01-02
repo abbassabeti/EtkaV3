@@ -18,8 +18,8 @@
         app:cardCornerRadius="4dp"
         app:cardBackgroundColor="@color/white"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -56,6 +56,11 @@
         android:id="@+id/searchContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/categoriesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
 
