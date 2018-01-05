@@ -24,6 +24,7 @@ import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.ActivityUtils;
 import ir.etkastores.app.Utils.DialogHelper;
+import ir.etkastores.app.Utils.UserSettings;
 import ir.etkastores.app.WebService.AccessToken;
 import ir.etkastores.app.WebService.ApiProvider;
 import ir.etkastores.app.WebService.ApiStatics;
@@ -90,6 +91,20 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         showManualLoginControl();
 
         initToolbar();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String userEmail = UserSettings.getEmailAddress();
+        String password = UserSettings.getPasswrod();
+        if (!TextUtils.isEmpty(userEmail)){
+            emailAddressInput.setText(userEmail);
+        }
+
+        if (!TextUtils.isEmpty(password)){
+            passwordInput.setText(password);
+        }
     }
 
     private void initToolbar() {

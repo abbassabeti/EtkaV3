@@ -2,6 +2,9 @@ package ir.etkastores.app.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Sajad on 9/3/17.
  */
@@ -18,10 +21,13 @@ public class OauthResponse<T> {
     public class Meta {
 
         @SerializedName("statusCode")
-        public int statusCode;
+        int statusCode;
 
         @SerializedName("message")
-        public String message;
+        String message;
+
+        @SerializedName("errors")
+        List<String> errors;
 
         public int getStatusCode() {
             return statusCode;
@@ -30,6 +36,15 @@ public class OauthResponse<T> {
         public String getMessage() {
             return message;
         }
+
+        public String getErrorsMessage(){
+            return Arrays.toString(errors.toArray());
+        }
+
+        public List<String> getErrors(){
+            return errors;
+        }
+
     }
 
     public boolean isSuccessful() {
@@ -48,4 +63,5 @@ public class OauthResponse<T> {
     public Meta getMeta() {
         return meta;
     }
+
 }

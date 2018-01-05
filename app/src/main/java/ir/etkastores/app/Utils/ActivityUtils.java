@@ -23,4 +23,12 @@ public class ActivityUtils {
         transaction.commitAllowingStateLoss();
     }
 
+    public static Fragment getFragmentByTag(FragmentActivity activity,String tag){
+        try {
+            return activity.getSupportFragmentManager().findFragmentByTag(tag);
+        }catch (Exception err){
+            return null;
+        }
+    }
+
 }
