@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.Fragments.Home.HomeFragment;
 import ir.etkastores.app.Fragments.MapFragment;
 import ir.etkastores.app.Fragments.ProfileFragment;
-import ir.etkastores.app.Fragments.SearchFragment;
+import ir.etkastores.app.Fragments.SearchFragments.SearchTabFragment;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.Models.profile.UserGender;
@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity {
                     break;
 
                 case R.id.navigation_search:
-                    replaceFragment(new SearchFragment());
+                    replaceFragment(new SearchTabFragment());
                     break;
             }
 

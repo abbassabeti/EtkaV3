@@ -15,11 +15,11 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:cardCornerRadius="4dp"
-        app:cardBackgroundColor="@color/white"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp">
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,24 +29,25 @@
                 android:id="@+id/goButon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                app:srcCompat="@drawable/ic_arrow_right_24dp_black"
                 android:background="?attr/selectableItemBackground"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:srcCompat="@drawable/ic_arrow_right_24dp_black" />
 
             <EditText
+                android:id="@+id/searchEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/goButon"
                 android:background="@color/transparrent"
-                android:hint="@string/performSearchLikeGreenTea"
                 android:gravity="center_vertical|right"
+                android:hint="@string/performSearchLikeGreenTea"
+                android:lines="1"
                 android:paddingLeft="16dp"
-                android:textSize="@dimen/textSizeSmall"
-                android:lines="1"/>
+                android:textSize="@dimen/textSizeSmall" />
 
         </RelativeLayout>
 
@@ -57,12 +58,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/categoriesRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
     </FrameLayout>
-
 
 </LinearLayout>
