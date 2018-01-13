@@ -1,8 +1,12 @@
 package ir.etkastores.app.WebService;
 
+import com.google.android.gms.common.AccountPicker;
+
 import java.util.List;
 
 import ir.etkastores.app.Models.CategoryModel;
+import ir.etkastores.app.Models.Factor.FactorModel;
+import ir.etkastores.app.Models.Factor.FactorRequestModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.Models.SearchProductRequestModel;
@@ -64,6 +68,14 @@ public interface EtkaApi {
     //9
     @GET(ApiStatics.END_POINT_STORE)
     Call<OauthResponse<List<StoreModel>>> getStores();
+
+    //10
+    @GET(ApiStatics.END_POINT_USER_PROFILE)
+    Call<OauthResponse<UserProfileModel>> getUserProfile();
+
+    //12
+    @POST(ApiStatics.END_POINT_FACTOR)
+    Call<OauthResponse<FactorModel>> getFactor(@Body FactorRequestModel requestModel);
 
 
 }

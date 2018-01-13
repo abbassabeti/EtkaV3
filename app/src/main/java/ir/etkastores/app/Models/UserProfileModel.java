@@ -8,35 +8,77 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserProfileModel {
 
-    @SerializedName("Id")
-    private String id;
+    @SerializedName("userName")
+    String userName;
 
-    @SerializedName("FirstName")
-    private String firstName;
+    @SerializedName("email")
+    String email;
 
-    @SerializedName("LastName")
-    private String lastName;
+    @SerializedName("totalPoints")
+    long totalPoints;
 
-    @SerializedName("CellPhone")
-    private String cellPhone;
+    @SerializedName("remainingPoints")
+    long remainingPoints;
 
-    @SerializedName("Address")
-    private String address;
+    @SerializedName("invitationCode")
+    String invitationCode;
 
-    @SerializedName("Gender")
-    private String gender;
+    @SerializedName("crmUserId")
+    String crmUserId;
 
-    @SerializedName("Education")
-    private String education;
+    @SerializedName("id")
+    String id;
 
-    @SerializedName("BirhtDate")
-    private String birhtDate;
+    @SerializedName("firstName")
+    String firstName;
 
-    @SerializedName("HekmatCard")
-    private String hekmatCard;
+    @SerializedName("lastName")
+    String lastName;
 
-    @SerializedName("NationalCode")
-    private String nationalCode;
+    @SerializedName("cellPhone")
+    String cellPhone;
+
+    @SerializedName("address")
+    String address;
+
+    @SerializedName("gender")
+    int gender;
+
+    @SerializedName("education")
+    String education;
+
+    @SerializedName("birthDate")
+    String birthDate;
+
+    @SerializedName("hekamtCardCode")
+    String hekamtCardCode;
+
+    @SerializedName("nationalCode")
+    String nationalCode;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public long getTotalPoints() {
+        return totalPoints;
+    }
+
+    public long getRemainingPoints() {
+        return remainingPoints;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+
+    public String getCrmUserId() {
+        return crmUserId;
+    }
 
     public String getId() {
         return id;
@@ -58,7 +100,7 @@ public class UserProfileModel {
         return address;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
@@ -66,16 +108,40 @@ public class UserProfileModel {
         return education;
     }
 
-    public String getBirhtDate() {
-        return birhtDate;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public String getHekmatCard() {
-        return hekmatCard;
+    public String getHekamtCardCode() {
+        return hekamtCardCode;
     }
 
     public String getNationalCode() {
         return nationalCode;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTotalPoints(long totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
+    public void setRemainingPoints(long remainingPoints) {
+        this.remainingPoints = remainingPoints;
+    }
+
+    public void setInvitationCode(String invitationCode) {
+        this.invitationCode = invitationCode;
+    }
+
+    public void setCrmUserId(String crmUserId) {
+        this.crmUserId = crmUserId;
     }
 
     public void setId(String id) {
@@ -98,7 +164,7 @@ public class UserProfileModel {
         this.address = address;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -106,12 +172,12 @@ public class UserProfileModel {
         this.education = education;
     }
 
-    public void setBirhtDate(String birhtDate) {
-        this.birhtDate = birhtDate;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public void setHekmatCard(String hekmatCard) {
-        this.hekmatCard = hekmatCard;
+    public void setHekamtCardCode(String hekamtCardCode) {
+        this.hekamtCardCode = hekamtCardCode;
     }
 
     public void setNationalCode(String nationalCode) {

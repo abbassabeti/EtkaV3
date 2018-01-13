@@ -17,6 +17,8 @@ public class ApiStatics {
     public static final String END_POINT_PRODUCT_SEARCH = "/api/v1/Product/search";
     public static final String END_POINT_PRODUCT = "/api/v1/Product/get";
     public static final String END_POINT_STORE = "/api/v1/store";
+    public static final String END_POINT_USER_PROFILE = "api/v1/account/info";
+    public static final String END_POINT_FACTOR = "api/v1/Factor";
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
     public static final String CLIENT_SECRET = "AS85dwD5asd8E4ESD85";
