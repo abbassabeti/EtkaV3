@@ -1,7 +1,5 @@
 package ir.etkastores.app.WebService;
 
-import com.google.android.gms.common.AccountPicker;
-
 import java.util.List;
 
 import ir.etkastores.app.Models.CategoryModel;
@@ -61,7 +59,7 @@ public interface EtkaApi {
     @GET(ApiStatics.END_POINT_PRODUCT_SEARCH)
     Call<OauthResponse<List<ProductModel>>> searchProduct(@Body SearchProductRequestModel request);
 
-    //8
+    //8`
     @GET(ApiStatics.END_POINT_PRODUCT)
     Call<OauthResponse<ProductModel>> getProduct(@Query("id") long id,@Query("Barcode") String barcode);
 
