@@ -2,6 +2,7 @@ package ir.etkastores.app.Fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -96,7 +97,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private void addMarker(StoreModel store){
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(store.getLatitude(),store.getLongitude()));
-        marker.icon(bitmapDescriptorFromVector(R.drawable.store_map_marker));
+        if (store.getRanking().contentEquals("اتکا ممتاز")){
+            marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_orange));
+        }else if (store.getRanking().contentEquals("اتکا بازار")){
+            marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_yellow));
+        }else if (store.getRanking().contentEquals("اتکا محله")){
+            marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_blue));
+        }
         marker.anchor(0.5f, 0.5f);
         storesHashMap.put(map.addMarker(marker),store);;
     }

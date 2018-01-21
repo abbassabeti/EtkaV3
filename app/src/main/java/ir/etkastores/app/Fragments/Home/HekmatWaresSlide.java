@@ -7,12 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.Models.OauthResponse;
+import ir.etkastores.app.Models.hekmat.HekmatModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.CategoryGroupHorizontalView;
 import ir.etkastores.app.UI.Views.CategorySliderView;
+import ir.etkastores.app.WebService.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Sajad on 12/2/17.
@@ -43,6 +52,28 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger {
 
     private void initViews(){
         itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+
+        Call<OauthResponse<List<HekmatModel>>> hekmatReq = ApiProvider.getAuthorizedApi().getHekmat();
+        hekmatReq.enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<List<HekmatModel>>> call, Response<OauthResponse<List<HekmatModel>>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+
+                    }else{
+
+                    }
+                }else{
+                    onFailure(null,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<List<HekmatModel>>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     @Override

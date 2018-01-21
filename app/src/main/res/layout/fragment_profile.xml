@@ -9,10 +9,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/profile"
         app:showBack="false"
         app:showMoreButton="true"
-        app:showSettingButton="true"/>
+        app:showSettingButton="true"
+        app:title="@string/profile" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,8 +35,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
                 android:layout_margin="4dp"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="4dp">
 
                 <LinearLayout
@@ -65,10 +65,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/lightYellow"
                 app:cardCornerRadius="4dp">
 
@@ -98,6 +98,27 @@
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="4dp">
 
+                <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    android:id="@+id/hekmatMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                    app:rowText="@string/hekmatCard" />
+
+            </android.support.v7.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@color/transparrent"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="4dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,7 +131,7 @@
                         app:rowIcon="@drawable/ic_star_circle_gold_24dp"
                         app:rowText="@string/nextShoppingList" />
 
-                    <View style="@style/profileMenuDividerViewStyle"/>
+                    <View style="@style/profileMenuDividerViewStyle" />
 
                     <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/shoppingHistoryMenu"
@@ -119,7 +140,7 @@
                         app:rowIcon="@drawable/ic_star_circle_gold_24dp"
                         app:rowText="@string/yourShoppingHistory" />
 
-                    <View style="@style/profileMenuDividerViewStyle"/>
+                    <View style="@style/profileMenuDividerViewStyle" />
 
                     <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/inviteFriendsMenu"
@@ -131,7 +152,7 @@
                         app:showScore="true"
                         app:showScoreStar="true" />
 
-                    <View style="@style/profileMenuDividerViewStyle"/>
+                    <View style="@style/profileMenuDividerViewStyle" />
 
                     <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/faqMenu"
@@ -140,7 +161,7 @@
                         app:rowIcon="@drawable/ic_star_circle_gold_24dp"
                         app:rowText="@string/faq" />
 
-                    <View style="@style/profileMenuDividerViewStyle"/>
+                    <View style="@style/profileMenuDividerViewStyle" />
 
                     <ir.etkastores.app.UI.Views.CustomRowMenuItem
                         android:id="@+id/supportMenu"

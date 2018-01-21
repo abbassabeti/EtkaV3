@@ -16,6 +16,8 @@ import ir.etkastores.app.Models.store.StoreModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.UI.Views.StorePagerSliderView;
+import ir.etkastores.app.Utils.IntentHelper;
+
 import android.os.Handler;
 
 public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
@@ -104,6 +106,11 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     @OnClick(R.id.btn_traceRouts)
     public void onTraceRoutesButtonClick(){
+        IntentHelper.openWayTracer(this,storeModel.getLatitude(),storeModel.getLongitude(),storeModel.getName());
+    }
+
+    @OnClick(R.id.btn_inStoreMode)
+    public void onInStoreModeClick(){
 
     }
 

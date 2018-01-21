@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <ir.etkastores.app.UI.Views.StorePagerSliderView
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
@@ -45,10 +44,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp"
-                android:paddingLeft="24dp"
-                android:paddingRight="24dp"
                 android:paddingTop="16dp"
-                android:weightSum="3">
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:id="@+id/btn_inStoreMode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        app:srcCompat="@drawable/ic_in_store_map_orange_32dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/inStoreMap"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/textSizeSmall" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btn_contactToBranch"
@@ -61,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_local_phone_orange_36dp" />
+                        app:srcCompat="@drawable/ic_local_phone_orange_32dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -84,7 +106,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_directions_orange_36dp" />
+                        app:srcCompat="@drawable/ic_directions_orange_32dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -107,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_share_orange_36dp" />
+                        app:srcCompat="@drawable/ic_share_orange_32dp" />
 
                     <TextView
                         android:layout_width="match_parent"

@@ -81,6 +81,7 @@
     <string name="contactToBranch">تماس با شعبه</string>
     <string name="showDirections">نمایش مسیرها</string>
     <string name="share">اشتراک گذاری</string>
+    <string name="inStoreMap">نقشه‌داخل‌شعبه</string>
 
     <string name="aboutEtkaStoresText">نیازمند متن از طرف شرکت</string>
     <string name="userPrivacyText">نیازمند متن از طرف شرکت</string>
@@ -90,7 +91,7 @@
     <string name="specialOffers">فروش‌ویژه</string>
     <string name="hekmatWares">کالاهای‌طرح‌حکمت</string>
     <string name="etkaٰExclusiveWares">کالاهای‌انحصاری‌اتکا</string>
-    
+
     <string name="firstNameCantBeEmpty">نام نباید خالی باشد!</string>
     <string name="lastNameCantBeEmpty">نام خانوادگی نباید خالی باشد!</string>
     <string name="emailAddresCantBeEmpty">آدرس ایمیل ننباید خالی باشد!</string>
@@ -98,4 +99,5 @@
     <string name="inRegistering">در حال ثبت نام...</string>
     <string name="registerSuccessful">ثبت نام با موفقیت انجام شد.</string>
     <string name="registerFailTryLater">خطا در ثبت نام رخ داده است، لطفا از دوباره تلاش کنید.</string>
+    <string name="hekmatCard">حکمت کارت</string>
 </resources>
