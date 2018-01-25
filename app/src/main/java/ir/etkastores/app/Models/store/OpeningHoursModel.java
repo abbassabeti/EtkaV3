@@ -8,32 +8,23 @@ import com.google.gson.annotations.SerializedName;
 
 public class OpeningHoursModel {
 
-    @SerializedName("morningStart")
-    String morningStart;
+    @SerializedName("morning")
+    String morning;
 
-    @SerializedName("morningFinish")
-    String morningFinish;
+    @SerializedName("afternoon")
+    String afternoon;
 
-    @SerializedName("afternoonStart")
-    String afternoonStart;
-
-    @SerializedName("afternoonFinish")
-    String afternoonFinish;
-
-    public String getMorningStart() {
-        return morningStart;
+    public String getMorning() {
+        return morning;
     }
 
-    public String getMorningFinish() {
-        return morningFinish;
+    public String getAfternoon() {
+        return afternoon;
     }
 
-    public String getAfternoonStart() {
-        return afternoonStart;
+    public String getOpeningTime(){
+        return morning +" \n "+afternoon;
     }
 
-    public String getAfternoonFinish() {
-        return afternoonFinish;
-    }
 
 }

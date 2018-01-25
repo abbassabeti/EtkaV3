@@ -76,7 +76,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         slider.setSlides(new ArrayList<String>(){{add(storeModel.getStoreImage());}});
         storeName.setText(storeModel.getName());
         storeAddress.setText(storeModel.getContactInfo().getAddress());
-        openingTime.setText(storeModel.getOpeningHours().getMorningStart());
+        openingTime.setText(storeModel.getOpeningHours().getOpeningTime());
         if (storeModel.getContactInfo().getPhoneNumbers() != null && storeModel.getContactInfo().getPhoneNumbers().size()>0){
             phoneNumber.setText(storeModel.getContactInfo().getPhoneNumbers().get(0));
         }else{
