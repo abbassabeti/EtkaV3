@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@id/goButon"
-                android:background="@color/transparrent"
+                android:background="@color/transparent"
                 android:gravity="center_vertical|right"
                 android:hint="@string/performSearchLikeGreenTea"
                 android:lines="1"

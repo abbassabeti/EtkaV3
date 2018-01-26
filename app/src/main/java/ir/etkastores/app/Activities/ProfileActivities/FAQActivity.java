@@ -35,10 +35,16 @@ public class FAQActivity extends BaseActivity implements EtkaToolbar.EtkaToolbar
 
     private void initViews(){
         toolbar.setActionListeners(this);
-
-        for (int x=0 ; x< 10 ; x++){
-            faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("عنوان سوال؟!"+x,"متن جواب سوال، متن جواب سوال، متن جواب سوال، متن جواب سوال، متن جواب سوال، متن جواب سوال، متن جواب سوال")));
-        }
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("مقدار کسری این پروژه چقدر است؟","۲۱ ماه!")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("چه کسانی با این پروژه معاف می شوند؟","سجاد گرشاسبی، هادی محمدی، آرمین رصدی، پیام شکیبافر، هژیر مفاخری، ....")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("کالای حکمت چیست؟","چیز خوبیه!")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("امتیاز باشگاه مشتریان چیست؟","اونم چیز خوبیه ؛)")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("آیا امکان سفارش آنلاین وجود دارد؟","نه")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("آیا تبدیل امتیاز به اعتبار آنی است؟","تقریبا")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("لیست خرید بعدی چیست؟","چیز خوبیه...")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("تخفیف ها شامل چه کالاهایی می شود؟","همه چیز")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("اتکا چند تا فروشگاه داره؟","زیاد")));
+        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("نقشه درون فروشگاه چیست؟","نمی دونم!")));
     }
 
     @Override

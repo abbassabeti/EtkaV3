@@ -43,8 +43,8 @@ public class EtkaIconTextImageButton extends CardView {
 
     private void init(AttributeSet attrs) {
         View.inflate(getContext(), R.layout.view_text_icon_button, this);
-        setBackgroundResource(R.color.transparrent);
-        setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparrent));
+        setBackgroundResource(R.color.transparent);
+        setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparent));
         ButterKnife.bind(this);
         if (attrs != null) {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.EtkaIconTextImageButton, 0, 0);

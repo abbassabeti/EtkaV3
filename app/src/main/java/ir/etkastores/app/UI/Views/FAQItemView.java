@@ -2,6 +2,7 @@ package ir.etkastores.app.UI.Views;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
@@ -54,6 +55,7 @@ public class FAQItemView extends CardView implements View.OnClickListener {
     private void init(AttributeSet attrs){
         LayoutInflater.from(getContext()).inflate(R.layout.view_faq_item,this,true);
         ButterKnife.bind(this,this);
+        setBackgroundColor(ContextCompat.getColor(getContext(),R.color.transparent));
         this.setOnClickListener(this);
         if (item != null) update();
     }

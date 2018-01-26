@@ -52,7 +52,7 @@
     <style name="editTextStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/transparrent</item>
+        <item name="android:background">@color/transparent</item>
         <item name="android:gravity">right</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/textSizeMedium</item>

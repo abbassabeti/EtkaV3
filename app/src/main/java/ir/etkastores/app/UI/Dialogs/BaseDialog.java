@@ -19,7 +19,7 @@ public class BaseDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawableResource(R.color.transparrent);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
         return dialog;
     }
 
