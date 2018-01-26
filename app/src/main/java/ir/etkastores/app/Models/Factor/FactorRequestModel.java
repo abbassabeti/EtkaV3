@@ -11,11 +11,16 @@ public class FactorRequestModel {
     @SerializedName("UserId")
     String userId;
 
-    @SerializedName("skip")
+    @SerializedName("Take")
     int take;
 
-    @SerializedName("skip")
+    @SerializedName("Skip")
     int skip;
+
+    public FactorRequestModel() {
+        take = 10;
+        skip = 0;
+    }
 
     public FactorRequestModel setUserId(String userId) {
         this.userId = userId;

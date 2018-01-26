@@ -61,7 +61,7 @@ public interface EtkaApi {
     @GET(ApiStatics.SEARCH)
     Call<OauthResponse<List<ProductModel>>> searchProduct(@Body SearchProductRequestModel request);
 
-    //8`
+    //8
     @GET(ApiStatics.PRODUCT)
     Call<OauthResponse<ProductModel>> getProduct(@Query("id") long id,@Query("Barcode") String barcode);
 
@@ -75,7 +75,7 @@ public interface EtkaApi {
 
     //12
     @POST(ApiStatics.FACTOR)
-    Call<OauthResponse<FactorModel>> getFactor(@Body FactorRequestModel requestModel);
+    Call<OauthResponse<List<FactorModel>>> getFactor(@Body FactorRequestModel requestModel);
 
     //13
     @GET(ApiStatics.HEKMAT)

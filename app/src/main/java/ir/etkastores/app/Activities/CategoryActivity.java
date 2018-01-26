@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 
@@ -36,6 +38,9 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     @BindView(R.id.categoryRecyclerView)
     RecyclerView categoryRecyclerView;
+
+    @BindView(R.id.circularProgress)
+    ProgressBar circularProgress;
 
     CategoryModel categoryModel;
 
@@ -72,6 +77,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     }
 
     private void loadData(){
+        showLoading();
         request = ApiProvider.getAuthorizedApi().getCategory(categoryModel.getId());
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
@@ -85,11 +91,12 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                 }else{
 
                 }
+                hideLoading();
             }
 
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
-
+                hideLoading();
             }
         });
     }
@@ -99,6 +106,14 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         if (model.hasChild()){
             CategoryActivity.show(this,model);
         }
+    }
+
+    private void showLoading(){
+        circularProgress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading(){
+        circularProgress.setVisibility(View.GONE);
     }
 
 }

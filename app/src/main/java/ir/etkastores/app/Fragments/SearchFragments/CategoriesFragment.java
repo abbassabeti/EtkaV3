@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -30,16 +31,19 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     private final static String CATEGORY_ID_KEY = "CATEGORY_ID_KEY";
 
-    public static Fragment newInstance(int categoryId){
-        CategoriesFragment  categoriesFragment = new CategoriesFragment();
+    public static Fragment newInstance(int categoryId) {
+        CategoriesFragment categoriesFragment = new CategoriesFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(CATEGORY_ID_KEY,categoryId);
+        bundle.putInt(CATEGORY_ID_KEY, categoryId);
         categoriesFragment.setArguments(bundle);
         return categoriesFragment;
     }
 
     @BindView(R.id.categoryRecyclerView)
     RecyclerView categoryRecyclerView;
+
+    @BindView(R.id.circularProgress)
+    ProgressBar circularProgress;
 
     Call<OauthResponse<List<CategoryModel>>> request;
 
@@ -50,8 +54,8 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            categoryId = getArguments().getInt(CATEGORY_ID_KEY,0);
-        }catch (Exception err){
+            categoryId = getArguments().getInt(CATEGORY_ID_KEY, 0);
+        } catch (Exception err) {
             categoryId = 0;
         }
     }
@@ -59,36 +63,36 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragmnet_categories,container,false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragmnet_categories, container, false);
+        ButterKnife.bind(this, view);
         initViews();
         return view;
     }
 
-    private void initViews(){
+    private void initViews() {
         adapter = new CategoryRecyclerAdapter(getActivity());
         adapter.setOnCategoryItemClickListener(this);
         categoryRecyclerView.setAdapter(adapter);
-        if (categoryId==0){
+        if (categoryId == 0) {
             loadCategoryAtRootLevel();
-        }else{
+        } else {
             loadCategory();
         }
     }
 
-    private void loadCategory(){
+    private void loadCategory() {
         request = ApiProvider.getAuthorizedApi().getCategory(categoryId);
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         adapter.setData(response.body().getData());
-                    }else{
+                    } else {
 
                     }
-                }else{
-                    onFailure(null,null);
+                } else {
+                    onFailure(null, null);
                 }
             }
 
@@ -99,34 +103,48 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
         });
     }
 
-    private void loadCategoryAtRootLevel(){
+    private void loadCategoryAtRootLevel() {
+        showLoading();
         request = ApiProvider.getAuthorizedApi().getCategoryAtLevel(1);
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         adapter.setData(response.body().getData());
-                    }else{
+                    } else {
 
                     }
-                }else{
-                    onFailure(null,null);
+                } else {
+                    onFailure(null, null);
                 }
+                hideLoading();
             }
 
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
-
+                hideLoading();
             }
         });
     }
 
     @Override
     public void onCategoryItemClick(CategoryModel model, int position) {
-        if (model.hasChild()){
-            CategoryActivity.show(getActivity(),model);
+        if (model.hasChild()) {
+            CategoryActivity.show(getActivity(), model);
         }
     }
 
+    private void showLoading() {
+        circularProgress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading() {
+        circularProgress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }
