@@ -100,4 +100,7 @@
     <string name="registerSuccessful">ثبت نام با موفقیت انجام شد.</string>
     <string name="registerFailTryLater">خطا در ثبت نام رخ داده است، لطفا از دوباره تلاش کنید.</string>
     <string name="hekmatCard">حکمت کارت</string>
+
+    <string name="totalPrice">قیمت کل:</string>
+
 </resources>
