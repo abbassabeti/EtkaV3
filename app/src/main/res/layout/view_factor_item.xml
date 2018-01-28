@@ -73,7 +73,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/purchasesRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="160dp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"

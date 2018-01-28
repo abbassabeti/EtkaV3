@@ -26,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.security.spec.ECField;
 import java.util.HashMap;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     TextView storeName;
 
     private StoreModel selectedStore;
-    private HashMap<Marker,StoreModel> storesHashMap;
+    private HashMap<Marker, StoreModel> storesHashMap;
 
     @Nullable
     @Override
@@ -79,7 +80,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         initViews();
     }
 
-    private LatLng chamranPosition = new LatLng(35.686169,51.4065863);
+    private LatLng chamranPosition = new LatLng(35.686169, 51.4065863);
 
     private void initViews() {
         storesHashMap = new HashMap<>();
@@ -91,26 +92,27 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         loadStores();
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(chamranPosition,15));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(chamranPosition, 15));
     }
 
-    private void addMarker(StoreModel store){
+    private void addMarker(StoreModel store) {
         MarkerOptions marker = new MarkerOptions();
-        marker.position(new LatLng(store.getLatitude(),store.getLongitude()));
-        if (store.getRanking().contentEquals("اتکا ممتاز")){
+        marker.position(new LatLng(store.getLatitude(), store.getLongitude()));
+        if (store.getRanking().contentEquals("اتکا ممتاز")) {
             marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_orange));
-        }else if (store.getRanking().contentEquals("اتکا بازار")){
+        } else if (store.getRanking().contentEquals("اتکا بازار")) {
             marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_yellow));
-        }else if (store.getRanking().contentEquals("اتکا محله")){
+        } else if (store.getRanking().contentEquals("اتکا محله")) {
             marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_blue));
         }
         marker.anchor(0.5f, 0.5f);
-        storesHashMap.put(map.addMarker(marker),store);;
+        storesHashMap.put(map.addMarker(marker), store);
+        ;
     }
 
     @OnClick(R.id.storeInfoHolder)
-    void onStoreInfoClick(){
-        StoreActivity.show(getActivity(),selectedStore);
+    void onStoreInfoClick() {
+        StoreActivity.show(getActivity(), selectedStore);
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(int vectorResId) {
@@ -123,25 +125,34 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     }
 
     Call<OauthResponse<List<StoreModel>>> storesRequest;
-    private void loadStores(){
+
+    private void loadStores() {
         storesRequest = ApiProvider.getAuthorizedApi().getStores();
         storesRequest.enqueue(new Callback<OauthResponse<List<StoreModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<StoreModel>>> call, Response<OauthResponse<List<StoreModel>>> response) {
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
-                        for (StoreModel store: response.body().getData()) addMarker(store);
-                    }else{
+                try {
+                    if (response.isSuccessful()) {
+                        if (response.body().isSuccessful()) {
+                            for (StoreModel store : response.body().getData()) addMarker(store);
+                        } else {
 
+                        }
+                    } else {
+                        onFailure(null, null);
                     }
-                }else{
-                    onFailure(null,null);
+                } catch (Exception err) {
+                    err.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<OauthResponse<List<StoreModel>>> call, Throwable t) {
-                Log.e("failure","map stores");
+                try {
+                    Log.e("failure", "map stores");
+                } catch (Exception err) {
+                    err.printStackTrace();
+                }
             }
         });
     }
@@ -163,24 +174,41 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onResume() {
         super.onResume();
-        if (mapView != null) mapView.onResume();
+        try {
+            if (mapView != null) mapView.onResume();
+        } catch (Exception err) {
+            Log.e("failure", "map stores");
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mapView != null) mapView.onPause();
+        try {
+            storesRequest.cancel();
+            if (mapView != null) mapView.onPause();
+        } catch (Exception err) {
+            Log.e("failure", "map stores");
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mapView != null) mapView.onDestroy();
+        try {
+            if (mapView != null) mapView.onDestroy();
+        } catch (Exception err) {
+            Log.e("failure", "map stores");
+        }
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        if (mapView != null) mapView.onLowMemory();
+        try {
+            if (mapView != null) mapView.onLowMemory();
+        } catch (Exception err) {
+            Log.e("failure", "map stores");
+        }
     }
 }

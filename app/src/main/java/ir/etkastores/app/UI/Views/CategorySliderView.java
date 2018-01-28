@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.rd.PageIndicatorView;
 
@@ -20,8 +19,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Widgets.ViewPager16x9;
+import ir.etkastores.app.UI.Widgets.ViewPager16x8;
 
 /**
  * Created by Sajad on 11/24/17.
@@ -30,7 +30,7 @@ import ir.etkastores.app.UI.Widgets.ViewPager16x9;
 public class CategorySliderView extends LinearLayout {
 
     @BindView(R.id.pager)
-    ViewPager16x9 pager;
+    ViewPager16x8 pager;
 
     @BindView(R.id.categoryPageIndicatorView)
     PageIndicatorView indicatorView;
@@ -68,7 +68,6 @@ public class CategorySliderView extends LinearLayout {
         items.add("یک");
         items.add("دو");
         items.add("سه");
-        items.add("چهار");
 
         Collections.reverse(items);
         adapter = new CategoryAdapter(getContext(),items);
@@ -103,9 +102,7 @@ public class CategorySliderView extends LinearLayout {
         public Object instantiateItem(ViewGroup container, int position) {
             View view  = inflater.inflate(R.layout.home_slider_slide,container,false);
             ImageView imageView = (ImageView) view.findViewById(R.id.image);
-            TextView testLable = (TextView) view.findViewById(R.id.testLable);
-            testLable.setText(items.get(position));
-            imageView.setImageResource(R.drawable.etka_logo_wide);
+            imageView.setImageResource(DummyProvider.getRandomSlider());
             container.addView(view);
             return view;
         }

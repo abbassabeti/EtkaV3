@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -209,6 +210,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
                 loadingDialog.cancel();
+                Toaster.show(getActivity(),R.string.errorInLoginTryLater, Toast.LENGTH_LONG);
             }
         });
     }

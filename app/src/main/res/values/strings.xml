@@ -102,5 +102,8 @@
     <string name="hekmatCard">حکمت کارت</string>
 
     <string name="totalPrice">قیمت کل:</string>
+    <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، از دوباره تلاش کنید</string>
+    <string name="factorDate">تاریخ سفارش: %s</string>
+    <string name="factorCode">کد سفارش: %d</string>
 
 </resources>

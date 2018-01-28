@@ -40,19 +40,19 @@ public class SearchTabFragment extends Fragment {
     }
 
     private void initViews(){
-        ActivityUtils.addFragment(getActivity(),R.id.searchContentFrame,CategoriesFragment.newInstance(0),"",false);
 
+        showCategories();
         searchInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (b) showAdvancedSearch();
+//                if (b) showAdvancedSearch();
             }
         });
 
     }
 
     private void showCategories(){
-        ActivityUtils.replaceFragment(getActivity(),R.id.searchContentFrame,CategoriesFragment.newInstance(0),"",false);
+        ActivityUtils.addFragment(getActivity(),R.id.searchContentFrame,CategoriesFragment.newInstance(0),"",false);
     }
 
     private void showAdvancedSearch(){

@@ -42,8 +42,6 @@ public class HomeCategorySliderPagerAdapter extends PagerAdapter{
     public Object instantiateItem(ViewGroup container, int position) {
         View view  = inflater.inflate(R.layout.home_slider_slide,container,false);
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
-        TextView testLable = (TextView) view.findViewById(R.id.testLable);
-        testLable.setText(items.get(position));
         imageView.setImageResource(R.drawable.etka_logo_wide);
         container.addView(view,0);
         return view;

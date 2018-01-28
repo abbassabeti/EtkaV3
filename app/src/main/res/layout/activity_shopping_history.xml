@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
@@ -11,45 +11,41 @@
         android:layout_height="wrap_content"
         app:title="@string/yourShoppingHistory" />
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/factorsHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--<ir.etkastores.app.UI.Views.FactorItemView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"/>-->
+
+                <!--<ir.etkastores.app.UI.Views.FactorItemView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"/>-->
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/colorPrimary"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
 
-            <ir.etkastores.app.UI.Views.FactorItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.FactorItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.FactorItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.FactorItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.FactorItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.FactorItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ir.etkastores.app.UI.Views.FactorItemView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </RelativeLayout>
 
 </LinearLayout>

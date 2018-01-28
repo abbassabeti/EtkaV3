@@ -19,6 +19,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.Adapters.RecyclerViewAdapters.CategoryRecyclerAdapter;
+import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.R;
 
 /**
@@ -117,7 +118,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
                 image.setImageResource(R.drawable.etka_logo_wide);
                 name.setText("نام کالا");
                 price.setText("قیمت کالا");
-                image.setImageResource(ir.etkastores.app.Adapters.RecyclerViewAdapters.CategoryRecyclerAdapter.getRandomImg());
+                image.setImageResource(DummyProvider.getRandomImgId());
             }
 
         }

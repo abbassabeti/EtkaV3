@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/colorPrimary">
 
-    <ImageView
+    <android.support.v7.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:src="@drawable/etka_logo_wide"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/etka_logo_vector" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:paddingBottom="80dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="اپلیکیشن باشگاه مشتریان"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeLarge" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="فروشگاه های زنجره ای اتکا"
+            android:textColor="@color/transWhiteC"
+            android:textSize="@dimen/textSizeMedium" />
+
+    </LinearLayout>
 
 </RelativeLayout>

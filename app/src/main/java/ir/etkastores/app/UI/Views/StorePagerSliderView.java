@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Widgets.ViewPager16x9;
+import ir.etkastores.app.UI.Widgets.ViewPager16x8;
 import ir.etkastores.app.Utils.Image.ImageLoader;
 
 /**
@@ -31,7 +31,7 @@ import ir.etkastores.app.Utils.Image.ImageLoader;
 public class StorePagerSliderView extends LinearLayout {
 
     @BindView(R.id.pager)
-    ViewPager16x9 pager;
+    ViewPager16x8 pager;
 
     @BindView(R.id.categoryPageIndicatorView)
     PageIndicatorView indicatorView;

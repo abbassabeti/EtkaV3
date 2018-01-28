@@ -16,6 +16,7 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.Models.CategoryModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.Utils.Image.ImageLoader;
@@ -73,7 +74,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
         public void bind(final CategoryModel model){
             title.setText(model.getTitle());
             if (!TextUtils.isEmpty(model.getImageUrl())) ImageLoader.load(context,image,model.getImageUrl());
-            image.setImageResource(getRandomImg());
+            image.setImageResource(DummyProvider.getRandomImgId());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,29 +97,6 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 
     public interface OnCategoryItemClickListener{
         void onCategoryItemClick(CategoryModel model,int position);
-    }
-
-    static int[] imgs = new int[]{R.drawable.t1,
-            R.drawable.t2,
-            R.drawable.t3,
-            R.drawable.t4,
-            R.drawable.t5,
-            R.drawable.t6,
-            R.drawable.t7,
-            R.drawable.t8,
-            R.drawable.t9,
-            R.drawable.t10,
-            R.drawable.t11,
-            R.drawable.t12,
-            R.drawable.t13,
-            R.drawable.t14};
-
-    public static int counter = 0;
-    public static int getRandomImg(){
-        int selectedImage = imgs[counter];
-        counter +=1;
-        if (counter == 14) counter = 0;
-        return selectedImage;
     }
 
 }
