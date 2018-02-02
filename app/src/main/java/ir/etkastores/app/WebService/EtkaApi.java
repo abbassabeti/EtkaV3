@@ -58,7 +58,7 @@ public interface EtkaApi {
     Call<OauthResponse<List<CategoryModel>>> getCategoryAtLevel(@Query("Level") int id);
 
     //7
-    @GET(ApiStatics.SEARCH)
+    @POST(ApiStatics.SEARCH)
     Call<OauthResponse<List<ProductModel>>> searchProduct(@Body SearchProductRequestModel request);
 
     //8

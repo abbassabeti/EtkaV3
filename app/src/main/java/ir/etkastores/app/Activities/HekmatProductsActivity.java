@@ -38,6 +38,7 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
 
     private void initViews(){
         toolbar.setActionListeners(this);
+        toolbar.setTitle(hekmatModel.getTitle());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ir.etkastores.app.Models;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -46,6 +47,14 @@ public class ProductModel {
 
     @SerializedName("ProprietaryPoint")
     int proprietaryPoint;
+
+    public static ProductModel fromJson(String json){
+        try {
+            return new Gson().fromJson(json,ProductModel.class);
+        }catch (Exception err){
+            return null;
+        }
+    }
 
     public void setId(long id) {
         this.id = id;

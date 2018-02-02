@@ -32,6 +32,10 @@ public class SearchProductRequestModel {
     @SerializedName("Page")
     int page;
 
+    public SearchProductRequestModel() {
+        page = 1;
+    }
+
     public SearchProductRequestModel setTitle(String title) {
         this.title = title;
         return this;
@@ -56,4 +60,9 @@ public class SearchProductRequestModel {
         this.page = page;
         return this;
     }
+
+    public int getPage() {
+        return page;
+    }
+
 }
