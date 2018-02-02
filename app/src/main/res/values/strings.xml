@@ -105,5 +105,6 @@
     <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، از دوباره تلاش کنید</string>
     <string name="factorDate">تاریخ سفارش: %s</string>
     <string name="factorCode">کد سفارش: %d</string>
+    <string name="XProducts">%d قلم کالا</string>
 
 </resources>

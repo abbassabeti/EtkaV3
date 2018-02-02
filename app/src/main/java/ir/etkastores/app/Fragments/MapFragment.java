@@ -1,8 +1,6 @@
 package ir.etkastores.app.Fragments;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,14 +17,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.security.spec.ECField;
 import java.util.HashMap;
 import java.util.List;
 
@@ -107,7 +103,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
         marker.anchor(0.5f, 0.5f);
         storesHashMap.put(map.addMarker(marker), store);
-        ;
+
     }
 
     @OnClick(R.id.storeInfoHolder)

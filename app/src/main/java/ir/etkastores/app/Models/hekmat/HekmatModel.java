@@ -10,28 +10,28 @@ import java.util.List;
 
 public class HekmatModel {
 
-    @SerializedName("Id")
+    @SerializedName("id")
     private long id;
 
-    @SerializedName("Title")
+    @SerializedName("title")
     private String title;
 
-    @SerializedName("Stage")
+    @SerializedName("stage")
     private String stage;
 
-    @SerializedName("KalaCode")
+    @SerializedName("kalaCode")
     private String kalaCode;
 
-    @SerializedName("StartDate")
+    @SerializedName("startDate")
     private String startDate;
 
-    @SerializedName("EndDate")
+    @SerializedName("endDate")
     private String endDate;
 
-    @SerializedName("ImageUrl")
+    @SerializedName("imageUrl")
     private String imageUrl;
 
-    @SerializedName("Products")
+    @SerializedName("products")
     private List<HekmatProductModel> products;
 
     public long getId() {

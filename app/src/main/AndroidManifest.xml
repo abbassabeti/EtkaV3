@@ -13,6 +13,8 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".EtkaApp"
         android:allowBackup="true"
@@ -21,15 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyC5mITzxE8vlSKRMN5zF-zcC_Xr73FhhFA" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="0eeca3d3f63bb0a30e6a1d10a66becb964f4863d" />
@@ -91,13 +90,14 @@
         <activity
             android:name=".Activities.ProductActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
-        <activity android:name=".Activities.CategoryActivity"
+        <activity
+            android:name=".Activities.CategoryActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".Activities.HekmatProductsActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity android:name=".Activities.ScannerActivity"
             android:theme="@style/AppTheme.SolidSystemBar"/>
-
-        <activity android:name=".Activities.HekmatActivity"
-            android:theme="@style/AppTheme.SolidSystemBar"/>
-
     </application>
 
 </manifest>

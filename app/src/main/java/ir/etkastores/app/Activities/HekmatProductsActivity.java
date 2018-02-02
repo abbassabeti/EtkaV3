@@ -2,29 +2,37 @@ package ir.etkastores.app.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.Models.hekmat.HekmatModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 
-public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
+public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public  static void show(Activity activity){
-        Intent intent = new Intent(activity,HekmatActivity.class);
+    private final static String HEKMAT_PRODUCT = "HEKMAT_PRODUCT";
+
+    public  static void show(Activity activity, HekmatModel hekmatModel){
+        Intent intent = new Intent(activity,HekmatProductsActivity.class);
+        intent.putExtra(HEKMAT_PRODUCT,new Gson().toJson(hekmatModel));
         activity.startActivity(intent);
     }
 
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
 
+    private HekmatModel hekmatModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hekmat);
         ButterKnife.bind(this);
+        hekmatModel = new Gson().fromJson(getIntent().getExtras().getString(HEKMAT_PRODUCT),HekmatModel.class);
         initViews();
     }
 
@@ -41,4 +49,5 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     public void onActionClick(int actionCode) {
 
     }
+
 }

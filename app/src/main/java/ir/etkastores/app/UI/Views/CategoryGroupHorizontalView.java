@@ -2,7 +2,6 @@ package ir.etkastores.app.UI.Views;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -14,11 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.Adapters.RecyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.R;
 
@@ -82,7 +79,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(inflater.inflate(R.layout.cell_product,parent,false));
+            return new ViewHolder(inflater.inflate(R.layout.cell_product_horizontal_row,parent,false));
         }
 
         @Override

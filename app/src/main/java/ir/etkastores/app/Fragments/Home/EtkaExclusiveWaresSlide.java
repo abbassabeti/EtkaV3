@@ -26,9 +26,6 @@ public class EtkaExclusiveWaresSlide extends Fragment implements PageTrigger {
 
     View view;
 
-    @BindView(R.id.itemsHolder)
-    LinearLayout itemsHolder;
-
     boolean isFirstSelect = true;
 
     @Nullable
@@ -42,7 +39,7 @@ public class EtkaExclusiveWaresSlide extends Fragment implements PageTrigger {
     }
 
     private void initViews(){
-        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+
     }
 
     @Override
