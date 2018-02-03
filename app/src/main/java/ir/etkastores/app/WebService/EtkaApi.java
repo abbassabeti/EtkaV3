@@ -7,6 +7,7 @@ import ir.etkastores.app.Models.Factor.FactorModel;
 import ir.etkastores.app.Models.Factor.FactorRequestModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
+import ir.etkastores.app.Models.ProductSearchResponseModel;
 import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.Models.hekmat.HekmatModel;
@@ -59,7 +60,7 @@ public interface EtkaApi {
 
     //7
     @POST(ApiStatics.SEARCH)
-    Call<OauthResponse<List<ProductModel>>> searchProduct(@Body SearchProductRequestModel request);
+    Call<OauthResponse<ProductSearchResponseModel>> searchProduct(@Body SearchProductRequestModel request);
 
     //8
     @GET(ApiStatics.PRODUCT)

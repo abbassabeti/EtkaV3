@@ -14,7 +14,7 @@ public class ApiStatics {
     public static final String RESET_PASSWORD = "/api/v1/Account/ResetPassword";
     public static final String PRODUCT_CATEGORY_LEVEL = "/api/v1/ProductCategory/Level";
     public static final String PRODUCT_CATEGORY_CHILD = "/api/v1/ProductCategory/child";
-    public static final String SEARCH = "/api/v1/Product/search";
+    public static final String SEARCH = "/api/v1/search";
     public static final String PRODUCT = "/api/v1/Product/get";
     public static final String STORE = "/api/v1/store";
     public static final String PROFILE = "api/v1/account/info";

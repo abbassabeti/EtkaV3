@@ -18,6 +18,7 @@ import ir.etkastores.app.Adapters.RecyclerViewAdapters.ProductsRecyclerAdapter;
 import ir.etkastores.app.Models.CategoryModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
+import ir.etkastores.app.Models.ProductSearchResponseModel;
 import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
@@ -51,7 +52,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     private ProductsRecyclerAdapter productsAdapter;
 
     private Call<OauthResponse<List<CategoryModel>>> categoryRequest;
-    private Call<OauthResponse<List<ProductModel>>> productRequest;
+    private Call<OauthResponse<ProductSearchResponseModel>> productRequest;
     private SearchProductRequestModel searchRequestModel;
 
     private final int MAX_PRODUCT_NEEDED = 20;
@@ -84,8 +85,10 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     private void initForProducts() {
         productsAdapter = new ProductsRecyclerAdapter(this, this);
+        recyclerView.setAdapter(productsAdapter);
         searchRequestModel = new SearchProductRequestModel();
         searchRequestModel.setCategoryId(categoryModel.getId());
+        searchRequestModel.setTake(MAX_PRODUCT_NEEDED);
         loadProducts();
     }
 
@@ -102,13 +105,13 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     private void loadProducts() {
         showLoading();
         productRequest = ApiProvider.getAuthorizedApi().searchProduct(searchRequestModel);
-        productRequest.enqueue(new Callback<OauthResponse<List<ProductModel>>>() {
+        productRequest.enqueue(new Callback<OauthResponse<ProductSearchResponseModel>>() {
             @Override
-            public void onResponse(Call<OauthResponse<List<ProductModel>>> call, Response<OauthResponse<List<ProductModel>>> response) {
+            public void onResponse(Call<OauthResponse<ProductSearchResponseModel>> call, Response<OauthResponse<ProductSearchResponseModel>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        productsAdapter.addItems(response.body().getData());
-                        if (response.body().getData().size() == MAX_PRODUCT_NEEDED) {
+                        productsAdapter.addItems(response.body().getData().getItems());
+                        if (response.body().getData().getItems().size() == MAX_PRODUCT_NEEDED) {
                             productsAdapter.setLoadMoreEnabled(true);
                             searchRequestModel.setPage(searchRequestModel.getPage()+1);
                         }
@@ -122,7 +125,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             }
 
             @Override
-            public void onFailure(Call<OauthResponse<List<ProductModel>>> call, Throwable t) {
+            public void onFailure(Call<OauthResponse<ProductSearchResponseModel>> call, Throwable t) {
                 hideLoading();
             }
         });
