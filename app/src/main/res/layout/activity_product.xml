@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@color/white">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,7 +21,99 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ir.etkastores.app.UI.Views.CategorySliderView
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+            <requestFocus/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeLarge" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    android:text="۲۴،۱۰۰ تومان"/>
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/starIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    app:srcCompat="@drawable/ic_star_circle_gold_24dp" />
+
+                <TextView
+                    android:id="@+id/point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="16dp"
+                    android:text="۵ امتیاز"
+                    android:layout_toRightOf="@id/starIcon"
+                    android:textColor="@color/darkGray" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkGray"
+                android:padding="16dp"
+                android:text=" متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
+            <LinearLayout
+                android:id="@+id/extraItemsHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#F1F1F1"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <!--<ir.etkastores.app.UI.Views.CategoryGroupHorizontalView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+                <!--<ir.etkastores.app.UI.Views.CategoryGroupHorizontalView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content" />-->
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -16,7 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.DummyProvider;
-import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.Utils.Image.ImageLoader;

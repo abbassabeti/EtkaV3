@@ -106,5 +106,7 @@
     <string name="factorDate">تاریخ سفارش: %s</string>
     <string name="factorCode">کد سفارش: %d</string>
     <string name="XProducts">%d قلم کالا</string>
+    <string name="Xpoint">%d امتیاز</string>
+    <string name="priceX">قیمت : %s</string>
 
 </resources>

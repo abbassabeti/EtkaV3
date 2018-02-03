@@ -58,8 +58,11 @@ public class CategorySliderView extends LinearLayout {
     }
 
     private void init(){
-        inflate(getContext(), R.layout.view_category_slider,this);
-        ButterKnife.bind(this);
+//        inflate(getContext(),R.layout.view_category_slider,this);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_category_slider,this,true);
+        ButterKnife.bind(this,this);
+        indicatorView.setFocusable(false);
+        pager.setFocusable(false);
         fillView();
     }
 

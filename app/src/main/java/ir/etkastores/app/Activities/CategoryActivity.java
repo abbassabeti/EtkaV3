@@ -176,7 +176,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     @Override
     public void onProductItemClick(ProductModel productModel) {
-
+        ProductActivity.show(this,productModel);
     }
 
 }

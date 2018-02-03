@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.Activities.ProductActivity;
 import ir.etkastores.app.Adapters.RecyclerViewAdapters.FactorsRecyclerAdapter;
 import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.Models.Factor.FactorModel;
@@ -150,7 +151,7 @@ public class FactorItemView extends CardView implements View.OnClickListener {
                 itemView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        
                     }
                 });
             }
