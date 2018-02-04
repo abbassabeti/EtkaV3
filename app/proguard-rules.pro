@@ -29,3 +29,93 @@
 -keep public class android.support.design.internal.BottomNavigationMenuView { *; }
 -keep public class android.support.design.internal.BottomNavigationPresenter { *; }
 -keep public class android.support.design.internal.BottomNavigationItemView { *; }
+
+#retrofit
+-dontnote retrofit2.Platform
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+
+#okhttp
+-dontwarn javax.annotation.**
+-dontwarn okio.**
+-dontwarn okhttp3.**
+
+#support
+-dontwarn android.support.**
+-keep interface android.support.v7.** { *; }
+-keep public class android.support.v7.widget.** { *; }
+-keep public class android.support.v7.internal.widget.** { *; }
+-keep public class android.support.v7.internal.view.menu.** { *; }
+-keep class android.support.v7.widget.RoundRectDrawable { *; }
+-keep class android.support.v7.widget.LinearLayoutManager { *; }
+-keep public class * extends android.support.v4.**
+-keep public class * extends android.app.Fragment
+-keep class !android.support.v7.internal.view.menu.**,android.support.** {*;}
+
+#butterknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+#crashlytics
+-keep class com.crashlytics.** { *; }
+-keep class com.crashlytics.android.**
+
+#google play services
+-keep class com.google.android.gms.ads.identifier.** { *; }
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+#GSON
+-keepattributes Signature
+-keepattributes *Annotation*
+-keepattributes EnclosingMethod
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.stream.** { *; }
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+#other
+-keepattributes LineNumberTable
+-keep class com.sheypoor.mobile.items.** { *; }
+-keep class com.sheypoor.mobile.network.** { *; }
+-dontwarn okio.**
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+-keepclasseswithmembers class * {
+    @retrofit2.http.* <methods>;
+}
+
+#webView
+-keep public class android.net.http.SslError
+-keep public class android.webkit.WebViewClient
+-dontwarn android.webkit.WebView
+-dontwarn android.net.http.SslError
+-dontwarn android.webkit.WebViewClient
+
