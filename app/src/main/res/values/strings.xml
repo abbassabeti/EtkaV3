@@ -108,5 +108,15 @@
     <string name="XProducts">%d قلم کالا</string>
     <string name="Xpoint">%d امتیاز</string>
     <string name="priceX">قیمت : %s</string>
+    <string name="anErrorHappend">خطایی رخ داده است!</string>
+    <string name="errorInLogin">خطا در ورود!</string>
+    <string name="errorInRegister">خطا در ثبت نام!</string>
+    <string name="anErrorHappendInServerConnection">در ارتباط با سرور خطایی رخ داده است، لطفا از دوباره تلاش کنید.</string>
+    <string name="errorInDataReceiving">خطا در دریافت اطلاعات!</string>
+    <string name="errorHappendInReceivingData">در دریافت اطلاعات خطایی رخ داده است، از دوباره تلاش کنید.</string>
+    <string name="retry">تلاش مجدد</string>
+    <string name="cancel">انصراف</string>
+    <string name="etkaChainStores">فروشگاه های زنجیره ای اتکا</string>
+    <string name="customersLoyaltyApplication">اپلیکیشن باشگاه مشتریان</string>
 
 </resources>

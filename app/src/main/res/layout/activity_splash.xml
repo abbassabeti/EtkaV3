@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="اپلیکیشن باشگاه مشتریان"
+            android:text="@string/customersLoyaltyApplication"
             android:textColor="@color/white"
             android:textSize="@dimen/textSizeLarge" />
 
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="فروشگاه های زنجره ای اتکا"
+            android:text="@string/etkaChainStores"
             android:textColor="@color/transWhiteC"
             android:textSize="@dimen/textSizeMedium" />
 

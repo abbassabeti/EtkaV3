@@ -20,6 +20,7 @@ import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.Models.profile.UserGender;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.WebService.AccessToken;
 import ir.etkastores.app.WebService.ApiProvider;
 import ir.etkastores.app.WebService.ApiStatics;
@@ -45,17 +46,13 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
 
         bottomNavigationView.setCurrentItem(3);
-
-        //testRegister();
-//        testLogin();
-
     }
 
     BottomNavigationViewEx.OnNavigationItemSelectedListener selectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
 
                 case R.id.navigation_home:
                     replaceFragment(new HomeFragment());
@@ -78,62 +75,8 @@ public class MainActivity extends BaseActivity {
         }
     };
 
-    private void replaceFragment(Fragment fragment){
-        getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder,fragment).commitNowAllowingStateLoss();
-    }
-
-    private void testRegister(){
-        RegisterUserRequestModel requestModel = new RegisterUserRequestModel();
-        requestModel.setFirstName("سجاد");
-        requestModel.setLastName("گرشاسبی");
-        requestModel.setGender(UserGender.MALE);
-        requestModel.setCellPhone("09354018630");
-        requestModel.setPassword("abcd1234#");
-        requestModel.setEmail("sajadgarshasbi@gmail.com");
-        Log.e("requestModel",""+new Gson().toJson(requestModel));
-        ApiProvider.getApi().registerNewUser(requestModel).enqueue(new Callback<OauthResponse<String>>() {
-            @Override
-            public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
-                        Log.e("registered User ID",""+response.body().getData());
-                    }else{
-                        Log.e("registered User error",""+response.body().getMeta().getMessage());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
-                Log.e("registered failed",""+t.getLocalizedMessage());
-            }
-        });
-    }
-
-    private void testLogin(){
-        ApiProvider.getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD,"sajadgarshasbi@gmail.com","#abcE1234#", ApiStatics.CLIENT_ID,ApiStatics.CLIENT_SECRET,"").enqueue(new Callback<AccessToken>() {
-            @Override
-            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
-                if (response.isSuccessful()){
-                    Log.e("login...","success");
-                }else{
-                    onFailure(null,null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AccessToken> call, Throwable t) {
-                Log.e("login...","failed");
-            }
-        });
-    }
-
-    private void testEditProfile(){
-
-    }
-
-    private void testChangePassword(){
-
+    private void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder, fragment).commitNowAllowingStateLoss();
     }
 
 }

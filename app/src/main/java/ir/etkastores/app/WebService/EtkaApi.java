@@ -14,7 +14,6 @@ import ir.etkastores.app.Models.hekmat.HekmatModel;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.Models.profile.ResetPasswordRequestModel;
 import ir.etkastores.app.Models.store.StoreModel;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;

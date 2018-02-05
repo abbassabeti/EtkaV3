@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -15,12 +16,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.Adapters.RecyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.Adapters.RecyclerViewAdapters.ProductsRecyclerAdapter;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.CategoryModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.Models.ProductSearchResponseModel;
 import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.WebService.ApiProvider;
 import retrofit2.Call;
@@ -141,7 +144,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                     if (response.body().isSuccessful()) {
                         categoryAdapter.setData(response.body().getData());
                     } else {
-
+                        showRetryDialog(response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(null,null);
@@ -151,6 +154,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
+                showRetryDialog(null);
                 hideLoading();
             }
         });
@@ -177,6 +181,36 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     @Override
     public void onProductItemClick(ProductModel productModel) {
         ProductActivity.show(this,productModel);
+    }
+
+    private void showRetryDialog(String message){
+        String msg = message;
+        if (TextUtils.isEmpty(msg)) msg = getResources().getString(R.string.errorHappendInReceivingData);
+        String title = getResources().getString(R.string.errorInDataReceiving);
+        String rightButton = getResources().getString(R.string.retry);
+        String leftButton = getResources().getString(R.string.cancel);
+        final MessageDialog messageDialog = MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
+                title,
+                msg,
+                rightButton,
+                leftButton);
+        boolean isCancellable = false;
+        messageDialog.show(getSupportFragmentManager(), isCancellable, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                messageDialog.getDialog().cancel();
+                if (button == LEFT_BUTTON){
+                    finish();
+                }else if (button == RIGHT_BUTTON){
+                    loadCategory();
+                }
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+                messageDialog.getDialog().cancel();
+            }
+        });
     }
 
 }

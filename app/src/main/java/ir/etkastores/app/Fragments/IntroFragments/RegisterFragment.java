@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,6 +19,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.ActivityUtils;
@@ -154,6 +156,10 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
                 Toaster.show(getActivity(),R.string.registerFailTryLater);
             }
         });
+    }
+
+    private void showRetryDialog(String message){
+        MessageDialog messageDialog = MessageDialog.registerError(message);
     }
 
 }

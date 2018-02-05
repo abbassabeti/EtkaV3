@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.MainActivity;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Dialogs.ResetPasswordDialog;
 import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
@@ -210,7 +211,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
                 loadingDialog.cancel();
-                Toaster.show(getActivity(),R.string.errorInLoginTryLater, Toast.LENGTH_LONG);
+                showRetryDialog();
             }
         });
     }
@@ -228,6 +229,24 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     private void cancelRequest(){
         if (loginRequest != null) loginRequest.cancel();
+    }
+
+    void showRetryDialog(){
+        final MessageDialog messageDialog = MessageDialog.loginError();
+        messageDialog.show(getChildFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (button == RIGHT_BUTTON){
+                    onLoginClick();
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+                messageDialog.getDialog().cancel();
+            }
+        });
     }
 
 }
