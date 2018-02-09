@@ -1,7 +1,6 @@
 package ir.etkastores.app.Fragments.IntroFragments;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,13 +8,13 @@ import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.R;
@@ -140,9 +139,9 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
                         onToolbarBackClick();
                     }else{
                         if (TextUtils.isEmpty(response.body().getMeta().getMessage())){
-                            Toaster.showLong(getActivity(),response.body().getMeta().getErrorsMessage());
+                            showRetryDialog(response.body().getMeta().getErrorsMessage());
                         }else{
-                            Toaster.showLong(getActivity(),response.body().getMeta().getMessage());
+                            showRetryDialog(response.body().getMeta().getMessage());
                         }
                     }
                 }else{
@@ -153,13 +152,27 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
             @Override
             public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
                 loadingDialog.cancel();
-                Toaster.show(getActivity(),R.string.registerFailTryLater);
+                showRetryDialog(EtkaApp.getInstnace().getResources().getString(R.string.registerFailTryLater));
             }
         });
     }
 
-    private void showRetryDialog(String message){
-        MessageDialog messageDialog = MessageDialog.registerError(message);
+    private void showRetryDialog(final String message){
+        final MessageDialog messageDialog = MessageDialog.registerError(message);
+        messageDialog.show(getChildFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (button == RIGHT_BUTTON){
+
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
     }
 
 }

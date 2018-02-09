@@ -16,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.Adapters.RecyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.Adapters.RecyclerViewAdapters.ProductsRecyclerAdapter;
-import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.CategoryModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
