@@ -8,12 +8,14 @@ import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 
 /**
@@ -36,6 +38,11 @@ public class FAQItemView extends CardView implements View.OnClickListener {
 
     private FAQItem item;
 
+    public FAQItemView(Context context) {
+        super(context);
+        init(null);
+    }
+
     public FAQItemView(Context context, FAQItem item) {
         super(context);
         this.item = item;
@@ -52,35 +59,36 @@ public class FAQItemView extends CardView implements View.OnClickListener {
         init(attrs);
     }
 
-    private void init(AttributeSet attrs){
-        LayoutInflater.from(getContext()).inflate(R.layout.view_faq_item,this,true);
-        ButterKnife.bind(this,this);
-        setBackgroundColor(ContextCompat.getColor(getContext(),R.color.transparent));
+    private void init(AttributeSet attrs) {
+        LayoutInflater.from(getContext()).inflate(R.layout.view_faq_item, this, true);
+        ButterKnife.bind(this, this);
+        setBackgroundColor(ContextCompat.getColor(getContext(), R.color.transparent));
+        expandableLayout.setInterpolator(null);
+        expandableLayout.setDuration(0);
         this.setOnClickListener(this);
         if (item != null) update();
     }
 
-    public void setItem(FAQItem item){
+    public void setItem(FAQItem item) {
         this.item = item;
         update();
     }
 
-    private void update(){
-        try {
-            title.setText(item.getTitle());
-            description.setText(item.getDescription());
-        }catch (Exception err){
-            err.printStackTrace();
-        }
+    private void update() {
+        title.setText(item.getTitle().trim());
+        description.setText(item.getDescription().trim());
+        expandableLayout.setExpanded(item.isExpanded);
     }
 
     @Override
     public void onClick(View v) {
         expandableLayout.toggle();
 
-        if (expandableLayout.isExpanded()){
+        if (expandableLayout.isExpanded()) {
+            item.setExpanded(true);
             rowIcon.setImageResource(R.drawable.ic_arrow_up_black_24dp);
-        }else{
+        } else {
+            item.setExpanded(false);
             rowIcon.setImageResource(R.drawable.ic_arrow_down_black_24dp);
         }
     }
@@ -89,6 +97,12 @@ public class FAQItemView extends CardView implements View.OnClickListener {
 
         String title;
         String description;
+        boolean isExpanded = false;
+
+        public FAQItem(int title, int description) {
+            this.title = EtkaApp.getInstnace().getResources().getString(title);
+            this.description = EtkaApp.getInstnace().getResources().getString(description);
+        }
 
         public FAQItem(String title, String description) {
             this.title = title;
@@ -103,6 +117,14 @@ public class FAQItemView extends CardView implements View.OnClickListener {
             return description;
         }
 
+        public boolean isExpanded() {
+            return isExpanded;
+        }
+
+        public FAQItem setExpanded(boolean expanded) {
+            isExpanded = expanded;
+            return this;
+        }
     }
 
 }

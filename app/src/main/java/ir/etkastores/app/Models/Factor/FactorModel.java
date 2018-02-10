@@ -28,6 +28,8 @@ public class FactorModel {
     @SerializedName("purchasedProducts")
     List<PurchasedProductModel> purchasedProducts;
 
+    boolean isExpanded = false;
+
     public long getId() {
         return id;
     }
@@ -76,4 +78,11 @@ public class FactorModel {
         this.purchasedProducts = purchasedProducts;
     }
 
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
+    }
 }

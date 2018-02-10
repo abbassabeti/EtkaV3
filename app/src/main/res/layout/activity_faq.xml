@@ -11,38 +11,9 @@
         android:layout_height="wrap_content"
         app:title="@string/faq"/>
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/faqHolder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!--<ir.etkastores.app.UI.Views.FAQItemView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="8dp"/>-->
-
-            <!--<ir.etkastores.app.UI.Views.FAQItemView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="8dp"/>-->
-
-            <!--<ir.etkastores.app.UI.Views.FAQItemView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="8dp"/>-->
-
-            <!--<ir.etkastores.app.UI.Views.FAQItemView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="8dp"/>-->
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

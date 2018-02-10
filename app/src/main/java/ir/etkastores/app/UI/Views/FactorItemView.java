@@ -22,8 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.Activities.ProductActivity;
-import ir.etkastores.app.Adapters.RecyclerViewAdapters.FactorsRecyclerAdapter;
 import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.Models.Factor.FactorModel;
 import ir.etkastores.app.Models.Factor.PurchasedProductModel;
@@ -62,6 +60,11 @@ public class FactorItemView extends CardView implements View.OnClickListener {
 
     private FactorModel factor;
 
+    public FactorItemView(@NonNull Context context) {
+        super(context);
+        init();
+    }
+
     public FactorItemView(@NonNull Context context, FactorModel factor) {
         super(context);
         this.factor = factor;
@@ -86,7 +89,7 @@ public class FactorItemView extends CardView implements View.OnClickListener {
         if (factor != null) setFactor(factor);
     }
 
-    public void setFactor(FactorModel factor){
+    public void setFactor(final FactorModel factor){
         this.factor = factor;
         recyclerView.setAdapter(new PurchaseAdapter(factor.getPurchasedProducts()));
         if (TextUtils.isEmpty(factor.getDate())){
@@ -100,6 +103,18 @@ public class FactorItemView extends CardView implements View.OnClickListener {
             factorCode.setText(String.format(getResources().getString(R.string.factorCode),factor.getFactorCode()));
         }
         factorPrice.setText(String.valueOf(factor.getTotalPrice()));
+        expandableLayout.setDuration(0);
+        expandableLayout.setOnExpansionUpdateListener(new ExpandableLayout.OnExpansionUpdateListener() {
+            @Override
+            public void onExpansionUpdate(float v, int i) {
+                if (expandableLayout.isExpanded()){
+                    factor.setExpanded(true);
+                }else{
+                    factor.setExpanded(false);
+                }
+            }
+        });
+        expandableLayout.setExpanded(factor.isExpanded());
     }
 
     @Override

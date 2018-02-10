@@ -37,4 +37,16 @@ public class FactorRequestModel {
         return this;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public int getTake() {
+        return take;
+    }
+
+    public int getSkip() {
+        return skip;
+    }
+
 }

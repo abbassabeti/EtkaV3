@@ -3,7 +3,13 @@ package ir.etkastores.app.Activities.ProfileActivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,8 +28,8 @@ public class FAQActivity extends BaseActivity implements EtkaToolbar.EtkaToolbar
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
 
-    @BindView(R.id.faqHolder)
-    LinearLayout faqHolder;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +41,26 @@ public class FAQActivity extends BaseActivity implements EtkaToolbar.EtkaToolbar
 
     private void initViews(){
         toolbar.setActionListeners(this);
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("مقدار کسری این پروژه چقدر است؟","۲۱ ماه!")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("چه کسانی با این پروژه معاف می شوند؟","سجاد گرشاسبی، هادی محمدی، آرمین رصدی، پیام شکیبافر، هژیر مفاخری، ....")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("کالای حکمت چیست؟","چیز خوبیه!")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("امتیاز باشگاه مشتریان چیست؟","اونم چیز خوبیه ؛)")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("آیا امکان سفارش آنلاین وجود دارد؟","نه")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("آیا تبدیل امتیاز به اعتبار آنی است؟","تقریبا")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("لیست خرید بعدی چیست؟","چیز خوبیه...")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("تخفیف ها شامل چه کالاهایی می شود؟","همه چیز")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("اتکا چند تا فروشگاه داره؟","زیاد")));
-        faqHolder.addView(new FAQItemView(this,new FAQItemView.FAQItem("نقشه درون فروشگاه چیست؟","نمی دونم!")));
+        List<FAQItemView.FAQItem> faqs = new ArrayList<>();
+
+        faqs.add(new FAQItemView.FAQItem(R.string.q1,R.string.a1));
+        faqs.add(new FAQItemView.FAQItem(R.string.q2,R.string.a2));
+        faqs.add(new FAQItemView.FAQItem(R.string.q3,R.string.a3));
+        faqs.add(new FAQItemView.FAQItem(R.string.q4,R.string.a4));
+        faqs.add(new FAQItemView.FAQItem(R.string.q5,R.string.a5));
+        faqs.add(new FAQItemView.FAQItem(R.string.q6,R.string.a6));
+        faqs.add(new FAQItemView.FAQItem(R.string.q7,R.string.a7));
+        faqs.add(new FAQItemView.FAQItem(R.string.q8,R.string.a8));
+        faqs.add(new FAQItemView.FAQItem(R.string.q9,R.string.a9));
+        faqs.add(new FAQItemView.FAQItem(R.string.q10,R.string.a10));
+        faqs.add(new FAQItemView.FAQItem(R.string.q11,R.string.a11));
+        faqs.add(new FAQItemView.FAQItem(R.string.q12,R.string.a12));
+        faqs.add(new FAQItemView.FAQItem(R.string.q13,R.string.a13));
+        faqs.add(new FAQItemView.FAQItem(R.string.q14,R.string.a14));
+        faqs.add(new FAQItemView.FAQItem(R.string.q15,R.string.a15));
+
+        FAQAdapter adapter = new FAQAdapter(faqs);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -56,4 +72,50 @@ public class FAQActivity extends BaseActivity implements EtkaToolbar.EtkaToolbar
     public void onActionClick(int actionCode) {
 
     }
+
+    class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.ViewHolder> {
+
+        private List<FAQItemView.FAQItem> items;
+
+        public FAQAdapter(List<FAQItemView.FAQItem> items) {
+            this.items = items;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ViewHolder(new FAQItemView(FAQActivity.this));
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.bind(items.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            private FAQItemView faqItemView;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                faqItemView = (FAQItemView) itemView;
+            }
+
+            public void bind(FAQItemView.FAQItem item){
+                faqItemView.setItem(item);
+            }
+
+        }
+
+        @Override
+        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(FAQActivity.this));
+        }
+    }
+
 }
