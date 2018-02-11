@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.ProfileActivities.FAQActivity;
+import ir.etkastores.app.Activities.ProfileActivities.HekmatActivity;
 import ir.etkastores.app.Activities.ProfileActivities.InviteFriendsActivity;
 import ir.etkastores.app.Activities.ProfileActivities.NextShoppingListActivity;
 import ir.etkastores.app.Activities.ProfileActivities.OtherPagesActivity;
@@ -61,7 +62,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick(){
-//        HekmatActivity.show(getActivity());
+        HekmatActivity.show(getActivity());
     }
 
     @OnClick(R.id.scoreMenu)

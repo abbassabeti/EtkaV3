@@ -30,7 +30,7 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hekmat);
+        setContentView(R.layout.activity_hekmat_product);
         ButterKnife.bind(this);
         hekmatModel = new Gson().fromJson(getIntent().getExtras().getString(HEKMAT_PRODUCT),HekmatModel.class);
         initViews();

@@ -5,23 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="ir.etkastores.app.Activities.ProfileActivities.HekmatActivity">
+    tools:context="ir.etkastores.app.Activities.HekmatProductsActivity">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:showBack="true"
         app:title="@string/hekmatCard"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ir.etkastores.app.UI.Views.MessageView
-            android:id="@+id/messageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </RelativeLayout>
 
 </LinearLayout>

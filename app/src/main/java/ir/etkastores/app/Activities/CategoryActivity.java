@@ -24,6 +24,7 @@ import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.UI.Views.MessageView;
 import ir.etkastores.app.WebService.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +48,9 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     @BindView(R.id.circularProgress)
     ProgressBar circularProgress;
+
+    @BindView(R.id.messageView)
+    MessageView messageView;
 
     private CategoryModel categoryModel;
 
@@ -113,15 +117,18 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         productsAdapter.addItems(response.body().getData().getItems());
+                        if (productsAdapter.getItemCount() == 0){
+                            showEmptyResultMessage();
+                        }
                         if (response.body().getData().getItems().size() == MAX_PRODUCT_NEEDED) {
                             productsAdapter.setLoadMoreEnabled(true);
-                            searchRequestModel.setPage(searchRequestModel.getPage()+1);
+                            searchRequestModel.setPage(searchRequestModel.getPage() + 1);
                         }
                     } else {
 
                     }
                 } else {
-                    onFailure(null,null);
+                    onFailure(null, null);
                 }
                 hideLoading();
             }
@@ -141,12 +148,16 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        categoryAdapter.setData(response.body().getData());
+                        if (response.body().getData().size()>0){
+                            categoryAdapter.setData(response.body().getData());
+                        }else{
+                            showEmptyResultMessage();
+                        }
                     } else {
                         showRetryDialog(response.body().getMeta().getMessage());
                     }
                 } else {
-                    onFailure(null,null);
+                    onFailure(null, null);
                 }
                 hideLoading();
             }
@@ -179,12 +190,13 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     @Override
     public void onProductItemClick(ProductModel productModel) {
-        ProductActivity.show(this,productModel);
+        ProductActivity.show(this, productModel);
     }
 
-    private void showRetryDialog(String message){
+    private void showRetryDialog(String message) {
         String msg = message;
-        if (TextUtils.isEmpty(msg)) msg = getResources().getString(R.string.errorHappendInReceivingData);
+        if (TextUtils.isEmpty(msg))
+            msg = getResources().getString(R.string.errorHappendInReceivingData);
         String title = getResources().getString(R.string.errorInDataReceiving);
         String rightButton = getResources().getString(R.string.retry);
         String leftButton = getResources().getString(R.string.cancel);
@@ -198,9 +210,9 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 messageDialog.getDialog().cancel();
-                if (button == LEFT_BUTTON){
+                if (button == LEFT_BUTTON) {
                     finish();
-                }else if (button == RIGHT_BUTTON){
+                } else if (button == RIGHT_BUTTON) {
                     loadCategory();
                 }
             }
@@ -208,6 +220,15 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             @Override
             public void onDialogMessageDismiss() {
                 messageDialog.getDialog().cancel();
+            }
+        });
+    }
+
+    private void showEmptyResultMessage() {
+        messageView.show(R.drawable.ic_warning_orange_48dp, R.string.thereIsNotResultAvailable, R.string.back, new MessageView.OnMessageViewButtonClick() {
+            @Override
+            public void onMessageViewButtonClick() {
+                onBackPressed();
             }
         });
     }

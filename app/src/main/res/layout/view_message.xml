@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="16dp"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeSmall" />
 
         <Button
@@ -30,8 +30,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:minHeight="0dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/textSizeMedium"
+            android:textSize="@dimen/textSizeSmall"
             android:background="@drawable/rect_round8dp_theme_color"/>
 
     </LinearLayout>

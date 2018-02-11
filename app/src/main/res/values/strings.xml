@@ -119,5 +119,9 @@
     <string name="etkaChainStores">فروشگاه های زنجیره ای اتکا</string>
     <string name="customersLoyaltyApplication">اپلیکیشن باشگاه مشتریان</string>
     <string name="inLoadingUserProfile">در حال دریافت اطلاعات کاربری...</string>
+    <string name="thereIsNotResultAvailable">برای این قسمت نتیجه ای موجود نیست</string>
+    <string name="back">بازگشت</string>
+    <string name="commingSoonMessage">این قسمت در نسخه های بعدی تکمیل خواهد شد.</string>
+
 
 </resources>

@@ -11,11 +11,10 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.UI.Views.MessageView;
 
-public class NextShoppingListActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
+public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void start(Activity activity){
-        Intent intent = new Intent(activity,NextShoppingListActivity.class);
-        activity.startActivity(intent);
+    public static void show(Activity activity) {
+        activity.startActivity(new Intent(activity, HekmatActivity.class));
     }
 
     @BindView(R.id.toolbar)
@@ -27,14 +26,14 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_next_shopping_list);
+        setContentView(R.layout.activity_hekmat);
         ButterKnife.bind(this);
-        toolbar.setActionListeners(this);
         initViews();
     }
 
-    private void initViews(){
-        showEmptyMessage();
+    private void initViews() {
+        toolbar.setActionListeners(this);
+        messageView.show(R.drawable.ic_warning_orange_48dp, R.string.commingSoonMessage, 0, null);
     }
 
     @Override
@@ -45,10 +44,6 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
     @Override
     public void onActionClick(int actionCode) {
 
-    }
-
-    private void showEmptyMessage(){
-        messageView.show(R.drawable.ic_warning_orange_48dp,R.string.commingSoonMessage,0,null);
     }
 
 }

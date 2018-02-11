@@ -96,20 +96,22 @@
         <activity
             android:name=".Activities.HekmatProductsActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
-        <activity android:name=".Activities.ScannerActivity"
-            android:theme="@style/AppTheme.SolidSystemBar"/>
+        <activity
+            android:name=".Activities.ScannerActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
 
-        <service
-            android:name=".services.EtkaFirebaseMessagingService">
+        <activity
+            android:name=".Activities.ProfileActivities.HekmatActivity"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+
+        <service android:name=".services.EtkaFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service
-            android:name=".services.EtkaFirebaseInstanceIDService">
+        <service android:name=".services.EtkaFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
