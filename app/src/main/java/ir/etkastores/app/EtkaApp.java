@@ -3,8 +3,12 @@ package ir.etkastores.app;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -23,6 +27,11 @@ public class EtkaApp extends MultiDexApplication {
         instnace = this;
 
         initFont();
+
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d("FCM", "last token: " + refreshedToken);
+        FirebaseMessaging.getInstance().subscribeToTopic("global");
+
     }
 
     @Override
