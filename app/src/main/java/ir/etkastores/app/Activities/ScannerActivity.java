@@ -12,6 +12,7 @@ import com.google.zxing.Result;
 
 import java.util.List;
 
+import ir.etkastores.app.UI.Toaster;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -49,6 +50,8 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
         Log.e("Scanner", "result format: "+result.getBarcodeFormat().toString());
         mScannerView.resumeCameraPreview(this);
         setResult(RESULT_OK);
+        Toaster.show(this,"Code:"+result.getText());
+        finish();
     }
 
     @Override
