@@ -6,9 +6,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -52,6 +54,9 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
         mBuilder.setContentText("Your text");
         mBuilder.setPriority(Notification.PRIORITY_MAX);
         mBuilder.setStyle(bigText);
+        mBuilder.setAutoCancel(true);
+        mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+        mBuilder.setLights(Color.RED, 1, 1);
 
         NotificationManager mNotificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -66,4 +71,5 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
 
         mNotificationManager.notify(0, mBuilder.build());
     }
+
 }

@@ -18,19 +18,19 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class EtkaApp extends MultiDexApplication {
 
-    private static EtkaApp instnace;
+    private static EtkaApp instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        instnace = this;
+        instance = this;
 
         initFont();
 
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d("FCM", "last token: " + refreshedToken);
-        FirebaseMessaging.getInstance().subscribeToTopic("global");
+//        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//        Log.d("FCM", "last token: " + refreshedToken);
+//        FirebaseMessaging.getInstance().subscribeToTopic("global");
 
     }
 
@@ -41,7 +41,7 @@ public class EtkaApp extends MultiDexApplication {
     }
 
     public static EtkaApp getInstnace() {
-        return instnace;
+        return instance;
     }
 
     private void initFont() {
