@@ -71,7 +71,7 @@ public interface EtkaApi {
 
     //10
     @GET(ApiStatics.PROFILE)
-    Call<OauthResponse<UserProfileModel>> getUserProfile();
+    Call<OauthResponse<UserProfileModel>> getUserProfile(@Query("UserId") String userId);
 
     //12
     @POST(ApiStatics.FACTOR)

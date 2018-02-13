@@ -13,12 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.MainActivity;
+import ir.etkastores.app.Models.OauthResponse;
+import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Dialogs.ResetPasswordDialog;
@@ -30,6 +31,7 @@ import ir.etkastores.app.Utils.UserSettings;
 import ir.etkastores.app.WebService.AccessToken;
 import ir.etkastores.app.WebService.ApiProvider;
 import ir.etkastores.app.WebService.ApiStatics;
+import ir.etkastores.app.data.ProfileManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,10 +58,13 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     @BindView(R.id.emailAddressInputHolder)
     View emailAddressInputHolder;
+
     @BindView(R.id.passwordInputHolder)
     View passwordInputHolder;
+
     @BindView(R.id.clubCardNumberInputHolder)
     View clubCardNumberInputHolder;
+
     @BindView(R.id.clubCardPasswordInputHolder)
     View clubCardPasswordInputHolder;
 
@@ -199,10 +204,11 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                if (!isAdded()) return;
+                loadingDialog.cancel();
                 if (response.isSuccessful()){
-                    loadingDialog.cancel();
                     ApiStatics.saveToken(response.body());
-                    goToApp();
+                    loadProfile();
                 }else{
                     onFailure(null,null);
                 }
@@ -210,6 +216,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
+                if (!isAdded()) return;
                 loadingDialog.cancel();
                 showRetryDialog();
             }
@@ -236,6 +243,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         messageDialog.show(getChildFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
+                if (!isAdded()) return;
                 if (button == RIGHT_BUTTON){
                     onLoginClick();
                 }
@@ -244,7 +252,36 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
             @Override
             public void onDialogMessageDismiss() {
+                if (!isAdded()) return;
                 messageDialog.getDialog().cancel();
+            }
+        });
+    }
+
+    private void loadProfile(){
+        loadingDialog = DialogHelper.showLoading(getActivity(),R.string.inLoadingUserProfileInfo);
+        ApiProvider.getApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
+                if (!isAdded()) return;
+                loadingDialog.cancel();
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+                        ProfileManager.saveProfile(response.body().getData());
+                        goToApp();
+                    }else{
+                        showRetryDialog();
+                    }
+                }else{
+                    onFailure(null,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
+                if (!isAdded()) return;
+                loadingDialog.cancel();
+                showRetryDialog();
             }
         });
     }

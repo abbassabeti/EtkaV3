@@ -27,14 +27,14 @@ public class ApiStatics {
     public static final String GRAND_TYPE_PASSWORD = "password";
     public static final String GRAND_TYPE_REFRESH_TOKEN = "refresh_token";
 
-    private static AccessToken LastToken;
+    private static AccessToken lastToken;
 
     public static AccessToken getLastToken(){
-        return getLastToken();
+        return lastToken;
     }
 
     public static void saveToken(AccessToken token){
-        LastToken = token;
+        lastToken = token;
     }
 
 }

@@ -1,6 +1,8 @@
 package ir.etkastores.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
@@ -49,6 +51,10 @@ public class EtkaApp extends MultiDexApplication {
                 .setDefaultFontPath("IRANSansMobile.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
+    }
+
+    public synchronized static SharedPreferences getPreference(){
+        return instance.getSharedPreferences("PREFERENCES",MODE_PRIVATE);
     }
 
 }
