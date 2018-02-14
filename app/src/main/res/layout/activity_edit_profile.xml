@@ -76,7 +76,8 @@
                         style="@style/loginRegisterEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/nationalCode" />
+                        android:hint="@string/nationalCode"
+                        android:inputType="numberDecimal"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -91,7 +92,8 @@
                         style="@style/loginRegisterEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/yourEmailAddress" />
+                        android:hint="@string/yourEmailAddress"
+                        android:inputType="textEmailAddress"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -106,7 +108,8 @@
                         style="@style/loginRegisterEditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/mobilePhoneNumber" />
+                        android:hint="@string/mobilePhoneNumber"
+                        android:inputType="phone"/>
 
                 </android.support.design.widget.TextInputLayout>
 

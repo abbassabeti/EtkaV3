@@ -183,4 +183,9 @@ public class UserProfileModel {
     public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
+
+    public String getFirstNameAndLastName(){
+        return firstName+" "+lastName;
+    }
+
 }

@@ -26,6 +26,7 @@
             app:srcCompat="@drawable/ic_star_circle_gold_24dp" />
 
         <TextView
+            android:id="@+id/yourRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/goldStarIcon"

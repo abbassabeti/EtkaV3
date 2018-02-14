@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.google.android.gms.maps.MapView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import ir.etkastores.app.R;
 
@@ -14,7 +15,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        FirebaseMessaging.getInstance().subscribeToTopic("global");
         initMap();
     }
 

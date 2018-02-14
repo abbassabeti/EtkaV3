@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
+import android.text.TextUtils;
 import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.BaseActivity;
+import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.CustomRowMenuItem;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.data.ProfileManager;
 
 public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -53,7 +56,51 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setting);
         ButterKnife.bind(this);
+        initViews();
+    }
+
+    private void initViews(){
         toolbar.setActionListeners(this);
+        UserProfileModel profile = ProfileManager.getProfile();
+        if (profile == null) return;
+        if (TextUtils.isEmpty(profile.getFirstNameAndLastName())){
+            firstNameAndLastName.setLeftText("-");
+        }else{
+            firstNameAndLastName.setLeftText(profile.getFirstNameAndLastName());
+        }
+
+        if (TextUtils.isEmpty(profile.getNationalCode())){
+            nationalCode.setLeftText("-");
+        }else{
+            nationalCode.setLeftText(profile.getNationalCode());
+        }
+
+        if (TextUtils.isEmpty(profile.getEmail())){
+            email.setLeftText("-");
+        }else{
+            email.setLeftText(profile.getEmail());
+        }
+
+        if (TextUtils.isEmpty(profile.getCellPhone())){
+            mobilePhone.setLeftText("-");
+        }else{
+            mobilePhone.setLeftText(profile.getCellPhone());
+        }
+
+        gender.setLeftText(profile.getGender()+"");
+
+        if (TextUtils.isEmpty(profile.getBirthDate())){
+            education.setLeftText("-");
+        }else{
+            education.setLeftText(profile.getEducation());
+        }
+
+        if (TextUtils.isEmpty(profile.getBirthDate())){
+            birthDate.setLeftText("-");
+        }else{
+            birthDate.setLeftText(profile.getBirthDate());
+        }
+
     }
 
     @Override

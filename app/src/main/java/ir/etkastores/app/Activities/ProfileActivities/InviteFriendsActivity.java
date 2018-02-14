@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.Activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.data.ProfileManager;
 
 public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -31,6 +32,7 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
         setContentView(R.layout.activity_invite_friends);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
+        invitationCode.setText(ProfileManager.getProfile().getInvitationCode());
     }
 
     @Override

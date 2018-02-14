@@ -27,8 +27,8 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
     private View view;
 
-    @BindView(R.id.homeToolbar)
-    EtkaToolbar toolbar;
+//    @BindView(R.id.homeToolbar)
+//    EtkaToolbar toolbar;
 
     @BindView(R.id.tabs)
     RTLTabLayout tabLayout;

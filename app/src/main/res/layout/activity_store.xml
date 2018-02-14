@@ -47,7 +47,7 @@
                 android:paddingTop="16dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:weightSum="4">
+                android:weightSum="3">
 
                 <LinearLayout
                     android:id="@+id/btn_inStoreMode"
@@ -72,28 +72,28 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/btn_contactToBranch"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/btn_contactToBranch"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="vertical">-->
 
-                    <android.support.v7.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        app:srcCompat="@drawable/ic_local_phone_orange_32dp" />
+                    <!--<android.support.v7.widget.AppCompatImageView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center_horizontal"-->
+                        <!--app:srcCompat="@drawable/ic_local_phone_orange_32dp" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/contactToBranch"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/textSizeSmall" />
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="@string/contactToBranch"-->
+                        <!--android:textColor="@color/colorPrimary"-->
+                        <!--android:textSize="@dimen/textSizeSmall" />-->
 
-                </LinearLayout>
+                <!--</LinearLayout>-->
 
                 <LinearLayout
                     android:id="@+id/btn_traceRouts"

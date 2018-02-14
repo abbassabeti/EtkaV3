@@ -3,7 +3,9 @@ package ir.etkastores.app.Activities.ProfileActivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
+import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -12,14 +14,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.Activities.BaseActivity;
-import ir.etkastores.app.Activities.MainActivity;
+import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.data.ProfileManager;
 
-public class EditProfileActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener{
+public class EditProfileActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void start(Activity activity){
-        Intent intent = new Intent(activity,EditProfileActivity.class);
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity, EditProfileActivity.class);
         activity.startActivity(intent);
     }
 
@@ -41,13 +44,38 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     @BindView(R.id.yearSpinner)
     AppCompatSpinner yearSpinner;
 
+    @BindView(R.id.lastNameInput)
+    AppCompatEditText lastNameEt;
+
+    @BindView(R.id.firstNameInputInput)
+    AppCompatEditText firstNameInputEt;
+
+    @BindView(R.id.nationalCodeInput)
+    AppCompatEditText nationalCodeEt;
+
+    @BindView(R.id.emailInput)
+    AppCompatEditText emailEt;
+
+    @BindView(R.id.mobilePhoneInput)
+    AppCompatEditText mobilePhoneEt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
-        toolbar.setActionListeners(this);
         fillSpinners();
+        initViews();
+    }
+
+    private void initViews() {
+        toolbar.setActionListeners(this);
+        UserProfileModel profile = ProfileManager.getProfile();
+        if (!TextUtils.isEmpty(profile.getFirstName())) firstNameInputEt.setText(profile.getFirstName());
+        if (!TextUtils.isEmpty(profile.getLastName())) lastNameEt.setText(profile.getLastName());
+        if (!TextUtils.isEmpty(profile.getNationalCode())) nationalCodeEt.setText(profile.getNationalCode().trim());
+        if (!TextUtils.isEmpty(profile.getEmail())) emailEt.setText(profile.getEmail());
+        if (!TextUtils.isEmpty(profile.getCellPhone())) mobilePhoneEt.setText(profile.getCellPhone());
     }
 
     @Override
@@ -60,7 +88,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
 
     }
 
-    private void fillSpinners(){
+    private void fillSpinners() {
         List<String> items = new ArrayList<>();
         items.add("یک");
         items.add("دو");

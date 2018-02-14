@@ -94,10 +94,10 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     }
 
-    @OnClick({R.id.btn_contactToBranch,R.id.btn_phoneNumberRow})
-    public void onContactToBranchButtonClick(){
-
-    }
+//    @OnClick({R.id.btn_contactToBranch,R.id.btn_phoneNumberRow})
+//    public void onContactToBranchButtonClick(){
+//
+//    }
 
     @OnClick(R.id.btn_share)
     public void onShareButtonClick(){
