@@ -4,10 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-
-import com.google.gson.Gson;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
@@ -16,17 +13,7 @@ import ir.etkastores.app.Fragments.Home.HomeFragment;
 import ir.etkastores.app.Fragments.MapFragment;
 import ir.etkastores.app.Fragments.ProfileFragment;
 import ir.etkastores.app.Fragments.SearchFragments.SearchTabFragment;
-import ir.etkastores.app.Models.OauthResponse;
-import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
-import ir.etkastores.app.Models.profile.UserGender;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Dialogs.MessageDialog;
-import ir.etkastores.app.WebService.AccessToken;
-import ir.etkastores.app.WebService.ApiProvider;
-import ir.etkastores.app.WebService.ApiStatics;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
 

@@ -2,6 +2,9 @@ package ir.etkastores.app.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
+
 /**
  * Created by Sajad on 9/8/17.
  */
@@ -186,6 +189,14 @@ public class UserProfileModel {
 
     public String getFirstNameAndLastName(){
         return firstName+" "+lastName;
+    }
+
+    public String getGenderValue(){
+        if (getGender() == 0){
+            return EtkaApp.getInstnace().getResources().getString(R.string.male);
+        }else{
+            return EtkaApp.getInstnace().getResources().getString(R.string.female);
+        }
     }
 
 }

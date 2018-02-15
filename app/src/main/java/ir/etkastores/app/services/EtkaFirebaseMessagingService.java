@@ -5,7 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -15,7 +14,6 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import ir.etkastores.app.Activities.SplashActivity;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.NotificationModel;
 import ir.etkastores.app.R;
@@ -41,12 +39,14 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     public void showNotification(NotificationModel notification) {
+
+        if (notification.getIntent() == null) return;
+
         Context context = EtkaApp.getInstnace().getApplicationContext();
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(EtkaApp.getInstnace().getApplicationContext(), "notify_001");
-        Intent ii = new Intent(EtkaApp.getInstnace().getApplicationContext(), SplashActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(EtkaApp.getInstnace().getApplicationContext(), 0, ii, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(EtkaApp.getInstnace().getApplicationContext(), 0, notification.getIntent(), 0);
 
 //        NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
 //        bigText.bigText(notification.getTitle());
@@ -63,8 +63,7 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
         mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
         mBuilder.setLights(Color.RED, 1, 1);
 
-        NotificationManager mNotificationManager =
-                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -74,7 +73,7 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
             mNotificationManager.createNotificationChannel(channel);
         }
 
-        mNotificationManager.notify(0, mBuilder.build());
+        mNotificationManager.notify(notification.getAction(), mBuilder.build());
     }
 
 }

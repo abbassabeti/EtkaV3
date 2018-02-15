@@ -123,6 +123,7 @@
     <string name="back">بازگشت</string>
     <string name="commingSoonMessage">این قسمت در نسخه های بعدی تکمیل خواهد شد.</string>
     <string name="inLoadingUserProfileInfo">در حال دریافت اطلاعات کاربری...</string>
-
+    <string name="male">آقا</string>
+    <string name="female">خانم</string>
 
 </resources>

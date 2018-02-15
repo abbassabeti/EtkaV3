@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.MainActivity;
+import ir.etkastores.app.Models.NotificationModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
@@ -223,8 +224,16 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         });
     }
 
-    private void goToApp(){
-        getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+    private void goToApp() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        if (getActivity().getIntent() != null && getActivity().getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
+            intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, getActivity().getIntent().getStringExtra(NotificationModel.IS_FROM_NOTIFICATION));
+            intent.putExtra(NotificationModel.ACTION_CODE, getActivity().getIntent().getStringExtra(NotificationModel.ACTION_CODE));
+            if (getActivity().getIntent().hasExtra(NotificationModel.DATA)){
+                intent.putExtra(NotificationModel.DATA, getActivity().getIntent().getStringExtra(NotificationModel.DATA));
+            }
+        }
+        getActivity().startActivity(intent);
         getActivity().finish();
     }
 
