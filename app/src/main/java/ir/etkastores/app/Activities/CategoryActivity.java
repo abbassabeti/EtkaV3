@@ -32,11 +32,18 @@ import retrofit2.Response;
 
 public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoryRecyclerAdapter.OnCategoryItemClickListener, ProductsRecyclerAdapter.ProductsRecyclerCallbacks {
 
-    private final static String MODEL = "MODEL";
+    private final static String CATEGORY_DATA_MODEL = "CATEGORY_DATA_MODEL";
+    private final static String SEARCH_DATA_MODEL = "SEARCH_DATA_MODEL";
 
     public static void show(Activity activity, CategoryModel model) {
         Intent intent = new Intent(activity, CategoryActivity.class);
-        intent.putExtra(MODEL, new Gson().toJson(model));
+        intent.putExtra(CATEGORY_DATA_MODEL, new Gson().toJson(model));
+        activity.startActivity(intent);
+    }
+
+    public static void show(Activity activity, SearchProductRequestModel searchRequestModel) {
+        Intent intent = new Intent(activity, CategoryActivity.class);
+        intent.putExtra(SEARCH_DATA_MODEL, new Gson().toJson(searchRequestModel));
         activity.startActivity(intent);
     }
 
@@ -61,6 +68,8 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     private Call<OauthResponse<ProductSearchResponseModel>> productRequest;
     private SearchProductRequestModel searchRequestModel;
 
+    private boolean isFromSearch = false;
+
     private final int MAX_PRODUCT_NEEDED = 20;
 
     @Override
@@ -68,14 +77,20 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         ButterKnife.bind(this);
-        categoryModel = new Gson().fromJson(getIntent().getExtras().getString(MODEL), CategoryModel.class);
+        String categoryExtraModel = getIntent().getExtras().getString(CATEGORY_DATA_MODEL, null);
+        String searchExtraModel = getIntent().getExtras().getString(SEARCH_DATA_MODEL, null);
+        if (!TextUtils.isEmpty(categoryExtraModel))
+            categoryModel = CategoryModel.fromJson(categoryExtraModel);
+        if (!TextUtils.isEmpty(searchExtraModel)) {
+            searchRequestModel = SearchProductRequestModel.fromJson(searchExtraModel);
+            isFromSearch = true;
+        }
         initViews();
     }
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        toolbar.setTitle(categoryModel.getTitle());
-        if (categoryModel.hasChild()) {
+        if (categoryModel != null && categoryModel.hasChild()) {
             initForCategories();
         } else {
             initForProducts();
@@ -83,6 +98,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     }
 
     private void initForCategories() {
+        toolbar.setTitle(categoryModel.getTitle());
         categoryAdapter = new CategoryRecyclerAdapter(this);
         categoryAdapter.setOnCategoryItemClickListener(this);
         recyclerView.setAdapter(categoryAdapter);
@@ -92,8 +108,13 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     private void initForProducts() {
         productsAdapter = new ProductsRecyclerAdapter(this, this);
         recyclerView.setAdapter(productsAdapter);
-        searchRequestModel = new SearchProductRequestModel();
-        searchRequestModel.setCategoryId(categoryModel.getId());
+        if (searchRequestModel == null) {
+            toolbar.setTitle(categoryModel.getTitle());
+            searchRequestModel = new SearchProductRequestModel();
+            searchRequestModel.setCategoryId(categoryModel.getId());
+        }else{
+            toolbar.setTitle(searchRequestModel.getTitle());
+        }
         searchRequestModel.setTake(MAX_PRODUCT_NEEDED);
         loadProducts();
     }
@@ -117,7 +138,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         productsAdapter.addItems(response.body().getData().getItems());
-                        if (productsAdapter.getItemCount() == 0){
+                        if (productsAdapter.getItemCount() == 0) {
                             showEmptyResultMessage();
                         }
                         if (response.body().getData().getItems().size() == MAX_PRODUCT_NEEDED) {
@@ -125,7 +146,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                             searchRequestModel.setPage(searchRequestModel.getPage() + 1);
                         }
                     } else {
-
+                        // TODO: handle error
                     }
                 } else {
                     onFailure(null, null);
@@ -136,6 +157,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             @Override
             public void onFailure(Call<OauthResponse<ProductSearchResponseModel>> call, Throwable t) {
                 hideLoading();
+                // TODO: handle error
             }
         });
     }
@@ -148,9 +170,9 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        if (response.body().getData().size()>0){
+                        if (response.body().getData().size() > 0) {
                             categoryAdapter.setData(response.body().getData());
-                        }else{
+                        } else {
                             showEmptyResultMessage();
                         }
                     } else {
@@ -225,7 +247,11 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     }
 
     private void showEmptyResultMessage() {
-        messageView.show(R.drawable.ic_warning_orange_48dp, R.string.thereIsNotResultAvailable, R.string.back, new MessageView.OnMessageViewButtonClick() {
+        int message = R.string.thereIsNotResultAvailable;
+        if (isFromSearch) {
+            message = R.string.yourSearchHasNotResult;
+        }
+        messageView.show(R.drawable.ic_warning_orange_48dp, message, R.string.back, new MessageView.OnMessageViewButtonClick() {
             @Override
             public void onMessageViewButtonClick() {
                 onBackPressed();

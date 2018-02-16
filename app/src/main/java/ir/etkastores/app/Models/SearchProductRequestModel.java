@@ -1,5 +1,6 @@
 package ir.etkastores.app.Models;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -7,6 +8,14 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class SearchProductRequestModel {
+
+    public static SearchProductRequestModel fromJson(String json){
+        try {
+            return  new Gson().fromJson(json,SearchProductRequestModel.class);
+        }catch (Exception err){
+            return null;
+        }
+    }
 
     public static class Sorts{
         public final static String UpdateDateAsc = "UpdateDateAsc";
@@ -65,4 +74,19 @@ public class SearchProductRequestModel {
         return page;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public int getTake() {
+        return take;
+    }
 }

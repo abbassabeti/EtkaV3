@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,14 +43,17 @@ public class StorePagerSliderView extends LinearLayout {
 
     public StorePagerSliderView(Context context) {
         super(context);
+        init();
     }
 
     public StorePagerSliderView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public StorePagerSliderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
     @Override
@@ -59,8 +63,8 @@ public class StorePagerSliderView extends LinearLayout {
     }
 
     private void init(){
-        inflate(getContext(), R.layout.view_store_page_slider,this);
-        ButterKnife.bind(this);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_store_page_slider,this, true);
+        ButterKnife.bind(this,this);
         items = new ArrayList<>();
     }
 
@@ -103,7 +107,7 @@ public class StorePagerSliderView extends LinearLayout {
             AppCompatImageView imageView = new AppCompatImageView(getContext());
             imageView.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             imageView.setImageResource(R.drawable.etka_logo_wide);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             if (!TextUtils.isEmpty(items.get(position)))ImageLoader.load(getContext(),imageView,items.get(position));
             container.addView(imageView);
             return imageView;

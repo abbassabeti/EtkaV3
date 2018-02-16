@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRecyclerAdapter.OnHekmatItemClickListener {
 
-    public static HekmatWaresSlide newInstance(){
+    public static HekmatWaresSlide newInstance() {
         return new HekmatWaresSlide();
     }
 
@@ -57,26 +57,26 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
         return view;
     }
 
-    private void initViews(){
-        adapter = new HekmatRecyclerAdapter(getActivity(),this);
+    private void initViews() {
+        adapter = new HekmatRecyclerAdapter(getActivity(), this);
         recyclerView.setAdapter(adapter);
         loadData();
     }
 
-    private void loadData(){
+    private void loadData() {
         showLoading();
         hekmatReq = ApiProvider.getAuthorizedApi().getHekmat();
         hekmatReq.enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<HekmatModel>>> call, Response<OauthResponse<List<HekmatModel>>> response) {
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         adapter.setItems(response.body().getData());
-                    }else{
+                    } else {
 
                     }
-                }else{
-                    onFailure(null,null);
+                } else {
+                    onFailure(null, null);
                 }
                 hideLoading();
             }
@@ -88,11 +88,11 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
         });
     }
 
-    private void showLoading(){
+    private void showLoading() {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-    private void hideLoading(){
+    private void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }
 
@@ -105,7 +105,7 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
 
     @Override
     public void onHekmatItemClick(HekmatModel hekmatModel) {
-        HekmatProductsActivity.show(getActivity(),hekmatModel);
+        HekmatProductsActivity.show(getActivity(), hekmatModel);
     }
 
 }

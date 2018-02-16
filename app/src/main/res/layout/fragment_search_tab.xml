@@ -56,10 +56,13 @@
                 android:layout_toLeftOf="@id/goButton"
                 android:layout_toRightOf="@id/scanButton"
                 android:background="@color/transparent"
+                android:inputType="text"
                 android:gravity="center_vertical|right"
                 android:hint="@string/performSearchLikeGreenTea"
-                android:lines="1"
+                android:maxLines="1"
                 android:paddingLeft="16dp"
+                android:imeOptions="actionSearch"
+                android:imeActionLabel="@string/search"
                 android:textSize="@dimen/textSizeSmall" />
 
         </RelativeLayout>

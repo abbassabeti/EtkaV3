@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
+import ir.etkastores.app.R;
+
 /**
  * Created by Sajad on 1/22/18.
  */
@@ -15,7 +17,7 @@ public class IntentHelper {
             String uri = "geo:" + lat + "," + lon + "?q=" + title;
             activity.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
         }catch (Exception err){
-            showWeb(activity,"http://maps.google.com/maps?saddr=" +lat+","+lon);
+            showWeb(activity,getGoogleMapLocationAddress(lat,lon));
         }
     }
 
@@ -25,6 +27,22 @@ public class IntentHelper {
         }catch (Exception err){
             err.printStackTrace();
         }
+    }
+
+    public static void share(Activity activity,String title, String body){
+        try {
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
+            activity.startActivity(Intent.createChooser(sharingIntent, activity.getResources().getString(R.string.shareUsing)));
+        }catch (Exception err){
+            err.printStackTrace();
+        }
+    }
+
+    public static String getGoogleMapLocationAddress(double lat, double lng){
+        return "http://maps.google.com/maps?saddr=" +lat+","+lng;
     }
 
 }

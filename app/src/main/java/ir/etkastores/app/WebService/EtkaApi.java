@@ -63,13 +63,17 @@ public interface EtkaApi {
 
     //8
     @GET(ApiStatics.PRODUCT)
-    Call<OauthResponse<ProductModel>> getProduct(@Query("id") long id,@Query("Barcode") String barcode);
+    Call<OauthResponse<ProductModel>> getProductById(@Query("id") long id);
 
     //9
+    @GET(ApiStatics.PRODUCT)
+    Call<OauthResponse<ProductModel>> getProductByBarcode(@Query("Barcode") String barcode);
+
+    //10
     @GET(ApiStatics.STORE)
     Call<OauthResponse<List<StoreModel>>> getStores();
 
-    //10
+    //11
     @GET(ApiStatics.PROFILE)
     Call<OauthResponse<UserProfileModel>> getUserProfile(@Query("UserId") String userId);
 

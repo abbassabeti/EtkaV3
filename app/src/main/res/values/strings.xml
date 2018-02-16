@@ -119,11 +119,25 @@
     <string name="etkaChainStores">فروشگاه های زنجیره ای اتکا</string>
     <string name="customersLoyaltyApplication">اپلیکیشن باشگاه مشتریان</string>
     <string name="inLoadingUserProfile">در حال دریافت اطلاعات کاربری...</string>
+    <string name="inLoadingProductInfo">در حال دریافت اطلاعات محصول...</string>
     <string name="thereIsNotResultAvailable">برای این قسمت نتیجه ای موجود نیست</string>
     <string name="back">بازگشت</string>
     <string name="commingSoonMessage">این قسمت در نسخه های بعدی تکمیل خواهد شد.</string>
     <string name="inLoadingUserProfileInfo">در حال دریافت اطلاعات کاربری...</string>
     <string name="male">آقا</string>
     <string name="female">خانم</string>
+    <string name="writeSomeThingsToSearch">ابتدا عبارتی برای جستجو بنویسید!</string>
+    <string name="yourSearchHasNotResult">برای جستجوی شما نتیجه ای پیدا نشد!</string>
+    <string name="exit">خروج</string>
+    <string name="closeApp">بستن برنامه!</string>
+    <string name="areYouSureToExit">آیا قصد خروج از برنامه را دارید؟!</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+    <string name="detailIsNotAvailable">اطلاعات تکمیلی وجود ندارد.</string>
+    <string name="productNotFound">محصول مورد نظر پیدا نشد!</string>
+    <string name="error">خطا</string>
+    <string name="errorInLoadProduct">خطا در دریافت اطلاعات محصول، از دوباره تلاش کنید</string>
+    <string name="etkaStoreBranchXAddressX" formatted="false">فروشگاه اتکا شعبه %s ،موقعیت نقشه: %s</string>
+    <string name="shareUsing">اشتراک گذاری با استفاده از:</string>
 
 </resources>

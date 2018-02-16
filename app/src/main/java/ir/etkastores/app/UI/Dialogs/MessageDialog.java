@@ -69,6 +69,22 @@ public class MessageDialog extends BaseDialog {
                 EtkaApp.getInstnace().getResources().getString(R.string.cancel));
     }
 
+    public static MessageDialog productNotFound(){
+        return newInstance(R.drawable.ic_warning_orange_48dp,
+                EtkaApp.getInstnace().getResources().getString(R.string.error),
+                EtkaApp.getInstnace().getResources().getString(R.string.productNotFound),
+                EtkaApp.getInstnace().getResources().getString(R.string.exit),
+                null);
+    }
+
+    public static MessageDialog sureToExit() {
+        return newInstance(R.drawable.ic_warning_orange_48dp,
+                EtkaApp.getInstnace().getResources().getString(R.string.closeApp),
+                EtkaApp.getInstnace().getResources().getString(R.string.areYouSureToExit),
+                EtkaApp.getInstnace().getResources().getString(R.string.yes),
+                EtkaApp.getInstnace().getResources().getString(R.string.no));
+    }
+
     public static MessageDialog newInstance(int icon, String title, String message, String rightButton, String leftButton) {
         MessageDialog messageDialog = new MessageDialog();
         Bundle bundle = new Bundle();

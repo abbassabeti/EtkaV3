@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -14,6 +15,7 @@ import ir.etkastores.app.Fragments.MapFragment;
 import ir.etkastores.app.Fragments.ProfileFragment;
 import ir.etkastores.app.Fragments.SearchFragments.SearchTabFragment;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Dialogs.MessageDialog;
 
 public class MainActivity extends BaseActivity {
 
@@ -66,5 +68,23 @@ public class MainActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder, fragment).commitNowAllowingStateLoss();
     }
 
+    @Override
+    public void onBackPressed() {
+        final MessageDialog exitDialog = MessageDialog.sureToExit();
+        exitDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (button == RIGHT_BUTTON){
+                    MainActivity.super.onBackPressed();
+                }
+                exitDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
+    }
 }
 

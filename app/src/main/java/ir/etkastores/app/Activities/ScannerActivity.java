@@ -12,6 +12,7 @@ import com.google.zxing.Result;
 
 import java.util.List;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.UI.Toaster;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -19,6 +20,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
 
 public class ScannerActivity extends BaseActivity implements ZXingScannerView.ResultHandler, EasyPermissions.PermissionCallbacks {
+
+    public static final String FORMAT = "FORMAT";
+    public static final String DATA = "DATA";
 
     public final static int SCAN_REQUEST_CODE = 1005;
     private final static int PERMISSION_REQ_CODE = 1006;
@@ -46,11 +50,15 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
 
     @Override
     public void handleResult(Result result) {
-        Log.e("Scanner", "result value: "+result.getText());
-        Log.e("Scanner", "result format: "+result.getBarcodeFormat().toString());
+        if(BuildConfig.DEBUG){
+            Log.e("Scanner", "result value: "+result.getText());
+            Log.e("Scanner", "result format: "+result.getBarcodeFormat().toString());
+        }
         mScannerView.resumeCameraPreview(this);
-        setResult(RESULT_OK);
-        Toaster.show(this,"Code:"+result.getText());
+        Intent intent = new Intent();
+        intent.putExtra(FORMAT,result.getBarcodeFormat().toString());
+        intent.putExtra(DATA,result.getText());
+        setResult(RESULT_OK,intent);
         finish();
     }
 

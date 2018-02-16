@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <ir.etkastores.app.UI.Views.EtkaToolbar
         android:id="@+id/toolbar"
@@ -14,7 +14,8 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <requestFocus/>
+            <requestFocus />
 
             <View
                 android:layout_width="match_parent"
@@ -59,8 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/darkGray"
-                    android:text="۲۴،۱۰۰ تومان"/>
+                    android:text="۲۴،۱۰۰ تومان"
+                    android:textColor="@color/darkGray" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/starIcon"
@@ -76,9 +77,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/starIcon"
                     android:paddingLeft="16dp"
                     android:text="۵ امتیاز"
-                    android:layout_toRightOf="@id/starIcon"
                     android:textColor="@color/darkGray" />
 
             </RelativeLayout>
@@ -87,9 +88,10 @@
                 android:id="@+id/detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/darkGray"
                 android:padding="16dp"
-                android:text=" متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست متن تست"/>
+                android:gravity="center_horizontal"
+                android:text="@string/detailIsNotAvailable"
+                android:textColor="@color/darkGray" />
 
             <View
                 android:layout_width="match_parent"
@@ -100,18 +102,10 @@
                 android:id="@+id/extraItemsHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:background="#F1F1F1"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp">
-
-                <!--<ir.etkastores.app.UI.Views.CategoryGroupHorizontalView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content" />-->
-
-                <!--<ir.etkastores.app.UI.Views.CategoryGroupHorizontalView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content" />-->
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp">
 
             </LinearLayout>
 

@@ -71,7 +71,8 @@
                 android:paddingRight="8dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/textSizeSmall"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:layout_marginLeft="16dp"/>
 
         </LinearLayout>
 

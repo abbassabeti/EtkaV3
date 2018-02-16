@@ -15,6 +15,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/mainHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -24,29 +25,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
+                android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
                     android:id="@+id/storeName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:gravity="right"
                     android:textColor="@color/white"
                     android:textSize="@dimen/textSizeMedium" />
 
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/storeCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textSizeSmall" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp"
-                android:paddingTop="16dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
+                android:paddingTop="16dp"
                 android:weightSum="3">
 
                 <LinearLayout
@@ -73,25 +83,25 @@
                 </LinearLayout>
 
                 <!--<LinearLayout-->
-                    <!--android:id="@+id/btn_contactToBranch"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical">-->
+                <!--android:id="@+id/btn_contactToBranch"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:orientation="vertical">-->
 
-                    <!--<android.support.v7.widget.AppCompatImageView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center_horizontal"-->
-                        <!--app:srcCompat="@drawable/ic_local_phone_orange_32dp" />-->
+                <!--<android.support.v7.widget.AppCompatImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--app:srcCompat="@drawable/ic_local_phone_orange_32dp" />-->
 
-                    <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="@string/contactToBranch"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:textSize="@dimen/textSizeSmall" />-->
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/contactToBranch"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:textSize="@dimen/textSizeSmall" />-->
 
                 <!--</LinearLayout>-->
 
@@ -151,25 +161,27 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="16dp">
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/pinIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    app:srcCompat="@drawable/ic_pin_orange_24dp"
                     android:layout_alignParentRight="true"
-                    android:layout_margin="16dp"/>
+                    android:layout_margin="16dp"
+                    app:srcCompat="@drawable/ic_pin_orange_24dp" />
 
                 <TextView
                     android:id="@+id/storeAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/pinIcon"
-                    android:textSize="@dimen/textSizeSmall"
                     android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/pinIcon"
+                    android:gravity="right"
                     android:textColor="@color/darkGray"
-                    android:gravity="right"/>
+                    android:textSize="@dimen/textSizeSmall" />
 
             </RelativeLayout>
 
@@ -181,25 +193,27 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="16dp">
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/clockIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    app:srcCompat="@drawable/ic_time_orange_24dp"
                     android:layout_alignParentRight="true"
-                    android:layout_margin="16dp"/>
+                    android:layout_margin="16dp"
+                    app:srcCompat="@drawable/ic_time_orange_24dp" />
 
                 <TextView
                     android:id="@+id/openingTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/clockIcon"
-                    android:textSize="@dimen/textSizeSmall"
                     android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/clockIcon"
+                    android:gravity="right"
                     android:textColor="@color/darkGray"
-                    android:gravity="right"/>
+                    android:textSize="@dimen/textSizeSmall" />
 
             </RelativeLayout>
 
@@ -208,31 +222,31 @@
                 android:layout_height="1dp"
                 android:background="@color/lightGray" />
 
-            <RelativeLayout
-                android:id="@+id/btn_phoneNumberRow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="16dp">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/btn_phoneNumberRow"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="16dp">-->
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/phoneIcon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    app:srcCompat="@drawable/ic_phone_orange_24dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_margin="16dp"/>
+            <!--<android.support.v7.widget.AppCompatImageView-->
+            <!--android:id="@+id/phoneIcon"-->
+            <!--android:layout_width="24dp"-->
+            <!--android:layout_height="24dp"-->
+            <!--app:srcCompat="@drawable/ic_phone_orange_24dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_margin="16dp"/>-->
 
-                <TextView
-                    android:id="@+id/phoneNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/phoneIcon"
-                    android:textSize="@dimen/textSizeSmall"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/darkGray"
-                    android:gravity="right"/>
+            <!--<TextView-->
+            <!--android:id="@+id/phoneNumber"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@id/phoneIcon"-->
+            <!--android:textSize="@dimen/textSizeSmall"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:textColor="@color/darkGray"-->
+            <!--android:gravity="right"/>-->
 
-            </RelativeLayout>
+            <!--</RelativeLayout>-->
 
         </LinearLayout>
 

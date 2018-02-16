@@ -1,5 +1,6 @@
 package ir.etkastores.app.Models;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -7,6 +8,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class CategoryModel {
+
+    public static CategoryModel fromJson(String json){
+        try {
+            return new Gson().fromJson(json,CategoryModel.class);
+        }catch (Exception err){
+            return null;
+        }
+    }
+
 
     @SerializedName("id")
     long id;
