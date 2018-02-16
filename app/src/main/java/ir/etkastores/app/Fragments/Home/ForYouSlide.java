@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.CategoryGroupHorizontalView;
 import ir.etkastores.app.UI.Views.CategorySliderView;
+import ir.etkastores.app.UI.Views.SpecialCategoriesView;
 
 /**
  * Created by Sajad on 12/2/17.
@@ -43,6 +44,8 @@ public class ForYouSlide extends Fragment implements PageTrigger {
 
     private void initViews(){
         itemsHolder.addView(new CategorySliderView(getActivity()));
+        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+        itemsHolder.addView(new SpecialCategoriesView(getActivity()));
         itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
         itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
     }
