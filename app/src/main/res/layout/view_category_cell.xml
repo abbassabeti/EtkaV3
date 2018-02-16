@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:src="@drawable/etka_logo_wide"/>
+            app:srcCompat="@drawable/t1"/>
 
         <TextView
             android:id="@+id/title"
@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="@dimen/textSizeSmall"
+            android:text="حبوبات"
             android:textColor="@color/darkGray"/>
 
     </LinearLayout>
