@@ -30,10 +30,6 @@ public class EtkaApp extends MultiDexApplication {
 
         initFont();
 
-//        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-//        Log.d("FCM", "last token: " + refreshedToken);
-//        FirebaseMessaging.getInstance().subscribeToTopic("global");
-
     }
 
     @Override

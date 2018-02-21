@@ -30,19 +30,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.StoreActivity;
-import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.store.StoreModel;
 import ir.etkastores.app.R;
-import ir.etkastores.app.WebService.ApiProvider;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import ir.etkastores.app.data.StoresManager;
 
 /**
  * Created by Sajad on 9/1/17.
  */
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, StoresManager.StoresCallback {
 
     private View view;
 
@@ -86,7 +82,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         map.setOnMarkerClickListener(this);
         map.setOnMapClickListener(this);
 
-        loadStores();
+        if (StoresManager.getInstance().getStores().size() > 0) {
+            for (StoreModel store : StoresManager.getInstance().getStores()) addMarker(store);
+        } else {
+            StoresManager.getInstance().fetchStores(this);
+        }
 
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(chamranPosition, 15));
     }
@@ -106,6 +106,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     }
 
+    @Override
+    public void onStoresFetchSuccess(List<StoreModel> stores) {
+        for (StoreModel store : stores) addMarker(store);
+    }
+
+    @Override
+    public void onStoresFetchError() {
+
+    }
+
     @OnClick(R.id.storeInfoHolder)
     void onStoreInfoClick() {
         StoreActivity.show(getActivity(), selectedStore);
@@ -118,39 +128,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
-    }
-
-    Call<OauthResponse<List<StoreModel>>> storesRequest;
-
-    private void loadStores() {
-        storesRequest = ApiProvider.getAuthorizedApi().getStores();
-        storesRequest.enqueue(new Callback<OauthResponse<List<StoreModel>>>() {
-            @Override
-            public void onResponse(Call<OauthResponse<List<StoreModel>>> call, Response<OauthResponse<List<StoreModel>>> response) {
-                try {
-                    if (response.isSuccessful()) {
-                        if (response.body().isSuccessful()) {
-                            for (StoreModel store : response.body().getData()) addMarker(store);
-                        } else {
-
-                        }
-                    } else {
-                        onFailure(null, null);
-                    }
-                } catch (Exception err) {
-                    err.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OauthResponse<List<StoreModel>>> call, Throwable t) {
-                try {
-                    Log.e("failure", "map stores");
-                } catch (Exception err) {
-                    err.printStackTrace();
-                }
-            }
-        });
     }
 
     @Override
@@ -181,7 +158,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void onPause() {
         super.onPause();
         try {
-            storesRequest.cancel();
             if (mapView != null) mapView.onPause();
         } catch (Exception err) {
             Log.e("failure", "map stores");
@@ -207,4 +183,5 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             Log.e("failure", "map stores");
         }
     }
+
 }

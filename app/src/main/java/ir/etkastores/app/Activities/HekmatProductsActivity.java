@@ -16,7 +16,7 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
 
     private final static String HEKMAT_PRODUCT = "HEKMAT_PRODUCT";
 
-    public  static void show(Activity activity, HekmatModel hekmatModel){
+    public static void show(Activity activity, HekmatModel hekmatModel){
         Intent intent = new Intent(activity,HekmatProductsActivity.class);
         intent.putExtra(HEKMAT_PRODUCT,new Gson().toJson(hekmatModel));
         activity.startActivity(intent);

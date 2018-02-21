@@ -9,6 +9,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import ir.etkastores.app.Models.NotificationModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.WebService.ApiProvider;
 
 public class SplashActivity extends BaseActivity {
 

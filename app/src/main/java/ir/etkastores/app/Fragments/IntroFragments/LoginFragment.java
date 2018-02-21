@@ -33,6 +33,7 @@ import ir.etkastores.app.WebService.AccessToken;
 import ir.etkastores.app.WebService.ApiProvider;
 import ir.etkastores.app.WebService.ApiStatics;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.data.StoresManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -225,6 +226,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     }
 
     private void goToApp() {
+        StoresManager.getInstance().fetchStores(null);
         Intent intent = new Intent(getActivity(), MainActivity.class);
         if (getActivity().getIntent() != null && getActivity().getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
             intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, getActivity().getIntent().getStringExtra(NotificationModel.IS_FROM_NOTIFICATION));
