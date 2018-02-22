@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import ir.etkastores.app.R;
+
 /**
  * Created by Sajad on 12/28/17.
  */
@@ -106,6 +108,21 @@ public class StoreModel {
 
     public String getManagerImage() {
         return managerImage;
+    }
+
+    public int getIcon() {
+        switch (getRanking()) {
+            case "اتکا ممتاز":
+                return R.drawable.marker_green;
+
+            case "اتکا بازار":
+                return R.drawable.marker_purple;
+
+            case "اتکا محله":
+                return R.drawable.marker_blue;
+
+        }
+        return R.drawable.marker_red;
     }
 
 }

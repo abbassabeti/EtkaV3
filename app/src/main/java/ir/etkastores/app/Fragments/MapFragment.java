@@ -1,6 +1,8 @@
 package ir.etkastores.app.Fragments;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
@@ -20,6 +24,7 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -41,7 +46,11 @@ import ir.etkastores.app.data.StoresManager;
  * Created by Sajad on 9/1/17.
  */
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener, StoresManager.StoresCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener,
+        GoogleMap.OnMapClickListener,
+        StoresManager.StoresCallback,
+        AdapterView.OnItemClickListener {
 
     private View view;
 
@@ -60,7 +69,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     AutoCompleteTextView storeSearchInput;
 
     private StoreModel selectedStore;
+    private Marker selectedMarker;
     private HashMap<Marker, StoreModel> storesHashMap;
+    private HashMap<StoreModel, Marker> markersHashMap;
+    private SuggestionArrayAdapter searchAdapter;
 
     @Nullable
     @Override
@@ -82,6 +94,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     private void initViews() {
         storesHashMap = new HashMap<>();
+        markersHashMap = new HashMap<>();
         map.getUiSettings().setRotateGesturesEnabled(false);
         map.getUiSettings().setCompassEnabled(true);
         map.getUiSettings().setMapToolbarEnabled(false);
@@ -100,25 +113,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     private void addMarker(StoreModel store) {
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(store.getLatitude(), store.getLongitude()));
-        if (store.getRanking().contentEquals("اتکا ممتاز")) {
-            marker.icon(bitmapDescriptorFromVector(R.drawable.marker_green));
-        } else if (store.getRanking().contentEquals("اتکا بازار")) {
-            marker.icon(bitmapDescriptorFromVector(R.drawable.marker_purple));
-        } else if (store.getRanking().contentEquals("اتکا محله")) {
-            marker.icon(bitmapDescriptorFromVector(R.drawable.marker_blue));
-        }
+        marker.icon(bitmapDescriptorFromVector(store.getIcon()));
         marker.anchor(0.5f, 0.5f);
-        storesHashMap.put(map.addMarker(marker), store);
+        Marker m = map.addMarker(marker);
+        storesHashMap.put(m, store);
+        markersHashMap.put(store,m);
     }
 
     public void addStoresToMap(List<StoreModel> stores){
         List<SuggestionArrayAdapter.SearchViewItem> searchViewItems = new ArrayList<>();
         for (StoreModel store : stores){
             addMarker(store);
-            searchViewItems.add(new SuggestionArrayAdapter.SearchViewItem(R.drawable.marker_purple,store.getName(),store.getProvinceName()));
+            searchViewItems.add(new SuggestionArrayAdapter.SearchViewItem(store));
         }
-        SuggestionArrayAdapter adapter = new SuggestionArrayAdapter(getActivity(),searchViewItems);
-        storeSearchInput.setAdapter(adapter);
+        searchAdapter = new SuggestionArrayAdapter(getActivity(),searchViewItems);
+        storeSearchInput.setAdapter(searchAdapter);
+        storeSearchInput.setOnItemClickListener(this);
     }
 
     @Override
@@ -129,6 +139,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     @Override
     public void onStoresFetchError() {
 
+    }
+
+    public void animateCameraToStore(StoreModel store){
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(store.getLatitude(),store.getLongitude()), 17));
+        onMarkerClick(markersHashMap.get(store));
     }
 
     @OnClick(R.id.storeInfoHolder)
@@ -147,16 +162,20 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        clearSelectedMarker();
         selectedStore = storesHashMap.get(marker);
         storeName.setText(selectedStore.getName());
         storeInfoHolder.setVisibility(View.VISIBLE);
+        selectedMarker = marker;
+        marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker_35dp));
         return false;
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
-        selectedStore = null;
+        clearSelectedMarker();
         storeInfoHolder.setVisibility(View.GONE);
+        storeSearchInput.setText("");
     }
 
     @Override
@@ -166,6 +185,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             if (mapView != null) mapView.onResume();
         } catch (Exception err) {
             Log.e("failure", "map stores");
+        }
+    }
+
+    private void clearSelectedMarker(){
+        if (selectedStore != null){
+            selectedMarker.setIcon(bitmapDescriptorFromVector(selectedStore.getIcon()));
+            selectedMarker = null;
+            selectedStore = null;
         }
     }
 
@@ -197,6 +224,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         } catch (Exception err) {
             Log.e("failure", "map stores");
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(storeSearchInput.getWindowToken(), 0);
+        animateCameraToStore(searchAdapter.getItem(position).getStoreModel());
     }
 
 }

@@ -275,7 +275,6 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
                 if (!isAdded()) return;
-                loadingDialog.cancel();
                 if (response.isSuccessful()){
                     if (response.body().isSuccessful()){
                         ProfileManager.saveProfile(response.body().getData());

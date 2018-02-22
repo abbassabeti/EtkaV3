@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.etkastores.app.Models.store.StoreModel;
 import ir.etkastores.app.R;
 
 /**
@@ -38,6 +39,7 @@ public class SuggestionArrayAdapter extends ArrayAdapter {
 
     @Override
     public int getCount() {
+        if (dataList == null) return 0;
         return dataList.size();
     }
 
@@ -126,11 +128,19 @@ public class SuggestionArrayAdapter extends ArrayAdapter {
         String description;
         int icon;
         boolean isEmptyStateItem = false;
+        StoreModel storeModel;
 
         public SearchViewItem(int icon, String title, String description) {
             this.title = title;
             this.icon = icon;
             this.description = description;
+        }
+
+        public SearchViewItem(StoreModel store){
+            this.title = store.getName();
+            this.description = store.getProvinceName();
+            this.icon = store.getIcon();
+            this.storeModel = store;
         }
 
         public String getTitle() {
@@ -153,6 +163,10 @@ public class SuggestionArrayAdapter extends ArrayAdapter {
         @Override
         public String toString() {
             return title;
+        }
+
+        public StoreModel getStoreModel(){
+            return storeModel;
         }
     }
 
