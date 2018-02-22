@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +34,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.Activities.StoreActivity;
 import ir.etkastores.app.Models.store.StoreModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.Utils.SuggestionArrayAdapter;
 import ir.etkastores.app.data.StoresManager;
 
 /**
@@ -52,6 +55,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     @BindView(R.id.infoStoreName)
     TextView storeName;
+
+    @BindView(R.id.storeSearchInput)
+    AutoCompleteTextView storeSearchInput;
 
     private StoreModel selectedStore;
     private HashMap<Marker, StoreModel> storesHashMap;
@@ -83,7 +89,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         map.setOnMapClickListener(this);
 
         if (StoresManager.getInstance().getStores().size() > 0) {
-            for (StoreModel store : StoresManager.getInstance().getStores()) addMarker(store);
+            addStoresToMap(StoresManager.getInstance().getStores());
         } else {
             StoresManager.getInstance().fetchStores(this);
         }
@@ -95,20 +101,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(store.getLatitude(), store.getLongitude()));
         if (store.getRanking().contentEquals("اتکا ممتاز")) {
-            marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_orange));
+            marker.icon(bitmapDescriptorFromVector(R.drawable.marker_green));
         } else if (store.getRanking().contentEquals("اتکا بازار")) {
-            marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_yellow));
+            marker.icon(bitmapDescriptorFromVector(R.drawable.marker_purple));
         } else if (store.getRanking().contentEquals("اتکا محله")) {
-            marker.icon(bitmapDescriptorFromVector(R.drawable.ic_store_blue));
+            marker.icon(bitmapDescriptorFromVector(R.drawable.marker_blue));
         }
         marker.anchor(0.5f, 0.5f);
         storesHashMap.put(map.addMarker(marker), store);
+    }
 
+    public void addStoresToMap(List<StoreModel> stores){
+        List<SuggestionArrayAdapter.SearchViewItem> searchViewItems = new ArrayList<>();
+        for (StoreModel store : stores){
+            addMarker(store);
+            searchViewItems.add(new SuggestionArrayAdapter.SearchViewItem(R.drawable.marker_purple,store.getName(),store.getProvinceName()));
+        }
+        SuggestionArrayAdapter adapter = new SuggestionArrayAdapter(getActivity(),searchViewItems);
+        storeSearchInput.setAdapter(adapter);
     }
 
     @Override
     public void onStoresFetchSuccess(List<StoreModel> stores) {
-        for (StoreModel store : stores) addMarker(store);
+        addStoresToMap(stores);
     }
 
     @Override
