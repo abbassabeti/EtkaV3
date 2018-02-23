@@ -77,7 +77,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/nationalCode"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="numberDecimal" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -93,7 +93,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/yourEmailAddress"
-                        android:inputType="textEmailAddress"/>
+                        android:inputType="textEmailAddress" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -109,13 +109,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/mobilePhoneNumber"
-                        android:inputType="phone"/>
+                        android:inputType="phone" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/genderSpinner"
-                    style="@style/loginRegisterEditTextStyle"
+                    style="@style/loginRegisterSpinnerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:layoutDirection="rtl"
@@ -130,7 +130,7 @@
 
                 <android.support.v7.widget.AppCompatSpinner
                     android:id="@+id/educationSpinner"
-                    style="@style/loginRegisterEditTextStyle"
+                    style="@style/loginRegisterSpinnerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:layoutDirection="rtl"
@@ -158,8 +158,8 @@
                         android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatSpinner
-                            android:id="@+id/daySpinner"
-                            style="@style/loginRegisterEditTextStyle"
+                            android:id="@+id/yearSpinner"
+                            style="@style/loginRegisterSpinnerStyle"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
                             android:layoutDirection="rtl"
@@ -182,7 +182,7 @@
 
                         <android.support.v7.widget.AppCompatSpinner
                             android:id="@+id/monthSpinner"
-                            style="@style/loginRegisterEditTextStyle"
+                            style="@style/loginRegisterSpinnerStyle"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
                             android:layoutDirection="rtl"
@@ -204,8 +204,8 @@
                         android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatSpinner
-                            android:id="@+id/yearSpinner"
-                            style="@style/loginRegisterEditTextStyle"
+                            android:id="@+id/daySpinner"
+                            style="@style/loginRegisterSpinnerStyle"
                             android:layout_width="match_parent"
                             android:layout_height="?attr/actionBarSize"
                             android:layoutDirection="rtl"
@@ -223,18 +223,18 @@
                 <android.support.v4.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="64dp" />
-                
+
                 <Button
                     android:id="@+id/saveChangesButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
                     android:background="@drawable/rect_round4dp_white"
                     android:paddingLeft="64dp"
                     android:paddingRight="64dp"
-                    android:layout_margin="8dp"
                     android:text="@string/saveChanges"
-                    android:textColor="@color/darkGray"
-                    android:layout_gravity="center_horizontal" />
+                    android:textColor="@color/darkGray" />
 
             </LinearLayout>
 

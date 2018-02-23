@@ -116,6 +116,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             toolbar.setTitle(searchRequestModel.getTitle());
         }
         searchRequestModel.setTake(MAX_PRODUCT_NEEDED);
+        searchRequestModel.setSort(SearchProductRequestModel.Sorts.UpdateDateAsc);
         loadProducts();
     }
 

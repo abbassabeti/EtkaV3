@@ -5,5 +5,5 @@
     android:layout_height="match_parent"
     android:textSize="@dimen/textSizeMedium"
     android:gravity="right|center_vertical"
-    android:paddingRight="8dp"
+    android:padding="8dp"
     android:textColor="@color/white" />

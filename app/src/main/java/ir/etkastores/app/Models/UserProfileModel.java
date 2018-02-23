@@ -2,8 +2,14 @@ package ir.etkastores.app.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.Utils.procalendar.XCalendar;
+import ir.etkastores.app.Utils.procalendar.repositories.CalendarRepoInterface;
 
 /**
  * Created by Sajad on 9/8/17.
@@ -196,6 +202,21 @@ public class UserProfileModel {
             return EtkaApp.getInstnace().getResources().getString(R.string.male);
         }else{
             return EtkaApp.getInstnace().getResources().getString(R.string.female);
+        }
+    }
+
+    public XCalendar getBirthDateXCalendar(){
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(getBirthDate());
+            XCalendar xCalendar = new XCalendar(date.getTime());
+            CalendarRepoInterface c = xCalendar.getCalendar(XCalendar.JalaliType);
+            if (c.getYear() == 1){
+                return null;
+            }else{
+                return xCalendar;
+            }
+        }catch (Exception err){
+            return null;
         }
     }
 

@@ -15,6 +15,7 @@ import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.CustomRowMenuItem;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.Utils.procalendar.XCalendar;
 import ir.etkastores.app.data.ProfileManager;
 
 public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
@@ -69,7 +70,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
             firstNameAndLastName.setLeftText(profile.getFirstNameAndLastName());
         }
 
-        if (TextUtils.isEmpty(profile.getNationalCode())){
+        if (profile.getNationalCode() == null || TextUtils.isEmpty(profile.getNationalCode().trim())){
             nationalCode.setLeftText("-");
         }else{
             nationalCode.setLeftText(profile.getNationalCode());
@@ -95,10 +96,10 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
             education.setLeftText(profile.getEducation());
         }
 
-        if (TextUtils.isEmpty(profile.getBirthDate())){
+        if (profile.getBirthDateXCalendar() == null){
             birthDate.setLeftText("-");
         }else{
-            birthDate.setLeftText(profile.getBirthDate());
+            birthDate.setLeftText(profile.getBirthDateXCalendar().getCalendar(XCalendar.GregorianType).getDateByMonthName());
         }
 
     }

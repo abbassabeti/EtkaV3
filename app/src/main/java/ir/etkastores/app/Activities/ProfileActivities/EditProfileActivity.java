@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import ir.etkastores.app.Activities.BaseActivity;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.Utils.procalendar.XCalendar;
+import ir.etkastores.app.Utils.procalendar.repositories.CalendarRepoInterface;
 import ir.etkastores.app.data.ProfileManager;
 
 public class EditProfileActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
@@ -59,23 +63,47 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     @BindView(R.id.mobilePhoneInput)
     AppCompatEditText mobilePhoneEt;
 
+    private ArrayAdapter<String> genderAdapter;
+    private ArrayAdapter<String> educationAdapter;
+    private ArrayAdapter<String> dayAdapter;
+    private ArrayAdapter<String> monthAdapter;
+    private ArrayAdapter<String> yearAdapter;
+    private CalendarRepoInterface calendar;
+
+    private int selectedGender;
+    private String selectedEducation;
+    private int selectedDay;
+    private int selectedMonth;
+    private int selectedYear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
-        fillSpinners();
         initViews();
     }
 
     private void initViews() {
         toolbar.setActionListeners(this);
         UserProfileModel profile = ProfileManager.getProfile();
-        if (!TextUtils.isEmpty(profile.getFirstName())) firstNameInputEt.setText(profile.getFirstName());
+        if (!TextUtils.isEmpty(profile.getFirstName()))
+            firstNameInputEt.setText(profile.getFirstName());
         if (!TextUtils.isEmpty(profile.getLastName())) lastNameEt.setText(profile.getLastName());
-        if (!TextUtils.isEmpty(profile.getNationalCode())) nationalCodeEt.setText(profile.getNationalCode().trim());
+        if (!TextUtils.isEmpty(profile.getNationalCode()))
+            nationalCodeEt.setText(profile.getNationalCode().trim());
         if (!TextUtils.isEmpty(profile.getEmail())) emailEt.setText(profile.getEmail());
-        if (!TextUtils.isEmpty(profile.getCellPhone())) mobilePhoneEt.setText(profile.getCellPhone());
+        if (!TextUtils.isEmpty(profile.getCellPhone()))
+            mobilePhoneEt.setText(profile.getCellPhone());
+
+        calendar = new XCalendar().getCalendar(XCalendar.JalaliType);
+        initGenderSpinnerAdapter();
+        initEducationSpinnerAdapter();
+        initYearSpinnerAdapter();
+        initMonthSpinnerAdapter();
+        initDaySpinnerAdapter();
+        firstNameInputEt.requestFocus();
+
     }
 
     @Override
@@ -88,24 +116,100 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
 
     }
 
-    private void fillSpinners() {
-        List<String> items = new ArrayList<>();
-        items.add("یک");
-        items.add("دو");
-        items.add("سه");
-        items.add("چهار");
-        items.add("پنج");
-        items.add("شش");
-        items.add("هفت");
-        items.add("هشت");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+    private ArrayAdapter<String> generateArrayAdapter(List<String> items) {
+        return new ArrayAdapter<String>(this,
                 R.layout.text_view_withe_text_for_spinner,
                 items);
-
-        genderSpinner.setAdapter(adapter);
-        educationSpinner.setAdapter(adapter);
-        daySpinner.setAdapter(adapter);
-        monthSpinner.setAdapter(adapter);
-        yearSpinner.setAdapter(adapter);
     }
+
+    private void initGenderSpinnerAdapter() {
+        List<String> genderItems = new ArrayList<>();
+        genderItems.add(getResources().getString(R.string.gender));
+        genderItems.add(getResources().getString(R.string.male));
+        genderItems.add(getResources().getString(R.string.female));
+        genderAdapter = generateArrayAdapter(genderItems);
+        genderSpinner.setAdapter(genderAdapter);
+    }
+
+    private void initEducationSpinnerAdapter() {
+        List<String> educationItems = new ArrayList<>();
+        educationItems.add("تحصیلات");
+        educationItems.add("زیر دیپلم");
+        educationItems.add("دیپلم");
+        educationItems.add("فوق دیپلم");
+        educationItems.add("لیسانس");
+        educationItems.add("فوق لیسانس");
+        educationItems.add("دکتری و بالاتر");
+        educationAdapter = generateArrayAdapter(educationItems);
+        educationSpinner.setAdapter(educationAdapter);
+    }
+
+    private void initDaySpinnerAdapter() {
+        List<String> dayItems = new ArrayList<>();
+        dayItems.add("روز");
+        for (int x = 1; x <= calendar.daysOfMonth() ; x++){
+            dayItems.add(String.valueOf(x));
+        }
+        dayAdapter = generateArrayAdapter(dayItems);
+        daySpinner.setAdapter(dayAdapter);
+    }
+
+    private void initMonthSpinnerAdapter() {
+        List<String> monthItems = new ArrayList<>();
+        monthItems.add("ماه");
+        for (String m : calendar.monthNamesOfYear()){
+            if (!TextUtils.isEmpty(m)) monthItems.add(m);
+        }
+        monthAdapter = generateArrayAdapter(monthItems);
+        monthSpinner.setAdapter(monthAdapter);
+    }
+
+    private void initYearSpinnerAdapter() {
+        List<String> yearItems = new ArrayList<>();
+        yearItems.add("سال");
+        int currentYear = new XCalendar().getCalendar(XCalendar.JalaliType).getYear();
+        int minYear = currentYear - 100;
+        for (int x = currentYear ; x>=minYear ; x--){
+            yearItems.add(String.valueOf(x));
+        }
+        yearAdapter = generateArrayAdapter(yearItems);
+        yearSpinner.setAdapter(yearAdapter);
+    }
+
+    AppCompatSpinner.OnItemSelectedListener daySelectListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    AppCompatSpinner.OnItemSelectedListener  monthSelectListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
+    AppCompatSpinner.OnItemSelectedListener yearSelectListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
+
 }
