@@ -35,7 +35,7 @@
 
         <activity
             android:name=".Activities.SplashActivity"
-            android:theme="@style/AppTheme.SolidSystemBar.WhiteParrentStyle">
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +44,7 @@
         </activity>
         <activity
             android:name=".Activities.MainActivity"
-            android:theme="@style/AppTheme.SolidSystemBar.WhiteParrentStyle" />
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".Activities.IntroActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
@@ -99,10 +99,11 @@
         <activity
             android:name=".Activities.ScannerActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".Activities.ProfileActivities.HekmatActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity android:name=".Activities.ProfileActivities.NewTicketActivity"
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle"/>
 
         <service android:name=".services.EtkaFirebaseMessagingService">
             <intent-filter>

@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Views.CategoryGroupHorizontalView;
-import ir.etkastores.app.UI.Views.CategorySliderView;
 
 /**
  * Created by Sajad on 12/2/17.
@@ -42,7 +40,7 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
     }
 
     private void initViews(){
-        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+
     }
 
     @Override

@@ -139,5 +139,9 @@
     <string name="errorInLoadProduct">خطا در دریافت اطلاعات محصول، از دوباره تلاش کنید</string>
     <string name="etkaStoreBranchXAddressX" formatted="false">فروشگاه اتکا شعبه %s ،موقعیت نقشه: %s</string>
     <string name="shareUsing">اشتراک گذاری با استفاده از:</string>
+    <string name="newTicket">درخواست جدید</string>
+    <string name="submitNewTicket">ثبت درخواست جدید</string>
+    <string name="title">عنوان</string>
+    <string name="requestText">متن درخواست</string>
 
 </resources>

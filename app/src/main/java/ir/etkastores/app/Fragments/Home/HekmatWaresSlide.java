@@ -18,6 +18,7 @@ import ir.etkastores.app.Adapters.RecyclerViewAdapters.HekmatRecyclerAdapter;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.hekmat.HekmatModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Views.MessageView;
 import ir.etkastores.app.WebService.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,6 +41,9 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
 
     @BindView(R.id.circularProgress)
     ProgressBar progressBar;
+
+    @BindView(R.id.messageView)
+    MessageView messageView;
 
     private HekmatRecyclerAdapter adapter;
 
@@ -65,6 +69,7 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
 
     private void loadData() {
         showLoading();
+        messageView.hide();
         hekmatReq = ApiProvider.getAuthorizedApi().getHekmat();
         hekmatReq.enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
             @Override
@@ -73,7 +78,7 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
                     if (response.body().isSuccessful()) {
                         adapter.setItems(response.body().getData());
                     } else {
-
+                        showErrorView(response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(null, null);
@@ -84,6 +89,7 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
             @Override
             public void onFailure(Call<OauthResponse<List<HekmatModel>>> call, Throwable t) {
                 hideLoading();
+                showErrorView(getResources().getString(R.string.errorHappendInReceivingData));
             }
         });
     }
@@ -106,6 +112,15 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
     @Override
     public void onHekmatItemClick(HekmatModel hekmatModel) {
         HekmatProductsActivity.show(getActivity(), hekmatModel);
+    }
+
+    private void showErrorView(String message){
+        messageView.show(R.drawable.ic_warning_orange_48dp, message, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
+            @Override
+            public void onMessageViewButtonClick() {
+                loadData();
+            }
+        });
     }
 
 }

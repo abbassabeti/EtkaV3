@@ -2,6 +2,7 @@ package ir.etkastores.app.UI.Views;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,24 @@ public class MessageView extends RelativeLayout {
             button.setVisibility(GONE);
         }else{
             button.setText(buttonId);
+            button.setVisibility(VISIBLE);
+            button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (callback != null) callback.onMessageViewButtonClick();
+                }
+            });
+        }
+    }
+
+    public void show(int iconId, String messagetext, String buttonTitle, final OnMessageViewButtonClick callback){
+        setVisibility(VISIBLE);
+        icon.setImageResource(iconId);
+        message.setText(messagetext);
+        if (TextUtils.isEmpty(buttonTitle)){
+            button.setVisibility(GONE);
+        }else{
+            button.setText(buttonTitle);
             button.setVisibility(VISIBLE);
             button.setOnClickListener(new OnClickListener() {
                 @Override

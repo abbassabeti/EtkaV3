@@ -23,6 +23,7 @@ import ir.etkastores.app.Models.ProductSearchResponseModel;
 import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
+import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.UI.Views.MessageView;
 import ir.etkastores.app.WebService.ApiProvider;
@@ -132,6 +133,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     private void loadProducts() {
         showLoading();
+        messageView.hide();
         productRequest = ApiProvider.getAuthorizedApi().searchProduct(searchRequestModel);
         productRequest.enqueue(new Callback<OauthResponse<ProductSearchResponseModel>>() {
             @Override
@@ -140,14 +142,17 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                     if (response.body().isSuccessful()) {
                         productsAdapter.addItems(response.body().getData().getItems());
                         if (productsAdapter.getItemCount() == 0) {
-                            showEmptyResultMessage();
+                            showCategoryErrorMessage();
                         }
                         if (response.body().getData().getItems().size() == MAX_PRODUCT_NEEDED) {
                             productsAdapter.setLoadMoreEnabled(true);
                             searchRequestModel.setPage(searchRequestModel.getPage() + 1);
                         }
+                        if (response.body().getData().getTotalItemsCount() == 0){
+                            showProductErrorMessage(getResources().getString(R.string.thereIsNotResultAvailable),false);
+                        }
                     } else {
-                        // TODO: handle error
+                        showProductErrorMessage(response.body().getMeta().getMessage(),true);
                     }
                 } else {
                     onFailure(null, null);
@@ -158,7 +163,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             @Override
             public void onFailure(Call<OauthResponse<ProductSearchResponseModel>> call, Throwable t) {
                 hideLoading();
-                // TODO: handle error
+                showProductErrorMessage(null,true);
             }
         });
     }
@@ -174,7 +179,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                         if (response.body().getData().size() > 0) {
                             categoryAdapter.setData(response.body().getData());
                         } else {
-                            showEmptyResultMessage();
+                            showCategoryErrorMessage();
                         }
                     } else {
                         showRetryDialog(response.body().getMeta().getMessage());
@@ -247,7 +252,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         });
     }
 
-    private void showEmptyResultMessage() {
+    private void showCategoryErrorMessage() {
         int message = R.string.thereIsNotResultAvailable;
         if (isFromSearch) {
             message = R.string.yourSearchHasNotResult;
@@ -258,6 +263,41 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                 onBackPressed();
             }
         });
+    }
+
+    public void showProductErrorMessage(String message, boolean showRetry){
+        String messageText = getResources().getString(R.string.errorHappendInReceivingData);
+        if (!TextUtils.isEmpty(message)){
+            messageText = message;
+        }
+        if (showRetry && productsAdapter != null && productsAdapter.getItemCount() == 0){
+            messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
+                @Override
+                public void onMessageViewButtonClick() {
+                    loadProducts();
+                }
+            });
+        }else if (!showRetry && productsAdapter != null && productsAdapter.getItemCount() == 0){
+            messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.retry), null);
+        }else{
+            if (showRetry){
+                final MessageDialog dialog = MessageDialog.warningRetry(getResources().getString(R.string.error), message);
+                dialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
+                    @Override
+                    public void onDialogMessageButtonsClick(int button) {
+                        dialog.getDialog().cancel();
+                        loadProducts();
+                    }
+
+                    @Override
+                    public void onDialogMessageDismiss() {
+
+                    }
+                });
+            }else{
+                Toaster.show(this,message);
+            }
+        }
     }
 
 }

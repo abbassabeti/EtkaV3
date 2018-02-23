@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         pages = new ArrayList<>();
 
         pages.add(new FragmentTitleModel(ForYouSlide.newInstance(),R.string.forYou));
-//        pages.add(new FragmentTitleModel(SpecialOffersSlide.newInstance(),R.string.specialOffers));
+        pages.add(new FragmentTitleModel(SpecialOffersSlide.newInstance(),R.string.specialOffers));
 //        pages.add(new FragmentTitleModel(TopSalesSlide.newInstance(),R.string.topSales));
 //        pages.add(new FragmentTitleModel(EtkaExclusiveWaresSlide.newInstance(),R.string.etkaٰExclusiveWares));
         pages.add(new FragmentTitleModel(HekmatWaresSlide.newInstance(),R.string.hekmatWares));

@@ -104,6 +104,8 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         initDaySpinnerAdapter();
         firstNameInputEt.requestFocus();
 
+        genderSpinner.setSelection(profile.getGender());
+
     }
 
     @Override
@@ -124,7 +126,6 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
 
     private void initGenderSpinnerAdapter() {
         List<String> genderItems = new ArrayList<>();
-        genderItems.add(getResources().getString(R.string.gender));
         genderItems.add(getResources().getString(R.string.male));
         genderItems.add(getResources().getString(R.string.female));
         genderAdapter = generateArrayAdapter(genderItems);

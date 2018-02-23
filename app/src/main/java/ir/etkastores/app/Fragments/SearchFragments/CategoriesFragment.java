@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -18,6 +21,7 @@ import ir.etkastores.app.Adapters.RecyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.Models.CategoryModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Views.MessageView;
 import ir.etkastores.app.WebService.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +48,9 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     @BindView(R.id.circularProgress)
     ProgressBar circularProgress;
+
+    @BindView(R.id.messageView)
+    MessageView messageView;
 
     Call<OauthResponse<List<CategoryModel>>> request;
 
@@ -105,6 +112,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     private void loadCategoryAtRootLevel() {
         showLoading();
+        messageView.hide();
         request = ApiProvider.getAuthorizedApi().getCategoryAtLevel(1);
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
@@ -113,7 +121,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
                     if (response.body().isSuccessful()) {
                         adapter.setData(response.body().getData());
                     } else {
-
+                        showError(response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(null, null);
@@ -124,6 +132,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
                 hideLoading();
+                showError(null);
             }
         });
     }
@@ -133,6 +142,19 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
         if (model.hasChild()) {
             CategoryActivity.show(getActivity(), model);
         }
+    }
+
+    private void showError(String message) {
+        String messageText = getResources().getString(R.string.errorInDataReceiving);
+        if (!TextUtils.isEmpty(message)){
+            messageText = message;
+        }
+        messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
+            @Override
+            public void onMessageViewButtonClick() {
+                loadCategoryAtRootLevel();
+            }
+        });
     }
 
     private void showLoading() {
@@ -147,4 +169,5 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     public void onDestroyView() {
         super.onDestroyView();
     }
+
 }

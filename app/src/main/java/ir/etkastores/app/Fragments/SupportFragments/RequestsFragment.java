@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import ir.etkastores.app.Activities.ProfileActivities.NewTicketActivity;
 import ir.etkastores.app.R;
 
 /**
@@ -38,6 +40,11 @@ public class RequestsFragment extends Fragment {
 
     private void initViews(){
 
+    }
+
+    @OnClick(R.id.addNewTicketFab)
+    public void onAddNewTicketButtonClick(){
+        NewTicketActivity.show(getActivity());
     }
 
 }
