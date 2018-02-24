@@ -70,12 +70,14 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     private ArrayAdapter<String> yearAdapter;
     private CalendarRepoInterface calendar;
 
+    private final int NOT_SET = -1;
+
     private int selectedGender;
     private String selectedEducation;
-    private int selectedDay;
-    private int selectedMonth;
-    private int selectedYear;
 
+    private int selectedDay = NOT_SET;
+    private int selectedMonth = NOT_SET;
+    private int selectedYear = 1356;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,11 +99,17 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
             mobilePhoneEt.setText(profile.getCellPhone());
 
         calendar = new XCalendar().getCalendar(XCalendar.JalaliType);
+        if (calendar != null){
+            selectedDay = calendar.getDay();
+            selectedMonth = calendar.getMonth();
+            selectedYear = calendar.getYear();
+        }
+
         initGenderSpinnerAdapter();
         initEducationSpinnerAdapter();
-        initYearSpinnerAdapter();
-        initMonthSpinnerAdapter();
-        initDaySpinnerAdapter();
+        initYearSpinner();
+        initMonthSpinner();
+        initDaySpinner();
         firstNameInputEt.requestFocus();
 
         genderSpinner.setSelection(profile.getGender());
@@ -145,7 +153,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         educationSpinner.setAdapter(educationAdapter);
     }
 
-    private void initDaySpinnerAdapter() {
+    private void initDaySpinner() {
         List<String> dayItems = new ArrayList<>();
         dayItems.add("روز");
         for (int x = 1; x <= calendar.daysOfMonth() ; x++){
@@ -155,7 +163,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         daySpinner.setAdapter(dayAdapter);
     }
 
-    private void initMonthSpinnerAdapter() {
+    private void initMonthSpinner() {
         List<String> monthItems = new ArrayList<>();
         monthItems.add("ماه");
         for (String m : calendar.monthNamesOfYear()){
@@ -165,7 +173,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         monthSpinner.setAdapter(monthAdapter);
     }
 
-    private void initYearSpinnerAdapter() {
+    private void initYearSpinner() {
         List<String> yearItems = new ArrayList<>();
         yearItems.add("سال");
         int currentYear = new XCalendar().getCalendar(XCalendar.JalaliType).getYear();
@@ -175,12 +183,23 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         }
         yearAdapter = generateArrayAdapter(yearItems);
         yearSpinner.setAdapter(yearAdapter);
+        if (selectedYear != NOT_SET){
+            String y = String.valueOf(selectedYear);
+            for (String s : yearItems){
+                if (s.contains(y)){
+                    yearSpinner.setSelection(yearItems.indexOf(s));
+                }
+            }
+        }
     }
 
     AppCompatSpinner.OnItemSelectedListener daySelectListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            if (position != 0){
+                selectedDay = Integer.parseInt(dayAdapter.getItem(position));
+                initDaySpinner();
+            }
         }
 
         @Override
@@ -192,7 +211,10 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     AppCompatSpinner.OnItemSelectedListener  monthSelectListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            if (position != 0){
+                selectedMonth = Integer.parseInt(monthAdapter.getItem(position));
+                initMonthSpinner();
+            }
         }
 
         @Override
@@ -204,7 +226,10 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     AppCompatSpinner.OnItemSelectedListener yearSelectListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+            if (position != 0){
+                selectedYear = Integer.parseInt(yearAdapter.getItem(position));
+                initMonthSpinner();
+            }
         }
 
         @Override

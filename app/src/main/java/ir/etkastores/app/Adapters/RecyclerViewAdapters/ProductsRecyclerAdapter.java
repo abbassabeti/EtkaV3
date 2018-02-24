@@ -98,10 +98,10 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
             price.setText(model.getOriginalPrice());
             scorePoint.setText(String.valueOf(model.getPoint()));
 
-            if (TextUtils.isEmpty(model.getImageUrl())){
+            if (TextUtils.isEmpty(model.getImageUrl().get(0))){
                 image.setImageResource(DummyProvider.getRandomImgId());
             }else{
-                ImageLoader.load(context,image,model.getImageUrl());
+                ImageLoader.load(context,image,model.getImageUrl().get(0));
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -220,4 +220,13 @@ public class UserProfileModel {
         }
     }
 
+    public static class EducationItems{
+        public static final String Illiterate = "Illiterate";
+        public static final String Diploma = "Diploma";
+        public static final String AssociateDegree = "AssociateDegree";
+        public static final String Bachelor = "Bachelor";
+        public static final String Master = "Master";
+        public static final String PHD = "PHD";
+    }
+
 }

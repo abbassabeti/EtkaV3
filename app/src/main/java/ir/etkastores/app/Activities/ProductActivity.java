@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.R;
@@ -98,10 +99,10 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private void initFromProduct() {
         scrollView.setVisibility(View.VISIBLE);
         toolbar.setTitle(productModel.getCategoryTitle());
-//        mPoint.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.Xpoint), productModel.getPoint()));
+        mPoint.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.Xpoint), productModel.getPoint()));
         mTitle.setText(productModel.getTitle());
-//        mPrice.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
-//        mDetail.setText(productModel.getDescription());
+        mPrice.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
+        mDetail.setText(productModel.getDescription());
     }
 
     private void initFromCode() {

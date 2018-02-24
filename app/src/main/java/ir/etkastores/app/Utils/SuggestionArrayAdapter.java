@@ -102,7 +102,7 @@ public class SuggestionArrayAdapter extends ArrayAdapter {
             List<SearchViewItem> tempList = new ArrayList<SearchViewItem>();
             if (constraint != null && originalDataList != null) {
                 for (SearchViewItem item : originalDataList) {
-                    if (item.getTitle().startsWith(constraint.toString())) tempList.add(item);
+                    if (item.getSearchableValue().contains(constraint.toString())) tempList.add(item);
                 }
                 filterResults.values = tempList;
                 filterResults.count = tempList.size();
@@ -129,18 +129,21 @@ public class SuggestionArrayAdapter extends ArrayAdapter {
         int icon;
         boolean isEmptyStateItem = false;
         StoreModel storeModel;
+        String searchableValue;
 
         public SearchViewItem(int icon, String title, String description) {
             this.title = title;
             this.icon = icon;
             this.description = description;
+            this.searchableValue = title;
         }
 
-        public SearchViewItem(StoreModel store){
+        public SearchViewItem(StoreModel store) {
             this.title = store.getName();
             this.description = store.getProvinceName();
             this.icon = store.getIcon();
             this.storeModel = store;
+            this.searchableValue = title + " " +store.getProvinceName();
         }
 
         public String getTitle() {
@@ -165,9 +168,14 @@ public class SuggestionArrayAdapter extends ArrayAdapter {
             return title;
         }
 
-        public StoreModel getStoreModel(){
+        public StoreModel getStoreModel() {
             return storeModel;
         }
+
+        public String getSearchableValue(){
+            return searchableValue;
+        }
+
     }
 
     private List<SearchViewItem> getCopyFromOriginalList() {

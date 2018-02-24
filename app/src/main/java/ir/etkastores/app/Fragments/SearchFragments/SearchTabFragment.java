@@ -21,11 +21,13 @@ import butterknife.OnClick;
 import ir.etkastores.app.Activities.CategoryActivity;
 import ir.etkastores.app.Activities.ProductActivity;
 import ir.etkastores.app.Activities.ScannerActivity;
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.ActivityUtils;
+import ir.etkastores.app.Utils.StringUtils;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -53,6 +55,9 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
     }
 
     private void initViews() {
+        if (BuildConfig.DEBUG){
+            searchInput.setText("#6260100601000");
+        }
         showCategories();
         searchInput.setOnEditorActionListener(this);
     }
@@ -81,8 +86,8 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
             case ScannerActivity.SCAN_REQUEST_CODE:
                 String format = data.getStringExtra(ScannerActivity.FORMAT);
                 String code = data.getStringExtra(ScannerActivity.DATA);
-                ProductActivity.show(getActivity(),code,format);
-                Log.i("scanned code is",""+format+" | "+code);
+                ProductActivity.show(getActivity(), code, format);
+                Log.i("scanned code is", "" + format + " | " + code);
                 break;
 
         }
@@ -102,12 +107,17 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
     @OnClick(R.id.goButton)
     public void onSearchButtonClick() {
         if (TextUtils.isEmpty(searchInput.getText().toString())) {
-            Toaster.show(getActivity(),R.string.writeSomeThingsToSearch);
+            Toaster.show(getActivity(), R.string.writeSomeThingsToSearch);
             return;
         }
-        SearchProductRequestModel searchReq = new SearchProductRequestModel();
-        searchReq.setTitle(searchInput.getText().toString());
-        CategoryActivity.show(getActivity(), searchReq);
+        String txt = searchInput.getText().toString();
+        if (txt.startsWith("#")) {
+            ProductActivity.show(getActivity(), StringUtils.toEnglishDigit(txt.replace("#", "")), "");
+        } else {
+            SearchProductRequestModel searchReq = new SearchProductRequestModel();
+            searchReq.setTitle(searchInput.getText().toString());
+            CategoryActivity.show(getActivity(), searchReq);
+        }
     }
 
 }

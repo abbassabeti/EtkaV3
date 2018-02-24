@@ -3,6 +3,8 @@ package ir.etkastores.app.Models;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by Sajad on 12/25/17.
  */
@@ -25,7 +27,7 @@ public class ProductModel {
     String description;
 
     @SerializedName("imageUrl")
-    String imageUrl;
+    List<String> imageUrl;
 
     @SerializedName("originalPrice")
     String originalPrice;
@@ -76,10 +78,6 @@ public class ProductModel {
         this.description = description;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public void setOriginalPrice(String originalPrice) {
         this.originalPrice = originalPrice;
     }
@@ -90,6 +88,10 @@ public class ProductModel {
 
     public void setOfferPrice(String offerPrice) {
         this.offerPrice = offerPrice;
+    }
+
+    public void setImageUrl(List<String> imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setCategoryTitle(String categoryTitle) {
@@ -128,7 +130,7 @@ public class ProductModel {
         return description;
     }
 
-    public String getImageUrl() {
+    public List<String> getImageUrl() {
         return imageUrl;
     }
 
