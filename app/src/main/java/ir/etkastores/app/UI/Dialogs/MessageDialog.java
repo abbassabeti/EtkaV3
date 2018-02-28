@@ -48,6 +48,14 @@ public class MessageDialog extends BaseDialog {
 
     MessageDialogCallbacks callbacks;
 
+    public static MessageDialog forceUpdate(){
+        return newInstance(R.drawable.ic_warning_orange_48dp,
+                EtkaApp.getInstnace().getResources().getString(R.string.update),
+                EtkaApp.getInstnace().getResources().getString(R.string.updateMessage),
+                EtkaApp.getInstnace().getResources().getString(R.string.update),
+                EtkaApp.getInstnace().getResources().getString(R.string.exit));
+    }
+
     public static MessageDialog loginError() {
         return warningRetry(EtkaApp.getInstnace().getResources().getString(R.string.errorInLogin),
                 EtkaApp.getInstnace().getResources().getString(R.string.anErrorHappendInServerConnection));

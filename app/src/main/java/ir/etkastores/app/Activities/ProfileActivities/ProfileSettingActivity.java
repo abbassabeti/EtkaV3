@@ -90,7 +90,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
         gender.setLeftText(profile.getGenderValue()+"");
 
-        if (TextUtils.isEmpty(profile.getBirthDate())){
+        if (TextUtils.isEmpty(profile.getEducation())){
             education.setLeftText("-");
         }else{
             education.setLeftText(profile.getEducation());
@@ -146,4 +146,5 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
                 break;
         }
     }
+
 }

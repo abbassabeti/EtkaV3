@@ -207,9 +207,9 @@ public class UserProfileModel {
 
     public XCalendar getBirthDateXCalendar(){
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(getBirthDate());
+            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(getBirthDate());
             XCalendar xCalendar = new XCalendar(date.getTime());
-            CalendarRepoInterface c = xCalendar.getCalendar(XCalendar.JalaliType);
+            CalendarRepoInterface c = xCalendar.getCalendar(XCalendar.GregorianType);
             if (c.getYear() == 1){
                 return null;
             }else{
@@ -227,6 +227,30 @@ public class UserProfileModel {
         public static final String Bachelor = "Bachelor";
         public static final String Master = "Master";
         public static final String PHD = "PHD";
+    }
+
+    public static String translateEducation(String education){
+        switch (education){
+            case EducationItems.Illiterate:
+                return "زیر دیپلم";
+
+            case EducationItems.Diploma:
+                return "دیپلم";
+
+            case EducationItems.AssociateDegree:
+                return "فوق دیپلم";
+
+            case EducationItems.Bachelor:
+                return "لیسانس";
+
+            case EducationItems.Master:
+                return "فوق لیسانس";
+
+            case EducationItems.PHD:
+                return "دکتری و بالاتر";
+
+        }
+        return "";
     }
 
 }

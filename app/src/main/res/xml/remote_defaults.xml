@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+
+    <entry>
+        <key>v3_api_server</key>
+        <value>http://217.66.218.174</value>
+    </entry>
+
+    <entry>
+        <key>v3_force_update_min_version_code</key>
+        <value>1</value>
+    </entry>
+
+    <entry>
+        <key>v3_force_update_url</key>
+        <value>https://cafebazaar.ir/app/ir.etkastores.app/?l=fa</value>
+    </entry>
+
+</defaultsMap>

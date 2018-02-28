@@ -52,7 +52,6 @@ public class DiskDataHelper {
     // Custom Methods
 
     private final static String LAST_TOKEN_KEY = "LAST_TOKEN_KEY";
-    private final static String USER_PROFILE_KEY = "USER_PROFILE_KEY";
 
     public static void saveLastToken(AccessToken token){
         if (token!=null){
@@ -63,22 +62,6 @@ public class DiskDataHelper {
     public static AccessToken getLastToken(){
         try {
             return new Gson().fromJson(getString(LAST_TOKEN_KEY),AccessToken.class);
-        }catch (Exception err){
-            return null;
-        }
-    }
-
-    public static void saveUserProfiel(UserProfileModel profileModel){
-        if (profileModel!=null){
-            putString(USER_PROFILE_KEY,new Gson().toJson(profileModel));
-        }else{
-            putString(USER_PROFILE_KEY,"");
-        }
-    }
-
-    public static UserProfileModel getUserProfileModel(){
-        try {
-            return new Gson().fromJson(getString(USER_PROFILE_KEY),UserProfileModel.class);
         }catch (Exception err){
             return null;
         }

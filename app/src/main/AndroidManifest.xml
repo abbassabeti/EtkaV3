@@ -102,8 +102,9 @@
         <activity
             android:name=".Activities.ProfileActivities.HekmatActivity"
             android:theme="@style/AppTheme.SolidSystemBar" />
-        <activity android:name=".Activities.ProfileActivities.NewTicketActivity"
-            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle"/>
+        <activity
+            android:name=".Activities.ProfileActivities.NewTicketActivity"
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
 
         <service android:name=".services.EtkaFirebaseMessagingService">
             <intent-filter>
@@ -116,6 +117,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".Activities.StoresListActivity"></activity>
     </application>
 
 </manifest>

@@ -3,22 +3,79 @@ package ir.etkastores.app.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.Models.NotificationModel;
 import ir.etkastores.app.R;
-import ir.etkastores.app.WebService.ApiProvider;
+import ir.etkastores.app.UI.Dialogs.MessageDialog;
+import ir.etkastores.app.Utils.IntentHelper;
+import ir.etkastores.app.WebService.ApiStatics;
 
 public class SplashActivity extends BaseActivity {
+
+    FirebaseRemoteConfig firebaseRemoteConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         FirebaseMessaging.getInstance().subscribeToTopic("global");
-        initMap();
+        checkRemoteConfigs();
+    }
+
+    private void checkRemoteConfigs() {
+        firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings settings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(true).build();
+        firebaseRemoteConfig.setConfigSettings(settings);
+        firebaseRemoteConfig.setDefaults(R.xml.remote_defaults);
+
+        firebaseRemoteConfig.fetch(180).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.i("EtkaV3", "Remote config fetch success.");
+                    firebaseRemoteConfig.activateFetched();
+                    String baseUrl = firebaseRemoteConfig.getString("v3_api_server");
+                    String minVersion = firebaseRemoteConfig.getString("v3_force_update_min_version_code");
+                    final String updateUrl = firebaseRemoteConfig.getString("v3_force_update_url");
+                    int minAppVersion = Integer.parseInt(minVersion);
+                    if (minAppVersion > BuildConfig.VERSION_CODE) {
+                        MessageDialog dialog = MessageDialog.forceUpdate();
+                        dialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+                            @Override
+                            public void onDialogMessageButtonsClick(int button) {
+                                if (button == RIGHT_BUTTON) {
+                                    IntentHelper.showWeb(SplashActivity.this, updateUrl);
+                                } else {
+                                    finish();
+                                }
+                            }
+
+                            @Override
+                            public void onDialogMessageDismiss() {
+
+                            }
+                        });
+                        return;
+                    }
+                    ApiStatics.BASE_URL = baseUrl;
+                } else {
+                    Log.i("EtkaV3", "Remote config fetch failure.");
+                }
+                prepareAppForRun();
+            }
+        });
+
     }
 
     private void showLogin() {
@@ -54,7 +111,11 @@ public class SplashActivity extends BaseActivity {
                 } catch (Exception err) {
                 }
             }
-        }, 300);
+        }, 100);
+    }
+
+    private void prepareAppForRun() {
+        initMap();
     }
 
 }

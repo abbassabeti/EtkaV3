@@ -113,12 +113,14 @@
     <string name="errorInRegister">خطا در ثبت نام!</string>
     <string name="anErrorHappendInServerConnection">در ارتباط با سرور خطایی رخ داده است، لطفا از دوباره تلاش کنید.</string>
     <string name="errorInDataReceiving">خطا در دریافت اطلاعات!</string>
+    <string name="errorInUpdatingProfile">خطا در بروزرسانی اطلاعات کاربری!، از دوباره تلاش کنید.</string>
     <string name="errorHappendInReceivingData">در دریافت اطلاعات خطایی رخ داده است، از دوباره تلاش کنید.</string>
     <string name="retry">تلاش مجدد</string>
     <string name="cancel">انصراف</string>
     <string name="etkaChainStores">فروشگاه های زنجیره ای اتکا</string>
     <string name="customersLoyaltyApplication">اپلیکیشن باشگاه مشتریان</string>
     <string name="inLoadingUserProfile">در حال دریافت اطلاعات کاربری...</string>
+    <string name="inUpdatingUserProfile">در حال بروزرسانی اطلاعات کاربری...</string>
     <string name="inLoadingProductInfo">در حال دریافت اطلاعات محصول...</string>
     <string name="thereIsNotResultAvailable">برای این قسمت نتیجه ای موجود نیست</string>
     <string name="back">بازگشت</string>
@@ -143,5 +145,8 @@
     <string name="submitNewTicket">ثبت درخواست جدید</string>
     <string name="title">عنوان</string>
     <string name="requestText">متن درخواست</string>
+    <string name="profileUpdatedSuccessfully">اطلاعات کاربری با موفقیت بروزرسانی شد.</string>
+    <string name="update">بروزرسانی</string>
+    <string name="updateMessage">برای استفاده از اپلیکیشن ابتدا باید بروزرسانی انجام دهید.</string>
 
 </resources>
