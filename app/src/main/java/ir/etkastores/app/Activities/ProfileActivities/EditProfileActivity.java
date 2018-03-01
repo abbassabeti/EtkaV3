@@ -27,9 +27,11 @@ import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.DialogHelper;
+import ir.etkastores.app.Utils.DiskDataHelper;
 import ir.etkastores.app.Utils.procalendar.XCalendar;
 import ir.etkastores.app.Utils.procalendar.repositories.CalendarRepoInterface;
 import ir.etkastores.app.WebService.ApiProvider;
+import ir.etkastores.app.WebService.ApiStatics;
 import ir.etkastores.app.data.ProfileManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -363,7 +365,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     public void onSaveChangesClick() {
         UserProfileModel profileModel = new UserProfileModel();
         profileModel.setFirstName(firstNameInputEt.getText().toString());
-        profileModel.setLastName(firstNameInputEt.getText().toString());
+        profileModel.setLastName(lastNameEt.getText().toString());
         profileModel.setNationalCode(nationalCodeEt.getText().toString());
         profileModel.setEmail(emailEt.getText().toString());
         profileModel.setCellPhone(mobilePhoneEt.getText().toString());
@@ -371,11 +373,12 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         profileModel.setEducation(selectedEducation);
         String selectedBirthDate = null;
         if (selectedYear != NOT_SET && selectedMonth != NOT_SET && selectedDay != NOT_SET){
-            XCalendar selectedDateCalendar = XCalendar.fromGerigorian(selectedYear,selectedMonth,selectedDay);
+            XCalendar selectedDateCalendar = XCalendar.fromJalali(selectedYear,selectedMonth,selectedDay);
             selectedBirthDate = selectedDateCalendar.getCalendar(XCalendar.GregorianType).getYYYYMMDD("-");
         }
         profileModel.setBirthDate(selectedBirthDate);
         newProfileInfo = profileModel;
+        newProfileInfo.setId(DiskDataHelper.getLastToken().getUserId());
         sendUpdateRequest();
     }
 

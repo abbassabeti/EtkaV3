@@ -17,6 +17,7 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.Models.NotificationModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
+import ir.etkastores.app.Utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.Utils.IntentHelper;
 import ir.etkastores.app.WebService.ApiStatics;
 
@@ -28,7 +29,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        FirebaseMessaging.getInstance().subscribeToTopic("global");
+        EtkaPushNotificationConfig.enableGlobal();
         checkRemoteConfigs();
     }
 

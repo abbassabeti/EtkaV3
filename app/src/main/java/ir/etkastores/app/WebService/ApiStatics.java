@@ -1,5 +1,7 @@
 package ir.etkastores.app.WebService;
 
+import ir.etkastores.app.Utils.DiskDataHelper;
+
 /**
  * Created by Sajad on 9/3/17.
  */
@@ -10,7 +12,7 @@ public class ApiStatics {
 
     public static final String TOKEN = "/Token";
     public static final String REGISTER = "/api/v1/Account/Register";
-    public static final String EDIT_PROFILE = "/api/v1/Account/EditProfile";
+    public static final String EDIT_PROFILE = "/api/v1/Account/Edit";
     public static final String RESET_PASSWORD = "/api/v1/Account/ResetPassword";
     public static final String PRODUCT_CATEGORY_LEVEL = "/api/v1/ProductCategory/Level";
     public static final String PRODUCT_CATEGORY_CHILD = "/api/v1/ProductCategory/child";
@@ -34,6 +36,7 @@ public class ApiStatics {
     }
 
     public static void saveToken(AccessToken token){
+        DiskDataHelper.saveLastToken(token);
         lastToken = token;
     }
 
