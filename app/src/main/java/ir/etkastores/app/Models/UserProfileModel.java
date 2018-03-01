@@ -207,7 +207,12 @@ public class UserProfileModel {
 
     public XCalendar getBirthDateXCalendar(){
         try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(getBirthDate());
+            String dt = null;
+            if (getBirthDate().contains("T")){
+                String[] t = getBirthDate().split("T");
+                dt = t[0];
+            }
+            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dt);
             XCalendar xCalendar = new XCalendar(date.getTime());
             CalendarRepoInterface c = xCalendar.getCalendar(XCalendar.GregorianType);
             if (c.getYear() == 1){

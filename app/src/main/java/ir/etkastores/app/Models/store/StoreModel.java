@@ -10,7 +10,7 @@ import ir.etkastores.app.R;
  * Created by Sajad on 12/28/17.
  */
 
-public class StoreModel {
+public class StoreModel implements Cloneable {
 
     @SerializedName("id")
     long id;
@@ -53,6 +53,25 @@ public class StoreModel {
 
     @SerializedName("managerImage")
     String managerImage;
+
+    int ic = -1;
+
+    public StoreModel(long id, long code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.parentName = parentName;
+        this.managerName = managerName;
+        this.provinceName = provinceName;
+        this.contactInfo = contactInfo;
+        this.openingHours = openingHours;
+        this.features = features;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.ranking = ranking;
+        this.storeImage = storeImage;
+        this.managerImage = managerImage;
+    }
 
     public long getId() {
         return id;
@@ -111,18 +130,28 @@ public class StoreModel {
     }
 
     public int getIcon() {
+        if (ic != -1) return ic;
         switch (getRanking()) {
             case "اتکا ممتاز":
+                ic = R.drawable.marker_green;
                 return R.drawable.marker_green;
 
             case "اتکا بازار":
+                ic = R.drawable.marker_purple;
                 return R.drawable.marker_purple;
 
             case "اتکا محله":
+                ic = R.drawable.marker_blue;
                 return R.drawable.marker_blue;
 
         }
+        ic = R.drawable.marker_red;
         return R.drawable.marker_red;
+    }
+
+    @Override
+    public StoreModel clone() {
+        return new StoreModel(id, code, name, parentName, managerName, provinceName, contactInfo, openingHours, features, latitude, longitude, ranking, storeImage, managerImage);
     }
 
 }

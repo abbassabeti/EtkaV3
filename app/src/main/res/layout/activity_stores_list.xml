@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"/>
 
-    <ListView
-        android:id="@+id/storesListView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/storesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

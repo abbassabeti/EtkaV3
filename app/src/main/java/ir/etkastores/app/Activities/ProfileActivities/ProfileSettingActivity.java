@@ -57,6 +57,11 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setting);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initViews();
     }
 
