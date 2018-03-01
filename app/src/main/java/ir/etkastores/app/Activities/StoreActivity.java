@@ -114,7 +114,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     @OnClick(R.id.btn_traceRouts)
     public void onTraceRoutesButtonClick() {
-        IntentHelper.openWayTracer(this, storeModel.getLatitude(), storeModel.getLongitude(), storeModel.getName());
+        IntentHelper.openWayTracer(this, storeModel.getLatitude(), storeModel.getLongitude());
     }
 
     @OnClick(R.id.btn_inStoreMode)

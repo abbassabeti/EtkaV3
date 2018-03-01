@@ -12,9 +12,9 @@ import ir.etkastores.app.R;
 
 public class IntentHelper {
 
-    public static void openWayTracer(Activity activity, double lat, double lon, String title){
+    public static void openWayTracer(Activity activity, double lat, double lon){
         try {
-            String uri = "geo:" + lat + "," + lon + "?q=" + title;
+            String uri = "geo:" + lat + "," + lon + "?q=";
             activity.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
         }catch (Exception err){
             showWeb(activity,getGoogleMapLocationAddress(lat,lon));
