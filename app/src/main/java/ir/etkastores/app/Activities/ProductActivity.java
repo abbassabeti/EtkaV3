@@ -21,6 +21,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Views.CategorySliderView;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.UI.Views.ProductImagesSliderView;
 import ir.etkastores.app.Utils.DialogHelper;
 import ir.etkastores.app.WebService.ApiProvider;
 import retrofit2.Call;
@@ -36,7 +37,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private final static String FORMAT = "FORMAT";
 
     @BindView(R.id.slider)
-    CategorySliderView mSlider;
+    ProductImagesSliderView mSlider;
     @BindView(R.id.title)
     TextView mTitle;
     @BindView(R.id.price)
@@ -103,6 +104,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         mTitle.setText(productModel.getTitle());
         mPrice.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
         mDetail.setText(productModel.getDescription());
+        mSlider.setImages(productModel.getImageUrl());
     }
 
     private void initFromCode() {
@@ -112,14 +114,6 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     @Override
     protected void onResume() {
         super.onResume();
-//        extrasHolder.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                extrasHolder.addView(new CategoryGroupHorizontalView(ProductActivity.this));
-//                extrasHolder.addView(new CategoryGroupHorizontalView(ProductActivity.this));
-//                extrasHolder.addView(new CategoryGroupHorizontalView(ProductActivity.this));
-//            }
-//        });
     }
 
     @Override

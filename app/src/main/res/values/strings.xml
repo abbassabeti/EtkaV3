@@ -64,6 +64,7 @@
     <string name="get20ScoreWithCompletingProfileInfo">با تکمیل اطلاعات کاربری ۲۰ امتیاز دریافت می کنید</string>
     <string name="changePassword">تغییر رمز عبور</string>
     <string name="receiveSpecialOffersNotifications">دریافت اعلان های فروش ویژه</string>
+    <string name="hekmatOffersNotifications">دریافت اعلان های طرح حکمت</string>
     <string name="logout">خروج از حساب کاربری</string>
     <string name="profileInfo">اطلاعات کاربری</string>
     <string name="edit">ویرایش</string>

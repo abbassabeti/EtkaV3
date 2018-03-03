@@ -121,12 +121,13 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         if (birthDayXCalendar != null) {
             calendar = birthDayXCalendar.getCalendar(XCalendar.JalaliType);
             selectedDay = calendar.getDay();
-            selectedMonth = calendar.getMonth();
+            selectedMonth = calendar.getMonth()-1;
             selectedYear = calendar.getYear();
         } else {
             calendar = new XCalendar().getCalendar(XCalendar.JalaliType);
         }
 
+        selectedEducation = profile.getEducation();
         initGenderSpinnerAdapter();
         initEducationSpinnerAdapter();
         initYearSpinner();
@@ -134,7 +135,6 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         initDaySpinner();
         firstNameInputEt.requestFocus();
         genderSpinner.setSelection(profile.getGender());
-        selectedEducation = profile.getEducation();
 
     }
 

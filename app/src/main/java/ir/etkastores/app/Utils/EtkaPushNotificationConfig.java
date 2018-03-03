@@ -14,10 +14,12 @@ public class EtkaPushNotificationConfig {
 
     public static void registerHekmat(){
         FirebaseMessaging.getInstance().subscribeToTopic(HEKMAT_TOPIC);
+        DiskDataHelper.putBool(HEKMAT_TOPIC,true);
     }
 
     public static void unregisterHekmat(){
         FirebaseMessaging.getInstance().unsubscribeFromTopic(HEKMAT_TOPIC);
+        DiskDataHelper.putBool(HEKMAT_TOPIC,false);
     }
 
     public static void registerUserIdTopic(){
@@ -44,6 +46,10 @@ public class EtkaPushNotificationConfig {
 
     public static void registerGlobal(){
         FirebaseMessaging.getInstance().subscribeToTopic(GLOBAL_TOPIC);
+    }
+
+    public static boolean isHekmatSubscribed(){
+        return DiskDataHelper.getBool(HEKMAT_TOPIC);
     }
 
 }

@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.Activities.BaseActivity;
+import ir.etkastores.app.Fragments.IntroFragments.LoginFragment;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.CustomRowMenuItem;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
+import ir.etkastores.app.Utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.Utils.procalendar.XCalendar;
 import ir.etkastores.app.data.ProfileManager;
 
@@ -30,6 +33,9 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @BindView(R.id.specialOfferNotificationSwitch)
     SwitchCompat specialOfferSwitch;
+
+    @BindView(R.id.hekmatNotificationSwitch)
+    SwitchCompat hekmatSwitch;
 
     @BindView(R.id.firstNameAndLastName)
     CustomRowMenuItem firstNameAndLastName;
@@ -65,47 +71,50 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         initViews();
     }
 
-    private void initViews(){
+    private void initViews() {
         toolbar.setActionListeners(this);
         UserProfileModel profile = ProfileManager.getProfile();
         if (profile == null) return;
-        if (TextUtils.isEmpty(profile.getFirstNameAndLastName())){
+        if (TextUtils.isEmpty(profile.getFirstNameAndLastName())) {
             firstNameAndLastName.setLeftText("-");
-        }else{
+        } else {
             firstNameAndLastName.setLeftText(profile.getFirstNameAndLastName());
         }
 
-        if (profile.getNationalCode() == null || TextUtils.isEmpty(profile.getNationalCode().trim())){
+        if (profile.getNationalCode() == null || TextUtils.isEmpty(profile.getNationalCode().trim())) {
             nationalCode.setLeftText("-");
-        }else{
+        } else {
             nationalCode.setLeftText(profile.getNationalCode());
         }
 
-        if (TextUtils.isEmpty(profile.getEmail())){
+        if (TextUtils.isEmpty(profile.getEmail())) {
             email.setLeftText("-");
-        }else{
+        } else {
             email.setLeftText(profile.getEmail());
         }
 
-        if (TextUtils.isEmpty(profile.getCellPhone())){
+        if (TextUtils.isEmpty(profile.getCellPhone())) {
             mobilePhone.setLeftText("-");
-        }else{
+        } else {
             mobilePhone.setLeftText(profile.getCellPhone());
         }
 
-        gender.setLeftText(profile.getGenderValue()+"");
+        gender.setLeftText(profile.getGenderValue() + "");
 
-        if (TextUtils.isEmpty(profile.getEducation())){
+        if (TextUtils.isEmpty(profile.getEducation())) {
             education.setLeftText("-");
-        }else{
-            education.setLeftText(profile.getEducation());
+        } else {
+            education.setLeftText(profile.translateEducation(profile.getEducation()));
         }
 
-        if (profile.getBirthDateXCalendar() == null){
+        if (profile.getBirthDateXCalendar() == null) {
             birthDate.setLeftText("-");
-        }else{
-            birthDate.setLeftText(profile.getBirthDateXCalendar().getCalendar(XCalendar.GregorianType).getDateByMonthName());
+        } else {
+            birthDate.setLeftText(profile.getBirthDateXCalendar().getCalendar(XCalendar.JalaliType).getDateByMonthName());
         }
+
+        hekmatSwitch.setChecked(EtkaPushNotificationConfig.isHekmatSubscribed());
+        hekmatSwitch.setOnCheckedChangeListener(hekmatChangeListener);
 
     }
 
@@ -134,11 +143,15 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     }
 
-    @OnClick(R.id.specialOfferNotificationButton)
+    @OnClick({R.id.specialOfferNotificationButton})
     public void onSpecialOfferNotificationButtonClick() {
         specialOfferSwitch.performClick();
     }
 
+    @OnClick(R.id.hekmatNotificationButton)
+    public void onHekmatNotificationButtonClick() {
+        hekmatSwitch.performClick();
+    }
 
     @OnClick({R.id.editButton, R.id.changePasswordButton, R.id.logoutButton})
     public void onViewClicked(View view) {
@@ -151,5 +164,18 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
                 break;
         }
     }
+
+    SwitchCompat.OnCheckedChangeListener hekmatChangeListener = new SwitchCompat.OnCheckedChangeListener(){
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (EtkaPushNotificationConfig.isHekmatSubscribed()){
+                EtkaPushNotificationConfig.unregisterHekmat();
+            }else{
+                EtkaPushNotificationConfig.registerHekmat();
+            }
+        }
+
+    };
 
 }

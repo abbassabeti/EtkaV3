@@ -11,9 +11,11 @@ import ir.etkastores.app.Models.ProductSearchResponseModel;
 import ir.etkastores.app.Models.SearchProductRequestModel;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.Models.hekmat.HekmatModel;
+import ir.etkastores.app.Models.home.OffersResponseModel;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.Models.profile.ResetPasswordRequestModel;
 import ir.etkastores.app.Models.store.StoreModel;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -84,5 +86,9 @@ public interface EtkaApi {
     //13
     @GET(ApiStatics.HEKMAT)
     Call<OauthResponse<List<HekmatModel>>> getHekmat();
+
+    //14
+    @GET(ApiStatics.HOME)
+    Call<OauthResponse<OffersResponseModel>> getOffers(@Query("page") String page);
 
 }

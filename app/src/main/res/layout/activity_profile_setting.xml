@@ -161,7 +161,8 @@
                     android:layout_height="?attr/actionBarSize"
                     android:layout_margin="8dp"
                     app:cardCornerRadius="4dp"
-                    android:foreground="?attr/selectableItemBackground">
+                    android:foreground="?attr/selectableItemBackground"
+                    android:visibility="gone">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -181,6 +182,43 @@
 
                         <android.support.v7.widget.SwitchCompat
                             android:id="@+id/specialOfferNotificationSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:textColor="@color/colorPrimary"
+                            app:theme="@style/themeColorSwitchStyle"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/hekmatNotificationButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="4dp"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/hekmatOffersNotifications"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:textColor="@color/darkGray"
+                            android:textSize="@dimen/textSizeSmall" />
+
+                        <android.support.v7.widget.SwitchCompat
+                            android:id="@+id/hekmatNotificationSwitch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"

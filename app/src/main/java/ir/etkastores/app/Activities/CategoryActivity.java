@@ -278,7 +278,12 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                 }
             });
         }else if (!showRetry && productsAdapter != null && productsAdapter.getItemCount() == 0){
-            messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.retry), null);
+            messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.back), new MessageView.OnMessageViewButtonClick() {
+                @Override
+                public void onMessageViewButtonClick() {
+                    onBackPressed();
+                }
+            });
         }else{
             if (showRetry){
                 final MessageDialog dialog = MessageDialog.warningRetry(getResources().getString(R.string.error), message);

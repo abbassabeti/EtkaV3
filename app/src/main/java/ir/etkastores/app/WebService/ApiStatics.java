@@ -22,6 +22,7 @@ public class ApiStatics {
     public static final String PROFILE = "api/v1/account/info";
     public static final String FACTOR = "api/v1/Factor";
     public static final String HEKMAT = "api/v1/Hekmat";
+    public static final String HOME = "/api/v1/home";
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
     public static final String CLIENT_SECRET = "AS85dwD5asd8E4ESD85";

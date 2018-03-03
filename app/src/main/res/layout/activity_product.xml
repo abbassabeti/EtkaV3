@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ir.etkastores.app.UI.Views.CategorySliderView
+            <ir.etkastores.app.UI.Views.ProductImagesSliderView
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
