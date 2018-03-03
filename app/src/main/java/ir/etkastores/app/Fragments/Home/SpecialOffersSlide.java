@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
 
     @BindView(R.id.messageView)
     MessageView messageView;
+
+    @BindView(R.id.circularProgress)
+    ProgressBar circularProgress;
 
     boolean isFirstSelect = true;
 
@@ -73,12 +77,14 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
     }
 
     private void loadOffers(){
+        showLoading();
         offersReq = ApiProvider.getAuthorizedApi().getOffers("offers");
         offersReq.enqueue(new Callback<OffersResponseModel>() {
             @Override
             public void onResponse(Call<OffersResponseModel> call, Response<OffersResponseModel> response) {
+                if (!isAdded()) return;
+                hideLoading();
                 if (response.isSuccessful()){
-                    if (!isAdded()) return;
                     if (response.body().getTotalItemsCount() == 0){
                         showMessageView(getResources().getString(R.string.thereIsNotResultAvailable),false);
                     }else{
@@ -92,6 +98,7 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
             @Override
             public void onFailure(Call<OffersResponseModel> call, Throwable throwable) {
                 if (!isAdded()) return;
+                hideLoading();
                 showMessageView(getResources().getString(R.string.errorInDataReceiving),true);
             }
         });
@@ -113,6 +120,14 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
 
     private void addItems(List<OffersItemModel> items){
 
+    }
+
+    private void showLoading(){
+        circularProgress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading(){
+        circularProgress.setVisibility(View.GONE);
     }
 
 }
