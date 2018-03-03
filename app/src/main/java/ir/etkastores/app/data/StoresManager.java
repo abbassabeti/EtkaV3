@@ -72,9 +72,13 @@ public class StoresManager {
 
     public void fetchStores(StoresCallback callback) {
         if (req != null) req.cancel();
-        this.storesCallback = callback;
-        retryCounter = 0;
-        loadData();
+        if (stores != null && stores.size()>0){
+            callback.onStoresFetchSuccess(stores);
+        }else{
+            this.storesCallback = callback;
+            retryCounter = 0;
+            loadData();
+        }
     }
 
     public interface StoresCallback {

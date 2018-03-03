@@ -149,5 +149,10 @@
     <string name="profileUpdatedSuccessfully">اطلاعات کاربری با موفقیت بروزرسانی شد.</string>
     <string name="update">بروزرسانی</string>
     <string name="updateMessage">برای استفاده از اپلیکیشن ابتدا باید بروزرسانی انجام دهید.</string>
+    <string name="discountedPriceX">قیمت با تخفیف: %s</string>
+    <string name="distributionX">توزیع: %s</string>
+    <string name="distributionCenters">مراکز عرضه</string>
+    <string name="selectStore">انتخاب فروشگاه</string>
+    <string name="writeCityNameOrStoreName">نام شهر یا فروشگاه را بنویسید...</string>
 
 </resources>

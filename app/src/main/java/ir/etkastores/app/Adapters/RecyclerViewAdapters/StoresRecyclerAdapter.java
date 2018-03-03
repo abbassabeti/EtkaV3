@@ -53,12 +53,13 @@ public class StoresRecyclerAdapter extends RecyclerView.Adapter<StoresRecyclerAd
 
     public void setStores(List<StoreModel> stores) {
         originalStores = stores;
+        filterKeyword(null);
     }
 
     public void filterKeyword(String keyword) {
         List<StoreModel> result = new ArrayList<>();
         if (TextUtils.isEmpty(keyword)) {
-            filteredStores = getCopyOfStores();
+            result = getCopyOfStores();
         } else {
             for (StoreModel store : getCopyOfStores()) {
                 if ((store.getProvinceName() + " " + store.getName()).contains(keyword)) {

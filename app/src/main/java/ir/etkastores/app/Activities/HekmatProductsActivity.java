@@ -3,16 +3,19 @@ package ir.etkastores.app.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.Adapters.RecyclerViewAdapters.HekmatProductSecondLevelRecyclerAdapter;
 import ir.etkastores.app.Models.hekmat.HekmatModel;
+import ir.etkastores.app.Models.hekmat.HekmatProductModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 
-public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
+public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, HekmatProductSecondLevelRecyclerAdapter.OnHekmatProductClickListener {
 
     private final static String HEKMAT_PRODUCT = "HEKMAT_PRODUCT";
 
@@ -25,7 +28,11 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
 
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
     private HekmatModel hekmatModel;
+    private HekmatProductSecondLevelRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,10 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
     private void initViews(){
         toolbar.setActionListeners(this);
         toolbar.setTitle(hekmatModel.getTitle());
+        adapter = new HekmatProductSecondLevelRecyclerAdapter(hekmatModel.getProducts(),this);
+        adapter.setOnHekmatProductClickListener(this);
+        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
@@ -49,6 +60,11 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
     @Override
     public void onActionClick(int actionCode) {
 
+    }
+
+    @Override
+    public void onHekmatProductClick(HekmatProductModel productModel) {
+        StoresListActivity.showForOpenStore(this,productModel);
     }
 
 }

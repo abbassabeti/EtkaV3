@@ -1,5 +1,6 @@
 package ir.etkastores.app.Models.hekmat;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -9,6 +10,14 @@ import java.util.List;
  */
 
 public class HekmatProductModel {
+
+    public static HekmatProductModel fromJson(String json){
+        try {
+            return new Gson().fromJson(json,HekmatProductModel.class);
+        }catch (Exception err){
+            return null;
+        }
+    }
 
     @SerializedName("title")
     private String title;
