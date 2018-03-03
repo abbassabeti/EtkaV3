@@ -103,9 +103,9 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         mPoint.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.Xpoint), productModel.getPoint()));
         mTitle.setText(productModel.getTitle());
         mPrice.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
-        if (!TextUtils.isEmpty(productModel.getDescription())){
+        if (!TextUtils.isEmpty(productModel.getDescription())) {
             mDetail.setText(productModel.getDescription());
-        }else{
+        } else {
             mDetail.setText(R.string.thereIsNoInformationForThisProduct);
         }
 
@@ -174,16 +174,16 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         });
     }
 
-    private void showRetryDialog(int action){
+    private void showRetryDialog(int action) {
         String title = getResources().getString(R.string.error);
         String message = getResources().getString(R.string.errorInLoadProduct);
-        messageDialog = MessageDialog.warningRetry(title,message);
+        messageDialog = MessageDialog.warningRetry(title, message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     loadProduct();
-                }else{
+                } else {
                     finish();
                 }
                 messageDialog.getDialog().cancel();
