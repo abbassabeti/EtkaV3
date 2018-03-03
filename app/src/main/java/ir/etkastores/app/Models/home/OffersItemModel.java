@@ -13,13 +13,13 @@ import ir.etkastores.app.Models.ProductModel;
 public class OffersItemModel {
 
     @SerializedName("title")
-    private String title;
+    String title;
 
     @SerializedName("bannerUrl")
-    private String bannerUrl;
+    String bannerUrl;
 
     @SerializedName("products")
-    private List<ProductModel> products;
+    List<ProductModel> products;
 
     public String getTitle() {
         return title;

@@ -1,5 +1,7 @@
 package ir.etkastores.app.Models.store;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -130,7 +132,7 @@ public class StoreModel implements Cloneable {
     }
 
     public int getIcon() {
-        if (ic != -1) return ic;
+        if (ic>0) return ic;
         switch (getRanking()) {
             case "اتکا ممتاز":
                 ic = R.drawable.marker_green;

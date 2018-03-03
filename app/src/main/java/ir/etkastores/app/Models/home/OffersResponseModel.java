@@ -13,16 +13,16 @@ import ir.etkastores.app.Models.ProductModel;
 public class OffersResponseModel {
 
     @SerializedName("totalItemsCount")
-    private int totalItemsCount;
+    int totalItemsCount;
 
     @SerializedName("items")
-    private List<OffersResponseModel> items;
+    List<OffersItemModel> items;
 
     public int getTotalItemsCount() {
         return totalItemsCount;
     }
 
-    public List<OffersResponseModel> getItems() {
+    public List<OffersItemModel> getItems() {
         return items;
     }
 

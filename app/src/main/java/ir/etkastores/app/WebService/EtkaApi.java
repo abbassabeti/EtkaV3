@@ -89,6 +89,6 @@ public interface EtkaApi {
 
     //14
     @GET(ApiStatics.HOME)
-    Call<OauthResponse<OffersResponseModel>> getOffers(@Query("page") String page);
+    Call<OffersResponseModel> getOffers(@Query("page") String page);
 
 }
