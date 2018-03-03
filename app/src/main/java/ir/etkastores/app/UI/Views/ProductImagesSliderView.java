@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +66,7 @@ public class ProductImagesSliderView extends LinearLayout {
     }
 
     public void setImages(List<String> images){
-        if (images == null || images.size()==0){
+        if (images == null || images.size() == 0 || (images.size() > 0 && TextUtils.isEmpty(images.get(0)))) {
             setVisibility(GONE);
         }else{
             setVisibility(VISIBLE);

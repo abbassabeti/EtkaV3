@@ -103,7 +103,12 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         mPoint.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.Xpoint), productModel.getPoint()));
         mTitle.setText(productModel.getTitle());
         mPrice.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
-        mDetail.setText(productModel.getDescription());
+        if (!TextUtils.isEmpty(productModel.getDescription())){
+            mDetail.setText(productModel.getDescription());
+        }else{
+            mDetail.setText(R.string.thereIsNoInformationForThisProduct);
+        }
+
         mSlider.setImages(productModel.getImageUrl());
     }
 

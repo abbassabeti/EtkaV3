@@ -154,5 +154,6 @@
     <string name="distributionCenters">مراکز عرضه</string>
     <string name="selectStore">انتخاب فروشگاه</string>
     <string name="writeCityNameOrStoreName">نام شهر یا فروشگاه را بنویسید...</string>
+    <string name="thereIsNoInformationForThisProduct">هیچ اطلاعاتی برای این محصول وجود ندارد!</string>
 
 </resources>
