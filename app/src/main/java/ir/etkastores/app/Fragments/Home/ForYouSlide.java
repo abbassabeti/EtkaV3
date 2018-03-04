@@ -44,10 +44,10 @@ public class ForYouSlide extends Fragment implements PageTrigger {
 
     private void initViews(){
         itemsHolder.addView(new CategorySliderView(getActivity()));
-        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
-        itemsHolder.addView(new SpecialCategoriesView(getActivity()));
-        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
-        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+//        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+//        itemsHolder.addView(new SpecialCategoriesView(getActivity()));
+//        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+//        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
     }
 
     @Override

@@ -42,7 +42,7 @@ public class TopSalesSlide extends Fragment implements PageTrigger {
     }
 
     private void initViews(){
-        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
+        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity(),null));
     }
 
     @Override

@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.DummyProvider;
+import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.R;
 
 /**
@@ -28,8 +29,19 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    public CategoryGroupHorizontalView(Context context) {
+    @BindView(R.id.title)
+    TextView mTitle;
+
+    @BindView(R.id.showAll)
+    TextView mShowAllButton;
+
+    private List<ProductModel> productModels;
+    private String title;
+
+    public CategoryGroupHorizontalView(Context context, String title ,List<ProductModel> productModels) {
         super(context);
+        this.productModels = productModels;
+        this.title = title;
         init(null);
     }
 
@@ -45,36 +57,23 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
     private void init(AttributeSet attrs){
         View.inflate(getContext(),R.layout.view_category_group_horizontal,this);
-        ButterKnife.bind(this);
+        ButterKnife.bind(this,this);
 
-        List<String> items = new ArrayList<>();
-        items.add("یک");
-        items.add("دو");
-        items.add("سه");
-        items.add("چهار");
-        items.add("پنج");
-        items.add("شش");
-        items.add("هفت");
-        items.add("هشت");
-        items.add("نه");
-        items.add("ده");
-        CategoryRecyclerAdapter adapter = new CategoryRecyclerAdapter(getContext(),items);
+        if (productModels == null) return;
+
+        mTitle.setText(title);
+
+        CategoryRecyclerAdapter adapter = new CategoryRecyclerAdapter(getContext());
         recyclerView.setAdapter(adapter);
-
-        if (attrs != null){
-
-        }
 
     }
 
     class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.ViewHolder>{
 
-        private List<String> items;
         private LayoutInflater inflater;
 
-        public CategoryRecyclerAdapter(Context context, List<String> items) {
+        public CategoryRecyclerAdapter(Context context) {
             this.inflater = LayoutInflater.from(context);
-            this.items = items;
         }
 
         @Override
@@ -84,12 +83,12 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.bind();
+            holder.bind(productModels.get(position));
         }
 
         @Override
         public int getItemCount() {
-            return items.size();
+            return productModels.size();
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
@@ -111,10 +110,11 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
                 ButterKnife.bind(this,itemView);
             }
 
-            public void bind(){
+            public void bind(ProductModel model){
                 image.setImageResource(R.drawable.etka_logo_wide);
-                name.setText("نام کالا");
-                price.setText("قیمت کالا");
+                name.setText(model.getTitle());
+                price.setText(model.getEtkaPrice());
+                scoreValue.setText(String.format(getResources().getString(R.string.Xpoint),model.getPoint()));
                 image.setImageResource(DummyProvider.getRandomImgId());
             }
 

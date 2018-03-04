@@ -18,6 +18,7 @@ import ir.etkastores.app.Models.home.OffersItemModel;
 import ir.etkastores.app.Models.home.OffersResponseModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Toaster;
+import ir.etkastores.app.UI.Views.CategoryGroupHorizontalView;
 import ir.etkastores.app.UI.Views.MessageView;
 import ir.etkastores.app.WebService.ApiProvider;
 import retrofit2.Call;
@@ -120,7 +121,9 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
     }
 
     private void addItems(List<OffersItemModel> items) {
-        Toaster.showLong(getActivity(), "تعداد دسته های دریافت شده:" + items.size());
+        for (OffersItemModel offersItem : items){
+            itemsHolder.addView(new CategoryGroupHorizontalView(getActivity(),offersItem.getTitle(),offersItem.getProducts()));
+        }
     }
 
     private void showLoading() {
