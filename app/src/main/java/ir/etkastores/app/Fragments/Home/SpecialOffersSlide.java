@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.Models.home.OffersItemModel;
 import ir.etkastores.app.Models.home.OffersResponseModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.MessageView;
 import ir.etkastores.app.WebService.ApiProvider;
 import retrofit2.Call;
@@ -29,7 +30,7 @@ import retrofit2.Response;
 
 public class SpecialOffersSlide extends Fragment implements PageTrigger {
 
-    public static SpecialOffersSlide newInstance(){
+    public static SpecialOffersSlide newInstance() {
         return new SpecialOffersSlide();
     }
 
@@ -65,7 +66,7 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
         onPageSelected();
     }
 
-    private void initViews(){
+    private void initViews() {
         loadOffers();
     }
 
@@ -76,7 +77,7 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
         initViews();
     }
 
-    private void loadOffers(){
+    private void loadOffers() {
         showLoading();
         offersReq = ApiProvider.getAuthorizedApi().getOffers("offers");
         offersReq.enqueue(new Callback<OffersResponseModel>() {
@@ -84,14 +85,14 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
             public void onResponse(Call<OffersResponseModel> call, Response<OffersResponseModel> response) {
                 if (!isAdded()) return;
                 hideLoading();
-                if (response.isSuccessful()){
-                    if (response.body().getTotalItemsCount() == 0){
-                        showMessageView(getResources().getString(R.string.thereIsNotResultAvailable),false);
-                    }else{
+                if (response.isSuccessful()) {
+                    if (response.body().getTotalItemsCount() == 0) {
+                        showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
+                    } else {
                         addItems(response.body().getItems());
                     }
-                }else{
-                    onFailure(call,null);
+                } else {
+                    onFailure(call, null);
                 }
             }
 
@@ -99,13 +100,13 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
             public void onFailure(Call<OffersResponseModel> call, Throwable throwable) {
                 if (!isAdded()) return;
                 hideLoading();
-                showMessageView(getResources().getString(R.string.errorInDataReceiving),true);
+                showMessageView(getResources().getString(R.string.errorInDataReceiving), true);
             }
         });
     }
 
-    private void showMessageView(String message, boolean hasRetry){
-        if (hasRetry){
+    private void showMessageView(String message, boolean hasRetry) {
+        if (hasRetry) {
             String buttonTitle = getResources().getString(R.string.retry);
             messageView.show(R.drawable.ic_warning_orange_48dp, message, buttonTitle, new MessageView.OnMessageViewButtonClick() {
                 @Override
@@ -113,20 +114,20 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
                     loadOffers();
                 }
             });
-        }else{
+        } else {
             messageView.show(R.drawable.ic_warning_orange_48dp, message, null, null);
         }
     }
 
-    private void addItems(List<OffersItemModel> items){
-
+    private void addItems(List<OffersItemModel> items) {
+        Toaster.showLong(getActivity(), "تعداد دسته های دریافت شده:" + items.size());
     }
 
-    private void showLoading(){
+    private void showLoading() {
         circularProgress.setVisibility(View.VISIBLE);
     }
 
-    private void hideLoading(){
+    private void hideLoading() {
         circularProgress.setVisibility(View.GONE);
     }
 

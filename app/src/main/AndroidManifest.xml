@@ -35,7 +35,8 @@
 
         <activity
             android:name=".Activities.SplashActivity"
-            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle">
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,70 +45,92 @@
         </activity>
         <activity
             android:name=".Activities.MainActivity"
-            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.IntroActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.EditProfileActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.ProfileSettingActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.FAQActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.InviteFriendsActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.SendNewRequestActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.NextShoppingListActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.ShoppingHistoryActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.OtherPagesActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.ScoresActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.SupportActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.RequestsActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.TextInfoActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.StoreActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProductActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.CategoryActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.HekmatProductsActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ScannerActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.HekmatActivity"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.ProfileActivities.NewTicketActivity"
-            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".Activities.StoresListActivity"
-            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle"/>
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle"
+            android:screenOrientation="portrait"/>
 
         <service android:name=".services.EtkaFirebaseMessagingService">
             <intent-filter>
