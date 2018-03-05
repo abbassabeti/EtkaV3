@@ -14,6 +14,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.Activities.ProductActivity;
+import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.Models.home.OffersItemModel;
 import ir.etkastores.app.Models.home.OffersResponseModel;
 import ir.etkastores.app.R;
@@ -29,7 +31,7 @@ import retrofit2.Response;
  * Created by Sajad on 12/2/17.
  */
 
-public class SpecialOffersSlide extends Fragment implements PageTrigger {
+public class SpecialOffersSlide extends Fragment implements PageTrigger, CategoryGroupHorizontalView.OnProductClickListener {
 
     public static SpecialOffersSlide newInstance() {
         return new SpecialOffersSlide();
@@ -121,8 +123,11 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
     }
 
     private void addItems(List<OffersItemModel> items) {
-        for (OffersItemModel offersItem : items){
-            itemsHolder.addView(new CategoryGroupHorizontalView(getActivity(),offersItem.getTitle(),offersItem.getProducts()));
+        for (OffersItemModel offersItem : items) {
+            CategoryGroupHorizontalView row = new CategoryGroupHorizontalView(getActivity(), offersItem.getTitle(), offersItem.getProducts());
+            row.setOnProductClickListener(this);
+            itemsHolder.addView(row);
+
         }
     }
 
@@ -132,6 +137,11 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger {
 
     private void hideLoading() {
         circularProgress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onProductClick(ProductModel productModel) {
+        ProductActivity.show(getActivity(),productModel);
     }
 
 }

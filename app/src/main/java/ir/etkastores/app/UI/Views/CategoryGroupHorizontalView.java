@@ -37,6 +37,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
     private List<ProductModel> productModels;
     private String title;
+    private OnProductClickListener onProductClickListener;
 
     public CategoryGroupHorizontalView(Context context, String title ,List<ProductModel> productModels) {
         super(context);
@@ -105,9 +106,15 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
             @BindView(R.id.scoreValue)
             TextView scoreValue;
 
-            public ViewHolder(View itemView) {
+            public ViewHolder(final View itemView) {
                 super(itemView);
                 ButterKnife.bind(this,itemView);
+                itemView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (onProductClickListener != null) onProductClickListener.onProductClick(productModels.get(getAdapterPosition()));
+                    }
+                });
             }
 
             public void bind(ProductModel model){
@@ -125,6 +132,14 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
             super.onAttachedToRecyclerView(recyclerView);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,true));
         }
+    }
+
+    public interface OnProductClickListener{
+        void onProductClick(ProductModel productModel);
+    }
+
+    public void setOnProductClickListener(OnProductClickListener onProductClickListener) {
+        this.onProductClickListener = onProductClickListener;
     }
 
 }
