@@ -29,7 +29,7 @@ public class MainActivity extends BaseActivity {
 
         bottomNavigationView.enableAnimation(false);
         bottomNavigationView.enableItemShiftingMode(false);
-        bottomNavigationView.setTextVisibility(false);
+        bottomNavigationView.setTextVisibility(true);
         bottomNavigationView.enableShiftingMode(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
 

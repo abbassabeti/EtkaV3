@@ -102,7 +102,7 @@
                     android:id="@+id/hekmatMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                    app:rowIcon="@drawable/ic_card_grey_24dp"
                     app:rowText="@string/hekmatCard" />
 
             </android.support.v7.widget.CardView>
@@ -128,7 +128,7 @@
                         android:id="@+id/nextShoppingListMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                        app:rowIcon="@drawable/ic_shopping_list_grey_24dp"
                         app:rowText="@string/nextShoppingList" />
 
                     <View style="@style/profileMenuDividerViewStyle" />
@@ -137,7 +137,7 @@
                         android:id="@+id/shoppingHistoryMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                        app:rowIcon="@drawable/ic_shopping_history_grey_24dp"
                         app:rowText="@string/yourShoppingHistory" />
 
                     <View style="@style/profileMenuDividerViewStyle" />
@@ -146,7 +146,7 @@
                         android:id="@+id/inviteFriendsMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                        app:rowIcon="@drawable/ic_invite_friends_grey_24dp"
                         app:rowText="@string/inviteFriends"
                         app:scoreText="@string/score5"
                         app:showScore="true"
@@ -158,7 +158,7 @@
                         android:id="@+id/faqMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                        app:rowIcon="@drawable/ic_faq_grey_24dp"
                         app:rowText="@string/faq" />
 
                     <View style="@style/profileMenuDividerViewStyle" />
@@ -167,7 +167,7 @@
                         android:id="@+id/supportMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                        app:rowIcon="@drawable/ic_support_grey_24dp"
                         app:rowText="@string/supportAndSendRequest" />
 
                 </LinearLayout>

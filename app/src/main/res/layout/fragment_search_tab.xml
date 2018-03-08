@@ -35,7 +35,7 @@
                 android:clickable="true"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                app:srcCompat="@drawable/ic_arrow_right_24dp_black" />
+                app:srcCompat="@drawable/ic_search_24dp" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/scanButton"
@@ -61,6 +61,7 @@
                 android:hint="@string/performSearchLikeGreenTea"
                 android:maxLines="1"
                 android:paddingLeft="16dp"
+                android:layout_marginRight="8dp"
                 android:imeOptions="actionSearch"
                 android:imeActionLabel="@string/search"
                 android:textSize="@dimen/textSizeSmall" />

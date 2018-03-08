@@ -84,8 +84,6 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         productModel = ProductModel.fromJson(getIntent().getExtras().getString(MODEL, null));
         productBarcodeCode = getIntent().getExtras().getString(CODE, null);
         barcodeFormat = getIntent().getExtras().getString(FORMAT, null);
-
-        initViews();
     }
 
     private void initViews() {
@@ -119,6 +117,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     @Override
     protected void onResume() {
         super.onResume();
+        initViews();
     }
 
     @Override

@@ -42,19 +42,16 @@ public class ProductImagesSliderView extends LinearLayout {
 
     public ProductImagesSliderView(Context context) {
         super(context);
+        init();
     }
 
     public ProductImagesSliderView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public ProductImagesSliderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
         init();
     }
 
@@ -110,7 +107,6 @@ public class ProductImagesSliderView extends LinearLayout {
             View view  = inflater.inflate(R.layout.home_slider_slide,container,false);
             AppCompatImageView imageView = (AppCompatImageView) view.findViewById(R.id.image);
             ImageLoader.load(getContext(),imageView,items.get(position));
-            imageView.setImageResource(DummyProvider.getRandomSlider());
             container.addView(view);
             return view;
         }

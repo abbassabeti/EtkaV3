@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
 
-        applicationId "ir.etkastores.appDemo"
+        applicationId "ir.etkastores.app"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
@@ -94,7 +94,6 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.romandanylyk:pageindicatorview:0.0.9'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'me.dm7.barcodescanner:zxing:1.9.8'
     compile 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     compile 'pub.devrel:easypermissions:1.1.3'

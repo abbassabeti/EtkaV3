@@ -36,6 +36,37 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473097796320:android:49d40920a7abfae5",
+        "android_client_info": {
+          "package_name": "ir.etkastores.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473097796320-v45d8otau7978optfv6nit1akevdo0bs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUbqEezKy_IaZweYamj20sOFBvMUvLwqY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"
