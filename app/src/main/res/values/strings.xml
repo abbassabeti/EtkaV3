@@ -159,5 +159,14 @@
     <string name="cameraPermissionRationalMessage">برای استفاده از این قسمت، ابتدا نیاز به دسترسی به دوربین وجود دارد.</string>
     <string name="locationPermissionRationalMessage">برای استفاده از این قسمت، نیاز به دسترسی به سرویس مکان یابی وجود دارد.</string>
     <string name="continue_">ادامه</string>
+    <string name="currentPassword">رمز عبور فعلی</string>
+    <string name="newPassword">رمز عبور جدید</string>
+    <string name="confirmPassword">تکرار رمز عبور جدید</string>
+    <string name="inSendingChangePassword">در حال ارسال درخواست تغییر رمز عبور...</string>
+    <string name="fillCurrentPassword">رمز عبور فعلی را وارد کنید</string>
+    <string name="fillNewPassword">رمز عبور جدید را وارد کنید</string>
+    <string name="fillConfirmPassword">تکرار رمز عبور جدید را وارد کنید</string>
+    <string name="confirmPasswordIdNotValid">تکرار رمز عبور معتبر نیست!</string>
+    <string name="errorInChangePassword">در تغییر رمز عبور خطایی به وجود آمده است، از دوباره تلاش کنید.</string>
 
 </resources>

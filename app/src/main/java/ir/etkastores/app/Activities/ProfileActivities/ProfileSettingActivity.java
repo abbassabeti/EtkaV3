@@ -140,7 +140,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @OnClick(R.id.changePasswordButton)
     public void onChangePasswordButtonClick() {
-
+        ChangePasswordActivity.show(this);
     }
 
     @OnClick({R.id.specialOfferNotificationButton})

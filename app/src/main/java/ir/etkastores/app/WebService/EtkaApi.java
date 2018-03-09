@@ -13,9 +13,8 @@ import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.Models.hekmat.HekmatModel;
 import ir.etkastores.app.Models.home.OffersResponseModel;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
-import ir.etkastores.app.Models.profile.ResetPasswordRequestModel;
+import ir.etkastores.app.Models.profile.ChangePasswordRequestModel;
 import ir.etkastores.app.Models.store.StoreModel;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -49,7 +48,7 @@ public interface EtkaApi {
 
     //4
     @POST(ApiStatics.RESET_PASSWORD)
-    Call<OauthResponse<String>> resetPassword(@Body ResetPasswordRequestModel resetPasswordRequestModel);
+    Call<OauthResponse<String>> resetPassword(@Body ChangePasswordRequestModel resetPasswordRequestModel);
 
     //5
     @GET(ApiStatics.PRODUCT_CATEGORY_CHILD)
@@ -90,5 +89,9 @@ public interface EtkaApi {
     //14
     @GET(ApiStatics.HOME)
     Call<OffersResponseModel> getOffers(@Query("page") String page);
+
+    //15
+    @POST(ApiStatics.CHANGE_PASSWORD)
+    Call<OauthResponse<String>> changePassword(@Body ChangePasswordRequestModel resetPasswordRequestModel);
 
 }

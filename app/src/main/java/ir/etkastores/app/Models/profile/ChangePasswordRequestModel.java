@@ -2,7 +2,7 @@ package ir.etkastores.app.Models.profile;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResetPasswordRequestModel{
+public class ChangePasswordRequestModel {
 
 	@SerializedName("NewPassword")
 	private String newPassword;
@@ -32,11 +32,11 @@ public class ResetPasswordRequestModel{
 		return userId;
 	}
 
-	public void setCOnfirmPassword(String cOnfirmPassword){
-		this.confirmPassword = cOnfirmPassword;
+	public void setConfirmPassword(String confirmPassword){
+		this.confirmPassword = confirmPassword;
 	}
 
-	public String getCOnfirmPassword(){
+	public String getConfirmPassword(){
 		return confirmPassword;
 	}
 
