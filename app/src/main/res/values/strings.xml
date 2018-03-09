@@ -1,5 +1,5 @@
 <resources>
-    <string name="applicationName">EtkaV3</string>
+    <string name="applicationName">همراه فروشگاه اتکا</string>
 
     <string name="home">خانه</string>
     <string name="search">جستجو</string>
@@ -156,5 +156,8 @@
     <string name="writeCityNameOrStoreName">نام شهر یا فروشگاه را بنویسید...</string>
     <string name="thereIsNoInformationForThisProduct">هیچ اطلاعاتی برای این محصول وجود ندارد!</string>
     <string name="Xtoman">%s تومان</string>
+    <string name="cameraPermissionRationalMessage">برای استفاده از این قسمت، ابتدا نیاز به دسترسی به دوربین وجود دارد.</string>
+    <string name="locationPermissionRationalMessage">برای استفاده از این قسمت، نیاز به دسترسی به سرویس مکان یابی وجود دارد.</string>
+    <string name="continue_">ادامه</string>
 
 </resources>

@@ -13,7 +13,7 @@ import com.google.zxing.Result;
 import java.util.List;
 
 import ir.etkastores.app.BuildConfig;
-import ir.etkastores.app.UI.Toaster;
+import ir.etkastores.app.R;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -71,9 +71,9 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
         }else{
             EasyPermissions.requestPermissions(
                     new PermissionRequest.Builder(this, PERMISSION_REQ_CODE, permissions)
-                            .setRationale("برای استفاده از این قسمت، ابتدا نیاز به دسترسی به دوربین وجود دارد.")
-                            .setPositiveButtonText("ادامه")
-                            .setNegativeButtonText("انصراف")
+                            .setRationale(R.string.cameraPermissionRationalMessage)
+                            .setPositiveButtonText(R.string.continue_)
+                            .setNegativeButtonText(R.string.cancel)
                             .build());
         }
     }

@@ -1,14 +1,17 @@
 package ir.etkastores.app.Fragments;
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +27,6 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -41,6 +43,9 @@ import ir.etkastores.app.Models.store.StoreModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.Utils.SuggestionArrayAdapter;
 import ir.etkastores.app.data.StoresManager;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+import pub.devrel.easypermissions.PermissionRequest;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -50,7 +55,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener,
         GoogleMap.OnMapClickListener,
         StoresManager.StoresCallback,
-        AdapterView.OnItemClickListener {
+        AdapterView.OnItemClickListener,
+        EasyPermissions.PermissionCallbacks, GoogleMap.OnMyLocationChangeListener {
 
     private View view;
 
@@ -67,6 +73,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @BindView(R.id.storeSearchInput)
     AutoCompleteTextView storeSearchInput;
+
+    @BindView(R.id.findMyLocationButton)
+    AppCompatImageView findMyLocationButton;
+
+    String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
+
+    private final static int PERMISSION_REQ_CODE = 1006;
 
     private StoreModel selectedStore;
     private Marker selectedMarker;
@@ -97,7 +110,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         markersHashMap = new HashMap<>();
         map.getUiSettings().setRotateGesturesEnabled(false);
         map.getUiSettings().setCompassEnabled(true);
-        map.getUiSettings().setMapToolbarEnabled(false);
+        map.getUiSettings().setMapToolbarEnabled(true);
+        map.getUiSettings().setMyLocationButtonEnabled(false);
         map.setOnMarkerClickListener(this);
         map.setOnMapClickListener(this);
 
@@ -107,7 +121,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             StoresManager.getInstance().fetchStores(this);
         }
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(chamranPosition, 15));
+        if (!EasyPermissions.hasPermissions(getActivity(),permissions)){
+            findMyLocationButton.setVisibility(View.GONE);
+            requestLocationPermission();
+        }else{
+            findMyLocationButton.setVisibility(View.VISIBLE);
+            findUserLocation();
+        }
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(chamranPosition, 4));
     }
 
     private void addMarker(StoreModel store) {
@@ -231,6 +253,61 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(storeSearchInput.getWindowToken(), 0);
         animateCameraToStore(searchAdapter.getItem(position).getStoreModel());
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults);
+    }
+
+    @Override
+    public void onPermissionsGranted(int i, @NonNull List<String> list) {
+        findUserLocation();
+    }
+
+    @Override
+    public void onPermissionsDenied(int i, @NonNull List<String> list) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, list)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+    }
+
+    private void requestLocationPermission(){
+        EasyPermissions.requestPermissions(
+                new PermissionRequest.Builder(this, PERMISSION_REQ_CODE, permissions)
+                        .setRationale(R.string.locationPermissionRationalMessage)
+                        .setPositiveButtonText(R.string.continue_)
+                        .setNegativeButtonText(R.string.cancel)
+                        .build());
+    }
+
+    private void findUserLocation(){
+        try{
+            map.setMyLocationEnabled(true);
+            map.setOnMyLocationChangeListener(this);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onMyLocationChange(Location location) {
+        try {
+            map.setOnMyLocationChangeListener(null);
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 13));
+        }catch (Exception err){
+            err.printStackTrace();
+        }
+    }
+
+    @OnClick(R.id.findMyLocationButton)
+    public void onFindMyLocationButtonClick(){
+        if (map.getMyLocation() != null){
+            onMyLocationChange(map.getMyLocation());
+        }else{
+            findUserLocation();
+        }
     }
 
 }
