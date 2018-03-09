@@ -173,11 +173,7 @@ public class FactorItemView extends CardView implements View.OnClickListener {
 
             public void bind(PurchasedProductModel purchase){
                 price.setText(purchase.getTitle());
-                if (!TextUtils.isEmpty(purchase.getImageUrl())){
-                    ImageLoader.load(getContext(),image,purchase.getImageUrl());
-                }else{
-                    image.setImageResource(DummyProvider.getRandomImgId());
-                }
+                ImageLoader.loadProductImage(getContext(),image,purchase.getImageUrl());
             }
 
         }

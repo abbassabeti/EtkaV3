@@ -54,7 +54,7 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
 //        bigText.setSummaryText(notification.getMessage());
 
         mBuilder.setContentIntent(pendingIntent);
-        mBuilder.setSmallIcon(R.drawable.ic_audiotrack_light);
+        mBuilder.setSmallIcon(R.drawable.etka_logo_vector);
         mBuilder.setContentTitle(notification.getTitle());
         mBuilder.setContentText(notification.getMessage());
         mBuilder.setPriority(Notification.PRIORITY_MAX);

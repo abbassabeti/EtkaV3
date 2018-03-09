@@ -15,13 +15,16 @@
         <ir.etkastores.app.UI.Widgets.SquareImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="8dp"/>
 
         <TextView
             android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingRight="4dp"
+            android:paddingLeft="4dp"
             android:textSize="@dimen/textSizeVerySmall"
             android:lines="2"
             android:ellipsize="end" />

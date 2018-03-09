@@ -19,7 +19,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Widgets.ViewPagerSquare;
 import ir.etkastores.app.Utils.Image.ImageLoader;
@@ -106,7 +105,7 @@ public class ProductImagesSliderView extends LinearLayout {
         public Object instantiateItem(ViewGroup container, int position) {
             View view  = inflater.inflate(R.layout.home_slider_slide,container,false);
             AppCompatImageView imageView = (AppCompatImageView) view.findViewById(R.id.image);
-            ImageLoader.load(getContext(),imageView,items.get(position));
+            ImageLoader.loadProductImage(getContext(),imageView,items.get(position));
             container.addView(view);
             return view;
         }

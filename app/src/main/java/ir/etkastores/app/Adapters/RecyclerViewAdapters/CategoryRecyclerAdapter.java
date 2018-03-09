@@ -12,11 +12,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.Models.CategoryModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.Utils.Image.ImageLoader;
@@ -73,8 +71,8 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 
         public void bind(final CategoryModel model){
             title.setText(model.getTitle());
-            if (!TextUtils.isEmpty(model.getImageUrl())) ImageLoader.load(context,image,model.getImageUrl());
-            image.setImageResource(DummyProvider.getRandomImgId());
+            if (!TextUtils.isEmpty(model.getImageUrl())) ImageLoader.loadProductImage(context,image,model.getImageUrl());
+            ImageLoader.loadProductImage(context,image,model.getImageUrl());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

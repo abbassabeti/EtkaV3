@@ -11,14 +11,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.Utils.Image.ImageLoader;
 
 /**
  * Created by Sajad on 11/25/17.
@@ -122,7 +121,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
                 name.setText(model.getTitle());
                 price.setText(model.getEtkaPrice());
                 scoreValue.setText(String.format(getResources().getString(R.string.Xpoint),model.getPoint()));
-                image.setImageResource(DummyProvider.getRandomImgId());
+                ImageLoader.loadProductImage(getContext(),image,model.getImageUrl());
             }
 
         }

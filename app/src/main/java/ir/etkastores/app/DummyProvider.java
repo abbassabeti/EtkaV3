@@ -6,10 +6,6 @@ package ir.etkastores.app;
 
 public class DummyProvider {
 
-    public static int getRandomImgId(){
-        return R.drawable.etka_logo_vector;
-    }
-
     private static String[] dates = new String[]{"۱۰ مرداد ۱۳۹۶",
             "۲۱ شهریور ۱۳۹۶",
             "۲۷ مهر ۱۳۹۶",

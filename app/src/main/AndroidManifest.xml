@@ -20,7 +20,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/applicationName"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <meta-data
@@ -32,6 +31,13 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="0eeca3d3f63bb0a30e6a1d10a66becb964f4863d" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/etka_logo_vector" />
+
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimary" />
 
         <activity
             android:name=".Activities.SplashActivity"
