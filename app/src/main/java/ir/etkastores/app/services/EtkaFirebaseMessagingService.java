@@ -48,17 +48,11 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
                 new NotificationCompat.Builder(EtkaApp.getInstnace().getApplicationContext(), "notify_001");
         PendingIntent pendingIntent = PendingIntent.getActivity(EtkaApp.getInstnace().getApplicationContext(), 0, notification.getIntent(), 0);
 
-//        NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
-//        bigText.bigText(notification.getTitle());
-//        bigText.setBigContentTitle(notification.getTitle());
-//        bigText.setSummaryText(notification.getMessage());
-
         mBuilder.setContentIntent(pendingIntent);
-        mBuilder.setSmallIcon(R.drawable.etka_logo_vector);
+        mBuilder.setSmallIcon(R.drawable.ic_etka_notify);
         mBuilder.setContentTitle(notification.getTitle());
         mBuilder.setContentText(notification.getMessage());
         mBuilder.setPriority(Notification.PRIORITY_MAX);
-//        mBuilder.setStyle(bigText);
         mBuilder.setAutoCancel(true);
         mBuilder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
         mBuilder.setLights(Color.RED, 1, 1);

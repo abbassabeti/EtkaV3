@@ -37,7 +37,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/etka_logo_vector" />
+            android:resource="@drawable/ic_etka_notify" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"

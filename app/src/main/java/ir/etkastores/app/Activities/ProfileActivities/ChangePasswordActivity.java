@@ -100,7 +100,7 @@ public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.
         }
 
         requestModel = new ChangePasswordRequestModel();
-        requestModel.setNewPassword(newPasswordInput.getText().toString());
+        requestModel.setCurrentPassword(currentPasswordInput.getText().toString());
         requestModel.setConfirmPassword(confirmPasswordInput.getText().toString());
         requestModel.setNewPassword(newPasswordInput.getText().toString());
         requestModel.setUserId(DiskDataHelper.getLastToken().getUserId());
