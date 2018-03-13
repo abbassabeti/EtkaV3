@@ -43,7 +43,6 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Log.i("EtkaV3", "Remote config fetch success.");
                     firebaseRemoteConfig.activateFetched();
                     String baseUrl = firebaseRemoteConfig.getString("v3_api_server");
                     String minVersion = firebaseRemoteConfig.getString("v3_force_update_min_version_code");
@@ -68,9 +67,9 @@ public class SplashActivity extends BaseActivity {
                         });
                         return;
                     }
-                    ApiStatics.BASE_URL = baseUrl;
+                    ApiStatics.setBaseUrl(baseUrl);
                 } else {
-                    Log.i("EtkaV3", "Remote config fetch failure.");
+
                 }
                 prepareAppForRun();
             }

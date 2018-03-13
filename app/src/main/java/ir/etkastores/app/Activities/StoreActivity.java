@@ -67,11 +67,6 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         storeModel = new Gson().fromJson(getIntent().getStringExtra(STORE_KEY), StoreModel.class);
 
         toolbar.setActionListeners(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         fillViews();
     }
 
@@ -129,7 +124,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toaster.show(StoreActivity.this, "" + phoneNumber);
+                IntentHelper.showDialer(StoreActivity.this,phoneNumber);
             }
         });
         mainHolder.addView(view);

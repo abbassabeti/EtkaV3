@@ -1,6 +1,6 @@
 package ir.etkastores.app.Utils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -12,30 +12,30 @@ import ir.etkastores.app.R;
 
 public class IntentHelper {
 
-    public static void openWayTracer(Activity activity, double lat, double lon){
+    public static void openWayTracer(Context context, double lat, double lon){
         try {
             String uri = "geo:" + lat + "," + lon + "?q=";
-            activity.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
+            context.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
         }catch (Exception err){
-            showWeb(activity,getGoogleMapLocationAddress(lat,lon));
+            showWeb(context,getGoogleMapLocationAddress(lat,lon));
         }
     }
 
-    public static void showWeb(Activity activity, String url){
+    public static void showWeb(Context context, String url){
         try {
-            activity.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url)));
+            context.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url)));
         }catch (Exception err){
             err.printStackTrace();
         }
     }
 
-    public static void share(Activity activity,String title, String body){
+    public static void share(Context context, String title, String body){
         try {
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
-            activity.startActivity(Intent.createChooser(sharingIntent, activity.getResources().getString(R.string.shareUsing)));
+            context.startActivity(Intent.createChooser(sharingIntent, context.getResources().getString(R.string.shareUsing)));
         }catch (Exception err){
             err.printStackTrace();
         }
@@ -43,6 +43,16 @@ public class IntentHelper {
 
     public static String getGoogleMapLocationAddress(double lat, double lng){
         return "http://maps.google.com/maps?saddr=" +lat+","+lng;
+    }
+
+    public static void showDialer(Context context, String number){
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:"+number));
+            context.startActivity(intent);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
 }

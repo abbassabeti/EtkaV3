@@ -47,7 +47,7 @@
                 android:clickable="true"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                app:srcCompat="@drawable/ic_camera_black_24dp" />
+                app:srcCompat="@drawable/ic_barcode_scanner" />
 
             <EditText
                 android:id="@+id/searchEditText"

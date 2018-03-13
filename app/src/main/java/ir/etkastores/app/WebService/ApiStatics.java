@@ -1,5 +1,7 @@
 package ir.etkastores.app.WebService;
 
+import android.text.TextUtils;
+
 import ir.etkastores.app.Utils.DiskDataHelper;
 
 /**
@@ -8,7 +10,23 @@ import ir.etkastores.app.Utils.DiskDataHelper;
 
 public class ApiStatics {
 
-    public static String BASE_URL = "http://217.147.92.168:8008";
+    private static final String BASE_URL_KEY = "BASE_URL";
+    private static String BASE_URL = "http://46.209.6.91:4102";
+
+    public static String getBaseUrl(){
+        String savedUrl = DiskDataHelper.getString(BASE_URL_KEY);
+        if (TextUtils.isEmpty(savedUrl)){
+            return BASE_URL;
+        }else{
+            BASE_URL = savedUrl;
+        }
+        return BASE_URL;
+    }
+
+    public static void setBaseUrl(String url){
+        DiskDataHelper.putString(BASE_URL_KEY,url);
+        BASE_URL = url;
+    }
 
     public static final String TOKEN = "/Token";
     public static final String REGISTER = "/api/v1/Account/Register";

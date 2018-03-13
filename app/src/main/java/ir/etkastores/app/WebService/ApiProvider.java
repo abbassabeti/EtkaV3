@@ -15,7 +15,6 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static ir.etkastores.app.WebService.ApiStatics.BASE_URL;
 
 /**
  * Created by Sajad on 9/3/17.
@@ -32,7 +31,7 @@ public class ApiProvider {
         httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(getLogInterceptor());
         builder = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(ApiStatics.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create());
 
         OkHttpClient client = httpClient.build();
@@ -44,7 +43,7 @@ public class ApiProvider {
         httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(getLogInterceptor());
         builder = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(ApiStatics.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create());
 
         if (accessToken == null){
