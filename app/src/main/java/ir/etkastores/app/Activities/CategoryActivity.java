@@ -31,7 +31,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoryRecyclerAdapter.OnCategoryItemClickListener, ProductsRecyclerAdapter.ProductsRecyclerCallbacks {
+public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener,
+        CategoryRecyclerAdapter.OnCategoryItemClickListener,
+        ProductsRecyclerAdapter.ProductsRecyclerCallbacks {
 
     private final static String CATEGORY_DATA_MODEL = "CATEGORY_DATA_MODEL";
     private final static String SEARCH_DATA_MODEL = "SEARCH_DATA_MODEL";
@@ -56,6 +58,9 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     @BindView(R.id.circularProgress)
     ProgressBar circularProgress;
+
+    @BindView(R.id.linearProgress)
+    ProgressBar linearProgress;
 
     @BindView(R.id.messageView)
     MessageView messageView;
@@ -204,11 +209,13 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     }
 
     private void showLoading() {
-        circularProgress.setVisibility(View.VISIBLE);
+        if (searchRequestModel.getPage()==1) circularProgress.setVisibility(View.VISIBLE);
+        linearProgress.setVisibility(View.VISIBLE);
     }
 
     private void hideLoading() {
         circularProgress.setVisibility(View.GONE);
+        linearProgress.setVisibility(View.GONE);
     }
 
     @Override

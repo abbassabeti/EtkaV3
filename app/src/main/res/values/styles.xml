@@ -141,4 +141,13 @@
         <item name="cardBackgroundColor">@color/white</item>
     </style>
 
+    <style name="linearProgressStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:colorAccent">@color/colorPrimary</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateTint">@color/colorPrimary</item>
+        <item name="android:indeterminateTintMode">multiply</item>
+        <item name="android:progressBackgroundTint">@color/colorPrimary</item>
+        <item name="android:progressTint">@color/colorPrimary</item>
+    </style>
+
 </resources>

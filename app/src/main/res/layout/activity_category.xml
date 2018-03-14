@@ -29,6 +29,13 @@
             android:layout_centerInParent="true"
             android:visibility="gone"/>
 
+        <ProgressBar
+            android:id="@+id/linearProgress"
+            style="@style/linearProgressStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
         <ir.etkastores.app.UI.Views.MessageView
             android:id="@+id/messageView"
             android:layout_width="match_parent"
