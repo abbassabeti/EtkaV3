@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnTextChanged;
 import ir.etkastores.app.Adapters.RecyclerViewAdapters.StoresRecyclerAdapter;
 import ir.etkastores.app.Models.hekmat.HekmatProductModel;
 import ir.etkastores.app.Models.store.StoreModel;
@@ -88,7 +90,6 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
         adapter.setOnStoreSelectListener(this);
         recyclerView.setAdapter(adapter);
         searchInputEt.setEnabled(false);
-        searchInputEt.addTextChangedListener(searchTextWatcher);
         recyclerView.requestFocus();
         StoresManager.getInstance().fetchStores(this);
     }
@@ -144,23 +145,9 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
         }
     }
 
-    TextWatcher searchTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-            if (searchInputEt.getText().length()>2){
-                adapter.filterKeyword(searchInputEt.getText().toString());
-            }
-        }
-    };
+    @OnTextChanged(R.id.searchInputEt)
+    public void onSearchTextChanged(CharSequence s){
+        adapter.filterKeyword(searchInputEt.getText().toString());
+    }
 
 }

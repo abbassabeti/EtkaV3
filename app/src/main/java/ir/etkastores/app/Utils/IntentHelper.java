@@ -42,7 +42,7 @@ public class IntentHelper {
     }
 
     public static String getGoogleMapLocationAddress(double lat, double lng){
-        return "http://maps.google.com/maps?saddr=" +lat+","+lng;
+        return "https://www.google.com/maps/search/?api=1&query="+lat+","+lng;
     }
 
     public static void showDialer(Context context, String number){

@@ -63,11 +63,11 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
     }
 
     private void showCategories() {
-        ActivityUtils.addFragment(getActivity(), R.id.searchContentFrame, CategoriesFragment.newInstance(0), "", false);
+        ActivityUtils.addChildFragment(this, R.id.searchContentFrame, CategoriesFragment.newInstance(0), "", false);
     }
 
     private void showAdvancedSearch() {
-        ActivityUtils.replaceFragment(getActivity(), R.id.searchContentFrame, SearchAdvancedFragment.newInstance(), "", false);
+        ActivityUtils.replaceChildFragment(this, R.id.searchContentFrame, SearchAdvancedFragment.newInstance(), "", false);
     }
 
     @OnClick(R.id.scanButton)

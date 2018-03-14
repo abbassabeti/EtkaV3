@@ -17,8 +17,20 @@ public class ActivityUtils {
         transaction.commitAllowingStateLoss();
     }
 
+    public static void replaceChildFragment(Fragment parentFragment, int fragmentHolder, Fragment fragment, String tag, boolean addToBackStack){
+        FragmentTransaction transaction = parentFragment.getChildFragmentManager().beginTransaction().replace(fragmentHolder,fragment,tag);
+        if (addToBackStack) transaction.addToBackStack("");
+        transaction.commitAllowingStateLoss();
+    }
+
     public static void addFragment(FragmentActivity activity,int fragmentHolder, Fragment fragment,String tag,boolean addToBackStack){
         FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction().add(fragmentHolder,fragment,tag);
+        if (addToBackStack) transaction.addToBackStack("");
+        transaction.commitAllowingStateLoss();
+    }
+
+    public static void addChildFragment(Fragment parentFragment,int fragmentHolder, Fragment fragment,String tag,boolean addToBackStack){
+        FragmentTransaction transaction = parentFragment.getChildFragmentManager().beginTransaction().add(fragmentHolder,fragment,tag);
         if (addToBackStack) transaction.addToBackStack("");
         transaction.commitAllowingStateLoss();
     }

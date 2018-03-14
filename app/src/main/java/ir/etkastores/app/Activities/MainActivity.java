@@ -15,8 +15,11 @@ import ir.etkastores.app.Fragments.ProfileFragment;
 import ir.etkastores.app.Fragments.SearchFragments.SearchTabFragment;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
+import ir.etkastores.app.data.ProfileManager;
 
 public class MainActivity extends BaseActivity {
+
+    private final static String CURRENT_SELECTED_HOME_FRAGMENT_TAG = "CURRENT_SELECTED_HOME_FRAGMENT_TAG";
 
     @BindView(R.id.mainBottomNavigation)
     BottomNavigationViewEx bottomNavigationView;
@@ -43,19 +46,27 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_home:
-                    replaceFragment(new HomeFragment());
+                    if (!(getCurrentFragment() instanceof  HomeFragment)){
+                        replaceFragment(new HomeFragment());
+                    }
                     break;
 
                 case R.id.navigation_map:
-                    replaceFragment(new MapFragment());
+                    if (!(getCurrentFragment() instanceof  MapFragment)){
+                        replaceFragment(new MapFragment());
+                    }
                     break;
 
                 case R.id.navigation_profile:
-                    replaceFragment(new ProfileFragment());
+                    if (!(getCurrentFragment() instanceof ProfileFragment)){
+                        replaceFragment(new ProfileFragment());
+                    }
                     break;
 
                 case R.id.navigation_search:
-                    replaceFragment(new SearchTabFragment());
+                    if (!(getCurrentFragment() instanceof SearchTabFragment)){
+                        replaceFragment(new SearchTabFragment());
+                    }
                     break;
             }
 
@@ -64,7 +75,11 @@ public class MainActivity extends BaseActivity {
     };
 
     private void replaceFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder, fragment).commitNowAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder, fragment,CURRENT_SELECTED_HOME_FRAGMENT_TAG).commitAllowingStateLoss();
+    }
+
+    public Fragment getCurrentFragment(){
+        return getSupportFragmentManager().findFragmentByTag(CURRENT_SELECTED_HOME_FRAGMENT_TAG);
     }
 
     @Override
