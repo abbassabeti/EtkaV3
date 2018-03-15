@@ -18,6 +18,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawableResource(R.color.mainBackgeoundColor);
+        overridePendingTransition(0, 0);
     }
 
     @Override

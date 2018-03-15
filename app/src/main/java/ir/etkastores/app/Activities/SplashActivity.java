@@ -81,16 +81,16 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    Intent intent = new Intent(SplashActivity.this, LoginRegisterActivity.class);
-                    if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
-                        intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, getIntent().getStringExtra(NotificationModel.IS_FROM_NOTIFICATION));
-                        intent.putExtra(NotificationModel.ACTION_CODE, getIntent().getStringExtra(NotificationModel.ACTION_CODE));
-                        if (getIntent().hasExtra(NotificationModel.DATA)) {
-                            intent.putExtra(NotificationModel.DATA, getIntent().getStringExtra(NotificationModel.DATA));
-                        }
-                    }
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
+//                    Intent intent = new Intent(SplashActivity.this, LoginRegisterActivity.class);
+//                    if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
+//                        intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, getIntent().getStringExtra(NotificationModel.IS_FROM_NOTIFICATION));
+//                        intent.putExtra(NotificationModel.ACTION_CODE, getIntent().getStringExtra(NotificationModel.ACTION_CODE));
+//                        if (getIntent().hasExtra(NotificationModel.DATA)) {
+//                            intent.putExtra(NotificationModel.DATA, getIntent().getStringExtra(NotificationModel.DATA));
+//                        }
+//                    }
+//                    startActivity(intent);
+                    LoginRegisterActivity.showLogin(SplashActivity.this);
                     finish();
                 } catch (Exception err) {
                 }

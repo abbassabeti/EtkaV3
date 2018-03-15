@@ -73,7 +73,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
 
     @OnClick(R.id.loginButton)
     public void onLoginClick(){
-        ActivityUtils.replaceFragment(getActivity(),R.id.introFragmentsHolder,new LoginFragment(),LoginFragment.TAG,true);
+        ActivityUtils.replaceFragment(getActivity(),R.id.loginRegisterFragmentHolder,new LoginFragment(),LoginFragment.TAG,true);
     }
 
     @Override
