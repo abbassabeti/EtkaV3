@@ -37,8 +37,6 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
 
     public static final String TAG = "REGISTER_FRAGMENT_TAG";
 
-    @BindView(R.id.toolbar)
-    EtkaToolbar toolbar;
     @BindView(R.id.firstNameInput)
     AppCompatEditText firsNameInput;
     @BindView(R.id.lastNameInput)
@@ -70,8 +68,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
     }
 
     private void initToolbar(){
-        toolbar.setTitle(R.string.register);
-        toolbar.setActionListeners(this);
+
     }
 
     @OnClick(R.id.loginButton)

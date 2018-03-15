@@ -60,7 +60,7 @@
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
 
         <activity
-            android:name=".Activities.IntroActivity"
+            android:name=".Activities.LoginRegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
 

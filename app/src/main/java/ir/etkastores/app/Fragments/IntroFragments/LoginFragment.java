@@ -52,9 +52,6 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     private int loginType;
 
-    @BindView(R.id.toolbar)
-    EtkaToolbar toolbar;
-
     @BindView(R.id.clubCardCheckBox)
     AppCompatCheckBox clubCardCheckBox;
 
@@ -117,8 +114,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     }
 
     private void initToolbar() {
-        toolbar.setTitle(R.string.enter);
-        toolbar.setActionListeners(this);
+
     }
 
     @OnClick(R.id.clubCardCheckBoxHolder)

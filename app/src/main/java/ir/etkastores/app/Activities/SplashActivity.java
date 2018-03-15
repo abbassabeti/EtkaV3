@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -82,7 +81,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    Intent intent = new Intent(SplashActivity.this, IntroActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, LoginRegisterActivity.class);
                     if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
                         intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, getIntent().getStringExtra(NotificationModel.IS_FROM_NOTIFICATION));
                         intent.putExtra(NotificationModel.ACTION_CODE, getIntent().getStringExtra(NotificationModel.ACTION_CODE));

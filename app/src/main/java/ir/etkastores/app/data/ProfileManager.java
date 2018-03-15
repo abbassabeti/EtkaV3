@@ -54,4 +54,12 @@ public class ProfileManager {
         }
     }
 
+    public static boolean isLogin(){
+        return false;
+    }
+
+    public static void logOut(){
+
+    }
+
 }
