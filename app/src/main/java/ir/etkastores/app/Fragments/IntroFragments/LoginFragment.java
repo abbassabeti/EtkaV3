@@ -177,8 +177,8 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     private void showManualLoginControl() {
         loginType = LOGIN_TYPE_EMAIL;
-        passwordInput.setText("#abcE1234#");
-        emailAddressInput.setText("sajadgarshasbi@gmail.com");
+//        passwordInput.setText("#abcE1234#");
+//        emailAddressInput.setText("sajadgarshasbi@gmail.com");
         emailAddressInputHolder.setVisibility(View.VISIBLE);
         passwordInputHolder.setVisibility(View.VISIBLE);
         clubCardNumberInputHolder.setVisibility(View.GONE);

@@ -209,7 +209,8 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     }
 
     private void showLoading() {
-        if (searchRequestModel.getPage()==1) circularProgress.setVisibility(View.VISIBLE);
+        if (searchRequestModel == null || searchRequestModel.getPage() == 1)
+            circularProgress.setVisibility(View.VISIBLE);
         linearProgress.setVisibility(View.VISIBLE);
     }
 

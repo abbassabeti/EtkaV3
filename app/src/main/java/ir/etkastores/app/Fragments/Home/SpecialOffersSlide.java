@@ -19,7 +19,6 @@ import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.Models.home.OffersItemModel;
 import ir.etkastores.app.Models.home.OffersResponseModel;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.CategoryGroupHorizontalView;
 import ir.etkastores.app.UI.Views.MessageView;
 import ir.etkastores.app.WebService.ApiProvider;
@@ -141,7 +140,18 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger, Categor
 
     @Override
     public void onProductClick(ProductModel productModel) {
-        ProductActivity.show(getActivity(),productModel);
+        ProductActivity.show(getActivity(), productModel);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (offersReq != null) offersReq.cancel();
     }
 
 }
