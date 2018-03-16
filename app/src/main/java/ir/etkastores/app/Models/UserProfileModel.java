@@ -2,7 +2,6 @@ package ir.etkastores.app.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,7 +50,7 @@ public class UserProfileModel {
     String address;
 
     @SerializedName("gender")
-    int gender;
+    Integer gender;
 
     @SerializedName("education")
     String education;
@@ -109,7 +108,7 @@ public class UserProfileModel {
         return address;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 
@@ -198,6 +197,7 @@ public class UserProfileModel {
     }
 
     public String getGenderValue(){
+        if (getGender() == null) return "-";
         if (getGender() == 0){
             return EtkaApp.getInstnace().getResources().getString(R.string.male);
         }else{

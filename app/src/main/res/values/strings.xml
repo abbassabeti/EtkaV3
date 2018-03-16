@@ -95,7 +95,7 @@
 
     <string name="firstNameCantBeEmpty">نام نباید خالی باشد!</string>
     <string name="lastNameCantBeEmpty">نام خانوادگی نباید خالی باشد!</string>
-    <string name="emailAddresCantBeEmpty">آدرس ایمیل ننباید خالی باشد!</string>
+    <string name="emailAddresCantBeEmpty">آدرس ایمیل نباید خالی باشد!</string>
     <string name="passwordCantBeEmpty">رمز عبور نباید خالی باشد!</string>
     <string name="inRegistering">در حال ثبت نام...</string>
     <string name="registerSuccessful">ثبت نام با موفقیت انجام شد.</string>
@@ -168,5 +168,9 @@
     <string name="fillConfirmPassword">تکرار رمز عبور جدید را وارد کنید</string>
     <string name="confirmPasswordIdNotValid">تکرار رمز عبور معتبر نیست!</string>
     <string name="errorInChangePassword">در تغییر رمز عبور خطایی به وجود آمده است، از دوباره تلاش کنید.</string>
+    <string name="loginRequiredForThisSection">برای استفاده از این قسمت ابتدا باید وارد حساب کاربری خود شوید.</string>
+    <string name="userAccountRequired">حساب کاربری مورد نیاز است!</string>
+    <string name="guestUser">کاربر میهمان</string>
+    <string name="loginSuccessfulMessage">ورود به حساب کاربری با موفقیت انجام شد.</string>
 
 </resources>

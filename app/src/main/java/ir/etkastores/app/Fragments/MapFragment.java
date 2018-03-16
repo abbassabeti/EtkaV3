@@ -206,7 +206,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         try {
             if (mapView != null) mapView.onResume();
         } catch (Exception err) {
-            Log.e("failure", "map stores");
+            err.printStackTrace();
         }
     }
 
@@ -224,7 +224,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         try {
             if (mapView != null) mapView.onPause();
         } catch (Exception err) {
-            Log.e("failure", "map stores");
+            err.printStackTrace();
         }
     }
 
@@ -234,7 +234,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         try {
             if (mapView != null) mapView.onDestroy();
         } catch (Exception err) {
-            Log.e("failure", "map stores");
+            err.printStackTrace();
         }
     }
 
@@ -244,7 +244,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         try {
             if (mapView != null) mapView.onLowMemory();
         } catch (Exception err) {
-            Log.e("failure", "map stores");
+            err.printStackTrace();
         }
     }
 
@@ -258,11 +258,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
     }
 
     @Override
     public void onPermissionsGranted(int i, @NonNull List<String> list) {
+        findMyLocationButton.setVisibility(View.VISIBLE);
         findUserLocation();
     }
 

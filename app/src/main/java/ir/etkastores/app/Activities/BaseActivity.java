@@ -26,4 +26,10 @@ public class BaseActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(context));
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
+    }
+
 }

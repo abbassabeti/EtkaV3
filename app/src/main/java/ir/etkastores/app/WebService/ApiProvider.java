@@ -3,6 +3,7 @@ package ir.etkastores.app.WebService;
 
 import java.io.IOException;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.Utils.DiskDataHelper;
 import okhttp3.Authenticator;
 import okhttp3.Interceptor;
@@ -29,7 +30,10 @@ public class ApiProvider {
 
     public static <S> S createService(Class<S> serviceClass) {
         httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(getLogInterceptor());
+        if (BuildConfig.DEBUG){
+            httpClient.addInterceptor(getBodyLogInterceptor());
+            httpClient.addInterceptor(getHeadersLogInterceptor());
+        }
         builder = new Retrofit.Builder()
                 .baseUrl(ApiStatics.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create());
@@ -41,7 +45,10 @@ public class ApiProvider {
 
     public static <S> S createService(Class<S> serviceClass, AccessToken accessToken) {
         httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(getLogInterceptor());
+        if (BuildConfig.DEBUG){
+            httpClient.addInterceptor(getBodyLogInterceptor());
+            httpClient.addInterceptor(getHeadersLogInterceptor());
+        }
         builder = new Retrofit.Builder()
                 .baseUrl(ApiStatics.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create());
@@ -127,9 +134,15 @@ public class ApiProvider {
 
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
-    private static HttpLoggingInterceptor getLogInterceptor(){
+    private static HttpLoggingInterceptor getBodyLogInterceptor(){
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return logging;
+    }
+
+    private static HttpLoggingInterceptor getHeadersLogInterceptor(){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
         return logging;
     }
 

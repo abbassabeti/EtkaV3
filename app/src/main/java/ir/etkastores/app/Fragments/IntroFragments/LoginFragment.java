@@ -196,7 +196,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     }
 
     Call<AccessToken> loginRequest;
-    private void login(String userName,String password){
+    private void login(final String userName, final String password){
         loadingDialog = DialogHelper.showLoading(getActivity(),R.string.inLogin);
         loginRequest = ApiProvider.getLogin(userName,password);
         loginRequest.enqueue(new Callback<AccessToken>() {
@@ -206,6 +206,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
                 loadingDialog.cancel();
                 if (response.isSuccessful()){
                     ApiStatics.saveToken(response.body());
+                    ProfileManager.saveUserNameAndPassword(userName,password);
                     loadProfile();
                 }else{
                     onFailure(null,null);
@@ -219,20 +220,6 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
                 showRetryDialog();
             }
         });
-    }
-
-    private void goToApp() {
-        StoresManager.getInstance().fetchStores(null);
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        if (getActivity().getIntent() != null && getActivity().getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
-            intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, getActivity().getIntent().getStringExtra(NotificationModel.IS_FROM_NOTIFICATION));
-            intent.putExtra(NotificationModel.ACTION_CODE, getActivity().getIntent().getStringExtra(NotificationModel.ACTION_CODE));
-            if (getActivity().getIntent().hasExtra(NotificationModel.DATA)){
-                intent.putExtra(NotificationModel.DATA, getActivity().getIntent().getStringExtra(NotificationModel.DATA));
-            }
-        }
-        getActivity().startActivity(intent);
-        getActivity().finish();
     }
 
     @Override
@@ -267,14 +254,15 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     private void loadProfile(){
         loadingDialog = DialogHelper.showLoading(getActivity(),R.string.inLoadingUserProfileInfo);
-        ApiProvider.getApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
+        ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
                 if (!isAdded()) return;
                 if (response.isSuccessful()){
                     if (response.body().isSuccessful()){
                         ProfileManager.saveProfile(response.body().getData());
-                        goToApp();
+                        Toaster.showLong(getActivity(),R.string.loginSuccessfulMessage);
+                        getActivity().finish();
                     }else{
                         showRetryDialog();
                     }

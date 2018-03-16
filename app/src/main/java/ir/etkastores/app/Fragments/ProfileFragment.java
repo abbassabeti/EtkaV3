@@ -15,6 +15,7 @@ import com.google.zxing.BarcodeFormat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.Activities.LoginRegisterActivity;
 import ir.etkastores.app.Activities.ProfileActivities.FAQActivity;
 import ir.etkastores.app.Activities.ProfileActivities.HekmatActivity;
 import ir.etkastores.app.Activities.ProfileActivities.InviteFriendsActivity;
@@ -26,6 +27,7 @@ import ir.etkastores.app.Activities.ProfileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.Activities.ProfileActivities.SupportActivity;
 import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Views.CustomRowMenuItem;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.Utils.BarcodeUtils;
@@ -67,9 +69,27 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     private void initViews() {
         toolbar.setActionListeners(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (ProfileManager.isGuest()){
+            initGuestUser();
+        }else{
+            initLoginUser();
+        }
+    }
+
+    private void initLoginUser(){
         UserProfileModel profile = ProfileManager.getProfile();
         userName.setText(profile.getFirstName() + " " + profile.getLastName());
         scoreMenu.setText(String.format(getResources().getString(R.string.youHaveXScore), profile.getTotalPoints()));
+    }
+
+    private void initGuestUser(){
+        userName.setText(R.string.guestUser);
+        scoreMenu.setText(getResources().getString(R.string.yourScore));
     }
 
     @Override
@@ -80,27 +100,47 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick() {
-        HekmatActivity.show(getActivity());
+        if (ProfileManager.isGuest()){
+            showLoginRequiredDialog();
+        }else{
+            HekmatActivity.show(getActivity());
+        }
     }
 
     @OnClick(R.id.scoreMenu)
     public void onScoreMenuClick() {
-        ScoresActivity.start(getActivity());
+        if (ProfileManager.isGuest()){
+            showLoginRequiredDialog();
+        }else{
+            ScoresActivity.start(getActivity());
+        }
     }
 
     @OnClick(R.id.nextShoppingListMenu)
     public void onNextShoppingListMenuClick() {
-        NextShoppingListActivity.start(getActivity());
+        if (ProfileManager.isGuest()){
+            showLoginRequiredDialog();
+        }else{
+            NextShoppingListActivity.start(getActivity());
+        }
     }
 
     @OnClick(R.id.shoppingHistoryMenu)
     public void onShoppingHistoryMenuClick() {
-        ShoppingHistoryActivity.start(getActivity());
+        if (ProfileManager.isGuest()){
+            showLoginRequiredDialog();
+        }else{
+            ShoppingHistoryActivity.start(getActivity());
+        }
     }
 
     @OnClick(R.id.inviteFriendsMenu)
     public void onInviteFriendsMenuClick() {
-        InviteFriendsActivity.start(getActivity());
+        if (ProfileManager.isGuest()){
+            showLoginRequiredDialog();
+        }else{
+            InviteFriendsActivity.start(getActivity());
+        }
     }
 
     @OnClick(R.id.faqMenu)
@@ -127,7 +167,11 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
                 break;
 
             case SETTING_BUTTON:
-                ProfileSettingActivity.start(getActivity());
+                if (ProfileManager.isGuest()){
+                    showLoginRequiredDialog();
+                }else{
+                    ProfileSettingActivity.start(getActivity());
+                }
                 break;
 
         }
@@ -137,5 +181,24 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     public void onDestroyView() {
         super.onDestroyView();
     }
+
+    private void showLoginRequiredDialog(){
+        final MessageDialog messageDialog = MessageDialog.loginRequired();
+        messageDialog.show(getChildFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (button == RIGHT_BUTTON){
+                    LoginRegisterActivity.showLogin(getActivity());
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
+    }
+
 
 }

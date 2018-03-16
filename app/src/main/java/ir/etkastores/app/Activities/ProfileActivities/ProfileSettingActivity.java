@@ -99,7 +99,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
             mobilePhone.setLeftText(profile.getCellPhone());
         }
 
-        gender.setLeftText(profile.getGenderValue() + "");
+        gender.setLeftText(profile.getGenderValue());
 
         if (TextUtils.isEmpty(profile.getEducation())) {
             education.setLeftText("-");

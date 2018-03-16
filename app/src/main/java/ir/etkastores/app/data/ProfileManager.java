@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.Models.UserProfileModel;
+import ir.etkastores.app.Utils.DiskDataHelper;
 
 /**
  * Created by Sajad on 2/13/18.
@@ -11,6 +12,10 @@ import ir.etkastores.app.Models.UserProfileModel;
 
 public class ProfileManager {
 
+    private static final String GUEST_USER_NAME = "GuestUser";
+    private static final String GUEST_USER_PASSWORD = "Et_#usj78Se";
+    private static final String USER_NAME = "USER_NAME";
+    private static final String USER_PASSWORD = "USER_PASSWORD";
     private final static String PROFILE_KEY = "PROFILE_KEY";
 
     private static UserProfileModel profileModel;
@@ -54,12 +59,38 @@ public class ProfileManager {
         }
     }
 
-    public static boolean isLogin(){
-        return false;
+    public static boolean isGuest(){
+        UserProfileModel profile = getProfile();
+        if (profile != null && !profile.getUserName().contentEquals(GUEST_USER_NAME)){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static void logOut(){
 
+    }
+
+    public static String getUserName(){
+        if (isGuest()){
+            return GUEST_USER_NAME;
+        }else{
+            return DiskDataHelper.getString(USER_NAME);
+        }
+    }
+
+    public static String getUserPassword(){
+        if (isGuest()){
+            return GUEST_USER_PASSWORD;
+        }else{
+            return DiskDataHelper.getString(USER_PASSWORD);
+        }
+    }
+
+    public static void saveUserNameAndPassword(String userName, String password){
+        DiskDataHelper.putString(USER_NAME,userName);
+        DiskDataHelper.putString(USER_PASSWORD,password);
     }
 
 }

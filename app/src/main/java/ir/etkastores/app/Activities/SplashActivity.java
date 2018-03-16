@@ -1,5 +1,6 @@
 package ir.etkastores.app.Activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,16 +13,26 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import ir.etkastores.app.BuildConfig;
-import ir.etkastores.app.Models.NotificationModel;
+import ir.etkastores.app.Models.OauthResponse;
+import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
+import ir.etkastores.app.Utils.DialogHelper;
 import ir.etkastores.app.Utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.Utils.IntentHelper;
+import ir.etkastores.app.WebService.AccessToken;
+import ir.etkastores.app.WebService.ApiProvider;
 import ir.etkastores.app.WebService.ApiStatics;
+import ir.etkastores.app.data.ProfileManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashActivity extends BaseActivity {
 
-    FirebaseRemoteConfig firebaseRemoteConfig;
+    private FirebaseRemoteConfig firebaseRemoteConfig;
+
+    private AlertDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,22 +91,15 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-//                    Intent intent = new Intent(SplashActivity.this, LoginRegisterActivity.class);
-//                    if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
-//                        intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, getIntent().getStringExtra(NotificationModel.IS_FROM_NOTIFICATION));
-//                        intent.putExtra(NotificationModel.ACTION_CODE, getIntent().getStringExtra(NotificationModel.ACTION_CODE));
-//                        if (getIntent().hasExtra(NotificationModel.DATA)) {
-//                            intent.putExtra(NotificationModel.DATA, getIntent().getStringExtra(NotificationModel.DATA));
-//                        }
-//                    }
-//                    startActivity(intent);
-                    LoginRegisterActivity.showLogin(SplashActivity.this);
-                    finish();
-                } catch (Exception err) {
-                }
+                login();
+//                try {
+//                    login();
+////                    LoginRegisterActivity.showLogin(SplashActivity.this);
+////                    finish();
+//                } catch (Exception err) {
+//                }
             }
-        }, 2000);
+        }, 500);
     }
 
     private void initMap() {
@@ -114,6 +118,86 @@ public class SplashActivity extends BaseActivity {
 
     private void prepareAppForRun() {
         initMap();
+    }
+
+
+    Call<AccessToken> loginRequest;
+    private void login(){
+        loadingDialog = DialogHelper.showLoading(this,R.string.inLogin);
+        loginRequest = ApiProvider.getLogin(ProfileManager.getUserName(),ProfileManager.getUserPassword());
+        loginRequest.enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+                loadingDialog.cancel();
+                if (response.isSuccessful()){
+                    ApiStatics.saveToken(response.body());
+                    if (ProfileManager.isGuest()){
+                        gotoApp();
+                    }else{
+                        loadProfile();
+                    }
+                }else{
+                    onFailure(null,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AccessToken> call, Throwable t) {
+                loadingDialog.cancel();
+                showRetryDialog();
+            }
+        });
+    }
+
+    void showRetryDialog(){
+        final MessageDialog messageDialog = MessageDialog.loginError();
+        messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (button == RIGHT_BUTTON){
+                    login();
+                }else{
+                    finish();
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+                messageDialog.getDialog().cancel();
+            }
+        });
+    }
+
+    private void loadProfile(){
+        loadingDialog = DialogHelper.showLoading(this,R.string.inLoadingUserProfileInfo);
+        ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+                        ProfileManager.saveProfile(response.body().getData());
+                        gotoApp();
+                    }else{
+                        showRetryDialog();
+                    }
+                }else{
+                    onFailure(null,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
+                loadingDialog.cancel();
+                showRetryDialog();
+            }
+        });
+    }
+
+    private void gotoApp(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

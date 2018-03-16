@@ -127,6 +127,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
         registerApi.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
+                if (!isAdded()) return;
                 loadingDialog.cancel();
                 if (response.isSuccessful()){
                     if (response.body().isSuccessful()){
@@ -148,6 +149,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
 
             @Override
             public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
+                if (!isAdded()) return;
                 loadingDialog.cancel();
                 showRetryDialog(EtkaApp.getInstnace().getResources().getString(R.string.registerFailTryLater));
             }
@@ -160,7 +162,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 if (button == RIGHT_BUTTON){
-
+                    register();
                 }
                 messageDialog.getDialog().cancel();
             }
