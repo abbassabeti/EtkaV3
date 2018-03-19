@@ -1,5 +1,7 @@
 package ir.etkastores.app.data;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 
 import ir.etkastores.app.EtkaApp;
@@ -61,7 +63,7 @@ public class ProfileManager {
 
     public static boolean isGuest(){
         UserProfileModel profile = getProfile();
-        if (profile != null && !profile.getUserName().contentEquals(GUEST_USER_NAME)){
+        if (profile != null && !TextUtils.isEmpty(profile.getUserName()) && !profile.getUserName().contentEquals(GUEST_USER_NAME)){
             return false;
         }else{
             return true;
