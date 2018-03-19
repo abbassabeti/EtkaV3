@@ -3,6 +3,7 @@ package ir.etkastores.app.Activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.UI.Views.StorePagerSliderView;
+import ir.etkastores.app.Utils.Image.ImageLoader;
 import ir.etkastores.app.Utils.IntentHelper;
 
 import android.os.Handler;
@@ -41,6 +43,12 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
     @BindView(R.id.slider)
     StorePagerSliderView slider;
 
+    @BindView(R.id.managerPhoto)
+    AppCompatImageView managerPhoto;
+
+    @BindView(R.id.managerName)
+    TextView managerName;
+
     @BindView(R.id.storeName)
     TextView storeName;
 
@@ -55,6 +63,9 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     @BindView(R.id.mainHolder)
     LinearLayout mainHolder;
+
+    @BindView(R.id.managerInfoHolder)
+    View managerInfoHolder;
 
     private StoreModel storeModel;
 
@@ -82,7 +93,22 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         storeCategory.setText(storeModel.getRanking());
         storeName.setText(storeModel.getName());
         storeAddress.setText(storeModel.getContactInfo().getAddress());
+
         openingTime.setText(storeModel.getOpeningHours().getOpeningTime());
+
+        if (!TextUtils.isEmpty(storeModel.getManagerName())){
+            managerName.setText(String.format(getResources().getString(R.string.managementX),storeModel.getManagerName()));
+        }
+
+        if (!TextUtils.isEmpty(storeModel.getManagerImage())){
+            ImageLoader.loadImage(this,managerPhoto, storeModel.getManagerImage());
+        }else{
+            managerPhoto.setVisibility(View.GONE);
+        }
+
+        if (TextUtils.isEmpty(storeModel.getManagerImage()) && TextUtils.isEmpty(storeModel.getManagerName())){
+            managerInfoHolder.setVisibility(View.GONE);
+        }
 
         if (storeModel.getContactInfo().getPhoneNumbers() != null && storeModel.getContactInfo().getPhoneNumbers().size() > 0) {
             for (String phone : storeModel.getContactInfo().getPhoneNumbers()) {
@@ -124,7 +150,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentHelper.showDialer(StoreActivity.this,phoneNumber);
+                IntentHelper.showDialer(StoreActivity.this, phoneNumber);
             }
         });
         mainHolder.addView(view);

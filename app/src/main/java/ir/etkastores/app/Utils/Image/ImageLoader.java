@@ -17,6 +17,14 @@ import ir.etkastores.app.R;
 
 public class ImageLoader {
 
+    public static void loadImage(Context context, AppCompatImageView imageView, String url){
+        try {
+            Glide.with(context).load(url).into(imageView);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
+    }
+
     public static void loadProductImage(Context context, AppCompatImageView imageView, String url) {
         try {
             if (TextUtils.isEmpty(url)){

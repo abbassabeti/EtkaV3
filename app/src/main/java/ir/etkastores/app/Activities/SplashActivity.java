@@ -92,12 +92,6 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void run() {
                 login();
-//                try {
-//                    login();
-////                    LoginRegisterActivity.showLogin(SplashActivity.this);
-////                    finish();
-//                } catch (Exception err) {
-//                }
             }
         }, 500);
     }

@@ -40,6 +40,8 @@ import butterknife.OnClick;
 import ir.etkastores.app.Activities.StoreActivity;
 import ir.etkastores.app.Models.store.StoreModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.UI.Toaster;
+import ir.etkastores.app.Utils.GeolocationUtils;
 import ir.etkastores.app.Utils.SuggestionArrayAdapter;
 import ir.etkastores.app.data.StoresManager;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -102,8 +104,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         initViews();
     }
 
-    private LatLng chamranPosition = new LatLng(35.686169, 51.4065863);
-
     private void initViews() {
         storesHashMap = new HashMap<>();
         markersHashMap = new HashMap<>();
@@ -128,7 +128,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             findUserLocation();
         }
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(chamranPosition, 4));
     }
 
     private void addMarker(StoreModel store) {
@@ -188,6 +187,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         storeName.setText(selectedStore.getName());
         storeInfoHolder.setVisibility(View.VISIBLE);
         selectedMarker = marker;
+//        if (map.getMyLocation() != null){
+//            LatLng userLocation = new LatLng(map.getMyLocation().getLatitude(),map.getMyLocation().getLongitude());
+//            LatLng storeLocation = new LatLng(selectedStore.getLatitude(),selectedStore.getLongitude());
+//            Toaster.showLong(getActivity(),"distance is: "+ GeolocationUtils.calculateDistanceBetweenTwoLocationInMeters(storeLocation,userLocation));
+//        }
         marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker_35dp));
         return false;
     }

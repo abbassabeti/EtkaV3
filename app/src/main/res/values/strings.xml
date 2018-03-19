@@ -172,5 +172,6 @@
     <string name="userAccountRequired">حساب کاربری مورد نیاز است!</string>
     <string name="guestUser">کاربر میهمان</string>
     <string name="loginSuccessfulMessage">ورود به حساب کاربری با موفقیت انجام شد.</string>
+    <string name="managementX">مدیریت: %s</string>
 
 </resources>
