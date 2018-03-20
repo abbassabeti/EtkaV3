@@ -47,7 +47,7 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bind(items.get(position));
         if (isLoadMoreEnabled && productsRecyclerCallbacks != null && position == items.size()-1){
-            isLoadMoreEnabled = true;
+            isLoadMoreEnabled = false;
             productsRecyclerCallbacks.onLoadMore();
         }
     }

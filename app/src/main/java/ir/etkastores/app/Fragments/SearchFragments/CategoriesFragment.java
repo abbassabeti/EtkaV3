@@ -145,6 +145,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     }
 
     private void showError(String message) {
+        if (!isAdded()) return;
         String messageText = getResources().getString(R.string.errorInDataReceiving);
         if (!TextUtils.isEmpty(message)){
             messageText = message;

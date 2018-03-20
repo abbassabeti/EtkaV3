@@ -91,7 +91,11 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                login();
+                try {
+                    login();
+                }catch (Exception err){
+                    err.printStackTrace();
+                }
             }
         }, 500);
     }

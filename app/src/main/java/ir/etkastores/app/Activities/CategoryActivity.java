@@ -143,6 +143,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         productRequest.enqueue(new Callback<OauthResponse<ProductSearchResponseModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<ProductSearchResponseModel>> call, Response<OauthResponse<ProductSearchResponseModel>> response) {
+                if (isFinishing()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         productsAdapter.addItems(response.body().getData().getItems());
@@ -167,8 +168,9 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
             @Override
             public void onFailure(Call<OauthResponse<ProductSearchResponseModel>> call, Throwable t) {
+                if (isFinishing()) return;
                 hideLoading();
-                showProductErrorMessage(null,true);
+                showProductErrorMessage(getResources().getString(R.string.errorHappendInReceivingData),true);
             }
         });
     }
@@ -179,6 +181,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         categoryRequest.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
+                if (isFinishing()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         if (response.body().getData().size() > 0) {
@@ -197,6 +200,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
+                if (isFinishing()) return;
                 showRetryDialog(null);
                 hideLoading();
             }
