@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -103,8 +104,10 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         mPrice.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
         if (!TextUtils.isEmpty(productModel.getDescription())) {
             mDetail.setText(productModel.getDescription());
+            mDetail.setGravity(Gravity.RIGHT);
         } else {
             mDetail.setText(R.string.thereIsNoInformationForThisProduct);
+            mDetail.setGravity(Gravity.CENTER_HORIZONTAL);
         }
 
         mSlider.setImages(productModel.getImageUrl());

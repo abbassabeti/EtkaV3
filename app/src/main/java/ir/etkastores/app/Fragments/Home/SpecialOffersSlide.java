@@ -81,6 +81,7 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger, Categor
 
     private void loadOffers() {
         showLoading();
+        messageView.hide();
         offersReq = ApiProvider.getAuthorizedApi().getOffers("offers");
         offersReq.enqueue(new Callback<OffersResponseModel>() {
             @Override
