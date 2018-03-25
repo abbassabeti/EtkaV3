@@ -20,7 +20,7 @@ public class FragmentTitleModel {
 
     public FragmentTitleModel(Fragment fragment,int title) {
         this.fragment = fragment;
-        this.title = EtkaApp.getInstnace().getResources().getString(title);
+        this.title = EtkaApp.getInstance().getResources().getString(title);
     }
 
     public Fragment getFragment() {

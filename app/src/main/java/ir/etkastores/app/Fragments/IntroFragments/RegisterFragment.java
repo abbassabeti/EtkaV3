@@ -151,7 +151,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
             public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
                 if (!isAdded()) return;
                 loadingDialog.cancel();
-                showRetryDialog(EtkaApp.getInstnace().getResources().getString(R.string.registerFailTryLater));
+                showRetryDialog(EtkaApp.getInstance().getResources().getString(R.string.registerFailTryLater));
             }
         });
     }

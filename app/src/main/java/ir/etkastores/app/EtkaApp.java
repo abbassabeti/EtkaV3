@@ -38,7 +38,7 @@ public class EtkaApp extends MultiDexApplication {
         MultiDex.install(this);
     }
 
-    public static EtkaApp getInstnace() {
+    public static EtkaApp getInstance() {
         return instance;
     }
 

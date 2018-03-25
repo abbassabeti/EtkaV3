@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.Models.UserProfileModel;
 import ir.etkastores.app.WebService.AccessToken;
 
 /**
@@ -16,35 +15,35 @@ import ir.etkastores.app.WebService.AccessToken;
 public class DiskDataHelper {
 
     public static void putString(String key, String value) {
-        EtkaApp.getInstnace().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
+        EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
                 .putString(key,value)
                 .apply();
     }
 
     public static String getString(String key) {
-        return EtkaApp.getInstnace().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
+        return EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
                 .getString(key,null);
     }
 
     public static void putInt(String key, int value) {
-        EtkaApp.getInstnace().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
+        EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
                 .putInt(key,value)
                 .apply();
     }
 
     public static int getInt(String key) {
-        return EtkaApp.getInstnace().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
+        return EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
                 .getInt(key,0);
     }
 
     public static void putBool(String key, boolean value) {
-        EtkaApp.getInstnace().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
+        EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
                 .putBoolean(key,value)
                 .apply();
     }
 
     public static boolean getBool(String key) {
-        return EtkaApp.getInstnace().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
+        return EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
                 .getBoolean(key,false);
     }
 

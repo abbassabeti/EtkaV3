@@ -199,9 +199,9 @@ public class UserProfileModel {
     public String getGenderValue(){
         if (getGender() == null) return "-";
         if (getGender() == 0){
-            return EtkaApp.getInstnace().getResources().getString(R.string.male);
+            return EtkaApp.getInstance().getResources().getString(R.string.male);
         }else{
-            return EtkaApp.getInstnace().getResources().getString(R.string.female);
+            return EtkaApp.getInstance().getResources().getString(R.string.female);
         }
     }
 

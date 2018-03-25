@@ -202,7 +202,7 @@ public class NotificationModel {
     }
 
     private Intent getAppIntent(){
-        Intent intent = new Intent(EtkaApp.getInstnace(), SplashActivity.class);
+        Intent intent = new Intent(EtkaApp.getInstance(), SplashActivity.class);
         intent.putExtra(IS_FROM_NOTIFICATION,true);
         intent.putExtra(ACTION_CODE,getAction());
         return intent;

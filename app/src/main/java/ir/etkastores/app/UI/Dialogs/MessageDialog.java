@@ -50,27 +50,27 @@ public class MessageDialog extends BaseDialog {
 
     public static MessageDialog forceUpdate(){
         return newInstance(R.drawable.ic_warning_orange_48dp,
-                EtkaApp.getInstnace().getResources().getString(R.string.update),
-                EtkaApp.getInstnace().getResources().getString(R.string.updateMessage),
-                EtkaApp.getInstnace().getResources().getString(R.string.update),
-                EtkaApp.getInstnace().getResources().getString(R.string.exit));
+                EtkaApp.getInstance().getResources().getString(R.string.update),
+                EtkaApp.getInstance().getResources().getString(R.string.updateMessage),
+                EtkaApp.getInstance().getResources().getString(R.string.update),
+                EtkaApp.getInstance().getResources().getString(R.string.exit));
     }
 
     public static MessageDialog loginRequired(){
         return newInstance(R.drawable.ic_warning_orange_48dp,
-                EtkaApp.getInstnace().getResources().getString(R.string.userAccountRequired),
-                EtkaApp.getInstnace().getResources().getString(R.string.loginRequiredForThisSection),
-                EtkaApp.getInstnace().getResources().getString(R.string.enter),
-                EtkaApp.getInstnace().getResources().getString(R.string.cancel));
+                EtkaApp.getInstance().getResources().getString(R.string.userAccountRequired),
+                EtkaApp.getInstance().getResources().getString(R.string.loginRequiredForThisSection),
+                EtkaApp.getInstance().getResources().getString(R.string.enter),
+                EtkaApp.getInstance().getResources().getString(R.string.cancel));
     }
 
     public static MessageDialog loginError() {
-        return warningRetry(EtkaApp.getInstnace().getResources().getString(R.string.errorInLogin),
-                EtkaApp.getInstnace().getResources().getString(R.string.anErrorHappendInServerConnection));
+        return warningRetry(EtkaApp.getInstance().getResources().getString(R.string.errorInLogin),
+                EtkaApp.getInstance().getResources().getString(R.string.anErrorHappendInServerConnection));
     }
 
     public static MessageDialog registerError(String messageText) {
-        return warningRetry(EtkaApp.getInstnace().getResources().getString(R.string.errorInRegister), messageText);
+        return warningRetry(EtkaApp.getInstance().getResources().getString(R.string.errorInRegister), messageText);
     }
 
     public static MessageDialog networkError() {
@@ -81,24 +81,24 @@ public class MessageDialog extends BaseDialog {
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 title,
                 message,
-                EtkaApp.getInstnace().getResources().getString(R.string.retry),
-                EtkaApp.getInstnace().getResources().getString(R.string.cancel));
+                EtkaApp.getInstance().getResources().getString(R.string.retry),
+                EtkaApp.getInstance().getResources().getString(R.string.cancel));
     }
 
     public static MessageDialog productNotFound(){
         return newInstance(R.drawable.ic_warning_orange_48dp,
-                EtkaApp.getInstnace().getResources().getString(R.string.error),
-                EtkaApp.getInstnace().getResources().getString(R.string.productNotFound),
-                EtkaApp.getInstnace().getResources().getString(R.string.exit),
+                EtkaApp.getInstance().getResources().getString(R.string.error),
+                EtkaApp.getInstance().getResources().getString(R.string.productNotFound),
+                EtkaApp.getInstance().getResources().getString(R.string.exit),
                 null);
     }
 
     public static MessageDialog sureToExit() {
         return newInstance(R.drawable.ic_warning_orange_48dp,
-                EtkaApp.getInstnace().getResources().getString(R.string.closeApp),
-                EtkaApp.getInstnace().getResources().getString(R.string.areYouSureToExit),
-                EtkaApp.getInstnace().getResources().getString(R.string.yes),
-                EtkaApp.getInstnace().getResources().getString(R.string.no));
+                EtkaApp.getInstance().getResources().getString(R.string.closeApp),
+                EtkaApp.getInstance().getResources().getString(R.string.areYouSureToExit),
+                EtkaApp.getInstance().getResources().getString(R.string.yes),
+                EtkaApp.getInstance().getResources().getString(R.string.no));
     }
 
     public static MessageDialog newInstance(int icon, String title, String message, String rightButton, String leftButton) {
@@ -115,10 +115,10 @@ public class MessageDialog extends BaseDialog {
 
     public static MessageDialog newInstance(int icon, int title, int message, int rightButton, int leftButton) {
         return newInstance(icon,
-                EtkaApp.getInstnace().getResources().getString(title),
-                EtkaApp.getInstnace().getResources().getString(message),
-                EtkaApp.getInstnace().getResources().getString(rightButton),
-                EtkaApp.getInstnace().getResources().getString(leftButton));
+                EtkaApp.getInstance().getResources().getString(title),
+                EtkaApp.getInstance().getResources().getString(message),
+                EtkaApp.getInstance().getResources().getString(rightButton),
+                EtkaApp.getInstance().getResources().getString(leftButton));
     }
 
     private int iconId;

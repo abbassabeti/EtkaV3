@@ -20,7 +20,6 @@ import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
-import ir.etkastores.app.UI.Views.CategorySliderView;
 import ir.etkastores.app.UI.Views.EtkaToolbar;
 import ir.etkastores.app.UI.Views.ProductImagesSliderView;
 import ir.etkastores.app.Utils.DialogHelper;
@@ -99,9 +98,9 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private void initFromProduct() {
         scrollView.setVisibility(View.VISIBLE);
         toolbar.setTitle(productModel.getCategoryTitle());
-        mPoint.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.Xpoint), productModel.getPoint()));
+        mPoint.setText(String.format(EtkaApp.getInstance().getResources().getString(R.string.Xpoint), productModel.getPoint()));
         mTitle.setText(productModel.getTitle());
-        mPrice.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
+        mPrice.setText(String.format(EtkaApp.getInstance().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
         if (!TextUtils.isEmpty(productModel.getDescription())) {
             mDetail.setText(productModel.getDescription());
             mDetail.setGravity(Gravity.RIGHT);

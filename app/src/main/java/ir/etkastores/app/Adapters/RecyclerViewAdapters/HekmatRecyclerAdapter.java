@@ -81,7 +81,7 @@ public class HekmatRecyclerAdapter extends RecyclerView.Adapter<HekmatRecyclerAd
             image.setImageResource(R.drawable.etka_logo_wide);
             name.setText(model.getTitle());
             startDate.setText(model.getStartDate());
-            count.setText(String.format(EtkaApp.getInstnace().getResources().getString(R.string.XProducts),model.getProducts().size()));
+            count.setText(String.format(EtkaApp.getInstance().getResources().getString(R.string.XProducts),model.getProducts().size()));
             ImageLoader.loadProductImage(context,image,model.getImageUrl());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

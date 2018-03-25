@@ -8,7 +8,6 @@ import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
@@ -100,8 +99,8 @@ public class FAQItemView extends CardView implements View.OnClickListener {
         boolean isExpanded = false;
 
         public FAQItem(int title, int description) {
-            this.title = EtkaApp.getInstnace().getResources().getString(title);
-            this.description = EtkaApp.getInstnace().getResources().getString(description);
+            this.title = EtkaApp.getInstance().getResources().getString(title);
+            this.description = EtkaApp.getInstance().getResources().getString(description);
         }
 
         public FAQItem(String title, String description) {
