@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
                         android:id="@+id/directCallToPRButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
 
                     <View style="@style/lightDividerMatchWidthStyle"/>
 
-                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
                         android:id="@+id/sendMailButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 
                     <View style="@style/lightDividerMatchWidthStyle"/>
 
-                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
                         android:id="@+id/webSiteButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="ir.etkastores.app.Activities.ProfileActivities.HekmatActivity">
+    tools:context="ir.etkastores.app.activities.profileActivities.HekmatActivity">
 
-    <ir.etkastores.app.UI.Views.EtkaToolbar
+    <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ir.etkastores.app.UI.Views.MessageView
+        <ir.etkastores.app.ui.views.MessageView
             android:id="@+id/messageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

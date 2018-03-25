@@ -13,7 +13,7 @@
         <!--app:showBack="false"-->
         <!--app:title="@string/home" />-->
 
-    <ir.etkastores.app.UI.Views.RTLTabLayout
+    <ir.etkastores.app.ui.views.RTLTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

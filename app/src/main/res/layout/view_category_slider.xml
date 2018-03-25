@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ir.etkastores.app.UI.Widgets.ViewPager16x8
+    <ir.etkastores.app.ui.widgets.ViewPager16x8
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

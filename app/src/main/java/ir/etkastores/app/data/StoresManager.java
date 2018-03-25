@@ -3,9 +3,9 @@ package ir.etkastores.app.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.etkastores.app.Models.OauthResponse;
-import ir.etkastores.app.Models.store.StoreModel;
-import ir.etkastores.app.WebService.ApiProvider;
+import ir.etkastores.app.models.OauthResponse;
+import ir.etkastores.app.models.store.StoreModel;
+import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

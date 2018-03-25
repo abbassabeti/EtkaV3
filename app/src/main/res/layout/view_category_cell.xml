@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ir.etkastores.app.UI.Widgets.SquareImageView
+        <ir.etkastores.app.ui.widgets.SquareImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

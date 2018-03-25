@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ir.etkastores.app.Activities.StoresListActivity">
+    tools:context="ir.etkastores.app.activities.StoresListActivity">
 
-    <ir.etkastores.app.UI.Views.EtkaToolbar
+    <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

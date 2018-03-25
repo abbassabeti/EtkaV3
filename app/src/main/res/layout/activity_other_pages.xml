@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/commonLayoutRootStyle">
 
-    <ir.etkastores.app.UI.Views.EtkaToolbar
+    <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
                         android:id="@+id/termAndConditionsButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
 
                     <View style="@style/lightDividerMatchWidthStyle"/>
 
-                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
                         android:id="@+id/userPrivacyButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
 
                     <View style="@style/lightDividerMatchWidthStyle"/>
 
-                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
                         android:id="@+id/aboutEtkaStoresButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

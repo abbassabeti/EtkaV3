@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/commonLayoutRootStyle">
 
-    <ir.etkastores.app.UI.Views.EtkaToolbar
+    <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
-            <ir.etkastores.app.UI.Views.EtkaIconTextImageButton
+            <ir.etkastores.app.ui.views.EtkaIconTextImageButton
                 android:id="@+id/shareButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

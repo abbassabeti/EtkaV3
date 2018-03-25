@@ -6,7 +6,7 @@
     android:background="#F1F1F1"
     android:orientation="vertical">
 
-    <ir.etkastores.app.UI.Views.EtkaToolbar
+    <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ir.etkastores.app.UI.Views.ProductImagesSliderView
+            <ir.etkastores.app.ui.views.ProductImagesSliderView
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

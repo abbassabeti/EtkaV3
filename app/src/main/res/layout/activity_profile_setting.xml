@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ir.etkastores.app.UI.Views.EtkaToolbar
+    <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        <ir.etkastores.app.ui.views.CustomRowMenuItem
                             android:id="@+id/firstNameAndLastName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
 
                         <View style="@style/lightDividerMatchWidthStyle" />
 
-                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        <ir.etkastores.app.ui.views.CustomRowMenuItem
                             android:id="@+id/nationalCode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
 
                         <View style="@style/lightDividerMatchWidthStyle" />
 
-                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        <ir.etkastores.app.ui.views.CustomRowMenuItem
                             android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
 
                         <View style="@style/lightDividerMatchWidthStyle" />
 
-                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        <ir.etkastores.app.ui.views.CustomRowMenuItem
                             android:id="@+id/mobilePhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
 
                         <View style="@style/lightDividerMatchWidthStyle" />
 
-                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        <ir.etkastores.app.ui.views.CustomRowMenuItem
                             android:id="@+id/gender"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
 
                         <View style="@style/lightDividerMatchWidthStyle" />
 
-                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        <ir.etkastores.app.ui.views.CustomRowMenuItem
                             android:id="@+id/education"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
 
                         <View style="@style/lightDividerMatchWidthStyle" />
 
-                        <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                        <ir.etkastores.app.ui.views.CustomRowMenuItem
                             android:id="@+id/birthDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                     android:layout_margin="8dp"
                     app:cardCornerRadius="4dp">
 
-                    <ir.etkastores.app.UI.Views.CustomRowMenuItem
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
                         android:id="@+id/changePasswordButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
