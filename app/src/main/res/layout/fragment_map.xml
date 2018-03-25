@@ -31,10 +31,11 @@
                 android:elevation="1dp"
                 android:gravity="center_vertical|right"
                 android:hint="@string/performSearchLikeChamranStore"
-                android:lines="1"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:popupBackground="@drawable/rect_white_bottom_round"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:popupElevation="1dp"
                 android:textSize="@dimen/textSizeSmall" />
 

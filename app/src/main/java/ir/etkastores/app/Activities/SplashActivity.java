@@ -14,7 +14,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.Models.OauthResponse;
-import ir.etkastores.app.Models.UserProfileModel;
+import ir.etkastores.app.Models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.Utils.DialogHelper;

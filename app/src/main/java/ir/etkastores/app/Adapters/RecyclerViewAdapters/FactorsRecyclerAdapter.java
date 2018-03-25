@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import ir.etkastores.app.Models.Factor.FactorModel;
-import ir.etkastores.app.R;
+import ir.etkastores.app.Models.factor.FactorModel;
 import ir.etkastores.app.UI.Views.FactorItemView;
 
 /**

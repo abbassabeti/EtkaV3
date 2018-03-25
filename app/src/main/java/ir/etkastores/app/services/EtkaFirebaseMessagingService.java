@@ -15,7 +15,7 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.Models.NotificationModel;
+import ir.etkastores.app.Models.notification.NotificationModel;
 import ir.etkastores.app.R;
 
 /**

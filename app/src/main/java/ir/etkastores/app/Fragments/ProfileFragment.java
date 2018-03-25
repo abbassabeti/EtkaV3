@@ -25,7 +25,7 @@ import ir.etkastores.app.Activities.ProfileActivities.ProfileSettingActivity;
 import ir.etkastores.app.Activities.ProfileActivities.ScoresActivity;
 import ir.etkastores.app.Activities.ProfileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.Activities.ProfileActivities.SupportActivity;
-import ir.etkastores.app.Models.UserProfileModel;
+import ir.etkastores.app.Models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Views.CustomRowMenuItem;

@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.Models.UserProfileModel;
+import ir.etkastores.app.Models.profile.UserProfileModel;
 import ir.etkastores.app.Utils.DiskDataHelper;
 
 /**

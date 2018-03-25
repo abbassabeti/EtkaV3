@@ -3,20 +3,24 @@ package ir.etkastores.app.WebService;
 import java.util.List;
 
 import ir.etkastores.app.Models.CategoryModel;
-import ir.etkastores.app.Models.Factor.FactorModel;
-import ir.etkastores.app.Models.Factor.FactorRequestModel;
+import ir.etkastores.app.Models.factor.FactorModel;
+import ir.etkastores.app.Models.factor.FactorRequestModel;
 import ir.etkastores.app.Models.OauthResponse;
 import ir.etkastores.app.Models.ProductModel;
-import ir.etkastores.app.Models.ProductSearchResponseModel;
-import ir.etkastores.app.Models.SearchProductRequestModel;
-import ir.etkastores.app.Models.UserProfileModel;
+import ir.etkastores.app.Models.search.ProductSearchResponseModel;
+import ir.etkastores.app.Models.search.SearchProductRequestModel;
+import ir.etkastores.app.Models.profile.UserProfileModel;
 import ir.etkastores.app.Models.hekmat.HekmatModel;
 import ir.etkastores.app.Models.home.OffersResponseModel;
 import ir.etkastores.app.Models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.Models.profile.ChangePasswordRequestModel;
+import ir.etkastores.app.Models.saveProduct.SaveProductRequestModel;
+import ir.etkastores.app.Models.saveProduct.SavedProductModel;
 import ir.etkastores.app.Models.store.StoreModel;
+import ir.etkastores.app.Models.tickets.TicketRequestModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -93,5 +97,21 @@ public interface EtkaApi {
     //15
     @POST(ApiStatics.CHANGE_PASSWORD)
     Call<OauthResponse<String>> changePassword(@Body ChangePasswordRequestModel resetPasswordRequestModel);
+
+    //16
+    @POST(ApiStatics.TICKET)
+    Call<OauthResponse<String>> sendTicket(@Body TicketRequestModel requestModel);
+
+    //17
+    @POST(ApiStatics.SAVE_PRODUCTS)
+    Call<OauthResponse<String>> saveProduct(@Body SaveProductRequestModel requestModel);
+
+    //18
+    @DELETE(ApiStatics.SAVE_PRODUCTS)
+    Call<OauthResponse<String>> deleteSavedProduct(@Query("id") long id);
+
+    //19
+    @GET(ApiStatics.SAVE_PRODUCTS)
+    Call<OauthResponse<List<SavedProductModel>>> getSavedProducts();
 
 }

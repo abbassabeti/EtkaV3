@@ -1,4 +1,4 @@
-package ir.etkastores.app.Models.Factor;
+package ir.etkastores.app.Models.factor;
 
 import com.google.gson.annotations.SerializedName;
 

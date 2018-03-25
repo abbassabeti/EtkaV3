@@ -1,10 +1,11 @@
-package ir.etkastores.app.Models;
+package ir.etkastores.app.Models.search;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 import butterknife.BindView;
+import ir.etkastores.app.Models.ProductModel;
 
 /**
  * Created by Sajad on 2/3/18.

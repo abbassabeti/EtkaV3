@@ -50,10 +50,13 @@ public class ProductModel {
     @SerializedName("ProprietaryPoint")
     int proprietaryPoint;
 
-    public static ProductModel fromJson(String json){
+    @SerializedName("DiscountPercentage")
+    int discountPercentage;
+
+    public static ProductModel fromJson(String json) {
         try {
-            return new Gson().fromJson(json,ProductModel.class);
-        }catch (Exception err){
+            return new Gson().fromJson(json, ProductModel.class);
+        } catch (Exception err) {
             return null;
         }
     }
@@ -162,4 +165,7 @@ public class ProductModel {
         return proprietaryPoint;
     }
 
+    public int getDiscountPercentage() {
+        return discountPercentage;
+    }
 }

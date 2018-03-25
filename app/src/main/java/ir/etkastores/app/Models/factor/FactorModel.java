@@ -1,4 +1,4 @@
-package ir.etkastores.app.Models.Factor;
+package ir.etkastores.app.Models.factor;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -17,7 +17,7 @@ public class FactorModel {
     long factorCode;
 
     @SerializedName("totalPrice")
-    long totalPrice;
+    String totalPrice;
 
     @SerializedName("totalDiscount")
     long totalDiscount;
@@ -38,7 +38,7 @@ public class FactorModel {
         return factorCode;
     }
 
-    public long getTotalPrice() {
+    public String getTotalPrice() {
         return totalPrice;
     }
 
@@ -62,7 +62,7 @@ public class FactorModel {
         this.factorCode = factorCode;
     }
 
-    public void setTotalPrice(long totalPrice) {
+    public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
     }
 

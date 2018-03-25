@@ -1,4 +1,4 @@
-package ir.etkastores.app.Models;
+package ir.etkastores.app.Models.profile;
 
 import com.google.gson.annotations.SerializedName;
 

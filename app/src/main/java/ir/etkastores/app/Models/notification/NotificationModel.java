@@ -1,4 +1,4 @@
-package ir.etkastores.app.Models;
+package ir.etkastores.app.Models.notification;
 
 import android.content.Intent;
 import android.net.Uri;

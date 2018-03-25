@@ -22,7 +22,7 @@ import ir.etkastores.app.Activities.CategoryActivity;
 import ir.etkastores.app.Activities.ProductActivity;
 import ir.etkastores.app.Activities.ScannerActivity;
 import ir.etkastores.app.BuildConfig;
-import ir.etkastores.app.Models.SearchProductRequestModel;
+import ir.etkastores.app.Models.search.SearchProductRequestModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Toaster;
 import ir.etkastores.app.UI.Views.EtkaToolbar;

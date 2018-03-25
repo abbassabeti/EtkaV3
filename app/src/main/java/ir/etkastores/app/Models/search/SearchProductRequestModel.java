@@ -1,4 +1,4 @@
-package ir.etkastores.app.Models;
+package ir.etkastores.app.Models.search;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
@@ -89,4 +89,5 @@ public class SearchProductRequestModel {
     public int getTake() {
         return take;
     }
+
 }

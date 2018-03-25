@@ -1,7 +1,6 @@
 package ir.etkastores.app.Fragments.IntroFragments;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,10 +16,8 @@ import android.widget.CompoundButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ir.etkastores.app.Activities.MainActivity;
-import ir.etkastores.app.Models.NotificationModel;
 import ir.etkastores.app.Models.OauthResponse;
-import ir.etkastores.app.Models.UserProfileModel;
+import ir.etkastores.app.Models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.UI.Dialogs.MessageDialog;
 import ir.etkastores.app.UI.Dialogs.ResetPasswordDialog;
@@ -33,7 +30,6 @@ import ir.etkastores.app.WebService.AccessToken;
 import ir.etkastores.app.WebService.ApiProvider;
 import ir.etkastores.app.WebService.ApiStatics;
 import ir.etkastores.app.data.ProfileManager;
-import ir.etkastores.app.data.StoresManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
