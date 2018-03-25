@@ -100,15 +100,15 @@ public interface EtkaApi {
 
     //16
     @POST(ApiStatics.TICKET)
-    Call<OauthResponse<String>> sendTicket(@Body TicketRequestModel requestModel);
+    Call<OauthResponse<Long>> sendTicket(@Body TicketRequestModel requestModel);
 
     //17
     @POST(ApiStatics.SAVE_PRODUCTS)
-    Call<OauthResponse<String>> saveProduct(@Body SaveProductRequestModel requestModel);
+    Call<OauthResponse<Long>> saveProduct(@Body SaveProductRequestModel requestModel);
 
     //18
     @DELETE(ApiStatics.SAVE_PRODUCTS)
-    Call<OauthResponse<String>> deleteSavedProduct(@Query("id") long id);
+    Call<OauthResponse<Long>> deleteSavedProduct(@Query("id") long id);
 
     //19
     @GET(ApiStatics.SAVE_PRODUCTS)
