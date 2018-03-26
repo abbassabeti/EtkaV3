@@ -1,4 +1,4 @@
-package ir.etkastores.app.UI.Views;
+package ir.etkastores.app.ui.views;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.DummyProvider;
 import ir.etkastores.app.R;
-import ir.etkastores.app.UI.Widgets.ViewPager16x8;
+import ir.etkastores.app.ui.widgets.ViewPager16x8;
 
 /**
  * Created by Sajad on 11/24/17.

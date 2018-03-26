@@ -1,4 +1,4 @@
-package ir.etkastores.app.UI.Views;
+package ir.etkastores.app.ui.views;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

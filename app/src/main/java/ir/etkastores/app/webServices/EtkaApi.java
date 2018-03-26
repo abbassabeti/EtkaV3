@@ -7,6 +7,8 @@ import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
+import ir.etkastores.app.models.news.NewsRequestModel;
+import ir.etkastores.app.models.news.NewsResponseModel;
 import ir.etkastores.app.models.search.ProductSearchResponseModel;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
@@ -18,6 +20,7 @@ import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
 import ir.etkastores.app.models.saveProduct.SavedProductModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
+import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -99,7 +102,7 @@ public interface EtkaApi {
     Call<OauthResponse<String>> changePassword(@Body ChangePasswordRequestModel resetPasswordRequestModel);
 
     //16
-    @POST(ApiStatics.TICKET)
+    @POST(ApiStatics.SEND_TICKET)
     Call<OauthResponse<Long>> sendTicket(@Body TicketRequestModel requestModel);
 
     //17
@@ -113,5 +116,13 @@ public interface EtkaApi {
     //19
     @GET(ApiStatics.SAVE_PRODUCTS)
     Call<OauthResponse<List<SavedProductModel>>> getSavedProducts();
+
+    //20
+    @GET(ApiStatics.GET_TICKET)
+    Call<OauthResponse<TicketResponseModel>> getTickets(@Query("page") int page);
+
+    //21
+    @POST(ApiStatics.NEWS)
+    Call<OauthResponse<NewsResponseModel>> getNews(@Body NewsRequestModel requestModel);
 
 }

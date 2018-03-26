@@ -1,4 +1,4 @@
-package ir.etkastores.app.Utils;
+package ir.etkastores.app.utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.etkastores.app.Models.store.StoreModel;
+import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
 
 /**

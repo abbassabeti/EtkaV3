@@ -11,106 +11,146 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+
+        <RelativeLayout
+            android:id="@+id/addToShoppingListHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:background="@color/white">
 
-            <ir.etkastores.app.ui.views.ProductImagesSliderView
-                android:id="@+id/slider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <requestFocus />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/addToNextShoppingListButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeLarge" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/rect_round8dp_theme_color"
+                android:minHeight="0dp"
+                android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/addToNextShoppingList"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizeSmall" />
 
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:text="۲۴،۱۰۰ تومان"
-                    android:textColor="@color/darkGray" />
 
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/starIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/darkGray"
-                    app:srcCompat="@drawable/ic_star_circle_gold_24dp" />
-
-                <TextView
-                    android:id="@+id/point"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/starIcon"
-                    android:paddingLeft="16dp"
-                    android:text="۵ امتیاز"
-                    android:textColor="@color/darkGray" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="16dp"
-                android:text="@string/detailIsNotAvailable"
-                android:textColor="@color/darkGray" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray" />
+                android:layout_alignParentTop="true"
+                android:background="@color/gray"/>
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/addToShoppingListHolder"
+            android:visibility="gone">
 
             <LinearLayout
-                android:id="@+id/extraItemsHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F1F1F1"
-                android:orientation="vertical"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp">
+                android:orientation="vertical">
+
+                <ir.etkastores.app.ui.views.ProductImagesSliderView
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <!--<requestFocus />-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeLarge" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="۲۴،۱۰۰ تومان"
+                        android:textColor="@color/darkGray" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/starIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/darkGray"
+                        app:srcCompat="@drawable/ic_star_circle_gold_24dp" />
+
+                    <TextView
+                        android:id="@+id/point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/starIcon"
+                        android:paddingLeft="16dp"
+                        android:text="۵ امتیاز"
+                        android:textColor="@color/darkGray" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:padding="16dp"
+                    android:text="@string/detailIsNotAvailable"
+                    android:textColor="@color/darkGray" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:id="@+id/extraItemsHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F1F1F1"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp">
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </RelativeLayout>
 
 </LinearLayout>
