@@ -175,5 +175,9 @@
     <string name="managementX">مدیریت: %s</string>
     <string name="addToNextShoppingList">افزودن به لیست خرید بعدی</string>
     <string name="priceColon">قیمت:</string>
+    <string name="inSavingToNextShoppingList">در حال ذخیره در لیست خرید بعدی...</string>
+    <string name="productAddedToNextShoppingListSuccessfully">محصول با موفقیت به لیست خرید بعدی اضافه شد.</string>
+    <string name="errorInAddingToNextShoppingList">خطا در اضافه کردن محصول به لیست خرید بعدی، لطفا از دوباره تلاش کنید.</string>
+    <string name="setProductCounts">تعداد محصولات را مشخص کنید</string>
 
 </resources>
