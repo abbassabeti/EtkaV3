@@ -63,10 +63,10 @@ public class HekmatRecyclerAdapter extends RecyclerView.Adapter<HekmatRecyclerAd
         @BindView(R.id.productImage)
         AppCompatImageView image;
 
-        @BindView(R.id.productLine1)
+        @BindView(R.id.productTitle)
         TextView name;
 
-        @BindView(R.id.productLine2)
+        @BindView(R.id.productPrice1)
         TextView startDate;
 
         @BindView(R.id.productLine3)

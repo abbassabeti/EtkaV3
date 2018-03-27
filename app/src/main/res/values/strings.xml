@@ -107,7 +107,7 @@
     <string name="factorDate">تاریخ سفارش: %s</string>
     <string name="factorCode">کد سفارش: %d</string>
     <string name="XProducts">%d قلم کالا</string>
-    <string name="Xpoint">%d امتیاز</string>
+    <string name="Xpoint">%s امتیاز</string>
     <string name="priceX">قیمت : %s</string>
     <string name="anErrorHappend">خطایی رخ داده است!</string>
     <string name="errorInLogin">خطا در ورود!</string>

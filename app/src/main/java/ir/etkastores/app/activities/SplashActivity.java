@@ -32,8 +32,6 @@ public class SplashActivity extends BaseActivity {
 
     private FirebaseRemoteConfig firebaseRemoteConfig;
 
-    private AlertDialog loadingDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,12 +119,10 @@ public class SplashActivity extends BaseActivity {
 
     Call<AccessToken> loginRequest;
     private void login(){
-        loadingDialog = DialogHelper.showLoading(this,R.string.inLogin);
         loginRequest = ApiProvider.getLogin(ProfileManager.getUserName(),ProfileManager.getUserPassword());
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
-                loadingDialog.cancel();
                 if (response.isSuccessful()){
                     ApiStatics.saveToken(response.body());
                     if (ProfileManager.isGuest()){
@@ -141,7 +137,6 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
-                loadingDialog.cancel();
                 showRetryDialog();
             }
         });
@@ -168,7 +163,6 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void loadProfile(){
-        loadingDialog = DialogHelper.showLoading(this,R.string.inLoadingUserProfileInfo);
         ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
@@ -186,7 +180,6 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
-                loadingDialog.cancel();
                 showRetryDialog();
             }
         });

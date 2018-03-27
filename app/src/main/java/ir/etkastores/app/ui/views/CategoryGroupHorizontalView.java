@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 
 /**
@@ -102,6 +104,9 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
             @BindView(R.id.productPrice)
             TextView price;
 
+            @BindView(R.id.productPrice2)
+            TextView price2;
+
             @BindView(R.id.scoreValue)
             TextView scoreValue;
 
@@ -119,8 +124,14 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
             public void bind(ProductModel model){
                 image.setImageResource(R.drawable.etka_logo_wide);
                 name.setText(model.getTitle());
-                price.setText(model.getFinalPrice());
-                scoreValue.setText(String.format(getResources().getString(R.string.Xpoint),model.getPoint()));
+                price.setText(model.getStrikeThruPrice());
+                StringUtils.setStrikeThruTextView(price);
+                price2.setText(model.getFinalPrice());
+                if (!TextUtils.isEmpty(model.getPoint())){
+                    scoreValue.setText(String.format(getResources().getString(R.string.Xpoint),model.getPoint()));
+                }else{
+                    scoreValue.setText("");
+                }
                 ImageLoader.loadProductImage(getContext(),image,model.getImageUrl());
             }
 

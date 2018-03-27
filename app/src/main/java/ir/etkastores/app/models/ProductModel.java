@@ -161,8 +161,12 @@ public class ProductModel {
         return supplierName;
     }
 
-    public int getPoint() {
-        return point;
+    public String getPoint() {
+        if (point > 0) {
+            return String.valueOf(point);
+        } else {
+            return "";
+        }
     }
 
     public int getProprietaryPoint() {
@@ -187,7 +191,7 @@ public class ProductModel {
     }
 
     public String getStrikeThruPrice() {
-        if (TextUtils.isEmpty(getOfferPrice())) {
+        if (!TextUtils.isEmpty(getOfferPrice())) {
             return getEtkaPrice();
         }
         if (!TextUtils.isEmpty(getOriginalPrice())) {
@@ -195,4 +199,5 @@ public class ProductModel {
         }
         return "";
     }
+
 }

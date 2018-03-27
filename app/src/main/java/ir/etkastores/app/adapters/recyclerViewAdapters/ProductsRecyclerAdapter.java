@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 
 /**
@@ -76,11 +77,14 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         @BindView(R.id.productImage)
         AppCompatImageView image;
 
-        @BindView(R.id.productLine1)
+        @BindView(R.id.productTitle)
         TextView name;
 
-        @BindView(R.id.productLine2)
-        TextView price;
+        @BindView(R.id.productPrice1)
+        TextView price1;
+
+        @BindView(R.id.productPrice2)
+        TextView price2;
 
         @BindView(R.id.productLine3)
         TextView scorePoint;
@@ -93,8 +97,10 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         public void bind(final ProductModel model) {
             image.setImageResource(R.drawable.etka_logo_wide);
             name.setText(model.getTitle());
-            price.setText(model.getFinalPrice());
-            scorePoint.setText(String.valueOf(model.getPoint()));
+            price1.setText(model.getStrikeThruPrice());
+            StringUtils.setStrikeThruTextView(price1);
+            price2.setText(model.getFinalPrice());
+            scorePoint.setText(model.getPoint());
             ImageLoader.loadProductImage(context,image,model.getImageUrl());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

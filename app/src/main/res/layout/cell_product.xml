@@ -15,35 +15,50 @@
         <ir.etkastores.app.ui.widgets.SquareImageView
             android:id="@+id/productImage"
             android:layout_width="match_parent"
-            android:padding="16dp"
-            android:layout_height="120dp" />
+            android:layout_height="120dp"
+            android:padding="16dp" />
 
         <TextView
-            android:id="@+id/productLine1"
+            android:id="@+id/productTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:lines="2"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:lines="2" />
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall" />
 
         <TextView
-            android:id="@+id/productLine2"
+            android:id="@+id/productPrice1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:lines="1"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:lines="1"/>
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall" />
+
+        <TextView
+            android:id="@+id/productPrice2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/textSizeSmall" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/lightYellow"
-            android:paddingRight="8dp"
+            android:paddingBottom="4dp"
             android:paddingLeft="8dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp">
+            android:paddingRight="8dp"
+            android:paddingTop="4dp">
 
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="24dp"
@@ -58,9 +73,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:text="1"
                 android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeSmall"
-                android:text="1"/>
+                android:textSize="@dimen/textSizeSmall" />
 
         </RelativeLayout>
 
