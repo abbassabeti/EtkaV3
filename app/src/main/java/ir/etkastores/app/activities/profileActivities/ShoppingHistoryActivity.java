@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.OauthResponse;
@@ -23,12 +24,13 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.FactorItemView;
+import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
+public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, MessageView.OnMessageViewButtonClick {
 
     public static void start(Activity activity) {
         Intent intent = new Intent(activity, ShoppingHistoryActivity.class);
@@ -43,6 +45,9 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.messageView)
+    MessageView messageView;
 
     private FactorsAdapter adapter;
     private FactorRequestModel requestModel;
@@ -61,7 +66,7 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
         adapter = new FactorsAdapter();
         recyclerView.setAdapter(adapter);
         requestModel = new FactorRequestModel();
-        requestModel.setUserId("a9979337-8485-4e5d-9f94-03e5a3b3b440");
+        requestModel.setUserId(ProfileManager.getProfile().getCrmUserId());
         loadData();
     }
 
@@ -77,15 +82,20 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
 
     private void loadData() {
         showLoading();
+        messageView.hide();
         factorRequest = ApiProvider.getAuthorizedApi().getFactor(requestModel);
         factorRequest.enqueue(new Callback<OauthResponse<List<FactorModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<FactorModel>>> call, Response<OauthResponse<List<FactorModel>>> response) {
+                if (isFinishing()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         adapter.addItems(response.body().getData());
                     } else {
-
+                        messageView.show(R.drawable.ic_warning_orange_48dp,
+                                response.body().getMeta().getMessage(),
+                                getResources().getString(R.string.retry),
+                                ShoppingHistoryActivity.this);
                     }
                 } else {
                     onFailure(null, null);
@@ -95,8 +105,11 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
 
             @Override
             public void onFailure(Call<OauthResponse<List<FactorModel>>> call, Throwable t) {
-                Log.e("factor response failure", "TTTTTTTT");
-                Toaster.show(ShoppingHistoryActivity.this, "خطا در دریافت اطلاعات از دوباره تلاش کنید.");
+                if (isFinishing()) return;
+                messageView.show(R.drawable.ic_warning_orange_48dp,
+                        getResources().getString(R.string.errorHappendInReceivingData),
+                        getResources().getString(R.string.retry),
+                        ShoppingHistoryActivity.this);
                 hideLoading();
             }
         });
@@ -108,6 +121,11 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
 
     private void hideLoading() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onMessageViewButtonClick() {
+        loadData();
     }
 
     class FactorsAdapter extends RecyclerView.Adapter<FactorsAdapter.ViewHolder> {
@@ -161,5 +179,6 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
         }
 
     }
+
 
 }

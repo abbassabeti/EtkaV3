@@ -129,6 +129,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     private void addMarker(StoreModel store) {
+        if (!isAdded()) return;
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(store.getLatitude(), store.getLongitude()));
         marker.icon(bitmapDescriptorFromVector(store.getIcon()));
@@ -185,11 +186,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         storeName.setText(selectedStore.getName());
         storeInfoHolder.setVisibility(View.VISIBLE);
         selectedMarker = marker;
-//        if (map.getMyLocation() != null){
-//            LatLng userLocation = new LatLng(map.getMyLocation().getLatitude(),map.getMyLocation().getLongitude());
-//            LatLng storeLocation = new LatLng(selectedStore.getLatitude(),selectedStore.getLongitude());
-//            Toaster.showLong(getActivity(),"distance is: "+ GeolocationUtils.calculateDistanceBetweenTwoLocationInMeters(storeLocation,userLocation));
-//        }
         marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker_35dp));
         return false;
     }
@@ -213,6 +209,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     private void clearSelectedMarker(){
         if (selectedStore != null){
+            if (!isAdded()) return;
             selectedMarker.setIcon(bitmapDescriptorFromVector(selectedStore.getIcon()));
             selectedMarker = null;
             selectedStore = null;

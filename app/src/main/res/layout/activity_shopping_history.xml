@@ -29,6 +29,11 @@
             android:indeterminateTintMode="src_atop"
             android:visibility="gone" />
 
+        <ir.etkastores.app.ui.views.MessageView
+            android:id="@+id/messageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </RelativeLayout>
 
 </LinearLayout>
