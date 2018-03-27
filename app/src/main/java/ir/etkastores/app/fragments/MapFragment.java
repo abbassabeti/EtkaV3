@@ -103,6 +103,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     private void initViews() {
+        if (!isAdded()) return;
         storesHashMap = new HashMap<>();
         markersHashMap = new HashMap<>();
         map.getUiSettings().setRotateGesturesEnabled(false);
@@ -140,6 +141,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void addStoresToMap(List<StoreModel> stores){
+        if (!isAdded()) return;
         List<SuggestionArrayAdapter.SearchViewItem> searchViewItems = new ArrayList<>();
         for (StoreModel store : stores){
             addMarker(store);
@@ -152,6 +154,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onStoresFetchSuccess(List<StoreModel> stores) {
+        if (!isAdded()) return;
         addStoresToMap(stores);
     }
 
