@@ -40,7 +40,7 @@ public class HekmatRecyclerAdapter extends RecyclerView.Adapter<HekmatRecyclerAd
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.cell_product,parent,false));
+        return new ViewHolder(inflater.inflate(R.layout.cell_hekmat_product,parent,false));
     }
 
     @Override
