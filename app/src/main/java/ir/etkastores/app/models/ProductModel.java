@@ -1,9 +1,13 @@
 package ir.etkastores.app.models;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import ir.etkastores.app.utils.StringUtils;
 
 /**
  * Created by Sajad on 12/25/17.
@@ -167,5 +171,28 @@ public class ProductModel {
 
     public int getDiscountPercentage() {
         return discountPercentage;
+    }
+
+    public String getFinalPrice() {
+        if (!TextUtils.isEmpty(getOfferPrice())) {
+            return getOfferPrice();
+        }
+        if (!TextUtils.isEmpty(getEtkaPrice())) {
+            return getEtkaPrice();
+        }
+        if (!TextUtils.isEmpty(getOriginalPrice())) {
+            return getOriginalPrice();
+        }
+        return "";
+    }
+
+    public String getStrikeThruPrice() {
+        if (TextUtils.isEmpty(getOfferPrice())) {
+            return getEtkaPrice();
+        }
+        if (!TextUtils.isEmpty(getOriginalPrice())) {
+            return getOriginalPrice();
+        }
+        return "";
     }
 }

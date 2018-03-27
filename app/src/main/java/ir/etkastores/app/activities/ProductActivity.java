@@ -23,6 +23,7 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.ProductImagesSliderView;
 import ir.etkastores.app.utils.DialogHelper;
+import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +47,8 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     TextView mPoint;
     @BindView(R.id.detail)
     TextView mDetail;
+    @BindView(R.id.priceDiscounted)
+    TextView mPriceDiscounted;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     @BindView(R.id.extraItemsHolder)
@@ -100,7 +103,9 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         toolbar.setTitle(productModel.getCategoryTitle());
         mPoint.setText(String.format(EtkaApp.getInstance().getResources().getString(R.string.Xpoint), productModel.getPoint()));
         mTitle.setText(productModel.getTitle());
-        mPrice.setText(String.format(EtkaApp.getInstance().getResources().getString(R.string.priceX), String.valueOf(productModel.getOriginalPrice())));
+        mPrice.setText(productModel.getStrikeThruPrice());
+        StringUtils.setStrikeThruTextView(mPrice);
+        mPriceDiscounted.setText(productModel.getFinalPrice());
         if (!TextUtils.isEmpty(productModel.getDescription())) {
             mDetail.setText(productModel.getDescription());
             mDetail.setGravity(Gravity.RIGHT);

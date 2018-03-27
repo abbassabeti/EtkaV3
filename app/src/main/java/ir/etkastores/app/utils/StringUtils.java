@@ -1,5 +1,8 @@
 package ir.etkastores.app.utils;
 
+import android.graphics.Paint;
+import android.widget.TextView;
+
 /**
  * Created by garshasbi on 2/24/18.
  */
@@ -34,6 +37,10 @@ public class StringUtils {
         s = s.replace("8","۸");
         s = s.replace("9","۹");
         return s;
+    }
+
+    public static void setStrikeThruTextView(TextView textView){
+        textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
 }

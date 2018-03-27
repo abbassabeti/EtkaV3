@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1F1F1"
+    android:background="@color/white"
     android:orientation="vertical">
+
+    <!--android:background="#F1F1F1"-->
 
     <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
@@ -39,12 +41,11 @@
                 android:textSize="@dimen/textSizeSmall" />
 
 
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignParentTop="true"
-                android:background="@color/gray"/>
+                android:background="@color/gray" />
 
         </RelativeLayout>
 
@@ -93,13 +94,34 @@
                     android:paddingRight="16dp">
 
                     <TextView
-                        android:id="@+id/price"
+                        android:id="@+id/gheymat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="۲۴،۱۰۰ تومان"
-                        android:textColor="@color/darkGray" />
+                        android:text="@string/priceColon"
+                        android:textColor="@color/darkGray"
+                        android:textSize="@dimen/textSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/gheymat"
+                        android:textColor="@color/darkGray"
+                        android:textSize="@dimen/textSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/priceDiscounted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@id/price"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/textSizeSmall" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/starIcon"
@@ -140,10 +162,11 @@
                     android:id="@+id/extraItemsHolder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#F1F1F1"
                     android:orientation="vertical"
                     android:paddingBottom="16dp"
                     android:paddingTop="16dp">
+
+                    <!--android:background="#F1F1F1"-->
 
                 </LinearLayout>
 

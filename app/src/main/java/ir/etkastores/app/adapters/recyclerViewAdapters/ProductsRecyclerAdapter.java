@@ -93,7 +93,7 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         public void bind(final ProductModel model) {
             image.setImageResource(R.drawable.etka_logo_wide);
             name.setText(model.getTitle());
-            price.setText(model.getOriginalPrice());
+            price.setText(model.getFinalPrice());
             scorePoint.setText(String.valueOf(model.getPoint()));
             ImageLoader.loadProductImage(context,image,model.getImageUrl());
             itemView.setOnClickListener(new View.OnClickListener() {

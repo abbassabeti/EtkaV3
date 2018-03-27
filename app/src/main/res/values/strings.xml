@@ -174,5 +174,6 @@
     <string name="loginSuccessfulMessage">ورود به حساب کاربری با موفقیت انجام شد.</string>
     <string name="managementX">مدیریت: %s</string>
     <string name="addToNextShoppingList">افزودن به لیست خرید بعدی</string>
+    <string name="priceColon">قیمت:</string>
 
 </resources>
