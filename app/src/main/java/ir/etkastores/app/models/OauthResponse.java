@@ -26,23 +26,12 @@ public class OauthResponse<T> {
         @SerializedName("message")
         String message;
 
-        @SerializedName("errors")
-        List<String> errors;
-
         public int getStatusCode() {
             return statusCode;
         }
 
         public String getMessage() {
             return message;
-        }
-
-        public String getErrorsMessage(){
-            return Arrays.toString(errors.toArray());
-        }
-
-        public List<String> getErrors(){
-            return errors;
         }
 
     }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import retrofit2.Response;
  * Created by Sajad on 12/2/17.
  */
 
-public class SpecialOffersSlide extends Fragment implements PageTrigger, CategoryGroupHorizontalView.OnProductClickListener {
+public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizontalView.OnProductClickListener {
 
     public static SpecialOffersSlide newInstance() {
         return new SpecialOffersSlide();
@@ -47,7 +48,7 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger, Categor
     @BindView(R.id.circularProgress)
     ProgressBar circularProgress;
 
-    boolean isFirstSelect = true;
+    boolean isDataLoaded = false;
 
     private Call<OffersResponseModel> offersReq;
 
@@ -58,14 +59,13 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger, Categor
             view = inflater.inflate(R.layout.fragment_home_slide, container, false);
             ButterKnife.bind(this, view);
         }
+        if (getUserVisibleHint()) checkToInitViews();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //we call this method here, because this fragment is the first slide of fragment
-        onPageSelected();
     }
 
     private void initViews() {
@@ -73,10 +73,15 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger, Categor
     }
 
     @Override
-    public void onPageSelected() {
-        if (!isFirstSelect) return;
-        isFirstSelect = false;
-        initViews();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()){
+            checkToInitViews();
+        }
+    }
+
+    private void checkToInitViews(){
+        if (!isDataLoaded) initViews();
     }
 
     private void loadOffers() {
@@ -94,6 +99,7 @@ public class SpecialOffersSlide extends Fragment implements PageTrigger, Categor
                     } else {
                         addItems(response.body().getItems());
                     }
+                    isDataLoaded = true;
                 } else {
                     onFailure(call, null);
                 }

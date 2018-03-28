@@ -17,7 +17,7 @@ import ir.etkastores.app.ui.views.CategorySliderView;
  * Created by Sajad on 12/2/17.
  */
 
-public class ForYouSlide extends Fragment implements PageTrigger {
+public class ForYouSlide extends Fragment {
 
     public static ForYouSlide newInstance(){
         return new ForYouSlide();
@@ -47,8 +47,4 @@ public class ForYouSlide extends Fragment implements PageTrigger {
 //        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
     }
 
-    @Override
-    public void onPageSelected() {
-
-    }
 }

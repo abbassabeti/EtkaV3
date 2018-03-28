@@ -91,12 +91,22 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         adapter.addItems(response.body().getData());
+                        if (adapter.getItemCount() == 0) {
+                            messageView.show(R.drawable.ic_warning_orange_48dp, getResources().getString(R.string.youHaveNotAnyShoppingHistory), getResources().getString(R.string.back), new MessageView.OnMessageViewButtonClick() {
+                                @Override
+                                public void onMessageViewButtonClick() {
+                                    if (isFinishing()) return;
+                                    onBackPressed();
+                                }
+                            });
+                        }
                     } else {
                         messageView.show(R.drawable.ic_warning_orange_48dp,
                                 response.body().getMeta().getMessage(),
                                 getResources().getString(R.string.retry),
                                 ShoppingHistoryActivity.this);
                     }
+
                 } else {
                     onFailure(null, null);
                 }

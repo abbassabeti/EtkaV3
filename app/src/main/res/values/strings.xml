@@ -179,5 +179,6 @@
     <string name="productAddedToNextShoppingListSuccessfully">محصول با موفقیت به لیست خرید بعدی اضافه شد.</string>
     <string name="errorInAddingToNextShoppingList">خطا در اضافه کردن محصول به لیست خرید بعدی، لطفا از دوباره تلاش کنید.</string>
     <string name="setProductCounts">تعداد محصولات را مشخص کنید</string>
+    <string name="youHaveNotAnyShoppingHistory">سابقه خریدی برای شما موجود نیست.</string>
 
 </resources>

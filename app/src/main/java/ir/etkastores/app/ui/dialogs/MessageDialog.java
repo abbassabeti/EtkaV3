@@ -64,9 +64,9 @@ public class MessageDialog extends BaseDialog {
                 EtkaApp.getInstance().getResources().getString(R.string.cancel));
     }
 
-    public static MessageDialog loginError() {
+    public static MessageDialog loginError(String messageText) {
         return warningRetry(EtkaApp.getInstance().getResources().getString(R.string.errorInLogin),
-                EtkaApp.getInstance().getResources().getString(R.string.anErrorHappendInServerConnection));
+                messageText);
     }
 
     public static MessageDialog registerError(String messageText) {

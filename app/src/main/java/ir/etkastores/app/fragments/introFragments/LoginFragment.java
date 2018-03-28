@@ -50,19 +50,14 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     @BindView(R.id.clubCardCheckBox)
     AppCompatCheckBox clubCardCheckBox;
-
     @BindView(R.id.emailAddressInputHolder)
     View emailAddressInputHolder;
-
     @BindView(R.id.passwordInputHolder)
     View passwordInputHolder;
-
     @BindView(R.id.clubCardNumberInputHolder)
     View clubCardNumberInputHolder;
-
     @BindView(R.id.clubCardPasswordInputHolder)
     View clubCardPasswordInputHolder;
-
     @BindView(R.id.emailAddressInput)
     AppCompatEditText emailAddressInput;
     @BindView(R.id.passwordInput)
@@ -213,7 +208,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
             public void onFailure(Call<AccessToken> call, Throwable t) {
                 if (!isAdded()) return;
                 loadingDialog.cancel();
-                showRetryDialog();
+                showRetryDialog(getResources().getString(R.string.errorInLogin));
             }
         });
     }
@@ -228,8 +223,8 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         if (loginRequest != null) loginRequest.cancel();
     }
 
-    void showRetryDialog(){
-        final MessageDialog messageDialog = MessageDialog.loginError();
+    void showRetryDialog(String message){
+        final MessageDialog messageDialog = MessageDialog.loginError(message);
         messageDialog.show(getChildFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
@@ -260,7 +255,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
                         Toaster.showLong(getActivity(),R.string.loginSuccessfulMessage);
                         getActivity().finish();
                     }else{
-                        showRetryDialog();
+                        showRetryDialog(response.body().getMeta().getMessage());
                     }
                 }else{
                     onFailure(null,null);
@@ -271,7 +266,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
             public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
                 if (!isAdded()) return;
                 loadingDialog.cancel();
-                showRetryDialog();
+                showRetryDialog(getResources().getString(R.string.errorInLogin));
             }
         });
     }

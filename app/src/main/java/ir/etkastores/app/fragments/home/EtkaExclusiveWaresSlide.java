@@ -14,7 +14,7 @@ import ir.etkastores.app.R;
  * Created by Sajad on 12/2/17.
  */
 
-public class EtkaExclusiveWaresSlide extends Fragment implements PageTrigger {
+public class EtkaExclusiveWaresSlide extends Fragment {
 
     public static EtkaExclusiveWaresSlide newInstance(){
         return new EtkaExclusiveWaresSlide();
@@ -38,10 +38,4 @@ public class EtkaExclusiveWaresSlide extends Fragment implements PageTrigger {
 
     }
 
-    @Override
-    public void onPageSelected() {
-        if (!isFirstSelect) return;
-        isFirstSelect = false;
-        initViews();
-    }
 }

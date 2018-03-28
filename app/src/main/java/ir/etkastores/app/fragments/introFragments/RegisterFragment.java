@@ -136,11 +136,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
                         UserSettings.setPasswrod(requestModel.getPassword());
                         onToolbarBackClick();
                     }else{
-                        if (TextUtils.isEmpty(response.body().getMeta().getMessage())){
-                            showRetryDialog(response.body().getMeta().getErrorsMessage());
-                        }else{
-                            showRetryDialog(response.body().getMeta().getMessage());
-                        }
+                        showRetryDialog(response.body().getMeta().getMessage());
                     }
                 }else{
                     onFailure(null,null);

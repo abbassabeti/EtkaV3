@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -137,13 +138,13 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
-                showRetryDialog();
+                showRetryDialog(null);
             }
         });
     }
 
-    void showRetryDialog(){
-        final MessageDialog messageDialog = MessageDialog.loginError();
+    void showRetryDialog(String message){
+        final MessageDialog messageDialog = MessageDialog.loginError(TextUtils.isEmpty(message)?getResources().getString(R.string.errorInLogin):message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
@@ -171,7 +172,7 @@ public class SplashActivity extends BaseActivity {
                         ProfileManager.saveProfile(response.body().getData());
                         gotoApp();
                     }else{
-                        showRetryDialog();
+                        showRetryDialog(response.body().getMeta().getMessage());
                     }
                 }else{
                     onFailure(null,null);
@@ -180,7 +181,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
-                showRetryDialog();
+                showRetryDialog(null);
             }
         });
     }

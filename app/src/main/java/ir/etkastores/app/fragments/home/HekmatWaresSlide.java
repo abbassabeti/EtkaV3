@@ -28,7 +28,7 @@ import retrofit2.Response;
  * Created by Sajad on 12/2/17.
  */
 
-public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRecyclerAdapter.OnHekmatItemClickListener {
+public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.OnHekmatItemClickListener {
 
     public static HekmatWaresSlide newInstance() {
         return new HekmatWaresSlide();
@@ -45,9 +45,9 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
     @BindView(R.id.messageView)
     MessageView messageView;
 
-    private HekmatRecyclerAdapter adapter;
+    private boolean isDataLoaded = false;
 
-    private boolean isFirstSelect = true;
+    private HekmatRecyclerAdapter adapter;
 
     private Call<OauthResponse<List<HekmatModel>>> hekmatReq;
 
@@ -58,6 +58,7 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
             view = inflater.inflate(R.layout.fragment__home_hekmat, container, false);
             ButterKnife.bind(this, view);
         }
+        if (getUserVisibleHint()) checkToInitViews();
         return view;
     }
 
@@ -77,6 +78,7 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         adapter.setItems(response.body().getData());
+                        isDataLoaded = true;
                     } else {
                         showErrorView(response.body().getMeta().getMessage());
                     }
@@ -103,10 +105,15 @@ public class HekmatWaresSlide extends Fragment implements PageTrigger, HekmatRec
     }
 
     @Override
-    public void onPageSelected() {
-        if (!isFirstSelect) return;
-        isFirstSelect = false;
-        initViews();
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()){
+            checkToInitViews();
+        }
+    }
+
+    private void checkToInitViews(){
+        if (!isDataLoaded) initViews();
     }
 
     @Override

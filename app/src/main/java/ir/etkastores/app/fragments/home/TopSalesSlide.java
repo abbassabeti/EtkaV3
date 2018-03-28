@@ -17,7 +17,7 @@ import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
  * Created by Sajad on 12/2/17.
  */
 
-public class TopSalesSlide extends Fragment implements PageTrigger {
+public class TopSalesSlide extends Fragment {
 
     public static TopSalesSlide newInstance(){
         return new TopSalesSlide();
@@ -44,10 +44,4 @@ public class TopSalesSlide extends Fragment implements PageTrigger {
         itemsHolder.addView(new CategoryGroupHorizontalView(getActivity(),null));
     }
 
-    @Override
-    public void onPageSelected() {
-        if (!isFirstSelect) return;
-        isFirstSelect = false;
-        initViews();
-    }
 }

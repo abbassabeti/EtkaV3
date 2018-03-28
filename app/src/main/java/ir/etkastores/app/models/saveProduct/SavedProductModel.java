@@ -12,10 +12,10 @@ import ir.etkastores.app.models.ProductModel;
 
 public class SavedProductModel {
 
-    @SerializedName("Product")
+    @SerializedName("product")
     private List<ProductModel> product;
 
-    @SerializedName("Count")
+    @SerializedName("count")
     private int count;
 
     public List<ProductModel> getProduct() {
