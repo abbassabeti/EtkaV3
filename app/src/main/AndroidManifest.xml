@@ -157,7 +157,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
 
-        <activity android:name=".activities.InStoreModeActivity"
+        <activity
+            android:name=".activities.InStoreModeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+
+        <activity
+            android:name=".activities.NewsListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+
+        <activity
+            android:name=".activities.NewsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar"/>
 

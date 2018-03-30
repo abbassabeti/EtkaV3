@@ -32,6 +32,9 @@ public class EtkaToolbar extends Toolbar {
     @BindView(R.id.toolbarSettingButton)
     AppCompatImageView settingButton;
 
+    @BindView(R.id.toolbarNewsButton)
+    View newsButton;
+
     private EtkaToolbarActionsListener callback;
 
     public EtkaToolbar(Context context) {
@@ -54,52 +57,66 @@ public class EtkaToolbar extends Toolbar {
         ButterKnife.bind(this);
         setPadding(0, 0, 0, 0);
         setContentInsetsAbsolute(0, 0);
-        if (attrs != null){
+        if (attrs != null) {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.EtkaToolbar, 0, 0);
             setTitle(a.getString(R.styleable.EtkaToolbar_title));
-            showBack(a.getBoolean(R.styleable.EtkaToolbar_showBack,true));
-            showMoreButton(a.getBoolean(R.styleable.EtkaToolbar_showMoreButton,false));
-            showSettingButton(a.getBoolean(R.styleable.EtkaToolbar_showSettingButton,false));
+            showBack(a.getBoolean(R.styleable.EtkaToolbar_showBack, true));
+            showMoreButton(a.getBoolean(R.styleable.EtkaToolbar_showMoreButton, false));
+            showSettingButton(a.getBoolean(R.styleable.EtkaToolbar_showSettingButton, false));
+            showNewsButton(a.getBoolean(R.styleable.EtkaToolbar_showNewsButton, false));
             a.recycle();
         }
     }
 
     @OnClick(R.id.toolbarBackButton)
-    void onBackClick(){
+    void onBackClick() {
         if (callback != null) callback.onToolbarBackClick();
     }
 
     @OnClick(R.id.toolbarMoreButton)
-    void onMoreButtonClick(){
+    void onMoreButtonClick() {
         if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.MORE_BUTTON);
     }
 
     @OnClick(R.id.toolbarSettingButton)
-    void onSettingButtonClick(){
+    void onSettingButtonClick() {
         if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.SETTING_BUTTON);
     }
 
-    public void showBack(boolean state){
-        if (state){
+    @OnClick(R.id.toolbarNewsButton)
+    void onNewsButtonClick(){
+        if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.NEWS_BUTTON);
+    }
+
+    public void showBack(boolean state) {
+        if (state) {
             backButton.setVisibility(VISIBLE);
-        }else{
+        } else {
             backButton.setVisibility(GONE);
         }
     }
 
-    public void showMoreButton(boolean state){
-        if (state){
+    public void showMoreButton(boolean state) {
+        if (state) {
             moreButton.setVisibility(VISIBLE);
-        }else{
+        } else {
             moreButton.setVisibility(GONE);
         }
     }
 
-    public void showSettingButton(boolean state){
-        if (state){
+    public void showSettingButton(boolean state) {
+        if (state) {
             settingButton.setVisibility(VISIBLE);
-        }else{
+        } else {
             settingButton.setVisibility(GONE);
+        }
+    }
+
+    public void showNewsButton(boolean state) {
+        if (state) {
+            newsButton.setVisibility(VISIBLE);
+        } else {
+            newsButton.setVisibility(GONE);
         }
     }
 
@@ -111,15 +128,17 @@ public class EtkaToolbar extends Toolbar {
         titleTv.setText(titleResId);
     }
 
-    public void setActionListeners(EtkaToolbarActionsListener callback){
+    public void setActionListeners(EtkaToolbarActionsListener callback) {
         this.callback = callback;
     }
 
-    public interface EtkaToolbarActionsListener{
+    public interface EtkaToolbarActionsListener {
         int MORE_BUTTON = 1;
         int SETTING_BUTTON = 2;
+        int NEWS_BUTTON = 3 ;
 
         void onToolbarBackClick();
+
         void onActionClick(int actionCode);
     }
 

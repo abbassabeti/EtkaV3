@@ -181,5 +181,6 @@
     <string name="setProductCounts">تعداد محصولات را مشخص کنید</string>
     <string name="youHaveNotAnyShoppingHistory">سابقه خریدی برای شما موجود نیست.</string>
     <string name="yourNextShoppingListIsEmpty">لیست خرید بعدی شما خالی است.</string>
+    <string name="news">اخبار</string>
 
 </resources>

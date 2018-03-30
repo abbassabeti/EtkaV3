@@ -6,12 +6,13 @@
     android:background="@color/mainBackgeoundColor"
     android:orientation="vertical">
 
-    <!--<ir.etkastores.app.UI.Views.EtkaToolbar-->
-        <!--android:id="@+id/homeToolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:showBack="false"-->
-        <!--app:title="@string/home" />-->
+    <ir.etkastores.app.ui.views.EtkaToolbar
+        android:id="@+id/homeToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:showBack="false"
+        app:title="@string/forYou"
+        app:showNewsButton="true"/>
 
     <ir.etkastores.app.ui.views.RTLTabLayout
         android:id="@+id/tabs"

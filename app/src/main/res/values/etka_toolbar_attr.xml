@@ -6,6 +6,7 @@
         <attr name="title" format="string" />
         <attr name="showMoreButton" format="boolean"/>
         <attr name="showSettingButton" format="boolean"/>
+        <attr name="showNewsButton" format="boolean"/>
     </declare-styleable>
 
 </resources>

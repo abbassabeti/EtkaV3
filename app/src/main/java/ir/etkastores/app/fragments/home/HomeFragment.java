@@ -14,21 +14,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.activities.NewsActivity;
 import ir.etkastores.app.adapters.viewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.adapters.viewPagerAdapters.GlobalFragmentPagerAdapter;
 import ir.etkastores.app.R;
+import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.RTLTabLayout;
 
 /**
  * Created by Sajad on 9/1/17.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements EtkaToolbar.EtkaToolbarActionsListener {
 
     private View view;
 
-//    @BindView(R.id.homeToolbar)
-//    EtkaToolbar toolbar;
+    @BindView(R.id.homeToolbar)
+    EtkaToolbar toolbar;
 
     @BindView(R.id.tabs)
     RTLTabLayout tabLayout;
@@ -55,10 +57,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void initViews() {
-        createDummyPages();
+        toolbar.setActionListeners(this);
+        createPages();
     }
 
-    private void createDummyPages() {
+    private void createPages() {
         pages = new ArrayList<>();
 
 //        pages.add(new FragmentTitleModel(ForYouSlide.newInstance(),R.string.forYou));
@@ -71,6 +74,18 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(pages.size());
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void onToolbarBackClick() {
+
+    }
+
+    @Override
+    public void onActionClick(int actionCode) {
+        if (actionCode == NEWS_BUTTON){
+            NewsActivity.show(getActivity());
+        }
     }
 
 }
