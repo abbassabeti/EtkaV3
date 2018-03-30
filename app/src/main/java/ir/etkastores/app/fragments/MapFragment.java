@@ -37,6 +37,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.StoreActivity;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
@@ -203,6 +204,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onResume() {
         super.onResume();
+        EtkaApp.getInstance().screenView("Map Fragment");
         try {
             if (mapView != null) mapView.onResume();
         } catch (Exception err) {

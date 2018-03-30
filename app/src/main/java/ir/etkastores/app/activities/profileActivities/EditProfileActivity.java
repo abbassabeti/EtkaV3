@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
@@ -100,6 +101,12 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Edit Profile Activity");
     }
 
     private void initViews() {

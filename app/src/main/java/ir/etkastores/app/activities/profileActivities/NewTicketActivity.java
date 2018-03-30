@@ -8,6 +8,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -33,6 +34,12 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         setContentView(R.layout.activity_new_ticket);
         ButterKnife.bind(this);
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("New Ticket Activity");
     }
 
     private void initViews() {

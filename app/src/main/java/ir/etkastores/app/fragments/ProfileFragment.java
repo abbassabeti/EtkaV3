@@ -15,6 +15,7 @@ import com.google.zxing.BarcodeFormat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.LoginRegisterActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
 import ir.etkastores.app.activities.profileActivities.HekmatActivity;
@@ -74,6 +75,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @Override
     public void onResume() {
         super.onResume();
+        EtkaApp.getInstance().screenView("Profile Fragment");
         if (ProfileManager.isGuest()){
             initGuestUser();
         }else{

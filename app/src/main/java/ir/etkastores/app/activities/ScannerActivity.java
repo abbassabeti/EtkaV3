@@ -13,6 +13,7 @@ import com.google.zxing.Result;
 import java.util.List;
 
 import ir.etkastores.app.BuildConfig;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -65,6 +66,7 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
     @Override
     public void onResume() {
         super.onResume();
+        EtkaApp.getInstance().screenView("Scanner Activity");
         if (EasyPermissions.hasPermissions(this, permissions)){
             mScannerView.setResultHandler(this);
             mScannerView.startCamera();

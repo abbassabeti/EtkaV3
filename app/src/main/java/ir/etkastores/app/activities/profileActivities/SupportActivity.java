@@ -10,6 +10,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.viewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.adapters.viewPagerAdapters.GlobalFragmentPagerAdapter;
@@ -42,6 +43,12 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         setContentView(R.layout.activity_support);
         ButterKnife.bind(this);
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Support Activity");
     }
 
     private void initViews(){

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -47,6 +48,7 @@ public class TextInfoActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     private int type;
     private String text;
     private String title;
+    private String screenName = "Unknown Info Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +62,19 @@ public class TextInfoActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             case ABOUT_ETKA_STORES:
                 title = getString(R.string.aboutEtkaStores);
                 text = getString(R.string.aboutEtkaStoresText);
+                screenName = "About Etka Stores Activity";
                 break;
 
             case USER_PRIVACY:
                 title = getString(R.string.userPrivacy);
                 text = getString(R.string.userPrivacyText);
+                screenName = "User Privacy Activity";
                 break;
 
             case TERM_AND_CONDITIONS:
                 title = getString(R.string.termAndConditions);
                 text = getString(R.string.termAndConditionsText);
+                screenName = "Rules Activity";
                 break;
 
         }
@@ -77,6 +82,12 @@ public class TextInfoActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         toolbar.setActionListeners(this);
         toolbar.setTitle(title);
         textView.setText(text);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView(screenName);
     }
 
     @Override

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.CategoryActivity;
 import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.activities.ScannerActivity;
@@ -52,6 +53,12 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
             initViews();
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Search Tab Fragment");
     }
 
     private void initViews() {

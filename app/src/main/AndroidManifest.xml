@@ -22,23 +22,18 @@
         android:label="@string/applicationName"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyC5mITzxE8vlSKRMN5zF-zcC_Xr73FhhFA" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="0eeca3d3f63bb0a30e6a1d10a66becb964f4863d" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_etka_notify" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
@@ -53,132 +48,118 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
-
         <activity
             android:name=".activities.LoginRegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.EditProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.ProfileSettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.FAQActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.InviteFriendsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.SendNewRequestActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.NextShoppingListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.ShoppingHistoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.OtherPagesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.ScoresActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.SupportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.RequestsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.TextInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.StoreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.ProductActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.CategoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.HekmatProductsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.ScannerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.HekmatActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.profileActivities.NewTicketActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
-
         <activity
             android:name=".activities.StoresListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
-
-        <activity android:name=".activities.profileActivities.ChangePasswordActivity"
+        <activity
+            android:name=".activities.profileActivities.ChangePasswordActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SolidSystemBar"/>
+            android:theme="@style/AppTheme.SolidSystemBar" />
 
         <service android:name=".services.EtkaFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".services.EtkaFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".activities.GalleryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+
+        <activity android:name=".activities.InStoreModeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar"/>
 
     </application>
 

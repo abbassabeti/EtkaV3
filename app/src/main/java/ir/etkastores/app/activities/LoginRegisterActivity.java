@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.fragments.introFragments.LoginFragment;
 import ir.etkastores.app.fragments.introFragments.RegisterFragment;
 import ir.etkastores.app.R;
@@ -47,6 +48,12 @@ public class LoginRegisterActivity extends BaseActivity implements EtkaToolbar.E
         }else{
             showRegister();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Login Register Activity");
     }
 
     private void showLogin(){

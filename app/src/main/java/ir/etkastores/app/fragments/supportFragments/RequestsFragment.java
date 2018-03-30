@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
 import ir.etkastores.app.R;
 
@@ -36,6 +37,12 @@ public class RequestsFragment extends Fragment {
         ButterKnife.bind(this,view);
         initViews();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Requests Fragment");
     }
 
     private void initViews(){

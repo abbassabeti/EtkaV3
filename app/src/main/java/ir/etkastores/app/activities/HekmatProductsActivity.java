@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatProductSecondLevelRecyclerAdapter;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.hekmat.HekmatProductModel;
@@ -41,6 +42,12 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
         ButterKnife.bind(this);
         hekmatModel = new Gson().fromJson(getIntent().getExtras().getString(HEKMAT_PRODUCT),HekmatModel.class);
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Hekmat Products Activity");
     }
 
     private void initViews(){

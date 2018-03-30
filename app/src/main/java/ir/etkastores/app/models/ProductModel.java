@@ -51,11 +51,14 @@ public class ProductModel {
     @SerializedName("Point")
     int point;
 
-    @SerializedName("ProprietaryPoint")
+    @SerializedName("proprietaryPoint")
     int proprietaryPoint;
 
-    @SerializedName("DiscountPercentage")
+    @SerializedName("discountPercentage")
     int discountPercentage;
+
+    @SerializedName("savedCount")
+    int savedCount;
 
     public static ProductModel fromJson(String json) {
         try {
@@ -200,4 +203,7 @@ public class ProductModel {
         return "";
     }
 
+    public int getSavedCount() {
+        return savedCount;
+    }
 }

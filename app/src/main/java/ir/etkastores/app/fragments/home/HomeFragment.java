@@ -13,6 +13,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.adapters.viewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.adapters.viewPagerAdapters.GlobalFragmentPagerAdapter;
 import ir.etkastores.app.R;
@@ -45,6 +46,12 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, view);
         initViews();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Home Tab Fragment");
     }
 
     private void initViews() {

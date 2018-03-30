@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 
 /**
@@ -30,6 +31,12 @@ public class ContactUsFramgment extends Fragment {
         ButterKnife.bind(this,view);
         initViews();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Contact Us Fragment");
     }
 
     private void initViews(){

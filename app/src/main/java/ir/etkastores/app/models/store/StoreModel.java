@@ -54,6 +54,9 @@ public class StoreModel implements Cloneable {
     @SerializedName("managerImage")
     String managerImage;
 
+    @SerializedName("InStoreModeUrl")
+    private String inStoreModeUrl;
+
     int ic = -1;
 
     public StoreModel(long id, long code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage) {
@@ -152,6 +155,10 @@ public class StoreModel implements Cloneable {
     @Override
     public StoreModel clone() {
         return new StoreModel(id, code, name, parentName, managerName, provinceName, contactInfo, openingHours, features, latitude, longitude, ranking, storeImage, managerImage);
+    }
+
+    public String getInStoreModeUrl() {
+        return inStoreModeUrl;
     }
 
 }

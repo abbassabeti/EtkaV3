@@ -7,6 +7,7 @@ import android.os.Bundle;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -27,6 +28,12 @@ public class OtherPagesActivity extends BaseActivity implements EtkaToolbar.Etka
         setContentView(R.layout.activity_other_pages);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Other Pages Activity");
     }
 
     @Override

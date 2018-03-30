@@ -14,11 +14,11 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import ir.etkastores.app.BuildConfig;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
-import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.webServices.AccessToken;
@@ -39,6 +39,12 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         EtkaPushNotificationConfig.registerGlobal();
         checkRemoteConfigs();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Splash Activity");
     }
 
     private void checkRemoteConfigs() {

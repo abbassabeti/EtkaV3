@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
@@ -77,6 +78,12 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
         toolbar.setActionListeners(this);
         fillViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Store Activity");
     }
 
     private void fillViews() {

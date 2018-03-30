@@ -9,6 +9,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.fragments.home.HomeFragment;
 import ir.etkastores.app.fragments.MapFragment;
 import ir.etkastores.app.fragments.ProfileFragment;
@@ -36,6 +37,12 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
 
         bottomNavigationView.setCurrentItem(3);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Main Activity");
     }
 
     BottomNavigationViewEx.OnNavigationItemSelectedListener selectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -8,6 +8,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -33,6 +34,12 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
         invitationCode.setText(ProfileManager.getProfile().getInvitationCode());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Invite Friends Activity");
     }
 
     @Override

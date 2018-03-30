@@ -17,7 +17,6 @@ import ir.etkastores.app.models.home.OffersResponseModel;
 import ir.etkastores.app.models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
 import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
-import ir.etkastores.app.models.saveProduct.SavedProductModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
@@ -115,7 +114,7 @@ public interface EtkaApi {
 
     //19
     @GET(ApiStatics.SAVE_PRODUCTS)
-    Call<OauthResponse<List<SavedProductModel>>> getSavedProducts();
+    Call<OauthResponse<List<ProductModel>>> getSavedProducts();
 
     //20
     @GET(ApiStatics.GET_TICKET)

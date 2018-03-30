@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -26,6 +27,12 @@ public class RequestsActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         setContentView(R.layout.activity_requests);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Requests Activity");
     }
 
     @Override

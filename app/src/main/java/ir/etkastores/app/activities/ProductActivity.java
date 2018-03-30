@@ -140,6 +140,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     @Override
     protected void onResume() {
         super.onResume();
+        EtkaApp.getInstance().screenView("Product Activity");
         initViews();
     }
 

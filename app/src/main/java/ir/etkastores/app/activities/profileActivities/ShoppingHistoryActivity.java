@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.factor.FactorModel;
@@ -59,6 +60,12 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
         setContentView(R.layout.activity_shopping_history);
         ButterKnife.bind(this);
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Shopping History Activity");
     }
 
     private void initViews() {

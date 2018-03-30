@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.adapters.recyclerViewAdapters.StoresRecyclerAdapter;
 import ir.etkastores.app.models.hekmat.HekmatProductModel;
 import ir.etkastores.app.models.store.StoreModel;
@@ -72,6 +73,12 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
         setContentView(R.layout.activity_stores_list);
         ButterKnife.bind(this);
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Stores List Activity");
     }
 
     private void initViews() {

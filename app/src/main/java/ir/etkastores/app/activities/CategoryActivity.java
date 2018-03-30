@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.adapters.recyclerViewAdapters.ProductsRecyclerAdapter;
 import ir.etkastores.app.models.CategoryModel;
@@ -92,6 +93,12 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
             isFromSearch = true;
         }
         initViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Category Activity");
     }
 
     private void initViews() {

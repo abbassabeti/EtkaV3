@@ -10,6 +10,7 @@ import android.text.method.PasswordTransformationMethod;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
@@ -61,6 +62,7 @@ public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.
     @Override
     protected void onResume() {
         super.onResume();
+        EtkaApp.getInstance().screenView("Change Password Activity");
         currentPasswordInput.setTransformationMethod(new PasswordTransformationMethod());
         newPasswordInput.setTransformationMethod(new PasswordTransformationMethod());
         confirmPasswordInput.setTransformationMethod(new PasswordTransformationMethod());

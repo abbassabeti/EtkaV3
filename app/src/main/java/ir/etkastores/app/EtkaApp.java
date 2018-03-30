@@ -8,6 +8,9 @@ import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -22,11 +25,16 @@ public class EtkaApp extends MultiDexApplication {
 
     private static EtkaApp instance;
 
+    private static GoogleAnalytics mGoogleAnalytics;
+    private static Tracker mTracker;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         instance = this;
+
+        mGoogleAnalytics = GoogleAnalytics.getInstance(this);
 
         initFont();
 
@@ -51,6 +59,22 @@ public class EtkaApp extends MultiDexApplication {
 
     public synchronized static SharedPreferences getPreference(){
         return instance.getSharedPreferences("PREFERENCES",MODE_PRIVATE);
+    }
+
+    synchronized public Tracker getGoogleAnalyticsTracker() {
+        if (mTracker == null) {
+            mTracker = mGoogleAnalytics.newTracker(R.xml.app_tracker);
+        }
+        return mTracker;
+    }
+
+    public void screenView(String screenName){
+        try {
+            getGoogleAnalyticsTracker().setScreenName(screenName);
+            getGoogleAnalyticsTracker().send(new HitBuilders.ScreenViewBuilder().build());
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
 }
