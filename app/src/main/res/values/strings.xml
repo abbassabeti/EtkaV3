@@ -185,5 +185,6 @@
     <string name="iKnow">بلدم</string>
     <string name="thisStoreNotSupportInStoreModeYet">این فروشگاه در حال حاضر از نقشه داخل فروشگاه پشتیبانی نمیکند.</string>
     <string name="InStoreModeForBranchX">نقشه داخل فروشگاه شعبه %s</string>
+    <string name="errorInLoadingInStoreMode">خطا در بارگزاری نقشه درون فروشگاه!</string>
 
 </resources>

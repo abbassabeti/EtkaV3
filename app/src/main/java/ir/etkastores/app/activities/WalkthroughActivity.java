@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.eftimoff.viewpagertransformers.RotateUpTransformer;
 import com.rd.PageIndicatorView;
@@ -24,6 +25,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.utils.FontUtils;
 
 public class WalkthroughActivity extends BaseActivity {
 
@@ -37,6 +39,9 @@ public class WalkthroughActivity extends BaseActivity {
 
     @BindView(R.id.pageIndicatorView)
     PageIndicatorView indicatorView;
+
+    @BindView(R.id.enterButton)
+    TextView enterButton;
 
     private WalkthroughPagerAdapter adapter;
 
@@ -56,6 +61,7 @@ public class WalkthroughActivity extends BaseActivity {
 
     private void initViews() {
         ProfileManager.setIsFirstRun(false);
+        enterButton.setTypeface(FontUtils.getBoldTypeFace());
         List<PagerSliderModel> items = new ArrayList<>();
         items.add(new PagerSliderModel(0, "", ""));
         items.add(new PagerSliderModel(0, "", ""));

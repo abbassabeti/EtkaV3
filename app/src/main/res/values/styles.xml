@@ -151,4 +151,12 @@
         <item name="android:progressTint">@color/colorPrimary</item>
     </style>
 
+    <style name="circularProgressStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
+        <item name="android:indeterminateTint">@color/colorPrimary</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
 </resources>

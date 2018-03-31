@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 
@@ -15,6 +18,7 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.store.StoreModel;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 
 public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
@@ -32,6 +36,9 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
 
     @BindView(R.id.webView)
     WebView webView;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private StoreModel storeModel;
 
@@ -52,18 +59,28 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     }
 
     private void initViews() {
-        toolbar.setTitle(String.format(getResources().getString(R.string.InStoreModeForBranchX),storeModel.getName()));
+        toolbar.setTitle(String.format(getResources().getString(R.string.InStoreModeForBranchX), storeModel.getName()));
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                Log.e("loading finished", "....");
+                if (isFinishing()) return;
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                Log.e("loading started", "....");
+                if (isFinishing()) return;
+                progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                if (isFinishing()) return;
+                progressBar.setVisibility(View.GONE);
+                showLoadingErrorDialog();
             }
         });
         webView.getSettings().setJavaScriptEnabled(true);
@@ -78,6 +95,26 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     @Override
     public void onActionClick(int actionCode) {
 
+    }
+
+    private void showLoadingErrorDialog() {
+        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error),getResources().getString(R.string.errorInLoadingInStoreMode));
+        messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (button == RIGHT_BUTTON){
+                    initViews();
+                }else{
+                    finish();
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
     }
 
 }
