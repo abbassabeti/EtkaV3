@@ -156,22 +156,21 @@
             android:name=".activities.GalleryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.InStoreModeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.NewsListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-
         <activity
             android:name=".activities.NewsActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity android:name=".activities.WalkthroughActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar"/>
-
     </application>
 
 </manifest>

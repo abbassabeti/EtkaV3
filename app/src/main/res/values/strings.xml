@@ -182,5 +182,8 @@
     <string name="youHaveNotAnyShoppingHistory">سابقه خریدی برای شما موجود نیست.</string>
     <string name="yourNextShoppingListIsEmpty">لیست خرید بعدی شما خالی است.</string>
     <string name="news">اخبار</string>
+    <string name="iKnow">بلدم</string>
+    <string name="thisStoreNotSupportInStoreModeYet">این فروشگاه در حال حاضر از نقشه داخل فروشگاه پشتیبانی نمیکند.</string>
+    <string name="InStoreModeForBranchX">نقشه داخل فروشگاه شعبه %s</string>
 
 </resources>

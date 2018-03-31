@@ -19,6 +19,7 @@ import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
+import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.webServices.AccessToken;
@@ -193,8 +194,11 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void gotoApp(){
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+        if (ProfileManager.isFirstRun()){
+            WalkthroughActivity.show(this);
+        }else{
+            MainActivity.show(this);
+        }
         finish();
     }
 

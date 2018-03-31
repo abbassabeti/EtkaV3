@@ -1,5 +1,8 @@
 package ir.etkastores.app.models.store;
 
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -54,10 +57,18 @@ public class StoreModel implements Cloneable {
     @SerializedName("managerImage")
     String managerImage;
 
-    @SerializedName("InStoreModeUrl")
+    @SerializedName("inStoreModeUrl")
     private String inStoreModeUrl;
 
     int ic = -1;
+
+    public static StoreModel fromJson(String  json){
+        try {
+            return new Gson().fromJson(json,StoreModel.class);
+        }catch (Exception err){
+            return null;
+        }
+    }
 
     public StoreModel(long id, long code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage) {
         this.id = id;
@@ -159,6 +170,10 @@ public class StoreModel implements Cloneable {
 
     public String getInStoreModeUrl() {
         return inStoreModeUrl;
+    }
+
+    public boolean hasInStoreMode(){
+        return !TextUtils.isEmpty(getInStoreModeUrl());
     }
 
 }

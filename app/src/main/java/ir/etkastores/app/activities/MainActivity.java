@@ -1,5 +1,7 @@
 package ir.etkastores.app.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,11 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 
 public class MainActivity extends BaseActivity {
+
+    public static void show(Context context){
+        Intent intent = new Intent(context,MainActivity.class);
+        context.startActivity(intent);
+    }
 
     private final static String CURRENT_SELECTED_HOME_FRAGMENT_TAG = "CURRENT_SELECTED_HOME_FRAGMENT_TAG";
 

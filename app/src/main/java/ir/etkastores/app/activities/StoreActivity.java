@@ -120,6 +120,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
                 addPhone(phone);
             }
         }
+
     }
 
     @Override
@@ -145,7 +146,11 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     @OnClick(R.id.btn_inStoreMode)
     public void onInStoreModeClick() {
-        Toaster.show(this, R.string.commingSoonMessage);
+        if (storeModel.hasInStoreMode()){
+            InStoreModeActivity.show(this,storeModel);
+        }else{
+            Toaster.show(this, R.string.thisStoreNotSupportInStoreModeYet);
+        }
     }
 
     private void addPhone(final String phoneNumber) {

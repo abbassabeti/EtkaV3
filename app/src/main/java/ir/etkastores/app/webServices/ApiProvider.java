@@ -30,13 +30,14 @@ public class ApiProvider {
 
     public static <S> S createService(Class<S> serviceClass) {
         httpClient = new OkHttpClient.Builder();
+        builder = new Retrofit.Builder()
+                .baseUrl(ApiStatics.getBaseUrl())
+                .addConverterFactory(GsonConverterFactory.create());
+
         if (BuildConfig.DEBUG){
             httpClient.addInterceptor(getBodyLogInterceptor());
             httpClient.addInterceptor(getHeadersLogInterceptor());
         }
-        builder = new Retrofit.Builder()
-                .baseUrl(ApiStatics.getBaseUrl())
-                .addConverterFactory(GsonConverterFactory.create());
 
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
@@ -45,10 +46,6 @@ public class ApiProvider {
 
     public static <S> S createService(Class<S> serviceClass, AccessToken accessToken) {
         httpClient = new OkHttpClient.Builder();
-        if (BuildConfig.DEBUG){
-            httpClient.addInterceptor(getBodyLogInterceptor());
-            httpClient.addInterceptor(getHeadersLogInterceptor());
-        }
         builder = new Retrofit.Builder()
                 .baseUrl(ApiStatics.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create());
@@ -78,6 +75,7 @@ public class ApiProvider {
             });
 
             httpClient.authenticator(new Authenticator() {
+
                 @Override
                 public Request authenticate(Route route, Response response) throws IOException {
                     if(responseCount(response) >= 2) {
@@ -108,7 +106,13 @@ public class ApiProvider {
                         return null;
                     }
                 }
+
             });
+        }
+
+        if (BuildConfig.DEBUG){
+            httpClient.addInterceptor(getBodyLogInterceptor());
+            httpClient.addInterceptor(getHeadersLogInterceptor());
         }
 
         OkHttpClient client = httpClient.build();

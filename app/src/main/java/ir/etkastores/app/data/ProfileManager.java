@@ -19,6 +19,7 @@ public class ProfileManager {
     private static final String USER_NAME = "USER_NAME";
     private static final String USER_PASSWORD = "USER_PASSWORD";
     private final static String PROFILE_KEY = "PROFILE_KEY";
+    private final static String IS_FIRST_RUN = "IS_FIRST_RUN";
 
     private static UserProfileModel profileModel;
 
@@ -93,6 +94,15 @@ public class ProfileManager {
     public static void saveUserNameAndPassword(String userName, String password){
         DiskDataHelper.putString(USER_NAME,userName);
         DiskDataHelper.putString(USER_PASSWORD,password);
+    }
+
+    public static boolean isFirstRun(){
+        return true;
+//        return !DiskDataHelper.getBool(IS_FIRST_RUN);
+    }
+
+    public static void setIsFirstRun(boolean isFirstRun){
+        DiskDataHelper.putBool(IS_FIRST_RUN,!isFirstRun);
     }
 
 }

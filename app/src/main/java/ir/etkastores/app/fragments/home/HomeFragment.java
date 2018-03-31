@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.NewsActivity;
+import ir.etkastores.app.activities.NewsListActivity;
 import ir.etkastores.app.adapters.viewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.adapters.viewPagerAdapters.GlobalFragmentPagerAdapter;
 import ir.etkastores.app.R;
@@ -84,7 +85,7 @@ public class HomeFragment extends Fragment implements EtkaToolbar.EtkaToolbarAct
     @Override
     public void onActionClick(int actionCode) {
         if (actionCode == NEWS_BUTTON){
-            NewsActivity.show(getActivity());
+            NewsListActivity.show(getActivity());
         }
     }
 
