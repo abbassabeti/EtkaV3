@@ -24,6 +24,7 @@
     <string name="yourEmailAddress">آدرس ایمیل شما</string>
     <string name="send">ارسال</string>
     <string name="enter">ورود</string>
+    <string name="registerOrLogin">ورود یا ثبت نام</string>
     <string name="iHaveEtkaClubCard">کارت باشگاه مشتریان اتکا دارم</string>
     <string name="notRegistered_registerNow">هنوز عضو نیستید؟ ثبت نام کنید</string>
     <string name="forgotYourPassword_resetNow">رمز عبور خود را فراموش کرده اید؟ بازگردانی رمز عبور</string>
@@ -168,7 +169,7 @@
     <string name="fillConfirmPassword">تکرار رمز عبور جدید را وارد کنید</string>
     <string name="confirmPasswordIdNotValid">تکرار رمز عبور معتبر نیست!</string>
     <string name="errorInChangePassword">در تغییر رمز عبور خطایی به وجود آمده است، از دوباره تلاش کنید.</string>
-    <string name="loginRequiredForThisSection">برای استفاده از این قسمت ابتدا باید وارد حساب کاربری خود شوید.</string>
+    <string name="loginRequiredForThisSection">برای استفاده از این قسمت ابتدا باید ثبت‌نام کنید یا وارد حساب کاربری خود شوید</string>
     <string name="userAccountRequired">حساب کاربری مورد نیاز است!</string>
     <string name="guestUser">کاربر میهمان</string>
     <string name="loginSuccessfulMessage">ورود به حساب کاربری با موفقیت انجام شد.</string>
@@ -192,5 +193,10 @@
     <string name="inDeletingProductFromYourNextShoppingList">در حال حذف محصول از لیست خرید بعدی...</string>
     <string name="errorInDeletingProductTryLater">خطا در حذف محصول از لیست خرید بعدی، از دوباره تلاش کنید.</string>
     <string name="productDeletedSuccessfully">محصول مورد نظر با موفقیت حذف شد.</string>
+    <string name="passwordChangeSuccessfully">رمز عبور شما با موفقیت تغییر کرد.</string>
+    <string name="logOutSuccessFully">شما از حساب کاربری خود با موفقیت خارج شدید.</string>
+    <string name="shareInvitationCodeMessage">"اپلیکیشن همراه فروشگاه اتکا را می‌توانید از طریق لینک زیر دانلود کنید و با ثبت‌نام با کد معرف %s از امتیاز ویژه اتکا برخوردار شوید."</string>
+    <string name="cafebazaarAppUrl">"https://cafebazaar.ir/app/ir.etkastores.app/?l=fa"</string>
+    <string name="etkaStoreAppInvitation">دعوت به استفاده از اپلیکیشن همراه فروشگاه اتکا</string>
 
 </resources>

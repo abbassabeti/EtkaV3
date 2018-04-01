@@ -59,8 +59,9 @@ public class ProfileManager {
     public static void clearProfile() {
         try {
             EtkaApp.getPreference().edit().remove(PROFILE_KEY).apply();
+            profileModel = null;
         } catch (Exception err) {
-
+            err.printStackTrace();
         }
     }
 
@@ -74,7 +75,8 @@ public class ProfileManager {
     }
 
     public static void logOut() {
-
+        saveUserNameAndPassword("","");
+        clearProfile();
     }
 
     public static String getUserName() {

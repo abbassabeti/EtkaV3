@@ -15,6 +15,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
@@ -136,7 +137,9 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @OnClick(R.id.logoutButton)
     public void onLogoutButtonClick() {
-
+        ProfileManager.logOut();
+        Toaster.show(this,R.string.logOutSuccessFully);
+        onBackPressed();
     }
 
     @OnClick(R.id.changePasswordButton)

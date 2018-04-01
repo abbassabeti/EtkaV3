@@ -53,75 +53,75 @@ public interface EtkaApi {
     Call<OauthResponse<String>> editUserProfile(@Body UserProfileModel userProfileModel);
 
     //4
-    @POST(ApiStatics.RESET_PASSWORD)
-    Call<OauthResponse<String>> resetPassword(@Body ChangePasswordRequestModel resetPasswordRequestModel);
-
-    //5
     @GET(ApiStatics.PRODUCT_CATEGORY_CHILD)
     Call<OauthResponse<List<CategoryModel>>> getCategory(@Query("ParentId") long parentId);
 
-    //6
+    //5
     @GET(ApiStatics.PRODUCT_CATEGORY_LEVEL)
     Call<OauthResponse<List<CategoryModel>>> getCategoryAtLevel(@Query("Level") int id);
 
-    //7
+    //6
     @POST(ApiStatics.SEARCH)
     Call<OauthResponse<ProductSearchResponseModel>> searchProduct(@Body SearchProductRequestModel request);
 
-    //8
+    //7
     @GET(ApiStatics.PRODUCT)
     Call<OauthResponse<ProductModel>> getProductById(@Query("id") long id);
 
-    //9
+    //8
     @GET(ApiStatics.PRODUCT)
     Call<OauthResponse<ProductModel>> getProductByBarcode(@Query("Barcode") String barcode);
 
-    //10
+    //9
     @GET(ApiStatics.STORE)
     Call<OauthResponse<List<StoreModel>>> getStores();
 
-    //11
+    //10
     @GET(ApiStatics.PROFILE)
     Call<OauthResponse<UserProfileModel>> getUserProfile(@Query("UserId") String userId);
 
-    //12
+    //11
     @POST(ApiStatics.FACTOR)
     Call<OauthResponse<List<FactorModel>>> getFactor(@Body FactorRequestModel requestModel);
 
-    //13
+    //12
     @GET(ApiStatics.HEKMAT)
     Call<OauthResponse<List<HekmatModel>>> getHekmat();
 
-    //14
+    //13
     @GET(ApiStatics.HOME)
     Call<OffersResponseModel> getOffers(@Query("page") String page);
 
-    //15
+    //14
     @POST(ApiStatics.CHANGE_PASSWORD)
     Call<OauthResponse<String>> changePassword(@Body ChangePasswordRequestModel resetPasswordRequestModel);
 
-    //16
+    //15
     @POST(ApiStatics.SEND_TICKET)
     Call<OauthResponse<Long>> sendTicket(@Body TicketRequestModel requestModel);
 
-    //17
+    //16
     @POST(ApiStatics.SAVE_PRODUCTS)
     Call<OauthResponse<Long>> saveProduct(@Body SaveProductRequestModel requestModel);
 
-    //18
+    //17
     @DELETE(ApiStatics.SAVE_PRODUCTS)
     Call<OauthResponse<Long>> deleteSavedProduct(@Query("id") long id);
 
-    //19
+    //18
     @GET(ApiStatics.SAVE_PRODUCTS)
     Call<OauthResponse<List<ProductModel>>> getSavedProducts();
 
-    //20
+    //19
     @GET(ApiStatics.GET_TICKET)
     Call<OauthResponse<TicketResponseModel>> getTickets(@Query("page") int page);
 
-    //21
+    //20
     @POST(ApiStatics.NEWS)
     Call<OauthResponse<NewsResponseModel>> getNews(@Body NewsRequestModel requestModel);
+
+    //21
+    @POST(ApiStatics.RESET_PASSWORD)
+    Call<OauthResponse<String>> resetPassword(@Query("PhoneNumber") String phoneNumber);
 
 }

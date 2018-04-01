@@ -13,11 +13,12 @@ import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.utils.IntentHelper;
 
 public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void start(Activity activity){
-        Intent intent = new Intent(activity,InviteFriendsActivity.class);
+    public static void start(Activity activity) {
+        Intent intent = new Intent(activity, InviteFriendsActivity.class);
         activity.startActivity(intent);
     }
 
@@ -53,8 +54,10 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
     }
 
     @OnClick(R.id.shareButton)
-    public void onShareButtonClick(){
-        // TODO share invitation code here
+    public void onShareButtonClick() {
+        String message = String.format(getResources().getString(R.string.shareInvitationCodeMessage), ProfileManager.getProfile().getInvitationCode()) +
+                "\n" + getResources().getString(R.string.cafebazaarAppUrl);
+        IntentHelper.share(this,getResources().getString(R.string.etkaStoreAppInvitation),message);
     }
 
 }
