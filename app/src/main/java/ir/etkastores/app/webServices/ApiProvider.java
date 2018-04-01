@@ -2,6 +2,7 @@ package ir.etkastores.app.webServices;
 
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.utils.DiskDataHelper;
@@ -115,6 +116,9 @@ public class ApiProvider {
             httpClient.addInterceptor(getHeadersLogInterceptor());
         }
 
+        httpClient.connectTimeout(20, TimeUnit.SECONDS);
+        httpClient.readTimeout(20, TimeUnit.SECONDS);
+        httpClient.writeTimeout(20, TimeUnit.SECONDS);
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);

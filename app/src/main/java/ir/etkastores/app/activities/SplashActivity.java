@@ -151,7 +151,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     void showRetryDialog(String message){
-        final MessageDialog messageDialog = MessageDialog.loginError(TextUtils.isEmpty(message)?getResources().getString(R.string.errorInLogin):message);
+        final MessageDialog messageDialog = MessageDialog.loginError(TextUtils.isEmpty(message)?getResources().getString(R.string.anErrorHappendInServerConnection):message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {

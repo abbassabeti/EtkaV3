@@ -186,5 +186,11 @@
     <string name="thisStoreNotSupportInStoreModeYet">این فروشگاه در حال حاضر از نقشه داخل فروشگاه پشتیبانی نمیکند.</string>
     <string name="InStoreModeForBranchX">نقشه داخل فروشگاه شعبه %s</string>
     <string name="errorInLoadingInStoreMode">خطا در بارگزاری نقشه درون فروشگاه!</string>
+    <string name="errorInLoadingNextShoppingList">خطا در دریافت اطلاعات لیست خرید بعدی.</string>
+    <string name="deleteProduct">حذف محصول</string>
+    <string name="areYouSureToDeleteThisProductFromNextShoppingList">"آیا قصد حذف این محصول را از لیست خرید بعدی دارید؟"</string>
+    <string name="inDeletingProductFromYourNextShoppingList">در حال حذف محصول از لیست خرید بعدی...</string>
+    <string name="errorInDeletingProductTryLater">خطا در حذف محصول از لیست خرید بعدی، از دوباره تلاش کنید.</string>
+    <string name="productDeletedSuccessfully">محصول مورد نظر با موفقیت حذف شد.</string>
 
 </resources>

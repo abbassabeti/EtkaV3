@@ -240,6 +240,11 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         ProductActivity.show(this, productModel);
     }
 
+    @Override
+    public void onProductSavedDeleteClick(ProductModel productModel) {
+
+    }
+
     private void showRetryDialog(String message) {
         String msg = message;
         if (TextUtils.isEmpty(msg))

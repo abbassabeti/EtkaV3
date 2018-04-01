@@ -25,6 +25,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+        <ProgressBar
+            android:id="@+id/circularProgress"
+            style="@style/circularProgressStyle"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/linearProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/linearProgressStyle"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
 </LinearLayout>

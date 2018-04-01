@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.utils.DiskDataHelper;
@@ -23,86 +24,87 @@ public class ProfileManager {
 
     private static UserProfileModel profileModel;
 
-    public static UserProfileModel getProfile(){
+    public static UserProfileModel getProfile() {
         initProfile();
         return profileModel;
     }
 
-    public static void saveProfile(UserProfileModel model){
+    public static void saveProfile(UserProfileModel model) {
         try {
             String str = new Gson().toJson(model);
-            EtkaApp.getPreference().edit().putString(PROFILE_KEY,str).apply();
+            EtkaApp.getPreference().edit().putString(PROFILE_KEY, str).apply();
             profileModel = model;
-        }catch (Exception err){}
+        } catch (Exception err) {
+        }
     }
 
-    public static boolean hasSavedProfile(){
+    public static boolean hasSavedProfile() {
         initProfile();
-        if (profileModel == null){
+        if (profileModel == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    private static void initProfile(){
+    private static void initProfile() {
         if (profileModel != null) return;
         try {
-            profileModel = new Gson().fromJson(EtkaApp.getPreference().getString(PROFILE_KEY,null),UserProfileModel.class);
-        }catch (Exception err){
+            profileModel = new Gson().fromJson(EtkaApp.getPreference().getString(PROFILE_KEY, null), UserProfileModel.class);
+        } catch (Exception err) {
             profileModel = null;
         }
     }
 
-    public static void clearProfile(){
+    public static void clearProfile() {
         try {
             EtkaApp.getPreference().edit().remove(PROFILE_KEY).apply();
-        }catch (Exception err){
+        } catch (Exception err) {
 
         }
     }
 
-    public static boolean isGuest(){
+    public static boolean isGuest() {
         UserProfileModel profile = getProfile();
-        if (profile != null && !TextUtils.isEmpty(profile.getUserName()) && !profile.getUserName().contentEquals(GUEST_USER_NAME)){
+        if (profile != null && !TextUtils.isEmpty(profile.getUserName()) && !profile.getUserName().contentEquals(GUEST_USER_NAME)) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    public static void logOut(){
+    public static void logOut() {
 
     }
 
-    public static String getUserName(){
-        if (isGuest()){
+    public static String getUserName() {
+        if (isGuest()) {
             return GUEST_USER_NAME;
-        }else{
+        } else {
             return DiskDataHelper.getString(USER_NAME);
         }
     }
 
-    public static String getUserPassword(){
-        if (isGuest()){
+    public static String getUserPassword() {
+        if (isGuest()) {
             return GUEST_USER_PASSWORD;
-        }else{
+        } else {
             return DiskDataHelper.getString(USER_PASSWORD);
         }
     }
 
-    public static void saveUserNameAndPassword(String userName, String password){
-        DiskDataHelper.putString(USER_NAME,userName);
-        DiskDataHelper.putString(USER_PASSWORD,password);
+    public static void saveUserNameAndPassword(String userName, String password) {
+        DiskDataHelper.putString(USER_NAME, userName);
+        DiskDataHelper.putString(USER_PASSWORD, password);
     }
 
-    public static boolean isFirstRun(){
-        return true;
-//        return !DiskDataHelper.getBool(IS_FIRST_RUN);
+    public static boolean isFirstRun() {
+        if (BuildConfig.DEBUG) return true;
+        return !DiskDataHelper.getBool(IS_FIRST_RUN);
     }
 
-    public static void setIsFirstRun(boolean isFirstRun){
-        DiskDataHelper.putBool(IS_FIRST_RUN,!isFirstRun);
+    public static void setIsFirstRun(boolean isFirstRun) {
+        DiskDataHelper.putBool(IS_FIRST_RUN, !isFirstRun);
     }
 
 }

@@ -12,6 +12,35 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/nextShoppingControlsHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/savedCountTv"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="8dp"
+                android:background="@drawable/circle_theme_color"
+                android:gravity="center"
+                android:paddingTop="2dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizeSmall" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/deleteSavedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_delete_gray_24dp" />
+
+        </RelativeLayout>
+
         <ir.etkastores.app.ui.widgets.SquareImageView
             android:id="@+id/productImage"
             android:layout_width="match_parent"

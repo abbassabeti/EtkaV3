@@ -48,6 +48,14 @@ public class MessageDialog extends BaseDialog {
 
     MessageDialogCallbacks callbacks;
 
+    public static MessageDialog sureToDeleteProductFromNextShoppingList(){
+        return newInstance(R.drawable.ic_warning_orange_48dp,
+                EtkaApp.getInstance().getResources().getString(R.string.deleteProduct),
+                EtkaApp.getInstance().getResources().getString(R.string.areYouSureToDeleteThisProductFromNextShoppingList),
+                EtkaApp.getInstance().getResources().getString(R.string.yes),
+                EtkaApp.getInstance().getResources().getString(R.string.no));
+    }
+
     public static MessageDialog forceUpdate(){
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.update),

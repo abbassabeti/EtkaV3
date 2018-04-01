@@ -1,6 +1,7 @@
 package ir.etkastores.app.adapters.recyclerViewAdapters;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.utils.StringUtils;
@@ -31,6 +34,7 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
 
     private boolean isLoadMoreEnabled;
     private ProductsRecyclerCallbacks productsRecyclerCallbacks;
+    private boolean isNextShoppingList = false;
 
     public ProductsRecyclerAdapter(Context context, ProductsRecyclerCallbacks callbacks) {
         this.context = context;
@@ -53,6 +57,10 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         }
     }
 
+    public List<ProductModel> getItems(){
+        return items;
+    }
+
     @Override
     public int getItemCount() {
         return items.size();
@@ -72,6 +80,15 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         notifyItemRangeInserted(start,newItems.size());
     }
 
+    public void deleteItem(int index){
+        items.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void setNextShoppingListMode(boolean isShoppingList) {
+        isNextShoppingList = isShoppingList;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.productImage)
@@ -89,6 +106,15 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         @BindView(R.id.productLine3)
         TextView scorePoint;
 
+        @BindView(R.id.nextShoppingControlsHolder)
+        View nextShoppingControlsHolder;
+
+        @BindView(R.id.deleteSavedButton)
+        AppCompatImageView deleteButton;
+
+        @BindView(R.id.savedCountTv)
+        TextView savedCount;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
@@ -102,6 +128,12 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
             price2.setText(model.getFinalPrice());
             scorePoint.setText(model.getPoint());
             ImageLoader.loadProductImage(context,image,model.getImageUrl());
+            savedCount.setText(String.valueOf(model.getSavedCount()));
+            if (isNextShoppingList){
+                nextShoppingControlsHolder.setVisibility(View.VISIBLE);
+            }else{
+                nextShoppingControlsHolder.setVisibility(View.GONE);
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -111,11 +143,17 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
 
         }
 
+        @OnClick(R.id.deleteSavedButton)
+        public void deleteSavedButton(){
+            if (productsRecyclerCallbacks != null) productsRecyclerCallbacks.onProductSavedDeleteClick(items.get(getAdapterPosition()));
+        }
+
     }
 
     public interface ProductsRecyclerCallbacks{
         void onLoadMore();
         void onProductItemClick(ProductModel productModel);
+        void onProductSavedDeleteClick(ProductModel productModel);
     }
 
     @Override
