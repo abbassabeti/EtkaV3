@@ -200,5 +200,6 @@
     <string name="etkaStoreAppInvitation">دعوت به استفاده از اپلیکیشن همراه فروشگاه اتکا</string>
     <string name="errorInResettingPasswordTryLater">خطا در ارسال درخواست بازگردانی رمز عبور، لطفا از دوباره تلاش کنید.</string>
     <string name="iRealized">متوجه شدم</string>
+    <string name="relatedProducts">کالاهای مرتبط</string>
 
 </resources>

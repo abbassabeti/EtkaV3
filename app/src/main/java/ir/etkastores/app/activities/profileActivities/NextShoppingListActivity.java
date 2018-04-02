@@ -136,6 +136,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
 
     @Override
     public void onProductItemClick(ProductModel productModel) {
+        productModel.setRelatedProducts(adapter.getItems());
         ProductActivity.show(this, productModel);
     }
 
@@ -185,24 +186,25 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
 
 
     private ProductModel tempProductForDelete;
-    private void deleteProductFromList(ProductModel productModel){
+
+    private void deleteProductFromList(ProductModel productModel) {
         tempProductForDelete = productModel;
-        loadingDialog = DialogHelper.showLoading(NextShoppingListActivity.this,R.string.inDeletingProductFromYourNextShoppingList);
+        loadingDialog = DialogHelper.showLoading(NextShoppingListActivity.this, R.string.inDeletingProductFromYourNextShoppingList);
         deleteProductReq = ApiProvider.getAuthorizedApi().deleteSavedProduct(productModel.getId());
         deleteProductReq.enqueue(new Callback<OauthResponse<Long>>() {
             @Override
             public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {
                 if (isFinishing()) return;
-                if (response.isSuccessful()){
-                    if (response.isSuccessful()){
-                        Toaster.show(NextShoppingListActivity.this,R.string.productDeletedSuccessfully);
+                if (response.isSuccessful()) {
+                    if (response.isSuccessful()) {
+                        Toaster.show(NextShoppingListActivity.this, R.string.productDeletedSuccessfully);
                         adapter.deleteItem(adapter.getItems().indexOf(tempProductForDelete));
                         tempProductForDelete = null;
-                    }else{
+                    } else {
                         showDeleteErrorDialog(response.body().getMeta().getMessage());
                     }
-                }else{
-                    onFailure(call,null);
+                } else {
+                    onFailure(call, null);
                 }
                 loadingDialog.cancel();
             }

@@ -237,6 +237,7 @@ public class CategoryActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     @Override
     public void onProductItemClick(ProductModel productModel) {
+        productModel.setRelatedProducts(productsAdapter.getItems());
         ProductActivity.show(this, productModel);
     }
 

@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,6 +28,7 @@ import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
+import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.ProductImagesSliderView;
 import ir.etkastores.app.utils.DialogHelper;
@@ -35,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
+public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoryGroupHorizontalView.OnProductClickListener {
 
     private final static int ACTION_LOAD_PRODUCT = 0;
 
@@ -131,6 +134,11 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
         mSlider.setImages(productModel.getImageUrl());
         updateSaveCountValue();
+        if (productModel.getRelatedProducts() != null && productModel.getRelatedProducts().size() > 0) {
+            CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), productModel.getRelatedProducts());
+            relatedProducts.setOnProductClickListener(this);
+            extrasHolder.addView(relatedProducts);
+        }
     }
 
     private void initFromCode() {
@@ -327,4 +335,11 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         if (addToNextShoppingListReq != null) addToNextShoppingListReq.cancel();
         if (productReq != null) productReq.cancel();
     }
+
+    @Override
+    public void onProductClick(ProductModel productModel) {
+        productModel.setRelatedProducts(this.productModel.getRelatedProducts());
+        ProductActivity.show(this,productModel);
+    }
+
 }

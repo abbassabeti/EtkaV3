@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ir.etkastores.app.utils.StringUtils;
@@ -60,12 +62,33 @@ public class ProductModel {
     @SerializedName("savedCount")
     int savedCount;
 
+    @SerializedName("relatedProducts")
+    private List<ProductModel> relatedProducts;
+
     public static ProductModel fromJson(String json) {
         try {
             return new Gson().fromJson(json, ProductModel.class);
         } catch (Exception err) {
             return null;
         }
+    }
+
+    public ProductModel(long id, String code, String barCode, String title, String description, List<String> imageUrl, String originalPrice, String etkaPrice, String offerPrice, String categoryTitle, String supplierName, int point, int proprietaryPoint, int discountPercentage, int savedCount) {
+        this.id = id;
+        this.code = code;
+        this.barCode = barCode;
+        this.title = title;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.originalPrice = originalPrice;
+        this.etkaPrice = etkaPrice;
+        this.offerPrice = offerPrice;
+        this.categoryTitle = categoryTitle;
+        this.supplierName = supplierName;
+        this.point = point;
+        this.proprietaryPoint = proprietaryPoint;
+        this.discountPercentage = discountPercentage;
+        this.savedCount = savedCount;
     }
 
     public void setId(long id) {
@@ -206,4 +229,35 @@ public class ProductModel {
     public int getSavedCount() {
         return savedCount;
     }
+
+    public List<ProductModel> getRelatedProducts() {
+        return relatedProducts;
+    }
+
+    public void setRelatedProducts(List<ProductModel> relatedProducts) {
+        if (relatedProducts == null || relatedProducts.size() == 0){
+            this.relatedProducts = new ArrayList<>();
+            return;
+        }
+        List<ProductModel> result = new ArrayList<>();
+        int x = 0;
+        for (ProductModel productModel : relatedProducts) {
+            if (productModel.getId() == getId()) {
+                continue;
+            }
+            if (x < 15) {
+                result.add(productModel.getCopy());
+                x++;
+            } else {
+                break;
+            }
+        }
+        Collections.shuffle(result);
+        this.relatedProducts = result;
+    }
+
+    public ProductModel getCopy() {
+        return new ProductModel(id, code, barCode, title, description, imageUrl, originalPrice, etkaPrice, offerPrice, categoryTitle, supplierName, point, proprietaryPoint, discountPercentage, savedCount);
+    }
+
 }
