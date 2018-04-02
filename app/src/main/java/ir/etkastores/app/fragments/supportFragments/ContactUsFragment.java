@@ -18,10 +18,10 @@ import ir.etkastores.app.utils.IntentHelper;
  * Created by Sajad on 10/17/17.
  */
 
-public class ContactUsFramgment extends Fragment {
+public class ContactUsFragment extends Fragment {
 
-    public static ContactUsFramgment newInstance() {
-        return new ContactUsFramgment();
+    public static ContactUsFragment newInstance() {
+        return new ContactUsFragment();
     }
 
     View view;

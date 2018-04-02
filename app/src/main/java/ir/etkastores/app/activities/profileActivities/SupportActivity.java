@@ -14,7 +14,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.viewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.adapters.viewPagerAdapters.GlobalFragmentPagerAdapter;
-import ir.etkastores.app.fragments.supportFragments.ContactUsFramgment;
+import ir.etkastores.app.fragments.supportFragments.ContactUsFragment;
 import ir.etkastores.app.fragments.supportFragments.RequestsFragment;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -55,7 +55,7 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         toolbar.setActionListeners(this);
         List<FragmentTitleModel> fragments = new ArrayList<>();
         fragments.add(new FragmentTitleModel(RequestsFragment.newInstance(),R.string.requests));
-        fragments.add(new FragmentTitleModel(ContactUsFramgment.newInstance(),R.string.contactUs));
+        fragments.add(new FragmentTitleModel(ContactUsFragment.newInstance(),R.string.contactUs));
         adapter = new GlobalFragmentPagerAdapter(getSupportFragmentManager(),fragments);
         pager.setAdapter(adapter);
         tabLayout.setupWithViewPager(pager);
