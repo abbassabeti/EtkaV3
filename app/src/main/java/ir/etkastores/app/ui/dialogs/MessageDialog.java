@@ -48,6 +48,14 @@ public class MessageDialog extends BaseDialog {
 
     MessageDialogCallbacks callbacks;
 
+    public static MessageDialog receiveNewsErrorRetry(String messageText){
+        return MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
+                EtkaApp.getInstance().getString(R.string.error),
+                messageText,
+                EtkaApp.getInstance().getString(R.string.retry),
+                EtkaApp.getInstance().getString(R.string.close));
+    }
+
     public static MessageDialog resetPasswordSuccess(String message) {
         return MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.resetPassword),

@@ -27,4 +27,11 @@ public class NewsRequestModel {
         this.page = page;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public int getPage() {
+        return page;
+    }
 }

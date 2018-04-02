@@ -14,4 +14,31 @@
         app:showBack="true"
         app:title="@string/news"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ir.etkastores.app.ui.views.MessageView
+            android:id="@+id/messageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ProgressBar
+            android:id="@+id/circularProgress"
+            style="@style/circularProgressStyle" />
+
+        <ProgressBar
+            android:id="@+id/linearProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            style="@style/linearProgressStyle" />
+
+    </RelativeLayout>
+
 </LinearLayout>

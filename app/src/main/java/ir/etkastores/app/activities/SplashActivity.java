@@ -15,6 +15,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.data.ContactUsManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
@@ -63,6 +64,8 @@ public class SplashActivity extends BaseActivity {
                     String baseUrl = firebaseRemoteConfig.getString("v3_api_server");
                     String minVersion = firebaseRemoteConfig.getString("v3_force_update_min_version_code");
                     final String updateUrl = firebaseRemoteConfig.getString("v3_force_update_url");
+                    ContactUsManager.getInstance().saveEmail(firebaseRemoteConfig.getString("v3_contact_us_email"));
+                    ContactUsManager.getInstance().savePhone(firebaseRemoteConfig.getString("v3_contact_us_phone"));
                     int minAppVersion = Integer.parseInt(minVersion);
                     if (minAppVersion > BuildConfig.VERSION_CODE) {
                         MessageDialog dialog = MessageDialog.forceUpdate();

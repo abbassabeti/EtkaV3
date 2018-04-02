@@ -16,4 +16,14 @@
         <value>https://cafebazaar.ir/app/ir.etkastores.app/?l=fa</value>
     </entry>
 
+    <entry>
+        <key>v3_contact_us_email</key>
+        <value>test@test.com</value>
+    </entry>
+
+    <entry>
+        <key>v3_contact_us_phone</key>
+        <value>02113123123</value>
+    </entry>
+
 </defaultsMap>

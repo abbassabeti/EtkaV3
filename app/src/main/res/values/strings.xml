@@ -201,5 +201,9 @@
     <string name="errorInResettingPasswordTryLater">خطا در ارسال درخواست بازگردانی رمز عبور، لطفا از دوباره تلاش کنید.</string>
     <string name="iRealized">متوجه شدم</string>
     <string name="relatedProducts">کالاهای مرتبط</string>
+    <string name="newsIdX">کد خبر: %d</string>
+    <string name="errorInReceivingNews">خطا در دریافت اخبار</string>
+    <string name="close">بستن</string>
+    <string name="newsListIsEmpty">در حال حاضر هیچ خبری برای نمایش وجود ندارد.</string>
 
 </resources>

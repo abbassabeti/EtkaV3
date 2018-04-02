@@ -1,5 +1,6 @@
 package ir.etkastores.app.models.news;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -19,6 +20,15 @@ public class NewsItem {
 
     @SerializedName("date")
     private String date;
+
+    public static NewsItem fromJson(String json){
+        try {
+            return new Gson().fromJson(json,NewsItem.class);
+        }catch (Exception err){
+            err.printStackTrace();
+            return null;
+        }
+    }
 
     public int getId() {
         return id;
