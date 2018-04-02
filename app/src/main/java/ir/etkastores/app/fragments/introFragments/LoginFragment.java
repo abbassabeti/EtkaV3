@@ -70,6 +70,8 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     View view;
 
     AlertDialog loadingDialog;
+    private ResetPasswordDialog resetPasswordDialog;
+    private Call<OauthResponse<String>> resetPasswordReq;
 
     @Nullable
     @Override
@@ -145,7 +147,55 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     @OnClick(R.id.forgotPasswordButton)
     public void onForgotPasswordClick(){
-        new ResetPasswordDialog().show(getActivity().getSupportFragmentManager(),ResetPasswordDialog.TAG);
+       resetPasswordDialog = new ResetPasswordDialog();
+       resetPasswordDialog.show(getChildFragmentManager(), new ResetPasswordDialog.OnUserEnterPhoneNumberToResetListener() {
+            @Override
+            public void onUserSetPhoneNumberToReset(String phone) {
+                resetPasswordReq = ApiProvider.getApi().resetPassword(phone);
+                sendResetPasswordRequest();
+            }
+        });
+    }
+
+    private void sendResetPasswordRequest(){
+        resetPasswordReq.enqueue(new Callback<OauthResponse<String>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
+                if (!isAdded()) return;
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+                        showSuccessResetPasswordDialog(response.body().getMeta().getMessage());
+                        resetPasswordDialog.getDialog().cancel();
+                    }else{
+                        Toaster.showLong(getActivity(),response.body().getMeta().getMessage());
+                    }
+                }else{
+                    onFailure(call,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<String>> call, Throwable throwable) {
+                if (!isAdded()) return;
+                Toaster.showLong(getActivity(),R.string.errorInResettingPasswordTryLater);
+            }
+        });
+    }
+
+    private void showSuccessResetPasswordDialog(final String message){
+        final MessageDialog messageDialog = MessageDialog.resetPasswordSuccess(message);
+        messageDialog.show(getChildFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (!isAdded()) return;
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
     }
 
     @Override

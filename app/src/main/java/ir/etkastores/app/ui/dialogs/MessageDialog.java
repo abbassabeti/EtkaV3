@@ -48,7 +48,15 @@ public class MessageDialog extends BaseDialog {
 
     MessageDialogCallbacks callbacks;
 
-    public static MessageDialog sureToDeleteProductFromNextShoppingList(){
+    public static MessageDialog resetPasswordSuccess(String message) {
+        return MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
+                EtkaApp.getInstance().getResources().getString(R.string.resetPassword),
+                message,
+                EtkaApp.getInstance().getResources().getString(R.string.iRealized),
+                null);
+    }
+
+    public static MessageDialog sureToDeleteProductFromNextShoppingList() {
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.deleteProduct),
                 EtkaApp.getInstance().getResources().getString(R.string.areYouSureToDeleteThisProductFromNextShoppingList),
@@ -56,7 +64,7 @@ public class MessageDialog extends BaseDialog {
                 EtkaApp.getInstance().getResources().getString(R.string.no));
     }
 
-    public static MessageDialog forceUpdate(){
+    public static MessageDialog forceUpdate() {
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.update),
                 EtkaApp.getInstance().getResources().getString(R.string.updateMessage),
@@ -64,7 +72,7 @@ public class MessageDialog extends BaseDialog {
                 EtkaApp.getInstance().getResources().getString(R.string.exit));
     }
 
-    public static MessageDialog loginRequired(){
+    public static MessageDialog loginRequired() {
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.userAccountRequired),
                 EtkaApp.getInstance().getResources().getString(R.string.loginRequiredForThisSection),
@@ -93,7 +101,7 @@ public class MessageDialog extends BaseDialog {
                 EtkaApp.getInstance().getResources().getString(R.string.cancel));
     }
 
-    public static MessageDialog productNotFound(){
+    public static MessageDialog productNotFound() {
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.error),
                 EtkaApp.getInstance().getResources().getString(R.string.productNotFound),

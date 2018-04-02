@@ -198,5 +198,7 @@
     <string name="shareInvitationCodeMessage">"اپلیکیشن همراه فروشگاه اتکا را می‌توانید از طریق لینک زیر دانلود کنید و با ثبت‌نام با کد معرف %s از امتیاز ویژه اتکا برخوردار شوید."</string>
     <string name="cafebazaarAppUrl">"https://cafebazaar.ir/app/ir.etkastores.app/?l=fa"</string>
     <string name="etkaStoreAppInvitation">دعوت به استفاده از اپلیکیشن همراه فروشگاه اتکا</string>
+    <string name="errorInResettingPasswordTryLater">خطا در ارسال درخواست بازگردانی رمز عبور، لطفا از دوباره تلاش کنید.</string>
+    <string name="iRealized">متوجه شدم</string>
 
 </resources>
