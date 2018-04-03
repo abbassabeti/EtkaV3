@@ -6,13 +6,13 @@ package ir.etkastores.app.models.tickets;
 
 public class TicketStatus {
 
-    public final static String Closed = "Closed";
+    public final static int Closed = 0;
 
-    public final static String Answered = "Answered";
+    public final static int Answered = 1;
 
-    public final static String UnAnswered = "UnAnswered";
+    public final static int UnAnswered = 2;
 
-    public static String getDisplayValueOfStatus(String val) {
+    public static String getDisplayValueOfStatus(int val) {
 
         switch (val) {
 

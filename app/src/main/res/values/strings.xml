@@ -205,5 +205,8 @@
     <string name="errorInReceivingNews">خطا در دریافت اخبار</string>
     <string name="close">بستن</string>
     <string name="newsListIsEmpty">در حال حاضر هیچ خبری برای نمایش وجود ندارد.</string>
+    <string name="ticketSubject">عنوان درخواست</string>
+    <string name="yourTicketsListIsEmpty">لیست تیکت های شما خالی است.</string>
+    <string name="errorInReceivingTicketsListData">خطا در دریافت لیست تیکت ها.</string>
 
 </resources>

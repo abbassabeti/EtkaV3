@@ -144,7 +144,7 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     }
 
     private void showRetryMessageView(String message) {
-        final MessageDialog messageDialog = MessageDialog.receiveNewsErrorRetry(message);
+        final MessageDialog messageDialog = MessageDialog.errorRetry(message);
         messageDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {

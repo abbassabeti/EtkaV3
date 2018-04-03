@@ -18,7 +18,7 @@ public class OauthResponse<T> {
     @SerializedName("meta")
     Meta meta;
 
-    public class Meta {
+    public static class Meta {
 
         @SerializedName("statusCode")
         int statusCode;

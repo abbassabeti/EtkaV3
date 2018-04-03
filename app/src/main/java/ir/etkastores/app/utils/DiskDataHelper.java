@@ -55,6 +55,8 @@ public class DiskDataHelper {
     public static void saveLastToken(AccessToken token){
         if (token!=null){
             putString(LAST_TOKEN_KEY,new Gson().toJson(token));
+        }else{
+            putString(LAST_TOKEN_KEY,"");
         }
     }
 

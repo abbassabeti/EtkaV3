@@ -87,7 +87,7 @@ public class NewsListRecyclerAdapter extends RecyclerView.Adapter<NewsListRecycl
     public void addItems(List<NewsItem> news){
         int startPosition = items.size();
         items.addAll(news);
-        notifyItemRangeInserted(startPosition,items.size());
+        notifyItemRangeInserted(startPosition,news.size());
     }
 
     public boolean isLoadMoreEnabled() {

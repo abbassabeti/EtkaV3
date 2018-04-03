@@ -48,7 +48,7 @@ public class MessageDialog extends BaseDialog {
 
     MessageDialogCallbacks callbacks;
 
-    public static MessageDialog receiveNewsErrorRetry(String messageText){
+    public static MessageDialog errorRetry(String messageText){
         return MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getString(R.string.error),
                 messageText,

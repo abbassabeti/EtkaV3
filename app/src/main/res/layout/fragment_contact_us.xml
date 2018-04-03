@@ -59,16 +59,6 @@
 
                     <View style="@style/lightDividerMatchWidthStyle"/>
 
-                    <!--<ir.etkastores.app.ui.views.CustomRowMenuItem-->
-                        <!--android:id="@+id/webSiteButton"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--app:rowText="@string/webSite"-->
-                        <!--app:leftIcon="@drawable/ic_globe_dark_gray_24dp"-->
-                        <!--app:showIcon="false"/>-->
-
-                    <!--<View style="@style/lightDividerMatchWidthStyle"/>-->
-
 
                 </LinearLayout>
 
