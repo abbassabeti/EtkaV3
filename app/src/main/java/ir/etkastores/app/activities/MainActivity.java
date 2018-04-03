@@ -7,22 +7,41 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
+import ir.etkastores.app.activities.profileActivities.FAQActivity;
+import ir.etkastores.app.activities.profileActivities.HekmatActivity;
+import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
+import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
+import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
+import ir.etkastores.app.activities.profileActivities.ScoresActivity;
+import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
+import ir.etkastores.app.activities.profileActivities.SupportActivity;
+import ir.etkastores.app.activities.profileActivities.TextInfoActivity;
+import ir.etkastores.app.fragments.home.HekmatWaresSlide;
 import ir.etkastores.app.fragments.home.HomeFragment;
 import ir.etkastores.app.fragments.MapFragment;
 import ir.etkastores.app.fragments.ProfileFragment;
 import ir.etkastores.app.fragments.searchFragments.SearchTabFragment;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.news.NewsItem;
+import ir.etkastores.app.models.notification.NotificationModel;
+import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 
 public class MainActivity extends BaseActivity {
 
-    public static void show(Context context){
-        Intent intent = new Intent(context,MainActivity.class);
+    public static void show(Context context, NotificationModel notificationModel) {
+        Intent intent = new Intent(context, MainActivity.class);
+        if (notificationModel != null) {
+            intent.putExtra(NotificationModel.IS_FROM_NOTIFICATION, true);
+            intent.putExtra(NotificationModel.NOTIFICATION_OBJECT, notificationModel.toJson());
+        }
         context.startActivity(intent);
     }
 
@@ -30,6 +49,10 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.mainBottomNavigation)
     BottomNavigationViewEx bottomNavigationView;
+
+    private int homeSelectedTab = -1;
+
+    private NotificationModel notificationModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +66,20 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.enableShiftingMode(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
 
+        if (getIntent() != null && getIntent().hasExtra(NotificationModel.NOTIFICATION_OBJECT)) {
+            try {
+                notificationModel = NotificationModel.fromJson(getIntent().getExtras().getString(NotificationModel.NOTIFICATION_OBJECT));
+            } catch (Exception err) {
+                notificationModel = null;
+            }
+        }
+
         bottomNavigationView.setCurrentItem(3);
+
+        if (notificationModel != null) {
+            handleNotificationAction();
+        }
+
     }
 
     @Override
@@ -59,25 +95,25 @@ public class MainActivity extends BaseActivity {
             switch (item.getItemId()) {
 
                 case R.id.navigation_home:
-                    if (!(getCurrentFragment() instanceof  HomeFragment)){
+                    if (!(getCurrentFragment() instanceof HomeFragment)) {
                         replaceFragment(new HomeFragment());
                     }
                     break;
 
                 case R.id.navigation_map:
-                    if (!(getCurrentFragment() instanceof  MapFragment)){
+                    if (!(getCurrentFragment() instanceof MapFragment)) {
                         replaceFragment(new MapFragment());
                     }
                     break;
 
                 case R.id.navigation_profile:
-                    if (!(getCurrentFragment() instanceof ProfileFragment)){
+                    if (!(getCurrentFragment() instanceof ProfileFragment)) {
                         replaceFragment(new ProfileFragment());
                     }
                     break;
 
                 case R.id.navigation_search:
-                    if (!(getCurrentFragment() instanceof SearchTabFragment)){
+                    if (!(getCurrentFragment() instanceof SearchTabFragment)) {
                         replaceFragment(new SearchTabFragment());
                     }
                     break;
@@ -88,10 +124,10 @@ public class MainActivity extends BaseActivity {
     };
 
     private void replaceFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder, fragment,CURRENT_SELECTED_HOME_FRAGMENT_TAG).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.homeActivityFragmentsHolder, fragment, CURRENT_SELECTED_HOME_FRAGMENT_TAG).commitAllowingStateLoss();
     }
 
-    public Fragment getCurrentFragment(){
+    public Fragment getCurrentFragment() {
         return getSupportFragmentManager().findFragmentByTag(CURRENT_SELECTED_HOME_FRAGMENT_TAG);
     }
 
@@ -101,7 +137,7 @@ public class MainActivity extends BaseActivity {
         exitDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     MainActivity.super.onBackPressed();
                 }
                 exitDialog.getDialog().cancel();
@@ -113,5 +149,109 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+    void handleNotificationAction() {
+        switch (notificationModel.getAction()) {
+
+            case NotificationModel.ACTION_OPEN_APP:
+                bottomNavigationView.setCurrentItem(3);
+                break;
+
+            case NotificationModel.ACTION_OPEN_HEKMAT_PRODUCTS:
+                homeSelectedTab = HekmatWaresSlide.TAB_POSITION_ID;
+                bottomNavigationView.setCurrentItem(3);
+                break;
+
+            case NotificationModel.ACTION_OPEN_SEARCH:
+                bottomNavigationView.setCurrentItem(2);
+                break;
+
+            case NotificationModel.ACTION_OPEN_MAP:
+                bottomNavigationView.setCurrentItem(1);
+                break;
+
+            case NotificationModel.ACTION_OPEN_PROFILE:
+                bottomNavigationView.setCurrentItem(0);
+                break;
+
+            case NotificationModel.ACTION_OPEN_PRODUCT:
+                ProductActivity.show(this, notificationModel.getData());
+                break;
+
+            case NotificationModel.ACTION_OPEN_FAQ:
+                FAQActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_EDIT_PROFILE:
+                EditProfileActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_CONSUME_YOUR_POINTS:
+                ScoresActivity.start(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_HEKMAT_ACCOUNT:
+                HekmatActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_NEXT_SHOPPING:
+                NextShoppingListActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_SHOPPING_HISTORY:
+                ShoppingHistoryActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_INVITE_FRIENDS:
+                InviteFriendsActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_SUPPORT:
+                SupportActivity.show(this, SupportActivity.TICKET_LIST);
+                break;
+
+            case NotificationModel.ACTION_OPEN_TICKET:
+
+                break;
+
+            case NotificationModel.ACTION_OPEN_NEW_TICKET:
+
+                break;
+
+            case NotificationModel.ACTION_OPEN_PROFILE_SETTING:
+                ProfileSettingActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_ABOUT_ETKA_STORES:
+                TextInfoActivity.showAboutEtkaStores(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_USER_PRIVACY:
+                TextInfoActivity.showUserPrivacy(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_TERM_OF_USE:
+                TextInfoActivity.showTermAndConditions(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_STORE_PROFILE:
+                StoreActivity.show(this, StoreModel.fromJson(notificationModel.getData()));
+                break;
+
+            case NotificationModel.ACTION_NEWS:
+                NewsActivity.show(this, NewsItem.fromJson(notificationModel.getData()));
+                break;
+
+            case NotificationModel.ACTION_NEWS_LIST:
+                NewsListActivity.show(this);
+                break;
+
+            default:
+                bottomNavigationView.setCurrentItem(3);
+                break;
+
+        }
+    }
+
 }
 

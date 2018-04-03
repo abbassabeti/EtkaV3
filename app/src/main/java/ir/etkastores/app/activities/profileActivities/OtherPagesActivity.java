@@ -48,17 +48,17 @@ public class OtherPagesActivity extends BaseActivity implements EtkaToolbar.Etka
 
     @OnClick(R.id.termAndConditionsButton)
     void onTermAndConditionsButtonClick(){
-        TextInfoActivity.startTermAndConditions(this);
+        TextInfoActivity.showTermAndConditions(this);
     }
 
     @OnClick(R.id.userPrivacyButton)
     void onUserPrivacyButtonClick(){
-        TextInfoActivity.startUserPrivacy(this);
+        TextInfoActivity.showUserPrivacy(this);
     }
 
     @OnClick(R.id.aboutEtkaStoresButton)
     void onAboutEtkaStoresbuttonClick(){
-        TextInfoActivity.startAboutEtkaStores(this);
+        TextInfoActivity.showAboutEtkaStores(this);
     }
 
 

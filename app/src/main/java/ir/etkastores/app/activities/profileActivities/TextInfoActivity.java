@@ -20,19 +20,19 @@ public class TextInfoActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     private final static int USER_PRIVACY = 2;
     private final static int TERM_AND_CONDITIONS = 3;
 
-    public static void startAboutEtkaStores(AppCompatActivity activity){
-        start(activity,ABOUT_ETKA_STORES);
+    public static void showAboutEtkaStores(AppCompatActivity activity){
+        show(activity,ABOUT_ETKA_STORES);
     }
 
-    public static void startUserPrivacy(AppCompatActivity activity){
-        start(activity,USER_PRIVACY);
+    public static void showUserPrivacy(AppCompatActivity activity){
+        show(activity,USER_PRIVACY);
     }
 
-    public static void startTermAndConditions(AppCompatActivity activity){
-        start(activity,TERM_AND_CONDITIONS);
+    public static void showTermAndConditions(AppCompatActivity activity){
+        show(activity,TERM_AND_CONDITIONS);
     }
 
-    private static void start(AppCompatActivity activity,int type){
+    private static void show(AppCompatActivity activity, int type){
         Intent intent = new Intent(activity,TextInfoActivity.class);
         intent.putExtra(TYPE_KEY,type);
         activity.startActivity(intent);

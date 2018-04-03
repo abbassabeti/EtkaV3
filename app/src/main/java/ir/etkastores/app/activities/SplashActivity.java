@@ -1,12 +1,9 @@
 package ir.etkastores.app.activities;
 
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,10 +15,10 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.data.ContactUsManager;
 import ir.etkastores.app.models.OauthResponse;
+import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
-import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.webServices.AccessToken;
@@ -36,11 +33,22 @@ public class SplashActivity extends BaseActivity {
 
     private FirebaseRemoteConfig firebaseRemoteConfig;
 
+    private NotificationModel notificationModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         EtkaPushNotificationConfig.registerGlobal();
+
+        if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)){
+            try {
+                notificationModel = NotificationModel.fromJson(getIntent().getStringExtra(NotificationModel.NOTIFICATION_OBJECT));
+            }catch (Exception err){
+                notificationModel = null;
+            }
+        }
+
         checkRemoteConfigs();
     }
 
@@ -198,10 +206,10 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void gotoApp(){
-        if (ProfileManager.isFirstRun()){
+        if (ProfileManager.isFirstRun() && notificationModel == null){
             WalkthroughActivity.show(this);
         }else{
-            MainActivity.show(this);
+            MainActivity.show(this,notificationModel);
         }
         finish();
     }

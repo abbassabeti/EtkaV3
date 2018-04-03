@@ -33,7 +33,7 @@ import retrofit2.Response;
 
 public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, MessageView.OnMessageViewButtonClick {
 
-    public static void start(Activity activity) {
+    public static void show(Activity activity) {
         Intent intent = new Intent(activity, ShoppingHistoryActivity.class);
         activity.startActivity(intent);
     }

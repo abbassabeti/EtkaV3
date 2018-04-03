@@ -81,7 +81,7 @@ public class WalkthroughActivity extends BaseActivity {
 
     @OnClick(R.id.enterButton)
     public void onIKnownButtonClick(){
-        MainActivity.show(this);
+        MainActivity.show(this,null);
         finish();
     }
 

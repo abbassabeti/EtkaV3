@@ -6,8 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <!--android:background="#F1F1F1"-->
-
     <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,7 +14,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <RelativeLayout
             android:id="@+id/addToShoppingListHolder"
@@ -192,11 +189,6 @@
                     android:text="@string/detailIsNotAvailable"
                     android:textColor="@color/darkGray" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/gray" />
-
                 <LinearLayout
                     android:id="@+id/extraItemsHolder"
                     android:layout_width="match_parent"
@@ -204,8 +196,6 @@
                     android:orientation="vertical"
                     android:paddingBottom="16dp"
                     android:paddingTop="16dp">
-
-                    <!--android:background="#F1F1F1"-->
 
                 </LinearLayout>
 

@@ -37,7 +37,7 @@ import retrofit2.Response;
 
 public class EditProfileActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void start(Activity activity) {
+    public static void show(Activity activity) {
         Intent intent = new Intent(activity, EditProfileActivity.class);
         activity.startActivity(intent);
     }

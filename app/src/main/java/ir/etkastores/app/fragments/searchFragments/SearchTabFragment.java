@@ -93,7 +93,7 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
             case ScannerActivity.SCAN_REQUEST_CODE:
                 String format = data.getStringExtra(ScannerActivity.FORMAT);
                 String code = data.getStringExtra(ScannerActivity.DATA);
-                ProductActivity.show(getActivity(), code, format);
+                ProductActivity.show(getActivity(), code);
                 Log.i("scanned code is", "" + format + " | " + code);
                 break;
 
@@ -119,7 +119,7 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
         }
         String txt = searchInput.getText().toString();
         if (txt.startsWith("#")) {
-            ProductActivity.show(getActivity(), StringUtils.toEnglishDigit(txt.replace("#", "")), "");
+            ProductActivity.show(getActivity(), StringUtils.toEnglishDigit(txt.replace("#", "")));
         } else {
             SearchProductRequestModel searchReq = new SearchProductRequestModel();
             searchReq.setTitle(searchInput.getText().toString());

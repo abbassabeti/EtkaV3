@@ -24,7 +24,7 @@ import ir.etkastores.app.data.ProfileManager;
 
 public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void start(Activity activity) {
+    public static void show(Activity activity) {
         Intent intent = new Intent(activity, ProfileSettingActivity.class);
         activity.startActivity(intent);
     }
@@ -132,7 +132,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @OnClick(R.id.editButton)
     public void onEditClick() {
-        EditProfileActivity.start(this);
+        EditProfileActivity.show(this);
     }
 
     @OnClick(R.id.logoutButton)

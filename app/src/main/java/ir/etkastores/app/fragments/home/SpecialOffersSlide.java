@@ -33,6 +33,8 @@ import retrofit2.Response;
 
 public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizontalView.OnProductClickListener {
 
+    public static int TAB_POSITION_ID = 1;
+
     public static SpecialOffersSlide newInstance() {
         return new SpecialOffersSlide();
     }

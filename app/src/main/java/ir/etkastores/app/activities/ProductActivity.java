@@ -44,7 +44,6 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
     private final static String MODEL = "MODEL";
     private final static String CODE = "CODE";
-    private final static String FORMAT = "FORMAT";
 
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
@@ -79,16 +78,14 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         activity.startActivity(intent);
     }
 
-    public static void show(Activity activity, String code, String format) {
+    public static void show(Activity activity, String code) {
         Intent intent = new Intent(activity, ProductActivity.class);
         intent.putExtra(CODE, code);
-        intent.putExtra(FORMAT, format);
         activity.startActivity(intent);
     }
 
     private ProductModel productModel;
     private String productBarcodeCode;
-    private String barcodeFormat;
 
     private AlertDialog loadingDialog;
     private Call<OauthResponse<ProductModel>> productReq;
@@ -104,7 +101,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
         productModel = ProductModel.fromJson(getIntent().getExtras().getString(MODEL, null));
         productBarcodeCode = getIntent().getExtras().getString(CODE, null);
-        barcodeFormat = getIntent().getExtras().getString(FORMAT, null);
+        initViews();
     }
 
     private void initViews() {
@@ -149,7 +146,6 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     protected void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Product Activity");
-        initViews();
     }
 
     @Override

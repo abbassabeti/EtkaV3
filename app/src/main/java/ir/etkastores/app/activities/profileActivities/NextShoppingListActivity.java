@@ -32,7 +32,7 @@ import retrofit2.Response;
 
 public class NextShoppingListActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, ProductsRecyclerAdapter.ProductsRecyclerCallbacks {
 
-    public static void start(Activity activity) {
+    public static void show(Activity activity) {
         Intent intent = new Intent(activity, NextShoppingListActivity.class);
         activity.startActivity(intent);
     }

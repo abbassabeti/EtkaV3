@@ -30,6 +30,8 @@ import retrofit2.Response;
 
 public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.OnHekmatItemClickListener {
 
+    public static int TAB_POSITION_ID = 2;
+
     public static HekmatWaresSlide newInstance() {
         return new HekmatWaresSlide();
     }
@@ -50,6 +52,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
     private HekmatRecyclerAdapter adapter;
 
     private Call<OauthResponse<List<HekmatModel>>> hekmatReq;
+
 
     @Nullable
     @Override

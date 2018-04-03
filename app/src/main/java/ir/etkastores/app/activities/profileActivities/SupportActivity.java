@@ -22,8 +22,14 @@ import ir.etkastores.app.ui.views.RTLTabLayout;
 
 public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void start(Activity activity){
+    private static String PAGE = "PAGE";
+
+    public static final int TICKET_LIST = 1;
+    public static final int CONTACT_US = 2;
+
+    public static void show(Activity activity, int page){
         Intent intent = new Intent(activity,SupportActivity.class);
+        intent.putExtra(PAGE,page);
         activity.startActivity(intent);
     }
 

@@ -17,7 +17,7 @@ import ir.etkastores.app.utils.IntentHelper;
 
 public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void start(Activity activity) {
+    public static void show(Activity activity) {
         Intent intent = new Intent(activity, InviteFriendsActivity.class);
         activity.startActivity(intent);
     }

@@ -21,7 +21,7 @@ import ir.etkastores.app.ui.views.FAQItemView;
 
 public class FAQActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener{
 
-    public static void start(Activity activity){
+    public static void show(Activity activity){
         Intent intent = new Intent(activity,FAQActivity.class);
         activity.startActivity(intent);
     }
