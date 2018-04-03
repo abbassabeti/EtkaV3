@@ -7,4 +7,6 @@
     <dimen name="textSizeLarge">20sp</dimen>
     <dimen name="textSizeXLarge">23sp</dimen>
 
+    <dimen name="galleryImageThumbSize">80dp</dimen>
+
 </resources>

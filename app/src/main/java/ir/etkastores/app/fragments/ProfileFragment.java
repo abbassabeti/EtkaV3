@@ -12,10 +12,13 @@ import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.activities.GalleryActivity;
 import ir.etkastores.app.activities.LoginRegisterActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
 import ir.etkastores.app.activities.profileActivities.HekmatActivity;
@@ -26,6 +29,7 @@ import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
 import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
+import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
@@ -102,11 +106,24 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick() {
-        if (ProfileManager.isGuest()) {
-            showLoginRequiredDialog();
-        } else {
-            HekmatActivity.show(getActivity());
-        }
+
+        GalleryItemsModel galleryItemsModel = new GalleryItemsModel("گالری تست", new ArrayList<String>() {
+            {
+                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
+                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
+                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
+                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
+                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
+                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
+            }
+        });
+
+        GalleryActivity.show(getActivity(),galleryItemsModel);
+//        if (ProfileManager.isGuest()) {
+//            showLoginRequiredDialog();
+//        } else {
+//            HekmatActivity.show(getActivity());
+//        }
     }
 
     @OnClick(R.id.scoreMenu)
