@@ -29,6 +29,7 @@ import ir.etkastores.app.fragments.MapFragment;
 import ir.etkastores.app.fragments.ProfileFragment;
 import ir.etkastores.app.fragments.searchFragments.SearchTabFragment;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
@@ -244,6 +245,10 @@ public class MainActivity extends BaseActivity {
 
             case NotificationModel.ACTION_NEWS_LIST:
                 NewsListActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_GALLERY:
+                GalleryActivity.show(this, GalleryItemsModel.fromJson(notificationModel.getData()));
                 break;
 
             default:

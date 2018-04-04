@@ -42,6 +42,7 @@ public class NotificationModel {
     public final static int ACTION_OPEN_STORE_PROFILE = 21;
     public final static int ACTION_NEWS_LIST = 22;
     public final static int ACTION_NEWS = 23;
+    public final static int ACTION_GALLERY = 24;
 
     public static NotificationModel fromJson(String json) {
         try {
