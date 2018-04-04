@@ -3,6 +3,8 @@ package ir.etkastores.app.models;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,6 +54,16 @@ public class GalleryItemsModel {
         }catch (Exception err){
             return "";
         }
+    }
+
+    public List<String> copyOfImages(){
+        List<String> result = new ArrayList<>();
+        if (getImages() == null || getImages().size() == 0) return result;
+        for (String s : getImages()){
+            result.add(s);
+        }
+        Collections.reverse(result);
+        return result;
     }
 
 }

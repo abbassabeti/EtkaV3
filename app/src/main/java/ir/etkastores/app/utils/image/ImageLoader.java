@@ -1,11 +1,14 @@
 package ir.etkastores.app.utils.image;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
@@ -20,6 +23,14 @@ public class ImageLoader {
     public static void loadImage(Context context, AppCompatImageView imageView, String url){
         try {
             Glide.with(context).load(url).into(imageView);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
+    }
+
+    public static void loadImage(Context context, String url, Target<Drawable> target){
+        try {
+            Glide.with(context).load(url).into(target);
         }catch (Exception err){
             err.printStackTrace();
         }

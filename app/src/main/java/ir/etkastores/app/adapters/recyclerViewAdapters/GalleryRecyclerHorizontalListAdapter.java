@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import java.util.List;
 
@@ -25,6 +24,7 @@ public class GalleryRecyclerHorizontalListAdapter extends RecyclerView.Adapter<G
     private Context context;
     private LayoutInflater inflater;
     private List<String> items;
+    private int selectedItem = 0;
 
     private OnImageSelectListener onImageSelectListener;
 
@@ -49,6 +49,11 @@ public class GalleryRecyclerHorizontalListAdapter extends RecyclerView.Adapter<G
         return items.size();
     }
 
+    public void setSelectedItem(int index){
+        selectedItem = index;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.image)
@@ -68,6 +73,12 @@ public class GalleryRecyclerHorizontalListAdapter extends RecyclerView.Adapter<G
 
         public void bind(String url) {
             ImageLoader.loadImage(context, imageView, url);
+            int position = getAdapterPosition();
+            if (position == selectedItem){
+                itemView.setAlpha(1f);
+            }else{
+                itemView.setAlpha(0.5f);
+            }
         }
 
     }
@@ -79,7 +90,7 @@ public class GalleryRecyclerHorizontalListAdapter extends RecyclerView.Adapter<G
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
     }
 
     public interface OnImageSelectListener {

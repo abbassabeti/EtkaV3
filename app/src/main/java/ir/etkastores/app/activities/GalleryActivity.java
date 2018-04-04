@@ -11,10 +11,13 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.GalleryRecyclerHorizontalListAdapter;
+import ir.etkastores.app.adapters.viewPagerAdapters.GalleryPagerAdapter;
 import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.ui.widgets.ZoomableViewPager;
+import ir.etkastores.app.utils.ZoomOutSlidePagerTransformer;
 
-public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, GalleryRecyclerHorizontalListAdapter.OnImageSelectListener {
+public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, GalleryRecyclerHorizontalListAdapter.OnImageSelectListener, ViewPager.OnPageChangeListener {
 
     private static final String MODEL = "MODEL";
 
@@ -28,14 +31,15 @@ public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     EtkaToolbar toolbar;
 
     @BindView(R.id.pager)
-    ViewPager pager;
+    ZoomableViewPager pager;
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
     private GalleryItemsModel galleryItemsModel;
 
-    private GalleryRecyclerHorizontalListAdapter adapter;
+    private GalleryRecyclerHorizontalListAdapter thumbAdapter;
+    private GalleryPagerAdapter pagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +53,14 @@ public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private void initViews(){
         toolbar.setActionListeners(this);
         toolbar.setTitle(galleryItemsModel.getTitle());
-        adapter = new GalleryRecyclerHorizontalListAdapter(this,galleryItemsModel.getImages());
-        adapter.setOnImageSelectListener(this);
-        recyclerView.setAdapter(adapter);
-
+        thumbAdapter = new GalleryRecyclerHorizontalListAdapter(this,galleryItemsModel.getImages());
+        thumbAdapter.setOnImageSelectListener(this);
+        recyclerView.setAdapter(thumbAdapter);
+        pagerAdapter = new GalleryPagerAdapter(this,galleryItemsModel.getImages());
+        pager.setAdapter(pagerAdapter);
+        pager.setPageTransformer(true,new ZoomOutSlidePagerTransformer());
+        pager.addOnPageChangeListener(this);
+        pager.setCurrentItem(galleryItemsModel.getImages().size()-1,false);
     }
 
     @Override
@@ -73,6 +81,22 @@ public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
     @Override
     public void onImageSelect(String img, int index) {
+        pager.setCurrentItem(index);
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        recyclerView.scrollToPosition(i);
+        thumbAdapter.setSelectedItem(i);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
 
     }
 
