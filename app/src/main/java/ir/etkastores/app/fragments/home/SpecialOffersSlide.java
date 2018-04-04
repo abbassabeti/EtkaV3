@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.activities.ProductActivity;
+import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.models.home.OffersItemModel;
 import ir.etkastores.app.models.home.OffersResponseModel;
@@ -52,7 +53,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
 
     boolean isDataLoaded = false;
 
-    private Call<OffersResponseModel> offersReq;
+    private Call<OauthResponse<OffersResponseModel>> offersReq;
 
     @Nullable
     @Override
@@ -77,12 +78,12 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && isResumed()){
+        if (isVisibleToUser && isResumed()) {
             checkToInitViews();
         }
     }
 
-    private void checkToInitViews(){
+    private void checkToInitViews() {
         if (!isDataLoaded) initViews();
     }
 
@@ -90,25 +91,29 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
         showLoading();
         messageView.hide();
         offersReq = ApiProvider.getAuthorizedApi().getOffers("offers");
-        offersReq.enqueue(new Callback<OffersResponseModel>() {
+        offersReq.enqueue(new Callback<OauthResponse<OffersResponseModel>>() {
             @Override
-            public void onResponse(Call<OffersResponseModel> call, Response<OffersResponseModel> response) {
+            public void onResponse(Call<OauthResponse<OffersResponseModel>> call, Response<OauthResponse<OffersResponseModel>> response) {
                 if (!isAdded()) return;
                 hideLoading();
                 if (response.isSuccessful()) {
-                    if (response.body().getTotalItemsCount() == 0) {
-                        showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
+                    if (response.body().isSuccessful()) {
+                        if (response.body().getData().getTotalItemsCount() == 0) {
+                            showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
+                        } else {
+                            addItems(response.body().getData().getItems());
+                        }
+                        isDataLoaded = true;
                     } else {
-                        addItems(response.body().getItems());
+
                     }
-                    isDataLoaded = true;
                 } else {
                     onFailure(call, null);
                 }
             }
 
             @Override
-            public void onFailure(Call<OffersResponseModel> call, Throwable throwable) {
+            public void onFailure(Call<OauthResponse<OffersResponseModel>> call, Throwable throwable) {
                 if (!isAdded()) return;
                 hideLoading();
                 showMessageView(getResources().getString(R.string.errorInDataReceiving), true);

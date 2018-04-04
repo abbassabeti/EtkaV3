@@ -38,12 +38,13 @@ public interface EtkaApi {
     //1
     @FormUrlEncoded
     @POST(ApiStatics.TOKEN)
-    Call<AccessToken> getToken(@Field("grant_type")String grant_type,
-                               @Field("username")String username,
-                               @Field("password")String password,
-                               @Field("client_id")String client_id,
-                               @Field("client_secret")String client_secret,
+    Call<AccessToken> getToken(@Field("grant_type") String grant_type,
+                               @Field("username") String username,
+                               @Field("password") String password,
+                               @Field("client_id") String client_id,
+                               @Field("client_secret") String client_secret,
                                @Field("refresh_token") String refreshToken);
+
     //2
     @POST(ApiStatics.REGISTER)
     Call<OauthResponse<String>> registerNewUser(@Body RegisterUserRequestModel userRequestModel);
@@ -90,7 +91,7 @@ public interface EtkaApi {
 
     //13
     @GET(ApiStatics.HOME)
-    Call<OffersResponseModel> getOffers(@Query("page") String page);
+    Call<OauthResponse<OffersResponseModel>> getOffers(@Query("page") String page);
 
     //14
     @POST(ApiStatics.CHANGE_PASSWORD)
