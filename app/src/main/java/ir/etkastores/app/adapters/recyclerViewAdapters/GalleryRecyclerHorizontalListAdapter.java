@@ -77,7 +77,7 @@ public class GalleryRecyclerHorizontalListAdapter extends RecyclerView.Adapter<G
             if (position == selectedItem){
                 itemView.setAlpha(1f);
             }else{
-                itemView.setAlpha(0.5f);
+                itemView.setAlpha(0.3f);
             }
         }
 
