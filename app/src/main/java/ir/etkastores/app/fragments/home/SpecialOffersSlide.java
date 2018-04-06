@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
 
     boolean isDataLoaded = false;
 
-    private Call<OauthResponse<OffersResponseModel>> offersReq;
+    private Call<OauthResponse<List<OffersItemModel>>> offersReq;
 
     @Nullable
     @Override
@@ -91,29 +92,25 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
         showLoading();
         messageView.hide();
         offersReq = ApiProvider.getAuthorizedApi().getOffers("offers");
-        offersReq.enqueue(new Callback<OauthResponse<OffersResponseModel>>() {
+        offersReq.enqueue(new Callback<OauthResponse<List<OffersItemModel>>>() {
             @Override
-            public void onResponse(Call<OauthResponse<OffersResponseModel>> call, Response<OauthResponse<OffersResponseModel>> response) {
+            public void onResponse(Call<OauthResponse<List<OffersItemModel>>> call, Response<OauthResponse<List<OffersItemModel>>> response) {
                 if (!isAdded()) return;
                 hideLoading();
                 if (response.isSuccessful()) {
-                    if (response.body().isSuccessful()) {
-                        if (response.body().getData().getTotalItemsCount() == 0) {
-                            showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
-                        } else {
-                            addItems(response.body().getData().getItems());
-                        }
-                        isDataLoaded = true;
+                    if (response.body().getData().size() == 0) {
+                        showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
                     } else {
-
+                        addItems(response.body().getData());
                     }
+                    isDataLoaded = true;
                 } else {
                     onFailure(call, null);
                 }
             }
 
             @Override
-            public void onFailure(Call<OauthResponse<OffersResponseModel>> call, Throwable throwable) {
+            public void onFailure(Call<OauthResponse<List<OffersItemModel>>> call, Throwable throwable) {
                 if (!isAdded()) return;
                 hideLoading();
                 showMessageView(getResources().getString(R.string.errorInDataReceiving), true);

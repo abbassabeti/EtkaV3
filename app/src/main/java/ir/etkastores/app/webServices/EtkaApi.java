@@ -7,6 +7,7 @@ import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
+import ir.etkastores.app.models.home.OffersItemModel;
 import ir.etkastores.app.models.news.NewsRequestModel;
 import ir.etkastores.app.models.news.NewsResponseModel;
 import ir.etkastores.app.models.search.ProductSearchResponseModel;
@@ -91,7 +92,7 @@ public interface EtkaApi {
 
     //13
     @GET(ApiStatics.HOME)
-    Call<OauthResponse<OffersResponseModel>> getOffers(@Query("page") String page);
+    Call<OauthResponse<List<OffersItemModel>>> getOffers(@Query("page") String page);
 
     //14
     @POST(ApiStatics.CHANGE_PASSWORD)
@@ -124,5 +125,7 @@ public interface EtkaApi {
     //21
     @POST(ApiStatics.RESET_PASSWORD)
     Call<OauthResponse<String>> resetPassword(@Query("PhoneNumber") String phoneNumber);
+
+
 
 }

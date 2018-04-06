@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:padding="8dp"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
             android:text="@string/ticketSubject"
             android:textColor="@color/gray"
             android:textSize="@dimen/textSizeSmall" />
@@ -29,7 +30,8 @@
         <RelativeLayout
             android:id="@+id/ticketTitleHolder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/ticketTitle"
@@ -38,7 +40,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="right"
-                android:padding="8dp"
+                android:ellipsize="end"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textSizeMedium" />
 
@@ -63,18 +68,28 @@
                 android:id="@+id/ticketStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:singleLine="true"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/textSizeVerySmall" />
 
             <View
                 android:layout_width="1dp"
-                android:layout_height="24dp"
-                android:background="@color/gray"/>
+                android:layout_height="8dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="2dp"
+                android:background="@color/gray" />
 
             <TextView
                 android:id="@+id/ticketDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:singleLine="true"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/textSizeVerySmall" />
 

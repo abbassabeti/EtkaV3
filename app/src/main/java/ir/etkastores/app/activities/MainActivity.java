@@ -239,15 +239,15 @@ public class MainActivity extends BaseActivity {
                 StoreActivity.show(this, StoreModel.fromJson(notificationModel.getData()));
                 break;
 
-            case NotificationModel.ACTION_NEWS:
+            case NotificationModel.ACTION_OPEN_NEWS:
                 NewsActivity.show(this, NewsItem.fromJson(notificationModel.getData()));
                 break;
 
-            case NotificationModel.ACTION_NEWS_LIST:
+            case NotificationModel.ACTION_OPEN_NEWS_LIST:
                 NewsListActivity.show(this);
                 break;
 
-            case NotificationModel.ACTION_GALLERY:
+            case NotificationModel.ACTION_OPEN_GALLERY:
                 GalleryActivity.show(this, GalleryItemsModel.fromJson(notificationModel.getData()));
                 break;
 

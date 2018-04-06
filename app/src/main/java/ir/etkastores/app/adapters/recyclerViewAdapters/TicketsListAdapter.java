@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketStatus;
+import ir.etkastores.app.utils.FontUtils;
 
 /**
  * Created by garshasbi on 4/3/18.
@@ -29,7 +30,7 @@ public class TicketsListAdapter extends RecyclerView.Adapter<TicketsListAdapter.
     private Context context;
     private LayoutInflater inflater;
     private List<TicketItem> items;
-    private boolean isLoadMoreEnabled = true;
+    private boolean isLoadMoreEnabled = false;
     private OnTicketsListCallbacks onTicketsListCallbacks;
 
     public TicketsListAdapter(Context context) {
@@ -128,11 +129,13 @@ public class TicketsListAdapter extends RecyclerView.Adapter<TicketsListAdapter.
                         onTicketsListCallbacks.onTicketListItemClick(items.get(getAdapterPosition()));
                 }
             });
+            title.setTypeface(FontUtils.getBoldTypeFace());
         }
 
         public void bind(TicketItem ticketItem) {
             title.setText(ticketItem.getTitle());
             date.setText(ticketItem.getDate());
+            status.setTextColor(ticketItem.getStatusTextColor());
             status.setText(TicketStatus.getDisplayValueOfStatus(ticketItem.getStatus()));
         }
 

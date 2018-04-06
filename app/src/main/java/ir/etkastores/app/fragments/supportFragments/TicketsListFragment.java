@@ -201,7 +201,9 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     }
 
     private void checkToLoadDataViews(){
-        if (adapter.getItemCount() == 0 && !listIsEmpty) loadTickets();
+        if (adapter.getItemCount() == 0 && !listIsEmpty){
+            loadTickets();
+        }
     }
 
 }

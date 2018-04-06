@@ -40,9 +40,12 @@ public class NotificationModel {
     public final static int ACTION_OPEN_USER_PRIVACY = 19;
     public final static int ACTION_OPEN_TERM_OF_USE = 20;
     public final static int ACTION_OPEN_STORE_PROFILE = 21;
-    public final static int ACTION_NEWS_LIST = 22;
-    public final static int ACTION_NEWS = 23;
-    public final static int ACTION_GALLERY = 24;
+    public final static int ACTION_OPEN_NEWS_LIST = 22;
+    public final static int ACTION_OPEN_NEWS = 23;
+    public final static int ACTION_OPEN_GALLERY = 24;
+    public final static int ACTION_OPEN_SEARCH_RESULT = 25;
+    public final static int ACTION_OPEN_LOGIN = 26;
+    public final static int ACTION_OPEN_SURVEY = 27;
 
     public static NotificationModel fromJson(String json) {
         try {
@@ -86,26 +89,26 @@ public class NotificationModel {
     public Intent getIntent() {
         Intent intent = null;
 
-        if (getAction() == ACTION_OPEN_URL){
+        if (getAction() == ACTION_OPEN_URL) {
             intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(getData()));
-        }else{
+        } else {
             intent = getAppIntent();
         }
 
         return intent;
     }
 
-    private Intent getAppIntent(){
+    private Intent getAppIntent() {
         Intent intent = new Intent(EtkaApp.getInstance(), SplashActivity.class);
-        intent.putExtra(IS_FROM_NOTIFICATION,true);
-        intent.putExtra(NOTIFICATION_OBJECT,toJson());
+        intent.putExtra(IS_FROM_NOTIFICATION, true);
+        intent.putExtra(NOTIFICATION_OBJECT, toJson());
         return intent;
     }
 
-    public String toJson(){
+    public String toJson() {
         try {
             return new Gson().toJson(this);
-        }catch (Exception err){
+        } catch (Exception err) {
             return "";
         }
     }

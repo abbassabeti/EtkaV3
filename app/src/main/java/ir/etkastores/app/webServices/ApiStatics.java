@@ -44,6 +44,8 @@ public class ApiStatics {
     public static final String CHANGE_PASSWORD = "/api/v1/Account/ChangePassword";
     public static final String SEND_TICKET = "/api/v1/Ticket/Ticket";
     public static final String GET_TICKET = "/api/v1/Ticket/GetTicket";
+    public static final String TICKET_ANSWER = "/api/v1/Ticket/TicketAnswer";
+    public static final String GET_TICKET_ANSWER = "/api/v1/Ticket/GetTicketAnswer";
     public static final String SAVE_PRODUCTS = "api/v1/SaveProducts";
     public static final String NEWS = "/api/v1/news";
 
