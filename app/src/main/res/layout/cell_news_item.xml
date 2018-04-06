@@ -23,11 +23,19 @@
             app:srcCompat="@drawable/ic_rss_feed_gray_24dp" />
 
         <TextView
-            android:id="@+id/newsTitle"
-            android:layout_width="match_parent"
+            android:id="@+id/newsId"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/rssIcon"
+            android:textColor="@color/gray"
             android:paddingRight="8dp"
+            android:textSize="@dimen/textSizeSmall" />
+
+        <TextView
+            android:id="@+id/newsDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:textColor="@color/gray"
             android:textSize="@dimen/textSizeSmall" />
 
@@ -41,19 +49,9 @@
             android:background="@color/gray" />
 
         <TextView
-            android:id="@+id/newsDate"
-            android:layout_width="wrap_content"
+            android:id="@+id/newsTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/line"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/textSizeSmall" />
-
-        <TextView
-            android:id="@+id/newsId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_below="@id/line"
             android:textColor="@color/gray"
             android:textSize="@dimen/textSizeSmall" />

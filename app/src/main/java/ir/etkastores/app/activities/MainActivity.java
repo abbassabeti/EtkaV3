@@ -23,6 +23,7 @@ import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.TextInfoActivity;
+import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.fragments.home.HekmatWaresSlide;
 import ir.etkastores.app.fragments.home.HomeFragment;
 import ir.etkastores.app.fragments.MapFragment;
@@ -80,6 +81,8 @@ public class MainActivity extends BaseActivity {
         if (notificationModel != null) {
             handleNotificationAction();
         }
+
+        StoresManager.getInstance().fetchStores(null);
 
     }
 
