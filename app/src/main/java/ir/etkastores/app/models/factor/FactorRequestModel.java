@@ -18,8 +18,6 @@ public class FactorRequestModel {
     int skip;
 
     public FactorRequestModel() {
-        take = 10;
-        skip = 0;
     }
 
     public FactorRequestModel setUserId(String userId) {

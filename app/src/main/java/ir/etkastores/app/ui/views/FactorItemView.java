@@ -22,7 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.DummyProvider;
+import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.PurchasedProductModel;
 import ir.etkastores.app.R;
@@ -92,17 +92,10 @@ public class FactorItemView extends CardView implements View.OnClickListener {
     public void setFactor(final FactorModel factor){
         this.factor = factor;
         recyclerView.setAdapter(new PurchaseAdapter(factor.getPurchasedProducts()));
-        if (TextUtils.isEmpty(factor.getDate())){
-            factorDate.setText(String.format(getResources().getString(R.string.factorDate),DummyProvider.getRandomDate()));
-        }else{
-            factorDate.setText(String.format(getResources().getString(R.string.factorDate),factor.getDate()));
-        }
-        if (factor.getFactorCode()==0){
-            factorCode.setText(String.format(getResources().getString(R.string.factorCode),12332122));
-        }else{
-            factorCode.setText(String.format(getResources().getString(R.string.factorCode),factor.getFactorCode()));
-        }
+        factorDate.setText(String.format(getResources().getString(R.string.factorDate),factor.getDate()));
+        factorCode.setText(String.format(getResources().getString(R.string.factorCode),factor.getFactorCode()));
         factorPrice.setText(String.valueOf(factor.getTotalPrice()));
+//        discountPrice.setText(String.valueOf(factor.getTotalDiscount()));
         expandableLayout.setDuration(0);
         expandableLayout.setOnExpansionUpdateListener(new ExpandableLayout.OnExpansionUpdateListener() {
             @Override
@@ -154,25 +147,37 @@ public class FactorItemView extends CardView implements View.OnClickListener {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
 
+            @BindView(R.id.title)
+            TextView title;
+
             @BindView(R.id.price)
             TextView price;
+
+            @BindView(R.id.count)
+            TextView count;
 
             @BindView(R.id.image)
             SquareImageView image;
 
-            public ViewHolder(View itemView) {
+            public ViewHolder(final View itemView) {
                 super(itemView);
                 ButterKnife.bind(this,itemView);
                 itemView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        
+                        try {
+                            ProductActivity.show(itemView.getContext(),items.get(getAdapterPosition()).getBarCode());
+                        }catch (Exception err){
+                            err.printStackTrace();
+                        }
                     }
                 });
             }
 
             public void bind(PurchasedProductModel purchase){
-                price.setText(purchase.getTitle());
+                title.setText(purchase.getTitle());
+                price.setText(purchase.getPrice());
+                count.setText(String.valueOf(purchase.getCount()));
                 ImageLoader.loadProductImage(getContext(),image,purchase.getImageUrl());
             }
 

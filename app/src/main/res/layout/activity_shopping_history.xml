@@ -22,17 +22,19 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:indeterminateTint="@color/colorPrimary"
-            android:indeterminateTintMode="src_atop"
-            android:visibility="gone" />
+            style="@style/circularProgressStyle" />
 
         <ir.etkastores.app.ui.views.MessageView
             android:id="@+id/messageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+        <ProgressBar
+            android:id="@+id/linearProgress"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/linearProgressStyle" />
 
     </RelativeLayout>
 

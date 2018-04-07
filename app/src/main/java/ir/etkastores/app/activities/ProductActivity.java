@@ -2,6 +2,7 @@ package ir.etkastores.app.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
@@ -72,16 +73,16 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     @BindView(R.id.savePlusButton)
     AppCompatImageView savePlusButton;
 
-    public static void show(Activity activity, ProductModel productModel) {
-        Intent intent = new Intent(activity, ProductActivity.class);
+    public static void show(Context context, ProductModel productModel) {
+        Intent intent = new Intent(context, ProductActivity.class);
         intent.putExtra(MODEL, new Gson().toJson(productModel));
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 
-    public static void show(Activity activity, String code) {
-        Intent intent = new Intent(activity, ProductActivity.class);
+    public static void show(Context context, String code) {
+        Intent intent = new Intent(context, ProductActivity.class);
         intent.putExtra(CODE, code);
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 
     private ProductModel productModel;
@@ -169,7 +170,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
                         productModel = response.body().getData();
                         initFromProduct();
                     } else {
-                        showProductNotFoundDialog();
+                        showProductNotFoundDialog(response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(null, null);
@@ -185,8 +186,12 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         });
     }
 
-    private void showProductNotFoundDialog() {
-        messageDialog = MessageDialog.productNotFound();
+    private void showProductNotFoundDialog(String message) {
+        String msg = message;
+        if (TextUtils.isEmpty(msg)){
+            msg = EtkaApp.getInstance().getResources().getString(R.string.productNotFound);
+        }
+        messageDialog = MessageDialog.productNotFound(msg);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {

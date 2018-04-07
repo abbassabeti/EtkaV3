@@ -51,6 +51,10 @@ public class ApiProvider {
             httpClient.addInterceptor(getHeadersLogInterceptor());
         }
 
+        httpClient.connectTimeout(20, TimeUnit.SECONDS);
+        httpClient.readTimeout(20, TimeUnit.SECONDS);
+        httpClient.writeTimeout(20, TimeUnit.SECONDS);
+
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);

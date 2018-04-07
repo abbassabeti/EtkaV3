@@ -109,10 +109,10 @@ public class MessageDialog extends BaseDialog {
                 EtkaApp.getInstance().getResources().getString(R.string.cancel));
     }
 
-    public static MessageDialog productNotFound() {
+    public static MessageDialog productNotFound(String messageText) {
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.error),
-                EtkaApp.getInstance().getResources().getString(R.string.productNotFound),
+                messageText,
                 EtkaApp.getInstance().getResources().getString(R.string.exit),
                 null);
     }

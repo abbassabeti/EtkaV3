@@ -20,6 +20,9 @@ public class PurchasedProductModel {
     @SerializedName("imageUrl")
     String imageUrl;
 
+    @SerializedName("barCode")
+    String barCode;
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -50,5 +53,9 @@ public class PurchasedProductModel {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getBarCode() {
+        return barCode;
     }
 }

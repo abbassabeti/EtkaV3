@@ -78,6 +78,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
         hekmatReq.enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<HekmatModel>>> call, Response<OauthResponse<List<HekmatModel>>> response) {
+                if (!isAdded()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         adapter.setItems(response.body().getData());
@@ -93,6 +94,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
 
             @Override
             public void onFailure(Call<OauthResponse<List<HekmatModel>>> call, Throwable t) {
+                if (!isAdded()) return;
                 hideLoading();
                 showErrorView(getResources().getString(R.string.errorHappendInReceivingData));
             }
@@ -110,12 +112,12 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && isResumed()){
+        if (isVisibleToUser && isResumed()) {
             checkToInitViews();
         }
     }
 
-    private void checkToInitViews(){
+    private void checkToInitViews() {
         if (!isDataLoaded) initViews();
     }
 
@@ -124,7 +126,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
         HekmatProductsActivity.show(getActivity(), hekmatModel);
     }
 
-    private void showErrorView(String message){
+    private void showErrorView(String message) {
         messageView.show(R.drawable.ic_warning_orange_48dp, message, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
             @Override
             public void onMessageViewButtonClick() {

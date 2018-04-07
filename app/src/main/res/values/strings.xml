@@ -105,8 +105,8 @@
 
     <string name="totalPrice">قیمت کل:</string>
     <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، از دوباره تلاش کنید</string>
-    <string name="factorDate">تاریخ سفارش: %s</string>
-    <string name="factorCode">کد سفارش: %d</string>
+    <string name="factorDate">تاریخ خرید: %s</string>
+    <string name="factorCode">کد خرید: %d</string>
     <string name="XProducts">%d قلم کالا</string>
     <string name="Xpoint">%s امتیاز</string>
     <string name="priceX">قیمت : %s</string>
