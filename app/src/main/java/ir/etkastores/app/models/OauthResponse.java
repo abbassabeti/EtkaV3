@@ -2,8 +2,8 @@ package ir.etkastores.app.models;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Arrays;
-import java.util.List;
+import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 
 /**
  * Created by Sajad on 9/3/17.
@@ -37,6 +37,7 @@ public class OauthResponse<T> {
     }
 
     public boolean isSuccessful() {
+        checkNullMeta();
         if (getMeta().getStatusCode() == 200) {
             return true;
         } else {
@@ -46,11 +47,21 @@ public class OauthResponse<T> {
     }
 
     public T getData() {
+        checkNullMeta();
         return data;
     }
 
     public Meta getMeta() {
+        checkNullMeta();
         return meta;
+    }
+
+    private void checkNullMeta(){
+        if (meta == null){
+            meta = new Meta();
+            meta.statusCode = -1;
+            meta.message = EtkaApp.getInstance().getResources().getString(R.string.errorInConnectingToServer);
+        }
     }
 
 }

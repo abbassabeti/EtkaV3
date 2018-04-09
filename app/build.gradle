@@ -1,3 +1,4 @@
+
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
@@ -80,13 +81,13 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.github.bumptech.glide:glide:4.0.0'
     //google play services:
-    compile 'com.google.android.gms:play-services-maps:10.2.1'
-    compile 'com.google.android.gms:play-services-location:10.2.1'
-    compile 'com.google.android.gms:play-services-analytics:10.2.1'
+    compile 'com.google.android.gms:play-services-maps:11.4.0'
+    compile 'com.google.android.gms:play-services-location:11.4.0'
+    compile 'com.google.android.gms:play-services-analytics:11.4.0'
 
-    compile 'com.google.firebase:firebase-messaging:10.2.1'
-    compile 'com.google.firebase:firebase-core:10.2.1'
-    compile 'com.google.firebase:firebase-config:10.2.1'
+    compile 'com.google.firebase:firebase-messaging:11.4.0'
+    compile 'com.google.firebase:firebase-core:11.4.0'
+    compile 'com.google.firebase:firebase-config:11.4.0'
     compile 'com.android.support:multidex:1.0.2'
     compile 'com.romandanylyk:pageindicatorview:0.0.9'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'

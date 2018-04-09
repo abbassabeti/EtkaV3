@@ -8,6 +8,13 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingApi;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationServices;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
@@ -259,6 +266,15 @@ public class MainActivity extends BaseActivity {
                 break;
 
         }
+    }
+
+    private void initStoresGeoFencing(){
+        GeofencingClient geofencingClient = LocationServices.getGeofencingClient(this);
+        Geofence geofence = new Geofence.Builder()
+                .build();
+        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+                .addGeofence(null)
+                .build();
     }
 
 }

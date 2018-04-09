@@ -55,7 +55,7 @@
     <string name="aboutEtkaStores">درباره شرکت فروشگاه های زنجیره ای اتکا</string>
     <string name="userPrivacy">حریم خصوصی کاربران</string>
     <string name="termAndConditions">شرایط، قوانین و مقررات استفاده</string>
-    <string name="otherPagesFooterLicense">استفاده از تمامی مطالب اپلیکیشن همراه فروشگاه اتکا فقط برای مقاصد غیر تجاری و با ذکر منبع بلامانع است. کلیه حقوق این سرویس مطعلق به شرکت فروشگاه های زنجیره ای اتکا می باشد.</string>
+    <string name="otherPagesFooterLicense">استفاده از تمامی مطالب اپلیکیشن همراه فروشگاه اتکا فقط برای مقاصد غیر تجاری و با ذکر منبع بلامانع است. کلیه حقوق این سرویس متعلق به شرکت فروشگاه های زنجیره ای اتکا می باشد.</string>
     <string name="copyrightEn">Copyright ® 2018-2019 Etkastores.ir</string>
     <string name="firstNameAndLastName">نام و نام خانوادگی</string>
     <string name="email">ایمیل</string>
@@ -208,5 +208,6 @@
     <string name="ticketSubject">عنوان درخواست:</string>
     <string name="yourTicketsListIsEmpty">لیست تیکت های شما خالی است.</string>
     <string name="errorInReceivingTicketsListData">خطا در دریافت لیست تیکت ها.</string>
+    <string name="errorInConnectingToServer">خطا در ارتباط با سرور، لطفا پس از مدتی از دوباره تلاش نمایید</string>
 
 </resources>
