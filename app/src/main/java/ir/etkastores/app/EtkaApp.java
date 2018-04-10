@@ -1,10 +1,15 @@
 package ir.etkastores.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.adjust.sdk.Adjust;
+import com.adjust.sdk.AdjustConfig;
+import com.adjust.sdk.LogLevel;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
@@ -33,6 +38,7 @@ public class EtkaApp extends MultiDexApplication {
         mGoogleAnalytics = GoogleAnalytics.getInstance(this);
 
         initFont();
+        initAdjust();
 
     }
 
@@ -57,6 +63,16 @@ public class EtkaApp extends MultiDexApplication {
         return instance.getSharedPreferences("PREFERENCES",MODE_PRIVATE);
     }
 
+    private void initAdjust(){
+        String appToken = "{YourAppToken}";
+        String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
+        if (!BuildConfig.DEBUG) environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
+        AdjustConfig config = new AdjustConfig(this, appToken, environment);
+        if (!BuildConfig.DEBUG) config.setLogLevel(LogLevel.SUPRESS);
+        Adjust.onCreate(config);
+        registerActivityLifecycleCallbacks(new AdjustLifecycleCallbacks());
+    }
+
     synchronized public Tracker getGoogleAnalyticsTracker() {
         if (mTracker == null) {
             mTracker = mGoogleAnalytics.newTracker(R.xml.app_tracker);
@@ -70,6 +86,44 @@ public class EtkaApp extends MultiDexApplication {
             getGoogleAnalyticsTracker().send(new HitBuilders.ScreenViewBuilder().build());
         }catch (Exception err){
             err.printStackTrace();
+        }
+    }
+
+    private static final class AdjustLifecycleCallbacks implements ActivityLifecycleCallbacks{
+
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+            Adjust.onResume();
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+            Adjust.onPause();
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+
         }
     }
 

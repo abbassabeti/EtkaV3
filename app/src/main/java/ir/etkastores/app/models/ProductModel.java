@@ -227,6 +227,7 @@ public class ProductModel {
     }
 
     public int getSavedCount() {
+        if (savedCount == 0) savedCount = 1;
         return savedCount;
     }
 

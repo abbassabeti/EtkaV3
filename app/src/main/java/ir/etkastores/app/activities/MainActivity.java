@@ -1,5 +1,6 @@
 package ir.etkastores.app.activities;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -41,6 +42,7 @@ import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
+import ir.etkastores.app.services.StoresGeofenceTransitionsIntentService;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 
 public class MainActivity extends BaseActivity {
@@ -275,6 +277,24 @@ public class MainActivity extends BaseActivity {
         GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
                 .addGeofence(null)
                 .build();
+
+        geofencingClient.addGeofences(geofencingRequest,getGeofencePendingIntent());
+    }
+
+    PendingIntent geofenceTransitionsIntentService;
+
+    private PendingIntent getGeofencePendingIntent() {
+        // Reuse the PendingIntent if we already have it.
+        if (geofenceTransitionsIntentService != null) {
+            return geofenceTransitionsIntentService;
+        }
+        Intent intent = new Intent(this, StoresGeofenceTransitionsIntentService.class);
+        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
+        // calling addGeofences() and removeGeofences().
+        geofenceTransitionsIntentService = PendingIntent.getService(this, 0, intent, PendingIntent.
+                FLAG_UPDATE_CURRENT);
+        return geofenceTransitionsIntentService;
+
     }
 
 }

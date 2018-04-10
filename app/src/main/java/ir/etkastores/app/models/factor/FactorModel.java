@@ -1,5 +1,6 @@
 package ir.etkastores.app.models.factor;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -29,6 +30,14 @@ public class FactorModel {
     List<PurchasedProductModel> purchasedProducts;
 
     boolean isExpanded = false;
+
+    public static FactorModel fromJson(String json) {
+        try {
+            return new Gson().fromJson(json, FactorModel.class);
+        } catch (Exception err) {
+            return null;
+        }
+    }
 
     public long getId() {
         return id;

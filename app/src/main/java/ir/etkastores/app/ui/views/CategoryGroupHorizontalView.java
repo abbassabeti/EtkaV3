@@ -124,7 +124,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
             public void bind(ProductModel model){
                 image.setImageResource(R.drawable.etka_logo_wide);
                 name.setText(model.getTitle());
-                price.setText(model.getStrikeThruPrice());
+                price.setText(model.getStrikeThruPrice().trim());
                 StringUtils.setStrikeThruTextView(price);
                 price2.setText(model.getFinalPrice());
                 if (!TextUtils.isEmpty(model.getPoint())){

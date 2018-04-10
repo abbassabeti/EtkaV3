@@ -92,7 +92,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private Call<OauthResponse<ProductModel>> productReq;
     private Call<OauthResponse<Long>> addToNextShoppingListReq;
     private MessageDialog messageDialog;
-    private int saveCountValue = 0;
+    private int saveCountValue = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +131,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         }
 
         mSlider.setImages(productModel.getImageUrl());
+        saveCountValue = productModel.getSavedCount();
         updateSaveCountValue();
         if (productModel.getRelatedProducts() != null && productModel.getRelatedProducts().size() > 0) {
             CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), productModel.getRelatedProducts());

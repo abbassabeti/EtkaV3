@@ -145,3 +145,5 @@
     java.util.Locale get(int);
 }
 -keep public class com.android.installreferrer.** { *; }
+
+-keep public class com.android.installreferrer.** { *; }
