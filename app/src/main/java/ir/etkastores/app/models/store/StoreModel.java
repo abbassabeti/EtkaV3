@@ -60,6 +60,12 @@ public class StoreModel implements Cloneable {
     @SerializedName("inStoreModeUrl")
     private String inStoreModeUrl;
 
+    @SerializedName("isGeofencingEnabled")
+    private boolean isGeofencingEnabled;
+
+    @SerializedName("geofencingRadius")
+    private int geofencingRadius;
+
     int ic = -1;
 
     public static StoreModel fromJson(String  json){
@@ -176,4 +182,12 @@ public class StoreModel implements Cloneable {
         return !TextUtils.isEmpty(getInStoreModeUrl());
     }
 
+
+    public boolean isGeofencingEnabled() {
+        return isGeofencingEnabled;
+    }
+
+    public int getGeofencingRadius() {
+        return geofencingRadius;
+    }
 }

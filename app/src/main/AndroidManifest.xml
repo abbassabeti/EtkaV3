@@ -21,7 +21,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/applicationName"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:resizeableActivity="false">
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyC5mITzxE8vlSKRMN5zF-zcC_Xr73FhhFA" />

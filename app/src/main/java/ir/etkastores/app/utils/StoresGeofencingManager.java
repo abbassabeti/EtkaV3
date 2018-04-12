@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.etkastores.app.data.StoresManager;
+import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.services.StoresGeofenceTransitionsIntentService;
 
 /**
@@ -26,6 +28,8 @@ import ir.etkastores.app.services.StoresGeofenceTransitionsIntentService;
  */
 
 public class StoresGeofencingManager {
+
+    private final static String GEOFENCING_IS_ENABLED = "GEOFENCING_IS_ENABLED";
 
     private static StoresGeofencingManager instance;
 
@@ -51,7 +55,16 @@ public class StoresGeofencingManager {
     private void initGeofenceList() {
         if (geofences == null) {
             geofences = new ArrayList<>();
-
+            for (StoreModel storeModel : StoresManager.getInstance().getStores()){
+                if (storeModel.isGeofencingEnabled()){
+                    geofences.add(new Geofence.Builder()
+                            .setCircularRegion(storeModel.getLatitude(), storeModel.getLongitude(), storeModel.getGeofencingRadius())
+                            .setRequestId(String.valueOf(storeModel.getId()))
+                            .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                            .build());
+                }
+            }
         }
     }
 
@@ -71,6 +84,7 @@ public class StoresGeofencingManager {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.i("Stores geofencing add", "Success");
+                DiskDataHelper.putBool(GEOFENCING_IS_ENABLED,true);
             }
         }).addOnFailureListener(activity, new OnFailureListener() {
             @Override
@@ -83,10 +97,11 @@ public class StoresGeofencingManager {
 
     private void disable() {
         geofencingClient.removeGeofences(pendingIntent);
+        DiskDataHelper.putBool(GEOFENCING_IS_ENABLED,false);
     }
 
     public boolean isEnabled(){
-        return false;
+        return DiskDataHelper.getBool(GEOFENCING_IS_ENABLED);
     }
 
 }

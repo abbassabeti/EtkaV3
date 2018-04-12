@@ -88,6 +88,7 @@ public class ApiProvider {
                     Request request = requestBuilder.build();
                     Response proceed = chain.proceed(request);
 
+
                     BufferedSource source = proceed.body().source();
                     source.request(Long.MAX_VALUE); // Buffer the entire body.
                     Buffer buffer = source.buffer();
@@ -119,7 +120,6 @@ public class ApiProvider {
                     }.getType());
                     if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401) {
                         synchronized (httpClient) {
-
                             String refreshToken = ApiStatics.getLastToken().getRefreshToken();
                             lastToken = null;
                             ApiStatics.saveToken(null);
@@ -140,6 +140,7 @@ public class ApiProvider {
                                 request=request.newBuilder()
                                 .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
                                 .build();
+
                                 proceed = chain.proceed(request);
                             }
                         }

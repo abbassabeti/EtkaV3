@@ -12,18 +12,18 @@ import ir.etkastores.app.R;
 
 public class OauthResponse<T> {
 
-    @SerializedName("data")
+    @SerializedName(value = "data",alternate = {"Data"})
     T data;
 
-    @SerializedName("meta")
+    @SerializedName(value = "meta",alternate = {"Meta"})
     Meta meta;
 
     public static class Meta {
 
-        @SerializedName("statusCode")
+        @SerializedName(value = "statusCode",alternate = {"StatusCode","statuscode"})
         int statusCode;
 
-        @SerializedName("message")
+        @SerializedName(value = "message",alternate = {"Message"})
         String message;
 
         public int getStatusCode() {
