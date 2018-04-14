@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.activities.CategoryActivity;
+import ir.etkastores.app.activities.SearchActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.OauthResponse;
@@ -137,9 +138,10 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     @Override
     public void onCategoryItemClick(CategoryModel model, int position) {
-        if (model.hasChild()) {
-            CategoryActivity.show(getActivity(), model);
-        }
+//        if (model.hasChild()) {
+//            CategoryActivity.show(getActivity(), model);
+//        }
+        SearchActivity.show(getActivity());
     }
 
     private void showError(String message) {

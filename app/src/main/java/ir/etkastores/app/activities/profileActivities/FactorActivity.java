@@ -3,13 +3,16 @@ package ir.etkastores.app.activities.profileActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.adapters.recyclerViewAdapters.FactorListRecyclerAdapter;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 
@@ -26,6 +29,9 @@ public class FactorActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
 
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
     private FactorModel factorModel;
 
     @Override
@@ -37,8 +43,16 @@ public class FactorActivity extends BaseActivity implements EtkaToolbar.EtkaTool
         initViews();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Factor List Activity");
+    }
+
     private void initViews() {
         toolbar.setActionListeners(this);
+        FactorListRecyclerAdapter adapter = new FactorListRecyclerAdapter(this,factorModel);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

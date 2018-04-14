@@ -209,5 +209,6 @@
     <string name="yourTicketsListIsEmpty">لیست تیکت های شما خالی است.</string>
     <string name="errorInReceivingTicketsListData">خطا در دریافت لیست تیکت ها.</string>
     <string name="errorInConnectingToServer">خطا در ارتباط با سرور، لطفا پس از مدتی از دوباره تلاش نمایید</string>
+    <string name="showAsList">مشاهده به صورت لیست</string>
 
 </resources>

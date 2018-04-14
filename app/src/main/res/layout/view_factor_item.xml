@@ -79,13 +79,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:padding="16dp">
+                    android:paddingRight="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp">
 
                     <TextView
+                        android:id="@+id/totalPriceTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:text="@string/totalPrice" />
 
                     <TextView
@@ -93,17 +96,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_centerVertical="true" />
+                        android:textColor="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/discountPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/totalPrice"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/showListButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/totalPriceTitle"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        android:text="@string/showAsList"
                         android:textColor="@color/colorPrimary"
-                        android:layout_toRightOf="@id/totalPrice" />
+                        android:textSize="@dimen/textSizeSmall" />
 
                 </RelativeLayout>
 

@@ -270,32 +270,32 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void initStoresGeoFencing(){
-        GeofencingClient geofencingClient = LocationServices.getGeofencingClient(this);
-        Geofence geofence = new Geofence.Builder()
-                .build();
-        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
-                .addGeofence(null)
-                .build();
-
-        geofencingClient.addGeofences(geofencingRequest,getGeofencePendingIntent());
-    }
-
-    PendingIntent geofenceTransitionsIntentService;
-
-    private PendingIntent getGeofencePendingIntent() {
-        // Reuse the PendingIntent if we already have it.
-        if (geofenceTransitionsIntentService != null) {
-            return geofenceTransitionsIntentService;
-        }
-        Intent intent = new Intent(this, StoresGeofenceTransitionsIntentService.class);
-        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
-        // calling addGeofences() and removeGeofences().
-        geofenceTransitionsIntentService = PendingIntent.getService(this, 0, intent, PendingIntent.
-                FLAG_UPDATE_CURRENT);
-        return geofenceTransitionsIntentService;
-
-    }
+//    private void initStoresGeoFencing(){
+//        GeofencingClient geofencingClient = LocationServices.getGeofencingClient(this);
+//        Geofence geofence = new Geofence.Builder()
+//                .build();
+//        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
+//                .addGeofence(null)
+//                .build();
+//
+//        geofencingClient.addGeofences(geofencingRequest,getGeofencePendingIntent());
+//    }
+//
+//    PendingIntent geofenceTransitionsIntentService;
+//
+//    private PendingIntent getGeofencePendingIntent() {
+//        // Reuse the PendingIntent if we already have it.
+//        if (geofenceTransitionsIntentService != null) {
+//            return geofenceTransitionsIntentService;
+//        }
+//        Intent intent = new Intent(this, StoresGeofenceTransitionsIntentService.class);
+//        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
+//        // calling addGeofences() and removeGeofences().
+//        geofenceTransitionsIntentService = PendingIntent.getService(this, 0, intent, PendingIntent.
+//                FLAG_UPDATE_CURRENT);
+//        return geofenceTransitionsIntentService;
+//
+//    }
 
 }
 

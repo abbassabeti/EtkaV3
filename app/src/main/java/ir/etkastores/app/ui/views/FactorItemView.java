@@ -22,11 +22,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.activities.ProductActivity;
+import ir.etkastores.app.activities.profileActivities.FactorActivity;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.PurchasedProductModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.widgets.SquareImageView;
+import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 
 /**
@@ -55,6 +58,9 @@ public class FactorItemView extends CardView implements View.OnClickListener {
 
     @BindView(R.id.purchasesRecyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.showListButton)
+    TextView showListButton;
 
     TextView totalScore;
 
@@ -96,6 +102,7 @@ public class FactorItemView extends CardView implements View.OnClickListener {
         factorCode.setText(String.format(getResources().getString(R.string.factorCode),factor.getFactorCode()));
         factorPrice.setText(String.valueOf(factor.getTotalPrice()));
 //        discountPrice.setText(String.valueOf(factor.getTotalDiscount()));
+        showListButton.setTypeface(FontUtils.getBoldTypeFace());
         expandableLayout.setDuration(0);
         expandableLayout.setOnExpansionUpdateListener(new ExpandableLayout.OnExpansionUpdateListener() {
             @Override
@@ -118,6 +125,11 @@ public class FactorItemView extends CardView implements View.OnClickListener {
         }else{
             rowIcon.setImageResource(R.drawable.ic_arrow_down_black_24dp);
         }
+    }
+
+    @OnClick(R.id.showListButton)
+    public void onShowListButtonClicked(){
+        FactorActivity.show(getContext(),factor);
     }
 
     public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHolder>{
