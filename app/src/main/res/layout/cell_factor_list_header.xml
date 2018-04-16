@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:paddingTop="16dp">
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:padding="8dp"
+        android:textSize="@dimen/textSizeSmall"
+        android:padding="16dp"
         android:textColor="@color/darkGray" />
 
     <TextView
@@ -18,9 +18,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:padding="8dp"
+        android:textSize="@dimen/textSizeSmall"
+        android:padding="16dp"
         android:textColor="@color/darkGray" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_below="@id/code"
+        android:weightSum="8">
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall"
+            android:text="@string/price"
+            android:background="@drawable/rect_trans_bordered_gray"/>
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall"
+            android:text="@string/count"
+            android:background="@drawable/rect_trans_bordered_gray"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="right"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:paddingRight="4dp"
+            android:paddingLeft="4dp"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall"
+            android:text="@string/title"
+            android:background="@drawable/rect_trans_bordered_gray"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

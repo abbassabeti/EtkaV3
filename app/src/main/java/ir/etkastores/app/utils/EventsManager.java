@@ -14,23 +14,22 @@ public class EventsManager {
 
     public static void screenView(String screenName){
         try {
+            sendAdjustEvent("Screen "+screenName);
             EtkaApp.getInstance().getGoogleAnalyticsTracker().setScreenName(screenName);
             EtkaApp.getInstance().getGoogleAnalyticsTracker().send(new HitBuilders.ScreenViewBuilder().build());
         }catch (Exception err){
-
+            err.printStackTrace();
         }
     }
 
     public static void sendEvent(String category, String action, String label){
-        sendAdjustEvent(category,action,label);
+        sendAdjustEvent(category);
         sendGoogleAnalyticsEvent(category,action,label);
     }
 
-    private static void sendAdjustEvent(String category, String action, String label){
+    private static void sendAdjustEvent(String name){
         try {
-            AdjustEvent event = new AdjustEvent("abc123");
-            event.setRevenue(0.01, "EUR");
-            event.setOrderId("{OrderId}");
+            AdjustEvent event = new AdjustEvent(name);
             Adjust.trackEvent(event);
         }catch (Exception err){
             err.printStackTrace();

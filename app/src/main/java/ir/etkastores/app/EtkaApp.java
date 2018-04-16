@@ -16,6 +16,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import io.fabric.sdk.android.Fabric;
+import ir.etkastores.app.utils.EventsManager;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -81,12 +82,7 @@ public class EtkaApp extends MultiDexApplication {
     }
 
     public void screenView(String screenName){
-        try {
-            getGoogleAnalyticsTracker().setScreenName(screenName);
-            getGoogleAnalyticsTracker().send(new HitBuilders.ScreenViewBuilder().build());
-        }catch (Exception err){
-            err.printStackTrace();
-        }
+        EventsManager.screenView(screenName);
     }
 
     private static final class AdjustLifecycleCallbacks implements ActivityLifecycleCallbacks{
