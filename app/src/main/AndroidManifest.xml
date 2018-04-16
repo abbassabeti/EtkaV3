@@ -165,7 +165,7 @@
             android:name=".activities.profileActivities.FactorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
-        <activity android:name=".activities.SearchActivity"
+        <activity android:name=".activities.categoriesFilter.CategoriesFilterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar"/>
 

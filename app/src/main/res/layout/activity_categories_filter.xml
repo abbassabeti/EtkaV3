@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="ir.etkastores.app.activities.SearchActivity">
+    tools:context="ir.etkastores.app.activities.categoriesFilter.CategoriesFilterActivity">
 
     <ir.etkastores.app.ui.views.EtkaToolbar
         android:id="@+id/toolbar"
@@ -24,12 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <FrameLayout
+                android:id="@+id/categoriesFrame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@color/white"
             android:layout_gravity="left">
 
         </LinearLayout>

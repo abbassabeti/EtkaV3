@@ -23,6 +23,8 @@ import ir.etkastores.app.activities.CategoryActivity;
 import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.activities.ScannerActivity;
 import ir.etkastores.app.BuildConfig;
+import ir.etkastores.app.activities.categoriesFilter.CategoriesFilterActivity;
+import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
@@ -34,7 +36,7 @@ import ir.etkastores.app.utils.StringUtils;
  * Created by Sajad on 9/1/17.
  */
 
-public class SearchTabFragment extends Fragment implements TextView.OnEditorActionListener {
+public class SearchTabFragment extends Fragment implements TextView.OnEditorActionListener, CategoriesFragment.OnCategoryItemClickListener {
 
     private View view;
 
@@ -70,11 +72,9 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
     }
 
     private void showCategories() {
-        ActivityUtils.addChildFragment(this, R.id.searchContentFrame, CategoriesFragment.newInstance(0), "", false);
-    }
-
-    private void showAdvancedSearch() {
-        ActivityUtils.replaceChildFragment(this, R.id.searchContentFrame, SearchAdvancedFragment.newInstance(), "", false);
+        CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(0);
+        categoriesFragment.setOnCategoryItemClickListener(this);
+        ActivityUtils.addChildFragment(this, R.id.searchContentFrame, categoriesFragment, "", false);
     }
 
     @OnClick(R.id.scanButton)
@@ -125,6 +125,12 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
             searchReq.setTitle(searchInput.getText().toString());
             CategoryActivity.show(getActivity(), searchReq);
         }
+    }
+
+    @Override
+    public void onCategoryClicked(CategoryModel categoryModel) {
+        Log.e("category clciked","....");
+        CategoriesFilterActivity.show(getActivity(),categoryModel);
     }
 
 }

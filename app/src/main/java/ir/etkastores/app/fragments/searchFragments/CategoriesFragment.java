@@ -14,8 +14,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.activities.CategoryActivity;
-import ir.etkastores.app.activities.SearchActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.OauthResponse;
@@ -34,10 +32,10 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     private final static String CATEGORY_ID_KEY = "CATEGORY_ID_KEY";
 
-    public static Fragment newInstance(int categoryId) {
+    public static CategoriesFragment newInstance(long categoryId) {
         CategoriesFragment categoriesFragment = new CategoriesFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(CATEGORY_ID_KEY, categoryId);
+        bundle.putLong(CATEGORY_ID_KEY, categoryId);
         categoriesFragment.setArguments(bundle);
         return categoriesFragment;
     }
@@ -54,13 +52,15 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     Call<OauthResponse<List<CategoryModel>>> request;
 
     private CategoryRecyclerAdapter adapter;
-    private int categoryId;
+    private long categoryId;
+
+    private OnCategoryItemClickListener callback;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            categoryId = getArguments().getInt(CATEGORY_ID_KEY, 0);
+            categoryId = getArguments().getLong(CATEGORY_ID_KEY, 0);
         } catch (Exception err) {
             categoryId = 0;
         }
@@ -138,10 +138,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     @Override
     public void onCategoryItemClick(CategoryModel model, int position) {
-//        if (model.hasChild()) {
-//            CategoryActivity.show(getActivity(), model);
-//        }
-        SearchActivity.show(getActivity());
+        if (callback != null) callback.onCategoryClicked(model);
     }
 
     private void showError(String message) {
@@ -171,4 +168,11 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
         super.onDestroyView();
     }
 
+    public interface OnCategoryItemClickListener{
+        void onCategoryClicked(CategoryModel categoryModel);
+    }
+
+    public void setOnCategoryItemClickListener(OnCategoryItemClickListener callback) {
+        this.callback = callback;
+    }
 }
