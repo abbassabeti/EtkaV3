@@ -40,14 +40,19 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
         return categoriesFragment;
     }
 
-    @BindView(R.id.categoryRecyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView categoryRecyclerView;
 
     @BindView(R.id.circularProgress)
     ProgressBar circularProgress;
 
+    @BindView(R.id.linearProgress)
+    ProgressBar linearProgress;
+
     @BindView(R.id.messageView)
     MessageView messageView;
+
+    private View view;
 
     Call<OauthResponse<List<CategoryModel>>> request;
 
@@ -69,9 +74,11 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragmnet_categories, container, false);
-        ButterKnife.bind(this, view);
-        initViews();
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_categories, container, false);
+            ButterKnife.bind(this, view);
+            initViews();
+        }
         return view;
     }
 
@@ -87,6 +94,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     }
 
     private void loadCategory() {
+        showLoading();
         request = ApiProvider.getAuthorizedApi().getCategory(categoryId);
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
@@ -100,11 +108,12 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
                 } else {
                     onFailure(null, null);
                 }
+                hideLoading();
             }
 
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable t) {
-
+                hideLoading();
             }
         });
     }
@@ -144,7 +153,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     private void showError(String message) {
         if (!isAdded()) return;
         String messageText = getResources().getString(R.string.errorInDataReceiving);
-        if (!TextUtils.isEmpty(message)){
+        if (!TextUtils.isEmpty(message)) {
             messageText = message;
         }
         messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
@@ -157,10 +166,12 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     private void showLoading() {
         circularProgress.setVisibility(View.VISIBLE);
+        linearProgress.setVisibility(View.VISIBLE);
     }
 
     private void hideLoading() {
         circularProgress.setVisibility(View.GONE);
+        linearProgress.setVisibility(View.GONE);
     }
 
     @Override
@@ -168,7 +179,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
         super.onDestroyView();
     }
 
-    public interface OnCategoryItemClickListener{
+    public interface OnCategoryItemClickListener {
         void onCategoryClicked(CategoryModel categoryModel);
     }
 

@@ -12,17 +12,29 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.fragments.searchFragments.CategoriesFragment;
+import ir.etkastores.app.fragments.searchFragments.ProductsListFragment;
 import ir.etkastores.app.models.CategoryModel;
+import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
 
 public class CategoriesFilterActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoriesFragment.OnCategoryItemClickListener {
 
-    private static String ID = "ID";;
+    private final static String ID = "ID";
+    private final static String SEARCH_TERM = "SEARCH_TERM";
+    private final static String IS_SEARCH = "IS_SEARCH";
 
     public static void show(Context context, CategoryModel categoryModel){
         Intent intent = new Intent(context, CategoriesFilterActivity.class);
         intent.putExtra(ID,categoryModel.getId());
+        intent.putExtra(IS_SEARCH,false);
+        context.startActivity(intent);
+    }
+
+    public static void show(Context context, String searchTerm){
+        Intent intent = new Intent(context, CategoriesFilterActivity.class);
+        intent.putExtra(SEARCH_TERM,searchTerm);
+        intent.putExtra(IS_SEARCH,true);
         context.startActivity(intent);
     }
 
@@ -49,10 +61,18 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     private void initViews(){
         toolbar.setActionListeners(this);
         long id = getIntent().getLongExtra(ID,0);
-        CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(id);
-        categoriesFragment.setOnCategoryItemClickListener(this);
-        ActivityUtils.addFragment(this,R.id.categoriesFrame,categoriesFragment,"CATEGORY_FILTER",false);
-
+        String searchTerm = getIntent().getExtras().getString(SEARCH_TERM,null);
+        boolean isFromSearch = getIntent().getExtras().getBoolean(IS_SEARCH);
+        if (isFromSearch){
+            SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
+            searchProductRequestModel.setTitle(searchTerm);
+            ProductsListFragment productsListFragment = ProductsListFragment.newInstance(searchProductRequestModel);
+            ActivityUtils.addFragment(this,R.id.categoriesFrame,productsListFragment,"CATEGORY_FILTER",false);
+        }else{
+            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(id);
+            categoriesFragment.setOnCategoryItemClickListener(this);
+            ActivityUtils.addFragment(this,R.id.categoriesFrame,categoriesFragment,"CATEGORY_FILTER",false);
+        }
     }
 
     @Override
@@ -75,6 +95,11 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
             CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId());
             categoriesFragment.setOnCategoryItemClickListener(this);
             addFragmentToBackStack(categoriesFragment);
+        }else{
+            SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
+            searchProductRequestModel.setCategoryId(categoryModel.getId());
+            ProductsListFragment productsListFragment = ProductsListFragment.newInstance(searchProductRequestModel);
+            addFragmentToBackStack(productsListFragment);
         }
     }
 

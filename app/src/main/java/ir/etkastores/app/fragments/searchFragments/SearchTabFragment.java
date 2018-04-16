@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -13,30 +14,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.CategoryActivity;
 import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.activities.ScannerActivity;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.activities.categoriesFilter.CategoriesFilterActivity;
+import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.models.CategoryModel;
-import ir.etkastores.app.models.search.SearchProductRequestModel;
+import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
-import ir.etkastores.app.utils.ActivityUtils;
 import ir.etkastores.app.utils.StringUtils;
+import ir.etkastores.app.webServices.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Sajad on 9/1/17.
  */
 
-public class SearchTabFragment extends Fragment implements TextView.OnEditorActionListener, CategoriesFragment.OnCategoryItemClickListener {
+public class SearchTabFragment extends Fragment implements TextView.OnEditorActionListener, CategoryRecyclerAdapter.OnCategoryItemClickListener {
 
     private View view;
 
@@ -45,6 +52,15 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
 
     @BindView(R.id.searchEditText)
     EditText searchInput;
+
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
+    @BindView(R.id.circularProgress)
+    ProgressBar circularProgress;
+
+    private Call<OauthResponse<List<CategoryModel>>> request;
+    private CategoryRecyclerAdapter adapter;
 
     @Nullable
     @Override
@@ -64,17 +80,41 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
     }
 
     private void initViews() {
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             searchInput.setText("#6260100601000");
         }
-        showCategories();
+        loadCategories();
         searchInput.setOnEditorActionListener(this);
     }
 
-    private void showCategories() {
-        CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(0);
-        categoriesFragment.setOnCategoryItemClickListener(this);
-        ActivityUtils.addChildFragment(this, R.id.searchContentFrame, categoriesFragment, "", false);
+    private void loadCategories() {
+        adapter = new CategoryRecyclerAdapter(getActivity());
+        adapter.setOnCategoryItemClickListener(this);
+        recyclerView.setAdapter(adapter);
+        request = ApiProvider.getAuthorizedApi().getCategoryAtLevel(1);
+        showLoading();
+        request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
+                if (!isAdded()) return;
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
+                        adapter.setData(response.body().getData());
+                    } else {
+
+                    }
+                } else {
+                    onFailure(call, null);
+                }
+                hideLoading();
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable throwable) {
+                if (!isAdded()) return;
+                hideLoading();
+            }
+        });
     }
 
     @OnClick(R.id.scanButton)
@@ -121,16 +161,21 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
         if (txt.startsWith("#")) {
             ProductActivity.show(getActivity(), StringUtils.toEnglishDigit(txt.replace("#", "")));
         } else {
-            SearchProductRequestModel searchReq = new SearchProductRequestModel();
-            searchReq.setTitle(searchInput.getText().toString());
-            CategoryActivity.show(getActivity(), searchReq);
+            CategoriesFilterActivity.show(getActivity(),searchInput.getText().toString());
         }
     }
 
     @Override
-    public void onCategoryClicked(CategoryModel categoryModel) {
-        Log.e("category clciked","....");
-        CategoriesFilterActivity.show(getActivity(),categoryModel);
+    public void onCategoryItemClick(CategoryModel model, int position) {
+        CategoriesFilterActivity.show(getActivity(), model);
+    }
+
+    private void showLoading(){
+        circularProgress.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoading(){
+        circularProgress.setVisibility(View.GONE);
     }
 
 }

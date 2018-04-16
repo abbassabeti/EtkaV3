@@ -4,7 +4,12 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/categoryRecyclerView"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ir.etkastores.app.ui.views.MessageView
+        android:id="@+id/messageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -12,14 +17,16 @@
         android:id="@+id/circularProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminateTint="@color/colorPrimary"
         android:indeterminateTintMode="src_atop"
-        android:visibility="gone" />
+        android:indeterminateTint="@color/colorPrimary"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
-    <ir.etkastores.app.ui.views.MessageView
-        android:id="@+id/messageView"
+    <ProgressBar
+        android:id="@+id/linearProgress"
+        style="@style/linearProgressStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

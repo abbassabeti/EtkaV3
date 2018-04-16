@@ -13,9 +13,9 @@ import ir.etkastores.app.data.ContactUsManager;
 
 public class IntentHelper {
 
-    public static void openWayTracer(Context context, double lat, double lon) {
+    public static void openWayTracer(Context context, double lat, double lon,String name) {
         try {
-            String uri = "geo:" + lat + "," + lon + "?q=";
+            String uri = "geo:" + lat + "," + lon + "?q=<"+lat+">,<"+lon+">("+name+")";
             context.startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
         } catch (Exception err) {
             showWeb(context, getGoogleMapLocationAddress(lat, lon));
