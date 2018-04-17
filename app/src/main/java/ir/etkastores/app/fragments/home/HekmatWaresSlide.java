@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.activities.HekmatProductsActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatRecyclerAdapter;
+import ir.etkastores.app.data.HekmatProductsManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.R;
@@ -28,7 +29,7 @@ import retrofit2.Response;
  * Created by Sajad on 12/2/17.
  */
 
-public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.OnHekmatItemClickListener {
+public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.OnHekmatItemClickListener, HekmatProductsManager.OnHekmatCallbacksListener {
 
     public static int TAB_POSITION_ID = 2;
 
@@ -51,9 +52,6 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
 
     private HekmatRecyclerAdapter adapter;
 
-    private Call<OauthResponse<List<HekmatModel>>> hekmatReq;
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,31 +72,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
     private void loadData() {
         showLoading();
         messageView.hide();
-        hekmatReq = ApiProvider.getAuthorizedApi().getHekmat();
-        hekmatReq.enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
-            @Override
-            public void onResponse(Call<OauthResponse<List<HekmatModel>>> call, Response<OauthResponse<List<HekmatModel>>> response) {
-                if (!isAdded()) return;
-                if (response.isSuccessful()) {
-                    if (response.body().isSuccessful()) {
-                        adapter.setItems(response.body().getData());
-                        isDataLoaded = true;
-                    } else {
-                        showErrorView(response.body().getMeta().getMessage());
-                    }
-                } else {
-                    onFailure(null, null);
-                }
-                hideLoading();
-            }
-
-            @Override
-            public void onFailure(Call<OauthResponse<List<HekmatModel>>> call, Throwable t) {
-                if (!isAdded()) return;
-                hideLoading();
-                showErrorView(getResources().getString(R.string.errorHappendInReceivingData));
-            }
-        });
+        HekmatProductsManager.getInstance().getProducts(this,null);
     }
 
     private void showLoading() {
@@ -133,6 +107,25 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
                 loadData();
             }
         });
+    }
+
+    @Override
+    public void onProductsLoaded(List<HekmatModel> products) {
+        if (!isAdded()) return;
+        hideLoading();
+        if (products != null && products.size()>0){
+            adapter.setItems(products);
+            isDataLoaded = true;
+        }else{
+            showErrorView(getResources().getString(R.string.thereIsNotResultAvailable));
+        }
+    }
+
+    @Override
+    public void onLoadFailure() {
+        if (!isAdded()) return;
+        hideLoading();
+        showErrorView(getResources().getString(R.string.errorHappendInReceivingData));
     }
 
 }

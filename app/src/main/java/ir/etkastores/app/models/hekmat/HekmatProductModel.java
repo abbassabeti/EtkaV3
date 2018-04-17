@@ -38,7 +38,7 @@ public class HekmatProductModel {
     private String distribution;
 
     @SerializedName("stores")
-    private List<Integer> stores;
+    private List<Long> stores;
 
     public String getTitle() {
         return title;
@@ -64,7 +64,7 @@ public class HekmatProductModel {
         return distribution;
     }
 
-    public List<Integer> getStores() {
+    public List<Long> getStores() {
         return stores;
     }
 
@@ -92,7 +92,7 @@ public class HekmatProductModel {
         this.distribution = distribution;
     }
 
-    public void setStores(List<Integer> stores) {
+    public void setStores(List<Long> stores) {
         this.stores = stores;
     }
 

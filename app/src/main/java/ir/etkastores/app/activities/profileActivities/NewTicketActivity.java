@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 
 public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
@@ -27,6 +28,8 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
     @BindView(R.id.bodyEt)
     EditText bodyEt;
+
+    private TicketRequestModel ticketRequestModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,12 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
     @OnClick(R.id.submitButton)
     public void onSubmitButtonClicked() {
+        ticketRequestModel = new TicketRequestModel();
+        ticketRequestModel.setTitle(titleEt.getText().toString());
+    }
+
+    private void submitRequest(){
 
     }
+
 }

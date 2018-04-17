@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,11 +19,15 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.data.HekmatProductsManager;
+import ir.etkastores.app.models.hekmat.HekmatModel;
+import ir.etkastores.app.models.hekmat.HekmatProductModel;
 import ir.etkastores.app.models.store.FeatureModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
@@ -84,6 +89,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         storeModel = new Gson().fromJson(getIntent().getStringExtra(STORE_KEY), StoreModel.class);
 
         toolbar.setActionListeners(this);
+
         fillViews();
     }
 

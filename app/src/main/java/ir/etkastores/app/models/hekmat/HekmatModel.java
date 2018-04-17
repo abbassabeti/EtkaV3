@@ -1,7 +1,9 @@
 package ir.etkastores.app.models.hekmat;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,5 +66,21 @@ public class HekmatModel {
 
     public List<HekmatProductModel> getProducts() {
         return products;
+    }
+
+    public HekmatModel getCopy(){
+        HekmatModel hekmatModel = new HekmatModel();
+        hekmatModel.id = id;
+        hekmatModel.title = title;
+        hekmatModel.stage = stage;
+        hekmatModel.kalaCode = kalaCode;
+        hekmatModel.startDate = startDate;
+        hekmatModel.endDate = endDate;
+        hekmatModel.imageUrl = imageUrl;
+        hekmatModel.products = new ArrayList<>();
+        for (HekmatProductModel hekmatProductModel : products){
+            hekmatModel.products.add(HekmatProductModel.fromJson(new Gson().toJson(hekmatProductModel)));
+        }
+        return hekmatModel;
     }
 }

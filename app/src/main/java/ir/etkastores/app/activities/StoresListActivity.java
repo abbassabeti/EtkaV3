@@ -121,7 +121,7 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
     public void onStoresFetchSuccess(List<StoreModel> stores) {
         List<StoreModel> items = new ArrayList<>();
         if (hekmatProductModel != null){
-            for (int id : hekmatProductModel.getStores()){
+            for (long id : hekmatProductModel.getStores()){
                 for (StoreModel store: stores){
                     if (store.getId() == id){
                         items.add(store);

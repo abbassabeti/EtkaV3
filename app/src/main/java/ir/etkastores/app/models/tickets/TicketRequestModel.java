@@ -22,6 +22,10 @@ public class TicketRequestModel {
     @SerializedName("StoreRef")
     private long storeRef;
 
+    public TicketRequestModel() {
+
+    }
+
     public TicketRequestModel(String title, String ticketType, long storeRef) {
         this.title = title;
         this.ticketType = ticketType;
