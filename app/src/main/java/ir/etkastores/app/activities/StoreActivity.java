@@ -2,11 +2,16 @@ package ir.etkastores.app.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,11 +23,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.models.store.FeatureModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.StorePagerSliderView;
+import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 import ir.etkastores.app.utils.IntentHelper;
 
@@ -121,6 +128,23 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
             }
         }
 
+        if (storeModel.getFeatures() != null && storeModel.getFeatures().size()>0){
+            TextView tv = new TextView(this);
+            tv.setText(R.string.featuresList);
+            tv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            tv.setGravity(Gravity.RIGHT);
+            int sidePadding = (int) (16 * Resources.getSystem().getDisplayMetrics().density);
+            int topBottomPadding = (int) (8 * Resources.getSystem().getDisplayMetrics().density);
+            tv.setPadding(sidePadding,topBottomPadding,sidePadding,topBottomPadding);
+            tv.setTextColor(ContextCompat.getColor(this,R.color.darkGray));
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,16f);
+            tv.setTypeface(FontUtils.getBoldTypeFace());
+            mainHolder.addView(tv);
+            for (FeatureModel featureModel : storeModel.getFeatures()){
+                addFeature(featureModel);
+            }
+        }
+
     }
 
     @Override
@@ -163,6 +187,13 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
                 IntentHelper.showDialer(StoreActivity.this, phoneNumber);
             }
         });
+        mainHolder.addView(view);
+    }
+
+    private void addFeature(FeatureModel featureModel){
+        View view = LayoutInflater.from(this).inflate(R.layout.store_feature_item, null, false);
+        TextView tv = (TextView) view.findViewById(R.id.featureTitle);
+        tv.setText(featureModel.getName()+" : "+featureModel.getValue());
         mainHolder.addView(view);
     }
 

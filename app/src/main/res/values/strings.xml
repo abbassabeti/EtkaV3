@@ -212,5 +212,6 @@
     <string name="errorInConnectingToServer">خطا در ارتباط با سرور، لطفا پس از مدتی از دوباره تلاش نمایید</string>
     <string name="showAsList">مشاهده به صورت لیست</string>
     <string name="count">تعداد</string>
+    <string name="featuresList">لیست امکانات:</string>
 
 </resources>

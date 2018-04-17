@@ -1,4 +1,4 @@
-package ir.etkastores.app.activities.categoriesFilter;
+package ir.etkastores.app.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
-import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.fragments.searchFragments.CategoriesFragment;
 import ir.etkastores.app.fragments.searchFragments.ProductsListFragment;
 import ir.etkastores.app.models.CategoryModel;

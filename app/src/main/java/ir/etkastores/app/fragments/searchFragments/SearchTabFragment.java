@@ -26,7 +26,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.activities.ScannerActivity;
 import ir.etkastores.app.BuildConfig;
-import ir.etkastores.app.activities.categoriesFilter.CategoriesFilterActivity;
+import ir.etkastores.app.activities.CategoriesFilterActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.OauthResponse;
