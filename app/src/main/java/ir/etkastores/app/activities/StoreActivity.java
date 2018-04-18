@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -25,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatHorizontalRecyclerListAdapter;
 import ir.etkastores.app.data.HekmatProductsManager;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.hekmat.HekmatProductModel;
@@ -77,6 +79,12 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     @BindView(R.id.managerInfoHolder)
     View managerInfoHolder;
+
+    @BindView(R.id.hekmatRecyclerView)
+    RecyclerView hekmatRecyclerView;
+
+    @BindView(R.id.hekmatItemsHolder)
+    View hekmatItemsHolder;
 
     private StoreModel storeModel;
 
@@ -150,6 +158,31 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
                 addFeature(featureModel);
             }
         }
+
+        HekmatProductsManager.getInstance().getProducts(new HekmatProductsManager.OnHekmatCallbacksListener() {
+
+            @Override
+            public void onProductsLoaded(List<HekmatModel> products) {
+                if (isFinishing()) return;
+                if (products == null || products.size() == 0) return;
+                hekmatItemsHolder.setVisibility(View.VISIBLE);
+                HekmatHorizontalRecyclerListAdapter adapter = new HekmatHorizontalRecyclerListAdapter(StoreActivity.this, new HekmatHorizontalRecyclerListAdapter.OnItemClickListener() {
+                    @Override
+                    public void OnHekmatItemClick(HekmatModel hekmatModel) {
+                        if (isFinishing()) return;
+                        HekmatProductsActivity.show(StoreActivity.this,hekmatModel);
+                    }
+                });
+                adapter.addItems(products);
+                hekmatRecyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onLoadFailure() {
+
+            }
+
+        }, Long.valueOf(storeModel.getId()));
 
     }
 
