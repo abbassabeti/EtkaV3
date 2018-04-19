@@ -70,6 +70,8 @@ dependencies {
         transitive = true;
     }
 
+    implementation 'com.google.android:flexbox:0.3.2'
+
     compile 'uk.co.chrisjenx:calligraphy:2.3.0'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.1'
     compile 'com.android.support:design:27.0.2'

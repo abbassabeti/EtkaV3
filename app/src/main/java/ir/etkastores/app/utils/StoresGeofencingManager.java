@@ -56,9 +56,9 @@ public class StoresGeofencingManager {
         if (geofences == null) {
             geofences = new ArrayList<>();
             for (StoreModel storeModel : StoresManager.getInstance().getStores()){
-                if (storeModel.isGeofencingEnabled()){
+                if (storeModel.isGeofenceEnabled()){
                     geofences.add(new Geofence.Builder()
-                            .setCircularRegion(storeModel.getLatitude(), storeModel.getLongitude(), storeModel.getGeofencingRadius())
+                            .setCircularRegion(storeModel.getLatitude(), storeModel.getLongitude(), storeModel.getGeofenceArea())
                             .setRequestId(String.valueOf(storeModel.getId()))
                             .setExpirationDuration(Geofence.NEVER_EXPIRE)
                             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)

@@ -14,7 +14,7 @@ public class EventsManager {
 
     public static void screenView(String screenName){
         try {
-            sendAdjustEvent("Screen "+screenName);
+            sendAdjustEvent(screenName);
             EtkaApp.getInstance().getGoogleAnalyticsTracker().setScreenName(screenName);
             EtkaApp.getInstance().getGoogleAnalyticsTracker().send(new HitBuilders.ScreenViewBuilder().build());
         }catch (Exception err){

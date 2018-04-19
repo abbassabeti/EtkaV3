@@ -3,6 +3,9 @@ package ir.etkastores.app.models.search;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Sajad on 12/25/17.
  */
@@ -30,7 +33,7 @@ public class SearchProductRequestModel {
     String title;
 
     @SerializedName("CategoryId")
-    Long categoryId;
+    List<Long> categoryId;
 
     @SerializedName("Sort")
     String sort;
@@ -41,8 +44,11 @@ public class SearchProductRequestModel {
     @SerializedName("Page")
     int page;
 
+
+
     public SearchProductRequestModel() {
         page = 1;
+        categoryId = new ArrayList<>();
     }
 
     public SearchProductRequestModel setTitle(String title) {
@@ -50,8 +56,8 @@ public class SearchProductRequestModel {
         return this;
     }
 
-    public SearchProductRequestModel setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public SearchProductRequestModel addCategoryId(Long categoryId) {
+        this.categoryId.add(categoryId);
         return this;
     }
 
@@ -70,16 +76,16 @@ public class SearchProductRequestModel {
         return this;
     }
 
+    public void setCategoryId(List<Long> categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public int getPage() {
         return page;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
     }
 
     public String getSort() {

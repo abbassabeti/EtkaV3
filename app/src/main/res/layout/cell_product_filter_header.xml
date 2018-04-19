@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/sortIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_filter_list_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/sortIcon"
+            android:gravity="right"
+            android:paddingRight="8dp"
+            android:text="@string/sorting"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall" />
+
+    </RelativeLayout>
+
+    <ir.etkastores.app.ui.views.FilterSortView
+        android:id="@+id/topRatedSortItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ir.etkastores.app.ui.views.FilterSortView
+        android:id="@+id/topOfferSortItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ir.etkastores.app.ui.views.FilterSortView
+        android:id="@+id/topSaleSortItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ir.etkastores.app.ui.views.FilterSortView
+        android:id="@+id/newestSortItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/darkGray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/filterIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_funnel_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/filterIcon"
+            android:gravity="right"
+            android:paddingRight="8dp"
+            android:text="@string/filtering"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/filterIcon"
+        android:gravity="right"
+        android:paddingRight="8dp"
+        android:text="@string/categoryOrdered"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeSmall" />
+
+    <EditText
+        android:id="@+id/categorySearchEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textSizeSmall"
+        android:background="@drawable/rect_round4dp_white"
+        android:padding="4dp"
+        android:hint="@string/searchCategory"
+        android:lines="1"
+        android:textColor="@color/darkGray"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:gravity="right"/>
+
+
+</LinearLayout>

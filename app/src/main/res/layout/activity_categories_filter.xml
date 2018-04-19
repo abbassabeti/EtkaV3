@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="ir.etkastores.app.activities.CategoriesFilterActivity">
 
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:showBack="true"
-        app:title="@string/search"/>
+        app:title="@string/search" />
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"
@@ -27,16 +27,21 @@
             <FrameLayout
                 android:id="@+id/categoriesFrame"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="240dp"
+            android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/white"
-            android:layout_gravity="left">
+            android:layout_gravity="left"
+            android:background="#F1F1F1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/filterRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

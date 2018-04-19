@@ -3,6 +3,7 @@
 
     <string name="home">خانه</string>
     <string name="search">جستجو</string>
+    <string name="searchCategory">جستجوی دسته بندی...</string>
     <string name="map">نقشه</string>
     <string name="profile">پروفایل</string>
     <string name="registerWithyourEmail">با ایمیل خود ثبت نام کنید</string>
@@ -214,5 +215,6 @@
     <string name="showAsList">مشاهده به صورت لیست</string>
     <string name="count">تعداد</string>
     <string name="featuresList">لیست امکانات:</string>
+    <string name="categoryOrdered">بر اساس دسته بندی</string>
 
 </resources>

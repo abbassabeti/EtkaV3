@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.adapters.recyclerViewAdapters.productFilter.ProductFilterCategoryViewHolder;
+import ir.etkastores.app.adapters.recyclerViewAdapters.productFilter.ProductFilterListRecyclerAdapter;
 import ir.etkastores.app.fragments.searchFragments.CategoriesFragment;
 import ir.etkastores.app.fragments.searchFragments.ProductsListFragment;
 import ir.etkastores.app.models.CategoryModel;
@@ -43,6 +46,11 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
 
+    @BindView(R.id.filterRecyclerView)
+    RecyclerView recyclerView;
+
+    private ProductFilterListRecyclerAdapter filterAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +80,9 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
             categoriesFragment.setOnCategoryItemClickListener(this);
             ActivityUtils.addFragment(this,R.id.categoriesFrame,categoriesFragment,"CATEGORY_FILTER",false);
         }
+
+        filterAdapter = new ProductFilterListRecyclerAdapter(this);
+        recyclerView.setAdapter(filterAdapter);
     }
 
     @Override
@@ -96,7 +107,7 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
             addFragmentToBackStack(categoriesFragment);
         }else{
             SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
-            searchProductRequestModel.setCategoryId(categoryModel.getId());
+            searchProductRequestModel.addCategoryId(categoryModel.getId());
             ProductsListFragment productsListFragment = ProductsListFragment.newInstance(searchProductRequestModel);
             addFragmentToBackStack(productsListFragment);
         }
