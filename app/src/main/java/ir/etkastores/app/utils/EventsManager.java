@@ -29,7 +29,7 @@ public class EventsManager {
 
     private static void sendAdjustEvent(String name){
         try {
-            AdjustEvent event = new AdjustEvent(name);
+            AdjustEvent event = new AdjustEvent(name.toLowerCase());
             Adjust.trackEvent(event);
         }catch (Exception err){
             err.printStackTrace();

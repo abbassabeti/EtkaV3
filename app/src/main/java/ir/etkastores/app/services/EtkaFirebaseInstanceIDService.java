@@ -2,6 +2,7 @@ package ir.etkastores.app.services;
 
 import android.util.Log;
 
+import com.adjust.sdk.Adjust;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -15,6 +16,7 @@ public class EtkaFirebaseInstanceIDService extends FirebaseInstanceIdService {
     public void onTokenRefresh() {
         super.onTokenRefresh();
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Adjust.setPushToken(refreshedToken);
         Log.d("FCM", "Refreshed token: " + refreshedToken);
     }
 }
