@@ -190,7 +190,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         storeName.setText(selectedStore.getName());
         storeInfoHolder.setVisibility(View.VISIBLE);
         selectedMarker = marker;
-        marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker_35dp));
+        marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker));
         return false;
     }
 
