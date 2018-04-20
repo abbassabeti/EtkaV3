@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.etkastores.app.R;
-import ir.etkastores.app.activities.profileActivities.FactorActivity;
 
 /**
  * Created by garshasbi on 4/19/18.
