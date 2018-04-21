@@ -20,8 +20,8 @@ import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.GalleryActivity;
 import ir.etkastores.app.activities.LoginRegisterActivity;
+import ir.etkastores.app.activities.NewsActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
-import ir.etkastores.app.activities.profileActivities.HekmatActivity;
 import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
 import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
 import ir.etkastores.app.activities.profileActivities.OtherPagesActivity;
@@ -107,23 +107,25 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick() {
 
-        GalleryItemsModel galleryItemsModel = new GalleryItemsModel("گالری تست", new ArrayList<String>() {
-            {
-                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
-                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
-                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
-                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
-                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
-                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
-            }
-        });
-
-        GalleryActivity.show(getActivity(),galleryItemsModel);
+//        GalleryItemsModel galleryItemsModel = new GalleryItemsModel("گالری تست", new ArrayList<String>() {
+//            {
+//                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
+//                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
+//                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
+//                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
+//                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
+//                add("https://www.iranflowerdelivery.com/wp-content/uploads/2017/08/2-37a.jpg");
+//            }
+//        });
+//
+//        GalleryActivity.show(getActivity(),galleryItemsModel);
 //        if (ProfileManager.isGuest()) {
 //            showLoginRequiredDialog();
 //        } else {
 //            HekmatActivity.show(getActivity());
 //        }
+
+        NewsActivity.show(getActivity(),13);
     }
 
     @OnClick(R.id.scoreMenu)
