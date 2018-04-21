@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -113,7 +114,10 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
         if (mode == OPEN_STORE_MODE) {
             StoreActivity.show(this,store);
         } else if (mode == SELECT_STORE_MODE) {
-
+            Intent intent = new Intent();
+            intent.putExtra(SELECTED_STORE,new Gson().toJson(store));
+            setResult(RESULT_OK,intent);
+            finish();
         }
     }
 
@@ -145,7 +149,8 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
     public void onBackPressed() {
         super.onBackPressed();
         if (mode == SELECT_STORE_MODE) {
-
+            setResult(RESULT_CANCELED);
+            finish();
         }
     }
 

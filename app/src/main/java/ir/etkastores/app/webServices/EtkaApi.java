@@ -15,7 +15,6 @@ import ir.etkastores.app.models.search.ProductSearchResponseModel;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.models.hekmat.HekmatModel;
-import ir.etkastores.app.models.home.OffersResponseModel;
 import ir.etkastores.app.models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
 import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
@@ -130,7 +129,6 @@ public interface EtkaApi {
     //22
     @GET(ApiStatics.NEWS)
     Call<OauthResponse<NewsItem>> getNews(@Query("id") long id);
-
 
 
 }

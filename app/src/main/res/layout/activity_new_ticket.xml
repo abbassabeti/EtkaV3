@@ -34,6 +34,38 @@
             android:orientation="vertical"
             android:padding="8dp">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/ticketTypeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@string/ticketType"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeSmall" />
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/ticketTypeSelectSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/ticketTypeTitle"
+                    android:background="@color/transparent" />
+
+            </RelativeLayout>
+
+            <VideoView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
             <EditText
                 android:id="@+id/titleEt"
                 android:layout_width="match_parent"
@@ -43,7 +75,8 @@
                 android:hint="@string/title"
                 android:lines="1"
                 android:padding="8dp"
-                android:textSize="@dimen/textSizeMedium" />
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeSmall" />
 
             <VideoView
                 android:layout_width="match_parent"
@@ -58,7 +91,8 @@
                 android:gravity="right"
                 android:hint="@string/requestText"
                 android:padding="8dp"
-                android:textSize="@dimen/textSizeMedium" />
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeSmall" />
 
         </LinearLayout>
 

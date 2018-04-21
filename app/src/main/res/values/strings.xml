@@ -216,5 +216,7 @@
     <string name="count">تعداد</string>
     <string name="featuresList">لیست امکانات:</string>
     <string name="categoryOrdered">بر اساس دسته بندی</string>
+    <string name="ticketType">نوع درخواست:</string>
+    <string name="productRequest">درخواست کالا</string>
 
 </resources>
