@@ -6,10 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.survey.QuestionModel;
@@ -52,13 +55,19 @@ public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     class QuestionViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.questionTv)
+        TextView question;
+
+        @BindView(R.id.answersHolder)
+        LinearLayout answersHolder;
+
         public QuestionViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(QuestionModel question) {
-
+        public void bind(QuestionModel q) {
+            question.setText(q.getText());
         }
 
     }

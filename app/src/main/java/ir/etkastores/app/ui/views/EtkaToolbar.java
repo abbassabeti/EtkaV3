@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,6 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.R;
+import ir.etkastores.app.activities.profileActivities.FAQActivity;
+import ir.etkastores.app.activities.profileActivities.FactorActivity;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -31,6 +34,9 @@ public class EtkaToolbar extends Toolbar {
 
     @BindView(R.id.toolbarSettingButton)
     AppCompatImageView settingButton;
+
+    @BindView(R.id.toolbarMenuButton)
+    AppCompatImageView menuButton;
 
     @BindView(R.id.toolbarNewsButton)
     View newsButton;
@@ -64,6 +70,7 @@ public class EtkaToolbar extends Toolbar {
             showMoreButton(a.getBoolean(R.styleable.EtkaToolbar_showMoreButton, false));
             showSettingButton(a.getBoolean(R.styleable.EtkaToolbar_showSettingButton, false));
             showNewsButton(a.getBoolean(R.styleable.EtkaToolbar_showNewsButton, false));
+            showMenu(a.getBoolean(R.styleable.EtkaToolbar_showMenuButton,false));
             a.recycle();
         }
     }
@@ -84,8 +91,21 @@ public class EtkaToolbar extends Toolbar {
     }
 
     @OnClick(R.id.toolbarNewsButton)
-    void onNewsButtonClick(){
+    void onNewsButtonClick() {
         if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.NEWS_BUTTON);
+    }
+
+    @OnClick(R.id.toolbarMenuButton)
+    void onMenuButtonClick(){
+        if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.MENU_BUTTON);
+    }
+
+    public void showMenu(boolean state) {
+        if (state) {
+            menuButton.setVisibility(VISIBLE);
+        } else {
+            menuButton.setVisibility(GONE);
+        }
     }
 
     public void showBack(boolean state) {
@@ -135,7 +155,8 @@ public class EtkaToolbar extends Toolbar {
     public interface EtkaToolbarActionsListener {
         int MORE_BUTTON = 1;
         int SETTING_BUTTON = 2;
-        int NEWS_BUTTON = 3 ;
+        int NEWS_BUTTON = 3;
+        int MENU_BUTTON = 4;
 
         void onToolbarBackClick();
 

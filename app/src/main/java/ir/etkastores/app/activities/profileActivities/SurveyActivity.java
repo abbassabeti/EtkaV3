@@ -96,6 +96,7 @@ public class SurveyActivity extends BaseActivity implements EtkaToolbar.EtkaTool
                 if (response.isSuccessful()){
                     if (response.body().isSuccessful()){
                         adapter.addItems(response.body().getData().getQuestions());
+                        toolbar.setTitle(response.body().getData().getTitle());
                     }else{
                         boolean showRetry = true;
                         if (response.body().getMeta().getStatusCode() == 400) showRetry = false;
