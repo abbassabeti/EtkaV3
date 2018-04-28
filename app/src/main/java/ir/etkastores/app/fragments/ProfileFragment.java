@@ -29,6 +29,7 @@ import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
 import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
+import ir.etkastores.app.activities.profileActivities.SurveyActivity;
 import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
@@ -174,9 +175,18 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         SupportActivity.show(getActivity(), SupportActivity.TICKET_LIST);
     }
 
+    @OnClick(R.id.surveyMenu)
+    public void onSurveyClick(){
+        SurveyActivity.show(getActivity());
+    }
+
     @Override
     public void onToolbarBackClick() {
-        getActivity().onBackPressed();
+        if (ProfileManager.isGuest()) {
+            showLoginRequiredDialog();
+        } else {
+            getActivity().onBackPressed();
+        }
     }
 
     @Override

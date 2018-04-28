@@ -10,17 +10,17 @@ import java.util.List;
 
 public class SurveyModel {
 
-    @SerializedName("Title")
+    @SerializedName("title")
     private String title;
 
-    @SerializedName("Questions")
-    private List<Question> questions;
+    @SerializedName("questions")
+    private List<QuestionModel> questions;
 
     public String getTitle() {
         return title;
     }
 
-    public List<Question> getQuestions() {
+    public List<QuestionModel> getQuestions() {
         return questions;
     }
 

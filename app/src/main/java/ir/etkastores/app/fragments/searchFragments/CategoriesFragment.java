@@ -103,7 +103,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
                     if (response.body().isSuccessful()) {
                         adapter.setData(response.body().getData());
                     } else {
-
+                        showError(response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(null, null);

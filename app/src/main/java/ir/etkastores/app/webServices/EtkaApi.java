@@ -19,6 +19,7 @@ import ir.etkastores.app.models.profile.RegisterUserRequestModel;
 import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
 import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
 import ir.etkastores.app.models.store.StoreModel;
+import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
@@ -129,6 +130,10 @@ public interface EtkaApi {
     //22
     @GET(ApiStatics.NEWS)
     Call<OauthResponse<NewsItem>> getNews(@Query("id") long id);
+
+    //23
+    @GET(ApiStatics.SURVEY)
+    Call<OauthResponse<SurveyModel>> getSurveys();
 
 
 }

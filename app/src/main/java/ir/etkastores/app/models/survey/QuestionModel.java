@@ -8,15 +8,15 @@ import java.util.List;
  * Created by garshasbi on 4/20/18.
  */
 
-public class Question {
+public class QuestionModel {
 
-    @SerializedName("Id")
+    @SerializedName("id")
     private long id;
 
-    @SerializedName("Text")
+    @SerializedName("text")
     private String text;
 
-    @SerializedName("Answers")
+    @SerializedName("answers")
     private List<Answer> answers;
 
     public long getId() {
@@ -29,5 +29,17 @@ public class Question {
 
     public List<Answer> getAnswers() {
         return answers;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }

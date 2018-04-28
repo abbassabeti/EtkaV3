@@ -1,7 +1,5 @@
 package ir.etkastores.app.webServices;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,8 +23,6 @@ import okio.GzipSource;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.google.zxing.common.CharacterSetECI.UTF8;
 
 
 /**

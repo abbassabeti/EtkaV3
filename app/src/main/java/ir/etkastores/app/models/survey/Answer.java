@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Answer {
 
-    @SerializedName("Id")
+    @SerializedName("id")
     private long id;
 
-    @SerializedName("Text")
+    @SerializedName("text")
     private String text;
 
     public long getId() {
@@ -22,4 +22,11 @@ public class Answer {
         return text;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }

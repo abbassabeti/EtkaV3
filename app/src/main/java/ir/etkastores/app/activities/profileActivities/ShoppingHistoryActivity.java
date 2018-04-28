@@ -19,6 +19,7 @@ import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.R;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.webServices.ApiProvider;
@@ -112,12 +113,8 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
                             adapter.setLoadMoreEnabled(true);
                         }
                     } else {
-                        messageView.show(R.drawable.ic_warning_orange_48dp,
-                                response.body().getMeta().getMessage(),
-                                getResources().getString(R.string.retry),
-                                ShoppingHistoryActivity.this);
+                        showErrorMessageView(response.body().getMeta().getMessage(),true);
                     }
-
                 } else {
                     onFailure(call, null);
                 }
@@ -127,11 +124,37 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
             @Override
             public void onFailure(Call<OauthResponse<List<FactorModel>>> call, Throwable t) {
                 if (isFinishing()) return;
-                messageView.show(R.drawable.ic_warning_orange_48dp,
-                        getResources().getString(R.string.errorHappendInReceivingData),
-                        getResources().getString(R.string.retry),
-                        ShoppingHistoryActivity.this);
+                if (adapter.getItemCount() == 0){
+                    showErrorMessageView(getResources().getString(R.string.errorHappendInReceivingData),true);
+                }else{
+                    showErrorMessageDialog();
+                }
                 hideLoading();
+            }
+        });
+    }
+
+    private void showErrorMessageView(String message, boolean showRetry){
+        String retry = getResources().getString(R.string.retry);
+        if (!showRetry) retry = null;
+        messageView.show(R.drawable.ic_warning_orange_48dp, message, retry, this);
+    }
+
+    private void showErrorMessageDialog(){
+        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error),getResources().getString(R.string.errorHappendInReceivingData));
+        messageDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (isFinishing()) return;
+                if (button == RIGHT_BUTTON){
+                    loadData();
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
             }
         });
     }

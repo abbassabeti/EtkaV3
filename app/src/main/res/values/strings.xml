@@ -218,5 +218,7 @@
     <string name="categoryOrdered">بر اساس دسته بندی</string>
     <string name="ticketType">نوع درخواست:</string>
     <string name="productRequest">درخواست کالا</string>
+    <string name="survey">نظرسنجی</string>
+    <string name="submit">ثبت</string>
 
 </resources>
