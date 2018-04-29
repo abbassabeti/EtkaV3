@@ -53,6 +53,8 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
     private FactorRequestModel requestModel;
     private Call<OauthResponse<List<FactorModel>>> factorRequest;
 
+    int page = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +93,7 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
     private void loadData() {
         showLoading();
         messageView.hide();
-        requestModel.setSkip(adapter.getItemCount());
+        requestModel.setSkip(page);
         factorRequest = ApiProvider.getAuthorizedApi().getFactor(requestModel);
         factorRequest.enqueue(new Callback<OauthResponse<List<FactorModel>>>() {
             @Override
@@ -111,6 +113,7 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
                         }
                         if (response.body().getData().size() == requestModel.getTake()) {
                             adapter.setLoadMoreEnabled(true);
+                            page++;
                         }
                     } else {
                         showErrorMessageView(response.body().getMeta().getMessage(),true);

@@ -55,7 +55,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
     private Call<OauthResponse<List<ProductModel>>> savedProductsReq;
     private Call<OauthResponse<Long>> deleteProductReq;
     private ProductsRecyclerAdapter adapter;
-    AlertDialog loadingDialog;
+    private AlertDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
