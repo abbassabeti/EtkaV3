@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +23,7 @@ import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
 
-public class CategoriesFilterActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoriesFragment.OnCategoryItemClickListener {
+public class CategoriesFilterActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoriesFragment.OnCategoryItemClickListener, ProductFilterListRecyclerAdapter.FilterCallback {
 
     private final static String ID = "ID";
     private final static String SEARCH_TERM = "SEARCH_TERM";
@@ -85,6 +88,7 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
 
         filterAdapter = new ProductFilterListRecyclerAdapter(this);
         recyclerView.setAdapter(filterAdapter);
+        filterAdapter.setFilterCallback(this);
     }
 
     @Override
@@ -137,6 +141,16 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     private void unlockDrawer(){
         toolbar.showMenu(true);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    @Override
+    public void onSelectSort(int sort) {
+        Log.e("selected sort is",""+sort);
+    }
+
+    @Override
+    public void onSelectCategory(List<Integer> categories) {
+
     }
 
 }

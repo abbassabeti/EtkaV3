@@ -2,6 +2,7 @@ package ir.etkastores.app.adapters.recyclerViewAdapters.productFilter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -23,6 +24,7 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     private Context context;
     private LayoutInflater inflater;
     private List<ProductFilterItem> items;
+    private FilterCallback callback;
 
     public ProductFilterListRecyclerAdapter(Context context) {
         this.context = context;
@@ -51,20 +53,6 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
         items.add(new ProductFilterItem(new CategoryItem("بیسکوئیت",1,true)));
         items.add(new ProductFilterItem(new CategoryItem("شکولات",1,false)));
         items.add(new ProductFilterItem(new CategoryItem("بیل",1,false)));
-        items.add(new ProductFilterItem(new CategoryItem("کلنگ",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("...",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("خبر",1,false)));
-        items.add(new ProductFilterItem(new CategoryItem("اتکا",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("تست",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("سجاد",1,false)));
-        items.add(new ProductFilterItem(new CategoryItem("پیام",1, false)));
-        items.add(new ProductFilterItem(new CategoryItem("هادی",1,false)));
-        items.add(new ProductFilterItem(new CategoryItem("کیک",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("بیسکوئیت",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("شکولات",1,false)));
-        items.add(new ProductFilterItem(new CategoryItem("کیک",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("بیسکوئیت",1,true)));
-        items.add(new ProductFilterItem(new CategoryItem("شکولات",1,false)));
     }
 
     @Override
@@ -75,7 +63,12 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         if (i == ProductFilterItem.HEADER){
-            return new ProductFilterHeaderViewHolder(inflater.inflate(R.layout.cell_product_filter_header,viewGroup,false));
+            return new ProductFilterHeaderViewHolder(inflater.inflate(R.layout.cell_product_filter_header, viewGroup, false)) {
+                @Override
+                void onSearched(String searchedKeyword) {
+                    filterCategory(searchedKeyword);
+                }
+            };
         }else{
             return new ProductFilterCategoryViewHolder(inflater.inflate(R.layout.cell_product_filter_category,viewGroup,false));
         }
@@ -84,7 +77,7 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder.getItemViewType() == ProductFilterItem.HEADER){
-            ((ProductFilterHeaderViewHolder) viewHolder).bind(items.get(i));
+            ((ProductFilterHeaderViewHolder) viewHolder).bind(items.get(i),callback);
         }else{
             ((ProductFilterCategoryViewHolder) viewHolder).bind(items.get(i));
         }
@@ -102,6 +95,23 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
         layoutManager.setFlexDirection(FlexDirection.ROW);
         layoutManager.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    public void setFilterCallback(FilterCallback filterCallback){
+        this.callback = filterCallback;
+    }
+
+    private void filterCategory(String s){
+        Log.e("searched keyword is",""+s);
+    }
+
+    public interface FilterCallback{
+        int TOP_OFFER_SORT = 1;
+        int TOP_RATE_SORT = 2;
+        int TOP_SALE_SORT = 3;
+        int NEWEST_SORT = 4;
+        void onSelectSort(int sort);
+        void onSelectCategory(List<Integer> categories);
     }
 
 }

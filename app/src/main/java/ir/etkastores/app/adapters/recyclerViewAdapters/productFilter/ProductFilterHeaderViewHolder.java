@@ -7,16 +7,16 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
-import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
 import ir.etkastores.app.ui.views.FilterSortView;
 
 /**
  * Created by garshasbi on 4/19/18.
  */
 
-public class ProductFilterHeaderViewHolder extends RecyclerView.ViewHolder {
+public abstract class ProductFilterHeaderViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.topRatedSortItem)
     FilterSortView topRateSortItem;
@@ -33,6 +33,8 @@ public class ProductFilterHeaderViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.categorySearchEt)
     EditText categorySearchEt;
 
+    private ProductFilterListRecyclerAdapter.FilterCallback callback;
+
 
     public ProductFilterHeaderViewHolder(View itemView) {
         super(itemView);
@@ -44,8 +46,8 @@ public class ProductFilterHeaderViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void bind(ProductFilterItem filterItem) {
-
+    public void bind(ProductFilterItem filterItem, ProductFilterListRecyclerAdapter.FilterCallback callback) {
+        this.callback = callback;
     }
 
     @OnClick({R.id.topRatedSortItem, R.id.topOfferSortItem, R.id.topSaleSortItem, R.id.newestSortItem})
@@ -59,20 +61,32 @@ public class ProductFilterHeaderViewHolder extends RecyclerView.ViewHolder {
         switch (view.getId()) {
             case R.id.topRatedSortItem:
                 topRateSortItem.setSelect(true);
+                if (callback != null) callback.onSelectSort(ProductFilterListRecyclerAdapter.FilterCallback.TOP_RATE_SORT);
                 break;
 
             case R.id.topOfferSortItem:
                 topOfferSortItem.setSelect(true);
+                if (callback != null) callback.onSelectSort(ProductFilterListRecyclerAdapter.FilterCallback.TOP_OFFER_SORT);
                 break;
 
             case R.id.topSaleSortItem:
                 topSaleSortItem.setSelect(true);
+                if (callback != null) callback.onSelectSort(ProductFilterListRecyclerAdapter.FilterCallback.TOP_SALE_SORT);
                 break;
 
             case R.id.newestSortItem:
                 newestSortItem.setSelect(true);
+                if (callback != null) callback.onSelectSort(ProductFilterListRecyclerAdapter.FilterCallback.NEWEST_SORT);
                 break;
         }
+
     }
+
+    @OnTextChanged(R.id.categorySearchEt)
+    public void OnSearchText(CharSequence s){
+        onSearched(s.toString());
+    }
+
+    abstract void onSearched(String searchedKeyword);
 
 }
