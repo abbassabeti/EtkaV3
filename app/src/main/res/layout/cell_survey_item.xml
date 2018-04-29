@@ -20,16 +20,17 @@
             android:id="@+id/questionTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/darkGray"
-            android:textSize="@dimen/textSizeMedium"
+            android:gravity="right"
             android:paddingBottom="8dp"
             android:paddingRight="8dp"
-            android:gravity="right"/>
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeMedium" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/darkGray"/>
+            android:layout_marginBottom="2dp"
+            android:background="@color/darkGray" />
 
         <LinearLayout
             android:id="@+id/answersHolder"
