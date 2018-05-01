@@ -27,6 +27,7 @@
             android:textSize="@dimen/textSizeMedium" />
 
         <View
+            android:id="@+id/dividerView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginBottom="2dp"
@@ -39,6 +40,17 @@
             android:orientation="vertical">
 
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/userCommentEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|right"
+            android:lines="3"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall"
+            android:background="@drawable/rect_trans_bordered_gray"
+            android:padding="8dp"/>
 
     </LinearLayout>
 

@@ -1,7 +1,5 @@
 package ir.etkastores.app.models.survey;
 
-import android.view.View;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -22,6 +20,9 @@ public class QuestionModel {
     private List<Answer> answers;
 
     private long answerId;
+
+    private boolean isUserComment;
+    private String userCommentText;
 
     public long getId() {
         return id;
@@ -54,4 +55,21 @@ public class QuestionModel {
     public void setAnswerId(long answerId) {
         this.answerId = answerId;
     }
+
+    public boolean isUserComment() {
+        return isUserComment;
+    }
+
+    public void setUserComment(boolean userComment) {
+        isUserComment = userComment;
+    }
+
+    public String getUserCommentText() {
+        return userCommentText;
+    }
+
+    public void setUserCommentText(String userCommentText) {
+        this.userCommentText = userCommentText;
+    }
+
 }

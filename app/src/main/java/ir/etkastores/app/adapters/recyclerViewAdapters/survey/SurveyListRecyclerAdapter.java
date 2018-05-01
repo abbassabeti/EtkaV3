@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnTextChanged;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.survey.Answer;
 import ir.etkastores.app.models.survey.QuestionModel;
@@ -52,6 +55,10 @@ public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
 
     public void addItems(List<QuestionModel> items) {
         this.items.addAll(items);
+        QuestionModel commentQuestion = new QuestionModel();
+        commentQuestion.setUserComment(true);
+        commentQuestion.setText(EtkaApp.getInstance().getResources().getString(R.string.moreDetails));
+        this.items.add(commentQuestion);
         notifyItemInserted(items.size());
     }
 
@@ -65,6 +72,12 @@ public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         @BindView(R.id.answersHolder)
         LinearLayout answersHolder;
 
+        @BindView(R.id.userCommentEt)
+        EditText userCommentEt;
+
+        @BindView(R.id.dividerView)
+        View dividerView;
+
         private List<View> answerViews;
         private QuestionModel questionModel;
 
@@ -74,27 +87,42 @@ public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         }
 
         public void bind(QuestionModel q) {
-            question.setText(q.getText());
-            answersHolder.removeAllViews();
-            List<View> ans = new ArrayList<>();
             questionModel = q;
-            for (Answer answer : q.getAnswers()) {
-                View view = inflater.inflate(R.layout.survey_answer_item, null, false);
-                TextView tv = (TextView) view.findViewById(R.id.tv);
-                tv.setText(bulletChar + " " + answer.getText());
-                view.setOnClickListener(this);
-                view.setTag(String.valueOf(answer.getId()));
-                if (questionModel.getAnswerId() == answer.getId()){
-                    tv.setTextColor(ContextCompat.getColor(context, R.color.white));
-                    view.setBackgroundResource(R.drawable.rec_them_round4dp);
-                }else{
-                    tv.setTextColor(ContextCompat.getColor(context, R.color.darkGray));
-                    view.setBackgroundResource(R.color.transparent);
+            question.setText(q.getText());
+            if (q.isUserComment()) {
+                answersHolder.setVisibility(View.GONE);
+                userCommentEt.setVisibility(View.VISIBLE);
+                userCommentEt.setText(q.getUserCommentText());
+                dividerView.setVisibility(View.GONE);
+            } else {
+                dividerView.setVisibility(View.VISIBLE);
+                userCommentEt.setVisibility(View.GONE);
+                answersHolder.setVisibility(View.VISIBLE);
+                answersHolder.removeAllViews();
+                List<View> ans = new ArrayList<>();
+                for (Answer answer : q.getAnswers()) {
+                    View view = inflater.inflate(R.layout.survey_answer_item, null, false);
+                    TextView tv = (TextView) view.findViewById(R.id.tv);
+                    tv.setText(bulletChar + " " + answer.getText());
+                    view.setOnClickListener(this);
+                    view.setTag(String.valueOf(answer.getId()));
+                    if (questionModel.getAnswerId() == answer.getId()) {
+                        tv.setTextColor(ContextCompat.getColor(context, R.color.white));
+                        view.setBackgroundResource(R.drawable.rec_them_round4dp);
+                    } else {
+                        tv.setTextColor(ContextCompat.getColor(context, R.color.darkGray));
+                        view.setBackgroundResource(R.color.transparent);
+                    }
+                    ans.add(view);
+                    answersHolder.addView(view);
                 }
-                ans.add(view);
-                answersHolder.addView(view);
+                answerViews = ans;
             }
-            answerViews = ans;
+        }
+
+        @OnTextChanged(R.id.userCommentEt)
+        public void onTextChanged(CharSequence charSequence) {
+            questionModel.setUserCommentText(charSequence.toString());
         }
 
         @Override
