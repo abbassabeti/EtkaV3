@@ -45,4 +45,8 @@ public class CategoryItem {
         isSelected = selected;
     }
 
+    public CategoryItem getCopy(){
+        return new CategoryItem(String.valueOf(title),id,isSelected);
+    }
+
 }

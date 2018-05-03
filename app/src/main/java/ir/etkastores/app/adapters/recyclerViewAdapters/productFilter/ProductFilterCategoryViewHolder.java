@@ -23,7 +23,7 @@ public class ProductFilterCategoryViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this,itemView);
     }
 
-    public void bind(final ProductFilterItem filterItem){
+    public void bind(final ProductFilterItem filterItem, final OnCategoryClickListener callback){
         title.setText(filterItem.getCategoryItem().getTitle());
         setState(filterItem.getCategoryItem());
         title.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +31,7 @@ public class ProductFilterCategoryViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 filterItem.getCategoryItem().toggle();
                 setState(filterItem.getCategoryItem());
+                if (callback != null) callback.onCategorySelect(filterItem.getCategoryItem());
             }
         });
     }
@@ -43,6 +44,10 @@ public class ProductFilterCategoryViewHolder extends RecyclerView.ViewHolder {
             title.setBackgroundColor(ContextCompat.getColor(itemView.getContext(),R.color.white));
             title.setTextColor(ContextCompat.getColor(itemView.getContext(),R.color.darkGray));
         }
+    }
+
+    public interface OnCategoryClickListener{
+        void onCategorySelect(CategoryItem categoryItem);
     }
 
 }

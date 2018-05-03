@@ -165,7 +165,7 @@
         <activity
             android:name=".activities.CategoriesFilterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".activities.profileActivities.SurveyActivity"
             android:screenOrientation="portrait"
