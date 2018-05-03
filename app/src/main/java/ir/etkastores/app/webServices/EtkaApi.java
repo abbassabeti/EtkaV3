@@ -20,6 +20,7 @@ import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
 import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.survey.SurveyModel;
+import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
@@ -134,6 +135,10 @@ public interface EtkaApi {
     //23
     @GET(ApiStatics.SURVEY)
     Call<OauthResponse<SurveyModel>> getSurveys();
+
+    //24
+    @POST(ApiStatics.SURVEY)
+    Call<OauthResponse<String>> submitSurvey(@Body SurveySubmitRequestModel requestModel);
 
 
 }

@@ -221,5 +221,7 @@
     <string name="survey">نظرسنجی</string>
     <string name="submit">ثبت</string>
     <string name="moreDetails">توضیحات:</string>
+    <string name="surveySubmitSuccessfully">نظر سنجی با موفقیت ثبت شد.</string>
+    <string name="errorInSubmitSurvey">خطا در ارسال اطلاعات، از دوباره تلاش کنید.</string>
 
 </resources>

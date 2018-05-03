@@ -53,6 +53,10 @@ public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         return items.size();
     }
 
+    public List<QuestionModel> getItems(){
+        return items;
+    }
+
     public void addItems(List<QuestionModel> items) {
         this.items.addAll(items);
         QuestionModel commentQuestion = new QuestionModel();

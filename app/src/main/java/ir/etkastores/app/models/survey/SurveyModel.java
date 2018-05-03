@@ -10,6 +10,9 @@ import java.util.List;
 
 public class SurveyModel {
 
+    @SerializedName("id")
+    private int id;
+
     @SerializedName("title")
     private String title;
 
@@ -24,4 +27,7 @@ public class SurveyModel {
         return questions;
     }
 
+    public int getId() {
+        return id;
+    }
 }
