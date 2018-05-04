@@ -14,7 +14,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
-import ir.etkastores.app.adapters.recyclerViewAdapters.productFilter.CategoryItem;
+import ir.etkastores.app.models.CategoryModel;
 
 /**
  * Created by garshasbi on 4/19/18.
@@ -31,9 +31,9 @@ public class FilterSortView extends CardView {
     @BindView(R.id.holder)
     RelativeLayout holder;
 
-    private CategoryItem categoryItem;
+    private CategoryModel categoryItem;
 
-    public FilterSortView(@NonNull Context context,CategoryItem categoryItem) {
+    public FilterSortView(@NonNull Context context,CategoryModel categoryItem) {
         super(context);
         this.categoryItem = categoryItem;
         init();
@@ -68,11 +68,11 @@ public class FilterSortView extends CardView {
         }
     }
 
-    public CategoryItem getCategoryItem() {
+    public CategoryModel getCategoryItem() {
         return categoryItem;
     }
 
-    public void setCategoryItem(CategoryItem categoryItem) {
+    public void setCategoryItem(CategoryModel categoryItem) {
         this.categoryItem = categoryItem;
         title.setText(categoryItem.getTitle());
         setSelect(categoryItem.isSelected());

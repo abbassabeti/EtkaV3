@@ -210,9 +210,13 @@ public class MessageDialog extends BaseDialog {
     }
 
     public void show(FragmentManager fragmentManager, boolean isCancelable, MessageDialogCallbacks callbacks) {
-        setCancelable(isCancelable);
-        this.callbacks = callbacks;
-        show(fragmentManager, "");
+        try {
+            setCancelable(isCancelable);
+            this.callbacks = callbacks;
+            show(fragmentManager, "");
+        }catch (Exception err){
+            err.printStackTrace();
+        }
     }
 
     public interface MessageDialogCallbacks {

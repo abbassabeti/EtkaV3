@@ -8,6 +8,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.CategoryModel;
 
 /**
  * Created by garshasbi on 4/19/18.
@@ -36,7 +37,7 @@ public class ProductFilterCategoryViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    private void setState(CategoryItem categoryItem){
+    private void setState(CategoryModel categoryItem){
         if (categoryItem.isSelected()){
             title.setBackgroundColor(ContextCompat.getColor(itemView.getContext(),R.color.colorPrimary));
             title.setTextColor(ContextCompat.getColor(itemView.getContext(),R.color.white));
@@ -47,7 +48,7 @@ public class ProductFilterCategoryViewHolder extends RecyclerView.ViewHolder {
     }
 
     public interface OnCategoryClickListener{
-        void onCategorySelect(CategoryItem categoryItem);
+        void onCategorySelect(CategoryModel categoryItem);
     }
 
 }

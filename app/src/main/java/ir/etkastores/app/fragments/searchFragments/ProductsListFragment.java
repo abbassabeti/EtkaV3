@@ -38,10 +38,10 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
 
     private final static String REQUEST_MODEL = "REQUEST_MODEL";
 
-    public static ProductsListFragment newInstance(SearchProductRequestModel searchProductRequestModel){
+    public static ProductsListFragment newInstance(SearchProductRequestModel searchProductRequestModel) {
         ProductsListFragment fragment = new ProductsListFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(REQUEST_MODEL,new Gson().toJson(searchProductRequestModel));
+        bundle.putString(REQUEST_MODEL, new Gson().toJson(searchProductRequestModel));
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -76,16 +76,16 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (view == null){
-            view = inflater.inflate(R.layout.fragment_categories,container,false);
-            ButterKnife.bind(this,view);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_categories, container, false);
+            ButterKnife.bind(this, view);
             initViews();
         }
         return view;
     }
 
-    private void initViews(){
-        productsAdapter = new ProductsRecyclerAdapter(getActivity(),this);
+    private void initViews() {
+        productsAdapter = new ProductsRecyclerAdapter(getActivity(), this);
         recyclerView.setAdapter(productsAdapter);
         loadProducts();
     }
@@ -102,17 +102,17 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
                     if (response.body().isSuccessful()) {
                         productsAdapter.addItems(response.body().getData().getItems());
                         if (productsAdapter.getItemCount() == 0) {
-                            showProductErrorMessage(getActivity().getResources().getString(R.string.thereIsNotResultAvailable),false);
+                            showProductErrorMessage(getActivity().getResources().getString(R.string.thereIsNotResultAvailable), false);
                         }
                         if (response.body().getData().getItems().size() == MAX_PRODUCT_NEEDED) {
                             productsAdapter.setLoadMoreEnabled(true);
                             requestModel.setPage(requestModel.getPage() + 1);
                         }
-                        if (response.body().getData().getTotalItemsCount() == 0){
-                            showProductErrorMessage(getResources().getString(R.string.thereIsNotResultAvailable),false);
+                        if (response.body().getData().getTotalItemsCount() == 0) {
+                            showProductErrorMessage(getResources().getString(R.string.thereIsNotResultAvailable), false);
                         }
                     } else {
-                        showProductErrorMessage(response.body().getMeta().getMessage(),true);
+                        showProductErrorMessage(response.body().getMeta().getMessage(), true);
                     }
                 } else {
                     onFailure(null, null);
@@ -122,34 +122,34 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
 
             @Override
             public void onFailure(Call<OauthResponse<ProductSearchResponseModel>> call, Throwable t) {
-                if (!isAdded()) return;
+                if (!isAdded() || call.isCanceled()) return;
                 hideLoading();
-                showProductErrorMessage(getResources().getString(R.string.errorHappendInReceivingData),true);
+                showProductErrorMessage(getResources().getString(R.string.errorHappendInReceivingData), true);
             }
         });
     }
 
-    public void showProductErrorMessage(String message, boolean showRetry){
+    public void showProductErrorMessage(String message, boolean showRetry) {
         String messageText = getResources().getString(R.string.errorHappendInReceivingData);
-        if (!TextUtils.isEmpty(message)){
+        if (!TextUtils.isEmpty(message)) {
             messageText = message;
         }
-        if (showRetry && productsAdapter != null && productsAdapter.getItemCount() == 0){
+        if (showRetry && productsAdapter != null && productsAdapter.getItemCount() == 0) {
             messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
                 @Override
                 public void onMessageViewButtonClick() {
                     loadProducts();
                 }
             });
-        }else if (!showRetry && productsAdapter != null && productsAdapter.getItemCount() == 0){
+        } else if (!showRetry && productsAdapter != null && productsAdapter.getItemCount() == 0) {
             messageView.show(R.drawable.ic_warning_orange_48dp, messageText, getResources().getString(R.string.back), new MessageView.OnMessageViewButtonClick() {
                 @Override
                 public void onMessageViewButtonClick() {
                     getActivity().onBackPressed();
                 }
             });
-        }else{
-            if (showRetry){
+        } else {
+            if (showRetry) {
                 final MessageDialog dialog = MessageDialog.warningRetry(getResources().getString(R.string.error), message);
                 dialog.show(getChildFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
                     @Override
@@ -163,8 +163,8 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
 
                     }
                 });
-            }else{
-                Toaster.show(getActivity(),message);
+            } else {
+                Toaster.show(getActivity(), message);
             }
         }
     }
@@ -194,6 +194,19 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
     @Override
     public void onProductSavedDeleteClick(ProductModel productModel) {
 
+    }
+
+    public void refreshResult(SearchProductRequestModel searchProductRequestModel) {
+        if (req != null && req.isExecuted()) req.cancel();
+        requestModel = searchProductRequestModel;
+        productsAdapter.clear();
+        requestModel.setPage(1);
+        requestModel.setTake(MAX_PRODUCT_NEEDED);
+        loadProducts();
+    }
+
+    public SearchProductRequestModel getSearchRequestModel() {
+        return requestModel;
     }
 
 }

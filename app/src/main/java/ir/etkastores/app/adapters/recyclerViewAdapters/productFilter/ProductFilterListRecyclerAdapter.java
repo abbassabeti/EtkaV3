@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.CategoryModel;
 
 /**
  * Created by garshasbi on 4/19/18.
@@ -24,7 +25,7 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     private Context context;
     private LayoutInflater inflater;
     private List<ProductFilterItem> items;
-    private List<CategoryItem> originalCategoryItems;
+    private List<CategoryModel> originalCategoryItems;
     private FilterCallback callback;
 
     private ProductFilterItem headerItem;
@@ -80,11 +81,11 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    public void setCategories(List<CategoryItem> categories) {
+    public void setCategories(List<CategoryModel> categories) {
         originalCategoryItems = categories;
         items.clear();
         items.add(headerItem);
-        for (CategoryItem i : getCopyOfCategories()) {
+        for (CategoryModel i : getCopyOfCategories()) {
             items.add(new ProductFilterItem(i));
         }
         notifyItemChanged(1, categories.size());
@@ -95,32 +96,36 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     }
 
     private void filterCategory(String s) {
-        List<CategoryItem> newList;
+        List<CategoryModel> newList;
         items.clear();
         items.add(headerItem);
         if (TextUtils.isEmpty(s)) {
-            for (CategoryItem i : getCopyOfCategories()) {
+            for (CategoryModel i : getCopyOfCategories()) {
                 items.add(new ProductFilterItem(i));
             }
             notifyItemRangeChanged(1,originalCategoryItems.size()+1);
             return;
         }
         newList = new ArrayList<>();
-        for (CategoryItem c : getCopyOfCategories()) {
+        for (CategoryModel c : getCopyOfCategories()) {
             if (c.getTitle().contains(s)) newList.add(c);
         }
-        for (CategoryItem i : newList) {
+        for (CategoryModel i : newList) {
             items.add(new ProductFilterItem(i));
         }
         notifyItemRangeChanged(1, originalCategoryItems.size()+1);
     }
 
     @Override
-    public void onCategorySelect(CategoryItem categoryItem) {
-        List<CategoryItem> categoryItems = new ArrayList<>();
+    public void onCategorySelect(CategoryModel categoryItem) {
+        List<CategoryModel> categoryItems = new ArrayList<>();
         for (ProductFilterItem i : items) {
-            if (i.getType() == ProductFilterItem.CATEGORY_ITEM && i.getCategoryItem().isSelected())
-                categoryItems.add(i.getCategoryItem());
+            if (i.getType() == ProductFilterItem.CATEGORY_ITEM){
+                if (i.getCategoryItem().isSelected()) categoryItems.add(i.getCategoryItem());
+                for (CategoryModel c : originalCategoryItems){
+                    if (c.getId() == i.getCategoryItem().getId()) c.setSelected(i.getCategoryItem().isSelected());
+                }
+            }
         }
         if (callback != null) callback.onSelectCategory(categoryItems);
     }
@@ -133,12 +138,12 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
 
         void onSelectSort(int sort);
 
-        void onSelectCategory(List<CategoryItem> categories);
+        void onSelectCategory(List<CategoryModel> categories);
     }
 
-    private List<CategoryItem> getCopyOfCategories() {
-        List<CategoryItem> items = new ArrayList<>();
-        for (CategoryItem categoryItem : originalCategoryItems) {
+    private List<CategoryModel> getCopyOfCategories() {
+        List<CategoryModel> items = new ArrayList<>();
+        for (CategoryModel categoryItem : originalCategoryItems) {
             items.add(categoryItem.getCopy());
         }
         return items;

@@ -10,6 +10,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.ui.views.FilterSortView;
 
 /**
@@ -39,10 +40,10 @@ public abstract class ProductFilterHeaderViewHolder extends RecyclerView.ViewHol
     public ProductFilterHeaderViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        topRateSortItem.setCategoryItem(new CategoryItem(EtkaApp.getInstance().getResources().getString(R.string.topRate),1,true));
-        topOfferSortItem.setCategoryItem(new CategoryItem(EtkaApp.getInstance().getResources().getString(R.string.topOffer),2));
-        topSaleSortItem.setCategoryItem(new CategoryItem(EtkaApp.getInstance().getResources().getString(R.string.topSales),3));
-        newestSortItem.setCategoryItem(new CategoryItem(EtkaApp.getInstance().getResources().getString(R.string.newest),4));
+        topRateSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.topRate),1,true));
+        topOfferSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.topOffer),2));
+        topSaleSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.topSales),3));
+        newestSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.newest),4));
 
     }
 

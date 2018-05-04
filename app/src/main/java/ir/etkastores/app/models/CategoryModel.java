@@ -36,6 +36,30 @@ public class CategoryModel {
     @SerializedName("hasChild")
     boolean hasChild;
 
+    boolean isSelected;
+
+    public CategoryModel(String title,long id) {
+        this.id = id;
+        this.title = title;
+        this.isSelected = isSelected;
+    }
+
+    public CategoryModel(String title,long id , boolean isSelected) {
+        this.id = id;
+        this.title = title;
+        this.isSelected = isSelected;
+    }
+
+    public CategoryModel(long id, String title, int level, String imageUrl, long parentId, boolean hasChild, boolean isSelected) {
+        this.id = id;
+        this.title = title;
+        this.level = level;
+        this.imageUrl = imageUrl;
+        this.parentId = parentId;
+        this.hasChild = hasChild;
+        this.isSelected = isSelected;
+    }
+
     public long getId() {
         return id;
     }
@@ -58,5 +82,21 @@ public class CategoryModel {
 
     public boolean hasChild() {
         return hasChild;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public CategoryModel getCopy(){
+        return new CategoryModel(id,title,level,imageUrl,parentId,hasChild,isSelected);
+    }
+
+    public void toggle(){
+        isSelected = (!isSelected);
     }
 }

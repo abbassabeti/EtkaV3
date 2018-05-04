@@ -16,14 +16,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
-import ir.etkastores.app.adapters.recyclerViewAdapters.productFilter.CategoryItem;
 import ir.etkastores.app.adapters.recyclerViewAdapters.productFilter.ProductFilterListRecyclerAdapter;
 import ir.etkastores.app.fragments.searchFragments.CategoriesFragment;
 import ir.etkastores.app.fragments.searchFragments.ProductsListFragment;
 import ir.etkastores.app.models.CategoryModel;
+import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
+import ir.etkastores.app.webServices.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoriesFilterActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoriesFragment.OnCategoryItemClickListener, ProductFilterListRecyclerAdapter.FilterCallback {
 
@@ -58,6 +62,8 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
 
     private ProductsListFragment productsListFragment;
 
+    private Call<OauthResponse<List<CategoryModel>>> categoryReq;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +76,12 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     protected void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Categories Filter");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (categoryReq != null && categoryReq.isExecuted()) categoryReq.cancel();
     }
 
     private void initViews() {
@@ -132,60 +144,86 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
             recyclerView.setAdapter(filterAdapter);
             filterAdapter.setFilterCallback(this);
             addFragmentToBackStack(productsListFragment);
+            loadMenuCategories(categoryModel.getParentId());
             unlockDrawer();
         }
     }
 
-    private void lockDrawer(){
+    private void lockDrawer() {
         toolbar.showMenu(false);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
-    private void unlockDrawer(){
+    private void unlockDrawer() {
         toolbar.showMenu(true);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 
     @Override
     public void onSelectSort(int sort) {
-        Log.e("selected sort is",""+sort);
-        List<CategoryItem> items = new ArrayList<>();
-        items.add(new CategoryItem("یک",1));
-        items.add(new CategoryItem("دو",2));
-        items.add(new CategoryItem("سه",3));
-        items.add(new CategoryItem("چهار",4));
-        items.add(new CategoryItem("پنج",5));
-        items.add(new CategoryItem("شیش",6));
-        items.add(new CategoryItem("هفت",7));
-        items.add(new CategoryItem("هشت",8));
-        items.add(new CategoryItem("نه",9));
-        items.add(new CategoryItem("ده",10));
-        items.add(new CategoryItem("یازده",11));
-        items.add(new CategoryItem("دوازده",12));
-        items.add(new CategoryItem("سیزده",13));
-        items.add(new CategoryItem("چهارده",14));
-        items.add(new CategoryItem("پانزده",15));
-        items.add(new CategoryItem("شانزده",16));
-        items.add(new CategoryItem("هفده",17));
-        items.add(new CategoryItem("هجده",18));
-        items.add(new CategoryItem("نوزده",19));
-        items.add(new CategoryItem("بیست",20));
-        items.add(new CategoryItem("بیست و یک",21));
-        items.add(new CategoryItem("بیست و دو",22));
-        items.add(new CategoryItem("بیست و سه",23));
-        items.add(new CategoryItem("بیست و چهار",24));
-        items.add(new CategoryItem("بیست و پنج",25));
-        items.add(new CategoryItem("بیست و شش",26));
-        items.add(new CategoryItem("بیست و هفت",27));
-        items.add(new CategoryItem("بیست و هشت",28));
-        items.add(new CategoryItem("بیست و نه",29));
-        items.add(new CategoryItem("سی",30));
-        filterAdapter.setCategories(items);
+        String sortValue = "";
+        switch (sort){
+            case TOP_OFFER_SORT:
+                sortValue = "";
+                break;
+
+            case TOP_SALE_SORT:
+                sortValue = "";
+                break;
+
+            case TOP_RATE_SORT:
+                sortValue = "";
+                break;
+
+            case NEWEST_SORT:
+                sortValue = "";
+                break;
+        }
+        SearchProductRequestModel searchProductRequestModel = productsListFragment.getSearchRequestModel();
+        searchProductRequestModel.setSort(sortValue);
+        productsListFragment.refreshResult(searchProductRequestModel);
+        drawerLayout.closeDrawers();
     }
 
     @Override
-    public void onSelectCategory(List<CategoryItem> categories) {
-        Log.e("selected categories","....");
+    public void onSelectCategory(List<CategoryModel> categories) {
+        SearchProductRequestModel searchProductRequestModel = productsListFragment.getSearchRequestModel();
+        List<Long> ids = new ArrayList<>();
+        for (CategoryModel model : categories){
+            ids.add(model.getId());
+        }
+        searchProductRequestModel.setCategoryId(ids);
+        productsListFragment.refreshResult(searchProductRequestModel);
+        drawerLayout.closeDrawers();
+    }
+
+    private void loadMenuCategories(final long id) {
+        categoryReq = ApiProvider.getAuthorizedApi().getCategory(id);
+        categoryReq.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
+                if (isFinishing()) return;
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
+                        List<CategoryModel> items = new ArrayList<>();
+                        for (CategoryModel categoryModel : response.body().getData()) {
+                            items.add(new CategoryModel(categoryModel.getTitle(), categoryModel.getId()));
+                        }
+                        filterAdapter.setCategories(items);
+                    } else {
+
+                    }
+                } else {
+                    onFailure(call, null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable throwable) {
+                if (isFinishing() || call.isCanceled()) return;
+
+            }
+        });
     }
 
 }

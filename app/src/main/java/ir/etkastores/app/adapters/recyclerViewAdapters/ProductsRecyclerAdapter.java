@@ -150,6 +150,11 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
 
     }
 
+    public void clear(){
+        items.clear();
+        notifyDataSetChanged();
+    }
+
     public interface ProductsRecyclerCallbacks{
         void onLoadMore();
         void onProductItemClick(ProductModel productModel);
