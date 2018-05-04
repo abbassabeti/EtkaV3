@@ -16,8 +16,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import ir.etkastores.app.activities.CategoriesFilterActivity;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.search.SearchProductRequestModel;
+import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 
@@ -38,12 +42,14 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
     private List<ProductModel> productModels;
     private String title;
+    private SearchProductRequestModel moreItemSearchModel;
     private OnProductClickListener onProductClickListener;
 
-    public CategoryGroupHorizontalView(Context context, String title ,List<ProductModel> productModels) {
+    public CategoryGroupHorizontalView(Context context, String title ,List<ProductModel> productModels, SearchProductRequestModel moreItemModel) {
         super(context);
         this.productModels = productModels;
         this.title = title;
+        this.moreItemSearchModel = moreItemModel;
         init(null);
     }
 
@@ -65,9 +71,22 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
         mTitle.setText(title);
 
+        if (moreItemSearchModel != null){
+            mShowAllButton.setVisibility(VISIBLE);
+        }else{
+            mShowAllButton.setVisibility(GONE);
+        }
+
+        mShowAllButton.setTypeface(FontUtils.getBoldTypeFace());
+
         CategoryRecyclerAdapter adapter = new CategoryRecyclerAdapter(getContext());
         recyclerView.setAdapter(adapter);
 
+    }
+
+    @OnClick(R.id.showAll)
+    public void showAllButton(){
+        CategoriesFilterActivity.show(getContext(),moreItemSearchModel);
     }
 
     class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.ViewHolder>{

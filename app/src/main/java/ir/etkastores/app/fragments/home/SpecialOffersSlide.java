@@ -136,7 +136,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
                 itemsHolder.addView(new HomeSliderItemView(getActivity(), offersItem.getBanners()));
             }
             if (offersItem.getProducts() != null && offersItem.getProducts().size() > 0) {
-                CategoryGroupHorizontalView row = new CategoryGroupHorizontalView(getActivity(), offersItem.getTitle(), offersItem.getProducts());
+                CategoryGroupHorizontalView row = new CategoryGroupHorizontalView(getActivity(), offersItem.getTitle(), offersItem.getProducts(), offersItem.getSearchProductRequestModel());
                 row.setOnProductClickListener(this);
                 itemsHolder.addView(row);
             }

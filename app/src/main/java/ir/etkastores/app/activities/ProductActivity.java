@@ -134,7 +134,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         saveCountValue = productModel.getSavedCount();
         updateSaveCountValue();
         if (productModel.getRelatedProducts() != null && productModel.getRelatedProducts().size() > 0) {
-            CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), productModel.getRelatedProducts());
+            CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), productModel.getRelatedProducts(),null);
             relatedProducts.setOnProductClickListener(this);
             extrasHolder.addView(relatedProducts);
         }

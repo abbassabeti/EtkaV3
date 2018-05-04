@@ -1,12 +1,11 @@
 package ir.etkastores.app.models.home;
 
-import android.widget.LinearLayout;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 import ir.etkastores.app.models.ProductModel;
+import ir.etkastores.app.models.search.SearchProductRequestModel;
 
 /**
  * Created by garshasbi on 3/3/18.
@@ -29,6 +28,8 @@ public class HomeItemsModel {
     @SerializedName("loadMoreJson")
     private String loadMoreJson;
 
+    private SearchProductRequestModel searchProductRequestModel;
+
     public String getTitle() {
         return title;
     }
@@ -45,7 +46,9 @@ public class HomeItemsModel {
         return banners;
     }
 
-    public String getLoadMoreJson() {
-        return loadMoreJson;
+    public SearchProductRequestModel getSearchProductRequestModel() {
+        if (searchProductRequestModel == null) searchProductRequestModel = SearchProductRequestModel.fromJson(loadMoreJson);
+        return searchProductRequestModel;
     }
+
 }
