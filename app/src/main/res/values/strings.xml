@@ -81,11 +81,11 @@
     <string name="saveChanges">ذخیره تغییرات</string>
     <string name="inLogin">در حال ورود به حساب کاربری...</string>
     <string name="inSendingData">در حال ارسال اطلاعات...</string>
+    <string name="inSendingRequest">در حال ارسال درخواست...</string>
     <string name="contactToBranch">تماس با شعبه</string>
     <string name="showDirections">نمایش مسیرها</string>
     <string name="share">اشتراک گذاری</string>
     <string name="inStoreMap">نقشه‌داخل‌شعبه</string>
-
     <string name="aboutEtkaStoresText">نیازمند متن از طرف شرکت</string>
     <string name="userPrivacyText">نیازمند متن از طرف شرکت</string>
     <string name="termAndConditionsText">نیازمند متن از طرف شرکت</string>
@@ -95,7 +95,6 @@
     <string name="hekmatWares">کالاهای‌طرح‌حکمت</string>
     <string name="availableHekmatWaresInStore">کالاهای طرح حکمت موجود در شعبه:</string>
     <string name="etkaٰExclusiveWares">کالاهای‌انحصاری‌اتکا</string>
-
     <string name="firstNameCantBeEmpty">نام نباید خالی باشد!</string>
     <string name="lastNameCantBeEmpty">نام خانوادگی نباید خالی باشد!</string>
     <string name="emailAddresCantBeEmpty">آدرس ایمیل نباید خالی باشد!</string>
@@ -104,7 +103,6 @@
     <string name="registerSuccessful">ثبت نام با موفقیت انجام شد.</string>
     <string name="registerFailTryLater">خطایی در ثبت نام رخ داده است، لطفا از دوباره تلاش کنید.</string>
     <string name="hekmatCard">حکمت کارت</string>
-
     <string name="totalPrice">قیمت کل:</string>
     <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، از دوباره تلاش کنید</string>
     <string name="factorDate">تاریخ خرید: %s</string>
@@ -223,5 +221,11 @@
     <string name="moreDetails">توضیحات:</string>
     <string name="surveySubmitSuccessfully">نظر سنجی با موفقیت ثبت شد.</string>
     <string name="errorInSubmitSurvey">خطا در ارسال اطلاعات، از دوباره تلاش کنید.</string>
+    <string name="selectTicketType">ابتدا نوع درخواست را انتخاب کنید!</string>
+    <string name="titleCantBeEmpty">عنوان درخواست خود را باید بنویسید!</string>
+    <string name="pleaseSelectYourTargetStore">لطفا شعبه مورد نظر را انتخاب کنید!</string>
+    <string name="textBodyCantBeEmpty">متن درخواست خود را بنویسید!</string>
+    <string name="errorInSendingRequest">خطایی در ارسال درخواست به وجود آمده است، از دوباره تلاش کنید.</string>
+    <string name="ticketSendSuccessfully">درخواست شما با موفقیت ارسال شد.</string>
 
 </resources>

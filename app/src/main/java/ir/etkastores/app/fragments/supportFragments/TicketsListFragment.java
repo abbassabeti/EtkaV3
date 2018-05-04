@@ -3,6 +3,7 @@ package ir.etkastores.app.fragments.supportFragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,7 @@ import retrofit2.Response;
  * Created by Sajad on 10/17/17.
  */
 
-public class TicketsListFragment extends Fragment implements TicketsListAdapter.OnTicketsListCallbacks {
+public class TicketsListFragment extends Fragment implements TicketsListAdapter.OnTicketsListCallbacks, SwipeRefreshLayout.OnRefreshListener {
 
     public static TicketsListFragment newInstance() {
         return new TicketsListFragment();
@@ -48,6 +49,9 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     @BindView(R.id.linearProgress)
     ProgressBar linearProgress;
 
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
+
     private View view;
 
     private Call<OauthResponse<TicketResponseModel>> ticketReq;
@@ -61,12 +65,13 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (view == null){
+        if (view == null) {
             view = inflater.inflate(R.layout.fragment_tickets_list, container, false);
             ButterKnife.bind(this, view);
             initViews();
         }
-        if (getUserVisibleHint()) checkToLoadDataViews();;
+        if (getUserVisibleHint()) checkToLoadDataViews();
+        ;
         return view;
     }
 
@@ -80,6 +85,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
         adapter = new TicketsListAdapter(getActivity());
         adapter.setOnTicketsListCallbacks(this);
         recyclerView.setAdapter(adapter);
+        swipeRefresh.setOnRefreshListener(this);
     }
 
     @OnClick(R.id.addNewTicketFab)
@@ -100,7 +106,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && isResumed()){
+        if (isVisibleToUser && isResumed()) {
             checkToLoadDataViews();
         }
     }
@@ -129,7 +135,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
                         if (adapter.getItemCount() == 0) {
                             messageView.show(R.drawable.ic_warning_orange_48dp, getResources().getString(R.string.yourTicketsListIsEmpty), null, null);
                             listIsEmpty = true;
-                        }else{
+                        } else {
                             listIsEmpty = false;
                         }
                     } else {
@@ -168,6 +174,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     private void hideLoading() {
         circularProgress.setVisibility(View.GONE);
         linearProgress.setVisibility(View.GONE);
+        swipeRefresh.setRefreshing(false);
     }
 
     private void showRetryDialog(String message) {
@@ -200,10 +207,16 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
         });
     }
 
-    private void checkToLoadDataViews(){
-        if (adapter.getItemCount() == 0 && !listIsEmpty){
+    private void checkToLoadDataViews() {
+        if (adapter.getItemCount() == 0 && !listIsEmpty) {
             loadTickets();
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        reqPage = 1;
+        loadTickets();
     }
 
 }

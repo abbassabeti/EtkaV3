@@ -22,6 +22,9 @@ public class TicketRequestModel {
     @SerializedName("StoreRef")
     private long storeRef;
 
+    @SerializedName("Message")
+    private String message;
+
     public TicketRequestModel() {
 
     }
@@ -67,4 +70,11 @@ public class TicketRequestModel {
         return "";
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

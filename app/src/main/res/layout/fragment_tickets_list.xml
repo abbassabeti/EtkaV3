@@ -13,20 +13,24 @@
         android:textColor="@color/darkGray"
         android:textSize="@dimen/textSizeSmall" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/requestHeaderMessage"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp" />
+        android:layout_below="@id/requestHeaderMessage">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ir.etkastores.app.ui.views.MessageView
         android:id="@+id/messageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/requestHeaderMessage" />
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addNewTicketFab"
