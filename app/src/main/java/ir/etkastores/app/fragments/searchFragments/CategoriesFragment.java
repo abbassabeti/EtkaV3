@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.activities.CategoriesFilterActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.OauthResponse;
@@ -31,11 +32,13 @@ import retrofit2.Response;
 public class CategoriesFragment extends Fragment implements CategoryRecyclerAdapter.OnCategoryItemClickListener {
 
     private final static String CATEGORY_ID_KEY = "CATEGORY_ID_KEY";
+    private final static String TITLE_KEY = "TITLE_KEY";
 
-    public static CategoriesFragment newInstance(long categoryId) {
+    public static CategoriesFragment newInstance(long categoryId, String title) {
         CategoriesFragment categoriesFragment = new CategoriesFragment();
         Bundle bundle = new Bundle();
         bundle.putLong(CATEGORY_ID_KEY, categoryId);
+        bundle.putString(TITLE_KEY, title);
         categoriesFragment.setArguments(bundle);
         return categoriesFragment;
     }
@@ -58,6 +61,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     private CategoryRecyclerAdapter adapter;
     private long categoryId;
+    private String title = "";
 
     private OnCategoryItemClickListener callback;
 
@@ -66,6 +70,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
         super.onCreate(savedInstanceState);
         try {
             categoryId = getArguments().getLong(CATEGORY_ID_KEY, 0);
+            title = getArguments().getString(TITLE_KEY);
         } catch (Exception err) {
             categoryId = 0;
         }
@@ -80,6 +85,12 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
             initViews();
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (callback != null) callback.onUpdateTitle(title);
     }
 
     private void initViews() {
@@ -181,6 +192,8 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     public interface OnCategoryItemClickListener {
         void onCategoryClicked(CategoryModel categoryModel);
+
+        void onUpdateTitle(String title);
     }
 
     public void setOnCategoryItemClickListener(OnCategoryItemClickListener callback) {

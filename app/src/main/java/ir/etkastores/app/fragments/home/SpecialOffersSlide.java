@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.util.TimingLogger;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +17,10 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
-import ir.etkastores.app.models.home.OffersItemModel;
-import ir.etkastores.app.models.home.OffersResponseModel;
+import ir.etkastores.app.models.home.HomeItemsModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
+import ir.etkastores.app.ui.views.HomeSliderItemView;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -54,7 +52,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
 
     boolean isDataLoaded = false;
 
-    private Call<OauthResponse<List<OffersItemModel>>> offersReq;
+    private Call<OauthResponse<List<HomeItemsModel>>> offersReq;
 
     @Nullable
     @Override
@@ -91,10 +89,10 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
     private void loadOffers() {
         showLoading();
         messageView.hide();
-        offersReq = ApiProvider.getAuthorizedApi().getOffers("offers");
-        offersReq.enqueue(new Callback<OauthResponse<List<OffersItemModel>>>() {
+        offersReq = ApiProvider.getAuthorizedApi().getOffers("TempOffers");
+        offersReq.enqueue(new Callback<OauthResponse<List<HomeItemsModel>>>() {
             @Override
-            public void onResponse(Call<OauthResponse<List<OffersItemModel>>> call, Response<OauthResponse<List<OffersItemModel>>> response) {
+            public void onResponse(Call<OauthResponse<List<HomeItemsModel>>> call, Response<OauthResponse<List<HomeItemsModel>>> response) {
                 if (!isAdded()) return;
                 hideLoading();
                 if (response.isSuccessful()) {
@@ -110,7 +108,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
             }
 
             @Override
-            public void onFailure(Call<OauthResponse<List<OffersItemModel>>> call, Throwable throwable) {
+            public void onFailure(Call<OauthResponse<List<HomeItemsModel>>> call, Throwable throwable) {
                 if (!isAdded()) return;
                 hideLoading();
                 showMessageView(getResources().getString(R.string.errorInDataReceiving), true);
@@ -132,12 +130,16 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
         }
     }
 
-    private void addItems(List<OffersItemModel> items) {
-        for (OffersItemModel offersItem : items) {
-            CategoryGroupHorizontalView row = new CategoryGroupHorizontalView(getActivity(), offersItem.getTitle(), offersItem.getProducts());
-            row.setOnProductClickListener(this);
-            itemsHolder.addView(row);
-
+    private void addItems(List<HomeItemsModel> items) {
+        for (HomeItemsModel offersItem : items) {
+            if (offersItem.getBanners() != null && offersItem.getBanners().size() > 0) {
+                itemsHolder.addView(new HomeSliderItemView(getActivity(), offersItem.getBanners()));
+            }
+            if (offersItem.getProducts() != null && offersItem.getProducts().size() > 0) {
+                CategoryGroupHorizontalView row = new CategoryGroupHorizontalView(getActivity(), offersItem.getTitle(), offersItem.getProducts());
+                row.setOnProductClickListener(this);
+                itemsHolder.addView(row);
+            }
         }
     }
 

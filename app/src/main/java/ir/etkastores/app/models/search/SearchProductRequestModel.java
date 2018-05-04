@@ -44,7 +44,17 @@ public class SearchProductRequestModel {
     @SerializedName("Page")
     int page;
 
+    @SerializedName("Tags")
+    private List<String> tags;
 
+    @SerializedName("StoreId")
+    private Long storeId;
+
+    @SerializedName("SupplierId")
+    private Long supplierId;
+
+    @SerializedName("OnlyEtkaProducts")
+    private boolean onlyEtkaProducts;
 
     public SearchProductRequestModel() {
         page = 1;
@@ -94,6 +104,42 @@ public class SearchProductRequestModel {
 
     public int getTake() {
         return take;
+    }
+
+    public List<Long> getCategoryId() {
+        return categoryId;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
+
+    public Long getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(Long supplierId) {
+        this.supplierId = supplierId;
+    }
+
+    public boolean isOnlyEtkaProducts() {
+        return onlyEtkaProducts;
+    }
+
+    public void setOnlyEtkaProducts(boolean onlyEtkaProducts) {
+        this.onlyEtkaProducts = onlyEtkaProducts;
     }
 
 }

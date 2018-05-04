@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,22 +31,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoriesFilterActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoriesFragment.OnCategoryItemClickListener, ProductFilterListRecyclerAdapter.FilterCallback {
+public class CategoriesFilterActivity extends BaseActivity implements
+        EtkaToolbar.EtkaToolbarActionsListener,
+        CategoriesFragment.OnCategoryItemClickListener,
+        ProductFilterListRecyclerAdapter.FilterCallback {
 
-    private final static String ID = "ID";
-    private final static String SEARCH_TERM = "SEARCH_TERM";
+    private final static String CATEGORY = "CATEGORY";
+    private final static String SEARCH_REQUEST = "SEARCH_REQUEST";
     private final static String IS_SEARCH = "IS_SEARCH";
 
     public static void show(Context context, CategoryModel categoryModel) {
         Intent intent = new Intent(context, CategoriesFilterActivity.class);
-        intent.putExtra(ID, categoryModel.getId());
+        intent.putExtra(CATEGORY, new Gson().toJson(categoryModel));
         intent.putExtra(IS_SEARCH, false);
         context.startActivity(intent);
     }
 
-    public static void show(Context context, String searchTerm) {
+    public static void show(Context context, SearchProductRequestModel searchProductRequestModel) {
         Intent intent = new Intent(context, CategoriesFilterActivity.class);
-        intent.putExtra(SEARCH_TERM, searchTerm);
+        intent.putExtra(SEARCH_REQUEST, new Gson().toJson(searchProductRequestModel));
         intent.putExtra(IS_SEARCH, true);
         context.startActivity(intent);
     }
@@ -62,6 +68,8 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     private ProductsListFragment productsListFragment;
 
     private Call<OauthResponse<List<CategoryModel>>> categoryReq;
+
+    private SearchProductRequestModel productRequestModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +93,22 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        long id = getIntent().getLongExtra(ID, 0);
-        String searchTerm = getIntent().getExtras().getString(SEARCH_TERM, null);
+        toolbar.setTitle("");
+        CategoryModel categoryModel = CategoryModel.fromJson(getIntent().getStringExtra(CATEGORY));
+        productRequestModel = SearchProductRequestModel.fromJson(getIntent().getExtras().getString(SEARCH_REQUEST, null));
         boolean isFromSearch = getIntent().getExtras().getBoolean(IS_SEARCH);
         if (isFromSearch) {
-            SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
-            searchProductRequestModel.setTitle(searchTerm);
-            ProductsListFragment productsListFragment = ProductsListFragment.newInstance(searchProductRequestModel);
+            ProductsListFragment productsListFragment = ProductsListFragment.newInstance(productRequestModel);
             ActivityUtils.addFragment(this, R.id.categoriesFrame, productsListFragment, "CATEGORY_FILTER", false);
-            unlockDrawer();
+            lockDrawer();
+            if (!TextUtils.isEmpty(productRequestModel.getTitle())) {
+                toolbar.setTitle(productRequestModel.getTitle());
+            }
         } else {
-            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(id);
+            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(),categoryModel.getTitle());
             categoriesFragment.setOnCategoryItemClickListener(this);
             ActivityUtils.addFragment(this, R.id.categoriesFrame, categoriesFragment, "CATEGORY_FILTER", false);
+            toolbar.setTitle(categoryModel.getTitle());
             lockDrawer();
         }
     }
@@ -131,7 +142,7 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     @Override
     public void onCategoryClicked(CategoryModel categoryModel) {
         if (categoryModel.hasChild()) {
-            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId());
+            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(),categoryModel.getTitle());
             categoriesFragment.setOnCategoryItemClickListener(this);
             addFragmentToBackStack(categoriesFragment);
             lockDrawer();
@@ -146,6 +157,12 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
             loadMenuCategories(categoryModel.getParentId());
             unlockDrawer();
         }
+        toolbar.setTitle(categoryModel.getTitle());
+    }
+
+    @Override
+    public void onUpdateTitle(String title) {
+        toolbar.setTitle(title);
     }
 
     private void lockDrawer() {
@@ -161,7 +178,7 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     @Override
     public void onSelectSort(int sort) {
         String sortValue = "";
-        switch (sort){
+        switch (sort) {
             case TOP_OFFER_SORT:
                 sortValue = "";
                 break;
@@ -188,7 +205,7 @@ public class CategoriesFilterActivity extends BaseActivity implements EtkaToolba
     public void onSelectCategory(List<CategoryModel> categories) {
         SearchProductRequestModel searchProductRequestModel = productsListFragment.getSearchRequestModel();
         List<Long> ids = new ArrayList<>();
-        for (CategoryModel model : categories){
+        for (CategoryModel model : categories) {
             ids.add(model.getId());
         }
         searchProductRequestModel.setCategoryId(ids);

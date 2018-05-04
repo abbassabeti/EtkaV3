@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
-import ir.etkastores.app.ui.views.CategorySliderView;
+import ir.etkastores.app.ui.views.HomeSliderItemView;
 
 /**
  * Created by Sajad on 12/2/17.
@@ -40,7 +40,7 @@ public class ForYouSlide extends Fragment {
     }
 
     private void initViews(){
-        itemsHolder.addView(new CategorySliderView(getActivity()));
+//        itemsHolder.addView(new HomeSliderItemView(getActivity()));
 //        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));
 //        itemsHolder.addView(new SpecialCategoriesView(getActivity()));
 //        itemsHolder.addView(new CategoryGroupHorizontalView(getActivity()));

@@ -31,6 +31,7 @@ import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.StringUtils;
@@ -161,7 +162,9 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
         if (txt.startsWith("#")) {
             ProductActivity.show(getActivity(), StringUtils.toEnglishDigit(txt.replace("#", "")));
         } else {
-            CategoriesFilterActivity.show(getActivity(),searchInput.getText().toString());
+            SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
+            searchProductRequestModel.setTitle(searchInput.getText().toString());
+            CategoriesFilterActivity.show(getActivity(),searchProductRequestModel);
         }
     }
 
