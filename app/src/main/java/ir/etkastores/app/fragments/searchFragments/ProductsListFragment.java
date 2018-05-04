@@ -94,6 +94,7 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
         showLoading();
         messageView.hide();
         req = ApiProvider.getAuthorizedApi().searchProduct(requestModel);
+        productsAdapter.setLoadMoreEnabled(false);
         req.enqueue(new Callback<OauthResponse<ProductSearchResponseModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<ProductSearchResponseModel>> call, Response<OauthResponse<ProductSearchResponseModel>> response) {
