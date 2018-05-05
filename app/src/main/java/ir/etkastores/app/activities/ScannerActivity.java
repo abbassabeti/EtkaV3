@@ -3,6 +3,11 @@ package ir.etkastores.app.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.media.ToneGenerator;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -29,14 +34,14 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
     public final static int SCAN_REQUEST_CODE = 1005;
     private final static int PERMISSION_REQ_CODE = 1006;
 
-    public static void show(Fragment fragment){
-        Intent intent = new Intent(fragment.getActivity(),ScannerActivity.class);
-        fragment.startActivityForResult(intent,SCAN_REQUEST_CODE);
+    public static void show(Fragment fragment) {
+        Intent intent = new Intent(fragment.getActivity(), ScannerActivity.class);
+        fragment.startActivityForResult(intent, SCAN_REQUEST_CODE);
     }
 
-    public static void show(Activity activity){
-        Intent intent = new Intent(activity,ScannerActivity.class);
-        activity.startActivityForResult(intent,SCAN_REQUEST_CODE);
+    public static void show(Activity activity) {
+        Intent intent = new Intent(activity, ScannerActivity.class);
+        activity.startActivityForResult(intent, SCAN_REQUEST_CODE);
     }
 
     private ZXingScannerView mScannerView;
@@ -53,15 +58,21 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
     @Override
     public void handleResult(Result result) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.ScanBarcode);
-        if(BuildConfig.DEBUG){
-            Log.e("Scanner", "result value: "+result.getText());
-            Log.e("Scanner", "result format: "+result.getBarcodeFormat().toString());
+        try{
+            ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 200);
+            toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD,200);
+        }catch (Exception err){
+            err.printStackTrace();
+        }
+        if (BuildConfig.DEBUG) {
+            Log.e("Scanner", "result value: " + result.getText());
+            Log.e("Scanner", "result format: " + result.getBarcodeFormat().toString());
         }
         mScannerView.resumeCameraPreview(this);
         Intent intent = new Intent();
-        intent.putExtra(FORMAT,result.getBarcodeFormat().toString());
-        intent.putExtra(DATA,result.getText());
-        setResult(RESULT_OK,intent);
+        intent.putExtra(FORMAT, result.getBarcodeFormat().toString());
+        intent.putExtra(DATA, result.getText());
+        setResult(RESULT_OK, intent);
         finish();
     }
 
@@ -69,10 +80,10 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
     public void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Scanner Activity");
-        if (EasyPermissions.hasPermissions(this, permissions)){
+        if (EasyPermissions.hasPermissions(this, permissions)) {
             mScannerView.setResultHandler(this);
             mScannerView.startCamera();
-        }else{
+        } else {
             EasyPermissions.requestPermissions(
                     new PermissionRequest.Builder(this, PERMISSION_REQ_CODE, permissions)
                             .setRationale(R.string.cameraPermissionRationalMessage)
@@ -91,7 +102,7 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
 

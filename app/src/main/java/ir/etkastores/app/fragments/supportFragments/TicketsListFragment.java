@@ -72,7 +72,6 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
             initViews();
         }
         if (getUserVisibleHint()) checkToLoadDataViews();
-        ;
         return view;
     }
 
@@ -87,6 +86,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
         adapter.setOnTicketsListCallbacks(this);
         recyclerView.setAdapter(adapter);
         swipeRefresh.setOnRefreshListener(this);
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
     }
 
     @OnClick(R.id.addNewTicketFab)
