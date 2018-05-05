@@ -22,6 +22,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
 import ir.etkastores.app.ui.views.HomeSliderItemView;
 import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -153,6 +154,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
 
     @Override
     public void onProductClick(ProductModel productModel) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.ClickProductHome);
         ProductActivity.show(getActivity(), productModel);
     }
 

@@ -41,6 +41,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.StoreActivity;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.SuggestionArrayAdapter;
 import ir.etkastores.app.data.StoresManager;
 import pub.devrel.easypermissions.AppSettingsDialog;
@@ -171,6 +172,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @OnClick(R.id.storeInfoHolder)
     void onStoreInfoClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenStoreFromMap);
         StoreActivity.show(getActivity(), selectedStore);
     }
 
@@ -253,6 +255,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.SelectStoreFromSearchSuggestion);
         InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(storeSearchInput.getWindowToken(), 0);
         animateCameraToStore(searchAdapter.getItem(position).getStoreModel());
@@ -310,6 +313,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         if (map.getMyLocation() != null){
             onMyLocationChange(map.getMyLocation());
         }else{
+            AdjustHelper.sendAdjustEvent(AdjustHelper.FindMyLocationInMap);
             findUserLocation();
         }
     }

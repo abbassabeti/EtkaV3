@@ -12,13 +12,10 @@ import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.GalleryActivity;
 import ir.etkastores.app.activities.LoginRegisterActivity;
 import ir.etkastores.app.activities.NewsActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
@@ -30,12 +27,12 @@ import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.SurveyActivity;
-import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.BarcodeUtils;
 import ir.etkastores.app.data.ProfileManager;
 
@@ -107,7 +104,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick() {
-
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
 //        GalleryItemsModel galleryItemsModel = new GalleryItemsModel("گالری تست", new ArrayList<String>() {
 //            {
 //                add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0yzHqRz95kQp3vBwWW9RdZa3s8LOjZ0PRGgMftwmSSRSGR5T_");
@@ -134,6 +131,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         if (ProfileManager.isGuest()) {
             showLoginRequiredDialog();
         } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenPoints);
             ScoresActivity.start(getActivity());
         }
     }
@@ -143,6 +141,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         if (ProfileManager.isGuest()) {
             showLoginRequiredDialog();
         } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNextShoppingList);
             NextShoppingListActivity.show(getActivity());
         }
     }
@@ -152,6 +151,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         if (ProfileManager.isGuest()) {
             showLoginRequiredDialog();
         } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenFactors);
             ShoppingHistoryActivity.show(getActivity());
         }
     }
@@ -161,23 +161,31 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         if (ProfileManager.isGuest()) {
             showLoginRequiredDialog();
         } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenInviteFriend);
             InviteFriendsActivity.show(getActivity());
         }
     }
 
     @OnClick(R.id.faqMenu)
     public void onFAQMenuClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenFAQ);
         FAQActivity.show(getActivity());
     }
 
     @OnClick(R.id.supportMenu)
     public void onSupportMenuClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenSupport);
         SupportActivity.show(getActivity(), SupportActivity.TICKET_LIST);
     }
 
     @OnClick(R.id.surveyMenu)
     public void onSurveyClick(){
-        SurveyActivity.show(getActivity());
+        if (ProfileManager.isGuest()) {
+            showLoginRequiredDialog();
+        } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenSurvey);
+            SurveyActivity.show(getActivity());
+        }
     }
 
     @Override
@@ -194,6 +202,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         switch (actionCode) {
 
             case MORE_BUTTON:
+                AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProfileOtherPages);
                 OtherPagesActivity.start(getActivity());
                 break;
 
@@ -201,6 +210,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
                 if (ProfileManager.isGuest()) {
                     showLoginRequiredDialog();
                 } else {
+                    AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProfileSetting);
                     ProfileSettingActivity.show(getActivity());
                 }
                 break;

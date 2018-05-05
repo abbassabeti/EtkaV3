@@ -32,6 +32,7 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.ProductImagesSliderView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.webServices.ApiProvider;
@@ -233,8 +234,10 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.addToNextShoppingListButton:
-                if (saveCountValue == 0) {
-                    Toaster.show(this, R.string.setProductCounts);
+                AdjustHelper.sendAdjustEvent(AdjustHelper.AddToNextShoppingList);
+                if (ProfileManager.isGuest()){
+                    Toaster.showLong(this,R.string.loginRequiredForThisSection);
+                    LoginRegisterActivity.showLogin(this);
                     return;
                 }
                 sendAddToNextShoppingListRequest();
@@ -340,6 +343,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
     @Override
     public void onProductClick(ProductModel productModel) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProductFromRelateds);
         productModel.setRelatedProducts(this.productModel.getRelatedProducts());
         ProductActivity.show(this,productModel);
     }

@@ -25,6 +25,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.FontUtils;
 
 public class WalkthroughActivity extends BaseActivity {
@@ -81,6 +82,7 @@ public class WalkthroughActivity extends BaseActivity {
 
     @OnClick(R.id.enterButton)
     public void onIKnownButtonClick(){
+        AdjustHelper.sendAdjustEvent(AdjustHelper.WalkthroughEnter);
         MainActivity.show(this,null);
         finish();
     }

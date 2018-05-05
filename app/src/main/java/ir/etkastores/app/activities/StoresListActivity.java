@@ -23,6 +23,7 @@ import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.data.StoresManager;
+import ir.etkastores.app.utils.AdjustHelper;
 
 public class StoresListActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener,
         StoresRecyclerAdapter.OnStoreSelectListener,
@@ -112,6 +113,7 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
     @Override
     public void onStoreSelect(StoreModel store) {
         if (mode == OPEN_STORE_MODE) {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenStoreFromList);
             StoreActivity.show(this,store);
         } else if (mode == SELECT_STORE_MODE) {
             Intent intent = new Intent();

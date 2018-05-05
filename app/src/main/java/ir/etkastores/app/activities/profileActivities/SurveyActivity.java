@@ -25,6 +25,7 @@ import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -172,6 +173,7 @@ public class SurveyActivity extends BaseActivity implements EtkaToolbar.EtkaTool
                 if (isFinishing()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.SubmitSurvey);
                         Toaster.showLong(SurveyActivity.this,R.string.surveySubmitSuccessfully);
                         finish();
                     } else {

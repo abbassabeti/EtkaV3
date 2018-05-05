@@ -8,7 +8,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,13 +28,13 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatHorizontalRecyclerListAdapter;
 import ir.etkastores.app.data.HekmatProductsManager;
 import ir.etkastores.app.models.hekmat.HekmatModel;
-import ir.etkastores.app.models.hekmat.HekmatProductModel;
 import ir.etkastores.app.models.store.FeatureModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.StorePagerSliderView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 import ir.etkastores.app.utils.IntentHelper;
@@ -170,6 +169,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
                     @Override
                     public void OnHekmatItemClick(HekmatModel hekmatModel) {
                         if (isFinishing()) return;
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatFromStore);
                         HekmatProductsActivity.show(StoreActivity.this,hekmatModel);
                     }
                 });
@@ -198,18 +198,21 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     @OnClick(R.id.btn_share)
     public void onShareButtonClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.ShareStore);
         String shareBody = String.format(getResources().getString(R.string.etkaStoreBranchXAddressX), storeModel.getName(), IntentHelper.getGoogleMapLocationAddress(storeModel.getLatitude(), storeModel.getLongitude()));
         IntentHelper.share(this, storeModel.getName(), shareBody);
     }
 
     @OnClick(R.id.btn_traceRouts)
     public void onTraceRoutesButtonClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.TraceRoutesStores);
         IntentHelper.openWayTracer(this, storeModel.getLatitude(), storeModel.getLongitude(),storeModel.getName());
     }
 
     @OnClick(R.id.btn_inStoreMode)
     public void onInStoreModeClick() {
         if (storeModel.hasInStoreMode()){
+            AdjustHelper.sendAdjustEvent(AdjustHelper.InStoreMode);
             InStoreModeActivity.show(this,storeModel);
         }else{
             Toaster.show(this, R.string.thisStoreNotSupportInStoreModeYet);
@@ -223,6 +226,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AdjustHelper.sendAdjustEvent(AdjustHelper.CallPhoneStore);
                 IntentHelper.showDialer(StoreActivity.this, phoneNumber);
             }
         });

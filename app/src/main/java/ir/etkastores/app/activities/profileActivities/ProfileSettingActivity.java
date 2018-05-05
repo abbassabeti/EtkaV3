@@ -18,6 +18,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.procalendar.XCalendar;
 import ir.etkastores.app.data.ProfileManager;
@@ -132,11 +133,13 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @OnClick(R.id.editButton)
     public void onEditClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenEditProfile);
         EditProfileActivity.show(this);
     }
 
     @OnClick(R.id.logoutButton)
     public void onLogoutButtonClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.Logout);
         ProfileManager.logOut();
         Toaster.show(this,R.string.logOutSuccessFully);
         onBackPressed();
@@ -144,6 +147,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @OnClick(R.id.changePasswordButton)
     public void onChangePasswordButtonClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenChangePassword);
         ChangePasswordActivity.show(this);
     }
 
@@ -174,8 +178,10 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (EtkaPushNotificationConfig.isHekmatSubscribed()){
+                AdjustHelper.sendAdjustEvent(AdjustHelper.DisableHekmatNotifications);
                 EtkaPushNotificationConfig.unregisterHekmat();
             }else{
+                AdjustHelper.sendAdjustEvent(AdjustHelper.EnableHekmatNotifications);
                 EtkaPushNotificationConfig.registerHekmat();
             }
         }

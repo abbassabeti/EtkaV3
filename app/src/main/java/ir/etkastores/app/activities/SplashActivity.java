@@ -19,6 +19,7 @@ import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.webServices.AccessToken;
@@ -56,6 +57,7 @@ public class SplashActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Splash Activity");
+        AdjustHelper.sendAdjustEvent(AdjustHelper.SplashOpen);
     }
 
     private void checkRemoteConfigs() {

@@ -21,6 +21,7 @@ import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.webServices.ApiProvider;
@@ -122,6 +123,7 @@ public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.
                 if (req == null || req.isCanceled()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.SuccessChangePassword);
                         ProfileManager.saveUserNameAndPassword(ProfileManager.getUserName(), requestModel.getNewPassword());
                         Toaster.show(ChangePasswordActivity.this, R.string.passwordChangeSuccessfully);
                         onBackPressed();
@@ -137,6 +139,7 @@ public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.
             @Override
             public void onFailure(Call<OauthResponse<String>> call, Throwable throwable) {
                 if (req == null || req.isCanceled()) return;
+                AdjustHelper.sendAdjustEvent(AdjustHelper.FailureChangePassword);
                 loadingDialog.cancel();
                 showRetryDialog(getResources().getString(R.string.errorInChangePassword));
             }

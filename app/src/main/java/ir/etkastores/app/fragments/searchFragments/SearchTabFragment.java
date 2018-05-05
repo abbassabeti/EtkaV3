@@ -34,6 +34,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -120,6 +121,7 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
 
     @OnClick(R.id.scanButton)
     public void onScanCameraButtonClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenBarcodeScanner);
         ScannerActivity.show(this);
     }
 
@@ -162,6 +164,7 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
         if (txt.startsWith("#")) {
             ProductActivity.show(getActivity(), StringUtils.toEnglishDigit(txt.replace("#", "")));
         } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.SearchKeyword);
             SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
             searchProductRequestModel.setTitle(searchInput.getText().toString());
             CategoriesFilterActivity.show(getActivity(),searchProductRequestModel);
@@ -170,6 +173,7 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
 
     @Override
     public void onCategoryItemClick(CategoryModel model, int position) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.SelectCategoryFromSearch);
         CategoriesFilterActivity.show(getActivity(), model);
     }
 

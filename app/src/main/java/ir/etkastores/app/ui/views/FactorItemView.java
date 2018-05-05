@@ -29,6 +29,7 @@ import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.PurchasedProductModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.widgets.SquareImageView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 
@@ -129,6 +130,7 @@ public class FactorItemView extends CardView implements View.OnClickListener {
 
     @OnClick(R.id.showListButton)
     public void onShowListButtonClicked(){
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenFactorList);
         FactorActivity.show(getContext(),factor);
     }
 

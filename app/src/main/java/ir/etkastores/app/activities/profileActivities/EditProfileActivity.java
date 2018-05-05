@@ -25,6 +25,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.procalendar.XCalendar;
@@ -367,6 +368,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
 
     @OnClick(R.id.saveChangesButton)
     public void onSaveChangesClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.EditProfile);
         UserProfileModel profileModel = new UserProfileModel();
         profileModel.setFirstName(firstNameInputEt.getText().toString());
         profileModel.setLastName(lastNameEt.getText().toString());

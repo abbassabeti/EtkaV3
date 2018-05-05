@@ -28,6 +28,7 @@ import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -140,6 +141,7 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
                 if (isFinishing()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.SubmitNewTicket);
                         Toaster.showLong(NewTicketActivity.this,R.string.ticketSendSuccessfully);
                         finish();
                     } else {

@@ -21,6 +21,7 @@ import ir.etkastores.app.adapters.viewPagerAdapters.GlobalFragmentPagerAdapter;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.RTLTabLayout;
+import ir.etkastores.app.utils.AdjustHelper;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -85,6 +86,7 @@ public class HomeFragment extends Fragment implements EtkaToolbar.EtkaToolbarAct
     @Override
     public void onActionClick(int actionCode) {
         if (actionCode == NEWS_BUTTON){
+            AdjustHelper.sendAdjustEvent(AdjustHelper.NewsButton);
             NewsListActivity.show(getActivity());
         }
     }

@@ -44,6 +44,7 @@ import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.services.StoresGeofenceTransitionsIntentService;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
+import ir.etkastores.app.utils.AdjustHelper;
 
 public class MainActivity extends BaseActivity {
 
@@ -110,24 +111,28 @@ public class MainActivity extends BaseActivity {
                 case R.id.navigation_home:
                     if (!(getCurrentFragment() instanceof HomeFragment)) {
                         replaceFragment(new HomeFragment());
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.HomeTab);
                     }
                     break;
 
                 case R.id.navigation_map:
                     if (!(getCurrentFragment() instanceof MapFragment)) {
                         replaceFragment(new MapFragment());
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.MapTab);
                     }
                     break;
 
                 case R.id.navigation_profile:
                     if (!(getCurrentFragment() instanceof ProfileFragment)) {
                         replaceFragment(new ProfileFragment());
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.ProfileTab);
                     }
                     break;
 
                 case R.id.navigation_search:
                     if (!(getCurrentFragment() instanceof SearchTabFragment)) {
                         replaceFragment(new SearchTabFragment());
+                        AdjustHelper.sendAdjustEvent(AdjustHelper.SearchTab);
                     }
                     break;
             }

@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ContactUsManager;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.IntentHelper;
 
 /**
@@ -47,11 +48,13 @@ public class ContactUsFragment extends Fragment {
 
     @OnClick(R.id.directCallToPRButton)
     public void onDirectCallToPRButtonClick(){
+        AdjustHelper.sendAdjustEvent(AdjustHelper.CallToSupport);
         IntentHelper.showDialer(getActivity(), ContactUsManager.getInstance().getPhone());
     }
 
     @OnClick(R.id.sendMailButton)
     public void sendMailButtonClick(){
+        AdjustHelper.sendAdjustEvent(AdjustHelper.EmailToSupport);
         IntentHelper.sendEmail(getActivity(), ContactUsManager.getInstance().getEmail(),"","");
     }
 

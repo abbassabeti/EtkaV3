@@ -15,6 +15,7 @@ import java.util.List;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.utils.AdjustHelper;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -51,6 +52,7 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
 
     @Override
     public void handleResult(Result result) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.ScanBarcode);
         if(BuildConfig.DEBUG){
             Log.e("Scanner", "result value: "+result.getText());
             Log.e("Scanner", "result format: "+result.getBarcodeFormat().toString());

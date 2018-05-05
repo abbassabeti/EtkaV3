@@ -15,6 +15,7 @@ import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.hekmat.HekmatProductModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 
 public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, HekmatProductSecondLevelRecyclerAdapter.OnHekmatProductClickListener {
 
@@ -71,6 +72,7 @@ public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.
 
     @Override
     public void onHekmatProductClick(HekmatProductModel productModel) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.HekmatShowStores);
         StoresListActivity.showForOpenStore(this,productModel);
     }
 

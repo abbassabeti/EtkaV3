@@ -20,6 +20,7 @@ import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -97,6 +98,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
 
     @Override
     public void onHekmatItemClick(HekmatModel hekmatModel) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.ClickHekmatHome);
         HekmatProductsActivity.show(getActivity(), hekmatModel);
     }
 

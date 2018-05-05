@@ -46,7 +46,7 @@ public class AdjustHelper {
     //18
     public final static String InStoreMode = "tfl61f";
     //19
-    public final static String InviteFriend = "k1b86n";
+    public final static String OpenInviteFriend = "k1b86n";
     //20
     public final static String Login = "6c7p9o";
     //21
@@ -118,23 +118,23 @@ public class AdjustHelper {
     //54
     public final static String ShareStore = "d8gi9m";
     //55
-    public final static String ShoppingHistory = "6qbv6l";
-    //56
-    public final static String ShoppingHistoryListMode = "1mq17i";
-    //57
     public final static String ShowFAQDetail = "xm2r0h";
-    //58
+    //56
     public final static String SplashOpen = "knk3du";
-    //59
+    //57
     public final static String SubmitNewTicket = "qy5kh1";
-    //60
+    //58
     public final static String SubmitSurvey = "c4kljz";
-    //61
+    //59
     public final static String SuccessChangePassword = "as649e";
-    //62
+    //60
     public final static String TraceRoutesStores = "h8u3le";
-    //63
+    //61
     public final static String WalkthroughEnter = "elnh5m";
+    //62
+    public final static String OpenFactors = "urae4z";
+    //63
+    public final static String OpenFactorList = "1ckm9r";
 
     public static void sendAdjustEvent(String name){
         try {

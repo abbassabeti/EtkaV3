@@ -11,6 +11,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
 
 public class OtherPagesActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -48,16 +49,19 @@ public class OtherPagesActivity extends BaseActivity implements EtkaToolbar.Etka
 
     @OnClick(R.id.termAndConditionsButton)
     void onTermAndConditionsButtonClick(){
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenRules);
         TextInfoActivity.showTermAndConditions(this);
     }
 
     @OnClick(R.id.userPrivacyButton)
     void onUserPrivacyButtonClick(){
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenUserPrivacy);
         TextInfoActivity.showUserPrivacy(this);
     }
 
     @OnClick(R.id.aboutEtkaStoresButton)
     void onAboutEtkaStoresbuttonClick(){
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenAboutEtka);
         TextInfoActivity.showAboutEtkaStores(this);
     }
 

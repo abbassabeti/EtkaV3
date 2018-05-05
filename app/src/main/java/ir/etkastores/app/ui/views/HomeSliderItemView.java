@@ -22,6 +22,7 @@ import ir.etkastores.app.activities.CategoriesFilterActivity;
 import ir.etkastores.app.models.home.BannerModel;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.widgets.ViewPager16x8;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.utils.image.ImageLoader;
 
@@ -98,6 +99,7 @@ public class HomeSliderItemView extends LinearLayout {
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    AdjustHelper.sendAdjustEvent(AdjustHelper.ClickBannerHome);
                     BannerModel model = items.get(position);
                     if (!TextUtils.isEmpty(model.getExternalUrl())) {
                         IntentHelper.showWeb(getContext(),model.getExternalUrl());

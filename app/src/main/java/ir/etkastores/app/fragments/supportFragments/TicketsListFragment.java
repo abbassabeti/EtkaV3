@@ -22,6 +22,7 @@ import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,6 +91,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
         NewTicketActivity.show(getActivity());
     }
 

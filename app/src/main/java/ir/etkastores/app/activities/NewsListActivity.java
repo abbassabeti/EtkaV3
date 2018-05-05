@@ -19,6 +19,7 @@ import ir.etkastores.app.models.news.NewsResponseModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -164,6 +165,7 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
     @Override
     public void onNewsClicked(NewsItem item) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewsDetail);
         NewsActivity.show(this, item);
     }
 

@@ -26,6 +26,7 @@ import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -141,6 +142,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
 
     @Override
     public void onCategoryClicked(CategoryModel categoryModel) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.SelectCategoryFromSearch);
         if (categoryModel.hasChild()) {
             CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(),categoryModel.getTitle());
             categoriesFragment.setOnCategoryItemClickListener(this);
@@ -177,6 +179,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
 
     @Override
     public void onSelectSort(int sort) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.FilterSort);
         String sortValue = "";
         switch (sort) {
             case TOP_OFFER_SORT:
@@ -203,6 +206,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
 
     @Override
     public void onSelectCategory(List<CategoryModel> categories) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.FilterCategory);
         SearchProductRequestModel searchProductRequestModel = productsListFragment.getSearchRequestModel();
         List<Long> ids = new ArrayList<>();
         for (CategoryModel model : categories) {

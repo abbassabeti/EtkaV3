@@ -24,6 +24,7 @@ import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -136,6 +137,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
 
     @Override
     public void onProductItemClick(ProductModel productModel) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProductFromNextShoppingList);
         productModel.setRelatedProducts(adapter.getItems());
         ProductActivity.show(this, productModel);
     }
@@ -188,6 +190,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
     private ProductModel tempProductForDelete;
 
     private void deleteProductFromList(ProductModel productModel) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.DeleteFromNextShoppingList);
         tempProductForDelete = productModel;
         loadingDialog = DialogHelper.showLoading(NextShoppingListActivity.this, R.string.inDeletingProductFromYourNextShoppingList);
         deleteProductReq = ApiProvider.getAuthorizedApi().deleteSavedProduct(productModel.getId());

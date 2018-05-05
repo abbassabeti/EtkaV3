@@ -24,6 +24,7 @@ import ir.etkastores.app.ui.dialogs.ResetPasswordDialog;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
+import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.UserSettings;
 import ir.etkastores.app.webServices.AccessToken;
@@ -97,11 +98,11 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         super.onResume();
         String userEmail = UserSettings.getEmailAddress();
         String password = UserSettings.getPasswrod();
-        if (!TextUtils.isEmpty(userEmail)){
+        if (!TextUtils.isEmpty(userEmail)) {
             emailAddressInput.setText(userEmail);
         }
 
-        if (!TextUtils.isEmpty(password)){
+        if (!TextUtils.isEmpty(password)) {
             passwordInput.setText(password);
         }
     }
@@ -116,39 +117,39 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     }
 
     @OnClick(R.id.registerButton)
-    public void onRegisterClick(){
-        ActivityUtils.replaceFragment(getActivity(),R.id.loginRegisterFragmentHolder,new RegisterFragment(),RegisterFragment.TAG,true);
+    public void onRegisterClick() {
+        ActivityUtils.replaceFragment(getActivity(), R.id.loginRegisterFragmentHolder, new RegisterFragment(), RegisterFragment.TAG, true);
     }
 
     @OnClick(R.id.loginButton)
-    public void onLoginClick(){
+    public void onLoginClick() {
         String userName, password;
 
-        if (loginType == LOGIN_TYPE_CLUBE_CARD){
+        if (loginType == LOGIN_TYPE_CLUBE_CARD) {
             userName = clubCardNumberInput.getText().toString();
             password = clubCardPasswordInput.getText().toString();
-        }else{
+        } else {
             userName = emailAddressInput.getText().toString();
             password = passwordInput.getText().toString();
         }
 
-        if (TextUtils.isEmpty(userName)){
-            Toaster.show(getActivity(),"userName is empty");
+        if (TextUtils.isEmpty(userName)) {
+            Toaster.show(getActivity(), "userName is empty");
             return;
         }
 
-        if (TextUtils.isEmpty(password)){
-            Toaster.show(getActivity(),"password is empty");
+        if (TextUtils.isEmpty(password)) {
+            Toaster.show(getActivity(), "password is empty");
             return;
         }
 
-        login(userName,password);
+        login(userName, password);
     }
 
     @OnClick(R.id.forgotPasswordButton)
-    public void onForgotPasswordClick(){
-       resetPasswordDialog = new ResetPasswordDialog();
-       resetPasswordDialog.show(getChildFragmentManager(), new ResetPasswordDialog.OnUserEnterPhoneNumberToResetListener() {
+    public void onForgotPasswordClick() {
+        resetPasswordDialog = new ResetPasswordDialog();
+        resetPasswordDialog.show(getChildFragmentManager(), new ResetPasswordDialog.OnUserEnterPhoneNumberToResetListener() {
             @Override
             public void onUserSetPhoneNumberToReset(String phone) {
                 resetPasswordReq = ApiProvider.getApi().resetPassword(phone);
@@ -157,32 +158,32 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         });
     }
 
-    private void sendResetPasswordRequest(){
+    private void sendResetPasswordRequest() {
         resetPasswordReq.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
                 if (!isAdded()) return;
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         showSuccessResetPasswordDialog(response.body().getMeta().getMessage());
                         resetPasswordDialog.getDialog().cancel();
-                    }else{
-                        Toaster.showLong(getActivity(),response.body().getMeta().getMessage());
+                    } else {
+                        Toaster.showLong(getActivity(), response.body().getMeta().getMessage());
                     }
-                }else{
-                    onFailure(call,null);
+                } else {
+                    onFailure(call, null);
                 }
             }
 
             @Override
             public void onFailure(Call<OauthResponse<String>> call, Throwable throwable) {
                 if (!isAdded()) return;
-                Toaster.showLong(getActivity(),R.string.errorInResettingPasswordTryLater);
+                Toaster.showLong(getActivity(), R.string.errorInResettingPasswordTryLater);
             }
         });
     }
 
-    private void showSuccessResetPasswordDialog(final String message){
+    private void showSuccessResetPasswordDialog(final String message) {
         final MessageDialog messageDialog = MessageDialog.resetPasswordSuccess(message);
         messageDialog.show(getChildFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
@@ -237,20 +238,22 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     }
 
     Call<AccessToken> loginRequest;
-    private void login(final String userName, final String password){
-        loadingDialog = DialogHelper.showLoading(getActivity(),R.string.inLogin);
-        loginRequest = ApiProvider.getLogin(userName,password);
+
+    private void login(final String userName, final String password) {
+        loadingDialog = DialogHelper.showLoading(getActivity(), R.string.inLogin);
+        loginRequest = ApiProvider.getLogin(userName, password);
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (!isAdded()) return;
                 loadingDialog.cancel();
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+                    AdjustHelper.sendAdjustEvent(AdjustHelper.Login);
                     ApiStatics.saveToken(response.body());
-                    ProfileManager.saveUserNameAndPassword(userName,password);
+                    ProfileManager.saveUserNameAndPassword(userName, password);
                     loadProfile();
-                }else{
-                    onFailure(null,null);
+                } else {
+                    onFailure(null, null);
                 }
             }
 
@@ -269,17 +272,17 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         super.onPause();
     }
 
-    private void cancelRequest(){
+    private void cancelRequest() {
         if (loginRequest != null) loginRequest.cancel();
     }
 
-    void showRetryDialog(String message){
+    void showRetryDialog(String message) {
         final MessageDialog messageDialog = MessageDialog.loginError(message);
         messageDialog.show(getChildFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 if (!isAdded()) return;
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     onLoginClick();
                 }
                 messageDialog.getDialog().cancel();
@@ -293,22 +296,22 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         });
     }
 
-    private void loadProfile(){
-        loadingDialog = DialogHelper.showLoading(getActivity(),R.string.inLoadingUserProfileInfo);
+    private void loadProfile() {
+        loadingDialog = DialogHelper.showLoading(getActivity(), R.string.inLoadingUserProfileInfo);
         ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
                 if (!isAdded()) return;
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         ProfileManager.saveProfile(response.body().getData());
-                        Toaster.showLong(getActivity(),R.string.loginSuccessfulMessage);
+                        Toaster.showLong(getActivity(), R.string.loginSuccessfulMessage);
                         getActivity().finish();
-                    }else{
+                    } else {
                         showRetryDialog(response.body().getMeta().getMessage());
                     }
-                }else{
-                    onFailure(null,null);
+                } else {
+                    onFailure(null, null);
                 }
             }
 

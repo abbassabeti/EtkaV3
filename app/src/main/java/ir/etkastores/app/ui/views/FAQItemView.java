@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.utils.AdjustHelper;
 
 /**
  * Created by Sajad on 1/26/18.
@@ -87,6 +88,7 @@ public class FAQItemView extends CardView implements View.OnClickListener {
             item.setExpanded(true);
             rowIcon.setImageResource(R.drawable.ic_arrow_up_black_24dp);
         } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.ShowFAQDetail);
             item.setExpanded(false);
             rowIcon.setImageResource(R.drawable.ic_arrow_down_black_24dp);
         }
