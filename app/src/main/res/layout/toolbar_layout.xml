@@ -18,6 +18,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/buttonsHolder"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
@@ -90,8 +91,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/buttonsHolder"
             android:layout_toLeftOf="@id/toolbarBackButton"
             android:paddingRight="8dp"
+            android:lines="1"
+            android:ellipsize="end"
             android:textColor="@color/white" />
 
     </RelativeLayout>

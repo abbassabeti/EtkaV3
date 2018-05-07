@@ -77,7 +77,7 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
         super.onAttachedToRecyclerView(recyclerView);
         FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(context);
         layoutManager.setFlexDirection(FlexDirection.ROW);
-        layoutManager.setJustifyContent(JustifyContent.FLEX_START);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_END);
         recyclerView.setLayoutManager(layoutManager);
     }
 

@@ -64,6 +64,14 @@ public class MessageDialog extends BaseDialog {
                 null);
     }
 
+    public static MessageDialog sureToLogout() {
+        return newInstance(R.drawable.ic_warning_orange_48dp,
+                EtkaApp.getInstance().getResources().getString(R.string.logout),
+                EtkaApp.getInstance().getResources().getString(R.string.areYouSureToLogout),
+                EtkaApp.getInstance().getResources().getString(R.string.yes),
+                EtkaApp.getInstance().getResources().getString(R.string.no));
+    }
+
     public static MessageDialog sureToDeleteProductFromNextShoppingList() {
         return newInstance(R.drawable.ic_warning_orange_48dp,
                 EtkaApp.getInstance().getResources().getString(R.string.deleteProduct),

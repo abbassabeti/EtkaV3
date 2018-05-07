@@ -1,6 +1,5 @@
 package ir.etkastores.app.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +14,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +31,7 @@ import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.ProductImagesSliderView;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
+import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -61,6 +59,8 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     TextView mDetail;
     @BindView(R.id.priceDiscounted)
     TextView mPriceDiscounted;
+    @BindView(R.id.productDescriptionTitle)
+    TextView mDescriptionTitle;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     @BindView(R.id.extraItemsHolder)
@@ -133,9 +133,10 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
         mSlider.setImages(productModel.getImageUrl());
         saveCountValue = productModel.getSavedCount();
+        mDescriptionTitle.setTypeface(FontUtils.getBoldTypeFace());
         updateSaveCountValue();
         if (productModel.getRelatedProducts() != null && productModel.getRelatedProducts().size() > 0) {
-            CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), productModel.getRelatedProducts(),null);
+            CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), productModel.getRelatedProducts(), null);
             relatedProducts.setOnProductClickListener(this);
             extrasHolder.addView(relatedProducts);
         }
@@ -190,7 +191,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
     private void showProductNotFoundDialog(String message) {
         String msg = message;
-        if (TextUtils.isEmpty(msg)){
+        if (TextUtils.isEmpty(msg)) {
             msg = EtkaApp.getInstance().getResources().getString(R.string.productNotFound);
         }
         messageDialog = MessageDialog.productNotFound(msg);
@@ -235,12 +236,11 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         switch (view.getId()) {
             case R.id.addToNextShoppingListButton:
                 AdjustHelper.sendAdjustEvent(AdjustHelper.AddToNextShoppingList);
-                if (ProfileManager.isGuest()){
-                    Toaster.showLong(this,R.string.loginRequiredForThisSection);
-                    LoginRegisterActivity.showLogin(this);
-                    return;
+                if (ProfileManager.isGuest()) {
+                    showNeedToLoginDialog();
+                }else{
+                    sendAddToNextShoppingListRequest();
                 }
-                sendAddToNextShoppingListRequest();
                 break;
 
             case R.id.saveMinusButton:
@@ -263,7 +263,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private void sendAddToNextShoppingListRequest() {
         if (isFinishing()) return;
         if (ProfileManager.isGuest()) {
-            showNedToLoginDialog();
+            showNeedToLoginDialog();
             return;
         }
         loadingDialog = DialogHelper.showLoading(this, R.string.inSavingToNextShoppingList);
@@ -295,7 +295,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         });
     }
 
-    private void showNedToLoginDialog() {
+    private void showNeedToLoginDialog() {
         final MessageDialog messageDialog = MessageDialog.loginRequired();
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
@@ -345,7 +345,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     public void onProductClick(ProductModel productModel) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProductFromRelateds);
         productModel.setRelatedProducts(this.productModel.getRelatedProducts());
-        ProductActivity.show(this,productModel);
+        ProductActivity.show(this, productModel);
     }
 
 }

@@ -16,9 +16,11 @@ import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.procalendar.XCalendar;
 import ir.etkastores.app.data.ProfileManager;
@@ -139,10 +141,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     @OnClick(R.id.logoutButton)
     public void onLogoutButtonClick() {
-        AdjustHelper.sendAdjustEvent(AdjustHelper.Logout);
-        ProfileManager.logOut();
-        Toaster.show(this,R.string.logOutSuccessFully);
-        onBackPressed();
+        showSureToLogoutDialog();
     }
 
     @OnClick(R.id.changePasswordButton)
@@ -187,5 +186,27 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         }
 
     };
+
+    private void showSureToLogoutDialog(){
+        final MessageDialog messageDialog = MessageDialog.sureToLogout();
+        messageDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (isFinishing()) return;
+                if (button == RIGHT_BUTTON){
+                    AdjustHelper.sendAdjustEvent(AdjustHelper.Logout);
+                    ProfileManager.logOut();
+                    Toaster.show(ProfileSettingActivity.this,R.string.logOutSuccessFully);
+                    onBackPressed();
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
+    }
 
 }

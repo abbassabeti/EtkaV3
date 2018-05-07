@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
-import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,8 +13,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.R;
-import ir.etkastores.app.activities.profileActivities.FAQActivity;
-import ir.etkastores.app.activities.profileActivities.FactorActivity;
 
 /**
  * Created by Sajad on 9/1/17.

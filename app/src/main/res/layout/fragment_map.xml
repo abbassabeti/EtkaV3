@@ -30,7 +30,7 @@
                 android:background="@color/transparent"
                 android:elevation="1dp"
                 android:gravity="center_vertical|right"
-                android:hint="@string/performSearchLikeChamranStore"
+                android:hint="@string/performSearchLikeChamran"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:popupBackground="@drawable/rect_white_bottom_round"

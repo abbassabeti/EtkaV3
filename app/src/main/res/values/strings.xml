@@ -8,7 +8,7 @@
     <string name="profile">پروفایل</string>
     <string name="registerWithyourEmail">با ایمیل خود ثبت نام کنید</string>
     <string name="ifRegisteredThenLogin">اگر کارت باشگاه مشتریان اتکا دارید و یا قبلا ثبت نام کرده اید، وارد شوید</string>
-    <string name="performSearchLikeChamranStore">جستجو کنید... مثلا فروشگاه چمران</string>
+    <string name="performSearchLikeChamran">جستجو کنید... مثلا چمران</string>
     <string name="performSearchLikeGreenTea">جستجو کنید... مثلا چای سبز</string>
     <string name="sorting">مرتب سازی</string>
     <string name="filtering">فیلتر کردن</string>
@@ -74,7 +74,7 @@
     <string name="contactUs">تماس با ما</string>
     <string name="youContactUsByFollowingMethods">شما کاربران گرامی می توانید از طریق یکی از روش های زیر با ما در تماس باشید.</string>
     <string name="directCallToEtkaPR">تماس مستقیم با روابط عمومی اتکا</string>
-    <string name="sendEmail">ارسال میل</string>
+    <string name="sendEmail">ارسال ایمیل</string>
     <string name="webSite">وب سایت</string>
     <string name="youCanIncreaseYourCardClubeCashByFollowingMethods">شما می توانید به یکی از حالت های زیر اعتبار کارت باشگاه مشتریان خود را افزایش داده و در خرید بعدی از آن استفاده کنید.</string>
     <string name="inThisSectionYouCanSendRequests">در این بخش شما می توانید پیشنهاد، انتقاد، گزارش مشکل و یا درخواست کالای مورد نیاز خود را ثبت کنید.</string>
@@ -139,6 +139,7 @@
     <string name="yes">بله</string>
     <string name="no">خیر</string>
     <string name="detailIsNotAvailable">اطلاعات تکمیلی وجود ندارد.</string>
+    <string name="productOverallDescriptionTitle">توضیحات کلی محصول:</string>
     <string name="productNotFound">محصول مورد نظر پیدا نشد!</string>
     <string name="error">خطا</string>
     <string name="errorInLoadProduct">خطا در دریافت اطلاعات محصول، از دوباره تلاش کنید</string>
@@ -191,6 +192,7 @@
     <string name="errorInLoadingNextShoppingList">خطا در دریافت اطلاعات لیست خرید بعدی.</string>
     <string name="deleteProduct">حذف محصول</string>
     <string name="areYouSureToDeleteThisProductFromNextShoppingList">"آیا قصد حذف این محصول را از لیست خرید بعدی دارید؟"</string>
+    <string name="areYouSureToLogout">"آیا قصد خروج از حساب کاربری خود را دارید؟"</string>
     <string name="inDeletingProductFromYourNextShoppingList">در حال حذف محصول از لیست خرید بعدی...</string>
     <string name="errorInDeletingProductTryLater">خطا در حذف محصول از لیست خرید بعدی، از دوباره تلاش کنید.</string>
     <string name="productDeletedSuccessfully">محصول مورد نظر با موفقیت حذف شد.</string>

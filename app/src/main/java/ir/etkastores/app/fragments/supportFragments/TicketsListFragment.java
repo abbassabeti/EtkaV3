@@ -1,6 +1,7 @@
 package ir.etkastores.app.fragments.supportFragments;
 
 import android.os.Bundle;
+import android.os.Trace;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -14,9 +15,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.activities.LoginRegisterActivity;
 import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketsListAdapter;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
@@ -78,6 +81,14 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     @Override
     public void onResume() {
         super.onResume();
+        if (ProfileManager.isGuest()) {
+            swipeRefresh.setEnabled(false);
+            messageView.show(R.drawable.ic_warning_orange_48dp, getResources().getString(R.string.loginRequiredForThisSection), null, null);
+            hideLoading();
+        } else {
+            swipeRefresh.setEnabled(true);
+            checkToLoadDataViews();
+        }
         EtkaApp.getInstance().screenView("Tickets List Fragment");
     }
 
@@ -91,8 +102,12 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
-        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
-        NewTicketActivity.show(getActivity());
+        if (ProfileManager.isGuest()) {
+            showNeedToLogin();
+        } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
+            NewTicketActivity.show(getActivity());
+        }
     }
 
     @Override
@@ -122,6 +137,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     private void loadTickets() {
         if (!isAdded()) return;
         showLoading();
+        messageView.hide();
         ticketReq = ApiProvider.getAuthorizedApi().getTickets(reqPage);
         ticketReq.enqueue(new Callback<OauthResponse<TicketResponseModel>>() {
             @Override
@@ -210,7 +226,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     }
 
     private void checkToLoadDataViews() {
-        if (adapter.getItemCount() == 0 && !listIsEmpty) {
+        if (adapter.getItemCount() == 0 && !listIsEmpty && !ProfileManager.isGuest() && (ticketReq == null || ticketReq.isCanceled())) {
             loadTickets();
         }
     }
@@ -218,7 +234,27 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
     @Override
     public void onRefresh() {
         reqPage = 1;
+        adapter.clear();
         loadTickets();
+    }
+
+    private void showNeedToLogin() {
+        final MessageDialog messageDialog = MessageDialog.loginRequired();
+        messageDialog.show(getChildFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (!isAdded()) return;
+                if (button == RIGHT_BUTTON) {
+                    LoginRegisterActivity.showLogin(getActivity());
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
     }
 
 }

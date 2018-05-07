@@ -156,7 +156,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
             recyclerView.setAdapter(filterAdapter);
             filterAdapter.setFilterCallback(this);
             addFragmentToBackStack(productsListFragment);
-            loadMenuCategories(categoryModel.getParentId());
+            loadMenuCategories(categoryModel.getId());
             unlockDrawer();
         }
         toolbar.setTitle(categoryModel.getTitle());

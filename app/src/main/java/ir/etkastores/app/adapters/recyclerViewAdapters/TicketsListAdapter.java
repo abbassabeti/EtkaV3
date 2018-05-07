@@ -96,6 +96,11 @@ public class TicketsListAdapter extends RecyclerView.Adapter<TicketsListAdapter.
         void onTicketListItemClick(TicketItem ticketItem);
     }
 
+    public void clear(){
+        items = new ArrayList<>();
+        notifyDataSetChanged();
+    }
+
     public class TicketViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.ticketSubject)
