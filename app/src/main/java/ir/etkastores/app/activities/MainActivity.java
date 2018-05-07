@@ -1,6 +1,5 @@
 package ir.etkastores.app.activities;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,13 +8,6 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.gms.common.api.GoogleApi;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.Geofence;
-import com.google.android.gms.location.GeofencingApi;
-import com.google.android.gms.location.GeofencingClient;
-import com.google.android.gms.location.GeofencingRequest;
-import com.google.android.gms.location.LocationServices;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
@@ -42,9 +34,9 @@ import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
-import ir.etkastores.app.services.StoresGeofenceTransitionsIntentService;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.EtkaRemoteConfigManager;
 
 public class MainActivity extends BaseActivity {
 
@@ -71,6 +63,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EtkaRemoteConfigManager.checkRemoteConfigs();
 
         bottomNavigationView.enableAnimation(false);
         bottomNavigationView.enableItemShiftingMode(false);
@@ -274,33 +267,6 @@ public class MainActivity extends BaseActivity {
 
         }
     }
-
-//    private void initStoresGeoFencing(){
-//        GeofencingClient geofencingClient = LocationServices.getGeofencingClient(this);
-//        Geofence geofence = new Geofence.Builder()
-//                .build();
-//        GeofencingRequest geofencingRequest = new GeofencingRequest.Builder()
-//                .addGeofence(null)
-//                .build();
-//
-//        geofencingClient.addGeofences(geofencingRequest,getGeofencePendingIntent());
-//    }
-//
-//    PendingIntent geofenceTransitionsIntentService;
-//
-//    private PendingIntent getGeofencePendingIntent() {
-//        // Reuse the PendingIntent if we already have it.
-//        if (geofenceTransitionsIntentService != null) {
-//            return geofenceTransitionsIntentService;
-//        }
-//        Intent intent = new Intent(this, StoresGeofenceTransitionsIntentService.class);
-//        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when
-//        // calling addGeofences() and removeGeofences().
-//        geofenceTransitionsIntentService = PendingIntent.getService(this, 0, intent, PendingIntent.
-//                FLAG_UPDATE_CURRENT);
-//        return geofenceTransitionsIntentService;
-//
-//    }
 
 }
 

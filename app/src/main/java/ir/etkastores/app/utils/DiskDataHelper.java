@@ -16,35 +16,35 @@ public class DiskDataHelper {
 
     public static void putString(String key, String value) {
         EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
-                .putString(key,value)
+                .putString(key, value)
                 .apply();
     }
 
     public static String getString(String key) {
         return EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
-                .getString(key,null);
+                .getString(key, null);
     }
 
     public static void putInt(String key, int value) {
         EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
-                .putInt(key,value)
+                .putInt(key, value)
                 .apply();
     }
 
     public static int getInt(String key) {
         return EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
-                .getInt(key,0);
+                .getInt(key, 0);
     }
 
     public static void putBool(String key, boolean value) {
         EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE).edit()
-                .putBoolean(key,value)
+                .putBoolean(key, value)
                 .apply();
     }
 
     public static boolean getBool(String key) {
         return EtkaApp.getInstance().getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
-                .getBoolean(key,false);
+                .getBoolean(key, false);
     }
 
 
@@ -52,20 +52,39 @@ public class DiskDataHelper {
 
     private final static String LAST_TOKEN_KEY = "LAST_TOKEN_KEY";
 
-    public static void saveLastToken(AccessToken token){
-        if (token!=null){
-            putString(LAST_TOKEN_KEY,new Gson().toJson(token));
-        }else{
-            putString(LAST_TOKEN_KEY,"");
+    public static void saveLastToken(AccessToken token) {
+        if (token != null) {
+            putString(LAST_TOKEN_KEY, new Gson().toJson(token));
+        } else {
+            putString(LAST_TOKEN_KEY, "");
         }
     }
 
-    public static AccessToken getLastToken(){
+    public static AccessToken getLastToken() {
         try {
-            return new Gson().fromJson(getString(LAST_TOKEN_KEY),AccessToken.class);
-        }catch (Exception err){
+            return new Gson().fromJson(getString(LAST_TOKEN_KEY), AccessToken.class);
+        } catch (Exception err) {
             return null;
         }
+    }
+
+    private final static String IS_FORCE_UPDATE_AVAILABLE = "IS_FORCE_UPDATE_AVAILABLE";
+    private final static String FORCE_UPDATE_URL = "FORCE_UPDATE_URL";
+
+    public static boolean isForceAvailableUpdate() {
+        return getBool(IS_FORCE_UPDATE_AVAILABLE);
+    }
+
+    public static void setIsForceUpdateAvailable(boolean isAvailable) {
+        putBool(IS_FORCE_UPDATE_AVAILABLE, isAvailable);
+    }
+
+    public static void setForceUpdateUrl(String url){
+        putString(FORCE_UPDATE_URL,url);
+    }
+
+    public static String getForceUpdateUrl() {
+        return getString(FORCE_UPDATE_URL);
     }
 
 }

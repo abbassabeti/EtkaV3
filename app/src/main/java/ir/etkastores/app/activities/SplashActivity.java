@@ -20,7 +20,9 @@ import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
+import ir.etkastores.app.utils.EtkaRemoteConfigManager;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.webServices.AccessToken;
 import ir.etkastores.app.webServices.ApiProvider;
@@ -32,8 +34,6 @@ import retrofit2.Response;
 
 public class SplashActivity extends BaseActivity {
 
-    private FirebaseRemoteConfig firebaseRemoteConfig;
-
     private NotificationModel notificationModel;
 
     @Override
@@ -41,6 +41,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         EtkaPushNotificationConfig.registerGlobal();
+        EtkaRemoteConfigManager.checkRemoteConfigs();
 
         if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)){
             try {
@@ -50,7 +51,9 @@ public class SplashActivity extends BaseActivity {
             }
         }
 
-        checkRemoteConfigs();
+        if (DiskDataHelper.isForceAvailableUpdate()) return;
+
+        prepareAppForRun();
     }
 
     @Override
@@ -58,53 +61,6 @@ public class SplashActivity extends BaseActivity {
         super.onResume();
         EtkaApp.getInstance().screenView("Splash Activity");
         AdjustHelper.sendAdjustEvent(AdjustHelper.SplashOpen);
-    }
-
-    private void checkRemoteConfigs() {
-        firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-        FirebaseRemoteConfigSettings settings = new FirebaseRemoteConfigSettings.Builder()
-                .setDeveloperModeEnabled(true).build();
-        firebaseRemoteConfig.setConfigSettings(settings);
-        firebaseRemoteConfig.setDefaults(R.xml.remote_defaults);
-
-        firebaseRemoteConfig.fetch(180).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    firebaseRemoteConfig.activateFetched();
-                    String baseUrl = firebaseRemoteConfig.getString("v3_api_server");
-                    String minVersion = firebaseRemoteConfig.getString("v3_force_update_min_version_code");
-                    final String updateUrl = firebaseRemoteConfig.getString("v3_force_update_url");
-                    ContactUsManager.getInstance().saveEmail(firebaseRemoteConfig.getString("v3_contact_us_email"));
-                    ContactUsManager.getInstance().savePhone(firebaseRemoteConfig.getString("v3_contact_us_phone"));
-                    int minAppVersion = Integer.parseInt(minVersion);
-                    if (minAppVersion > BuildConfig.VERSION_CODE) {
-                        MessageDialog dialog = MessageDialog.forceUpdate();
-                        dialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
-                            @Override
-                            public void onDialogMessageButtonsClick(int button) {
-                                if (button == RIGHT_BUTTON) {
-                                    IntentHelper.showWeb(SplashActivity.this, updateUrl);
-                                } else {
-                                    finish();
-                                }
-                            }
-
-                            @Override
-                            public void onDialogMessageDismiss() {
-
-                            }
-                        });
-                        return;
-                    }
-                    ApiStatics.setBaseUrl(baseUrl);
-                } else {
-
-                }
-                prepareAppForRun();
-            }
-        });
-
     }
 
     private void showLogin() {

@@ -192,6 +192,10 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".activities.FinishActivity"
+            android:label="@string/title_activity_finish"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

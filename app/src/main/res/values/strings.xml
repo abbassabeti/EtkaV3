@@ -86,9 +86,6 @@
     <string name="showDirections">نمایش مسیرها</string>
     <string name="share">اشتراک گذاری</string>
     <string name="inStoreMap">نقشه‌داخل‌شعبه</string>
-    <string name="aboutEtkaStoresText">نیازمند متن از طرف شرکت</string>
-    <string name="userPrivacyText">نیازمند متن از طرف شرکت</string>
-    <string name="termAndConditionsText">نیازمند متن از طرف شرکت</string>
     <string name="nationalCode">کد ملی</string>
     <string name="forYou">برای‌شما</string>
     <string name="specialOffers">فروش‌ویژه</string>
@@ -229,5 +226,6 @@
     <string name="textBodyCantBeEmpty">متن درخواست خود را بنویسید!</string>
     <string name="errorInSendingRequest">خطایی در ارسال درخواست به وجود آمده است، از دوباره تلاش کنید.</string>
     <string name="ticketSendSuccessfully">درخواست شما با موفقیت ارسال شد.</string>
+    <string name="title_activity_finish">FinishActivity</string>
 
 </resources>
