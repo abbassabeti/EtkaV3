@@ -214,7 +214,6 @@ public class CategoriesFilterActivity extends BaseActivity implements
         }
         searchProductRequestModel.setCategoryId(ids);
         productsListFragment.refreshResult(searchProductRequestModel);
-        drawerLayout.closeDrawers();
     }
 
     private void loadMenuCategories(final long id) {
