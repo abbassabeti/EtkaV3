@@ -344,7 +344,8 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     @Override
     public void onProductClick(ProductModel productModel) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProductFromRelateds);
-        productModel.setRelatedProducts(this.productModel.getRelatedProducts());
+        if (productModel.getRelatedProducts() == null || productModel.getRelatedProducts().size() == 0)
+            productModel.setRelatedProducts(this.productModel.getRelatedProducts());
         ProductActivity.show(this, productModel);
     }
 

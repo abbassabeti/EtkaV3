@@ -190,7 +190,8 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
     @Override
     public void onProductItemClick(ProductModel productModel) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.SelectProductFromSearch);
-        productModel.setRelatedProducts(productsAdapter.getItems());
+        if (productModel.getRelatedProducts() == null || productModel.getRelatedProducts().size() == 0)
+            productModel.setRelatedProducts(productsAdapter.getItems());
         ProductActivity.show(getActivity(), productModel);
     }
 

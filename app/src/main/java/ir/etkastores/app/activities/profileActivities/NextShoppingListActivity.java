@@ -138,7 +138,8 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
     @Override
     public void onProductItemClick(ProductModel productModel) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProductFromNextShoppingList);
-        productModel.setRelatedProducts(adapter.getItems());
+        if (productModel.getRelatedProducts() == null || productModel.getRelatedProducts().size() == 0)
+            productModel.setRelatedProducts(adapter.getItems());
         ProductActivity.show(this, productModel);
     }
 

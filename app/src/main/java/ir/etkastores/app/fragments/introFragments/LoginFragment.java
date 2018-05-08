@@ -261,7 +261,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
             public void onFailure(Call<AccessToken> call, Throwable t) {
                 if (!isAdded()) return;
                 loadingDialog.cancel();
-                showRetryDialog(getResources().getString(R.string.errorInLogin));
+                showRetryDialog(getResources().getString(R.string.anErrorHappendInServerConnection));
             }
         });
     }
