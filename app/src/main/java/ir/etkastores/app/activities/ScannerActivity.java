@@ -70,8 +70,8 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
         }
         mScannerView.resumeCameraPreview(this);
         Intent intent = new Intent();
-        intent.putExtra(FORMAT, result.getBarcodeFormat().toString());
-        intent.putExtra(DATA, result.getText());
+        intent.putExtra(FORMAT, result.getBarcodeFormat().toString().toLowerCase());
+        intent.putExtra(DATA, result.getText().toLowerCase());
         setResult(RESULT_OK, intent);
         finish();
     }

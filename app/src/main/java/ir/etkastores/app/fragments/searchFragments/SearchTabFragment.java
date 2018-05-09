@@ -27,7 +27,9 @@ import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.activities.ScannerActivity;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.activities.CategoriesFilterActivity;
+import ir.etkastores.app.activities.StoreActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
+import ir.etkastores.app.data.StaticsData;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.R;
@@ -35,6 +37,7 @@ import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -136,7 +139,11 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
             case ScannerActivity.SCAN_REQUEST_CODE:
                 String format = data.getStringExtra(ScannerActivity.FORMAT);
                 String code = data.getStringExtra(ScannerActivity.DATA);
-                ProductActivity.show(getActivity(), code);
+                if (code.startsWith(StaticsData.etkaStoreScheme)){
+                    IntentHelper.showWeb(getActivity(),code);
+                }else{
+                    ProductActivity.show(getActivity(),code);
+                }
                 Log.i("scanned code is", "" + format + " | " + code);
                 break;
 

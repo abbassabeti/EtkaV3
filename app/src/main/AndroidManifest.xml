@@ -109,7 +109,16 @@
         <activity
             android:name=".activities.StoreActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar" >
+
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="etka-store" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".activities.ProductActivity"
             android:screenOrientation="portrait"

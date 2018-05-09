@@ -3,11 +3,13 @@ package ir.etkastores.app.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,19 +30,24 @@ import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatHorizontalRecyclerListAdapter;
 import ir.etkastores.app.data.HekmatProductsManager;
+import ir.etkastores.app.data.StaticsData;
+import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.store.FeatureModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.StorePagerSliderView;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 import ir.etkastores.app.utils.IntentHelper;
+import ir.etkastores.app.webServices.ApiProvider;
+import ir.etkastores.app.webServices.ApiStatics;
 
-public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
+public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, StoresManager.StoresCallback {
 
     private final static String STORE_KEY = "STORE_KEY";
 
@@ -87,6 +95,8 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     private StoreModel storeModel;
 
+    private long storeId = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +107,29 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
         toolbar.setActionListeners(this);
 
-        fillViews();
+        String url = null;
+        try {
+            Uri uri = this.getIntent().getData();
+            url = uri.toString();
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+
+        if (storeModel != null){
+            fillViews();
+        }else if (!TextUtils.isEmpty(url)){
+            url = url.replace(StaticsData.etkaStoreScheme,"");
+            url = url.trim();
+            try {
+                long id = Long.parseLong(url);
+                storeId = id;
+                loadStore();
+            }catch (Exception err){
+                finish();
+            }
+        }else{
+            finish();
+        }
     }
 
     @Override
@@ -121,17 +153,17 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
         openingTime.setText(storeModel.getOpeningHours().getOpeningTime());
 
-        if (!TextUtils.isEmpty(storeModel.getManagerName())){
-            managerName.setText(String.format(getResources().getString(R.string.managementX),storeModel.getManagerName()));
+        if (!TextUtils.isEmpty(storeModel.getManagerName())) {
+            managerName.setText(String.format(getResources().getString(R.string.managementX), storeModel.getManagerName()));
         }
 
-        if (!TextUtils.isEmpty(storeModel.getManagerImage())){
-            ImageLoader.loadImage(this,managerPhoto, storeModel.getManagerImage());
-        }else{
+        if (!TextUtils.isEmpty(storeModel.getManagerImage())) {
+            ImageLoader.loadImage(this, managerPhoto, storeModel.getManagerImage());
+        } else {
             managerPhoto.setVisibility(View.GONE);
         }
 
-        if (TextUtils.isEmpty(storeModel.getManagerImage()) && TextUtils.isEmpty(storeModel.getManagerName())){
+        if (TextUtils.isEmpty(storeModel.getManagerImage()) && TextUtils.isEmpty(storeModel.getManagerName())) {
             managerInfoHolder.setVisibility(View.GONE);
         }
 
@@ -141,19 +173,19 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
             }
         }
 
-        if (storeModel.getFeatures() != null && storeModel.getFeatures().size()>0){
+        if (storeModel.getFeatures() != null && storeModel.getFeatures().size() > 0) {
             TextView tv = new TextView(this);
             tv.setText(R.string.featuresList);
             tv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             tv.setGravity(Gravity.RIGHT);
             int sidePadding = (int) (16 * Resources.getSystem().getDisplayMetrics().density);
             int topBottomPadding = (int) (8 * Resources.getSystem().getDisplayMetrics().density);
-            tv.setPadding(sidePadding,topBottomPadding,sidePadding,topBottomPadding);
-            tv.setTextColor(ContextCompat.getColor(this,R.color.darkGray));
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,16f);
+            tv.setPadding(sidePadding, topBottomPadding, sidePadding, topBottomPadding);
+            tv.setTextColor(ContextCompat.getColor(this, R.color.darkGray));
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
             tv.setTypeface(FontUtils.getBoldTypeFace());
             mainHolder.addView(tv);
-            for (FeatureModel featureModel : storeModel.getFeatures()){
+            for (FeatureModel featureModel : storeModel.getFeatures()) {
                 addFeature(featureModel);
             }
         }
@@ -170,7 +202,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
                     public void OnHekmatItemClick(HekmatModel hekmatModel) {
                         if (isFinishing()) return;
                         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatFromStore);
-                        HekmatProductsActivity.show(StoreActivity.this,hekmatModel);
+                        HekmatProductsActivity.show(StoreActivity.this, hekmatModel);
                     }
                 });
                 adapter.addItems(products);
@@ -206,15 +238,15 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
     @OnClick(R.id.btn_traceRouts)
     public void onTraceRoutesButtonClick() {
         AdjustHelper.sendAdjustEvent(AdjustHelper.TraceRoutesStores);
-        IntentHelper.openWayTracer(this, storeModel.getLatitude(), storeModel.getLongitude(),storeModel.getName());
+        IntentHelper.openWayTracer(this, storeModel.getLatitude(), storeModel.getLongitude(), storeModel.getName());
     }
 
     @OnClick(R.id.btn_inStoreMode)
     public void onInStoreModeClick() {
-        if (storeModel.hasInStoreMode()){
+        if (storeModel.hasInStoreMode()) {
             AdjustHelper.sendAdjustEvent(AdjustHelper.InStoreMode);
-            InStoreModeActivity.show(this,storeModel);
-        }else{
+            InStoreModeActivity.show(this, storeModel);
+        } else {
             Toaster.show(this, R.string.thisStoreNotSupportInStoreModeYet);
         }
     }
@@ -233,11 +265,52 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         mainHolder.addView(view);
     }
 
-    private void addFeature(FeatureModel featureModel){
+    private void addFeature(FeatureModel featureModel) {
         View view = LayoutInflater.from(this).inflate(R.layout.store_feature_item, null, false);
         TextView tv = (TextView) view.findViewById(R.id.featureTitle);
-        tv.setText(featureModel.getName()+" : "+featureModel.getValue());
+        tv.setText(featureModel.getName() + " : " + featureModel.getValue());
         mainHolder.addView(view);
+    }
+
+    private void loadStore(){
+        Log.e("load store",""+storeId);
+        StoresManager.getInstance().fetchStores(this);
+    }
+
+    @Override
+    public void onStoresFetchSuccess(List<StoreModel> stores) {
+        if (isFinishing()) return;
+        boolean storeIsAvailable = false;
+        for (StoreModel store : stores){
+            if (store.getId() == storeId){
+                storeModel = store;
+                storeIsAvailable = true;
+                break;
+            }
+        }
+        if (storeIsAvailable){
+            fillViews();
+        }else{
+            showError(getResources().getString(R.string.storeIsNotValid),false);
+        }
+    }
+
+    @Override
+    public void onStoresFetchError() {
+        if (isFinishing()) return;
+        showError(getResources().getString(R.string.errorInDataReceiving),true);
+    }
+
+    private void showLoading(){
+
+    }
+
+    private void hideLoading(){
+
+    }
+
+    private void showError(String message, boolean showRetry){
+
     }
 
 }

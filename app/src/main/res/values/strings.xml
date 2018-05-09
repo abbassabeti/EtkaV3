@@ -227,5 +227,7 @@
     <string name="errorInSendingRequest">خطایی در ارسال درخواست به وجود آمده است، از دوباره تلاش کنید.</string>
     <string name="ticketSendSuccessfully">درخواست شما با موفقیت ارسال شد.</string>
     <string name="title_activity_finish">FinishActivity</string>
+    <string name="storeIsNotValid">فروشگاه مورد نظر معتبر نیست!</string>
+    <string name="barcodeScan">اسکن بارکد</string>
 
 </resources>

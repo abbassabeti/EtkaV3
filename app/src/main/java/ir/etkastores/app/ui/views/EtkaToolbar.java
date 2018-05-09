@@ -3,6 +3,7 @@ package ir.etkastores.app.ui.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -38,6 +39,12 @@ public class EtkaToolbar extends Toolbar {
     @BindView(R.id.toolbarNewsButton)
     View newsButton;
 
+    @BindView(R.id.toolbarScannerButton)
+    View scannerButton;
+
+    @BindView(R.id.scannerIcon)
+    AppCompatImageView scannerIcon;
+
     private EtkaToolbarActionsListener callback;
 
     public EtkaToolbar(Context context) {
@@ -67,7 +74,8 @@ public class EtkaToolbar extends Toolbar {
             showMoreButton(a.getBoolean(R.styleable.EtkaToolbar_showMoreButton, false));
             showSettingButton(a.getBoolean(R.styleable.EtkaToolbar_showSettingButton, false));
             showNewsButton(a.getBoolean(R.styleable.EtkaToolbar_showNewsButton, false));
-            showMenu(a.getBoolean(R.styleable.EtkaToolbar_showMenuButton,false));
+            showMenu(a.getBoolean(R.styleable.EtkaToolbar_showMenuButton, false));
+            showScannerButton(a.getBoolean(R.styleable.EtkaToolbar_showScannerButton, false));
             a.recycle();
         }
     }
@@ -93,8 +101,13 @@ public class EtkaToolbar extends Toolbar {
     }
 
     @OnClick(R.id.toolbarMenuButton)
-    void onMenuButtonClick(){
+    void onMenuButtonClick() {
         if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.MENU_BUTTON);
+    }
+
+    @OnClick(R.id.toolbarScannerButton)
+    void onScannerButtonClick() {
+        if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.SCANNER_BUTTON);
     }
 
     public void showMenu(boolean state) {
@@ -137,6 +150,15 @@ public class EtkaToolbar extends Toolbar {
         }
     }
 
+    public void showScannerButton(boolean state) {
+        if (state) {
+            scannerButton.setVisibility(VISIBLE);
+            scannerIcon.setColorFilter(ContextCompat.getColor(getContext(),R.color.white));
+        } else {
+            scannerButton.setVisibility(GONE);
+        }
+    }
+
     public void setTitle(String title) {
         titleTv.setText(title);
     }
@@ -154,6 +176,7 @@ public class EtkaToolbar extends Toolbar {
         int SETTING_BUTTON = 2;
         int NEWS_BUTTON = 3;
         int MENU_BUTTON = 4;
+        int SCANNER_BUTTON = 5;
 
         void onToolbarBackClick();
 
