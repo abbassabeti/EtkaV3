@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -64,14 +65,11 @@ public class WalkthroughActivity extends BaseActivity {
         ProfileManager.setIsFirstRun(false);
         enterButton.setTypeface(FontUtils.getBoldTypeFace());
         List<PagerSliderModel> items = new ArrayList<>();
-        items.add(new PagerSliderModel(0, "", ""));
-        items.add(new PagerSliderModel(0, "", ""));
-        items.add(new PagerSliderModel(0, "", ""));
-        items.add(new PagerSliderModel(0, "", ""));
-        items.add(new PagerSliderModel(0, "", ""));
-        items.add(new PagerSliderModel(0, "", ""));
-        items.add(new PagerSliderModel(0, "", ""));
-        items.add(new PagerSliderModel(0, "", ""));
+        items.add(new PagerSliderModel(R.drawable.walk_img_map, "نقشه", "نقشه داره چه نقشه ای! اصلا حال میکنی"));
+        items.add(new PagerSliderModel(R.drawable.walk_img_crm, "سی آر ام", "یه سی آر ام داره فوق العاده!"));
+        items.add(new PagerSliderModel(R.drawable.walk_img_shopping, "خرید", "قشنگ میفهمی جنسا چی به چین، میتونی راحت انتخاب کنی"));
+        items.add(new PagerSliderModel(R.drawable.walk_img_support, "پشتیبانی", "شماره موبایل مجید هست، هر وقت دوست داشتی زنگ بزن بهش کارتو راه میندازه"));
+        items.add(new PagerSliderModel(R.drawable.walk_img_hekmat, "حکمت", "فعلا خرابه و کار نمیکنه! شاید بعدا زدیمش"));
         Collections.reverse(items);
         adapter = new WalkthroughPagerAdapter(this, items);
         pager.setAdapter(adapter);
@@ -81,9 +79,9 @@ public class WalkthroughActivity extends BaseActivity {
     }
 
     @OnClick(R.id.enterButton)
-    public void onIKnownButtonClick(){
+    public void onIKnownButtonClick() {
         AdjustHelper.sendAdjustEvent(AdjustHelper.WalkthroughEnter);
-        MainActivity.show(this,null);
+        MainActivity.show(this, null);
         finish();
     }
 
@@ -104,21 +102,26 @@ public class WalkthroughActivity extends BaseActivity {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == (RelativeLayout) object;
+            return view == (LinearLayout) object;
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = inflater.inflate(R.layout.walkthrough_slider_slide, container, false);
             ImageView imageView = (ImageView) view.findViewById(R.id.image);
-            imageView.setImageResource(R.mipmap.ic_launcher);
+            TextView title = (TextView) view.findViewById(R.id.title);
+            TextView message = (TextView) view.findViewById(R.id.message);
+            title.setTypeface(FontUtils.getBoldTypeFace());
+            title.setText(items.get(position).getTitle());
+            message.setText(items.get(position).getInfo());
+            imageView.setImageResource(items.get(position).getArtWork());
             container.addView(view);
             return view;
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((RelativeLayout) object);
+            container.removeView((LinearLayout) object);
         }
     }
 

@@ -8,6 +8,7 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.utils.DiskDataHelper;
+import ir.etkastores.app.webServices.ApiStatics;
 
 /**
  * Created by Sajad on 2/13/18.
@@ -59,6 +60,7 @@ public class ProfileManager {
     public static void clearProfile() {
         try {
             EtkaApp.getPreference().edit().remove(PROFILE_KEY).apply();
+            ApiStatics.saveToken(null);
             profileModel = null;
         } catch (Exception err) {
             err.printStackTrace();

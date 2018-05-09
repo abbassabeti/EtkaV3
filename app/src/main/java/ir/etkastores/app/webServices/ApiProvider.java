@@ -1,5 +1,6 @@
 package ir.etkastores.app.webServices;
 
+import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -8,6 +9,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
 import ir.etkastores.app.BuildConfig;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
 import okhttp3.Headers;
@@ -116,28 +118,43 @@ public class ApiProvider {
                     }.getType());
                     if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401) {
                         synchronized (httpClient) {
-                            String refreshToken = ApiStatics.getLastToken().getRefreshToken();
-                            lastToken = null;
-                            ApiStatics.saveToken(null);
-                            EtkaApi tokenClient = createService(EtkaApi.class);
-                            Call<AccessToken> call = tokenClient.getToken(
-                                    ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
-                                    "",
-                                    "",
-                                    ApiStatics.CLIENT_ID,
-                                    "",
-                                    refreshToken);
+                            if (ApiStatics.getLastToken() == null){
+                                Call<AccessToken> call = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
+                                retrofit2.Response<AccessToken> tokenResponse = call.execute();
+                                if (tokenResponse.code() == 200) {
+                                    AccessToken newToken = tokenResponse.body();
+                                    lastToken = newToken;
+                                    ApiStatics.saveToken(lastToken);
+                                    request=request.newBuilder()
+                                            .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
+                                            .build();
 
-                            retrofit2.Response<AccessToken> tokenResponse = call.execute();
-                            if (tokenResponse.code() == 200) {
-                                AccessToken newToken = tokenResponse.body();
-                                lastToken = newToken;
-                                ApiStatics.saveToken(lastToken);
-                                request=request.newBuilder()
-                                .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
-                                .build();
+                                    proceed = chain.proceed(request);
+                                }
+                            }else{
+                                String refreshToken = ApiStatics.getLastToken().getRefreshToken();
+                                lastToken = null;
+                                ApiStatics.saveToken(null);
+                                EtkaApi tokenClient = createService(EtkaApi.class);
+                                Call<AccessToken> call = tokenClient.getToken(
+                                        ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
+                                        "",
+                                        "",
+                                        ApiStatics.CLIENT_ID,
+                                        "",
+                                        refreshToken);
 
-                                proceed = chain.proceed(request);
+                                retrofit2.Response<AccessToken> tokenResponse = call.execute();
+                                if (tokenResponse.code() == 200) {
+                                    AccessToken newToken = tokenResponse.body();
+                                    lastToken = newToken;
+                                    ApiStatics.saveToken(lastToken);
+                                    request=request.newBuilder()
+                                            .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
+                                            .build();
+
+                                    proceed = chain.proceed(request);
+                                }
                             }
                         }
                     }

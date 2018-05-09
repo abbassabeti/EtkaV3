@@ -2,18 +2,11 @@ package ir.etkastores.app.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
-import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.data.ContactUsManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
@@ -23,7 +16,6 @@ import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
-import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.webServices.AccessToken;
 import ir.etkastores.app.webServices.ApiProvider;
 import ir.etkastores.app.webServices.ApiStatics;
@@ -43,17 +35,28 @@ public class SplashActivity extends BaseActivity {
         EtkaPushNotificationConfig.registerGlobal();
         EtkaRemoteConfigManager.checkRemoteConfigs();
 
-        if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)){
+        if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
             try {
                 notificationModel = NotificationModel.fromJson(getIntent().getStringExtra(NotificationModel.NOTIFICATION_OBJECT));
-            }catch (Exception err){
+            } catch (Exception err) {
                 notificationModel = null;
             }
         }
 
         if (DiskDataHelper.isForceAvailableUpdate()) return;
 
-        prepareAppForRun();
+        if (ApiStatics.getLastToken() == null) {
+            prepareAppForRun();
+        } else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (isFinishing()) return;
+                    gotoApp();
+                }
+            },2000);
+        }
+
     }
 
     @Override
@@ -67,9 +70,10 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                if (isFinishing()) return;
                 try {
                     login();
-                }catch (Exception err){
+                } catch (Exception err) {
                     err.printStackTrace();
                 }
             }
@@ -96,20 +100,21 @@ public class SplashActivity extends BaseActivity {
 
 
     Call<AccessToken> loginRequest;
-    private void login(){
-        loginRequest = ApiProvider.getLogin(ProfileManager.getUserName(),ProfileManager.getUserPassword());
+
+    private void login() {
+        loginRequest = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ApiStatics.saveToken(response.body());
-                    if (ProfileManager.isGuest()){
+                    if (ProfileManager.isGuest()) {
                         gotoApp();
-                    }else{
+                    } else {
                         loadProfile();
                     }
-                }else{
-                    onFailure(null,null);
+                } else {
+                    onFailure(null, null);
                 }
             }
 
@@ -120,14 +125,14 @@ public class SplashActivity extends BaseActivity {
         });
     }
 
-    void showRetryDialog(String message){
-        final MessageDialog messageDialog = MessageDialog.loginError(TextUtils.isEmpty(message)?getResources().getString(R.string.anErrorHappendInServerConnection):message);
+    void showRetryDialog(String message) {
+        final MessageDialog messageDialog = MessageDialog.loginError(TextUtils.isEmpty(message) ? getResources().getString(R.string.anErrorHappendInServerConnection) : message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     login();
-                }else{
+                } else {
                     finish();
                 }
                 messageDialog.getDialog().cancel();
@@ -140,19 +145,19 @@ public class SplashActivity extends BaseActivity {
         });
     }
 
-    private void loadProfile(){
+    private void loadProfile() {
         ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         ProfileManager.saveProfile(response.body().getData());
                         gotoApp();
-                    }else{
+                    } else {
                         showRetryDialog(response.body().getMeta().getMessage());
                     }
-                }else{
-                    onFailure(null,null);
+                } else {
+                    onFailure(null, null);
                 }
             }
 
@@ -163,11 +168,11 @@ public class SplashActivity extends BaseActivity {
         });
     }
 
-    private void gotoApp(){
-        if (ProfileManager.isFirstRun() && notificationModel == null){
+    private void gotoApp() {
+        if (ProfileManager.isFirstRun() && notificationModel == null) {
             WalkthroughActivity.show(this);
-        }else{
-            MainActivity.show(this,notificationModel);
+        } else {
+            MainActivity.show(this, notificationModel);
         }
         finish();
     }
