@@ -122,6 +122,7 @@
     <string name="inLoadingUserProfile">در حال دریافت اطلاعات کاربری...</string>
     <string name="inUpdatingUserProfile">در حال بروزرسانی اطلاعات کاربری...</string>
     <string name="inLoadingProductInfo">در حال دریافت اطلاعات محصول...</string>
+    <string name="inLoadingStoreInfo">در حال دریافت اطلاعات فروشگاه...</string>
     <string name="thereIsNotResultAvailable">برای این قسمت نتیجه ای موجود نیست</string>
     <string name="back">بازگشت</string>
     <string name="commingSoonMessage">این قسمت در نسخه های بعدی تکمیل خواهد شد.</string>

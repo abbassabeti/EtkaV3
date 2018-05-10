@@ -1,6 +1,7 @@
 package ir.etkastores.app.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -9,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +40,10 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.StorePagerSliderView;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 import ir.etkastores.app.utils.IntentHelper;
-import ir.etkastores.app.webServices.ApiProvider;
-import ir.etkastores.app.webServices.ApiStatics;
 
 public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, StoresManager.StoresCallback {
 
@@ -95,7 +93,9 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     private StoreModel storeModel;
 
-    private long storeId = 0;
+    private long storeCode = 0;
+
+    private AlertDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,19 +115,19 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
             err.printStackTrace();
         }
 
-        if (storeModel != null){
+        if (storeModel != null) {
             fillViews();
-        }else if (!TextUtils.isEmpty(url)){
-            url = url.replace(StaticsData.etkaStoreScheme,"");
+        } else if (!TextUtils.isEmpty(url)) {
+            url = url.replace(StaticsData.etkaStoreScheme, "");
             url = url.trim();
             try {
-                long id = Long.parseLong(url);
-                storeId = id;
+                long code = Long.parseLong(url);
+                storeCode = code;
                 loadStore();
-            }catch (Exception err){
+            } catch (Exception err) {
                 finish();
             }
-        }else{
+        } else {
             finish();
         }
     }
@@ -272,45 +272,71 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         mainHolder.addView(view);
     }
 
-    private void loadStore(){
-        Log.e("load store",""+storeId);
+    private void loadStore() {
+        showLoading();
         StoresManager.getInstance().fetchStores(this);
     }
 
     @Override
     public void onStoresFetchSuccess(List<StoreModel> stores) {
         if (isFinishing()) return;
+        hideLoading();
         boolean storeIsAvailable = false;
-        for (StoreModel store : stores){
-            if (store.getId() == storeId){
+        for (StoreModel store : stores) {
+            if (store.getCode() == storeCode) {
                 storeModel = store;
                 storeIsAvailable = true;
                 break;
             }
         }
-        if (storeIsAvailable){
+        if (storeIsAvailable) {
             fillViews();
-        }else{
-            showError(getResources().getString(R.string.storeIsNotValid),false);
+        } else {
+            showError(getResources().getString(R.string.storeIsNotValid), false);
         }
     }
 
     @Override
     public void onStoresFetchError() {
         if (isFinishing()) return;
-        showError(getResources().getString(R.string.errorInDataReceiving),true);
+        showError(getResources().getString(R.string.errorInDataReceiving), true);
     }
 
-    private void showLoading(){
-
+    private void showLoading() {
+        if (loadingDialog != null) loadingDialog.cancel();
+        loadingDialog = DialogHelper.showLoading(this, R.string.inLoadingStoreInfo);
     }
 
-    private void hideLoading(){
-
+    private void hideLoading() {
+        if (isFinishing()) return;
+        if (loadingDialog != null) loadingDialog.cancel();
     }
 
-    private void showError(String message, boolean showRetry){
+    private void showError(final String message, boolean showRetry) {
+        String rightButton = null;
+        if (showRetry) rightButton = getResources().getString(R.string.retry);
+        final MessageDialog messageDialog = MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
+                getResources().getString(R.string.error),
+                message,
+                rightButton,
+                getResources().getString(R.string.close));
+        messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (isFinishing()) return;
+                messageDialog.getDialog().cancel();
+                if (button == RIGHT_BUTTON) {
+                    loadStore();
+                } else {
+                    finish();
+                }
+            }
 
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
     }
 
 }
