@@ -90,7 +90,7 @@ public class GalleryRecyclerHorizontalListAdapter extends RecyclerView.Adapter<G
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true));
     }
 
     public interface OnImageSelectListener {

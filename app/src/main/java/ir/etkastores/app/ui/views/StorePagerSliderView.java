@@ -39,7 +39,9 @@ public class StorePagerSliderView extends LinearLayout {
 
     private StoreSliderAdapter adapter;
 
-    List<String> items;
+    private List<String> items;
+
+    private OnStoreImageClickListener onStoreImageClickListener;
 
     public StorePagerSliderView(Context context) {
         super(context);
@@ -62,33 +64,37 @@ public class StorePagerSliderView extends LinearLayout {
         init();
     }
 
-    private void init(){
-        LayoutInflater.from(getContext()).inflate(R.layout.view_store_page_slider,this, true);
-        ButterKnife.bind(this,this);
+    private void init() {
+        LayoutInflater.from(getContext()).inflate(R.layout.view_store_page_slider, this, true);
+        ButterKnife.bind(this, this);
         items = new ArrayList<>();
     }
 
-    public void setSlides(List<String> slides){
+    public void setSlides(List<String> slides) {
         this.items = slides;
         fillView();
     }
 
-    private void fillView(){
+    public void setOnStoreImageClickListener(OnStoreImageClickListener onStoreImageClickListener) {
+        this.onStoreImageClickListener = onStoreImageClickListener;
+    }
+
+    private void fillView() {
         Collections.reverse(items);
-        adapter = new StoreSliderAdapter(getContext(),items);
+        adapter = new StoreSliderAdapter(getContext(), items);
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(items.size());
         indicatorView.setViewPager(pager);
-        indicatorView.setSelection(items.size()-1);
-        pager.setCurrentItem(items.size()-1);
-        if (items.size()<2) indicatorView.setVisibility(INVISIBLE);
+        indicatorView.setSelection(items.size() - 1);
+        pager.setCurrentItem(items.size() - 1);
+        if (items.size() < 2) indicatorView.setVisibility(INVISIBLE);
     }
 
-    private class StoreSliderAdapter extends PagerAdapter{
+    private class StoreSliderAdapter extends PagerAdapter {
 
         private List<String> items;
 
-        public StoreSliderAdapter(Context context,List<String> items) {
+        public StoreSliderAdapter(Context context, List<String> items) {
             this.items = items;
         }
 
@@ -103,12 +109,20 @@ public class StorePagerSliderView extends LinearLayout {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(ViewGroup container, final int position) {
             AppCompatImageView imageView = new AppCompatImageView(getContext());
             imageView.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             imageView.setImageResource(R.drawable.etka_logo_wide);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            if (!TextUtils.isEmpty(items.get(position)))ImageLoader.loadProductImage(getContext(),imageView,items.get(position));
+            if (!TextUtils.isEmpty(items.get(position)))
+                ImageLoader.loadProductImage(getContext(), imageView, items.get(position));
+            imageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onStoreImageClickListener != null)
+                        onStoreImageClickListener.onStoreImageClick(position, items.get(position));
+                }
+            });
             container.addView(imageView);
             return imageView;
         }
@@ -117,6 +131,10 @@ public class StorePagerSliderView extends LinearLayout {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((AppCompatImageView) object);
         }
+    }
+
+    public interface OnStoreImageClickListener {
+        void onStoreImageClick(int position, String img);
     }
 
 }

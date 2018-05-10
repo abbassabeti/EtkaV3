@@ -64,11 +64,11 @@ public class WalkthroughActivity extends BaseActivity {
         ProfileManager.setIsFirstRun(false);
         enterButton.setTypeface(FontUtils.getBoldTypeFace());
         List<PagerSliderModel> items = new ArrayList<>();
-        items.add(new PagerSliderModel(R.drawable.walk_img_map, "نقشه", "نقشه داره چه نقشه ای! اصلا حال میکنی"));
-        items.add(new PagerSliderModel(R.drawable.walk_img_crm, "سی آر ام", "یه سی آر ام داره فوق العاده!"));
-        items.add(new PagerSliderModel(R.drawable.walk_img_shopping, "خرید", "قشنگ میفهمی جنسا چی به چین، میتونی راحت انتخاب کنی"));
-        items.add(new PagerSliderModel(R.drawable.walk_img_support, "پشتیبانی", "شماره موبایل مجید هست، هر وقت دوست داشتی زنگ بزن بهش کارتو راه میندازه"));
-        items.add(new PagerSliderModel(R.drawable.walk_img_hekmat, "حکمت", "فعلا خرابه و کار نمیکنه! شاید بعدا زدیمش"));
+        items.add(new PagerSliderModel(R.drawable.walk_img_map, "همراه فروشگاه اتکا", "جزئیات کالاهای موجود در شعب فروشگاه های اتکا، مکان و جزئیات شعب، سوابق خرید، اطلاعات کاربری و سایر خدمات را در جیب خود داشته باشید."));
+        items.add(new PagerSliderModel(R.drawable.walk_img_shopping, "خرید از راه دود", "شما می توانید قبل از حضور در شعب لیست خرید بعدی خود را کامل کنید تا کارکنان شعبه آن را برای شما آماده و بسته بندی کنند."));
+        items.add(new PagerSliderModel(R.drawable.walk_img_crm, "باشگاه مشتریان", "با هر خرید کالا از شعب اتکا، امتیاز کسب می کنید و در خرید های بعدی می توانید از تخفیف ویژه باشگاه مشتریان بهره مند شوید."));
+        items.add(new PagerSliderModel(R.drawable.walk_img_hekmat, "حکمت کارت", "کارکنان محترم نیروی های مسلح می توانند از طریق این اپلیکیشن، از کالابرگ های اعلامی و اعتبار حکمت کارت خود اطلاع یابند."));
+        items.add(new PagerSliderModel(R.drawable.walk_img_support, "پشتیبانی و ارسال درخواست", "از طریق این اپلیکیشن می توانید به راحتی پیشنهاد، انتقاد و یا درخواست خود را ارسال کنید تا در اسرع وقت در واحد پشتیبانی اتکا بررسی شوند."));
         Collections.reverse(items);
         adapter = new WalkthroughPagerAdapter(this, items);
         pager.setAdapter(adapter);

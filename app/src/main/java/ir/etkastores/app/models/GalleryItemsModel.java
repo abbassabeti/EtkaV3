@@ -1,5 +1,7 @@
 package ir.etkastores.app.models;
 
+import android.widget.LinearLayout;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -19,6 +21,9 @@ public class GalleryItemsModel {
     @SerializedName("images")
     List<String> images;
 
+    @SerializedName("position")
+    int position;
+
     public static GalleryItemsModel fromJson(String json){
         try {
             return new Gson().fromJson(json,GalleryItemsModel.class);
@@ -27,9 +32,17 @@ public class GalleryItemsModel {
         }
     }
 
-    public GalleryItemsModel(String title, List<String> images) {
+    public GalleryItemsModel(String title, List<String> images, int position) {
         this.title = title;
         this.images = images;
+        this.position = position;
+    }
+
+    public GalleryItemsModel(String title,String image, int position){
+        images = new ArrayList<>();
+        images.add(image);
+        this.title = title;
+        this.position = position;
     }
 
     public String getTitle() {
@@ -46,6 +59,14 @@ public class GalleryItemsModel {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public String toJson(){

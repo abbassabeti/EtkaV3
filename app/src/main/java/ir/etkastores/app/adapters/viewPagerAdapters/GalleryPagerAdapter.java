@@ -2,20 +2,14 @@ package ir.etkastores.app.adapters.viewPagerAdapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
-import com.bumptech.glide.request.target.BaseTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.github.chrisbanes.photoview.PhotoView;
 
@@ -58,7 +52,11 @@ public class GalleryPagerAdapter extends PagerAdapter {
         ImageLoader.loadImage(context, items.get(position), new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(Drawable drawable, Transition<? super Drawable> transition) {
-                photoView.setImageDrawable(drawable);
+                try{
+                    photoView.setImageDrawable(drawable);
+                }catch (Exception err){
+                    err.printStackTrace();
+                }
             }
 
             @Override

@@ -37,7 +37,9 @@ public class ProductImagesSliderView extends LinearLayout {
 
     private ProductImagesAdapter adapter;
 
-    List<String> items;
+    private List<String> items;
+
+    private OnProductImageClickListener onProductImageClickListener;
 
     public ProductImagesSliderView(Context context) {
         super(context);
@@ -54,39 +56,47 @@ public class ProductImagesSliderView extends LinearLayout {
         init();
     }
 
-    private void init(){
-        LayoutInflater.from(getContext()).inflate(R.layout.view_product_slider,this,true);
-        ButterKnife.bind(this,this);
+    private void init() {
+        LayoutInflater.from(getContext()).inflate(R.layout.view_product_slider, this, true);
+        ButterKnife.bind(this, this);
         indicatorView.setFocusable(false);
         pager.setFocusable(false);
     }
 
-    public void setImages(List<String> images){
+    public void setImages(List<String> images) {
         if (images == null || images.size() == 0 || (images.size() > 0 && TextUtils.isEmpty(images.get(0)))) {
             setVisibility(GONE);
-        }else{
+        } else {
             setVisibility(VISIBLE);
             this.items = images;
             fillView();
         }
     }
 
-    private void fillView(){
+    private void fillView() {
         Collections.reverse(items);
-        adapter = new ProductImagesAdapter(getContext(),items);
+        adapter = new ProductImagesAdapter(getContext(), items);
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(items.size());
         indicatorView.setViewPager(pager);
-        indicatorView.setSelection(items.size()-1);
-        pager.setCurrentItem(items.size()-1);
+        indicatorView.setSelection(items.size() - 1);
+        pager.setCurrentItem(items.size() - 1);
     }
 
-    private class ProductImagesAdapter extends PagerAdapter{
+    public void setOnProductImageClickListener(OnProductImageClickListener onProductImageClickListener) {
+        this.onProductImageClickListener = onProductImageClickListener;
+    }
+
+    public interface OnProductImageClickListener {
+        void onProductImageClick(int position, String img);
+    }
+
+    private class ProductImagesAdapter extends PagerAdapter {
 
         private List<String> items;
         private LayoutInflater inflater;
 
-        public ProductImagesAdapter(Context context,List<String> items) {
+        public ProductImagesAdapter(Context context, List<String> items) {
             this.items = items;
             this.inflater = LayoutInflater.from(context);
         }
@@ -102,10 +112,21 @@ public class ProductImagesSliderView extends LinearLayout {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View view  = inflater.inflate(R.layout.home_slider_slide,container,false);
+        public Object instantiateItem(ViewGroup container, final int position) {
+            View view = inflater.inflate(R.layout.home_slider_slide, container, false);
             AppCompatImageView imageView = (AppCompatImageView) view.findViewById(R.id.image);
-            ImageLoader.loadProductImage(getContext(),imageView,items.get(position));
+            ImageLoader.loadProductImage(getContext(), imageView, items.get(position));
+            imageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        if (onProductImageClickListener != null)
+                            onProductImageClickListener.onProductImageClick(position, items.get(position));
+                    } catch (Exception err) {
+                        err.printStackTrace();
+                    }
+                }
+            });
             container.addView(view);
             return view;
         }

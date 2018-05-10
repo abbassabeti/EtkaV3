@@ -38,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoryGroupHorizontalView.OnProductClickListener {
+public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoryGroupHorizontalView.OnProductClickListener, ProductImagesSliderView.OnProductImageClickListener {
 
     private final static int ACTION_LOAD_PRODUCT = 0;
 
@@ -132,6 +132,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         }
 
         mSlider.setImages(productModel.getImageUrl());
+        mSlider.setOnProductImageClickListener(this);
         saveCountValue = productModel.getSavedCount();
         mDescriptionTitle.setTypeface(FontUtils.getBoldTypeFace());
         updateSaveCountValue();
@@ -238,7 +239,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
                 AdjustHelper.sendAdjustEvent(AdjustHelper.AddToNextShoppingList);
                 if (ProfileManager.isGuest()) {
                     showNeedToLoginDialog();
-                }else{
+                } else {
                     sendAddToNextShoppingListRequest();
                 }
                 break;
@@ -347,6 +348,12 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         if (productModel.getRelatedProducts() == null || productModel.getRelatedProducts().size() == 0)
             productModel.setRelatedProducts(this.productModel.getRelatedProducts());
         ProductActivity.show(this, productModel);
+    }
+
+    @Override
+    public void onProductImageClick(int position, String img) {
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProductImage);
+        GalleryActivity.show(this, productModel, position);
     }
 
 }

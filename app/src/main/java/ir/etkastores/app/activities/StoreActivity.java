@@ -31,6 +31,7 @@ import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatHorizontalRecyclerL
 import ir.etkastores.app.data.HekmatProductsManager;
 import ir.etkastores.app.data.StaticsData;
 import ir.etkastores.app.data.StoresManager;
+import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.store.FeatureModel;
 import ir.etkastores.app.models.store.StoreModel;
@@ -45,7 +46,7 @@ import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
 import ir.etkastores.app.utils.IntentHelper;
 
-public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, StoresManager.StoresCallback {
+public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, StoresManager.StoresCallback, StorePagerSliderView.OnStoreImageClickListener {
 
     private final static String STORE_KEY = "STORE_KEY";
 
@@ -216,6 +217,8 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
         }, Long.valueOf(storeModel.getId()));
 
+        slider.setOnStoreImageClickListener(this);
+
     }
 
     @Override
@@ -337,6 +340,18 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
             }
         });
+    }
+
+    @OnClick(R.id.managerPhoto)
+    public void onManagerPhotoClick(){
+        GalleryItemsModel galleryItemsModel = new GalleryItemsModel(storeModel.getManagerName(),storeModel.getManagerImage(),0);
+        GalleryActivity.show(this,galleryItemsModel);
+    }
+
+    @Override
+    public void onStoreImageClick(int position, String img) {
+        GalleryItemsModel galleryItemsModel = new GalleryItemsModel(storeModel.getName(),img,position);
+        GalleryActivity.show(this,galleryItemsModel);
     }
 
 }

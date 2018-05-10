@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -13,13 +15,25 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.GalleryRecyclerHorizontalListAdapter;
 import ir.etkastores.app.adapters.viewPagerAdapters.GalleryPagerAdapter;
 import ir.etkastores.app.models.GalleryItemsModel;
+import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.ui.widgets.ViewPager16x8;
 import ir.etkastores.app.ui.widgets.ZoomableViewPager;
 import ir.etkastores.app.utils.ZoomOutSlidePagerTransformer;
 
-public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, GalleryRecyclerHorizontalListAdapter.OnImageSelectListener, ViewPager.OnPageChangeListener {
+public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener,
+        GalleryRecyclerHorizontalListAdapter.OnImageSelectListener,
+        ViewPager.OnPageChangeListener {
 
     private static final String MODEL = "MODEL";
+
+    public static void show(Context context, ProductModel productModel, int position) {
+        if (productModel == null || productModel.getImageUrl() == null || productModel.getImageUrl().size() == 0) {
+            return;
+        }
+        GalleryItemsModel galleryItemsModel = new GalleryItemsModel(productModel.getTitle(), productModel.getImageUrl(), position);
+        show(context, galleryItemsModel);
+    }
 
     public static void show(Context context, GalleryItemsModel galleryItemsModel) {
         Intent intent = new Intent(context, GalleryActivity.class);
@@ -36,6 +50,9 @@ public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    @BindView(R.id.imagesThumbHolder)
+    FrameLayout imagesThumbHolder;
+
     private GalleryItemsModel galleryItemsModel;
 
     private GalleryRecyclerHorizontalListAdapter thumbAdapter;
@@ -50,17 +67,20 @@ public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         initViews();
     }
 
-    private void initViews(){
+    private void initViews() {
         toolbar.setActionListeners(this);
         toolbar.setTitle(galleryItemsModel.getTitle());
-        thumbAdapter = new GalleryRecyclerHorizontalListAdapter(this,galleryItemsModel.getImages());
+        thumbAdapter = new GalleryRecyclerHorizontalListAdapter(this, galleryItemsModel.getImages());
         thumbAdapter.setOnImageSelectListener(this);
         recyclerView.setAdapter(thumbAdapter);
-        pagerAdapter = new GalleryPagerAdapter(this,galleryItemsModel.getImages());
+        pagerAdapter = new GalleryPagerAdapter(this, galleryItemsModel.getImages());
         pager.setAdapter(pagerAdapter);
-        pager.setPageTransformer(true,new ZoomOutSlidePagerTransformer());
+        pager.setPageTransformer(true, new ZoomOutSlidePagerTransformer());
         pager.addOnPageChangeListener(this);
-        pager.setCurrentItem(galleryItemsModel.getImages().size()-1,false);
+        pager.setCurrentItem(galleryItemsModel.getImages().size() - 1 - galleryItemsModel.getPosition(), false);
+        if (galleryItemsModel.getImages().size() == 1){
+            imagesThumbHolder.setVisibility(View.GONE);
+        }
     }
 
     @Override
