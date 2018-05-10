@@ -68,15 +68,15 @@ public class DiskDataHelper {
         }
     }
 
-    private final static String IS_FORCE_UPDATE_AVAILABLE = "IS_FORCE_UPDATE_AVAILABLE";
+    private final static String FORCE_UPDATE_VERSION = "FORCE_UPDATE_VERSION";
     private final static String FORCE_UPDATE_URL = "FORCE_UPDATE_URL";
 
-    public static boolean isForceAvailableUpdate() {
-        return getBool(IS_FORCE_UPDATE_AVAILABLE);
+    public static int getForceUpdateVersion() {
+        return getInt(FORCE_UPDATE_VERSION);
     }
 
-    public static void setIsForceUpdateAvailable(boolean isAvailable) {
-        putBool(IS_FORCE_UPDATE_AVAILABLE, isAvailable);
+    public static void setMinForceUpdateVersion(int version) {
+        putInt(FORCE_UPDATE_VERSION, version);
     }
 
     public static void setForceUpdateUrl(String url){

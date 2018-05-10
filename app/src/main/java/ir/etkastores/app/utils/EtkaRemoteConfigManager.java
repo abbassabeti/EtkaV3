@@ -37,15 +37,11 @@ public class EtkaRemoteConfigManager {
                     ContactUsManager.getInstance().saveEmail(firebaseRemoteConfig.getString("v3_contact_us_email"));
                     ContactUsManager.getInstance().savePhone(firebaseRemoteConfig.getString("v3_contact_us_phone"));
                     int minAppVersion = Integer.parseInt(minVersion);
-                    if (minAppVersion > BuildConfig.VERSION_CODE) {
-                        DiskDataHelper.setIsForceUpdateAvailable(true);
-                        DiskDataHelper.setForceUpdateUrl(updateUrl);
-                    } else {
-                        DiskDataHelper.setIsForceUpdateAvailable(false);
-                    }
+                    DiskDataHelper.setMinForceUpdateVersion(minAppVersion);
+                    DiskDataHelper.setForceUpdateUrl(updateUrl);
                     ApiStatics.setBaseUrl(baseUrl);
                 }else{
-                    DiskDataHelper.setIsForceUpdateAvailable(false);
+                    DiskDataHelper.setMinForceUpdateVersion(1);
                 }
             }
         });

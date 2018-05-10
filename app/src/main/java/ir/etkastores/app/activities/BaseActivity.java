@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.DiskDataHelper;
@@ -39,7 +40,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void checkForceUpdate() {
-        if (DiskDataHelper.isForceAvailableUpdate()) {
+        if (DiskDataHelper.getForceUpdateVersion() > BuildConfig.VERSION_CODE) {
             MessageDialog dialog = MessageDialog.forceUpdate();
             dialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
                 @Override
@@ -57,7 +58,6 @@ public class BaseActivity extends AppCompatActivity {
 
                 }
             });
-            return;
         }
     }
 

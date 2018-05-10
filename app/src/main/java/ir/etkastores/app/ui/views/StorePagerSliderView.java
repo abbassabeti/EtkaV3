@@ -112,7 +112,6 @@ public class StorePagerSliderView extends LinearLayout {
         public Object instantiateItem(ViewGroup container, final int position) {
             AppCompatImageView imageView = new AppCompatImageView(getContext());
             imageView.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            imageView.setImageResource(R.drawable.etka_logo_wide);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             if (!TextUtils.isEmpty(items.get(position)))
                 ImageLoader.loadProductImage(getContext(), imageView, items.get(position));

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.google.android.gms.maps.MapView;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.notification.NotificationModel;
@@ -43,7 +44,7 @@ public class SplashActivity extends BaseActivity {
             }
         }
 
-        if (DiskDataHelper.isForceAvailableUpdate()) return;
+        if (DiskDataHelper.getForceUpdateVersion() > BuildConfig.VERSION_CODE) return;
 
         if (ApiStatics.getLastToken() == null) {
             prepareAppForRun();
