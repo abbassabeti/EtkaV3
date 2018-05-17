@@ -7,7 +7,7 @@
         <attr name="showMoreButton" format="boolean"/>
         <attr name="showSettingButton" format="boolean"/>
         <attr name="showNewsButton" format="boolean"/>
-        <attr name="showMenuButton" format="boolean"/>
+        <attr name="showFilterButton" format="boolean"/>
         <attr name="showScannerButton" format="boolean"/>
     </declare-styleable>
 

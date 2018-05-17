@@ -230,5 +230,12 @@
     <string name="title_activity_finish">FinishActivity</string>
     <string name="storeIsNotValid">فروشگاه مورد نظر معتبر نیست!</string>
     <string name="barcodeScan">اسکن بارکد</string>
+    <string name="remainedCredit">مانده اعتبار</string>
+    <string name="remainedEtkaBonCredit">موجودی بن اتکا</string>
+    <string name="remainedOfferInThisMonth">مانده تخفیف این ماه</string>
+    <string name="remainedLoan">مانده اقساط</string>
+    <string name="remainedLoanDescription">در صورت عدم خرید اعتباری</string>
+    <string name="kalabargHayeElamShode">کالابرگ های اعلام شده</string>
+    <string name="hekmatCardTransactionsHistory">سابقه تراکنش های حکمت کارت</string>
 
 </resources>

@@ -168,12 +168,12 @@ public class CategoriesFilterActivity extends BaseActivity implements
     }
 
     private void lockDrawer() {
-        toolbar.showMenu(false);
+        toolbar.showFilter(false);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     private void unlockDrawer() {
-        toolbar.showMenu(true);
+        toolbar.showFilter(true);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
     }
 

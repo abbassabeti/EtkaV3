@@ -3,14 +3,15 @@ package ir.etkastores.app.activities.profileActivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
+import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.ui.views.EtkaToolbar;
-import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.FontUtils;
 
 public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -21,8 +22,23 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
 
-    @BindView(R.id.messageView)
-    MessageView messageView;
+    @BindView(R.id.userProfileName)
+    TextView userProfileName;
+
+    @BindView(R.id.userCode)
+    TextView userCode;
+
+    @BindView(R.id.remainedCreditValue)
+    TextView remainedCreditValue;
+
+    @BindView(R.id.remainedEtkaBonCreditValue)
+    TextView remainedEtkaBonCreditValue;
+
+    @BindView(R.id.offerValue)
+    TextView offerValue;
+
+    @BindView(R.id.remainedLoanValue)
+    TextView remainedLoanValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +52,17 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     protected void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Hekmat Card Activity");
+        userProfileName.setTypeface(FontUtils.getBoldTypeFace());
+        userProfileName.setText("سجاد گرشاسبی");
+        userCode.setText("12301293109");
+        remainedCreditValue.setText("۶۵۰ هزار تومان");
+        remainedEtkaBonCreditValue.setText("۶۵۰ هزار تومان");
+        offerValue.setText("۶۵۰ هزار تومان");
+        remainedLoanValue.setText("۶۵۰ هزار تومان");
     }
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        messageView.show(R.drawable.ic_warning_orange_48dp, R.string.commingSoonMessage, 0, null);
     }
 
     @Override

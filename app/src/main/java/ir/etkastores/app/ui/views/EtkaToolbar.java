@@ -34,7 +34,7 @@ public class EtkaToolbar extends Toolbar {
     AppCompatImageView settingButton;
 
     @BindView(R.id.toolbarMenuButton)
-    AppCompatImageView menuButton;
+    AppCompatImageView filterButton;
 
     @BindView(R.id.toolbarNewsButton)
     View newsButton;
@@ -74,7 +74,7 @@ public class EtkaToolbar extends Toolbar {
             showMoreButton(a.getBoolean(R.styleable.EtkaToolbar_showMoreButton, false));
             showSettingButton(a.getBoolean(R.styleable.EtkaToolbar_showSettingButton, false));
             showNewsButton(a.getBoolean(R.styleable.EtkaToolbar_showNewsButton, false));
-            showMenu(a.getBoolean(R.styleable.EtkaToolbar_showMenuButton, false));
+            showFilter(a.getBoolean(R.styleable.EtkaToolbar_showFilterButton, false));
             showScannerButton(a.getBoolean(R.styleable.EtkaToolbar_showScannerButton, false));
             a.recycle();
         }
@@ -110,11 +110,11 @@ public class EtkaToolbar extends Toolbar {
         if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.SCANNER_BUTTON);
     }
 
-    public void showMenu(boolean state) {
+    public void showFilter(boolean state) {
         if (state) {
-            menuButton.setVisibility(VISIBLE);
+            filterButton.setVisibility(VISIBLE);
         } else {
-            menuButton.setVisibility(GONE);
+            filterButton.setVisibility(GONE);
         }
     }
 

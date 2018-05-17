@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F5F5"
     android:orientation="vertical"
     tools:context="ir.etkastores.app.activities.profileActivities.HekmatActivity">
 
@@ -11,17 +12,249 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/hekmatCard"/>
+        app:title="@string/hekmatCard" />
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ir.etkastores.app.ui.views.MessageView
-            android:id="@+id/messageView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/userProfileName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeMedium" />
+
+            <TextView
+                android:id="@+id/userCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeSmall" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/cardIcon1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_card_grey_24dp" />
+
+                <TextView
+                    android:id="@+id/remainedCreditTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/cardIcon1"
+                    android:paddingRight="8dp"
+                    android:text="@string/remainedCredit"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/remainedCreditValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/darkGray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/cardIcon2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_card_grey_24dp" />
+
+                <TextView
+                    android:id="@+id/remainedEtkaBonCreditTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/cardIcon2"
+                    android:paddingRight="8dp"
+                    android:text="@string/remainedEtkaBonCredit"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/remainedEtkaBonCreditValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/darkGray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/offerIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_money_off_black_24dp" />
+
+                <TextView
+                    android:id="@+id/offerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/offerIcon"
+                    android:paddingRight="8dp"
+                    android:text="@string/remainedOfferInThisMonth"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/offerValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/darkGray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/loanIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_dollar_rect_gray_24dp" />
+
+                <TextView
+                    android:id="@+id/remainedLoanTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/loanIcon"
+                    android:paddingRight="8dp"
+                    android:text="@string/remainedLoan"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/remainedLoanTitle"
+                    android:layout_toLeftOf="@id/loanIcon"
+                    android:paddingRight="8dp"
+                    android:text="@string/remainedLoanDescription"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeSmall" />
+
+                <TextView
+                    android:id="@+id/remainedLoanValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeMedium" />
+
+            </RelativeLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
+            <ir.etkastores.app.ui.views.CustomRowMenuItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:rowText="@string/kalabargHayeElamShode" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
+            <ir.etkastores.app.ui.views.CustomRowMenuItem
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:rowText="@string/hekmatCardTransactionsHistory" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
