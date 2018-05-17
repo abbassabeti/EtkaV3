@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ir.etkastores.app.ui.widgets.ViewPager16x8
+    <ir.etkastores.app.ui.widgets.ViewPager16x9
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </ir.etkastores.app.ui.widgets.ViewPager16x8>
+    </ir.etkastores.app.ui.widgets.ViewPager16x9>
 
     <com.rd.PageIndicatorView
         android:id="@+id/categoryPageIndicatorView"

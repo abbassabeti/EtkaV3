@@ -166,7 +166,7 @@
         <activity
             android:name=".activities.WalkthroughActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SolidSystemBar" />
+            android:theme="@style/AppTheme.SolidSystemBar.Light" />
         <activity
             android:name=".activities.profileActivities.FactorActivity"
             android:screenOrientation="portrait"

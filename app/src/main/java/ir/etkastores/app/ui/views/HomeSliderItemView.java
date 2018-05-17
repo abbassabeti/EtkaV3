@@ -21,7 +21,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.activities.CategoriesFilterActivity;
 import ir.etkastores.app.models.home.BannerModel;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
-import ir.etkastores.app.ui.widgets.ViewPager16x8;
+import ir.etkastores.app.ui.widgets.ViewPager16x9;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.utils.image.ImageLoader;
@@ -33,7 +33,7 @@ import ir.etkastores.app.utils.image.ImageLoader;
 public class HomeSliderItemView extends LinearLayout {
 
     @BindView(R.id.pager)
-    ViewPager16x8 pager;
+    ViewPager16x9 pager;
 
     private CategoryAdapter adapter;
 

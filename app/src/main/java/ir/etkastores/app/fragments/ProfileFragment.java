@@ -19,6 +19,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.LoginRegisterActivity;
 import ir.etkastores.app.activities.NewsActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
+import ir.etkastores.app.activities.profileActivities.HekmatActivity;
 import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
 import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
 import ir.etkastores.app.activities.profileActivities.OtherPagesActivity;
@@ -105,6 +106,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick() {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
+        HekmatActivity.show(getActivity());
     }
 
     @OnClick(R.id.scoreMenu)

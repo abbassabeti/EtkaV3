@@ -17,7 +17,6 @@ import ir.etkastores.app.adapters.viewPagerAdapters.GalleryPagerAdapter;
 import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
-import ir.etkastores.app.ui.widgets.ViewPager16x8;
 import ir.etkastores.app.ui.widgets.ZoomableViewPager;
 import ir.etkastores.app.utils.ZoomOutSlidePagerTransformer;
 
