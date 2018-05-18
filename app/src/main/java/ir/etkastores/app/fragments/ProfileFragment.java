@@ -105,8 +105,12 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick() {
-        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
-        HekmatActivity.show(getActivity());
+        if (ProfileManager.isGuest()) {
+            showLoginRequiredDialog();
+        } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
+            HekmatActivity.show(getActivity());
+        }
     }
 
     @OnClick(R.id.scoreMenu)

@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.ui.dialogs.HekmatCardLoginDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.FontUtils;
 
@@ -59,6 +60,13 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
         remainedEtkaBonCreditValue.setText("۶۵۰ هزار تومان");
         offerValue.setText("۶۵۰ هزار تومان");
         remainedLoanValue.setText("۶۵۰ هزار تومان");
+        HekmatCardLoginDialog.newInstance().show(getSupportFragmentManager(), new HekmatCardLoginDialog.OnHekmatCardCallbackListener() {
+
+            @Override
+            public void onHekmatCardLoginDialogSubmitButton(String cardNumber, String password) {
+
+            }
+        });
     }
 
     private void initViews() {

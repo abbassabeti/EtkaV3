@@ -12,6 +12,7 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
+import okhttp3.CertificatePinner;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -52,7 +53,7 @@ public class ApiProvider {
         httpClient.connectTimeout(20, TimeUnit.SECONDS);
         httpClient.readTimeout(20, TimeUnit.SECONDS);
         httpClient.writeTimeout(20, TimeUnit.SECONDS);
-
+        if (getPinnedCertificate() != null) httpClient.certificatePinner(getPinnedCertificate());
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
@@ -172,6 +173,7 @@ public class ApiProvider {
         httpClient.connectTimeout(20, TimeUnit.SECONDS);
         httpClient.readTimeout(20, TimeUnit.SECONDS);
         httpClient.writeTimeout(20, TimeUnit.SECONDS);
+        if (getPinnedCertificate() != null) httpClient.certificatePinner(getPinnedCertificate());
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
@@ -199,6 +201,16 @@ public class ApiProvider {
 
     public static Call<AccessToken> getLogin(String userName, String password) {
         return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, userName, password, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+    }
+
+    public static CertificatePinner certificatePinner = null;
+    private static CertificatePinner getPinnedCertificate(){
+//        if (certificatePinner == null){
+//            certificatePinner = new CertificatePinner.Builder()
+//                    .add("api.github.com", "sha256/6wJsqVDF8K19zxfLxV5DGRneLyzso9adVdUN/exDacw=")
+//                    .build();
+//        }
+        return certificatePinner;
     }
 
 }

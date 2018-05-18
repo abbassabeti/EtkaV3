@@ -237,5 +237,9 @@
     <string name="remainedLoanDescription">در صورت عدم خرید اعتباری</string>
     <string name="kalabargHayeElamShode">کالابرگ های اعلام شده</string>
     <string name="hekmatCardTransactionsHistory">سابقه تراکنش های حکمت کارت</string>
+    <string name="enterHekmatCardInformationMessage">برای ورود به این بخش ابتدا باید کارت حکمت خود را ثبت کنید</string>
+    <string name="submitAndEnter">ثبت و ورود</string>
+    <string name="hekmatCard16digitNumber">شماره ۱۶ رقمی حکمت کارت</string>
+    <string name="hekmatCardPassword">رمز عبور حکمت کارت</string>
 
 </resources>
