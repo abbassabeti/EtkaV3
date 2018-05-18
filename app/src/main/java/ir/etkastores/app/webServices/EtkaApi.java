@@ -21,6 +21,7 @@ import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
+import ir.etkastores.app.models.tickets.DepartmentModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
@@ -140,5 +141,8 @@ public interface EtkaApi {
     @POST(ApiStatics.SURVEY)
     Call<OauthResponse<String>> submitSurvey(@Body SurveySubmitRequestModel requestModel);
 
+    //25
+    @GET(ApiStatics.DEPARTMENTS)
+    Call<OauthResponse<List<DepartmentModel>>> getDepartments();
 
 }

@@ -49,6 +49,7 @@ public class ApiStatics {
     public static final String SAVE_PRODUCTS = "api/v1/SaveProducts";
     public static final String NEWS = "/api/v1/news";
     public static final String SURVEY = "/api/v1/Survey";
+    public static final String DEPARTMENTS = "/api/v1/Ticket/Departments";
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
     public static final String CLIENT_SECRET = "AS85dwD5asd8E4ESD85";
