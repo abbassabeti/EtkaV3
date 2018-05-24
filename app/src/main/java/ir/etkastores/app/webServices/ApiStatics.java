@@ -2,6 +2,7 @@ package ir.etkastores.app.webServices;
 
 import android.text.TextUtils;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.utils.DiskDataHelper;
 
 /**
@@ -11,20 +12,23 @@ import ir.etkastores.app.utils.DiskDataHelper;
 public class ApiStatics {
 
     private static final String BASE_URL_KEY = "BASE_URL";
-    private static String BASE_URL = "http://46.209.6.91:4102";
+//        private static String BASE_URL = "http://46.209.6.91:4102";
+    private static String BASE_URL = "https://api.ecrmapp.ir/";
 
-    public static String getBaseUrl(){
+    public static String getBaseUrl() {
+        if (BuildConfig.DEBUG) return BASE_URL;
         String savedUrl = DiskDataHelper.getString(BASE_URL_KEY);
-        if (TextUtils.isEmpty(savedUrl)){
+        if (TextUtils.isEmpty(savedUrl)) {
             return BASE_URL;
-        }else{
+        } else {
             BASE_URL = savedUrl;
         }
         return BASE_URL;
     }
 
-    public static void setBaseUrl(String url){
-        DiskDataHelper.putString(BASE_URL_KEY,url);
+    public static void setBaseUrl(String url) {
+        if (BuildConfig.DEBUG) return;
+        DiskDataHelper.putString(BASE_URL_KEY, url);
         BASE_URL = url;
     }
 
@@ -59,12 +63,12 @@ public class ApiStatics {
 
     private static AccessToken lastToken;
 
-    public static AccessToken getLastToken(){
+    public static AccessToken getLastToken() {
         if (lastToken == null) lastToken = DiskDataHelper.getLastToken();
         return lastToken;
     }
 
-    public static void saveToken(AccessToken token){
+    public static void saveToken(AccessToken token) {
         DiskDataHelper.saveLastToken(token);
         lastToken = token;
     }

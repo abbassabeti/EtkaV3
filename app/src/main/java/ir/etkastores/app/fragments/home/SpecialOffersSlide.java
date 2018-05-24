@@ -96,14 +96,18 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
             public void onResponse(Call<OauthResponse<List<HomeItemsModel>>> call, Response<OauthResponse<List<HomeItemsModel>>> response) {
                 if (!isAdded()) return;
                 hideLoading();
-                if (response.isSuccessful()) {
-                    if (response.body().getData().size() == 0) {
-                        showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()) {
+                        if (response.body().getData().size() == 0) {
+                            showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
+                        } else {
+                            addItems(response.body().getData());
+                        }
+                        isDataLoaded = true;
                     } else {
-                        addItems(response.body().getData());
+                        onFailure(call, null);
                     }
-                    isDataLoaded = true;
-                } else {
+                }else{
                     onFailure(call, null);
                 }
             }

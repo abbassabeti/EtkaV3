@@ -14,9 +14,10 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.notification.NotificationModel;
 
 /**
  * Created by Sajad on 2/11/18.
@@ -24,15 +25,18 @@ import ir.etkastores.app.R;
 
 public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
 
+    private final static String ETKA_NOTIFICATION_OBJECT = "etkaNotificationObject";
+    private final static String CHANNEL_ID = "notify_001";
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        Log.e("FCM", "messae received" + remoteMessage.getFrom());
+        if (BuildConfig.DEBUG) Log.e("FCM", "messae received" + remoteMessage.getFrom());
 
         if (remoteMessage.getData() == null) return;
 
-        if (!TextUtils.isEmpty(remoteMessage.getData().get("etkaNotificationObject"))) {
-            NotificationModel notificationModel = NotificationModel.fromJson(remoteMessage.getData().get("etkaNotificationObject"));
+        if (!TextUtils.isEmpty(remoteMessage.getData().get(ETKA_NOTIFICATION_OBJECT))) {
+            NotificationModel notificationModel = NotificationModel.fromJson(remoteMessage.getData().get(ETKA_NOTIFICATION_OBJECT));
             showNotification(notificationModel);
         }
 
@@ -45,7 +49,7 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
         Context context = EtkaApp.getInstance().getApplicationContext();
 
         NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(EtkaApp.getInstance().getApplicationContext(), "notify_001");
+                new NotificationCompat.Builder(EtkaApp.getInstance().getApplicationContext(), CHANNEL_ID);
         PendingIntent pendingIntent = PendingIntent.getActivity(EtkaApp.getInstance().getApplicationContext(), 0, notification.getIntent(), 0);
 
         mBuilder.setContentIntent(pendingIntent);
@@ -61,8 +65,8 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("notify_001",
-                    "Channel human readable title",
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    getResources().getString(R.string.applicationName),
                     NotificationManager.IMPORTANCE_DEFAULT);
             mNotificationManager.createNotificationChannel(channel);
         }

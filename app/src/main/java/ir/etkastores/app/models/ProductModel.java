@@ -168,10 +168,12 @@ public class ProductModel {
     }
 
     public String getOriginalPrice() {
+        if (originalPrice == null) return "";
         return originalPrice;
     }
 
     public String getEtkaPrice() {
+        if (etkaPrice == null) return "";
         return etkaPrice;
     }
 
@@ -217,7 +219,7 @@ public class ProductModel {
     }
 
     public String getStrikeThruPrice() {
-        if (!TextUtils.isEmpty(getOfferPrice())) {
+        if (!TextUtils.isEmpty(getOfferPrice()) && !TextUtils.isEmpty(getEtkaPrice())) {
             return getEtkaPrice();
         }
         if (!TextUtils.isEmpty(getOriginalPrice())) {

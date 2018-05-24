@@ -1,6 +1,5 @@
 package ir.etkastores.app.webServices;
 
-import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -45,6 +44,8 @@ public class ApiProvider {
                 .baseUrl(ApiStatics.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create());
 
+        addTLSSocketFactory(httpClient);
+
         if (BuildConfig.DEBUG) {
             httpClient.addInterceptor(getBodyLogInterceptor());
             httpClient.addInterceptor(getHeadersLogInterceptor());
@@ -64,6 +65,8 @@ public class ApiProvider {
         builder = new Retrofit.Builder()
                 .baseUrl(ApiStatics.getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create());
+
+        addTLSSocketFactory(httpClient);
 
         if (accessToken == null) {
             accessToken = new AccessToken();
@@ -205,12 +208,22 @@ public class ApiProvider {
 
     public static CertificatePinner certificatePinner = null;
     private static CertificatePinner getPinnedCertificate(){
-//        if (certificatePinner == null){
-//            certificatePinner = new CertificatePinner.Builder()
-//                    .add("api.github.com", "sha256/6wJsqVDF8K19zxfLxV5DGRneLyzso9adVdUN/exDacw=")
-//                    .build();
-//        }
+        if (certificatePinner == null && ApiStatics.getBaseUrl().contains("https://")) {
+            certificatePinner = new CertificatePinner.Builder()
+                    .add(ApiStatics.getBaseUrl().replace("https://",""), "sha256/EC6FcYlSSdciVUvdR4NqRZIYvcdmbqdqYUQDZJP04Xk=")
+                    .build();
+        }
         return certificatePinner;
+    }
+
+    private static void addTLSSocketFactory(OkHttpClient.Builder httpBuilder){
+        TLSSocketFactory tlsSocketFactory;
+        try {
+            tlsSocketFactory = new TLSSocketFactory();
+            httpBuilder.sslSocketFactory(tlsSocketFactory, tlsSocketFactory.systemDefaultTrustManager());
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
     }
 
 }
