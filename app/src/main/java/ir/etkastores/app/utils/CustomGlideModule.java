@@ -1,5 +1,5 @@
 //package ir.etkastores.app.utils;
-
+//
 //import android.content.Context;
 //
 //import com.bumptech.glide.Glide;
@@ -13,7 +13,7 @@
 //import java.util.concurrent.TimeUnit;
 //
 //import okhttp3.OkHttpClient;
-
+//
 //@GlideModule
 //public class CustomGlideModule extends AppGlideModule {
 //

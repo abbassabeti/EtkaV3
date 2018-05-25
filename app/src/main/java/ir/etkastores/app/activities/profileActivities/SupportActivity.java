@@ -60,7 +60,8 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private void initViews(){
         toolbar.setActionListeners(this);
         List<FragmentTitleModel> fragments = new ArrayList<>();
-        fragments.add(new FragmentTitleModel(TicketsListFragment.newInstance(),R.string.requests));
+        fragments.add(new FragmentTitleModel(TicketsListFragment.newInstance(),R.string.support));
+        fragments.add(new FragmentTitleModel(TicketsListFragment.newInstance(),R.string.productRequest));
         fragments.add(new FragmentTitleModel(ContactUsFragment.newInstance(),R.string.contactUs));
         adapter = new GlobalFragmentPagerAdapter(getSupportFragmentManager(),fragments);
         pager.setAdapter(adapter);

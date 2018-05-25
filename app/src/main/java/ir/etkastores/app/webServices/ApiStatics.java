@@ -12,8 +12,8 @@ import ir.etkastores.app.utils.DiskDataHelper;
 public class ApiStatics {
 
     private static final String BASE_URL_KEY = "BASE_URL";
-//        private static String BASE_URL = "http://46.209.6.91:4102";
-    private static String BASE_URL = "https://api.ecrmapp.ir/";
+        private static String BASE_URL = "http://46.209.6.91:4102";
+//    private static String BASE_URL = "https://api.ecrmapp.ir/";
 
     public static String getBaseUrl() {
         if (BuildConfig.DEBUG) return BASE_URL;
