@@ -12,8 +12,8 @@ import ir.etkastores.app.utils.DiskDataHelper;
 public class ApiStatics {
 
     private static final String BASE_URL_KEY = "BASE_URL";
-        private static String BASE_URL = "http://46.209.6.91:4102";
-//    private static String BASE_URL = "https://api.ecrmapp.ir/";
+//        private static String BASE_URL = "http://46.209.6.91:4102";
+    private static String BASE_URL = "https://api.ecrmapp.ir/";
 
     public static String getBaseUrl() {
         if (BuildConfig.DEBUG) return BASE_URL;
@@ -54,6 +54,7 @@ public class ApiStatics {
     public static final String NEWS = "/api/v1/news";
     public static final String SURVEY = "/api/v1/Survey";
     public static final String DEPARTMENTS = "/api/v1/Ticket/Departments";
+    public static final String DEVICE_GROUP_TOKEN = "/api/v1/Notification/DeviceGroup";
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
     public static final String CLIENT_SECRET = "AS85dwD5asd8E4ESD85";

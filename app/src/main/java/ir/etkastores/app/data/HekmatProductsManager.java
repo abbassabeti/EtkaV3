@@ -32,44 +32,46 @@ public class HekmatProductsManager {
     private OnHekmatCallbacksListener callbacksListener;
     Long filteredStoreId = null;
 
-    private HekmatProductsManager(){
+    private HekmatProductsManager() {
         request();
     }
 
-    private void request(){
+    private void request() {
         isLoading = true;
         ApiProvider.getAuthorizedApi().getHekmat().enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<HekmatModel>>> call, Response<OauthResponse<List<HekmatModel>>> response) {
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         products = response.body().getData();
                         retryCounter = 5;
                         isLoading = false;
-                        if (filteredStoreId != null){
-                            if (callbacksListener != null) callbacksListener.onProductsLoaded(getFilteredByIdProducts(filteredStoreId));
-                        }else{
-                            if (callbacksListener != null) callbacksListener.onProductsLoaded(products);
+                        if (filteredStoreId != null) {
+                            if (callbacksListener != null)
+                                callbacksListener.onProductsLoaded(getFilteredByIdProducts(filteredStoreId));
+                        } else {
+                            if (callbacksListener != null)
+                                callbacksListener.onProductsLoaded(products);
                         }
-                    }else{
-                        onFailure(call,null);
+                    } else {
+                        onFailure(call, null);
                     }
-                }else{
-                    onFailure(call,null);
+                } else {
+                    onFailure(call, null);
                 }
             }
 
             @Override
             public void onFailure(Call<OauthResponse<List<HekmatModel>>> call, Throwable throwable) {
-                if (retryCounter>0){
+                if (retryCounter > 0) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            retryCounter --;
+                            retryCounter--;
                             request();
                         }
-                    },500);
-                }else{
+                    }, 500);
+                } else {
                     isLoading = false;
                     if (callbacksListener != null) callbacksListener.onLoadFailure();
                 }
@@ -77,41 +79,50 @@ public class HekmatProductsManager {
         });
     }
 
-    public void getProducts(OnHekmatCallbacksListener callbacksListener,Long filteredStoreId) {
-        if (products != null){
+    public void getProducts(OnHekmatCallbacksListener callbacksListener, Long filteredStoreId) {
+        if (products != null) {
             this.filteredStoreId = filteredStoreId;
-            if (filteredStoreId != null){
-                if (callbacksListener != null) callbacksListener.onProductsLoaded(getFilteredByIdProducts(filteredStoreId));
-            }else{
+            if (filteredStoreId != null) {
+                if (callbacksListener != null)
+                    callbacksListener.onProductsLoaded(getFilteredByIdProducts(filteredStoreId));
+            } else {
                 if (callbacksListener != null) callbacksListener.onProductsLoaded(products);
             }
             return;
-        }else{
+        } else {
             this.filteredStoreId = filteredStoreId;
             this.callbacksListener = callbacksListener;
         }
-        if (!isLoading){
+        if (!isLoading) {
             request();
         }
     }
 
-    public interface OnHekmatCallbacksListener{
+    public interface OnHekmatCallbacksListener {
         void onProductsLoaded(List<HekmatModel> products);
+
         void onLoadFailure();
     }
 
-    private List<HekmatModel> getFilteredByIdProducts(long storeId){
+    private List<HekmatModel> getFilteredByIdProducts(long storeId) {
         List<HekmatModel> tmp = new ArrayList<>();
-        for (HekmatModel h : products){
-            for (HekmatProductModel hp : h.getProducts()){
-                for (long hsid : hp.getStores()){
-                    if (hsid == storeId){
-                        tmp.add(h.getCopy());
+        for (HekmatModel h : products) {
+            for (HekmatProductModel hp : h.getProducts()) {
+                for (long hsid : hp.getStores()) {
+                    if (hsid == storeId) {
+                        if (!isHekmatAdded(h, tmp)) tmp.add(h.getCopy());
                     }
                 }
             }
         }
         return tmp;
+    }
+
+    private boolean isHekmatAdded(HekmatModel hekmatModel, List<HekmatModel> items) {
+        for (HekmatModel item : items) {
+            if (hekmatModel.getId() == item.getId()) return true;
+        }
+        return false;
     }
 
 }
