@@ -68,7 +68,7 @@ public class HekmatModel {
         return products;
     }
 
-    public HekmatModel getCopy(){
+    public HekmatModel getCopy() {
         HekmatModel hekmatModel = new HekmatModel();
         hekmatModel.id = id;
         hekmatModel.title = title;
@@ -78,9 +78,34 @@ public class HekmatModel {
         hekmatModel.endDate = endDate;
         hekmatModel.imageUrl = imageUrl;
         hekmatModel.products = new ArrayList<>();
-        for (HekmatProductModel hekmatProductModel : products){
+        for (HekmatProductModel hekmatProductModel : products) {
             hekmatModel.products.add(HekmatProductModel.fromJson(new Gson().toJson(hekmatProductModel)));
         }
         return hekmatModel;
     }
+
+    public HekmatModel getFilteredCopyForStore(long storeId) {
+        HekmatModel hekmatModel = new HekmatModel();
+        hekmatModel.id = id;
+        hekmatModel.title = title;
+        hekmatModel.stage = stage;
+        hekmatModel.kalaCode = kalaCode;
+        hekmatModel.startDate = startDate;
+        hekmatModel.endDate = endDate;
+        hekmatModel.imageUrl = imageUrl;
+        hekmatModel.products = new ArrayList<>();
+        for (HekmatProductModel hekmatProductModel : products) {
+            if (hekmatProducatsIsAvailableInStore(hekmatProductModel, storeId))
+                hekmatModel.products.add(HekmatProductModel.fromJson(new Gson().toJson(hekmatProductModel)));
+        }
+        return hekmatModel;
+    }
+
+    private boolean hekmatProducatsIsAvailableInStore(HekmatProductModel hekmatProductModel, long storeId) {
+        for (long sId : hekmatProductModel.getStores()) {
+            if (sId == storeId) return true;
+        }
+        return false;
+    }
+
 }

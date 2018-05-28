@@ -110,7 +110,9 @@ public class HekmatProductsManager {
             for (HekmatProductModel hp : h.getProducts()) {
                 for (long hsid : hp.getStores()) {
                     if (hsid == storeId) {
-                        if (!isHekmatAdded(h, tmp)) tmp.add(h.getCopy());
+                        if (!isHekmatAdded(h, tmp)){
+                            tmp.add(h.getFilteredCopyForStore(storeId));
+                        }
                     }
                 }
             }
