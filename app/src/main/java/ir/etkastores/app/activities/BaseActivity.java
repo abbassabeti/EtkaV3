@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.R;
+import ir.etkastores.app.data.PushTokenManager;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.IntentHelper;
@@ -37,6 +38,12 @@ public class BaseActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PushTokenManager.getInstance().syncToken();
     }
 
     private void checkForceUpdate() {

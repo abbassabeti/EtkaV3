@@ -3,21 +3,21 @@ package ir.etkastores.app.webServices;
 import java.util.List;
 
 import ir.etkastores.app.models.CategoryModel;
-import ir.etkastores.app.models.factor.FactorModel;
-import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
+import ir.etkastores.app.models.factor.FactorModel;
+import ir.etkastores.app.models.factor.FactorRequestModel;
+import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.home.HomeItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.news.NewsRequestModel;
 import ir.etkastores.app.models.news.NewsResponseModel;
+import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
+import ir.etkastores.app.models.profile.RegisterUserRequestModel;
+import ir.etkastores.app.models.profile.UserProfileModel;
+import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
 import ir.etkastores.app.models.search.ProductSearchResponseModel;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
-import ir.etkastores.app.models.profile.UserProfileModel;
-import ir.etkastores.app.models.hekmat.HekmatModel;
-import ir.etkastores.app.models.profile.RegisterUserRequestModel;
-import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
-import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
@@ -144,5 +144,9 @@ public interface EtkaApi {
     //25
     @GET(ApiStatics.DEPARTMENTS)
     Call<OauthResponse<List<DepartmentModel>>> getDepartments();
+
+    //26
+    @POST(ApiStatics.DEVICE_GROUP_TOKEN)
+    Call<OauthResponse<String>> syncLastPushToken(@Query("TokenId") String token);
 
 }

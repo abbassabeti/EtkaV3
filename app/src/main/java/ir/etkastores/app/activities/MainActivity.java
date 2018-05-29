@@ -6,9 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +27,7 @@ import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.TextInfoActivity;
 import ir.etkastores.app.data.StoresManager;
+import ir.etkastores.app.data.TicketsDepartmentsManager;
 import ir.etkastores.app.fragments.home.HekmatWaresSlide;
 import ir.etkastores.app.fragments.home.HomeFragment;
 import ir.etkastores.app.fragments.MapFragment;
@@ -34,6 +38,7 @@ import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
+import ir.etkastores.app.models.tickets.DepartmentModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
@@ -86,6 +91,19 @@ public class MainActivity extends BaseActivity {
         }
 
         StoresManager.getInstance().fetchStores(null);
+
+        //TODO remote below code
+        TicketsDepartmentsManager.getInstance().fetchDepartments(new TicketsDepartmentsManager.OnDepartmentCallback() {
+            @Override
+            public void onDepartmentsFetched(List<DepartmentModel> departments) {
+                Log.e("size",""+departments.size());
+            }
+
+            @Override
+            public void onDepartmentsFailure(String message) {
+                Log.e("message",""+message);
+            }
+        });
 
     }
 
