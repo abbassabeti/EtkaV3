@@ -111,6 +111,7 @@ dependencies {
 
 //    compile 'mobi.inthepocket.android:ibeaconscanner:2.0.0'
     compile 'com.github.florent37:rxbeacon:1.0.0'
+//    compile 'org.altbeacon:android-beacon-library:2+'
 
 }
 

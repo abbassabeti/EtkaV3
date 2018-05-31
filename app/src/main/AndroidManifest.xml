@@ -204,6 +204,9 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
+        
+        <service android:name=".services.EtkaBeaconService"
+            android:enabled="true" />
 
         <activity
             android:name=".activities.FinishActivity"

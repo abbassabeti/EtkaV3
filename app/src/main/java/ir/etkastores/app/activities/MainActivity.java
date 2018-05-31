@@ -9,17 +9,14 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.github.florent37.rxbeacon.RxBeacon;
-import com.github.florent37.rxbeacon.RxBeaconRange;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconManager;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.functions.Consumer;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
@@ -44,6 +41,7 @@ import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
+import ir.etkastores.app.services.EtkaBeaconService;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
@@ -67,6 +65,8 @@ public class MainActivity extends BaseActivity {
     private int homeSelectedTab = -1;
 
     private NotificationModel notificationModel = null;
+
+    BeaconManager beaconManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,26 +110,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        RxBeacon.with(this)
-                .addBeaconParser("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24")
-                .beaconsInRegion()
-                .subscribe(new Consumer<RxBeaconRange>() {
-                    @Override
-                    public void accept(@NonNull RxBeaconRange rxBeaconRange) throws Exception {
-                        rxBeaconRange.getBeacons();
-                        if (rxBeaconRange.getBeacons() != null)
-                            for (Beacon beacon : rxBeaconRange.getBeacons()) {
-                                Log.e("iBeacon Detected",""+beacon.toString());
-                                Log.e("UUID",""+beacon.getIdentifiers().get(0).toString());
-                                Log.e("major",""+beacon.getIdentifiers().get(1).toString());
-                                Log.e("minor",""+beacon.getIdentifiers().get(2).toString());
-                                Log.e("distance",""+beacon.getDistance());
-                                Log.e("*****************","************");
-                            }
-                        //rxBeaconRange.beacons (Collection<Beacon>)
-                        //rxBeaconRange.region (Region)
-                    }
-                });
+        startService(new Intent(this, EtkaBeaconService.class));
 
     }
 
