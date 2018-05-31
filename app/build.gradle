@@ -23,7 +23,7 @@ android {
     defaultConfig {
 
         applicationId "ir.etkastores.app"
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 27
         versionCode 4
         versionName "3.0.0 Beta 4"
@@ -108,6 +108,9 @@ dependencies {
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+
+//    compile 'mobi.inthepocket.android:ibeaconscanner:2.0.0'
+    compile 'com.github.florent37:rxbeacon:1.0.0'
 
 }
 

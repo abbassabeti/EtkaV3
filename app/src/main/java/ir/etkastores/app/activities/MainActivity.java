@@ -2,20 +2,26 @@ package ir.etkastores.app.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.github.florent37.rxbeacon.RxBeacon;
+import com.github.florent37.rxbeacon.RxBeaconRange;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+import org.altbeacon.beacon.Beacon;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.functions.Consumer;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
 import ir.etkastores.app.activities.profileActivities.HekmatActivity;
@@ -28,12 +34,11 @@ import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.TextInfoActivity;
 import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.data.TicketsDepartmentsManager;
-import ir.etkastores.app.fragments.home.HekmatWaresSlide;
-import ir.etkastores.app.fragments.home.HomeFragment;
 import ir.etkastores.app.fragments.MapFragment;
 import ir.etkastores.app.fragments.ProfileFragment;
+import ir.etkastores.app.fragments.home.HekmatWaresSlide;
+import ir.etkastores.app.fragments.home.HomeFragment;
 import ir.etkastores.app.fragments.searchFragments.SearchTabFragment;
-import ir.etkastores.app.R;
 import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
@@ -96,14 +101,35 @@ public class MainActivity extends BaseActivity {
         TicketsDepartmentsManager.getInstance().fetchDepartments(new TicketsDepartmentsManager.OnDepartmentCallback() {
             @Override
             public void onDepartmentsFetched(List<DepartmentModel> departments) {
-                Log.e("size",""+departments.size());
+                Log.e("size", "" + departments.size());
             }
 
             @Override
             public void onDepartmentsFailure(String message) {
-                Log.e("message",""+message);
+                Log.e("message", "" + message);
             }
         });
+
+        RxBeacon.with(this)
+                .addBeaconParser("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24")
+                .beaconsInRegion()
+                .subscribe(new Consumer<RxBeaconRange>() {
+                    @Override
+                    public void accept(@NonNull RxBeaconRange rxBeaconRange) throws Exception {
+                        rxBeaconRange.getBeacons();
+                        if (rxBeaconRange.getBeacons() != null)
+                            for (Beacon beacon : rxBeaconRange.getBeacons()) {
+                                Log.e("iBeacon Detected",""+beacon.toString());
+                                Log.e("UUID",""+beacon.getIdentifiers().get(0).toString());
+                                Log.e("major",""+beacon.getIdentifiers().get(1).toString());
+                                Log.e("minor",""+beacon.getIdentifiers().get(2).toString());
+                                Log.e("distance",""+beacon.getDistance());
+                                Log.e("*****************","************");
+                            }
+                        //rxBeaconRange.beacons (Collection<Beacon>)
+                        //rxBeaconRange.region (Region)
+                    }
+                });
 
     }
 

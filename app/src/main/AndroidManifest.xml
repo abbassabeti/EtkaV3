@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ir.etkastores.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,6 +13,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
 
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -23,7 +27,8 @@
         android:label="@string/applicationName"
         android:resizeableActivity="false"
         android:supportsRtl="false"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="label">
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyC5mITzxE8vlSKRMN5zF-zcC_Xr73FhhFA" />
@@ -190,7 +195,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".services.StoresGeofenceTransitionsIntentService" />
 
         <receiver
             android:name="com.adjust.sdk.AdjustReferrerReceiver"
@@ -205,6 +209,7 @@
             android:name=".activities.FinishActivity"
             android:label="@string/title_activity_finish"
             android:theme="@style/AppTheme"></activity>
+
     </application>
 
 </manifest>

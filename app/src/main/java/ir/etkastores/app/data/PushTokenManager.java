@@ -73,7 +73,8 @@ public class PushTokenManager {
                         req = null;
                     }
                 } else {
-                    onFailure(null, null);
+                    retryCounter = MAX_RETRY_COUNT;
+                    req = null;
                 }
             }
 

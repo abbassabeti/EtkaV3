@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class DepartmentModel {
 
-    @SerializedName("Id")
+    @SerializedName("id")
     private int id;
 
-    @SerializedName("Title")
+    @SerializedName("title")
     private String title;
 
     public int getId() {
