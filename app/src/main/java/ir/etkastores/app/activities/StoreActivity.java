@@ -92,6 +92,9 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
     @BindView(R.id.hekmatItemsHolder)
     View hekmatItemsHolder;
 
+    @BindView(R.id.extraItemHolder)
+    LinearLayout extraItemHolder;
+
     private StoreModel storeModel;
 
     private long storeCode = 0;
@@ -185,7 +188,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
             tv.setTextColor(ContextCompat.getColor(this, R.color.darkGray));
             tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
             tv.setTypeface(FontUtils.getBoldTypeFace());
-            mainHolder.addView(tv);
+            extraItemHolder.addView(tv);
             for (FeatureModel featureModel : storeModel.getFeatures()) {
                 addFeature(featureModel);
             }
@@ -265,14 +268,14 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
                 IntentHelper.showDialer(StoreActivity.this, phoneNumber);
             }
         });
-        mainHolder.addView(view);
+        extraItemHolder.addView(view);
     }
 
     private void addFeature(FeatureModel featureModel) {
         View view = LayoutInflater.from(this).inflate(R.layout.store_feature_item, null, false);
         TextView tv = (TextView) view.findViewById(R.id.featureTitle);
         tv.setText(featureModel.getName() + " : " + featureModel.getValue());
-        mainHolder.addView(view);
+        extraItemHolder.addView(view);
     }
 
     private void loadStore() {

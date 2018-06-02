@@ -55,11 +55,13 @@ public class ApiStatics {
     public static final String SURVEY = "/api/v1/Survey";
     public static final String DEPARTMENTS = "/api/v1/Ticket/Departments";
     public static final String DEVICE_GROUP_TOKEN = "/api/v1/Notification/DeviceGroup";
+    public static final String ACTIVATION_CODE = "/api/v1/Account/GetActivationCode";
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
     public static final String CLIENT_SECRET = "AS85dwD5asd8E4ESD85";
 
     public static final String GRAND_TYPE_PASSWORD = "password";
+    public static final String GRAND_TYPE_VERIFY = "verify";
     public static final String GRAND_TYPE_REFRESH_TOKEN = "refresh_token";
 
     private static AccessToken lastToken;

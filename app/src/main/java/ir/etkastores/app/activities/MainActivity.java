@@ -11,8 +11,6 @@ import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-import org.altbeacon.beacon.BeaconManager;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,7 +39,7 @@ import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
-import ir.etkastores.app.services.EtkaBeaconService;
+//import ir.etkastores.app.services.EtkaBeaconService;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
@@ -65,8 +63,6 @@ public class MainActivity extends BaseActivity {
     private int homeSelectedTab = -1;
 
     private NotificationModel notificationModel = null;
-
-    BeaconManager beaconManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +106,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        startService(new Intent(this, EtkaBeaconService.class));
+//        startService(new Intent(this, EtkaBeaconService.class));
 
     }
 

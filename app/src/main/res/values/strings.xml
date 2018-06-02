@@ -241,5 +241,10 @@
     <string name="submitAndEnter">ثبت و ورود</string>
     <string name="hekmatCard16digitNumber">شماره ۱۶ رقمی حکمت کارت</string>
     <string name="hekmatCardPassword">رمز عبور حکمت کارت</string>
+    <string name="requestActivationCode">دریافت کد فعال سازی</string>
+    <string name="enterActivationCodeHere">کد فعالسازی را اینجا وارد کنید</string>
+    <string name="checkActivationCode">بررسی کد فعالسازی</string>
+    <string name="enterPhoneNumberMessageForVerify">برای ورود یا ثبت نام در اتکا، شماره موبایل خود را وارد کنید.</string>
+    <string name="enterVerificationCode">کد تائیدی که تا لحظاتی دیگر برای شما پیامک می شود را در کادر زیر وارد کنید.</string>
 
 </resources>

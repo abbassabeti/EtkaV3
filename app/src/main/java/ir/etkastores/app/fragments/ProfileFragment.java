@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.LoginRegisterActivity;
+import ir.etkastores.app.activities.LoginWithSMSActivity;
 import ir.etkastores.app.activities.NewsActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
 import ir.etkastores.app.activities.profileActivities.HekmatActivity;
@@ -216,7 +217,8 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 if (button == RIGHT_BUTTON) {
-                    LoginRegisterActivity.showLogin(getActivity());
+                    LoginWithSMSActivity.show(getActivity());
+//                    LoginRegisterActivity.showLogin(getActivity());
                 }
                 messageDialog.getDialog().cancel();
             }

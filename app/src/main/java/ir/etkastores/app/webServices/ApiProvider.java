@@ -122,20 +122,20 @@ public class ApiProvider {
                     }.getType());
                     if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401) {
                         synchronized (httpClient) {
-                            if (ApiStatics.getLastToken() == null){
+                            if (ApiStatics.getLastToken() == null) {
                                 Call<AccessToken> call = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
                                 if (tokenResponse.code() == 200) {
                                     AccessToken newToken = tokenResponse.body();
                                     lastToken = newToken;
                                     ApiStatics.saveToken(lastToken);
-                                    request=request.newBuilder()
+                                    request = request.newBuilder()
                                             .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
                                             .build();
 
                                     proceed = chain.proceed(request);
                                 }
-                            }else{
+                            } else {
                                 String refreshToken = ApiStatics.getLastToken().getRefreshToken();
                                 lastToken = null;
                                 ApiStatics.saveToken(null);
@@ -153,7 +153,7 @@ public class ApiProvider {
                                     AccessToken newToken = tokenResponse.body();
                                     lastToken = newToken;
                                     ApiStatics.saveToken(lastToken);
-                                    request=request.newBuilder()
+                                    request = request.newBuilder()
                                             .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
                                             .build();
 
@@ -202,21 +202,26 @@ public class ApiProvider {
         return logging;
     }
 
+    public static Call<AccessToken> getLoginWithSMSVerification(String mobilePhone, String verificationCode) {
+        return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, mobilePhone + "-" + verificationCode, "", ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+    }
+
     public static Call<AccessToken> getLogin(String userName, String password) {
         return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, userName, password, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
     }
 
     public static CertificatePinner certificatePinner = null;
-    private static CertificatePinner getPinnedCertificate(){
+
+    private static CertificatePinner getPinnedCertificate() {
         if (certificatePinner == null && ApiStatics.getBaseUrl().contains("https://")) {
             certificatePinner = new CertificatePinner.Builder()
-                    .add(ApiStatics.getBaseUrl().replace("https://",""), "sha256/EC6FcYlSSdciVUvdR4NqRZIYvcdmbqdqYUQDZJP04Xk=")
+                    .add(ApiStatics.getBaseUrl().replace("https://", ""), "sha256/EC6FcYlSSdciVUvdR4NqRZIYvcdmbqdqYUQDZJP04Xk=")
                     .build();
         }
         return certificatePinner;
     }
 
-    private static void addTLSSocketFactory(OkHttpClient.Builder httpBuilder){
+    private static void addTLSSocketFactory(OkHttpClient.Builder httpBuilder) {
         TLSSocketFactory tlsSocketFactory;
         try {
             tlsSocketFactory = new TLSSocketFactory();

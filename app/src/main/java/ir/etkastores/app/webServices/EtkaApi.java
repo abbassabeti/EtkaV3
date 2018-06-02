@@ -149,4 +149,8 @@ public interface EtkaApi {
     @POST(ApiStatics.DEVICE_GROUP_TOKEN)
     Call<OauthResponse<String>> syncLastPushToken(@Query("TokenId") String token);
 
+    //27
+    @POST(ApiStatics.ACTIVATION_CODE)
+    Call<OauthResponse<String>> requestVerificationCode(@Query("PhoneNumber") String phoneNumber);
+
 }
