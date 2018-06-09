@@ -21,11 +21,10 @@ public class SearchProductRequestModel {
     }
 
     public static class Sorts{
-        public final static String UpdateDateAsc = "UpdateDateAsc";
+        public final static String Default = "default";
         public final static String UpdateDateDesc = "UpdateDateDesc";
         public final static String PriceAsc = "PriceAsc";
-        public final static String PriceDesc = "PriceDesc";
-        public final static String PointAsc = "String";
+        public final static String OfferPrice = "OfferPrice";
         public final static String PointDesc = "PointDesc";
     }
 

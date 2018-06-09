@@ -109,11 +109,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
-//    compile 'mobi.inthepocket.android:ibeaconscanner:2.0.0'
-//    compile 'com.github.florent37:rxbeacon:1.0.0'
-//    compile 'org.altbeacon:android-beacon-library:2.12+'
-//
-
 }
 
 apply plugin: 'com.google.gms.google-services'

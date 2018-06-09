@@ -1,5 +1,7 @@
 package ir.etkastores.app.webServices;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -118,12 +120,18 @@ public class ApiProvider {
                         charset = contentType.charset(UTF8);
                     }
                     String jsonResponse = buffer.clone().readString(charset);
-                    OauthResponse<Object> response = new Gson().fromJson(jsonResponse, new TypeToken<OauthResponse<Object>>() {
-                    }.getType());
+                    OauthResponse<Object> response = null;
+                    try {
+                        response = new Gson().fromJson(jsonResponse, new TypeToken<OauthResponse<Object>>() {
+                        }.getType());
+                    } catch (Exception err) {
+                        err.printStackTrace();
+                    }
                     if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401) {
                         synchronized (httpClient) {
                             if (ApiStatics.getLastToken() == null) {
-                                Call<AccessToken> call = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
+//                                Call<AccessToken> call = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
+                                Call<AccessToken> call = ApiProvider.getLoginWithSMSVerification("", "");
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
                                 if (tokenResponse.code() == 200) {
                                     AccessToken newToken = tokenResponse.body();
@@ -140,12 +148,19 @@ public class ApiProvider {
                                 lastToken = null;
                                 ApiStatics.saveToken(null);
                                 EtkaApi tokenClient = createService(EtkaApi.class);
+//                                Call<AccessToken> call = tokenClient.getToken(
+//                                        ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
+//                                        "",
+//                                        "",
+//                                        ApiStatics.CLIENT_ID,
+//                                        "",
+//                                        refreshToken);
+
                                 Call<AccessToken> call = tokenClient.getToken(
                                         ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
                                         "",
-                                        "",
                                         ApiStatics.CLIENT_ID,
-                                        "",
+                                        ApiStatics.CLIENT_SECRET,
                                         refreshToken);
 
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
@@ -203,11 +218,17 @@ public class ApiProvider {
     }
 
     public static Call<AccessToken> getLoginWithSMSVerification(String mobilePhone, String verificationCode) {
-        return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, mobilePhone + "-" + verificationCode, "", ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+//        return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, mobilePhone + "-" + verificationCode, "", ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+        String vc = "";
+        if (!TextUtils.isEmpty(mobilePhone) && !TextUtils.isEmpty(verificationCode)) {
+            vc = mobilePhone + "-" + verificationCode;
+        }
+        return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, vc, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
     }
 
-    public static Call<AccessToken> getLogin(String userName, String password) {
-        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, userName, password, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+    public static Call<AccessToken> guestLogin() {
+//        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, userName, password, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ProfileManager.GUEST_USER_NAME, ProfileManager.GUEST_USER_PASSWORD, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
     }
 
     public static CertificatePinner certificatePinner = null;

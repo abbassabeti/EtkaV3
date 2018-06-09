@@ -15,7 +15,7 @@
     <string name="brandOrdered">بر اساس برند</string>
     <string name="topRate">بیشترین امتیاز</string>
     <string name="topOffer">بیشترین تخفیف(فروش ویژه)</string>
-    <string name="topSales">پر فروش ترین</string>
+    <string name="lowestPrice">کمترین قیمت</string>
     <string name="newest">جدید ترین</string>
     <string name="profileBarcodeMessage">برای دریافت امتیاز اقلام موجود در سبد خرید خود، پس از پرداخت مبلغ، بارکد زیر را به صندوق دار ارائه دهید</string>
     <string name="profileConvertRateMessage">شما می توانید اعتبار کارت باشگاه مشتریان خود را به مبلغی متناسب با امتیاز خود افزایش داده و در خرید بعدی از آن استفاده کنید</string>
@@ -246,5 +246,6 @@
     <string name="checkActivationCode">بررسی کد فعالسازی</string>
     <string name="enterPhoneNumberMessageForVerify">برای ورود یا ثبت نام در اتکا، شماره موبایل خود را وارد کنید.</string>
     <string name="enterVerificationCode">کد تائیدی که تا لحظاتی دیگر برای شما پیامک می شود را در کادر زیر وارد کنید.</string>
+    <string name="_default">پیشفرض</string>
 
 </resources>

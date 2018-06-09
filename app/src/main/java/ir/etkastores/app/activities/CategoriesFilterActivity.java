@@ -182,12 +182,15 @@ public class CategoriesFilterActivity extends BaseActivity implements
         AdjustHelper.sendAdjustEvent(AdjustHelper.FilterSort);
         String sortValue = "";
         switch (sort) {
+            case DEFAULT:
+                sortValue = SearchProductRequestModel.Sorts.Default;
+                break;
             case TOP_OFFER_SORT:
-                sortValue = "";
+                sortValue = SearchProductRequestModel.Sorts.OfferPrice;
                 break;
 
             case TOP_SALE_SORT:
-                sortValue = "";
+                sortValue = SearchProductRequestModel.Sorts.PriceAsc;
                 break;
 
             case TOP_RATE_SORT:

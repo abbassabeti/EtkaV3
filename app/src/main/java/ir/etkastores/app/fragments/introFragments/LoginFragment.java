@@ -240,30 +240,30 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     Call<AccessToken> loginRequest;
 
     private void login(final String userName, final String password) {
-        loadingDialog = DialogHelper.showLoading(getActivity(), R.string.inLogin);
-        loginRequest = ApiProvider.getLogin(userName, password);
-        loginRequest.enqueue(new Callback<AccessToken>() {
-            @Override
-            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
-                if (!isAdded()) return;
-                loadingDialog.cancel();
-                if (response.isSuccessful()) {
-                    AdjustHelper.sendAdjustEvent(AdjustHelper.Login);
-                    ApiStatics.saveToken(response.body());
-                    ProfileManager.saveUserNameAndPassword(userName, password);
-                    loadProfile();
-                } else {
-                    onFailure(null, null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<AccessToken> call, Throwable t) {
-                if (!isAdded()) return;
-                loadingDialog.cancel();
-                showRetryDialog(getResources().getString(R.string.anErrorHappendInServerConnection));
-            }
-        });
+//        loadingDialog = DialogHelper.showLoading(getActivity(), R.string.inLogin);
+//        loginRequest = ApiProvider.getLogin(userName, password);
+//        loginRequest.enqueue(new Callback<AccessToken>() {
+//            @Override
+//            public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
+//                if (!isAdded()) return;
+//                loadingDialog.cancel();
+//                if (response.isSuccessful()) {
+//                    AdjustHelper.sendAdjustEvent(AdjustHelper.Login);
+//                    ApiStatics.saveToken(response.body());
+//                    ProfileManager.saveUserNameAndPassword(userName, password);
+//                    loadProfile();
+//                } else {
+//                    onFailure(null, null);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<AccessToken> call, Throwable t) {
+//                if (!isAdded()) return;
+//                loadingDialog.cancel();
+//                showRetryDialog(getResources().getString(R.string.anErrorHappendInServerConnection));
+//            }
+//        });
     }
 
     @Override

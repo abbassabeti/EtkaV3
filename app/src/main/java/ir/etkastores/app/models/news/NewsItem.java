@@ -21,6 +21,9 @@ public class NewsItem {
     @SerializedName("date")
     private String date;
 
+    @SerializedName("imageUrl")
+    private String imageUrl;
+
     public static NewsItem fromJson(String json){
         try {
             return new Gson().fromJson(json,NewsItem.class);
@@ -46,4 +49,7 @@ public class NewsItem {
         return date;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

@@ -33,6 +33,11 @@
     </RelativeLayout>
 
     <ir.etkastores.app.ui.views.FilterSortView
+        android:id="@+id/defaultSortItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ir.etkastores.app.ui.views.FilterSortView
         android:id="@+id/topRatedSortItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -52,15 +57,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/darkGray" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:padding="8dp">
 
         <android.support.v7.widget.AppCompatImageView

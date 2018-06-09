@@ -49,6 +49,15 @@ public interface EtkaApi {
                                @Field("client_secret") String client_secret,
                                @Field("refresh_token") String refreshToken);
 
+    //1
+    @FormUrlEncoded
+    @POST(ApiStatics.TOKEN)
+    Call<AccessToken> getToken(@Field("grant_type") String grant_type,
+                               @Field("verification_code") String verification_code,
+                               @Field("client_id") String client_id,
+                               @Field("client_secret") String client_secret,
+                               @Field("refresh_token") String refreshToken);
+
     //2
     @POST(ApiStatics.REGISTER)
     Call<OauthResponse<String>> registerNewUser(@Body RegisterUserRequestModel userRequestModel);

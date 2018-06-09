@@ -115,35 +115,35 @@ public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.
     }
 
     void sendRequest() {
-        loadingDialog = DialogHelper.showLoading(this, R.string.inSendingChangePassword);
-        req = ApiProvider.getAuthorizedApi().changePassword(requestModel);
-        req.enqueue(new Callback<OauthResponse<String>>() {
-            @Override
-            public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
-                if (req == null || req.isCanceled()) return;
-                if (response.isSuccessful()) {
-                    if (response.body().isSuccessful()) {
-                        AdjustHelper.sendAdjustEvent(AdjustHelper.SuccessChangePassword);
-                        ProfileManager.saveUserNameAndPassword(ProfileManager.getUserName(), requestModel.getNewPassword());
-                        Toaster.show(ChangePasswordActivity.this, R.string.passwordChangeSuccessfully);
-                        onBackPressed();
-                    } else {
-                        showRetryDialog(response.body().getMeta().getMessage());
-                    }
-                } else {
-                    onFailure(call, null);
-                }
-                loadingDialog.cancel();
-            }
-
-            @Override
-            public void onFailure(Call<OauthResponse<String>> call, Throwable throwable) {
-                if (req == null || req.isCanceled()) return;
-                AdjustHelper.sendAdjustEvent(AdjustHelper.FailureChangePassword);
-                loadingDialog.cancel();
-                showRetryDialog(getResources().getString(R.string.errorInChangePassword));
-            }
-        });
+//        loadingDialog = DialogHelper.showLoading(this, R.string.inSendingChangePassword);
+//        req = ApiProvider.getAuthorizedApi().changePassword(requestModel);
+//        req.enqueue(new Callback<OauthResponse<String>>() {
+//            @Override
+//            public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
+//                if (req == null || req.isCanceled()) return;
+//                if (response.isSuccessful()) {
+//                    if (response.body().isSuccessful()) {
+//                        AdjustHelper.sendAdjustEvent(AdjustHelper.SuccessChangePassword);
+//                        ProfileManager.saveUserNameAndPassword(ProfileManager.getUserName(), requestModel.getNewPassword());
+//                        Toaster.show(ChangePasswordActivity.this, R.string.passwordChangeSuccessfully);
+//                        onBackPressed();
+//                    } else {
+//                        showRetryDialog(response.body().getMeta().getMessage());
+//                    }
+//                } else {
+//                    onFailure(call, null);
+//                }
+//                loadingDialog.cancel();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OauthResponse<String>> call, Throwable throwable) {
+//                if (req == null || req.isCanceled()) return;
+//                AdjustHelper.sendAdjustEvent(AdjustHelper.FailureChangePassword);
+//                loadingDialog.cancel();
+//                showRetryDialog(getResources().getString(R.string.errorInChangePassword));
+//            }
+//        });
     }
 
     private void showRetryDialog(String message) {

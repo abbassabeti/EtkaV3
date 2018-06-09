@@ -19,6 +19,9 @@ import ir.etkastores.app.ui.views.FilterSortView;
 
 public abstract class ProductFilterHeaderViewHolder extends RecyclerView.ViewHolder {
 
+    @BindView(R.id.defaultSortItem)
+    FilterSortView defaultSortItem;
+
     @BindView(R.id.topRatedSortItem)
     FilterSortView topRateSortItem;
 
@@ -40,9 +43,10 @@ public abstract class ProductFilterHeaderViewHolder extends RecyclerView.ViewHol
     public ProductFilterHeaderViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        topRateSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.topRate),1,true));
+        defaultSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string._default),0,true));
+        topRateSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.topRate),1));
         topOfferSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.topOffer),2));
-        topSaleSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.topSales),3));
+        topSaleSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.lowestPrice),3));
         newestSortItem.setCategoryItem(new CategoryModel(EtkaApp.getInstance().getResources().getString(R.string.newest),4));
 
     }
@@ -51,15 +55,22 @@ public abstract class ProductFilterHeaderViewHolder extends RecyclerView.ViewHol
         this.callback = callback;
     }
 
-    @OnClick({R.id.topRatedSortItem, R.id.topOfferSortItem, R.id.topSaleSortItem, R.id.newestSortItem})
+    @OnClick({R.id.topRatedSortItem, R.id.topOfferSortItem, R.id.topSaleSortItem, R.id.newestSortItem,R.id.defaultSortItem})
     public void onSortItemClicked(View view) {
 
+        defaultSortItem.setSelect(false);
         topOfferSortItem.setSelect(false);
         topRateSortItem.setSelect(false);
         topSaleSortItem.setSelect(false);
         newestSortItem.setSelect(false);
 
         switch (view.getId()) {
+
+            case R.id.defaultSortItem:
+                defaultSortItem.setSelect(true);
+                if (callback != null) callback.onSelectSort(ProductFilterListRecyclerAdapter.FilterCallback.DEFAULT);
+                break;
+
             case R.id.topRatedSortItem:
                 topRateSortItem.setSelect(true);
                 if (callback != null) callback.onSelectSort(ProductFilterListRecyclerAdapter.FilterCallback.TOP_RATE_SORT);

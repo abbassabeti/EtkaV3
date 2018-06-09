@@ -131,6 +131,7 @@ public class ProductFilterListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     }
 
     public interface FilterCallback {
+        int DEFAULT = 0;
         int TOP_OFFER_SORT = 1;
         int TOP_RATE_SORT = 2;
         int TOP_SALE_SORT = 3;

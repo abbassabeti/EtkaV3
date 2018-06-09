@@ -3,6 +3,8 @@ package ir.etkastores.app.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.MessageView;
+import ir.etkastores.app.utils.image.ImageLoader;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,9 +36,9 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
         context.startActivity(intent);
     }
 
-    public static void show(Context context, long id){
+    public static void show(Context context, long id) {
         Intent intent = new Intent(context, NewsActivity.class);
-        intent.putExtra(NEWS_ID,id);
+        intent.putExtra(NEWS_ID, id);
         context.startActivity(intent);
     }
 
@@ -57,6 +60,9 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
     @BindView(R.id.circularProgress)
     ProgressBar circularProgress;
 
+    @BindView(R.id.newsImage)
+    AppCompatImageView newsImage;
+
     private NewsItem newsItem;
     private Long requestedNewId;
     private Call<OauthResponse<NewsItem>> req;
@@ -69,22 +75,28 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
         toolbar.setActionListeners(this);
 
         newsItem = NewsItem.fromJson(getIntent().getExtras().getString(NEWS));
-        if (newsItem != null){
+        if (newsItem != null) {
             fillViews();
-        }else{
-            requestedNewId = getIntent().getExtras().getLong(NEWS_ID,-1);
+        } else {
+            requestedNewId = getIntent().getExtras().getLong(NEWS_ID, -1);
             loadNews();
         }
 
     }
 
-    private void fillViews(){
+    private void fillViews() {
         messageView.hide();
         hideLoading();
         toolbar.setTitle(newsItem.getTitle());
         newsDate.setText(newsItem.getDate());
-        newsId.setText(String.format(getResources().getString(R.string.newsIdX),newsItem.getId()));
+        newsId.setText(String.format(getResources().getString(R.string.newsIdX), newsItem.getId()));
         newsBody.setText(newsItem.getContent());
+        if (TextUtils.isEmpty(newsItem.getImageUrl())) {
+            newsImage.setVisibility(View.GONE);
+        } else {
+            newsImage.setVisibility(View.VISIBLE);
+            ImageLoader.loadImage(this, newsImage, newsItem.getImageUrl());
+        }
     }
 
     @Override
@@ -109,7 +121,7 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
 
     }
 
-    private void loadNews(){
+    private void loadNews() {
         showLoading();
         messageView.hide();
         req = ApiProvider.getAuthorizedApi().getNews(requestedNewId);
@@ -117,15 +129,15 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
             @Override
             public void onResponse(Call<OauthResponse<NewsItem>> call, Response<OauthResponse<NewsItem>> response) {
                 if (isFinishing()) return;
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         newsItem = response.body().getData();
                         fillViews();
-                    }else{
+                    } else {
                         showRetryMessage(response.body().getMeta().getMessage());
                     }
-                }else{
-                    onFailure(call,null);
+                } else {
+                    onFailure(call, null);
                 }
                 hideLoading();
             }
@@ -139,7 +151,7 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
         });
     }
 
-    private void showRetryMessage(final String message){
+    private void showRetryMessage(final String message) {
         messageView.show(R.drawable.ic_warning_orange_48dp, message, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
             @Override
             public void onMessageViewButtonClick() {
@@ -149,11 +161,11 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
         });
     }
 
-    private void showLoading(){
+    private void showLoading() {
         circularProgress.setVisibility(View.VISIBLE);
     }
 
-    private void hideLoading(){
+    private void hideLoading() {
         circularProgress.setVisibility(View.GONE);
     }
 

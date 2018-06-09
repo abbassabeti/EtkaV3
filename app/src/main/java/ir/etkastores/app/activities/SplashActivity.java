@@ -103,7 +103,8 @@ public class SplashActivity extends BaseActivity {
     Call<AccessToken> loginRequest;
 
     private void login() {
-        loginRequest = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
+//        loginRequest = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
+        loginRequest = ApiProvider.guestLogin();
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
