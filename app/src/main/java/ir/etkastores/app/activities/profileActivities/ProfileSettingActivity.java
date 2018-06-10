@@ -20,7 +20,6 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
-import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.procalendar.XCalendar;
 import ir.etkastores.app.data.ProfileManager;
@@ -144,11 +143,11 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         showSureToLogoutDialog();
     }
 
-    @OnClick(R.id.changePasswordButton)
-    public void onChangePasswordButtonClick() {
-        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenChangePassword);
-        ChangePasswordActivity.show(this);
-    }
+//    @OnClick(R.id.changePasswordButton)
+//    public void onChangePasswordButtonClick() {
+//        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenChangePassword);
+//        ChangePasswordActivity.show(this);
+//    }
 
     @OnClick({R.id.specialOfferNotificationButton})
     public void onSpecialOfferNotificationButtonClick() {
@@ -158,18 +157,6 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
     @OnClick(R.id.hekmatNotificationButton)
     public void onHekmatNotificationButtonClick() {
         hekmatSwitch.performClick();
-    }
-
-    @OnClick({R.id.editButton, R.id.changePasswordButton, R.id.logoutButton})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.editButton:
-                break;
-            case R.id.changePasswordButton:
-                break;
-            case R.id.logoutButton:
-                break;
-        }
     }
 
     SwitchCompat.OnCheckedChangeListener hekmatChangeListener = new SwitchCompat.OnCheckedChangeListener(){

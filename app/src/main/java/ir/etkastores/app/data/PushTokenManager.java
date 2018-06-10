@@ -39,18 +39,18 @@ public class PushTokenManager {
     }
 
     public void syncToken() {
-        if (TextUtils.isEmpty(getLastRefreshedToken())) {
-            try {
-                String token = FirebaseInstanceId.getInstance().getToken();
-                DiskDataHelper.putString(LAST_REFRESHED_TOKEN, token);
-            }catch (Exception err){
-                err.printStackTrace();
-            }
-            if (TextUtils.isEmpty(getLastRefreshedToken())) return;
-        }
-        if (ProfileManager.isGuest() && !BuildConfig.DEBUG) return;
-        if (req != null && req.isExecuted()) return;
-        if (!isTokenSynced()) sendRequest();
+//        if (TextUtils.isEmpty(getLastRefreshedToken())) {
+//            try {
+//                String token = FirebaseInstanceId.getInstance().getToken();
+//                DiskDataHelper.putString(LAST_REFRESHED_TOKEN, token);
+//            }catch (Exception err){
+//                err.printStackTrace();
+//            }
+//            if (TextUtils.isEmpty(getLastRefreshedToken())) return;
+//        }
+//        if (ProfileManager.isGuest() && !BuildConfig.DEBUG) return;
+//        if (req != null && req.isExecuted()) return;
+//        if (!isTokenSynced()) sendRequest();
     }
 
     public boolean isTokenSynced() {

@@ -1,5 +1,6 @@
 package ir.etkastores.app.models.survey;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -29,5 +30,14 @@ public class SurveyModel {
 
     public int getId() {
         return id;
+    }
+
+    public static SurveyModel fromJson(String json) {
+        try {
+            return new Gson().fromJson(json, SurveyModel.class);
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
+        return null;
     }
 }

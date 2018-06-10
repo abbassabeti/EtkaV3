@@ -144,7 +144,7 @@ public interface EtkaApi {
 
     //23
     @GET(ApiStatics.SURVEY)
-    Call<OauthResponse<SurveyModel>> getSurveys();
+    Call<OauthResponse<List<SurveyModel>>> getSurveys();
 
     //24
     @POST(ApiStatics.SURVEY)

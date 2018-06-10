@@ -69,10 +69,10 @@ public class ProfileManager {
 
     public static boolean isGuest() {
         UserProfileModel profile = getProfile();
-        if (profile != null && !TextUtils.isEmpty(profile.getUserName()) && !profile.getUserName().contentEquals(GUEST_USER_NAME)) {
-            return false;
-        } else {
+        if (profile == null){
             return true;
+        }else{
+            return false;
         }
     }
 

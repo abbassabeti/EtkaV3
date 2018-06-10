@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.ui.Toaster;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
@@ -71,18 +73,21 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     }
 
     private void sendVerificationCode() {
+        hideKeyboard(phoneEt);
+        showLoading(getResources().getString(R.string.inSendinfVerificationCode));
         verificationReq = ApiProvider.getApi().requestVerificationCode(phoneEt.getText().toString());
         verificationReq.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
                 if (isFinishing()) return;
+                hideLoading();
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         Toaster.showLong(LoginWithSMSActivity.this, response.body().getMeta().getMessage());
                         setupEnterVerifyCode();
                         isVerifyStep = true;
                     } else {
-                        Toaster.showLong(LoginWithSMSActivity.this, response.body().getMeta().getMessage());
+                        showRetryVerification(response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(call, null);
@@ -92,20 +97,21 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             @Override
             public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
                 if (isFinishing()) return;
+                hideLoading();
+                showRetryVerification(getResources().getString(R.string.errorInSendingVerificationCode));
             }
         });
     }
 
-    private void handleRetryVerification() {
-
-    }
-
     public void loginWithVerificationCode() {
+        hideKeyboard(verifyEt);
+        showLoading(getResources().getString(R.string.inLogin));
         Call<AccessToken> login = ApiProvider.getLoginWithSMSVerification(phoneEt.getText().toString(), verifyEt.getText().toString());
         login.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (isFinishing()) return;
+                hideLoading();
                 if (response.isSuccessful()) {
                     AdjustHelper.sendAdjustEvent(AdjustHelper.Login);
                     ApiStatics.saveToken(response.body());
@@ -118,23 +124,27 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             @Override
             public void onFailure(Call<AccessToken> call, Throwable t) {
                 if (isFinishing()) return;
+                hideLoading();
+                Toaster.showLong(LoginWithSMSActivity.this,R.string.errorInLogin);
             }
         });
     }
 
     private void loadProfile() {
+        showLoading(getResources().getString(R.string.inLoadingUserProfile));
         loadingDialog = DialogHelper.showLoading(this, R.string.inLoadingUserProfileInfo);
         ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
                 if (isFinishing()) return;
+                hideLoading();
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         ProfileManager.saveProfile(response.body().getData());
                         Toaster.showLong(LoginWithSMSActivity.this, R.string.loginSuccessfulMessage);
                         LoginWithSMSActivity.this.finish();
                     } else {
-//                        showRetryDialog(response.body().getMeta().getMessage());
+                        Toaster.showLong(LoginWithSMSActivity.this,response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(null, null);
@@ -144,8 +154,8 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             @Override
             public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
                 if (isFinishing()) return;
-                loadingDialog.cancel();
-//                showRetryDialog(getResources().getString(R.string.errorInLogin));
+                hideLoading();
+                Toaster.showLong(LoginWithSMSActivity.this,R.string.errorInLogin);
             }
         });
     }
@@ -173,4 +183,48 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     public void onActionClick(int actionCode) {
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hideLoading();
+    }
+
+    void showLoading(String message) {
+        hideLoading();
+        loadingDialog = DialogHelper.showLoading(this, message);
+    }
+
+    void hideLoading(){
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.cancel();
+        }
+    }
+
+    void showRetryVerification(String message){
+        if (isFinishing()) return;
+        final MessageDialog messageDialog = MessageDialog.errorRetry(message);
+        messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (button == RIGHT_BUTTON){
+                    sendVerificationCode();
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
+    }
+
+    void hideKeyboard(View view){
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
 }

@@ -16,9 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.LoginRegisterActivity;
 import ir.etkastores.app.activities.LoginWithSMSActivity;
-import ir.etkastores.app.activities.NewsActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
 import ir.etkastores.app.activities.profileActivities.HekmatActivity;
 import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
@@ -28,7 +26,8 @@ import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
 import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
-import ir.etkastores.app.activities.profileActivities.SurveyActivity;
+import ir.etkastores.app.activities.profileActivities.survey.SurveyActivity;
+import ir.etkastores.app.activities.profileActivities.survey.SurveyListActivity;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
@@ -172,7 +171,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
             showLoginRequiredDialog();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenSurvey);
-            SurveyActivity.show(getActivity());
+            SurveyListActivity.show(getActivity());
         }
     }
 

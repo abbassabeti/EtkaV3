@@ -1,14 +1,12 @@
 package ir.etkastores.app.adapters.recyclerViewAdapters.survey;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,21 +14,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnTextChanged;
-import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
-import ir.etkastores.app.models.survey.Answer;
-import ir.etkastores.app.models.survey.QuestionModel;
+import ir.etkastores.app.models.survey.SurveyModel;
 
-/**
- * Created by garshasbi on 4/27/18.
- */
+public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<SurveyListRecyclerAdapter.ViewHolder> {
 
-public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private List<QuestionModel> items;
+    private List<SurveyModel> items;
     private Context context;
     private LayoutInflater inflater;
+    private OnSurveyClickListener onSurveyClickListener;
 
     public SurveyListRecyclerAdapter(Context context) {
         this.context = context;
@@ -38,14 +30,15 @@ public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         items = new ArrayList<>();
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        return new QuestionViewHolder(inflater.inflate(R.layout.cell_survey_item, viewGroup, false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(inflater.inflate(R.layout.cell_survey_list_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
-        ((QuestionViewHolder) viewHolder).bind(items.get(i));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.bind(items.get(position));
     }
 
     @Override
@@ -53,105 +46,47 @@ public class SurveyListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         return items.size();
     }
 
-    public List<QuestionModel> getItems(){
-        return items;
+    public void setItems(List<SurveyModel> items) {
+        this.items = items;
+        notifyDataSetChanged();
     }
 
-    public void addItems(List<QuestionModel> items) {
-        this.items.addAll(items);
-        QuestionModel commentQuestion = new QuestionModel();
-        commentQuestion.setUserComment(true);
-        commentQuestion.setText(EtkaApp.getInstance().getResources().getString(R.string.moreDetails));
-        this.items.add(commentQuestion);
-        notifyItemInserted(items.size());
+    public void setOnSurveyClickListener(OnSurveyClickListener onSurveyClickListener) {
+        this.onSurveyClickListener = onSurveyClickListener;
     }
 
-    class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        final static String bulletChar = "\u25CF";
+        @BindView(R.id.surveyTitle)
+        TextView title;
 
-        @BindView(R.id.questionTv)
-        TextView question;
+        @BindView(R.id.surveyId)
+        TextView id;
 
-        @BindView(R.id.answersHolder)
-        LinearLayout answersHolder;
-
-        @BindView(R.id.userCommentEt)
-        EditText userCommentEt;
-
-        @BindView(R.id.dividerView)
-        View dividerView;
-
-        private List<View> answerViews;
-        private QuestionModel questionModel;
-
-        public QuestionViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        public void bind(QuestionModel q) {
-            questionModel = q;
-            question.setText(q.getText());
-            if (q.isUserComment()) {
-                answersHolder.setVisibility(View.GONE);
-                userCommentEt.setVisibility(View.VISIBLE);
-                userCommentEt.setText(q.getUserCommentText());
-                dividerView.setVisibility(View.GONE);
-            } else {
-                dividerView.setVisibility(View.VISIBLE);
-                userCommentEt.setVisibility(View.GONE);
-                answersHolder.setVisibility(View.VISIBLE);
-                answersHolder.removeAllViews();
-                List<View> ans = new ArrayList<>();
-                for (Answer answer : q.getAnswers()) {
-                    View view = inflater.inflate(R.layout.survey_answer_item, null, false);
-                    TextView tv = (TextView) view.findViewById(R.id.tv);
-                    tv.setText(bulletChar + " " + answer.getText());
-                    view.setOnClickListener(this);
-                    view.setTag(String.valueOf(answer.getId()));
-                    if (questionModel.getAnswerId() == answer.getId()) {
-                        tv.setTextColor(ContextCompat.getColor(context, R.color.white));
-                        view.setBackgroundResource(R.drawable.rec_them_round4dp);
-                    } else {
-                        tv.setTextColor(ContextCompat.getColor(context, R.color.darkGray));
-                        view.setBackgroundResource(R.color.transparent);
-                    }
-                    ans.add(view);
-                    answersHolder.addView(view);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onSurveyClickListener != null) onSurveyClickListener.onSurveyClick(items.get(getAdapterPosition()));
                 }
-                answerViews = ans;
-            }
+            });
         }
 
-        @OnTextChanged(R.id.userCommentEt)
-        public void onTextChanged(CharSequence charSequence) {
-            questionModel.setUserCommentText(charSequence.toString());
+        public void bind(SurveyModel item) {
+            title.setText(item.getTitle());
+            id.setText(String.format(context.getResources().getString(R.string.surveyIdX),item.getId()));
         }
-
-        @Override
-        public void onClick(View v) {
-            clearAllViews();
-            TextView tv = (TextView) v.findViewById(R.id.tv);
-            tv.setTextColor(ContextCompat.getColor(context, R.color.white));
-            v.setBackgroundResource(R.drawable.rec_them_round4dp);
-            questionModel.setAnswerId(Long.parseLong(v.getTag().toString()));
-        }
-
-        private void clearAllViews() {
-            for (View view : answerViews) {
-                TextView tv = (TextView) view.findViewById(R.id.tv);
-                tv.setTextColor(ContextCompat.getColor(context, R.color.darkGray));
-                view.setBackgroundResource(R.color.transparent);
-            }
-        }
-
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
     }
 
+    public interface OnSurveyClickListener{
+        void onSurveyClick(SurveyModel surveyModel);
+    }
 }
