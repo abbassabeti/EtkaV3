@@ -1,7 +1,6 @@
 package ir.etkastores.app.fragments.supportFragments;
 
 import android.os.Bundle;
-import android.os.Trace;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,17 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.LoginRegisterActivity;
 import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
-import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketsListAdapter;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
+import ir.etkastores.app.models.tickets.RequestProductModel;
+import ir.etkastores.app.models.tickets.RequestProductResponse;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
@@ -35,10 +39,10 @@ import retrofit2.Response;
  * Created by Sajad on 10/17/17.
  */
 
-public class TicketsListFragment extends Fragment implements TicketsListAdapter.OnTicketsListCallbacks, SwipeRefreshLayout.OnRefreshListener {
+public class ProductRequestTicketsListFragment extends Fragment implements TicketsListAdapter.OnTicketsListCallbacks, SwipeRefreshLayout.OnRefreshListener {
 
-    public static TicketsListFragment newInstance() {
-        return new TicketsListFragment();
+    public static ProductRequestTicketsListFragment newInstance() {
+        return new ProductRequestTicketsListFragment();
     }
 
     @BindView(R.id.recyclerView)
@@ -58,7 +62,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
 
     private View view;
 
-    private Call<OauthResponse<TicketResponseModel>> ticketReq;
+    private Call<OauthResponse<RequestProductResponse>> ticketReq;
 
     private TicketsListAdapter adapter;
 
@@ -138,30 +142,25 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
         if (!isAdded()) return;
         showLoading();
         messageView.hide();
-        ticketReq = ApiProvider.getAuthorizedApi().getTickets(reqPage);
-        ticketReq.enqueue(new Callback<OauthResponse<TicketResponseModel>>() {
+        ticketReq = ApiProvider.getAuthorizedApi().getProductsTicketList(reqPage);
+
+        ticketReq.enqueue(new Callback<OauthResponse<RequestProductResponse>>() {
             @Override
-            public void onResponse(Call<OauthResponse<TicketResponseModel>> call, Response<OauthResponse<TicketResponseModel>> response) {
+            public void onResponse(Call<OauthResponse<RequestProductResponse>> call, Response<OauthResponse<RequestProductResponse>> response) {
                 if (!isAdded()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        adapter.addItems(response.body().getData().getItems());
-                        if (response.body().getData().getTotalItemsCount() > adapter.getItemCount()) {
-                            adapter.setLoadMoreEnabled(true);
-                            reqPage++;
-                        }
-                        if (adapter.getItemCount() == 0) {
+                        if (response.body().getData().getTotalItemsCount() == 0) {
                             messageView.show(R.drawable.ic_warning_orange_48dp, getResources().getString(R.string.yourTicketsListIsEmpty), null, null);
                             listIsEmpty = true;
                         } else {
                             listIsEmpty = false;
                         }
-                    } else {
-                        if (adapter.getItemCount() == 0) {
-                            showRetryMessageView(response.body().getMeta().getMessage());
-                        } else {
-                            showRetryDialog(response.body().getMeta().getMessage());
-                        }
+//                        adapter.addItems(response.body().getData().getItems());
+//                        if (response.body().getData().getTotalItemsCount() > adapter.getItemCount()) {
+//                            adapter.setLoadMoreEnabled(true);
+//                            reqPage++;
+//                        }
                     }
                 } else {
                     onFailure(call, null);
@@ -170,7 +169,7 @@ public class TicketsListFragment extends Fragment implements TicketsListAdapter.
             }
 
             @Override
-            public void onFailure(Call<OauthResponse<TicketResponseModel>> call, Throwable throwable) {
+            public void onFailure(Call<OauthResponse<RequestProductResponse>> call, Throwable throwable) {
                 if (!isAdded()) return;
                 hideLoading();
                 String message = getResources().getString(R.string.errorInReceivingTicketsListData);

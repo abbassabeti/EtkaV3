@@ -15,7 +15,8 @@ import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.viewPagerAdapters.FragmentTitleModel;
 import ir.etkastores.app.adapters.viewPagerAdapters.GlobalFragmentPagerAdapter;
 import ir.etkastores.app.fragments.supportFragments.ContactUsFragment;
-import ir.etkastores.app.fragments.supportFragments.TicketsListFragment;
+import ir.etkastores.app.fragments.supportFragments.ProductRequestTicketsListFragment;
+import ir.etkastores.app.fragments.supportFragments.SupportTicketsListFragment;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.RTLTabLayout;
@@ -60,8 +61,8 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private void initViews(){
         toolbar.setActionListeners(this);
         List<FragmentTitleModel> fragments = new ArrayList<>();
-        fragments.add(new FragmentTitleModel(TicketsListFragment.newInstance(),R.string.support));
-        fragments.add(new FragmentTitleModel(TicketsListFragment.newInstance(),R.string.productRequest));
+        fragments.add(new FragmentTitleModel(SupportTicketsListFragment.newInstance(),R.string.support));
+        fragments.add(new FragmentTitleModel(ProductRequestTicketsListFragment.newInstance(),R.string.productRequest));
         fragments.add(new FragmentTitleModel(ContactUsFragment.newInstance(),R.string.contactUs));
         adapter = new GlobalFragmentPagerAdapter(getSupportFragmentManager(),fragments);
         pager.setAdapter(adapter);

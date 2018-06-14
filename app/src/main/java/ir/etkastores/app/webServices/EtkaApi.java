@@ -22,6 +22,10 @@ import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
+import ir.etkastores.app.models.tickets.RequestProductModel;
+import ir.etkastores.app.models.tickets.RequestProductResponse;
+import ir.etkastores.app.models.tickets.SupportTicketModel;
+import ir.etkastores.app.models.tickets.SupportTicketResponse;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
@@ -111,8 +115,8 @@ public interface EtkaApi {
     Call<OauthResponse<String>> changePassword(@Body ChangePasswordRequestModel resetPasswordRequestModel);
 
     //15
-    @POST(ApiStatics.SEND_TICKET)
-    Call<OauthResponse<Long>> sendTicket(@Body TicketRequestModel requestModel);
+//    @POST(ApiStatics.SEND_TICKET)
+//    Call<OauthResponse<Long>> sendTicket(@Body TicketRequestModel requestModel);
 
     //16
     @POST(ApiStatics.SAVE_PRODUCTS)
@@ -127,38 +131,42 @@ public interface EtkaApi {
     Call<OauthResponse<List<ProductModel>>> getSavedProducts();
 
     //19
-    @GET(ApiStatics.GET_TICKET)
-    Call<OauthResponse<TicketResponseModel>> getTickets(@Query("page") int page);
+    @GET(ApiStatics.GET_PRODUCT_TICKETS)
+    Call<OauthResponse<RequestProductResponse>> getProductsTicketList(@Query("page") int page);
 
     //20
+    @GET(ApiStatics.GET_PRODUCT_TICKETS)
+    Call<OauthResponse<SupportTicketResponse>> getSupportTicketList(@Query("page") int page);
+
+    //21
     @POST(ApiStatics.NEWS)
     Call<OauthResponse<NewsResponseModel>> getNews(@Body NewsRequestModel requestModel);
 
-    //21
+    //22
     @POST(ApiStatics.RESET_PASSWORD)
     Call<OauthResponse<String>> resetPassword(@Query("PhoneNumber") String phoneNumber);
 
-    //22
+    //23
     @GET(ApiStatics.NEWS)
     Call<OauthResponse<NewsItem>> getNews(@Query("id") long id);
 
-    //23
+    //24
     @GET(ApiStatics.SURVEY)
     Call<OauthResponse<List<SurveyModel>>> getSurveys();
 
-    //24
+    //25
     @POST(ApiStatics.SURVEY)
     Call<OauthResponse<String>> submitSurvey(@Body SurveySubmitRequestModel requestModel);
 
-    //25
+    //26
     @GET(ApiStatics.DEPARTMENTS)
     Call<OauthResponse<List<DepartmentModel>>> getDepartments();
 
-    //26
+    //27
     @POST(ApiStatics.DEVICE_GROUP_TOKEN)
     Call<OauthResponse<String>> syncLastPushToken(@Query("TokenId") String token);
 
-    //27
+    //28
     @POST(ApiStatics.ACTIVATION_CODE)
     Call<OauthResponse<String>> requestVerificationCode(@Query("PhoneNumber") String phoneNumber);
 

@@ -16,7 +16,6 @@ public class ApiStatics {
     private static String BASE_URL = "https://api.ecrmapp.ir/";
 
     public static String getBaseUrl() {
-        if (BuildConfig.DEBUG) return BASE_URL;
         String savedUrl = DiskDataHelper.getString(BASE_URL_KEY);
         if (TextUtils.isEmpty(savedUrl)) {
             return BASE_URL;
@@ -27,7 +26,6 @@ public class ApiStatics {
     }
 
     public static void setBaseUrl(String url) {
-        if (BuildConfig.DEBUG) return;
         DiskDataHelper.putString(BASE_URL_KEY, url);
         BASE_URL = url;
     }
@@ -46,8 +44,10 @@ public class ApiStatics {
     public static final String HEKMAT = "api/v1/Hekmat";
     public static final String HOME = "/api/v1/home";
     public static final String CHANGE_PASSWORD = "/api/v1/Account/ChangePassword";
-    public static final String SEND_TICKET = "/api/v1/Ticket/Ticket";
-    public static final String GET_TICKET = "/api/v1/Ticket/GetTicket";
+    public static final String SEND_PRODUCT_REQUEST = "/api/v1/Ticket/ProductRequest";
+    public static final String GET_SUPPORT_TICKETS = "/api/v1/Ticket/Support";
+    public static final String SUPPORT_CONVERSATION  = "/api/v1/Ticket/SupportConversation";
+    public static final String GET_PRODUCT_TICKETS = "/api/v1/Ticket/ProductRequest";
     public static final String TICKET_ANSWER = "/api/v1/Ticket/TicketAnswer";
     public static final String GET_TICKET_ANSWER = "/api/v1/Ticket/GetTicketAnswer";
     public static final String SAVE_PRODUCTS = "api/v1/SaveProducts";

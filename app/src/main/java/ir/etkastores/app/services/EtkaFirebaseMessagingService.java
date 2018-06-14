@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
 
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
@@ -31,7 +32,9 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        if (BuildConfig.DEBUG) Log.e("FCM", "messae received" + remoteMessage.getFrom());
+        if (BuildConfig.DEBUG){
+            Log.e("FCM Sender", "messae received: " + remoteMessage.getFrom());
+        }
 
         if (remoteMessage.getData() == null) return;
 

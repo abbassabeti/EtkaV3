@@ -4,20 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/requestHeaderMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/inThisSectionYouCanSendRequests"
-        android:textColor="@color/darkGray"
-        android:textSize="@dimen/textSizeSmall" />
-
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/requestHeaderMessage">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -29,8 +19,7 @@
     <ir.etkastores.app.ui.views.MessageView
         android:id="@+id/messageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/requestHeaderMessage" />
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addNewTicketFab"

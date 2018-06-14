@@ -137,32 +137,32 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
     private void submitRequest() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
-        sendTicketReq = ApiProvider.getAuthorizedApi().sendTicket(ticketRequestModel);
-        sendTicketReq.enqueue(new Callback<OauthResponse<Long>>() {
-            @Override
-            public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {
-                if (isFinishing()) return;
-                if (response.isSuccessful()) {
-                    if (response.body().isSuccessful()) {
-                        AdjustHelper.sendAdjustEvent(AdjustHelper.SubmitNewTicket);
-                        Toaster.showLong(NewTicketActivity.this,R.string.ticketSendSuccessfully);
-                        finish();
-                    } else {
-                        showErrorDialog(response.body().getMeta().getMessage());
-                    }
-                } else {
-                    onFailure(call, null);
-                }
-                loadingDialog.cancel();
-            }
-
-            @Override
-            public void onFailure(Call<OauthResponse<Long>> call, Throwable throwable) {
-                if (isFinishing() || sendTicketReq.isCanceled()) return;
-                loadingDialog.cancel();
-                showErrorDialog(getResources().getString(R.string.errorInSendingRequest));
-            }
-        });
+//        sendTicketReq = ApiProvider.getAuthorizedApi().sendTicket(ticketRequestModel);
+//        sendTicketReq.enqueue(new Callback<OauthResponse<Long>>() {
+//            @Override
+//            public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {
+//                if (isFinishing()) return;
+//                if (response.isSuccessful()) {
+//                    if (response.body().isSuccessful()) {
+//                        AdjustHelper.sendAdjustEvent(AdjustHelper.SubmitNewTicket);
+//                        Toaster.showLong(NewTicketActivity.this,R.string.ticketSendSuccessfully);
+//                        finish();
+//                    } else {
+//                        showErrorDialog(response.body().getMeta().getMessage());
+//                    }
+//                } else {
+//                    onFailure(call, null);
+//                }
+//                loadingDialog.cancel();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<OauthResponse<Long>> call, Throwable throwable) {
+//                if (isFinishing() || sendTicketReq.isCanceled()) return;
+//                loadingDialog.cancel();
+//                showErrorDialog(getResources().getString(R.string.errorInSendingRequest));
+//            }
+//        });
     }
 
     private void showErrorDialog(final String message) {
