@@ -27,6 +27,7 @@ import ir.etkastores.app.models.tickets.RequestProductModel;
 import ir.etkastores.app.models.tickets.RequestProductResponse;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
@@ -106,6 +107,10 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
+        if (1 == 1) {
+            Toaster.show(getActivity(), "در نسخه بعدی آماده می شود.");
+            return;
+        }
         if (ProfileManager.isGuest()) {
             showNeedToLogin();
         } else {
