@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -23,6 +24,7 @@ public class ImageLoader {
             Glide.with(context).load(url.trim()).into(imageView);
         }catch (Exception err){
             err.printStackTrace();
+            Log.e("load image crash",""+err.getLocalizedMessage());
         }
     }
 
@@ -31,6 +33,7 @@ public class ImageLoader {
             Glide.with(context).load(url.trim()).into(target);
         }catch (Exception err){
             err.printStackTrace();
+            Log.e("load image crash2",""+err.getLocalizedMessage());
         }
     }
 
@@ -43,6 +46,7 @@ public class ImageLoader {
             }
         } catch (Exception err) {
             err.printStackTrace();
+            Log.e("load image crash3",""+err.getLocalizedMessage());
         }
     }
 

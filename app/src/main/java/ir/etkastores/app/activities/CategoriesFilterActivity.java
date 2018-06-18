@@ -151,6 +151,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
         } else {
             SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
             searchProductRequestModel.addCategoryId(categoryModel.getId());
+            searchProductRequestModel.setSort(SearchProductRequestModel.Sorts.Default);
             productsListFragment = ProductsListFragment.newInstance(searchProductRequestModel);
             filterAdapter = new ProductFilterListRecyclerAdapter(this);
             recyclerView.setAdapter(filterAdapter);
