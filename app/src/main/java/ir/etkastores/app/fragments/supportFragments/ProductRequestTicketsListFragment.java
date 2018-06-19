@@ -9,25 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
-import ir.etkastores.app.activities.LoginRegisterActivity;
+import ir.etkastores.app.activities.LoginWithSMSActivity;
 import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketsListAdapter;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
-import ir.etkastores.app.models.tickets.RequestProductModel;
-import ir.etkastores.app.models.tickets.RequestProductResponse;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
-import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
@@ -63,7 +57,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
 
     private View view;
 
-    private Call<OauthResponse<RequestProductResponse>> ticketReq;
+    private Call<OauthResponse<TicketResponseModel>> ticketReq;
 
     private TicketsListAdapter adapter;
 
@@ -98,7 +92,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
     }
 
     private void initViews() {
-        adapter = new TicketsListAdapter(getActivity());
+        adapter = new TicketsListAdapter(getActivity(), TicketsListAdapter.REQUEST_PRODUCT);
         adapter.setOnTicketsListCallbacks(this);
         recyclerView.setAdapter(adapter);
         swipeRefresh.setOnRefreshListener(this);
@@ -107,15 +101,11 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
-        if (1 == 1) {
-            Toaster.show(getActivity(), "در نسخه بعدی آماده می شود.");
-            return;
-        }
         if (ProfileManager.isGuest()) {
             showNeedToLogin();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
-            NewTicketActivity.show(getActivity());
+            NewTicketActivity.show(getActivity(), NewTicketActivity.REQUEST_PRODUCT_TYPE);
         }
     }
 
@@ -149,9 +139,9 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
         messageView.hide();
         ticketReq = ApiProvider.getAuthorizedApi().getProductsTicketList(reqPage);
 
-        ticketReq.enqueue(new Callback<OauthResponse<RequestProductResponse>>() {
+        ticketReq.enqueue(new Callback<OauthResponse<TicketResponseModel>>() {
             @Override
-            public void onResponse(Call<OauthResponse<RequestProductResponse>> call, Response<OauthResponse<RequestProductResponse>> response) {
+            public void onResponse(Call<OauthResponse<TicketResponseModel>> call, Response<OauthResponse<TicketResponseModel>> response) {
                 if (!isAdded()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
@@ -161,11 +151,11 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
                         } else {
                             listIsEmpty = false;
                         }
-//                        adapter.addItems(response.body().getData().getItems());
-//                        if (response.body().getData().getTotalItemsCount() > adapter.getItemCount()) {
-//                            adapter.setLoadMoreEnabled(true);
-//                            reqPage++;
-//                        }
+                        adapter.addItems(response.body().getData().getItems());
+                        if (response.body().getData().getTotalItemsCount() > adapter.getItemCount()) {
+                            adapter.setLoadMoreEnabled(true);
+                            reqPage++;
+                        }
                     }
                 } else {
                     onFailure(call, null);
@@ -174,7 +164,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
             }
 
             @Override
-            public void onFailure(Call<OauthResponse<RequestProductResponse>> call, Throwable throwable) {
+            public void onFailure(Call<OauthResponse<TicketResponseModel>> call, Throwable throwable) {
                 if (!isAdded()) return;
                 hideLoading();
                 String message = getResources().getString(R.string.errorInReceivingTicketsListData);
@@ -249,7 +239,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
             public void onDialogMessageButtonsClick(int button) {
                 if (!isAdded()) return;
                 if (button == RIGHT_BUTTON) {
-                    LoginRegisterActivity.showLogin(getActivity());
+                    LoginWithSMSActivity.show(getActivity());
                 }
                 messageDialog.getDialog().cancel();
             }

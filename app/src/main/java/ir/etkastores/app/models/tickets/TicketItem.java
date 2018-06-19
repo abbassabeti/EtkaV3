@@ -23,11 +23,20 @@ public class TicketItem {
     @SerializedName("date")
     private String date;
 
-    @SerializedName("type")
-    private String type;
-
     @SerializedName("status")
     private String status;
+
+    @SerializedName("Message")
+    private String message;
+
+    @SerializedName("TicketCode")
+    private String ticketCode;
+
+    @SerializedName("DepartmentRef")
+    private int departmentRef;
+
+    @SerializedName("Answer")
+    public RequestProductAnswerModel answer;
 
     public int getId() {
         return id;
@@ -39,10 +48,6 @@ public class TicketItem {
 
     public String getDate() {
         return date;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public String getStatus() {
@@ -87,13 +92,20 @@ public class TicketItem {
         }
     }
 
-    public boolean isSupport(){
-        return getType().contentEquals(TicketType.Support);
+    public String getMessage() {
+        return message;
     }
 
-    public boolean isProductRequest(){
-        return getType().contentEquals(TicketType.ProductRequest);
+    public String getTicketCode() {
+        return ticketCode;
     }
 
+    public int getDepartmentRef() {
+        return departmentRef;
+    }
+
+    public RequestProductAnswerModel getAnswer() {
+        return answer;
+    }
 
 }

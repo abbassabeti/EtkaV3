@@ -27,16 +27,21 @@ import ir.etkastores.app.utils.FontUtils;
 
 public class TicketsListAdapter extends RecyclerView.Adapter<TicketsListAdapter.TicketViewHolder> {
 
+    public final static int REQUEST_PRODUCT = 1;
+    public final static int SUPPORT = 2;
+
     private Context context;
     private LayoutInflater inflater;
     private List<TicketItem> items;
     private boolean isLoadMoreEnabled = false;
     private OnTicketsListCallbacks onTicketsListCallbacks;
+    private int type;
 
-    public TicketsListAdapter(Context context) {
+    public TicketsListAdapter(Context context, int type) {
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.items = new ArrayList<>();
+        this.type = type;
     }
 
     @Override

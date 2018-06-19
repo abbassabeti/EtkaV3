@@ -22,11 +22,6 @@ import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
-import ir.etkastores.app.models.tickets.RequestProductModel;
-import ir.etkastores.app.models.tickets.RequestProductResponse;
-import ir.etkastores.app.models.tickets.SupportTicketModel;
-import ir.etkastores.app.models.tickets.SupportTicketResponse;
-import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -132,11 +127,11 @@ public interface EtkaApi {
 
     //19
     @GET(ApiStatics.GET_PRODUCT_TICKETS)
-    Call<OauthResponse<RequestProductResponse>> getProductsTicketList(@Query("page") int page);
+    Call<OauthResponse<TicketResponseModel>> getProductsTicketList(@Query("page") int page);
 
     //20
     @GET(ApiStatics.GET_PRODUCT_TICKETS)
-    Call<OauthResponse<SupportTicketResponse>> getSupportTicketList(@Query("page") int page);
+    Call<OauthResponse<TicketResponseModel>> getSupportTicketList(@Query("page") int page);
 
     //21
     @POST(ApiStatics.NEWS)

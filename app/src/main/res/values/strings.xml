@@ -97,10 +97,10 @@
     <string name="passwordCantBeEmpty">رمز عبور نباید خالی باشد!</string>
     <string name="inRegistering">در حال ثبت نام...</string>
     <string name="registerSuccessful">ثبت نام با موفقیت انجام شد.</string>
-    <string name="registerFailTryLater">خطایی در ثبت نام رخ داده است، لطفا از دوباره تلاش کنید.</string>
+    <string name="registerFailTryLater">خطایی در ثبت نام رخ داده است، لطفا دوباره تلاش کنید.</string>
     <string name="hekmatCard">حکمت کارت</string>
     <string name="totalPrice">قیمت کل:</string>
-    <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، از دوباره تلاش کنید</string>
+    <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، دوباره تلاش کنید</string>
     <string name="factorDate">تاریخ خرید: %s</string>
     <string name="factorCode">کد خرید: %d</string>
     <string name="XProducts">%d قلم کالا</string>
@@ -108,12 +108,12 @@
     <string name="priceX">قیمت : %s</string>
     <string name="price">قیمت</string>
     <string name="anErrorHappend">خطایی رخ داده است!</string>
-    <string name="errorInLogin">خطا در ورود به حساب کاربری، از دوباره تلاش کنید</string>
+    <string name="errorInLogin">خطا در ورود به حساب کاربری، دوباره تلاش کنید</string>
     <string name="errorInRegister">خطا در ثبت نام!</string>
-    <string name="anErrorHappendInServerConnection">در ارتباط با سرور خطایی رخ داده است، لطفا از دوباره تلاش کنید.</string>
+    <string name="anErrorHappendInServerConnection">در ارتباط با سرور خطایی رخ داده است، لطفا دوباره تلاش کنید.</string>
     <string name="errorInDataReceiving">خطا در دریافت اطلاعات!</string>
-    <string name="errorInUpdatingProfile">خطا در بروزرسانی اطلاعات کاربری!، از دوباره تلاش کنید.</string>
-    <string name="errorHappendInReceivingData">در دریافت اطلاعات خطایی رخ داده است، از دوباره تلاش کنید.</string>
+    <string name="errorInUpdatingProfile">خطا در بروزرسانی اطلاعات کاربری!، دوباره تلاش کنید.</string>
+    <string name="errorHappendInReceivingData">در دریافت اطلاعات خطایی رخ داده است، دوباره تلاش کنید.</string>
     <string name="retry">تلاش مجدد</string>
     <string name="cancel">انصراف</string>
     <string name="etkaChainStores">فروشگاه های زنجیره ای اتکا</string>
@@ -139,7 +139,7 @@
     <string name="productOverallDescriptionTitle">توضیحات کلی محصول:</string>
     <string name="productNotFound">محصول مورد نظر پیدا نشد!</string>
     <string name="error">خطا</string>
-    <string name="errorInLoadProduct">خطا در دریافت اطلاعات محصول، از دوباره تلاش کنید</string>
+    <string name="errorInLoadProduct">خطا در دریافت اطلاعات محصول، دوباره تلاش کنید</string>
     <string name="etkaStoreBranchXAddressX" formatted="false">فروشگاه اتکا شعبه %s ،موقعیت نقشه: %s</string>
     <string name="shareUsing">اشتراک گذاری با استفاده از:</string>
     <string name="newTicket">درخواست جدید</string>
@@ -167,7 +167,7 @@
     <string name="fillNewPassword">رمز عبور جدید را وارد کنید</string>
     <string name="fillConfirmPassword">تکرار رمز عبور جدید را وارد کنید</string>
     <string name="confirmPasswordIdNotValid">تکرار رمز عبور معتبر نیست!</string>
-    <string name="errorInChangePassword">در تغییر رمز عبور خطایی به وجود آمده است، از دوباره تلاش کنید.</string>
+    <string name="errorInChangePassword">در تغییر رمز عبور خطایی به وجود آمده است، دوباره تلاش کنید.</string>
     <string name="loginRequiredForThisSection">برای استفاده از این قسمت ابتدا باید ثبت‌نام کنید یا وارد حساب کاربری خود شوید</string>
     <string name="userAccountRequired">حساب کاربری مورد نیاز است!</string>
     <string name="guestUser">کاربر میهمان</string>
@@ -177,7 +177,7 @@
     <string name="priceColon">قیمت:</string>
     <string name="inSavingToNextShoppingList">در حال ذخیره در لیست خرید بعدی...</string>
     <string name="productAddedToNextShoppingListSuccessfully">محصول با موفقیت به لیست خرید بعدی اضافه شد.</string>
-    <string name="errorInAddingToNextShoppingList">خطا در اضافه کردن محصول به لیست خرید بعدی، لطفا از دوباره تلاش کنید.</string>
+    <string name="errorInAddingToNextShoppingList">خطا در اضافه کردن محصول به لیست خرید بعدی، لطفا دوباره تلاش کنید.</string>
     <string name="setProductCounts">تعداد محصولات را مشخص کنید</string>
     <string name="youHaveNotAnyShoppingHistory">سابقه خریدی برای شما موجود نیست.</string>
     <string name="yourNextShoppingListIsEmpty">لیست خرید بعدی شما خالی است.</string>
@@ -191,14 +191,14 @@
     <string name="areYouSureToDeleteThisProductFromNextShoppingList">"آیا قصد حذف این محصول را از لیست خرید بعدی دارید؟"</string>
     <string name="areYouSureToLogout">"آیا قصد خروج از حساب کاربری خود را دارید؟"</string>
     <string name="inDeletingProductFromYourNextShoppingList">در حال حذف محصول از لیست خرید بعدی...</string>
-    <string name="errorInDeletingProductTryLater">خطا در حذف محصول از لیست خرید بعدی، از دوباره تلاش کنید.</string>
+    <string name="errorInDeletingProductTryLater">خطا در حذف محصول از لیست خرید بعدی، دوباره تلاش کنید.</string>
     <string name="productDeletedSuccessfully">محصول مورد نظر با موفقیت حذف شد.</string>
     <string name="passwordChangeSuccessfully">رمز عبور شما با موفقیت تغییر کرد.</string>
     <string name="logOutSuccessFully">شما از حساب کاربری خود با موفقیت خارج شدید.</string>
     <string name="shareInvitationCodeMessage">"اپلیکیشن همراه فروشگاه اتکا را می‌توانید از طریق لینک زیر دانلود کنید و با ثبت‌نام با کد معرف %s از امتیاز ویژه اتکا برخوردار شوید."</string>
     <string name="cafebazaarAppUrl">"https://cafebazaar.ir/app/ir.etkastores.app/?l=fa"</string>
     <string name="etkaStoreAppInvitation">دعوت به استفاده از اپلیکیشن همراه فروشگاه اتکا</string>
-    <string name="errorInResettingPasswordTryLater">خطا در ارسال درخواست بازگردانی رمز عبور، لطفا از دوباره تلاش کنید.</string>
+    <string name="errorInResettingPasswordTryLater">خطا در ارسال درخواست بازگردانی رمز عبور، لطفا دوباره تلاش کنید.</string>
     <string name="iRealized">متوجه شدم</string>
     <string name="relatedProducts">کالاهای مرتبط</string>
     <string name="newsIdX">کد خبر: %d</string>
@@ -208,7 +208,7 @@
     <string name="ticketSubject">عنوان درخواست:</string>
     <string name="yourTicketsListIsEmpty">لیست تیکت های شما خالی است.</string>
     <string name="errorInReceivingTicketsListData">خطا در دریافت لیست تیکت ها.</string>
-    <string name="errorInConnectingToServer">خطا در ارتباط با سرور، لطفا پس از مدتی از دوباره تلاش نمایید</string>
+    <string name="errorInConnectingToServer">خطا در ارتباط با سرور، لطفا پس از مدتی دوباره تلاش نمایید</string>
     <string name="showAsList">مشاهده به صورت لیست</string>
     <string name="count">تعداد</string>
     <string name="featuresList">لیست امکانات:</string>
@@ -219,12 +219,12 @@
     <string name="submit">ثبت</string>
     <string name="moreDetails">توضیحات:</string>
     <string name="surveySubmitSuccessfully">نظر سنجی با موفقیت ثبت شد.</string>
-    <string name="errorInSubmitSurvey">خطا در ارسال اطلاعات، از دوباره تلاش کنید.</string>
+    <string name="errorInSubmitSurvey">خطا در ارسال اطلاعات، دوباره تلاش کنید.</string>
     <string name="selectTicketType">ابتدا نوع درخواست را انتخاب کنید!</string>
     <string name="titleCantBeEmpty">عنوان درخواست خود را باید بنویسید!</string>
     <string name="pleaseSelectYourTargetStore">لطفا شعبه مورد نظر را انتخاب کنید!</string>
     <string name="textBodyCantBeEmpty">متن درخواست خود را بنویسید!</string>
-    <string name="errorInSendingRequest">خطایی در ارسال درخواست به وجود آمده است، از دوباره تلاش کنید.</string>
+    <string name="errorInSendingRequest">خطایی در ارسال درخواست به وجود آمده است، دوباره تلاش کنید.</string>
     <string name="ticketSendSuccessfully">درخواست شما با موفقیت ارسال شد.</string>
     <string name="title_activity_finish">FinishActivity</string>
     <string name="storeIsNotValid">فروشگاه مورد نظر معتبر نیست!</string>
@@ -247,7 +247,7 @@
     <string name="enterVerificationCode">کد تائیدی که تا لحظاتی دیگر برای شما پیامک می شود را در کادر زیر وارد کنید.</string>
     <string name="_default">پیشفرض</string>
     <string name="inSendinfVerificationCode">در حال ارسال کد فعال سازی</string>
-    <string name="errorInSendingVerificationCode">خطا در ارسال کد فعال سازی، از دوباره تلاش کنید.</string>
+    <string name="errorInSendingVerificationCode">خطا در ارسال کد فعال سازی، دوباره تلاش کنید.</string>
     <string name="surveyIdX">کد نظر سنجی: %d</string>
 
 </resources>

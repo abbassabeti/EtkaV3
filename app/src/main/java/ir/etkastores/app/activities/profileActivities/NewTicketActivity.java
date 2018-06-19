@@ -40,12 +40,14 @@ import retrofit2.Response;
 
 public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    private final static int NOT_SELECTED = 0;
-    private final static int REQUEST_PRODUCT_TYPE = 1;
-    private final static int SUPPORT_TYPE = 2;
+    private final static String TYPE = "TYPE";
+    public final static int REQUEST_PRODUCT_TYPE = 1;
+    public final static int SUPPORT_TYPE = 2;
 
-    public static void show(Activity activity) {
-        activity.startActivity(new Intent(activity, NewTicketActivity.class));
+    public static void show(Activity activity,int type) {
+        Intent intent = new Intent(activity,NewTicketActivity.class);
+        intent.putExtra(TYPE,type);
+        activity.startActivity(intent);
     }
 
     @BindView(R.id.toolbar)
@@ -77,6 +79,7 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_ticket);
         ButterKnife.bind(this);
+        type = getIntent().getExtras().getInt(TYPE);
         initViews();
     }
 
@@ -103,10 +106,10 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
     @OnClick(R.id.submitButton)
     public void onSubmitButtonClicked() {
-        if (type == NOT_SELECTED) {
-            Toaster.showLong(this, R.string.selectTicketType);
-            return;
-        }
+//        if (type == NOT_SELECTED) {
+//            Toaster.showLong(this, R.string.selectTicketType);
+//            return;
+//        }
 
         if (TextUtils.isEmpty(titleEt.getText().toString())) {
             Toaster.showLong(this, R.string.titleCantBeEmpty);
