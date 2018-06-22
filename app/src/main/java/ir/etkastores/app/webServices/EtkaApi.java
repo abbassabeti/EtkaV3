@@ -22,6 +22,7 @@ import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
+import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -126,11 +127,11 @@ public interface EtkaApi {
     Call<OauthResponse<List<ProductModel>>> getSavedProducts();
 
     //19
-    @GET(ApiStatics.GET_PRODUCT_TICKETS)
+    @GET(ApiStatics.PRODUCT_TICKETS)
     Call<OauthResponse<TicketResponseModel>> getProductsTicketList(@Query("page") int page);
 
     //20
-    @GET(ApiStatics.GET_PRODUCT_TICKETS)
+    @GET(ApiStatics.SUPPORT_TICKETS)
     Call<OauthResponse<TicketResponseModel>> getSupportTicketList(@Query("page") int page);
 
     //21
@@ -164,5 +165,13 @@ public interface EtkaApi {
     //28
     @POST(ApiStatics.ACTIVATION_CODE)
     Call<OauthResponse<String>> requestVerificationCode(@Query("PhoneNumber") String phoneNumber);
+
+    //29
+    @POST(ApiStatics.SUPPORT_TICKETS)
+    Call<OauthResponse<Long>> sendSupportTicket(@Body TicketRequestModel requestModel);
+
+    //30
+    @POST(ApiStatics.PRODUCT_TICKETS)
+    Call<OauthResponse<Long>> sendRequestProduct(@Body TicketRequestModel requestModel);
 
 }

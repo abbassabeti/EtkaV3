@@ -34,16 +34,24 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/ticketTypeSelectSpinner"
+            <LinearLayout
+                android:id="@+id/selectDepartmentHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent" />
+                android:orientation="vertical">
 
-            <VideoView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/ticketDepartmentSelectSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/titleEt"

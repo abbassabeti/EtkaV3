@@ -22,14 +22,19 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.activities.StoresListActivity;
+import ir.etkastores.app.data.TicketsDepartmentsManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.store.StoreModel;
+import ir.etkastores.app.models.tickets.DepartmentModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.DialogHelper;
+import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -52,20 +57,24 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     @BindView(R.id.bodyEt)
     EditText bodyEt;
 
-    @BindView(R.id.ticketTypeSelectSpinner)
-    AppCompatSpinner typeSpinner;
+    @BindView(R.id.ticketDepartmentSelectSpinner)
+    AppCompatSpinner departmentSpinner;
 
     @BindView(R.id.selectStoreHolder)
     View selectStoreButton;
 
+    @BindView(R.id.selectDepartmentHolder)
+    View departmentHolder;
+
     @BindView(R.id.selectedStore)
     TextView selectedStoreTv;
 
-    private TicketRequestModel ticketRequestModel;
+    private TicketRequestModel reqModel;
     private int type;
     private StoreModel selectedStore;
     private AlertDialog loadingDialog;
-    private Call<OauthResponse<Long>> sendTicketReq;
+    private Call<OauthResponse<Long>> req;
+    private DepartmentModel selectedDepartment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +93,6 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        initTicketTypeSpinner();
         if (type == REQUEST_PRODUCT_TYPE) {
             initForProductRequest();
         } else {
@@ -103,19 +111,22 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     }
 
     private void initForProductRequest() {
+        toolbar.setTitle(R.string.productRequest);
+        selectStoreButton.setVisibility(View.VISIBLE);
+        departmentHolder.setVisibility(View.GONE);
 
     }
 
     private void initForSupport() {
+        toolbar.setTitle(R.string.support);
+        selectStoreButton.setVisibility(View.GONE);
+        departmentHolder.setVisibility(View.VISIBLE);
+        initDepartments();
 
     }
 
     @OnClick(R.id.submitButton)
     public void onSubmitButtonClicked() {
-//        if (type == NOT_SELECTED) {
-//            Toaster.showLong(this, R.string.selectTicketType);
-//            return;
-//        }
 
         if (TextUtils.isEmpty(titleEt.getText().toString())) {
             Toaster.showLong(this, R.string.titleCantBeEmpty);
@@ -132,46 +143,24 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
             return;
         }
 
-        ticketRequestModel = new TicketRequestModel();
-        ticketRequestModel.setTitle(titleEt.getText().toString());
-        if (type == REQUEST_PRODUCT_TYPE) {
-            ticketRequestModel.setStoreRef(selectedStore.getId());
+        if (type == SUPPORT_TYPE && selectedDepartment == null){
+            Toaster.showLong(this, R.string.pleaseSelectDepartment);
+            return;
         }
-        ticketRequestModel.setMessage(bodyEt.getText().toString());
-        String ticketType = TicketRequestModel.TicketType.ProductRequest;
-        if (type == SUPPORT_TYPE) ticketType = TicketRequestModel.TicketType.Support;
-        ticketRequestModel.setTicketType(ticketType);
-        submitRequest();
-    }
 
-    private void submitRequest() {
-        loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
-//        sendTicketReq = ApiProvider.getAuthorizedApi().sendTicket(ticketRequestModel);
-//        sendTicketReq.enqueue(new Callback<OauthResponse<Long>>() {
-//            @Override
-//            public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {
-//                if (isFinishing()) return;
-//                if (response.isSuccessful()) {
-//                    if (response.body().isSuccessful()) {
-//                        AdjustHelper.sendAdjustEvent(AdjustHelper.SubmitNewTicket);
-//                        Toaster.showLong(NewTicketActivity.this,R.string.ticketSendSuccessfully);
-//                        finish();
-//                    } else {
-//                        showErrorDialog(response.body().getMeta().getMessage());
-//                    }
-//                } else {
-//                    onFailure(call, null);
-//                }
-//                loadingDialog.cancel();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<OauthResponse<Long>> call, Throwable throwable) {
-//                if (isFinishing() || sendTicketReq.isCanceled()) return;
-//                loadingDialog.cancel();
-//                showErrorDialog(getResources().getString(R.string.errorInSendingRequest));
-//            }
-//        });
+        reqModel = new TicketRequestModel();
+
+        if (type == SUPPORT_TYPE){
+            reqModel = new TicketRequestModel(titleEt.getText().toString(),bodyEt.getText().toString(),selectedDepartment.getId());
+        }else{
+            reqModel = new TicketRequestModel(titleEt.getText().toString(),bodyEt.getText().toString(),selectedStore.getId());
+        }
+
+        if (type == REQUEST_PRODUCT_TYPE) {
+            sendRequestProductTicket();
+        } else {
+            sendSupportTicket();
+        }
     }
 
     private void showErrorDialog(final String message) {
@@ -180,7 +169,11 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 if (button == RIGHT_BUTTON) {
-                    submitRequest();
+                    if (type == REQUEST_PRODUCT_TYPE) {
+                        sendRequestProductTicket();
+                    } else {
+                        sendSupportTicket();
+                    }
                 }
                 messageDialog.getDialog().cancel();
             }
@@ -192,21 +185,21 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         });
     }
 
-    private void initTicketTypeSpinner() {
+    private void initDepartmentSpinner(final List<DepartmentModel> departments) {
         List<String> items = new ArrayList<>();
-        items.add(getResources().getString(R.string.ticketType));
-        items.add(getResources().getString(R.string.productRequest));
-        items.add(getResources().getString(R.string.support));
+        items.add(getResources().getString(R.string.selectDepartment));
+        for (DepartmentModel d : departments) {
+            items.add(d.getTitle());
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.text_view_dark_text_for_spinner, items);
-        typeSpinner.setAdapter(adapter);
-        typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        departmentSpinner.setAdapter(adapter);
+        departmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = position;
-                if (type == REQUEST_PRODUCT_TYPE) {
-                    selectStoreButton.setVisibility(View.VISIBLE);
+                if (position == 0) {
+                    selectedDepartment = null;
                 } else {
-                    selectStoreButton.setVisibility(View.GONE);
+                    selectedDepartment = departments.get(position - 1);
                 }
             }
 
@@ -229,9 +222,61 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         if (requestCode == StoresListActivity.SELECT_STORE_REQ_CODE) {
             selectedStore = StoreModel.fromJson(data.getStringExtra(StoresListActivity.SELECTED_STORE));
             if (selectedStore != null) {
-                selectedStoreTv.setText(selectedStore.getName());
+                selectedStoreTv.setText(getResources().getString(R.string.store) + ": " + selectedStore.getName());
             }
         }
     }
+
+    private void initDepartments() {
+        TicketsDepartmentsManager.getInstance().fetchDepartments(new TicketsDepartmentsManager.OnDepartmentCallback() {
+            @Override
+            public void onDepartmentsFetched(List<DepartmentModel> departments) {
+                if (isFinishing()) return;
+                initDepartmentSpinner(departments);
+            }
+
+            @Override
+            public void onDepartmentsFailure(String message) {
+                if (isFinishing()) return;
+            }
+        });
+    }
+
+    private void sendRequestProductTicket() {
+        loadingDialog = DialogHelper.showLoading(this,R.string.inSendingRequest);
+        req = ApiProvider.getAuthorizedApi().sendRequestProduct(reqModel);
+        req.enqueue(reqCallback);
+    }
+
+    private void sendSupportTicket() {
+        loadingDialog = DialogHelper.showLoading(this,R.string.inSendingRequest);
+        req = ApiProvider.getAuthorizedApi().sendSupportTicket(reqModel);
+        req.enqueue(reqCallback);
+    }
+
+    Callback<OauthResponse<Long>> reqCallback = new Callback<OauthResponse<Long>>() {
+        @Override
+        public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {
+            if (isFinishing()) return;
+            if (response.isSuccessful()){
+                if (response.body().isSuccessful()){
+                    Toaster.show(NewTicketActivity.this,R.string.ticketSendSuccessfully);
+                    finish();
+                }else{
+                    showErrorDialog(response.body().getMeta().getMessage());
+                }
+            }else{
+                onFailure(call,null);
+            }
+            loadingDialog.cancel();
+        }
+
+        @Override
+        public void onFailure(Call<OauthResponse<Long>> call, Throwable t) {
+            if (isFinishing()) return;
+            loadingDialog.cancel();
+            showErrorDialog(getResources().getString(R.string.errorInSendingRequest));
+        }
+    };
 
 }

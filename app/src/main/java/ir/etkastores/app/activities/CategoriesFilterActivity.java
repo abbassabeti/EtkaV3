@@ -40,6 +40,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
     private final static String CATEGORY = "CATEGORY";
     private final static String SEARCH_REQUEST = "SEARCH_REQUEST";
     private final static String IS_SEARCH = "IS_SEARCH";
+    private final static String TITLE = "TITLE";
 
     public static void show(Context context, CategoryModel categoryModel) {
         Intent intent = new Intent(context, CategoriesFilterActivity.class);
@@ -49,9 +50,14 @@ public class CategoriesFilterActivity extends BaseActivity implements
     }
 
     public static void show(Context context, SearchProductRequestModel searchProductRequestModel) {
+        show(context,searchProductRequestModel,"");
+    }
+
+    public static void show(Context context, SearchProductRequestModel searchProductRequestModel, String title) {
         Intent intent = new Intent(context, CategoriesFilterActivity.class);
         intent.putExtra(SEARCH_REQUEST, new Gson().toJson(searchProductRequestModel));
         intent.putExtra(IS_SEARCH, true);
+        intent.putExtra(TITLE,title);
         context.startActivity(intent);
     }
 
@@ -71,6 +77,8 @@ public class CategoriesFilterActivity extends BaseActivity implements
     private Call<OauthResponse<List<CategoryModel>>> categoryReq;
 
     private SearchProductRequestModel productRequestModel;
+
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +105,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
         toolbar.setTitle("");
         CategoryModel categoryModel = CategoryModel.fromJson(getIntent().getStringExtra(CATEGORY));
         productRequestModel = SearchProductRequestModel.fromJson(getIntent().getExtras().getString(SEARCH_REQUEST, null));
+        title = getIntent().getStringExtra(TITLE);
         boolean isFromSearch = getIntent().getExtras().getBoolean(IS_SEARCH);
         if (isFromSearch) {
             ProductsListFragment productsListFragment = ProductsListFragment.newInstance(productRequestModel);
@@ -104,6 +113,8 @@ public class CategoriesFilterActivity extends BaseActivity implements
             lockDrawer();
             if (!TextUtils.isEmpty(productRequestModel.getTitle())) {
                 toolbar.setTitle(productRequestModel.getTitle());
+            }else if (!TextUtils.isEmpty(title)){
+                toolbar.setTitle(title);
             }
         } else {
             CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(),categoryModel.getTitle());

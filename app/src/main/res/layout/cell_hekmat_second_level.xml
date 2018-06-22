@@ -31,19 +31,9 @@
             android:paddingTop="8dp">
 
             <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textSizeMedium" />
-
-            <TextView
                 android:id="@+id/discountedPrice"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:gravity="right"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/textSizeMedium" />
@@ -61,6 +51,14 @@
 
         <TextView
             android:id="@+id/share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeSmall" />
+
+        <TextView
+            android:id="@+id/subject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"

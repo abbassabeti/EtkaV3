@@ -155,6 +155,10 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
                                 reqPage++;
                             }
                         }
+                    } else {
+                        boolean showRetry = true;
+                        if (response.body().getMeta().getStatusCode() == 404) showRetry = false;
+                        showRetryMessageView(response.body().getMeta().getMessage(), showRetry);
                     }
                 } else {
                     onFailure(call, null);
@@ -168,7 +172,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
                 hideLoading();
                 String message = getResources().getString(R.string.errorInReceivingTicketsListData);
                 if (adapter.getItemCount() == 0) {
-                    showRetryMessageView(message);
+                    showRetryMessageView(message, true);
                 } else {
                     showRetryDialog(message);
                 }
@@ -207,8 +211,10 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
         });
     }
 
-    private void showRetryMessageView(final String message) {
-        messageView.show(R.drawable.ic_warning_orange_48dp, message, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
+    private void showRetryMessageView(final String message, boolean showRetry) {
+        String retry = null;
+        if (showRetry) retry = getResources().getString(R.string.retry);
+        messageView.show(R.drawable.ic_warning_orange_48dp, message, retry, new MessageView.OnMessageViewButtonClick() {
             @Override
             public void onMessageViewButtonClick() {
                 if (!isAdded()) return;

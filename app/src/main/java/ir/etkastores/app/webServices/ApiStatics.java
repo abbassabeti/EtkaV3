@@ -44,10 +44,9 @@ public class ApiStatics {
     public static final String HEKMAT = "api/v1/Hekmat/get";
     public static final String HOME = "/api/v1/home";
     public static final String CHANGE_PASSWORD = "/api/v1/Account/ChangePassword";
-    public static final String SEND_PRODUCT_REQUEST = "/api/v1/Ticket/ProductRequest";
-    public static final String GET_SUPPORT_TICKETS = "/api/v1/Ticket/Support";
+    public static final String SUPPORT_TICKETS = "/api/v1/Ticket/SupportTicket";
     public static final String SUPPORT_CONVERSATION  = "/api/v1/Ticket/SupportConversation";
-    public static final String GET_PRODUCT_TICKETS = "/api/v1/Ticket/ProductRequest";
+    public static final String PRODUCT_TICKETS = "/api/v1/Ticket/ProductRequest";
     public static final String TICKET_ANSWER = "/api/v1/Ticket/TicketAnswer";
     public static final String GET_TICKET_ANSWER = "/api/v1/Ticket/GetTicketAnswer";
     public static final String SAVE_PRODUCTS = "api/v1/SaveProducts";

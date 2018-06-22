@@ -8,16 +8,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class TicketRequestModel {
 
-    public static class TicketType{
-        public final static String ProductRequest = "ProductRequest";
-        public final static String Support = "Support";
-    }
+    @SerializedName("TicketCode")
+    private String ticketCode;
 
     @SerializedName("Title")
     private String title;
-
-    @SerializedName("TicketType")
-    private String ticketType;
 
     @SerializedName("StoreRef")
     private long storeRef;
@@ -25,22 +20,35 @@ public class TicketRequestModel {
     @SerializedName("Message")
     private String message;
 
+    @SerializedName("DepartmentRef")
+    private int departmentRef;
+
     public TicketRequestModel() {
 
     }
 
-    public TicketRequestModel(String title, String ticketType, long storeRef) {
+    public TicketRequestModel(String title, String message, long storeRef) {
         this.title = title;
-        this.ticketType = ticketType;
         this.storeRef = storeRef;
+        this.message = message;
+    }
+
+    public TicketRequestModel(String title, String message, int departmentRef) {
+        this.title = title;
+        this.message = message;
+        this.departmentRef = departmentRef;
+        this.ticketCode = null;
+    }
+
+    public TicketRequestModel(String ticketCode, String title, String message, int departmentRef) {
+        this.title = title;
+        this.message = message;
+        this.departmentRef = departmentRef;
+        this.ticketCode = ticketCode;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public String getTicketType() {
-        return ticketType;
     }
 
     public long getStoreRef() {
@@ -51,23 +59,8 @@ public class TicketRequestModel {
         this.title = title;
     }
 
-    public void setTicketType(String ticketType) {
-        this.ticketType = ticketType;
-    }
-
     public void setStoreRef(long storeRef) {
         this.storeRef = storeRef;
-    }
-
-    public String getDisplayTicketType(){
-        switch (getTicketType()){
-            case TicketType.ProductRequest:
-                return "درخواست کالا";
-
-            case TicketType.Support:
-                return "پشتیبانی";
-        }
-        return "";
     }
 
     public String getMessage() {
@@ -77,4 +70,5 @@ public class TicketRequestModel {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

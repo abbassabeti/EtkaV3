@@ -86,7 +86,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
     @OnClick(R.id.showAll)
     public void showAllButton(){
-        CategoriesFilterActivity.show(getContext(),moreItemSearchModel);
+        CategoriesFilterActivity.show(getContext(),moreItemSearchModel,title);
     }
 
     class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.ViewHolder>{

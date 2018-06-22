@@ -13,8 +13,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ir.etkastores.app.models.hekmat.HekmatProductModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.models.hekmat.HekmatProductModel;
 
 /**
  * Created by garshasbi on 3/3/18.
@@ -67,14 +67,14 @@ public class HekmatProductSecondLevelRecyclerAdapter extends RecyclerView.Adapte
         @BindView(R.id.distribution)
         TextView distribution;
 
-        @BindView(R.id.price)
-        TextView price;
-
         @BindView(R.id.discountedPrice)
         TextView discountedPrice;
 
         @BindView(R.id.share)
         TextView share;
+
+        @BindView(R.id.subject)
+        TextView subject;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -91,9 +91,9 @@ public class HekmatProductSecondLevelRecyclerAdapter extends RecyclerView.Adapte
         public void bind(HekmatProductModel model) {
             title.setText(model.getTitle());
             distribution.setText(String.format(context.getResources().getString(R.string.distributionX), model.getDistribution()));
-            price.setText(String.format(context.getResources().getString(R.string.priceX), model.getPrice()));
-            discountedPrice.setText(String.format(context.getResources().getString(R.string.discountedPriceX), model.getDiscountedPrice()));
+            discountedPrice.setText(String.format(context.getResources().getString(R.string.unitPriceX), model.getDiscountedPrice()));
             share.setText(model.getShare());
+            subject.setText(context.getResources().getString(R.string.sujectsComma) + model.getSubject());
         }
 
     }
