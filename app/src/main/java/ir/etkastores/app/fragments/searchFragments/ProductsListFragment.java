@@ -117,7 +117,7 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
                         showProductErrorMessage(response.body().getMeta().getMessage(), true);
                     }
                 } else {
-                    onFailure(null, null);
+                    onFailure(call, null);
                 }
                 hideLoading();
             }

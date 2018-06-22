@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,6 +25,7 @@ import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
 import ir.etkastores.app.ui.views.HomeSliderItemView;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.EtkaLogger;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;

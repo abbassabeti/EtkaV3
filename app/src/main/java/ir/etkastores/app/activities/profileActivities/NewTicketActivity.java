@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,23 +19,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
+import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.activities.StoresListActivity;
-import ir.etkastores.app.data.TicketsDepartmentsManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.store.StoreModel;
-import ir.etkastores.app.models.tickets.DepartmentModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
-import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
-import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -44,9 +37,9 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     public final static int REQUEST_PRODUCT_TYPE = 1;
     public final static int SUPPORT_TYPE = 2;
 
-    public static void show(Activity activity,int type) {
-        Intent intent = new Intent(activity,NewTicketActivity.class);
-        intent.putExtra(TYPE,type);
+    public static void show(Activity activity, int type) {
+        Intent intent = new Intent(activity, NewTicketActivity.class);
+        intent.putExtra(TYPE, type);
         activity.startActivity(intent);
     }
 
@@ -92,6 +85,11 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     private void initViews() {
         toolbar.setActionListeners(this);
         initTicketTypeSpinner();
+        if (type == REQUEST_PRODUCT_TYPE) {
+            initForProductRequest();
+        } else {
+            initForSupport();
+        }
     }
 
     @Override
@@ -101,6 +99,14 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
     @Override
     public void onActionClick(int actionCode) {
+
+    }
+
+    private void initForProductRequest() {
+
+    }
+
+    private void initForSupport() {
 
     }
 
@@ -128,7 +134,7 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
         ticketRequestModel = new TicketRequestModel();
         ticketRequestModel.setTitle(titleEt.getText().toString());
-        if (type == REQUEST_PRODUCT_TYPE){
+        if (type == REQUEST_PRODUCT_TYPE) {
             ticketRequestModel.setStoreRef(selectedStore.getId());
         }
         ticketRequestModel.setMessage(bodyEt.getText().toString());
@@ -169,11 +175,11 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     }
 
     private void showErrorDialog(final String message) {
-        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error),message);
+        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error), message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     submitRequest();
                 }
                 messageDialog.getDialog().cancel();

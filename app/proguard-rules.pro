@@ -154,3 +154,10 @@
   **[] $VALUES;
   public *;
 }
+
+# keep anything annotated with @Expose
+-keepclassmembers public class * {
+    @com.google.gson.annotations.Expose *;
+}
+# Also keep classes that @Expose everything
+-keep @com.google.gson.annotations.Expose public class *

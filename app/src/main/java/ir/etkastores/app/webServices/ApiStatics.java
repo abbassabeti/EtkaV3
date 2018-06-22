@@ -41,7 +41,7 @@ public class ApiStatics {
     public static final String STORE = "/api/v1/store";
     public static final String PROFILE = "api/v1/account/info";
     public static final String FACTOR = "api/v1/Factor";
-    public static final String HEKMAT = "api/v1/Hekmat";
+    public static final String HEKMAT = "api/v1/Hekmat/get";
     public static final String HOME = "/api/v1/home";
     public static final String CHANGE_PASSWORD = "/api/v1/Account/ChangePassword";
     public static final String SEND_PRODUCT_REQUEST = "/api/v1/Ticket/ProductRequest";

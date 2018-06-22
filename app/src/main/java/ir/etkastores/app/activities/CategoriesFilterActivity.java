@@ -151,7 +151,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
         } else {
             SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
             searchProductRequestModel.addCategoryId(categoryModel.getId());
-            searchProductRequestModel.setSort(SearchProductRequestModel.Sorts.Default);
+            searchProductRequestModel.setSort(SearchProductRequestModel.SortOptions.Default);
             productsListFragment = ProductsListFragment.newInstance(searchProductRequestModel);
             filterAdapter = new ProductFilterListRecyclerAdapter(this);
             recyclerView.setAdapter(filterAdapter);
@@ -184,22 +184,22 @@ public class CategoriesFilterActivity extends BaseActivity implements
         String sortValue = "";
         switch (sort) {
             case DEFAULT:
-                sortValue = SearchProductRequestModel.Sorts.Default;
+                sortValue = SearchProductRequestModel.SortOptions.Default;
                 break;
             case TOP_OFFER_SORT:
-                sortValue = SearchProductRequestModel.Sorts.OfferPrice;
+                sortValue = SearchProductRequestModel.SortOptions.OfferPrice;
                 break;
 
             case TOP_SALE_SORT:
-                sortValue = SearchProductRequestModel.Sorts.PriceAsc;
+                sortValue = SearchProductRequestModel.SortOptions.PriceAsc;
                 break;
 
             case TOP_RATE_SORT:
-                sortValue = SearchProductRequestModel.Sorts.PointDesc;
+                sortValue = SearchProductRequestModel.SortOptions.PointDesc;
                 break;
 
             case NEWEST_SORT:
-                sortValue = SearchProductRequestModel.Sorts.UpdateDateDesc;
+                sortValue = SearchProductRequestModel.SortOptions.UpdateDateDesc;
                 break;
         }
         SearchProductRequestModel searchProductRequestModel = productsListFragment.getSearchRequestModel();

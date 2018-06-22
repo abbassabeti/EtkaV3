@@ -39,6 +39,7 @@ public class PushTokenManager {
     }
 
     public void syncToken() {
+        if (BuildConfig.DEBUG) return;
         if (TextUtils.isEmpty(getLastRefreshedToken())) {
             try {
                 String token = FirebaseInstanceId.getInstance().getToken();

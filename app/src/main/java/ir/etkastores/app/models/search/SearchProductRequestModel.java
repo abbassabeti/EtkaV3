@@ -1,6 +1,7 @@
 package ir.etkastores.app.models.search;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -12,48 +13,41 @@ import java.util.List;
 
 public class SearchProductRequestModel {
 
-    public static SearchProductRequestModel fromJson(String json){
-        try {
-            return  new Gson().fromJson(json,SearchProductRequestModel.class);
-        }catch (Exception err){
-            return null;
-        }
-    }
-
-    public static class Sorts{
-        public final static String Default = "default";
-        public final static String UpdateDateDesc = "UpdateDateDesc";
-        public final static String PriceAsc = "PriceAsc";
-        public final static String OfferPrice = "OfferPrice";
-        public final static String PointDesc = "PointDesc";
-    }
-
+    @Expose
     @SerializedName("Title")
     String title;
 
+    @Expose
     @SerializedName("CategoryId")
     List<Long> categoryId;
 
+    @Expose
     @SerializedName("Sort")
     String sort;
 
+    @Expose
     @SerializedName("Take")
     int take;
 
+    @Expose
     @SerializedName("Page")
     int page;
 
+    @Expose
     @SerializedName("Tags")
-    private List<String> tags;
+    List<String> tags;
 
+    @Expose
     @SerializedName("StoreId")
-    private Long storeId;
+    Long storeId;
 
+    @Expose
     @SerializedName("SupplierId")
-    private Long supplierId;
+    Long supplierId;
 
+    @Expose
     @SerializedName("OnlyEtkaProducts")
-    private boolean onlyEtkaProducts;
+    boolean onlyEtkaProducts;
 
     public SearchProductRequestModel() {
         page = 1;
@@ -139,6 +133,22 @@ public class SearchProductRequestModel {
 
     public void setOnlyEtkaProducts(boolean onlyEtkaProducts) {
         this.onlyEtkaProducts = onlyEtkaProducts;
+    }
+
+    public static SearchProductRequestModel fromJson(String json){
+        try {
+            return  new Gson().fromJson(json,SearchProductRequestModel.class);
+        }catch (Exception err){
+            return null;
+        }
+    }
+
+    public static class SortOptions {
+        public final static String Default = "default";
+        public final static String UpdateDateDesc = "UpdateDateDesc";
+        public final static String PriceAsc = "PriceAsc";
+        public final static String OfferPrice = "OfferPrice";
+        public final static String PointDesc = "PointDesc";
     }
 
 }
