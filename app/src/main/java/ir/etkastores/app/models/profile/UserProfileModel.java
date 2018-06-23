@@ -38,10 +38,10 @@ public class UserProfileModel {
     String id;
 
     @SerializedName("firstName")
-    String firstName;
+    String firstName = "";
 
     @SerializedName("lastName")
-    String lastName;
+    String lastName = "";
 
     @SerializedName("cellPhone")
     String cellPhone;

@@ -1,6 +1,7 @@
 package ir.etkastores.app.activities.profileActivities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,14 +11,29 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
-import ir.etkastores.app.ui.dialogs.HekmatCardLoginDialog;
+import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.models.OauthResponse;
+import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
+import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.FontUtils;
+import ir.etkastores.app.webServices.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void show(Activity activity) {
-        activity.startActivity(new Intent(activity, HekmatActivity.class));
+    private final static String CARD_NUMBER = "CARD_NUMBER";
+    private final static String PASSWORD = "PASSWORD";
+
+    public static void show(Activity activity, String cardNumber, String password) {
+        Intent intent = new Intent(activity,HekmatActivity.class);
+        intent.putExtra(CARD_NUMBER,cardNumber);
+        intent.putExtra(PASSWORD,password);
+        activity.startActivity(intent);
     }
 
     @BindView(R.id.toolbar)
@@ -38,15 +54,24 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @BindView(R.id.offerValue)
     TextView offerValue;
 
-    @BindView(R.id.remainedLoanValue)
-    TextView remainedLoanValue;
+    @BindView(R.id.remainedDebitValue)
+    TextView remainedDebitValue;
+
+    private String cardNumber;
+    private String password;
+    private AlertDialog loadingDialog;
+
+    private Call<OauthResponse<HekmatRemainingsModel>> loginReq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hekmat);
         ButterKnife.bind(this);
+        cardNumber = getIntent().getStringExtra(CARD_NUMBER);
+        password = getIntent().getStringExtra(PASSWORD);
         initViews();
+        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
     }
 
     @Override
@@ -54,23 +79,11 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
         super.onResume();
         EtkaApp.getInstance().screenView("Hekmat Card Activity");
         userProfileName.setTypeface(FontUtils.getBoldTypeFace());
-        userProfileName.setText("سجاد گرشاسبی");
-        userCode.setText("12301293109");
-        remainedCreditValue.setText("۶۵۰ هزار تومان");
-        remainedEtkaBonCreditValue.setText("۶۵۰ هزار تومان");
-        offerValue.setText("۶۵۰ هزار تومان");
-        remainedLoanValue.setText("۶۵۰ هزار تومان");
-        HekmatCardLoginDialog.newInstance().show(getSupportFragmentManager(), new HekmatCardLoginDialog.OnHekmatCardCallbackListener() {
-
-            @Override
-            public void onHekmatCardLoginDialogSubmitButton(String cardNumber, String password) {
-
-            }
-        });
     }
 
     private void initViews() {
         toolbar.setActionListeners(this);
+        login();
     }
 
     @Override
@@ -81,6 +94,36 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @Override
     public void onActionClick(int actionCode) {
 
+    }
+
+    private void login(){
+        loadingDialog = DialogHelper.showLoading(this,R.string.inCheckingHekmatData);
+        loginReq = ApiProvider.getAuthorizedApi().hekmatLogin(new HekmatCardLoginModel(cardNumber, password));
+        loginReq.enqueue(new Callback<OauthResponse<HekmatRemainingsModel>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<HekmatRemainingsModel>> call, Response<OauthResponse<HekmatRemainingsModel>> response) {
+                if (isFinishing()) return;
+                loadingDialog.cancel();
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+                        userCode.setText(cardNumber);
+//                        userProfileName.setText(ProfileManager.getProfile().getFirstNameAndLastName());
+                        remainedCreditValue.setText(response.body().getData().getRemainCredit());
+                        remainedDebitValue.setText(response.body().getData().getRemainDebit());
+                    }else{
+
+                    }
+                }else{
+                    onFailure(call,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<HekmatRemainingsModel>> call, Throwable t) {
+                if (isFinishing()) return;
+                loadingDialog.cancel();
+            }
+        });
     }
 
 }

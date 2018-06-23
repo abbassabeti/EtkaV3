@@ -15,6 +15,7 @@ import com.google.zxing.BarcodeFormat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.LoginWithSMSActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
@@ -30,6 +31,7 @@ import ir.etkastores.app.activities.profileActivities.survey.SurveyActivity;
 import ir.etkastores.app.activities.profileActivities.survey.SurveyListActivity;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.ui.dialogs.HekmatCardLoginDialog;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -100,7 +102,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        BarcodeUtils.generateBarcodeBitmap("00989354018630", BarcodeFormat.CODABAR, userBarcodeIdImage);
+        BarcodeUtils.generateBarcodeBitmap("00000000000", BarcodeFormat.CODABAR, userBarcodeIdImage);
     }
 
     @OnClick(R.id.hekmatMenu)
@@ -108,8 +110,16 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         if (ProfileManager.isGuest()) {
             showLoginRequiredDialog();
         } else {
-            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
-            HekmatActivity.show(getActivity());
+            HekmatCardLoginDialog.newInstance().show(getChildFragmentManager(), new HekmatCardLoginDialog.OnHekmatCardCallbackListener() {
+                @Override
+                public void onHekmatCardLoginDialogSubmitButton(String cardNumber, String password) {
+                    if (BuildConfig.DEBUG){
+                        HekmatActivity.show(getActivity(),"0892090119536318","123!@#qweQWE");
+                    }else{
+                        HekmatActivity.show(getActivity(),cardNumber,password);
+                    }
+                }
+            });
         }
     }
 

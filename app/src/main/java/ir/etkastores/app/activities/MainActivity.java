@@ -223,7 +223,8 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case NotificationModel.ACTION_OPEN_HEKMAT_ACCOUNT:
-                HekmatActivity.show(this);
+                HekmatActivity.show(this,"","");
+                // TODO need to handle
                 break;
 
             case NotificationModel.ACTION_OPEN_NEXT_SHOPPING:

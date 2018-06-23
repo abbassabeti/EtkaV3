@@ -53,9 +53,7 @@ public class ApiProvider {
             httpClient.addInterceptor(getHeadersLogInterceptor());
         }
 
-        httpClient.connectTimeout(20, TimeUnit.SECONDS);
-        httpClient.readTimeout(20, TimeUnit.SECONDS);
-        httpClient.writeTimeout(20, TimeUnit.SECONDS);
+        setTimeOuts(httpClient);
         if (getPinnedCertificate() != null) httpClient.certificatePinner(getPinnedCertificate());
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
@@ -188,9 +186,7 @@ public class ApiProvider {
             httpClient.addInterceptor(getHeadersLogInterceptor());
         }
 
-        httpClient.connectTimeout(20, TimeUnit.SECONDS);
-        httpClient.readTimeout(20, TimeUnit.SECONDS);
-        httpClient.writeTimeout(20, TimeUnit.SECONDS);
+        setTimeOuts(httpClient);
         if (getPinnedCertificate() != null) httpClient.certificatePinner(getPinnedCertificate());
         OkHttpClient client = httpClient.build();
         Retrofit retrofit = builder.client(client).build();
@@ -250,6 +246,12 @@ public class ApiProvider {
         } catch (Exception err) {
             err.printStackTrace();
         }
+    }
+
+    private static void setTimeOuts(OkHttpClient.Builder httpClient){
+        httpClient.connectTimeout(30, TimeUnit.SECONDS);
+        httpClient.readTimeout(30, TimeUnit.SECONDS);
+        httpClient.writeTimeout(30, TimeUnit.SECONDS);
     }
 
 }

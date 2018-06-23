@@ -255,5 +255,6 @@
     <string name="pleaseSelectDepartment">لطفا دپارتمان مورد نظر را نتخاب کنید</string>
     <string name="sujectsComma">"مشمولین: "</string>
     <string name="validUntil">"اعتبار تا: "</string>
+    <string name="inCheckingHekmatData">درحال بررسی اطلاعات کار حکمت شما...</string>
 
 </resources>

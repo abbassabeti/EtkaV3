@@ -8,6 +8,9 @@ import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.hekmat.HekmatModel;
+import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
+import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
+import ir.etkastores.app.models.hekmat.card.InstallmentItem;
 import ir.etkastores.app.models.home.HomeItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.news.NewsRequestModel;
@@ -173,5 +176,18 @@ public interface EtkaApi {
     //30
     @POST(ApiStatics.PRODUCT_TICKETS)
     Call<OauthResponse<Long>> sendRequestProduct(@Body TicketRequestModel requestModel);
+
+    //31
+    @POST(ApiStatics.HEKMAT_LOGIN)
+    Call<OauthResponse<HekmatRemainingsModel>> hekmatLogin(@Body HekmatCardLoginModel loginModel);
+
+    //32
+    @GET(ApiStatics.INSTALLMENT_TRANSACTION)
+    Call<OauthResponse<List<InstallmentItem>>> getInstallments();
+
+    //32
+    @GET(ApiStatics.CREDIT_TRANSACTION)
+    Call<OauthResponse<List<InstallmentItem>>> getHekmatTransactions();
+
 
 }
