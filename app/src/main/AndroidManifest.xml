@@ -222,6 +222,10 @@
             android:name=".activities.profileActivities.survey.SurveyListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".activities.profileActivities.HekmatCardCouponsProductsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar" />
     </application>
 
 </manifest>

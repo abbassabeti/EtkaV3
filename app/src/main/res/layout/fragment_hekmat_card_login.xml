@@ -36,6 +36,7 @@
             android:hint="@string/hekmatCard16digitNumber"
             android:textColor="@color/darkGray"
             android:textSize="@dimen/textSizeSmall"
+            android:inputType="numberSigned"
             app:backgroundTint="@color/gray"/>
 
         <android.support.v7.widget.AppCompatEditText
@@ -46,6 +47,7 @@
             android:hint="@string/hekmatCardPassword"
             android:textColor="@color/darkGray"
             android:textSize="@dimen/textSizeSmall"
+            android:inputType="textPassword"
             app:backgroundTint="@color/gray"/>
 
         <TextView

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.LoginWithSMSActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
 import ir.etkastores.app.activities.profileActivities.HekmatActivity;
@@ -27,17 +29,16 @@ import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
 import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
-import ir.etkastores.app.activities.profileActivities.survey.SurveyActivity;
 import ir.etkastores.app.activities.profileActivities.survey.SurveyListActivity;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.profile.UserProfileModel;
-import ir.etkastores.app.R;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.HekmatCardLoginDialog;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.BarcodeUtils;
-import ir.etkastores.app.data.ProfileManager;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -110,14 +111,21 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         if (ProfileManager.isGuest()) {
             showLoginRequiredDialog();
         } else {
-            HekmatCardLoginDialog.newInstance().show(getChildFragmentManager(), new HekmatCardLoginDialog.OnHekmatCardCallbackListener() {
+            final HekmatCardLoginDialog dialog = HekmatCardLoginDialog.newInstance();
+            dialog.show(getChildFragmentManager(), new HekmatCardLoginDialog.OnHekmatCardCallbackListener() {
                 @Override
                 public void onHekmatCardLoginDialogSubmitButton(String cardNumber, String password) {
-                    if (BuildConfig.DEBUG){
-                        HekmatActivity.show(getActivity(),"0892090119536318","123!@#qweQWE");
-                    }else{
-                        HekmatActivity.show(getActivity(),cardNumber,password);
+                    if (BuildConfig.DEBUG && TextUtils.isEmpty(cardNumber) && TextUtils.isEmpty(password)) {
+                        HekmatActivity.show(getActivity(), "0892090119536318", "123!@#qweQWE");
+                    } else {
+                        if (TextUtils.isEmpty(cardNumber) || TextUtils.isEmpty(password)) {
+                            Toaster.show(getActivity(), R.string.pleaseFillCardNumberAndPassword);
+                            return;
+                        } else {
+                            HekmatActivity.show(getActivity(), cardNumber, password);
+                        }
                     }
+                    dialog.getDialog().cancel();
                 }
             });
         }
@@ -176,7 +184,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     }
 
     @OnClick(R.id.surveyMenu)
-    public void onSurveyClick(){
+    public void onSurveyClick() {
         if (ProfileManager.isGuest()) {
             showLoginRequiredDialog();
         } else {
@@ -240,7 +248,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     }
 
     @OnClick(R.id.userBarcodeId)
-    public void onUserIdBarcodeClick(){
+    public void onUserIdBarcodeClick() {
 
     }
 

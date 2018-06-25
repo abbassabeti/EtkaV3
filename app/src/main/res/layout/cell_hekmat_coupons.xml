@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    android:weightSum="7">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeSmall" />
+
+    <TextView
+        android:id="@+id/expireDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeSmall" />
+
+    <TextView
+        android:id="@+id/startDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeSmall" />
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeSmall" />
+
+</LinearLayout>

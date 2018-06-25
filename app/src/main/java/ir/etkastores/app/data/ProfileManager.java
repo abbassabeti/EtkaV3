@@ -1,7 +1,5 @@
 package ir.etkastores.app.data;
 
-import android.text.TextUtils;
-
 import com.google.gson.Gson;
 
 import ir.etkastores.app.BuildConfig;
@@ -18,7 +16,7 @@ public class ProfileManager {
 
     public static final String GUEST_USER_NAME = "GuestUser";
     public static final String GUEST_USER_PASSWORD = "Et_#usj78Se";
-//    private static final String USER_NAME = "USER_NAME";
+    //    private static final String USER_NAME = "USER_NAME";
 //    private static final String USER_PASSWORD = "USER_PASSWORD";
     private final static String PROFILE_KEY = "PROFILE_KEY";
     private final static String IS_FIRST_RUN = "IS_FIRST_RUN";
@@ -69,9 +67,9 @@ public class ProfileManager {
 
     public static boolean isGuest() {
         UserProfileModel profile = getProfile();
-        if (profile == null){
+        if (profile == null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

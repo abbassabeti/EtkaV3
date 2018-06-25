@@ -8,13 +8,16 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
-import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
 import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
+import ir.etkastores.app.ui.Toaster;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
+import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
@@ -30,9 +33,9 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     private final static String PASSWORD = "PASSWORD";
 
     public static void show(Activity activity, String cardNumber, String password) {
-        Intent intent = new Intent(activity,HekmatActivity.class);
-        intent.putExtra(CARD_NUMBER,cardNumber);
-        intent.putExtra(PASSWORD,password);
+        Intent intent = new Intent(activity, HekmatActivity.class);
+        intent.putExtra(CARD_NUMBER, cardNumber);
+        intent.putExtra(PASSWORD, password);
         activity.startActivity(intent);
     }
 
@@ -51,17 +54,19 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @BindView(R.id.remainedEtkaBonCreditValue)
     TextView remainedEtkaBonCreditValue;
 
-    @BindView(R.id.offerValue)
-    TextView offerValue;
+    @BindView(R.id.saghfeEtebar)
+    TextView saghfeEtebar;
 
-    @BindView(R.id.remainedDebitValue)
-    TextView remainedDebitValue;
+    @BindView(R.id.kalabargHayeElamShodeButton)
+    CustomRowMenuItem kalabargHayeElamShodeButton;
 
     private String cardNumber;
     private String password;
     private AlertDialog loadingDialog;
 
     private Call<OauthResponse<HekmatRemainingsModel>> loginReq;
+
+    private HekmatRemainingsModel responseModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,25 +101,30 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     }
 
-    private void login(){
-        loadingDialog = DialogHelper.showLoading(this,R.string.inCheckingHekmatData);
+    private void login() {
+        loadingDialog = DialogHelper.showLoading(this, R.string.inCheckingHekmatData);
         loginReq = ApiProvider.getAuthorizedApi().hekmatLogin(new HekmatCardLoginModel(cardNumber, password));
         loginReq.enqueue(new Callback<OauthResponse<HekmatRemainingsModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<HekmatRemainingsModel>> call, Response<OauthResponse<HekmatRemainingsModel>> response) {
                 if (isFinishing()) return;
                 loadingDialog.cancel();
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    responseModel = response.body().getData();
+                    if (response.body().isSuccessful()) {
                         userCode.setText(cardNumber);
-//                        userProfileName.setText(ProfileManager.getProfile().getFirstNameAndLastName());
                         remainedCreditValue.setText(response.body().getData().getRemainCredit());
-                        remainedDebitValue.setText(response.body().getData().getRemainDebit());
-                    }else{
-
+                        remainedEtkaBonCreditValue.setText(response.body().getData().getRemainDebit());
+                        saghfeEtebar.setText(response.body().getData().getMaxCredit());
+                    } else {
+                        boolean hasRetry = true;
+                        if (response.body().getMeta().getStatusCode() == 500) {
+                            hasRetry = false;
+                        }
+                        showRetry(response.body().getMeta().getMessage(), hasRetry);
                     }
-                }else{
-                    onFailure(call,null);
+                } else {
+                    onFailure(call, null);
                 }
             }
 
@@ -122,8 +132,46 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
             public void onFailure(Call<OauthResponse<HekmatRemainingsModel>> call, Throwable t) {
                 if (isFinishing()) return;
                 loadingDialog.cancel();
+                showRetry(getResources().getString(R.string.errorInLogginHekmatCard), true);
             }
         });
+    }
+
+    private void showRetry(String message, boolean hasRetry) {
+        String rightButton = getResources().getString(R.string.retry);
+        if (!hasRetry) rightButton = null;
+        final MessageDialog messageDialog = MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
+                getResources().getString(R.string.error),
+                message,
+                rightButton,
+                getResources().getString(R.string.exit)
+        );
+        messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
+            @Override
+            public void onDialogMessageButtonsClick(int button) {
+                if (isFinishing()) return;
+                if (button == RIGHT_BUTTON) {
+                    login();
+                } else {
+                    finish();
+                }
+                messageDialog.getDialog().cancel();
+            }
+
+            @Override
+            public void onDialogMessageDismiss() {
+
+            }
+        });
+    }
+
+    @OnClick(R.id.kalabargHayeElamShodeButton)
+    public void kalabargHayeElamShodeButtonClick(){
+        if (responseModel.getCoupons().size() == 0){
+            Toaster.show(this,R.string.thereIsNotResultAvailable);
+        }else{
+            HekmatCardCouponsProductsActivity.show(this,responseModel);
+        }
     }
 
 }

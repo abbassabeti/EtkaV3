@@ -231,8 +231,8 @@
     <string name="storeIsNotValid">فروشگاه مورد نظر معتبر نیست!</string>
     <string name="barcodeScan">اسکن بارکد</string>
     <string name="remainedCredit">مانده اعتبار</string>
-    <string name="remainedEtkaBonCredit">موجودی بن اتکا</string>
-    <string name="remainedOfferInThisMonth">مانده تخفیف این ماه</string>
+    <string name="mojodiBoneRiali">موجودی بن ریالی</string>
+    <string name="saghfeEtebar">سقف اعتبار</string>
     <string name="remainedLoan">مانده اقساط</string>
     <string name="remainedLoanDescription">در صورت عدم خرید اعتباری</string>
     <string name="kalabargHayeElamShode">کالابرگ های اعلام شده</string>
@@ -255,6 +255,12 @@
     <string name="pleaseSelectDepartment">لطفا دپارتمان مورد نظر را نتخاب کنید</string>
     <string name="sujectsComma">"مشمولین: "</string>
     <string name="validUntil">"اعتبار تا: "</string>
-    <string name="inCheckingHekmatData">درحال بررسی اطلاعات کار حکمت شما...</string>
+    <string name="inCheckingHekmatData">درحال بررسی اطلاعات کارت حکمت شما...</string>
+    <string name="errorInLogginHekmatCard">خطا در ورود به حساب کات حکمت، دوباره تلاش کنید</string>
+    <string name="number">شماره</string>
+    <string name="startDate">تاریخ اعلام</string>
+    <string name="expireDate">تاریخ انقضاء</string>
+    <string name="description">توضیحات</string>
+    <string name="pleaseFillCardNumberAndPassword">لطفا شماره کارت و رمز عبور را وارد کنید</string>
 
 </resources>
