@@ -1,5 +1,7 @@
 package ir.etkastores.app.models.store;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -22,8 +24,10 @@ public class OpeningHoursModel {
         return afternoon;
     }
 
-    public String getOpeningTime(){
-        return morning +" \n "+afternoon;
+    public String getOpeningTime() {
+        String result = morning;
+        if (!TextUtils.isEmpty(afternoon)) result = result + " \n " + afternoon;
+        return result;
     }
 
 
