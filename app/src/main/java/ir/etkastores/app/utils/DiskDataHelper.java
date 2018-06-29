@@ -79,12 +79,22 @@ public class DiskDataHelper {
         putInt(FORCE_UPDATE_VERSION, version);
     }
 
-    public static void setForceUpdateUrl(String url){
-        putString(FORCE_UPDATE_URL,url);
+    public static void setForceUpdateUrl(String url) {
+        putString(FORCE_UPDATE_URL, url);
     }
 
     public static String getForceUpdateUrl() {
         return getString(FORCE_UPDATE_URL);
+    }
+
+    private final static String LAST_HEKMAT_CARD_NUMBER = "LAST_HEKMAT_CARD_NUMBER";
+
+    public static String getLastHekmatCardNumber() {
+        return getString(LAST_HEKMAT_CARD_NUMBER);
+    }
+
+    public static void setLastHekmatCardNumber(String number){
+        putString(LAST_HEKMAT_CARD_NUMBER,number);
     }
 
 }

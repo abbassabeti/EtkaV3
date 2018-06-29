@@ -303,7 +303,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
             public void onDialogMessageButtonsClick(int button) {
                 if (isFinishing()) return;
                 if (button == RIGHT_BUTTON) {
-                    LoginRegisterActivity.showLogin(ProductActivity.this);
+                    LoginWithSMSActivity.show(ProductActivity.this);
                 }
                 messageDialog.getDialog().cancel();
             }

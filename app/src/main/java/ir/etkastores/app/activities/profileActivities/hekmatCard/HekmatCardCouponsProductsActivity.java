@@ -1,4 +1,4 @@
-package ir.etkastores.app.activities.profileActivities;
+package ir.etkastores.app.activities.profileActivities.hekmatCard;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatCouponsAdapter;
@@ -41,8 +42,14 @@ public class HekmatCardCouponsProductsActivity extends BaseActivity implements E
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
         model = HekmatRemainingsModel.fromJSon(getIntent().getStringExtra(MODEL));
-        adapter = new HekmatCouponsAdapter(this,model.getCoupons());
+        adapter = new HekmatCouponsAdapter(this, model.getCoupons());
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EtkaApp.getInstance().screenView("Hekmat Card Coupons List Activity");
     }
 
     @Override

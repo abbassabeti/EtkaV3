@@ -245,7 +245,7 @@
     <string name="enterActivationCodeHere">کد فعالسازی را اینجا وارد کنید</string>
     <string name="checkActivationCode">بررسی کد فعالسازی</string>
     <string name="enterPhoneNumberMessageForVerify">برای ورود یا ثبت نام در اتکا، شماره موبایل خود را وارد کنید.</string>
-    <string name="enterVerificationCode">کد تائیدی که تا لحظاتی دیگر برای شما پیامک می شود را در کادر زیر وارد کنید.</string>
+    <string name="enterVerificationCode">کد تائیدی را که تا لحظاتی دیگر برای شما پیامک می شود در کادر زیر وارد کنید.</string>
     <string name="_default">پیشفرض</string>
     <string name="inSendinfVerificationCode">در حال ارسال کد فعال سازی</string>
     <string name="errorInSendingVerificationCode">خطا در ارسال کد فعال سازی، دوباره تلاش کنید.</string>
@@ -262,5 +262,7 @@
     <string name="expireDate">تاریخ انقضاء</string>
     <string name="description">توضیحات</string>
     <string name="pleaseFillCardNumberAndPassword">لطفا شماره کارت و رمز عبور را وارد کنید</string>
+    <string name="rial">ریال</string>
+    <string name="inLoadingData">در حال دریافت اطلاعات...</string>
 
 </resources>

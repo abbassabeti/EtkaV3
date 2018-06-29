@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatEditText;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.R;
+import ir.etkastores.app.utils.DiskDataHelper;
 
 public class HekmatCardLoginDialog extends BaseDialog {
 
@@ -31,7 +33,6 @@ public class HekmatCardLoginDialog extends BaseDialog {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -39,6 +40,8 @@ public class HekmatCardLoginDialog extends BaseDialog {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hekmat_card_login, container, false);
         ButterKnife.bind(this, view);
+        String lastCardNumber = DiskDataHelper.getLastHekmatCardNumber();
+        if (!TextUtils.isEmpty(lastCardNumber)) hekmatCardNumberEt.setText(lastCardNumber);
         return view;
     }
 

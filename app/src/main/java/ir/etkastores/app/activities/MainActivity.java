@@ -19,7 +19,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
-import ir.etkastores.app.activities.profileActivities.HekmatActivity;
+import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatActivity;
 import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
 import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
 import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;

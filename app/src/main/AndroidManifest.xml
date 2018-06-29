@@ -81,10 +81,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
-            android:name=".activities.profileActivities.SendNewRequestActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SolidSystemBar" />
-        <activity
             android:name=".activities.profileActivities.NextShoppingListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
@@ -138,7 +134,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
-            android:name=".activities.profileActivities.HekmatActivity"
+            android:name=".activities.profileActivities.hekmatCard.HekmatActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
@@ -206,10 +202,6 @@
             </intent-filter>
         </receiver>
 
-        <!-- <service -->
-        <!-- android:name=".services.EtkaBeaconService" -->
-        <!-- android:enabled="true" /> -->
-
         <activity
             android:name=".activities.FinishActivity"
             android:screenOrientation="portrait"
@@ -223,9 +215,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
-            android:name=".activities.profileActivities.HekmatCardCouponsProductsActivity"
+            android:name=".activities.profileActivities.hekmatCard.HekmatCardCouponsProductsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".activities.profileActivities.hekmatCard.HekmatTransactionsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar"/>
     </application>
 
 </manifest>

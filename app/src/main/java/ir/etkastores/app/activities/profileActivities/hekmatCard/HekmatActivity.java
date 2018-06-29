@@ -1,4 +1,4 @@
-package ir.etkastores.app.activities.profileActivities;
+package ir.etkastores.app.activities.profileActivities.hekmatCard;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -166,12 +166,17 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     }
 
     @OnClick(R.id.kalabargHayeElamShodeButton)
-    public void kalabargHayeElamShodeButtonClick(){
-        if (responseModel.getCoupons().size() == 0){
-            Toaster.show(this,R.string.thereIsNotResultAvailable);
-        }else{
-            HekmatCardCouponsProductsActivity.show(this,responseModel);
+    public void kalabargHayeElamShodeButtonClick() {
+        if (responseModel.getCoupons().size() == 0) {
+            Toaster.show(this, R.string.thereIsNotResultAvailable);
+        } else {
+            HekmatCardCouponsProductsActivity.show(this, responseModel);
         }
+    }
+
+    @OnClick(R.id.hekmatTransactionsButton)
+    public void onHekmatTransactionClick() {
+        HekmatTransactionsActivity.show(this);
     }
 
 }
