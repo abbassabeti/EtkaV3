@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -17,12 +16,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.StoresRecyclerAdapter;
+import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.models.hekmat.HekmatProductModel;
 import ir.etkastores.app.models.store.StoreModel;
-import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
-import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.utils.AdjustHelper;
 
 public class StoresListActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener,
@@ -87,9 +86,9 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
         mode = getIntent().getExtras().getInt(MODE, OPEN_STORE_MODE);
         hekmatProductModel = HekmatProductModel.fromJson(getIntent().getExtras().getString(PRODUCT_MODEL));
         toolbar.setActionListeners(this);
-        if (hekmatProductModel != null){
+        if (hekmatProductModel != null) {
             toolbar.setTitle(R.string.distributionCenters);
-        }else{
+        } else {
             toolbar.setTitle(R.string.selectStore);
         }
         adapter = new StoresRecyclerAdapter(this);
@@ -114,11 +113,11 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
     public void onStoreSelect(StoreModel store) {
         if (mode == OPEN_STORE_MODE) {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenStoreFromList);
-            StoreActivity.show(this,store);
+            StoreActivity.show(this, store);
         } else if (mode == SELECT_STORE_MODE) {
             Intent intent = new Intent();
-            intent.putExtra(SELECTED_STORE,new Gson().toJson(store));
-            setResult(RESULT_OK,intent);
+            intent.putExtra(SELECTED_STORE, new Gson().toJson(store));
+            setResult(RESULT_OK, intent);
             finish();
         }
     }
@@ -126,16 +125,16 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
     @Override
     public void onStoresFetchSuccess(List<StoreModel> stores) {
         List<StoreModel> items = new ArrayList<>();
-        if (hekmatProductModel != null){
-            for (long id : hekmatProductModel.getStores()){
-                for (StoreModel store: stores){
-                    if (store.getId() == id){
-                        items.add(store);
+        if (hekmatProductModel != null) {
+            for (StoreModel s : stores) {
+                for (long id : hekmatProductModel.getStores()) {
+                    if (s.getId() == id) {
+                        items.add(s);
                         break;
                     }
                 }
             }
-        }else{
+        } else {
             items = stores;
         }
         adapter.setStores(items);
@@ -157,7 +156,7 @@ public class StoresListActivity extends BaseActivity implements EtkaToolbar.Etka
     }
 
     @OnTextChanged(R.id.searchInputEt)
-    public void onSearchTextChanged(CharSequence s){
+    public void onSearchTextChanged(CharSequence s) {
         adapter.filterKeyword(searchInputEt.getText().toString());
     }
 
