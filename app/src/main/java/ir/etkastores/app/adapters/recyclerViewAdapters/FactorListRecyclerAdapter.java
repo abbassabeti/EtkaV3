@@ -87,16 +87,18 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         @BindView(R.id.code)
         TextView code;
 
+        @BindView(R.id.storeName)
+        TextView storeName;
+
         public HeaderViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-            date.setTypeface(FontUtils.getBoldTypeFace());
-            code.setTypeface(FontUtils.getBoldTypeFace());
         }
 
         public void bind(){
             date.setText(String.format(context.getResources().getString(R.string.factorDate),factorModel.getDate()));
             code.setText(String.format(context.getResources().getString(R.string.factorCode),factorModel.getFactorCode()));
+            storeName.setText(String.format(context.getResources().getString(R.string.storeX),factorModel.getStoreName()));
         }
 
     }
@@ -129,6 +131,12 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         @BindView(R.id.count)
         TextView count;
 
+        @BindView(R.id.discount)
+        TextView discount;
+
+        @BindView(R.id.totalPrice)
+        TextView totalPrice;
+
         public PurchaseViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
@@ -138,6 +146,8 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             title.setText(productModel.getTitle());
             price.setText(productModel.getPrice());
             count.setText(String.valueOf(productModel.getCount()));
+            discount.setText(productModel.getDiscount());
+            totalPrice.setText(productModel.getTotalPrice());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

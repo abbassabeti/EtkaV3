@@ -21,7 +21,7 @@ public class TicketRequestModel {
     private String message;
 
     @SerializedName("DepartmentRef")
-    private int departmentRef;
+    private Integer departmentRef;
 
     public TicketRequestModel() {
 
@@ -38,13 +38,6 @@ public class TicketRequestModel {
         this.message = message;
         this.departmentRef = departmentRef;
         this.ticketCode = null;
-    }
-
-    public TicketRequestModel(String ticketCode, String title, String message, int departmentRef) {
-        this.title = title;
-        this.message = message;
-        this.departmentRef = departmentRef;
-        this.ticketCode = ticketCode;
     }
 
     public String getTitle() {

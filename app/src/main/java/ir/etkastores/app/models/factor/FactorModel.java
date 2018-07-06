@@ -21,10 +21,19 @@ public class FactorModel {
     String totalPrice;
 
     @SerializedName("totalDiscount")
-    long totalDiscount;
+    String totalDiscount;
 
     @SerializedName("date")
     String date;
+
+    @SerializedName("storeName")
+    String storeName;
+
+    @SerializedName("tax")
+    String tax;
+
+    @SerializedName("totalPaid")
+    String totalPaid;
 
     @SerializedName("purchasedProducts")
     List<PurchasedProductModel> purchasedProducts;
@@ -51,7 +60,7 @@ public class FactorModel {
         return totalPrice;
     }
 
-    public long getTotalDiscount() {
+    public String getTotalDiscount() {
         return totalDiscount;
     }
 
@@ -75,7 +84,7 @@ public class FactorModel {
         this.totalPrice = totalPrice;
     }
 
-    public void setTotalDiscount(long totalDiscount) {
+    public void setTotalDiscount(String totalDiscount) {
         this.totalDiscount = totalDiscount;
     }
 
@@ -94,4 +103,17 @@ public class FactorModel {
     public void setExpanded(boolean expanded) {
         isExpanded = expanded;
     }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public String getTax() {
+        return tax;
+    }
+
+    public String getTotalPaid() {
+        return totalPaid;
+    }
+
 }

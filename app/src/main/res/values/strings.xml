@@ -102,7 +102,7 @@
     <string name="totalPrice">قیمت کل:</string>
     <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، دوباره تلاش کنید</string>
     <string name="factorDate">تاریخ خرید: %s</string>
-    <string name="factorCode">کد خرید: %d</string>
+    <string name="factorCode">شماره فاکتور: %d</string>
     <string name="XProducts">%d قلم کالا</string>
     <string name="Xpoint">%s امتیاز</string>
     <string name="priceX">قیمت : %s</string>
@@ -264,5 +264,9 @@
     <string name="pleaseFillCardNumberAndPassword">لطفا شماره کارت و رمز عبور را وارد کنید</string>
     <string name="rial">ریال</string>
     <string name="inLoadingData">در حال دریافت اطلاعات...</string>
+    <string name="productName">نام کالا</string>
+    <string name="fiCustomer">فی مصرف کننده</string>
+    <string name="discount">تخفیف</string>
+    <string name="storeX">فروشگاه: %s</string>
 
 </resources>

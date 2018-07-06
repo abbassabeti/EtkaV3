@@ -1,5 +1,7 @@
 package ir.etkastores.app.models.factor;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -23,27 +25,19 @@ public class PurchasedProductModel {
     @SerializedName("barCode")
     String barCode;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    @SerializedName("discount")
+    String discount;
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+    @SerializedName("totalPrice")
+    String totalPrice;
 
     public String getTitle() {
+        if (TextUtils.isEmpty(title)) return "-";
         return title;
     }
 
     public String getPrice() {
+        if (TextUtils.isEmpty(price)) return "-";
         return price;
     }
 
@@ -57,5 +51,15 @@ public class PurchasedProductModel {
 
     public String getBarCode() {
         return barCode;
+    }
+
+    public String getDiscount() {
+        if (TextUtils.isEmpty(discount)) return "-";
+        return discount;
+    }
+
+    public String getTotalPrice() {
+        if (TextUtils.isEmpty(totalPrice)) return "-";
+        return totalPrice;
     }
 }

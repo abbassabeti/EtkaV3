@@ -2,46 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_below="@id/code"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    android:weightSum="8">
+    android:weightSum="12">
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/totalPrice"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
+        android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="center"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
+        android:maxLines="2"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
         android:textColor="@color/darkGray"
-        android:textSize="@dimen/textSizeSmall"
-        android:background="@drawable/rect_trans_bordered_gray"/>
+        android:textSize="@dimen/textSizeVerySmall" />
+
+    <TextView
+        android:id="@+id/discount"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/rect_trans_bordered_gray"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeVerySmall" />
 
     <TextView
         android:id="@+id/count"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="center"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
+        android:maxLines="2"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
         android:textColor="@color/darkGray"
-        android:textSize="@dimen/textSizeSmall"
-        android:background="@drawable/rect_trans_bordered_gray"/>
+        android:textSize="@dimen/textSizeVerySmall" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:background="@drawable/rect_trans_bordered_gray"
+        android:gravity="center"
+        android:maxLines="2"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:textColor="@color/darkGray"
+        android:textSize="@dimen/textSizeVerySmall" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
+        android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="right"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:paddingRight="4dp"
-        android:paddingLeft="4dp"
+        android:maxLines="2"
+        android:padding="4dp"
         android:textColor="@color/darkGray"
-        android:textSize="@dimen/textSizeSmall"
-        android:background="@drawable/rect_trans_bordered_gray"/>
+        android:textSize="@dimen/textSizeVerySmall" />
 
 </LinearLayout>

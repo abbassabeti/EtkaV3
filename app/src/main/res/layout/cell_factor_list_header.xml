@@ -10,16 +10,30 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textSize="@dimen/textSizeSmall"
-        android:padding="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:textColor="@color/darkGray" />
+
+    <TextView
+        android:id="@+id/storeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/textSizeSmall"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         android:textColor="@color/darkGray" />
 
     <TextView
         android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_below="@id/storeName"
+        android:layout_alignParentRight="true"
         android:textSize="@dimen/textSizeSmall"
-        android:padding="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         android:textColor="@color/darkGray" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,19 +42,28 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:layout_below="@id/code"
-        android:weightSum="8">
+        android:weightSum="12">
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/totalPrice"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
             android:textColor="@color/darkGray"
-            android:textSize="@dimen/textSizeSmall"
+            android:textSize="@dimen/textSizeVerySmall"
             android:text="@string/price"
+            android:background="@drawable/rect_trans_bordered_gray"/>
+
+        <TextView
+            android:id="@+id/discount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeVerySmall"
+            android:text="@string/discount"
             android:background="@drawable/rect_trans_bordered_gray"/>
 
         <TextView
@@ -49,26 +72,31 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
             android:textColor="@color/darkGray"
-            android:textSize="@dimen/textSizeSmall"
+            android:textSize="@dimen/textSizeVerySmall"
             android:text="@string/count"
+            android:background="@drawable/rect_trans_bordered_gray"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeVerySmall"
+            android:text="@string/fiCustomer"
             android:background="@drawable/rect_trans_bordered_gray"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="5"
-            android:gravity="right"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:paddingRight="4dp"
-            android:paddingLeft="4dp"
+            android:gravity="center"
             android:textColor="@color/darkGray"
-            android:textSize="@dimen/textSizeSmall"
-            android:text="@string/title"
+            android:textSize="@dimen/textSizeVerySmall"
+            android:text="@string/productName"
             android:background="@drawable/rect_trans_bordered_gray"/>
 
     </LinearLayout>

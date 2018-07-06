@@ -163,8 +163,14 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         }
     }
 
-    private void showErrorDialog(final String message) {
-        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error), message);
+    private void showErrorDialog(final String message, boolean showRetry) {
+        String retry = getResources().getString(R.string.retry);
+        if (!showRetry) retry = null;
+        final MessageDialog messageDialog = MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
+                getResources().getString(R.string.error),
+                message,
+                retry,
+                getResources().getString(R.string.close));
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
@@ -263,7 +269,7 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
                     Toaster.show(NewTicketActivity.this,R.string.ticketSendSuccessfully);
                     finish();
                 }else{
-                    showErrorDialog(response.body().getMeta().getMessage());
+                    showErrorDialog(response.body().getMeta().getMessage(),false);
                 }
             }else{
                 onFailure(call,null);
@@ -275,7 +281,7 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         public void onFailure(Call<OauthResponse<Long>> call, Throwable t) {
             if (isFinishing()) return;
             loadingDialog.cancel();
-            showErrorDialog(getResources().getString(R.string.errorInSendingRequest));
+            showErrorDialog(getResources().getString(R.string.errorInSendingRequest),true);
         }
     };
 

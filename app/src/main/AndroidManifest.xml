@@ -221,7 +221,12 @@
         <activity
             android:name=".activities.profileActivities.hekmatCard.HekmatTransactionsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SolidSystemBar"/>
+            android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".activities.profileActivities.TicketConversationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar" />
+
     </application>
 
 </manifest>
