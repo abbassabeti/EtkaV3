@@ -170,7 +170,7 @@ public interface EtkaApi {
     Call<OauthResponse<String>> requestVerificationCode(@Query("PhoneNumber") String phoneNumber);
 
     //29
-    @POST(ApiStatics.SUPPORT_TICKETS)
+    @POST(ApiStatics.SUPPORT_TICKET)
     Call<OauthResponse<Long>> sendSupportTicket(@Body TicketRequestModel requestModel);
 
     //30

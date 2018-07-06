@@ -43,7 +43,8 @@ public class ApiStatics {
     public static final String HEKMAT = "api/v1/Hekmat/get";
     public static final String HOME = "/api/v1/home";
     public static final String CHANGE_PASSWORD = "/api/v1/Account/ChangePassword";
-    public static final String SUPPORT_TICKETS = "/api/v1/Ticket/SupportTicket";
+    public static final String SUPPORT_TICKETS = "/api/v1/Ticket/SupportTickets";
+    public static final String SUPPORT_TICKET = "/api/v1/Ticket/SupportTicket";
     public static final String SUPPORT_CONVERSATION = "/api/v1/Ticket/SupportConversation";
     public static final String PRODUCT_TICKETS = "/api/v1/Ticket/ProductRequest";
     public static final String TICKET_ANSWER = "/api/v1/Ticket/TicketAnswer";

@@ -51,13 +51,22 @@ public class HekmatCardLoginDialog extends BaseDialog {
     }
 
     @OnClick(R.id.enterButton)
-    public void onViewClicked() {
-        if (callbackListener != null) callbackListener.onHekmatCardLoginDialogSubmitButton(hekmatCardNumberEt.getText().toString(),hekmatCardPasswordEt.getText().toString());
+    public void onEnterClick() {
+        if (callbackListener != null)
+            callbackListener.onHekmatCardLoginDialogSubmitButton(hekmatCardNumberEt.getText().toString(), hekmatCardPasswordEt.getText().toString());
+    }
+
+    @OnClick(R.id.registerButton)
+    public void onRegisterClick(){
+        if (callbackListener != null)
+            callbackListener.onHekmatRegisterButton(hekmatCardNumberEt.getText().toString(), hekmatCardPasswordEt.getText().toString());
     }
 
 
     public interface OnHekmatCardCallbackListener {
-        void onHekmatCardLoginDialogSubmitButton(String cardNumber,String password);
+        void onHekmatCardLoginDialogSubmitButton(String cardNumber, String password);
+
+        void onHekmatRegisterButton(String cardNumber, String password);
     }
 
 }

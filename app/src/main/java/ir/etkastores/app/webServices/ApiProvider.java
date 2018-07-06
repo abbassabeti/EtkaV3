@@ -129,7 +129,8 @@ public class ApiProvider {
                         synchronized (httpClient) {
                             if (ApiStatics.getLastToken() == null) {
 //                                Call<AccessToken> call = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
-                                Call<AccessToken> call = ApiProvider.getLoginWithSMSVerification("", "");
+                                ProfileManager.clearProfile();
+                                Call<AccessToken> call = ApiProvider.guestLogin();
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
                                 if (tokenResponse.code() == 200) {
                                     AccessToken newToken = tokenResponse.body();

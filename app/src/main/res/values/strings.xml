@@ -256,7 +256,7 @@
     <string name="sujectsComma">"مشمولین: "</string>
     <string name="validUntil">"اعتبار تا: "</string>
     <string name="inCheckingHekmatData">درحال بررسی اطلاعات کارت حکمت شما...</string>
-    <string name="errorInLogginHekmatCard">خطا در ورود به حساب کات حکمت، دوباره تلاش کنید</string>
+    <string name="errorInLogginHekmatCard">خطا در ورود به حساب کارت حکمت، دوباره تلاش کنید</string>
     <string name="number">شماره</string>
     <string name="startDate">تاریخ اعلام</string>
     <string name="expireDate">تاریخ انقضاء</string>
@@ -268,5 +268,8 @@
     <string name="fiCustomer">فی مصرف کننده</string>
     <string name="discount">تخفیف</string>
     <string name="storeX">فروشگاه: %s</string>
+    <string name="registerHekmatCard">ثبت نام کارت حکمت</string>
+    <string name="employeeNumber">کد پرسنلی</string>
+    <string name="password">رمز عبور</string>
 
 </resources>

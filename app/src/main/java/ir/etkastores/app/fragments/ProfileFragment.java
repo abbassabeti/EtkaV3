@@ -29,6 +29,7 @@ import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatActivity;
+import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatCardRegisterActivity;
 import ir.etkastores.app.activities.profileActivities.survey.SurveyListActivity;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.profile.UserProfileModel;
@@ -128,6 +129,11 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
                         }
                     }
                     dialog.getDialog().cancel();
+                }
+
+                @Override
+                public void onHekmatRegisterButton(String cardNumber, String password) {
+                    HekmatCardRegisterActivity.show(getActivity(),cardNumber,password);
                 }
             });
         }

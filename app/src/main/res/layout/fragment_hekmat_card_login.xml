@@ -34,10 +34,10 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:hint="@string/hekmatCard16digitNumber"
+            android:inputType="numberSigned"
             android:textColor="@color/darkGray"
             android:textSize="@dimen/textSizeSmall"
-            android:inputType="numberSigned"
-            app:backgroundTint="@color/gray"/>
+            app:backgroundTint="@color/gray" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/hekmatCardPasswordEt"
@@ -45,19 +45,36 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:hint="@string/hekmatCardPassword"
+            android:inputType="textPassword"
             android:textColor="@color/darkGray"
             android:textSize="@dimen/textSizeSmall"
-            android:inputType="textPassword"
-            app:backgroundTint="@color/gray"/>
+            app:backgroundTint="@color/gray" />
 
-        <TextView
-            android:id="@+id/enterButton"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="16dp"
-            android:textSize="@dimen/textSizeSmall"
-            android:text="@string/submitAndEnter"/>
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/enterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/enter"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/textSizeSmall" />
+
+            <TextView
+                android:id="@+id/registerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@id/enterButton"
+                android:text="@string/register"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeSmall" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
