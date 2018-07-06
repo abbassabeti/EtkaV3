@@ -3,7 +3,6 @@ package ir.etkastores.app.activities.profileActivities.hekmatCard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
 import android.widget.EditText;
 
@@ -77,4 +76,5 @@ public class HekmatCardRegisterActivity extends BaseActivity implements EtkaTool
     public void onActionClick(int actionCode) {
 
     }
+
 }
