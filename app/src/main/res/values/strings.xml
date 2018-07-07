@@ -278,5 +278,6 @@
     <string name="enterConfirmPassword">تکرار رمز عبور خود را وارد کنید</string>
     <string name="enteredPasswordNotMathWithConfirmPassword">رمز عبور وارد شده با تکرار رمز عبور مطابقت ندارد!</string>
     <string name="passwortMustBeAtLeast6Character">رمز عبور باید بیش از ۶ حرف باشد</string>
+    <string name="youHasNotAnyTransactionInfo">برای شما سابقه تراکنشی موجود نیست</string>
 
 </resources>

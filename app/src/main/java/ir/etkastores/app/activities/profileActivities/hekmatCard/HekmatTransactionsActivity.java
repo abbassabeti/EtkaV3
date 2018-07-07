@@ -18,6 +18,7 @@ import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.InstallmentItem;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
@@ -36,6 +37,9 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.messageView)
+    MessageView messageView;
 
     private Call<OauthResponse<List<InstallmentItem>>> req;
     private HekmatTransactionRecyclerAdapter adapter;
@@ -65,6 +69,7 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
         toolbar.setActionListeners(this);
         adapter = new HekmatTransactionRecyclerAdapter(this);
         recyclerView.setAdapter(adapter);
+        messageView.hide();
         loadData();
     }
 
@@ -78,7 +83,11 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
                 loadingDialog.cancel();
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        adapter.addItems(response.body().getData());
+                        if (response.body().getData() != null && response.body().getData().size()>0){
+                            adapter.addItems(response.body().getData());
+                        }else{
+                            messageView.show(R.drawable.ic_warning_orange_48dp,R.string.youHasNotAnyTransactionInfo,0,null);
+                        }
                     } else {
                         showRetry(response.body().getMeta().getMessage(), false);
                     }
