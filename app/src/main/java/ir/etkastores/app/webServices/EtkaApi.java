@@ -9,6 +9,7 @@ import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
+import ir.etkastores.app.models.hekmat.card.HekmatRegisterRequest;
 import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
 import ir.etkastores.app.models.hekmat.card.InstallmentItem;
 import ir.etkastores.app.models.home.HomeItemsModel;
@@ -25,6 +26,7 @@ import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
+import ir.etkastores.app.models.tickets.TicketFilterModel;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
@@ -134,8 +136,8 @@ public interface EtkaApi {
     Call<OauthResponse<TicketResponseModel>> getProductsTicketList(@Query("page") int page);
 
     //20
-    @GET(ApiStatics.SUPPORT_TICKETS)
-    Call<OauthResponse<TicketResponseModel>> getSupportTicketList(@Query("page") int page);
+    @POST(ApiStatics.SUPPORT_TICKETS)
+    Call<OauthResponse<TicketResponseModel>> getSupportTicketList(@Body TicketFilterModel request);
 
     //21
     @POST(ApiStatics.NEWS)
@@ -188,6 +190,10 @@ public interface EtkaApi {
     //32
     @GET(ApiStatics.CREDIT_TRANSACTION)
     Call<OauthResponse<List<InstallmentItem>>> getHekmatTransactions();
+
+    //33
+    @POST(ApiStatics.HEKMAT_REGISTER)
+    Call<OauthResponse<String>> registerHekmatCard(@Body HekmatRegisterRequest request);
 
 
 }

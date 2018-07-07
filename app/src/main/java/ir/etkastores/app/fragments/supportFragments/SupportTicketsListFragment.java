@@ -20,6 +20,7 @@ import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketsListAdapter;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
+import ir.etkastores.app.models.tickets.TicketFilterModel;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
@@ -61,9 +62,11 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
     private TicketsListAdapter adapter;
 
-    private int reqPage = 1;
-
     private boolean listIsEmpty = false;
+
+    private TicketFilterModel requestModel;
+
+    private final static int PAGE_SIZE = 20;
 
     @Nullable
     @Override
@@ -97,6 +100,10 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
         recyclerView.setAdapter(adapter);
         swipeRefresh.setOnRefreshListener(this);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        requestModel = new TicketFilterModel();
+        requestModel.setPage(0);
+        requestModel.setTake(PAGE_SIZE);
+        requestModel.setUserId(ProfileManager.getProfile().getId());
     }
 
     @OnClick(R.id.addNewTicketFab)
@@ -137,7 +144,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
         if (!isAdded()) return;
         showLoading();
         messageView.hide();
-        ticketReq = ApiProvider.getAuthorizedApi().getSupportTicketList(reqPage);
+        ticketReq = ApiProvider.getAuthorizedApi().getSupportTicketList(requestModel);
         ticketReq.enqueue(new Callback<OauthResponse<TicketResponseModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<TicketResponseModel>> call, Response<OauthResponse<TicketResponseModel>> response) {
@@ -152,7 +159,6 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
                             adapter.addItems(response.body().getData().getItems());
                             if (response.body().getData().getTotalItemsCount() > adapter.getItemCount()) {
                                 adapter.setLoadMoreEnabled(true);
-                                reqPage++;
                             }
                         }
                     } else {
@@ -232,7 +238,6 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
     @Override
     public void onRefresh() {
-        reqPage = 1;
         adapter.clear();
         loadTickets();
     }

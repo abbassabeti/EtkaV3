@@ -133,7 +133,8 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
                 @Override
                 public void onHekmatRegisterButton(String cardNumber, String password) {
-                    HekmatCardRegisterActivity.show(getActivity(),cardNumber,password);
+                    HekmatCardRegisterActivity.show(getActivity(), cardNumber, password);
+                    dialog.getDialog().cancel();
                 }
             });
         }

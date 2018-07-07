@@ -271,5 +271,12 @@
     <string name="registerHekmatCard">ثبت نام کارت حکمت</string>
     <string name="employeeNumber">کد پرسنلی</string>
     <string name="password">رمز عبور</string>
+    <string name="enterPhoneNumberCorrectly">شماره موبایل خود را به درستی وارد کنید!</string>
+    <string name="enterHekmatCardNumberCorreclty">شماره کارت ۱۶ رقمی حکمت کارت خود را به درستی وارد کنید</string>
+    <string name="enterYourEmployeeNumber">کد پرسنلی خود را وارد کنید</string>
+    <string name="enterPassword">رمز عبور خود را وارد کنید</string>
+    <string name="enterConfirmPassword">تکرار رمز عبور خود را وارد کنید</string>
+    <string name="enteredPasswordNotMathWithConfirmPassword">رمز عبور وارد شده با تکرار رمز عبور مطابقت ندارد!</string>
+    <string name="passwortMustBeAtLeast6Character">رمز عبور باید بیش از ۶ حرف باشد</string>
 
 </resources>
