@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,7 +24,6 @@ import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.tickets.TicketFilterModel;
 import ir.etkastores.app.models.tickets.TicketItem;
-import ir.etkastores.app.models.tickets.TicketResponseModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
@@ -58,7 +59,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
     private View view;
 
-    private Call<OauthResponse<TicketResponseModel>> ticketReq;
+    private Call<OauthResponse<List<TicketItem>>> ticketReq;
 
     private TicketsListAdapter adapter;
 
@@ -145,19 +146,19 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
         showLoading();
         messageView.hide();
         ticketReq = ApiProvider.getAuthorizedApi().getSupportTicketList(requestModel);
-        ticketReq.enqueue(new Callback<OauthResponse<TicketResponseModel>>() {
+        ticketReq.enqueue(new Callback<OauthResponse<List<TicketItem>>>() {
             @Override
-            public void onResponse(Call<OauthResponse<TicketResponseModel>> call, Response<OauthResponse<TicketResponseModel>> response) {
+            public void onResponse(Call<OauthResponse<List<TicketItem>>> call, Response<OauthResponse<List<TicketItem>>> response) {
                 if (!isAdded()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        if (response.body().getData().getTotalItemsCount() == 0) {
+                        if (response.body().getData().size() == 0 && adapter.getItemCount() == 0) {
                             messageView.show(R.drawable.ic_warning_orange_48dp, getResources().getString(R.string.yourTicketsListIsEmpty), null, null);
                             listIsEmpty = true;
                         } else {
                             listIsEmpty = false;
-                            adapter.addItems(response.body().getData().getItems());
-                            if (response.body().getData().getTotalItemsCount() > adapter.getItemCount()) {
+                            adapter.addItems(response.body().getData());
+                            if (response.body().getData().size() == PAGE_SIZE) {
                                 adapter.setLoadMoreEnabled(true);
                             }
                         }
@@ -173,7 +174,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
             }
 
             @Override
-            public void onFailure(Call<OauthResponse<TicketResponseModel>> call, Throwable throwable) {
+            public void onFailure(Call<OauthResponse<List<TicketItem>>> call, Throwable throwable) {
                 if (!isAdded()) return;
                 hideLoading();
                 String message = getResources().getString(R.string.errorInReceivingTicketsListData);

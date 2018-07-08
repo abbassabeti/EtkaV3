@@ -27,6 +27,7 @@ import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.models.survey.SurveySubmitRequestModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
 import ir.etkastores.app.models.tickets.TicketFilterModel;
+import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
 import retrofit2.Call;
@@ -137,7 +138,7 @@ public interface EtkaApi {
 
     //20
     @POST(ApiStatics.SUPPORT_TICKETS)
-    Call<OauthResponse<TicketResponseModel>> getSupportTicketList(@Body TicketFilterModel request);
+    Call<OauthResponse<List<TicketItem>>> getSupportTicketList(@Body TicketFilterModel request);
 
     //21
     @POST(ApiStatics.NEWS)

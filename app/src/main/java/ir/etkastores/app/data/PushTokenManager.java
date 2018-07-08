@@ -39,11 +39,19 @@ public class PushTokenManager {
     }
 
     public void syncToken() {
+        try {
+            String token = FirebaseInstanceId.getInstance().getToken();
+            if (!getLastRefreshedToken().contentEquals(token)) {
+                DiskDataHelper.putString(LAST_REFRESHED_TOKEN, token);
+            }
+        } catch (Exception err) {
+        }
+
         if (TextUtils.isEmpty(getLastRefreshedToken())) {
             try {
                 String token = FirebaseInstanceId.getInstance().getToken();
                 DiskDataHelper.putString(LAST_REFRESHED_TOKEN, token);
-            }catch (Exception err){
+            } catch (Exception err) {
                 err.printStackTrace();
             }
             if (TextUtils.isEmpty(getLastRefreshedToken())) return;
@@ -59,15 +67,16 @@ public class PushTokenManager {
     }
 
     private void sendRequest() {
-        req = ApiProvider.getAuthorizedApi().syncLastPushToken(getLastRefreshedToken());
+        final String token = getLastRefreshedToken();
+        req = ApiProvider.getAuthorizedApi().syncLastPushToken(token);
         req.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        DiskDataHelper.putString(LAST_SYNCED_TOKEN, getLastRefreshedToken());
+                        DiskDataHelper.putString(LAST_SYNCED_TOKEN, token);
                         retryCounter = MAX_RETRY_COUNT;
-                        if (BuildConfig.DEBUG) Log.i("FCM Token synced",""+getLastSyncedToken());
+                        if (BuildConfig.DEBUG) Log.i("FCM Token synced", "" + getLastSyncedToken());
                     } else {
                         retryCounter = MAX_RETRY_COUNT;
                         req = null;

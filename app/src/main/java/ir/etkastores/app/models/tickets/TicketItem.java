@@ -26,16 +26,16 @@ public class TicketItem {
     @SerializedName("status")
     private String status;
 
-    @SerializedName("Message")
+    @SerializedName("message")
     private String message;
 
-    @SerializedName("TicketCode")
+    @SerializedName("ticketCode")
     private String ticketCode;
 
-    @SerializedName("DepartmentRef")
+    @SerializedName("departmentRef")
     private int departmentRef;
 
-    @SerializedName("Answer")
+    @SerializedName("answer")
     public RequestProductAnswerModel answer;
 
     public int getId() {
@@ -51,6 +51,7 @@ public class TicketItem {
     }
 
     public String getStatus() {
+        if (status == null) return "";
         return status;
     }
 
