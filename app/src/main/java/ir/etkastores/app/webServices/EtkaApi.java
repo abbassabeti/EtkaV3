@@ -11,6 +11,7 @@ import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
 import ir.etkastores.app.models.hekmat.card.HekmatRegisterRequest;
 import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
+import ir.etkastores.app.models.hekmat.card.HekmatSetPasswordRequest;
 import ir.etkastores.app.models.hekmat.card.InstallmentItem;
 import ir.etkastores.app.models.home.HomeItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
@@ -197,8 +198,12 @@ public interface EtkaApi {
     Call<OauthResponse<String>> registerHekmatCard(@Body HekmatRegisterRequest request);
 
     //34
-    @GET(ApiStatics.SUPPORT_CONVERSATION)
-    Call<OauthResponse<List<TicketItem>>> getConvesation();
+    @GET(ApiStatics.HEKMAT_SET_PASSWORD)
+    Call<OauthResponse<List<TicketItem>>> getConversation(@Query("TicketCode") String ticketCode);
+
+    //35
+    @POST(ApiStatics.HEKMAT_SET_PASSWORD)
+    Call<OauthResponse<String>> resetHekmatPassword(@Body()HekmatSetPasswordRequest request);
 
 
 }

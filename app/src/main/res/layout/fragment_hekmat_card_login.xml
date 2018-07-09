@@ -50,6 +50,18 @@
             android:textSize="@dimen/textSizeSmall"
             app:backgroundTint="@color/gray" />
 
+        <TextView
+            android:id="@+id/resetPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/forgotYourPassword_resetNow"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/textSizeSmall" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

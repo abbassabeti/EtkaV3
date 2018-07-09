@@ -280,5 +280,6 @@
     <string name="passwortMustBeAtLeast6Character">رمز عبور باید بیش از ۶ حرف باشد</string>
     <string name="youHasNotAnyTransactionInfo">برای شما سابقه تراکنشی موجود نیست</string>
     <string name="requestCodeX">درخواست کد %d</string>
+    <string name="resetPasswordSuccessFully">رمز عبور شما با موفقیت تغییر کرد</string>
 
 </resources>

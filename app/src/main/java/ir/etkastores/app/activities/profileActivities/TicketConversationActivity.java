@@ -16,8 +16,13 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TickerConversationAdapter;
+import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.webServices.ApiProvider;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TicketConversationActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -76,6 +81,26 @@ public class TicketConversationActivity extends BaseActivity implements EtkaTool
     private void initSupportList(){
         toolbar.setTitle(String.format(getResources().getString(R.string.requestCodeX),ticketItem.getId()));
         title.setText(ticketItem.getTitle());
+        Call<OauthResponse<List<TicketItem>>> req = ApiProvider.getAuthorizedApi().getConversation(ticketItem.getTicketCode());
+        req.enqueue(new Callback<OauthResponse<List<TicketItem>>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<List<TicketItem>>> call, Response<OauthResponse<List<TicketItem>>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().isSuccessful()){
+
+                    }else{
+
+                    }
+                }else{
+                    onFailure(call,null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<List<TicketItem>>> call, Throwable t) {
+                if (isFinishing()) return;
+            }
+        });
     }
 
     @Override

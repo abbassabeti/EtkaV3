@@ -59,6 +59,7 @@ public class ApiStatics {
     public static final String INSTALLMENT_TRANSACTION = "/api/v1/hekmat/GetInstallmentTransaction";
     public static final String HEKMAT_LOGIN = "/api/v1/hekmat/HekmatCardLogin2";
     public static final String HEKMAT_REGISTER = "/api/v1/hekmat/HekmatRegister";
+    public static final String HEKMAT_SET_PASSWORD = "/api/v1/hekmat/HekmatSetPassword";
 
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
