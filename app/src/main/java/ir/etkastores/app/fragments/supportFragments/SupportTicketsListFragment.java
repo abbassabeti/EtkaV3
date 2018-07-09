@@ -19,6 +19,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.LoginWithSMSActivity;
 import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
+import ir.etkastores.app.activities.profileActivities.TicketConversationActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketsListAdapter;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
@@ -124,7 +125,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
     @Override
     public void onTicketListItemClick(TicketItem ticketItem) {
-
+        TicketConversationActivity.show(getActivity(),ticketItem,TicketConversationActivity.SUPPORT_REQUEST);
     }
 
     @Override

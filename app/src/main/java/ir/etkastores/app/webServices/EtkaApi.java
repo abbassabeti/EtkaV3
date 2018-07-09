@@ -196,5 +196,9 @@ public interface EtkaApi {
     @POST(ApiStatics.HEKMAT_REGISTER)
     Call<OauthResponse<String>> registerHekmatCard(@Body HekmatRegisterRequest request);
 
+    //34
+    @GET(ApiStatics.SUPPORT_CONVERSATION)
+    Call<OauthResponse<List<TicketItem>>> getConvesation();
+
 
 }

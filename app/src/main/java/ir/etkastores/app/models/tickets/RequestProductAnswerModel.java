@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class RequestProductAnswerModel {
 
-    @SerializedName("Id")
+    @SerializedName("id")
     public long id;
 
-    @SerializedName("Message")
+    @SerializedName("message")
     public String message;
 
-    @SerializedName("TicketRef")
+    @SerializedName("ticketRef")
     public long ticketRef;
 
-    @SerializedName("Date")
+    @SerializedName("date")
     public String date;
 
     public long getId() {

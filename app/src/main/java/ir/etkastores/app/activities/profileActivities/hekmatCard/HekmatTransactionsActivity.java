@@ -83,10 +83,10 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
                 loadingDialog.cancel();
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        if (response.body().getData() != null && response.body().getData().size()>0){
+                        if (response.body().getData() != null && response.body().getData().size() > 0) {
                             adapter.addItems(response.body().getData());
-                        }else{
-                            messageView.show(R.drawable.ic_warning_orange_48dp,R.string.youHasNotAnyTransactionInfo,0,null);
+                        } else {
+                            messageView.show(R.drawable.ic_warning_orange_48dp, R.string.youHasNotAnyTransactionInfo, 0, null);
                         }
                     } else {
                         showRetry(response.body().getMeta().getMessage(), false);

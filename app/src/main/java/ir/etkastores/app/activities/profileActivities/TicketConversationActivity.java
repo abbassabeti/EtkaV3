@@ -3,36 +3,79 @@ package ir.etkastores.app.activities.profileActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.adapters.recyclerViewAdapters.TickerConversationAdapter;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 
 public class TicketConversationActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    public static void show(Context context){
-        Intent intent = new Intent(context,TicketConversationActivity.class);
-        context.startActivity(intent);
-    }
+    public final static String PRODUCT_REQUEST = "PRODUCT_REQUEST";
+    public final static String SUPPORT_REQUEST = "SUPPORT_REQUEST";
 
-    public static void show(Context context, TicketItem ticketItem){
+    private final static String TICKET_ITEM = "TICKET_ITEM";
+    private final static String TYPE = "TYPE";
+
+    public static void show(Context context, TicketItem ticketItem, String type){
         Intent intent = new Intent(context,TicketConversationActivity.class);
+        intent.putExtra(TICKET_ITEM,new Gson().toJson(ticketItem));
+        intent.putExtra(TYPE,type);
         context.startActivity(intent);
     }
 
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
 
+    @BindView(R.id.title)
+    TextView title;
+
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+
+    private TickerConversationAdapter adapter;
+
+    private TicketItem ticketItem;
+    private String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_conversation);
         ButterKnife.bind(this);
+        ticketItem = TicketItem.fromJson(getIntent().getExtras().getString(TICKET_ITEM,""));
+        type = getIntent().getExtras().getString(TYPE);
         toolbar.setActionListeners(this);
+        adapter = new TickerConversationAdapter(this);
+        recyclerView.setAdapter(adapter);
+        if (type.contentEquals(PRODUCT_REQUEST)){
+            initProductRequestList();
+        }else if (type.contentEquals(SUPPORT_REQUEST)){
+            initSupportList();
+        }
+    }
 
+    private void initProductRequestList(){
+        toolbar.setTitle(String.format(getResources().getString(R.string.requestCodeX),ticketItem.getId()));
+        title.setText(ticketItem.getTitle());
+        List<TicketItem> items = new ArrayList<>();
+        items.add(ticketItem);
+        adapter.addItems(items);
+    }
+
+    private void initSupportList(){
+        toolbar.setTitle(String.format(getResources().getString(R.string.requestCodeX),ticketItem.getId()));
+        title.setText(ticketItem.getTitle());
     }
 
     @Override

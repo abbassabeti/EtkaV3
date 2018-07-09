@@ -3,6 +3,7 @@ package ir.etkastores.app.models.tickets;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import ir.etkastores.app.EtkaApp;
@@ -36,7 +37,7 @@ public class TicketItem {
     private int departmentRef;
 
     @SerializedName("answer")
-    public RequestProductAnswerModel answer;
+    private RequestProductAnswerModel answer;
 
     public int getId() {
         return id;
@@ -107,6 +108,14 @@ public class TicketItem {
 
     public RequestProductAnswerModel getAnswer() {
         return answer;
+    }
+
+    public static TicketItem fromJson(String json) {
+        try {
+            return new Gson().fromJson(json, TicketItem.class);
+        } catch (Exception err) {
+            return null;
+        }
     }
 
 }
