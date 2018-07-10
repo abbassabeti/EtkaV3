@@ -39,6 +39,9 @@ public class TicketItem {
     @SerializedName("answer")
     private RequestProductAnswerModel answer;
 
+    @SerializedName("UserTicket")
+    private boolean isUserTicket;
+
     public int getId() {
         return id;
     }
@@ -108,6 +111,10 @@ public class TicketItem {
 
     public RequestProductAnswerModel getAnswer() {
         return answer;
+    }
+
+    public boolean isUserTicket() {
+        return isUserTicket;
     }
 
     public static TicketItem fromJson(String json) {

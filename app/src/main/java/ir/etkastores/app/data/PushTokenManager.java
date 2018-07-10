@@ -56,7 +56,7 @@ public class PushTokenManager {
             }
             if (TextUtils.isEmpty(getLastRefreshedToken())) return;
         }
-        if (ProfileManager.isGuest() && !BuildConfig.DEBUG) return;
+        if (ProfileManager.isGuest()) return;
         if (req != null && req.isExecuted()) return;
         if (!isTokenSynced()) sendRequest();
     }

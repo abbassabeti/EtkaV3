@@ -199,7 +199,7 @@ public interface EtkaApi {
     Call<OauthResponse<String>> registerHekmatCard(@Body HekmatRegisterRequest request);
 
     //34
-    @GET(ApiStatics.HEKMAT_SET_PASSWORD)
+    @GET(ApiStatics.SUPPORT_CONVERSATION)
     Call<OauthResponse<List<TicketItem>>> getConversation(@Query("TicketCode") String ticketCode);
 
     //35
