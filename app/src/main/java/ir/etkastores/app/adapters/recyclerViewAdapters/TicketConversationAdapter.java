@@ -17,13 +17,13 @@ import butterknife.ButterKnife;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.tickets.TicketItem;
 
-public class TickerConversationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TicketConversationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<TicketItem> items;
     private Context context;
     private LayoutInflater inflater;
 
-    public TickerConversationAdapter(Context context) {
+    public TicketConversationAdapter(Context context) {
         this.context = context;
         items = new ArrayList<>();
         inflater = LayoutInflater.from(context);
@@ -69,7 +69,9 @@ public class TickerConversationAdapter extends RecyclerView.Adapter<RecyclerView
         public void bind(TicketItem item) {
             senderName.setText("تست");
             date.setText(item.getDate());
-            body.setText(item.getAnswer().message);
+            if (item.getAnswer() != null){
+                body.setText(item.getAnswer().getMessage());
+            }
         }
 
     }

@@ -241,7 +241,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
-                        app:rowText="@string/kalabargHayeElamShode" />
+                        app:rowText="@string/kalabargHayeDaryaftnashode" />
 
                     <View
                         android:layout_width="match_parent"
@@ -254,6 +254,18 @@
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         app:rowText="@string/hekmatCardTransactionsHistory" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray" />
+
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
+                        android:id="@+id/changePasswordButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        app:rowText="@string/changePassword" />
 
                 </LinearLayout>
 

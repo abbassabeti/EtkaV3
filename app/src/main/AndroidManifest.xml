@@ -234,6 +234,10 @@
             android:name=".activities.profileActivities.hekmatCard.HekmatCardResetPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
+        <activity
+            android:name=".activities.profileActivities.hekmatCard.HekmatCardChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SolidSystemBar" />
     </application>
 
 </manifest>

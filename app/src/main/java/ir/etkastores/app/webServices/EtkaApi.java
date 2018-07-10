@@ -8,6 +8,7 @@ import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.hekmat.HekmatModel;
+import ir.etkastores.app.models.hekmat.card.HekmatChangePasswordRequest;
 import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
 import ir.etkastores.app.models.hekmat.card.HekmatRegisterRequest;
 import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
@@ -203,7 +204,10 @@ public interface EtkaApi {
 
     //35
     @POST(ApiStatics.HEKMAT_SET_PASSWORD)
-    Call<OauthResponse<String>> resetHekmatPassword(@Body()HekmatSetPasswordRequest request);
+    Call<OauthResponse<String>> resetHekmatPassword(@Body HekmatSetPasswordRequest request);
 
+    //36
+    @POST(ApiStatics.HEKMAT_CHANGE_PASSWORD)
+    Call<OauthResponse<String>> changeHekmatPassword(@Body HekmatChangePasswordRequest requestModel);
 
 }

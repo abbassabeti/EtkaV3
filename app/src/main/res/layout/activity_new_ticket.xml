@@ -27,67 +27,45 @@
             android:textColor="@color/white"
             android:textSize="@dimen/textSizeMedium" />
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/submitButton"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_above="@id/submitButton">
 
             <LinearLayout
-                android:id="@+id/selectDepartmentHolder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/ticketDepartmentSelectSpinner"
+                <LinearLayout
+                    android:id="@+id/selectDepartmentHolder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/transparent" />
+                    android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/ticketDepartmentSelectSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent" />
 
-            </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray" />
 
-            <EditText
-                android:id="@+id/titleEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:gravity="right"
-                android:hint="@string/title"
-                android:lines="1"
-                android:padding="8dp"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeSmall" />
+                </LinearLayout>
 
-            <VideoView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
-
-            <LinearLayout
-                android:id="@+id/selectStoreHolder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/selectedStore"
+                <EditText
+                    android:id="@+id/titleEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:gravity="right"
+                    android:hint="@string/title"
                     android:lines="1"
                     android:padding="8dp"
-                    android:text="@string/selectStore"
                     android:textColor="@color/darkGray"
                     android:textSize="@dimen/textSizeSmall" />
 
@@ -96,20 +74,48 @@
                     android:layout_height="1dp"
                     android:background="@color/gray" />
 
+                <LinearLayout
+                    android:id="@+id/selectStoreHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/selectedStore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:gravity="right"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:text="@string/selectStore"
+                        android:textColor="@color/darkGray"
+                        android:textSize="@dimen/textSizeSmall" />
+
+                    <VideoView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/bodyEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent"
+                    android:gravity="right"
+                    android:hint="@string/requestText"
+                    android:padding="8dp"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeSmall" />
+
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/bodyEt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:gravity="right"
-                android:hint="@string/requestText"
-                android:padding="8dp"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeSmall" />
-
-        </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 

@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 public class RequestProductAnswerModel {
 
     @SerializedName("id")
-    public long id;
+    private long id;
 
     @SerializedName("message")
-    public String message;
+    private String message;
 
     @SerializedName("ticketRef")
-    public long ticketRef;
+    private long ticketRef;
 
     @SerializedName("date")
-    public String date;
+    private String date;
 
     public long getId() {
         return id;
@@ -25,6 +25,7 @@ public class RequestProductAnswerModel {
     }
 
     public String getMessage() {
+        if (message == null) return "";
         return message;
     }
 

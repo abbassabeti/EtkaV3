@@ -235,7 +235,7 @@
     <string name="saghfeEtebar">سقف اعتبار</string>
     <string name="remainedLoan">مانده اقساط</string>
     <string name="remainedLoanDescription">در صورت عدم خرید اعتباری</string>
-    <string name="kalabargHayeElamShode">کالابرگ های اعلام شده</string>
+    <string name="kalabargHayeDaryaftnashode">کالابرگ های دریافت نشده</string>
     <string name="hekmatCardTransactionsHistory">سابقه تراکنش های حکمت کارت</string>
     <string name="enterHekmatCardInformationMessage">برای ورود به این بخش ابتدا باید کارت حکمت خود را ثبت کنید</string>
     <string name="submitAndEnter">ثبت و ورود</string>
@@ -281,5 +281,6 @@
     <string name="youHasNotAnyTransactionInfo">برای شما سابقه تراکنشی موجود نیست</string>
     <string name="requestCodeX">درخواست کد %d</string>
     <string name="resetPasswordSuccessFully">رمز عبور شما با موفقیت تغییر کرد</string>
+    <string name="enterOldPassword">ابتدا رمز عبور فعلی خود را وارد کنید</string>
 
 </resources>

@@ -179,4 +179,9 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
         HekmatTransactionsActivity.show(this);
     }
 
+    @OnClick(R.id.changePasswordButton)
+    public void changePasswordClick(){
+        HekmatCardChangePasswordActivity.show(this);
+    }
+
 }
