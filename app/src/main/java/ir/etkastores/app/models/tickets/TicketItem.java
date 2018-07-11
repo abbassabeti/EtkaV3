@@ -125,4 +125,39 @@ public class TicketItem {
         }
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setTicketCode(String ticketCode) {
+        this.ticketCode = ticketCode;
+    }
+
+    public void setDepartmentRef(int departmentRef) {
+        this.departmentRef = departmentRef;
+    }
+
+    public void setAnswer(RequestProductAnswerModel answer) {
+        this.answer = answer;
+    }
+
+    public void setUserTicket(boolean userTicket) {
+        isUserTicket = userTicket;
+    }
 }

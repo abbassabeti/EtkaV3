@@ -71,6 +71,8 @@
     <string name="profileInfo">اطلاعات کاربری</string>
     <string name="edit">ویرایش</string>
     <string name="requests">درخواست ها</string>
+    <string name="sendByYou">ارسالی از شما:</string>
+    <string name="etkaReply">پاسخ اتکا:</string>
     <string name="contactUs">تماس با ما</string>
     <string name="youContactUsByFollowingMethods">شما کاربران گرامی می توانید از طریق یکی از روش های زیر با ما در تماس باشید.</string>
     <string name="directCallToEtkaPR">تماس مستقیم با روابط عمومی اتکا</string>
@@ -285,5 +287,8 @@
     <string name="enterOldPassword">ابتدا رمز عبور فعلی خود را وارد کنید</string>
     <string name="youCanRequestActivationCodeAfterXSecond">شما می توانید بعد از %d ثانیه دیگر، دوباره کد فعالسازی درخواست نمایید</string>
     <string name="youCanRequestActivationCodeAfterXMinAndXSecond">شما می توانید بعد از %d دقیقه و %d ثانیه دیگر، دوباره کد فعالسازی درخواست نمایید</string>
+    <string name="sendReply">ارسال پاسخ</string>
+    <string name="inReplyWaiting">در انتظار پاسخ</string>
+    <string name="yourRequestInX">درخواست شما در %s :</string>
 
 </resources>

@@ -20,9 +20,12 @@ import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
 import ir.etkastores.app.activities.profileActivities.TicketConversationActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketsListAdapter;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.fragments.home.TopSalesSlide;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketResponseModel;
+import ir.etkastores.app.models.tickets.TicketStatus;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
@@ -117,6 +120,10 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
 
     @Override
     public void onTicketListItemClick(TicketItem ticketItem) {
+        if (ticketItem.getStatus().contentEquals(TicketStatus.UnAnswered)){
+            Toaster.show(getActivity(),R.string.inReplyWaiting);
+            return;
+        }
         TicketConversationActivity.show(getActivity(),ticketItem, TicketConversationActivity.PRODUCT_REQUEST);
     }
 
