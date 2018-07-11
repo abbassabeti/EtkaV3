@@ -55,7 +55,7 @@ public class SplashActivity extends BaseActivity {
                     if (isFinishing()) return;
                     gotoApp();
                 }
-            },2000);
+            },3000);
         }
 
     }
