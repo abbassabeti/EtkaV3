@@ -65,9 +65,28 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/rect_round4dp_white"
+                android:text="@string/checkActivationCode"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeMedium" />
+
+            <Button
+                android:id="@+id/requestVerificationCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/rect_round4dp_white"
                 android:text="@string/requestActivationCode"
                 android:textColor="@color/darkGray"
                 android:textSize="@dimen/textSizeMedium" />
+
+            <TextView
+                android:id="@+id/countDownTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizeSmall"
+                android:gravity="center_horizontal"
+                android:paddingTop="16dp"/>
 
         </LinearLayout>
 

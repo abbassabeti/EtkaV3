@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -45,10 +46,16 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     EditText verifyEt;
 
     @BindView(R.id.submitVerification)
-    Button submitButton;
+    Button submitVerificationButton;
+
+    @BindView(R.id.requestVerificationCode)
+    Button requestVerificationCodeButton;
 
     @BindView(R.id.messageTitle)
     TextView messageTitle;
+
+    @BindView(R.id.countDownTimer)
+    TextView countDownTimerTv;
 
     private Call<OauthResponse<String>> verificationReq;
     private boolean isVerifyStep = false;
@@ -64,12 +71,21 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     }
 
     @OnClick(R.id.submitVerification)
-    public void onSubmitButtonClick() {
-        if (!isVerifyStep) {
-            sendVerificationCode();
-        } else {
-            loginWithVerificationCode();
+    public void onSubmitVerificationClick() {
+        if (verifyEt.getText().toString().isEmpty()) {
+            Toaster.show(this, R.string.pleaseEnterVerificationCode);
+            return;
         }
+        loginWithVerificationCode();
+    }
+
+    @OnClick(R.id.requestVerificationCode)
+    public void onRequestVerificationCodeClick() {
+        if (isTimerRunning) {
+            Toaster.show(this, String.format(getResources().getString(R.string.youCanRequestActivationCodeAfterXSecond), counter));
+            return;
+        }
+        sendVerificationCode();
     }
 
     private void sendVerificationCode() {
@@ -86,6 +102,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
                         Toaster.showLong(LoginWithSMSActivity.this, response.body().getMeta().getMessage());
                         setupEnterVerifyCode();
                         isVerifyStep = true;
+                        startTimer();
                     } else {
                         showRetryVerification(response.body().getMeta().getMessage());
                     }
@@ -125,7 +142,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             public void onFailure(Call<AccessToken> call, Throwable t) {
                 if (isFinishing()) return;
                 hideLoading();
-                Toaster.showLong(LoginWithSMSActivity.this,R.string.errorInLogin);
+                Toaster.showLong(LoginWithSMSActivity.this, R.string.errorInLogin);
             }
         });
     }
@@ -144,7 +161,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
                         Toaster.showLong(LoginWithSMSActivity.this, R.string.loginSuccessfulMessage);
                         LoginWithSMSActivity.this.finish();
                     } else {
-                        Toaster.showLong(LoginWithSMSActivity.this,response.body().getMeta().getMessage());
+                        Toaster.showLong(LoginWithSMSActivity.this, response.body().getMeta().getMessage());
                     }
                 } else {
                     onFailure(null, null);
@@ -155,7 +172,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
                 if (isFinishing()) return;
                 hideLoading();
-                Toaster.showLong(LoginWithSMSActivity.this,R.string.errorInLogin);
+                Toaster.showLong(LoginWithSMSActivity.this, R.string.errorInLogin);
             }
         });
     }
@@ -163,14 +180,15 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     public void setupEnterPhoneNumber() {
         phoneEt.setVisibility(View.VISIBLE);
         verifyEt.setVisibility(View.GONE);
-        submitButton.setText(R.string.requestActivationCode);
+        submitVerificationButton.setVisibility(View.GONE);
         messageTitle.setText(R.string.enterPhoneNumberMessageForVerify);
     }
 
     public void setupEnterVerifyCode() {
         phoneEt.setVisibility(View.GONE);
         verifyEt.setVisibility(View.VISIBLE);
-        submitButton.setText(R.string.checkActivationCode);
+        submitVerificationButton.setVisibility(View.VISIBLE);
+        requestVerificationCodeButton.setVisibility(View.GONE);
         messageTitle.setText(R.string.enterVerificationCode);
     }
 
@@ -195,19 +213,19 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
         loadingDialog = DialogHelper.showLoading(this, message);
     }
 
-    void hideLoading(){
+    void hideLoading() {
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.cancel();
         }
     }
 
-    void showRetryVerification(String message){
+    void showRetryVerification(String message) {
         if (isFinishing()) return;
         final MessageDialog messageDialog = MessageDialog.errorRetry(message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     sendVerificationCode();
                 }
                 messageDialog.getDialog().cancel();
@@ -220,11 +238,44 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
         });
     }
 
-    void hideKeyboard(View view){
+    void hideKeyboard(View view) {
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    private int counter;
+    private boolean isTimerRunning = false;
+
+    private void startTimer() {
+        if (isFinishing()) return;
+        counter = 180;
+        isTimerRunning = true;
+        timer.start();
+    }
+
+    private CountDownTimer timer = new CountDownTimer(180 * 1000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            if (isFinishing()) return;
+            counter--;
+            int min = counter / 60;
+            int sec = counter % 60;
+            if (min>0){
+                countDownTimerTv.setText(String.format(getResources().getString(R.string.youCanRequestActivationCodeAfterXMinAndXSecond), min,sec));
+            }else{
+                countDownTimerTv.setText(String.format(getResources().getString(R.string.youCanRequestActivationCodeAfterXSecond), sec));
+            }
+        }
+
+        @Override
+        public void onFinish() {
+            if (isFinishing()) return;
+            isTimerRunning = false;
+            requestVerificationCodeButton.setVisibility(View.VISIBLE);
+            countDownTimerTv.setText("");
+        }
+    };
 
 }
