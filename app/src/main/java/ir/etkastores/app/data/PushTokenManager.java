@@ -109,4 +109,9 @@ public class PushTokenManager {
         return DiskDataHelper.getString(LAST_SYNCED_TOKEN);
     }
 
+    public void clearLastStates(){
+        DiskDataHelper.putString(LAST_REFRESHED_TOKEN,"");
+        DiskDataHelper.putString(LAST_SYNCED_TOKEN,"");
+    }
+
 }

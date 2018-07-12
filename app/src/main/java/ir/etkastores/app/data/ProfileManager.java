@@ -1,5 +1,8 @@
 package ir.etkastores.app.data;
 
+import android.util.Log;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import ir.etkastores.app.BuildConfig;
@@ -77,6 +80,19 @@ public class ProfileManager {
     public static void logOut() {
 //        saveUserNameAndPassword("","");
         clearProfile();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    PushTokenManager.getInstance().clearLastStates();
+                    FirebaseInstanceId.getInstance().deleteInstanceId();
+                    if (BuildConfig.DEBUG) Log.i("instance id Deleted", "....");
+                } catch (Exception err) {
+                    if (BuildConfig.DEBUG)
+                        Log.i("instanceId delete err", "" + err.getLocalizedMessage());
+                }
+            }
+        }).start();
     }
 
 //    public static String getUserName() {
