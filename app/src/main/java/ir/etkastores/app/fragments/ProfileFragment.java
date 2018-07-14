@@ -105,7 +105,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        BarcodeUtils.generateBarcodeBitmap("00000000000", BarcodeFormat.CODABAR, userBarcodeIdImage);
+        //BarcodeUtils.generateBarcodeBitmap("00000000000", BarcodeFormat.CODABAR, userBarcodeIdImage);
     }
 
     @OnClick(R.id.hekmatMenu)
@@ -142,12 +142,13 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.scoreMenu)
     public void onScoreMenuClick() {
-        if (ProfileManager.isGuest()) {
-            showLoginRequiredDialog();
-        } else {
-            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenPoints);
-            ScoresActivity.start(getActivity());
-        }
+//        if (ProfileManager.isGuest()) {
+//            showLoginRequiredDialog();
+//        } else {
+//            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenPoints);
+//            ScoresActivity.start(getActivity());
+//        }
+        Toaster.show(getContext(),R.string.commingSoonMessage);
     }
 
     @OnClick(R.id.nextShoppingListMenu)

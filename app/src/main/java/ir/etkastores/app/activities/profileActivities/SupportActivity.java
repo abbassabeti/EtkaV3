@@ -66,6 +66,7 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         fragments.add(new FragmentTitleModel(ContactUsFragment.newInstance(),R.string.contactUs));
         adapter = new GlobalFragmentPagerAdapter(getSupportFragmentManager(),fragments);
         pager.setAdapter(adapter);
+        pager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(pager);
     }
 
