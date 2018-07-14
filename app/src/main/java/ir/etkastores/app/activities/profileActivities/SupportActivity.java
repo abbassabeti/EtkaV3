@@ -49,13 +49,13 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
         ButterKnife.bind(this);
+        initViews();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Support Activity");
-        initViews();
     }
 
     private void initViews(){
@@ -66,7 +66,7 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         fragments.add(new FragmentTitleModel(ContactUsFragment.newInstance(),R.string.contactUs));
         adapter = new GlobalFragmentPagerAdapter(getSupportFragmentManager(),fragments);
         pager.setAdapter(adapter);
-        pager.setOffscreenPageLimit(3);
+        pager.setOffscreenPageLimit(fragments.size());
         tabLayout.setupWithViewPager(pager);
     }
 

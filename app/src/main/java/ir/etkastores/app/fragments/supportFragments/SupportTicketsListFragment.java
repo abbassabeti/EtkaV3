@@ -105,7 +105,9 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
         requestModel = new TicketFilterModel();
         requestModel.setPage(0);
         requestModel.setTake(PAGE_SIZE);
-        requestModel.setUserId(ProfileManager.getProfile().getId());
+        if (!ProfileManager.isGuest()) {
+            requestModel.setUserId(ProfileManager.getProfile().getId());
+        }
     }
 
     @OnClick(R.id.addNewTicketFab)
@@ -125,7 +127,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
     @Override
     public void onTicketListItemClick(TicketItem ticketItem) {
-        TicketConversationActivity.show(getActivity(),ticketItem,TicketConversationActivity.SUPPORT_REQUEST);
+        TicketConversationActivity.show(getActivity(), ticketItem, TicketConversationActivity.SUPPORT_REQUEST);
     }
 
     @Override
