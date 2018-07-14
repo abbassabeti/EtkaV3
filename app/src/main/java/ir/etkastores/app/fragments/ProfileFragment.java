@@ -105,7 +105,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //BarcodeUtils.generateBarcodeBitmap("00000000000", BarcodeFormat.CODABAR, userBarcodeIdImage);
+        BarcodeUtils.generateBarcodeBitmap("00000000000", BarcodeFormat.CODABAR, userBarcodeIdImage);
     }
 
     @OnClick(R.id.hekmatMenu)
