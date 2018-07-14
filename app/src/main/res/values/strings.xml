@@ -291,5 +291,9 @@
     <string name="inReplyWaiting">در انتظار پاسخ</string>
     <string name="yourRequestInX">درخواست شما در %s :</string>
     <string name="openInBrowser">مشاهده در مرورگر</string>
+    <string name="totalFactorPrice">مبلغ کل فاکتور:</string>
+    <string name="totalDiscount">تخفیف کل:</string>
+    <string name="tax">مالیات:</string>
+    <string name="customerPayment">پرداخت مشتری:</string>
 
 </resources>

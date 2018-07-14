@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,14 +110,25 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         @BindView(R.id.totalPrice)
         TextView totalPrice;
 
+        @BindView(R.id.totalDiscount)
+        TextView totalDiscount;
+
+        @BindView(R.id.totalTax)
+        TextView totalTax;
+
+        @BindView(R.id.totalPayment)
+        TextView totalPayment;
+
         public FooterViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-            totalPrice.setTypeface(FontUtils.getBoldTypeFace());
         }
 
         public void bind(){
             totalPrice.setText(factorModel.getTotalPrice());
+            totalDiscount.setText(factorModel.getTotalDiscount());
+            totalTax.setText(factorModel.getTax());
+            totalPayment.setText(factorModel.getTotalPaid());
         }
 
     }
