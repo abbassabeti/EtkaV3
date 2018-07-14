@@ -81,6 +81,7 @@ public class ProductImagesSliderView extends LinearLayout {
         indicatorView.setViewPager(pager);
         indicatorView.setSelection(items.size() - 1);
         pager.setCurrentItem(items.size() - 1);
+        if (adapter.getCount() < 2) indicatorView.setVisibility(INVISIBLE);
     }
 
     public void setOnProductImageClickListener(OnProductImageClickListener onProductImageClickListener) {
