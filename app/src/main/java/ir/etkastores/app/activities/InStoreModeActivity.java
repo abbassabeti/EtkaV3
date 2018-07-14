@@ -15,11 +15,13 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.utils.IntentHelper;
 
 public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -95,6 +97,11 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     @Override
     public void onActionClick(int actionCode) {
 
+    }
+
+    @OnClick(R.id.openInBrowserButton)
+    public void onOpenInInBrowserClick(){
+        IntentHelper.showWeb(this,storeModel.getInStoreModeUrl());
     }
 
     private void showLoadingErrorDialog() {

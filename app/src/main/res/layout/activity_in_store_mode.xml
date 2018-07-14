@@ -17,10 +17,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/openInBrowserButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/openInBrowser"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/textSizeSmall"
+            android:background="@color/colorPrimary"/>
+
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_above="@id/openInBrowserButton"/>
 
         <ProgressBar
             android:id="@+id/progressBar"

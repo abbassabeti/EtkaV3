@@ -290,5 +290,6 @@
     <string name="sendReply">ارسال پاسخ</string>
     <string name="inReplyWaiting">در انتظار پاسخ</string>
     <string name="yourRequestInX">درخواست شما در %s :</string>
+    <string name="openInBrowser">مشاهده در مرورگر</string>
 
 </resources>

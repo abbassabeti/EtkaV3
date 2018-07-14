@@ -49,13 +49,13 @@ public class SupportActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
         ButterKnife.bind(this);
-        initViews();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Support Activity");
+        initViews();
     }
 
     private void initViews(){
