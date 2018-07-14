@@ -103,8 +103,8 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         @BindView(R.id.productPrice2)
         TextView price2;
 
-        @BindView(R.id.productLine3)
-        TextView scorePoint;
+//        @BindView(R.id.productLine3)
+//        TextView scorePoint;
 
         @BindView(R.id.nextShoppingControlsHolder)
         View nextShoppingControlsHolder;
@@ -126,7 +126,7 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
             price1.setText(model.getStrikeThruPrice());
             StringUtils.setStrikeThruTextView(price1);
             price2.setText(model.getFinalPrice());
-            scorePoint.setText(model.getPoint());
+//            scorePoint.setText(model.getPoint());
             ImageLoader.loadProductImage(context,image,model.getImageUrl());
             savedCount.setText(String.valueOf(model.getSavedCount()));
             if (isNextShoppingList){

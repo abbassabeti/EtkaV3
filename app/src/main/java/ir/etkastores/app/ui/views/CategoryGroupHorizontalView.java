@@ -126,8 +126,8 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
             @BindView(R.id.productPrice2)
             TextView price2;
 
-            @BindView(R.id.scoreValue)
-            TextView scoreValue;
+//            @BindView(R.id.scoreValue)
+//            TextView scoreValue;
 
             public ViewHolder(final View itemView) {
                 super(itemView);
@@ -146,11 +146,11 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
                 price.setText(model.getStrikeThruPrice().trim());
                 StringUtils.setStrikeThruTextView(price);
                 price2.setText(model.getFinalPrice());
-                if (!TextUtils.isEmpty(model.getPoint())){
-                    scoreValue.setText(String.format(getResources().getString(R.string.Xpoint),model.getPoint()));
-                }else{
-                    scoreValue.setText("");
-                }
+//                if (!TextUtils.isEmpty(model.getPoint())){
+//                    scoreValue.setText(String.format(getResources().getString(R.string.Xpoint),model.getPoint()));
+//                }else{
+//                    scoreValue.setText("");
+//                }
                 ImageLoader.loadProductImage(getContext(),image,model.getImageUrl());
             }
 

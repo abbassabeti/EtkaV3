@@ -50,35 +50,36 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/textSizeSmall" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/lightYellow"
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="4dp">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/lightYellow"-->
+            <!--android:paddingBottom="4dp"-->
+            <!--android:paddingLeft="8dp"-->
+            <!--android:paddingRight="8dp"-->
+            <!--android:visibility="gone"-->
+            <!--android:paddingTop="4dp">-->
 
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                app:srcCompat="@drawable/ic_star_circle_gold_24dp" />
+            <!--<android.support.v7.widget.AppCompatImageView-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--app:srcCompat="@drawable/ic_star_circle_gold_24dp" />-->
 
-            <TextView
-                android:id="@+id/scoreValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:text="1"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeSmall" />
+            <!--<TextView-->
+                <!--android:id="@+id/scoreValue"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:paddingLeft="8dp"-->
+                <!--android:paddingRight="8dp"-->
+                <!--android:text="1"-->
+                <!--android:textColor="@color/darkGray"-->
+                <!--android:textSize="@dimen/textSizeSmall" />-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
     </LinearLayout>
 
