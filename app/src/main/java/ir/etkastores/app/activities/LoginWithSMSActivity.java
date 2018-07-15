@@ -23,6 +23,7 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
+import ir.etkastores.app.utils.EventsManager;
 import ir.etkastores.app.webServices.AccessToken;
 import ir.etkastores.app.webServices.ApiProvider;
 import ir.etkastores.app.webServices.ApiStatics;
@@ -222,6 +223,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     void showRetryVerification(String message) {
         if (isFinishing()) return;
         final MessageDialog messageDialog = MessageDialog.errorRetry(message);
+        EventsManager.sendEvent("Dev","Verification err","|"+phoneEt.getText().toString()+"|"+message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {

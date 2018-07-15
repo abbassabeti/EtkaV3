@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ir.etkastores.app.utils.StringUtils;
-
 /**
  * Created by Sajad on 12/25/17.
  */
@@ -65,6 +63,9 @@ public class ProductModel {
     @SerializedName("relatedProducts")
     private List<ProductModel> relatedProducts;
 
+    @SerializedName("relatedIsFake")
+    boolean relatedIsFake = false;
+
     public static ProductModel fromJson(String json) {
         try {
             return new Gson().fromJson(json, ProductModel.class);
@@ -73,7 +74,7 @@ public class ProductModel {
         }
     }
 
-    public ProductModel(long id, String code, String barCode, String title, String description, List<String> imageUrl, String originalPrice, String etkaPrice, String offerPrice, String categoryTitle, String supplierName, int point, int proprietaryPoint, int discountPercentage, int savedCount) {
+    public ProductModel(long id, String code, String barCode, String title, String description, List<String> imageUrl, String originalPrice, String etkaPrice, String offerPrice, String categoryTitle, String supplierName, int point, int proprietaryPoint, int discountPercentage, int savedCount, boolean relatedIsFake) {
         this.id = id;
         this.code = code;
         this.barCode = barCode;
@@ -89,6 +90,7 @@ public class ProductModel {
         this.proprietaryPoint = proprietaryPoint;
         this.discountPercentage = discountPercentage;
         this.savedCount = savedCount;
+        this.relatedIsFake = relatedIsFake;
     }
 
     public void setId(long id) {
@@ -237,30 +239,36 @@ public class ProductModel {
         return relatedProducts;
     }
 
+    //handle fake related products ;)
     public void setRelatedProducts(List<ProductModel> relatedProducts) {
-        if (relatedProducts == null || relatedProducts.size() == 0){
-            this.relatedProducts = new ArrayList<>();
-            return;
-        }
-        List<ProductModel> result = new ArrayList<>();
-        int x = 0;
-        for (ProductModel productModel : relatedProducts) {
-            if (productModel.getId() == getId()) {
-                continue;
-            }
-            if (x < 15) {
-                result.add(productModel.getCopy());
-                x++;
-            } else {
-                break;
-            }
-        }
-        Collections.shuffle(result);
-        this.relatedProducts = result;
+//        if (this.relatedProducts != null && this.relatedProducts.size() > 0 && relatedIsFake == false){
+//            return;
+//        }
+//
+//        if (relatedProducts == null || relatedProducts.size() == 0) {
+//            this.relatedProducts = new ArrayList<>();
+//            return;
+//        }
+//        relatedIsFake = true;
+//        List<ProductModel> result = new ArrayList<>();
+//        int x = 0;
+//        for (ProductModel productModel : relatedProducts) {
+//            if (productModel.getId() == getId()) {
+//                continue;
+//            }
+//            if (x < 15) {
+//                result.add(productModel.getCopy());
+//                x++;
+//            } else {
+//                break;
+//            }
+//        }
+//        Collections.shuffle(result);
+//        this.relatedProducts = result;
     }
 
     public ProductModel getCopy() {
-        return new ProductModel(id, code, barCode, title, description, imageUrl, originalPrice, etkaPrice, offerPrice, categoryTitle, supplierName, point, proprietaryPoint, discountPercentage, savedCount);
+        return new ProductModel(id, code, barCode, title, description, imageUrl, originalPrice, etkaPrice, offerPrice, categoryTitle, supplierName, point, proprietaryPoint, discountPercentage, savedCount, relatedIsFake);
     }
 
 }

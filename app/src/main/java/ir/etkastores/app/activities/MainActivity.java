@@ -169,8 +169,9 @@ public class MainActivity extends BaseActivity {
         exitDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
+                if (isFinishing()) return;
                 if (button == RIGHT_BUTTON) {
-                    MainActivity.super.onBackPressed();
+                    finish();
                 }
                 exitDialog.getDialog().cancel();
             }

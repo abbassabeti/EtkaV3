@@ -37,6 +37,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="@color/darkGray"
+            android:maxLines="4"
             android:textSize="@dimen/textSizeSmall" />
 
         <LinearLayout
