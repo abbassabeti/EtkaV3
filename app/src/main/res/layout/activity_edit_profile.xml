@@ -143,6 +143,15 @@
                     android:layout_marginRight="4dp"
                     android:background="@color/white" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSizeSmall"
+                    android:textColor="@color/white"
+                    android:text="@string/birthDate"
+                    android:gravity="right"
+                    android:paddingTop="16dp"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

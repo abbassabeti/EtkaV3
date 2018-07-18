@@ -209,7 +209,7 @@ public class UserProfileModel {
         try {
             String dt = getBirthDate();
             if (dt.contains("T")){
-                dt = dt.substring(0,dt.indexOf("T")-1);
+                dt = dt.substring(0,dt.indexOf("T"));
             }
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
             XCalendar xCalendar = new XCalendar(date.getTime());

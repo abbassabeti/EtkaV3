@@ -41,7 +41,8 @@ public class PushTokenManager {
     public void syncToken() {
         try {
             String token = FirebaseInstanceId.getInstance().getToken();
-            if (!getLastRefreshedToken().contentEquals(token)) {
+            String lastRefreshed = getLastRefreshedToken();
+            if (!lastRefreshed.contentEquals(token)){
                 DiskDataHelper.putString(LAST_REFRESHED_TOKEN, token);
             }
         } catch (Exception err) {
@@ -109,9 +110,9 @@ public class PushTokenManager {
         return DiskDataHelper.getString(LAST_SYNCED_TOKEN);
     }
 
-    public void clearLastStates(){
-        DiskDataHelper.putString(LAST_REFRESHED_TOKEN,"");
-        DiskDataHelper.putString(LAST_SYNCED_TOKEN,"");
+    public void clearLastStates() {
+        DiskDataHelper.putString(LAST_REFRESHED_TOKEN, "");
+        DiskDataHelper.putString(LAST_SYNCED_TOKEN, "");
     }
 
 }
