@@ -1,5 +1,7 @@
 package ir.etkastores.app.webServices;
 
+import com.google.android.gms.common.api.Api;
+
 import java.util.List;
 
 import ir.etkastores.app.models.CategoryModel;
@@ -10,6 +12,8 @@ import ir.etkastores.app.models.factor.FactorRequestModel;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.hekmat.card.HekmatChangePasswordRequest;
 import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
+import ir.etkastores.app.models.hekmat.card.HekmatCoupons;
+import ir.etkastores.app.models.hekmat.card.HekmatCouponsResponseModel;
 import ir.etkastores.app.models.hekmat.card.HekmatRegisterRequest;
 import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
 import ir.etkastores.app.models.hekmat.card.HekmatSetPasswordRequest;
@@ -209,5 +213,8 @@ public interface EtkaApi {
     //36
     @POST(ApiStatics.HEKMAT_CHANGE_PASSWORD)
     Call<OauthResponse<String>> changeHekmatPassword(@Body HekmatChangePasswordRequest requestModel);
+
+    @GET(ApiStatics.HEKMAT_GET_COUPONS)
+    Call<OauthResponse<List<HekmatCoupons>>> getHekmatCoupons();
 
 }

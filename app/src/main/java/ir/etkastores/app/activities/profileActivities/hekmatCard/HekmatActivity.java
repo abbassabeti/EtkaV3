@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -75,8 +78,15 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
         ButterKnife.bind(this);
         cardNumber = getIntent().getStringExtra(CARD_NUMBER);
         password = getIntent().getStringExtra(PASSWORD);
+        responseModel = HekmatRemainingsModel.fromJSon(getIntent().getExtras().getString("MODEL",""));
         initViews();
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("MODEL",new Gson().toJson(responseModel));
     }
 
     @Override
@@ -88,7 +98,12 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        login();
+        if (responseModel != null){
+            fillViews();
+            if (loadingDialog != null) loadingDialog.cancel();
+        }else {
+            login();
+        }
     }
 
     @Override
@@ -112,10 +127,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
                 if (response.isSuccessful()) {
                     responseModel = response.body().getData();
                     if (response.body().isSuccessful()) {
-                        userCode.setText(cardNumber);
-                        remainedCreditValue.setText(response.body().getData().getRemainCredit());
-                        remainedEtkaBonCreditValue.setText(response.body().getData().getRemainDebit());
-                        saghfeEtebar.setText(response.body().getData().getMaxCredit());
+                        fillViews();
                     } else {
                         boolean hasRetry = true;
                         if (response.body().getMeta().getStatusCode() == 500) {
@@ -135,6 +147,13 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
                 showRetry(getResources().getString(R.string.errorInLogginHekmatCard), true);
             }
         });
+    }
+
+    private void fillViews(){
+        userCode.setText(cardNumber);
+        remainedCreditValue.setText(responseModel.getRemainCredit());
+        remainedEtkaBonCreditValue.setText(responseModel.getRemainDebit());
+        saghfeEtebar.setText(responseModel.getMaxCredit());
     }
 
     private void showRetry(String message, boolean hasRetry) {
@@ -167,11 +186,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     @OnClick(R.id.kalabargHayeElamShodeButton)
     public void kalabargHayeElamShodeButtonClick() {
-        if (responseModel.getCoupons().size() == 0) {
-            Toaster.show(this, R.string.thereIsNotResultAvailable);
-        } else {
-            HekmatCardCouponsProductsActivity.show(this, responseModel);
-        }
+        HekmatCardCouponsProductsActivity.show(this);
     }
 
     @OnClick(R.id.hekmatTransactionsButton)

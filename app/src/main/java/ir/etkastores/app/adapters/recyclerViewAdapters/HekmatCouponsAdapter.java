@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,9 +23,9 @@ public class HekmatCouponsAdapter extends RecyclerView.Adapter<HekmatCouponsAdap
     private List<HekmatCoupons> items;
     private LayoutInflater inflater;
 
-    public HekmatCouponsAdapter(Context context, List<HekmatCoupons> items) {
+    public HekmatCouponsAdapter(Context context) {
         this.context = context;
-        this.items = items;
+        this.items = new ArrayList<>();
         inflater = LayoutInflater.from(context);
     }
 
@@ -42,6 +43,11 @@ public class HekmatCouponsAdapter extends RecyclerView.Adapter<HekmatCouponsAdap
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void addItems(List<HekmatCoupons> newItems){
+        this.items.addAll(newItems);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -31,6 +31,9 @@ public class InstallmentItem {
     @SerializedName("dateTime")
     private String dateTime;
 
+    @SerializedName("IsCreadit")
+    private boolean isCreadit;
+
     public String getAmount() {
         return amount;
     }
@@ -55,6 +58,9 @@ public class InstallmentItem {
         return dateTime;
     }
 
+    public boolean isCreadit() {
+        return isCreadit;
+    }
 
     public String getFormattedDate() {
         try {

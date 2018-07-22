@@ -297,5 +297,7 @@
     <string name="customerPayment">پرداخت مشتری:</string>
     <string name="writeYourMessage">پیام خود را بنویسید</string>
     <string name="pleaseWriteMessage">لطفا پیام خود را بنویسید</string>
+    <string name="etebari">اعتباری</string>
+    <string name="naghdi">نقدی</string>
 
 </resources>

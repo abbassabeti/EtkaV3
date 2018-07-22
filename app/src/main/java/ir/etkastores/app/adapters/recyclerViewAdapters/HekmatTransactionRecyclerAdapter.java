@@ -67,7 +67,13 @@ public class HekmatTransactionRecyclerAdapter extends RecyclerView.Adapter<Hekma
         }
 
         private void bind(InstallmentItem item) {
-            type.setText(item.getType());
+            String textType = item.getType();
+            if (item.isCreadit()) {
+                textType += " " + context.getResources().getString(R.string.etebari);
+            } else {
+                textType += " " + context.getResources().getString(R.string.naghdi);
+            }
+            type.setText(textType);
             date.setText(item.getFormattedDate());
             store.setText(item.getMerchantName());
             amount.setText(item.getFormattedAmount());

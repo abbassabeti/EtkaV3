@@ -38,9 +38,9 @@ public class ApiStatics {
     public static final String SEARCH = "/api/v1/search";
     public static final String PRODUCT = "/api/v1/Product/get";
     public static final String STORE = "/api/v1/store";
-    public static final String PROFILE = "api/v1/account/info";
-    public static final String FACTOR = "api/v1/Factor";
-    public static final String HEKMAT = "api/v1/Hekmat/get";
+    public static final String PROFILE = "/api/v1/account/info";
+    public static final String FACTOR = "/api/v1/Factor";
+    public static final String HEKMAT = "/api/v1/Hekmat/get";
     public static final String HOME = "/api/v1/home";
     public static final String CHANGE_PASSWORD = "/api/v1/Account/ChangePassword";
     public static final String SUPPORT_TICKETS = "/api/v1/Ticket/SupportTickets";
@@ -61,6 +61,7 @@ public class ApiStatics {
     public static final String HEKMAT_REGISTER = "/api/v1/hekmat/HekmatRegister";
     public static final String HEKMAT_SET_PASSWORD = "/api/v1/hekmat/HekmatSetPassword";
     public static final String HEKMAT_CHANGE_PASSWORD = " /api/v1/hekmat/HekmatChangePassword";
+    public static final String HEKMAT_GET_COUPONS = "/api/v1/hekmat/GetCoupons";
 
 
     public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
