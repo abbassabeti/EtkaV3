@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +11,19 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.BuildConfig;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.CategoriesFilterActivity;
 import ir.etkastores.app.models.ProductModel;
-import ir.etkastores.app.R;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.utils.image.ImageLoader;
@@ -45,7 +48,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
     private SearchProductRequestModel moreItemSearchModel;
     private OnProductClickListener onProductClickListener;
 
-    public CategoryGroupHorizontalView(Context context, String title ,List<ProductModel> productModels, SearchProductRequestModel moreItemModel) {
+    public CategoryGroupHorizontalView(Context context, String title, List<ProductModel> productModels, SearchProductRequestModel moreItemModel) {
         super(context);
         this.productModels = productModels;
         this.title = title;
@@ -63,17 +66,17 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
         init(attrs);
     }
 
-    private void init(AttributeSet attrs){
-        View.inflate(getContext(),R.layout.view_category_group_horizontal,this);
-        ButterKnife.bind(this,this);
+    private void init(AttributeSet attrs) {
+        View.inflate(getContext(), R.layout.view_category_group_horizontal, this);
+        ButterKnife.bind(this, this);
 
         if (productModels == null) return;
 
         mTitle.setText(title);
 
-        if (moreItemSearchModel != null){
+        if (moreItemSearchModel != null) {
             mShowAllButton.setVisibility(VISIBLE);
-        }else{
+        } else {
             mShowAllButton.setVisibility(GONE);
         }
 
@@ -85,11 +88,11 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
     }
 
     @OnClick(R.id.showAll)
-    public void showAllButton(){
-        CategoriesFilterActivity.show(getContext(),moreItemSearchModel,title);
+    public void showAllButton() {
+        CategoriesFilterActivity.show(getContext(), moreItemSearchModel, title);
     }
 
-    class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.ViewHolder>{
+    class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.ViewHolder> {
 
         private LayoutInflater inflater;
 
@@ -99,7 +102,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(inflater.inflate(R.layout.cell_product_horizontal_row,parent,false));
+            return new ViewHolder(inflater.inflate(R.layout.cell_product_horizontal_row, parent, false));
         }
 
         @Override
@@ -131,16 +134,17 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 
             public ViewHolder(final View itemView) {
                 super(itemView);
-                ButterKnife.bind(this,itemView);
+                ButterKnife.bind(this, itemView);
                 itemView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (onProductClickListener != null) onProductClickListener.onProductClick(productModels.get(getAdapterPosition()));
+                        if (onProductClickListener != null)
+                            onProductClickListener.onProductClick(productModels.get(getAdapterPosition()));
                     }
                 });
             }
 
-            public void bind(ProductModel model){
+            public void bind(final ProductModel model) {
                 image.setImageResource(R.drawable.etka_logo_wide);
                 name.setText(model.getTitle());
                 price.setText(model.getStrikeThruPrice().trim());
@@ -151,7 +155,17 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 //                }else{
 //                    scoreValue.setText("");
 //                }
-                ImageLoader.loadProductImage(getContext(),image,model.getImageUrl());
+                if (model.getImageUrl() != null && model.getImageUrl().size() > 0){
+                    ImageLoader.loadProductImage(getContext(), image, model.getImageUrl());
+                }
+                if (BuildConfig.DEBUG)
+                    itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Toaster.showLong(itemView.getContext(), new Gson().toJson(model));
+                            return false;
+                        }
+                    });
             }
 
         }
@@ -159,11 +173,11 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
         @Override
         public void onAttachedToRecyclerView(RecyclerView recyclerView) {
             super.onAttachedToRecyclerView(recyclerView);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,true));
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, true));
         }
     }
 
-    public interface OnProductClickListener{
+    public interface OnProductClickListener {
         void onProductClick(ProductModel productModel);
     }
 

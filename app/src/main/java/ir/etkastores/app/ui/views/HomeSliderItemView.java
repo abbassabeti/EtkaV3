@@ -1,6 +1,7 @@
 package ir.etkastores.app.ui.views;
 
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.AppCompatImageView;
@@ -71,6 +72,7 @@ public class HomeSliderItemView extends LinearLayout {
         pager.setAdapter(adapter);
         pager.setOffscreenPageLimit(items.size());
         pager.setCurrentItem(items.size() - 1);
+        if (adapter.getCount() > 0) timer.start();
     }
 
     private class CategoryAdapter extends PagerAdapter {
@@ -102,11 +104,11 @@ public class HomeSliderItemView extends LinearLayout {
                     AdjustHelper.sendAdjustEvent(AdjustHelper.ClickBannerHome);
                     BannerModel model = items.get(position);
                     if (!TextUtils.isEmpty(model.getExternalUrl())) {
-                        IntentHelper.showWeb(getContext(),model.getExternalUrl());
+                        IntentHelper.showWeb(getContext(), model.getExternalUrl());
                     }
                     SearchProductRequestModel searchProductRequestModel = model.getSearchProductRequest();
                     if (searchProductRequestModel != null) {
-                        CategoriesFilterActivity.show(getContext(),searchProductRequestModel);
+                        CategoriesFilterActivity.show(getContext(), searchProductRequestModel);
                     }
                 }
             });
@@ -119,5 +121,28 @@ public class HomeSliderItemView extends LinearLayout {
             container.removeView((RelativeLayout) object);
         }
     }
+
+    CountDownTimer timer = new CountDownTimer(2000, 2000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+        }
+
+        @Override
+        public void onFinish() {
+            try {
+                int currentItem = pager.getCurrentItem();
+                if (currentItem > 0) {
+                    currentItem--;
+                } else {
+                    currentItem = adapter.getCount() - 1;
+                }
+                pager.setCurrentItem(currentItem);
+                timer.start();
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+        }
+    };
 
 }

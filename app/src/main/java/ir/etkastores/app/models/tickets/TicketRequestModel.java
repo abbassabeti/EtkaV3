@@ -23,6 +23,9 @@ public class TicketRequestModel {
     @SerializedName("DepartmentRef")
     private Integer departmentRef;
 
+    @SerializedName("parentId")
+    private int parentId;
+
     public TicketRequestModel() {
 
     }
@@ -64,4 +67,19 @@ public class TicketRequestModel {
         this.message = message;
     }
 
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getDepartmentRef() {
+        return departmentRef;
+    }
+
+    public void setDepartmentRef(Integer departmentRef) {
+        this.departmentRef = departmentRef;
+    }
 }

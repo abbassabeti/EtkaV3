@@ -34,7 +34,7 @@ public class TicketItem {
     private String ticketCode;
 
     @SerializedName("departmentRef")
-    private int departmentRef;
+    private Integer departmentRef;
 
     @SerializedName("answer")
     private RequestProductAnswerModel answer;
@@ -105,7 +105,7 @@ public class TicketItem {
         return ticketCode;
     }
 
-    public int getDepartmentRef() {
+    public Integer getDepartmentRef() {
         return departmentRef;
     }
 

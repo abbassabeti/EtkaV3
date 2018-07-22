@@ -295,5 +295,7 @@
     <string name="totalDiscount">تخفیف کل:</string>
     <string name="tax">مالیات:</string>
     <string name="customerPayment">پرداخت مشتری:</string>
+    <string name="writeYourMessage">پیام خود را بنویسید</string>
+    <string name="pleaseWriteMessage">لطفا پیام خود را بنویسید</string>
 
 </resources>
