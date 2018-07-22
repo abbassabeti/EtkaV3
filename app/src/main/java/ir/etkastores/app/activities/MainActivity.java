@@ -19,7 +19,6 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
-import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatActivity;
 import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
 import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
 import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
@@ -27,6 +26,7 @@ import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.TextInfoActivity;
+import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatActivity;
 import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.data.TicketsDepartmentsManager;
 import ir.etkastores.app.fragments.MapFragment;
@@ -39,10 +39,11 @@ import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.models.tickets.DepartmentModel;
-//import ir.etkastores.app.services.EtkaBeaconService;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
+
+//import ir.etkastores.app.services.EtkaBeaconService;
 
 public class MainActivity extends BaseActivity {
 
@@ -224,7 +225,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case NotificationModel.ACTION_OPEN_HEKMAT_ACCOUNT:
-                HekmatActivity.show(this,"","");
+                HekmatActivity.show(this, "", "");
                 // TODO need to handle
                 break;
 
@@ -248,9 +249,9 @@ public class MainActivity extends BaseActivity {
 
                 break;
 
-            case NotificationModel.ACTION_OPEN_NEW_TICKET:
-
-                break;
+//            case NotificationModel.ACTION_OPEN_NEW_TICKET:
+//                NewTicketActivity.show(this,);
+//                break;
 
             case NotificationModel.ACTION_OPEN_PROFILE_SETTING:
                 ProfileSettingActivity.show(this);

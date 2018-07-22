@@ -8,6 +8,7 @@ import com.google.android.gms.maps.MapView;
 
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.data.PushTokenManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
@@ -35,6 +36,12 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         EtkaPushNotificationConfig.registerGlobal();
         EtkaRemoteConfigManager.checkRemoteConfigs();
+
+        if (BuildConfig.DEBUG){
+            EtkaPushNotificationConfig.registerDev();
+        }else{
+            EtkaPushNotificationConfig.unregisterDev();
+        }
 
         if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
             try {

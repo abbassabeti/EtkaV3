@@ -53,7 +53,8 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(EtkaApp.getInstance().getApplicationContext(), CHANNEL_ID);
-        PendingIntent pendingIntent = PendingIntent.getActivity(EtkaApp.getInstance().getApplicationContext(), 0, notification.getIntent(), 0);
+        int iUniqueId = (int) (System.currentTimeMillis() & 0xfffffff);
+        PendingIntent pendingIntent = PendingIntent.getActivity(EtkaApp.getInstance().getApplicationContext(), iUniqueId, notification.getIntent(), 0);
 
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.drawable.ic_etka_notify);

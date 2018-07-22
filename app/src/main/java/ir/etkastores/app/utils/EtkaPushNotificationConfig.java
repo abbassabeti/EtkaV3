@@ -11,6 +11,7 @@ public class EtkaPushNotificationConfig {
 
     private static final String HEKMAT_TOPIC = "hekmat";
     private static final String GLOBAL_TOPIC = "global";
+    private static final String DEV_TOPIC = "dev";
 
     public static void registerHekmat(){
         FirebaseMessaging.getInstance().subscribeToTopic(HEKMAT_TOPIC);
@@ -28,6 +29,14 @@ public class EtkaPushNotificationConfig {
 
     public static void unregisterUserIdTopic(){
         FirebaseMessaging.getInstance().unsubscribeFromTopic(DiskDataHelper.getLastToken().getUserId());
+    }
+
+    public static void registerDev(){
+        FirebaseMessaging.getInstance().subscribeToTopic(DEV_TOPIC);
+    }
+
+    public static void unregisterDev(){
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(DEV_TOPIC);
     }
 
     public static void deleteInstanceId(){
