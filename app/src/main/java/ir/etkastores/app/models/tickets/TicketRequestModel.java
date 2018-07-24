@@ -15,7 +15,7 @@ public class TicketRequestModel {
     private String title;
 
     @SerializedName("StoreRef")
-    private long storeRef;
+    private Long storeRef;
 
     @SerializedName("Message")
     private String message;
@@ -24,7 +24,7 @@ public class TicketRequestModel {
     private Integer departmentRef;
 
     @SerializedName("parentId")
-    private int parentId;
+    private Integer parentId;
 
     public TicketRequestModel() {
 
@@ -71,7 +71,7 @@ public class TicketRequestModel {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
 

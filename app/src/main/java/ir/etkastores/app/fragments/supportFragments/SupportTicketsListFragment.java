@@ -25,7 +25,6 @@ import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.tickets.TicketFilterModel;
 import ir.etkastores.app.models.tickets.TicketItem;
-import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
@@ -113,7 +112,12 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
-        Toaster.show(getActivity(),R.string.commingSoonMessage);
+        if (ProfileManager.isGuest()) {
+            showNeedToLogin();
+        } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
+            NewTicketActivity.show(getActivity(), NewTicketActivity.SUPPORT_TYPE);
+        }
     }
 
     @Override
