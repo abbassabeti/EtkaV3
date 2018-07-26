@@ -1,5 +1,7 @@
 package ir.etkastores.app.models.hekmat.card;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -55,10 +57,12 @@ public class HekmatRemainingsModel {
     }
 
     public String getRemainDiscount1() {
+        if (TextUtils.isEmpty(remainDiscount1)) return "-";
         return remainDiscount1;
     }
 
     public String getRemainDiscount2() {
+        if (TextUtils.isEmpty(remainDiscount2)) return "-";
         return remainDiscount2;
     }
 

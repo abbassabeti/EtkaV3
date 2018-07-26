@@ -52,7 +52,7 @@
             android:gravity="center"
             android:textColor="@color/darkGray"
             android:textSize="@dimen/textSizeVerySmall"
-            android:text="@string/price"
+            android:text="@string/paymented"
             android:background="@drawable/rect_trans_bordered_gray"/>
 
         <TextView

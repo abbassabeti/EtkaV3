@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -18,13 +17,11 @@ import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
 import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
-import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
-import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,9 +42,6 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
 
-    @BindView(R.id.userProfileName)
-    TextView userProfileName;
-
     @BindView(R.id.userCode)
     TextView userCode;
 
@@ -62,6 +56,12 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     @BindView(R.id.kalabargHayeElamShodeButton)
     CustomRowMenuItem kalabargHayeElamShodeButton;
+
+    @BindView(R.id.militaryRemainedValue)
+    TextView militaryRemainedValue;
+
+    @BindView(R.id.pensionaryRemainedValue)
+    TextView pensionaryRemainedValue;
 
     private String cardNumber;
     private String password;
@@ -78,7 +78,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
         ButterKnife.bind(this);
         cardNumber = getIntent().getStringExtra(CARD_NUMBER);
         password = getIntent().getStringExtra(PASSWORD);
-        responseModel = HekmatRemainingsModel.fromJSon(getIntent().getExtras().getString("MODEL",""));
+        responseModel = HekmatRemainingsModel.fromJSon(getIntent().getExtras().getString("MODEL", ""));
         initViews();
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenHekmatCard);
     }
@@ -86,22 +86,21 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("MODEL",new Gson().toJson(responseModel));
+        outState.putString("MODEL", new Gson().toJson(responseModel));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Hekmat Card Activity");
-        userProfileName.setTypeface(FontUtils.getBoldTypeFace());
     }
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        if (responseModel != null){
+        if (responseModel != null) {
             fillViews();
             if (loadingDialog != null) loadingDialog.cancel();
-        }else {
+        } else {
             login();
         }
     }
@@ -149,11 +148,13 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
         });
     }
 
-    private void fillViews(){
+    private void fillViews() {
         userCode.setText(cardNumber);
         remainedCreditValue.setText(responseModel.getRemainCredit());
         remainedEtkaBonCreditValue.setText(responseModel.getRemainDebit());
         saghfeEtebar.setText(responseModel.getMaxCredit());
+        militaryRemainedValue.setText(responseModel.getRemainDiscount1());
+        pensionaryRemainedValue.setText(responseModel.getRemainDiscount2());
     }
 
     private void showRetry(String message, boolean hasRetry) {
@@ -195,7 +196,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     }
 
     @OnClick(R.id.changePasswordButton)
-    public void changePasswordClick(){
+    public void changePasswordClick() {
         HekmatCardChangePasswordActivity.show(this);
     }
 

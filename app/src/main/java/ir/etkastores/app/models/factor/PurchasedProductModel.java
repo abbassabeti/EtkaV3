@@ -11,25 +11,25 @@ import com.google.gson.annotations.SerializedName;
 public class PurchasedProductModel {
 
     @SerializedName("title")
-    String title;
+    private String title;
 
     @SerializedName("price")
-    String price;
+    private String price;
 
     @SerializedName("count")
-    int count;
+    private int count;
 
     @SerializedName("imageUrl")
-    String imageUrl;
+    private String imageUrl;
 
     @SerializedName("barCode")
-    String barCode;
+    private String barCode;
 
     @SerializedName("discount")
-    String discount;
+    private String discount;
 
     @SerializedName("totalPrice")
-    String totalPrice;
+    private String totalPrice;
 
     public String getTitle() {
         if (TextUtils.isEmpty(title)) return "-";

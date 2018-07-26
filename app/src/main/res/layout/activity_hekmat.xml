@@ -22,15 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="16dp">
-
-            <TextView
-                android:id="@+id/userProfileName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeMedium" />
+            android:paddingTop="8dp">
 
             <TextView
                 android:id="@+id/userCode"
@@ -66,7 +58,7 @@
                     android:paddingRight="8dp"
                     android:text="@string/saghfeEtebar"
                     android:textColor="@color/darkGray"
-                    android:textSize="@dimen/textSizeMedium" />
+                    android:textSize="@dimen/textSizeSmall" />
 
                 <TextView
                     android:id="@+id/saghfeEtebar"
@@ -75,7 +67,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/darkGray"
-                    android:textSize="@dimen/textSizeMedium" />
+                    android:textSize="@dimen/textSizeSmall" />
 
             </RelativeLayout>
 
@@ -108,7 +100,7 @@
                     android:paddingRight="8dp"
                     android:text="@string/remainedCredit"
                     android:textColor="@color/darkGray"
-                    android:textSize="@dimen/textSizeMedium" />
+                    android:textSize="@dimen/textSizeSmall" />
 
                 <TextView
                     android:id="@+id/remainedCreditValue"
@@ -117,7 +109,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/darkGray"
-                    android:textSize="@dimen/textSizeMedium" />
+                    android:textSize="@dimen/textSizeSmall" />
 
             </RelativeLayout>
 
@@ -150,7 +142,7 @@
                     android:paddingRight="8dp"
                     android:text="@string/mojodiBoneRiali"
                     android:textColor="@color/darkGray"
-                    android:textSize="@dimen/textSizeMedium" />
+                    android:textSize="@dimen/textSizeSmall" />
 
 
                 <TextView
@@ -160,7 +152,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/darkGray"
-                    android:textSize="@dimen/textSizeMedium" />
+                    android:textSize="@dimen/textSizeSmall" />
 
             </RelativeLayout>
 
@@ -170,6 +162,89 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:background="@color/darkGray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/icon3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_dollar_rect_gray_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/icon3"
+                    android:paddingRight="8dp"
+                    android:text="@string/militaryRemainedCredit"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeSmall" />
+
+                <TextView
+                    android:id="@+id/militaryRemainedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeSmall" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/darkGray" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/icon4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_dollar_rect_gray_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/icon4"
+                    android:paddingRight="8dp"
+                    android:text="@string/pensionaryRemainedCredit"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeSmall" />
+
+                <TextView
+                    android:id="@+id/pensionaryRemainedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/darkGray"
+                    android:textSize="@dimen/textSizeSmall" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/darkGray" />
+
 
             <!--<RelativeLayout-->
             <!--android:layout_width="match_parent"-->

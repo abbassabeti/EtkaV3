@@ -60,6 +60,7 @@ public class HekmatCardChangePasswordActivity extends BaseActivity implements Et
     private void initViews() {
         newPasswordEt.setTransformationMethod(new PasswordTransformationMethod());
         confirmPasswordEt.setTransformationMethod(new PasswordTransformationMethod());
+        oldPasswordEt.setTransformationMethod(new PasswordTransformationMethod());
     }
 
     @Override
@@ -70,6 +71,12 @@ public class HekmatCardChangePasswordActivity extends BaseActivity implements Et
     @Override
     public void onActionClick(int actionCode) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (req != null && req.isExecuted()) req.cancel();
     }
 
     @OnClick(R.id.submitButton)
