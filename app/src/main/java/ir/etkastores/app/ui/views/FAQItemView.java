@@ -78,6 +78,11 @@ public class FAQItemView extends CardView implements View.OnClickListener {
         title.setText(item.getTitle().trim());
         description.setText(item.getDescription().trim());
         expandableLayout.setExpanded(item.isExpanded);
+        if (item.isExpanded){
+            rowIcon.setImageResource(R.drawable.ic_arrow_up_black_24dp);
+        }else{
+            rowIcon.setImageResource(R.drawable.ic_arrow_down_black_24dp);
+        }
     }
 
     @Override

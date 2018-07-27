@@ -65,6 +65,15 @@ public class FAQActivity extends BaseActivity implements EtkaToolbar.EtkaToolbar
         faqs.add(new FAQItemView.FAQItem(R.string.q13,R.string.a13));
         faqs.add(new FAQItemView.FAQItem(R.string.q14,R.string.a14));
         faqs.add(new FAQItemView.FAQItem(R.string.q15,R.string.a15));
+        faqs.add(new FAQItemView.FAQItem(R.string.q16,R.string.a16));
+        faqs.add(new FAQItemView.FAQItem(R.string.q17,R.string.a17));
+        faqs.add(new FAQItemView.FAQItem(R.string.q18,R.string.a18));
+        faqs.add(new FAQItemView.FAQItem(R.string.q19,R.string.a19));
+        faqs.add(new FAQItemView.FAQItem(R.string.q20,R.string.a20));
+        faqs.add(new FAQItemView.FAQItem(R.string.q21,R.string.a21));
+        faqs.add(new FAQItemView.FAQItem(R.string.q22,R.string.a22));
+        faqs.add(new FAQItemView.FAQItem(R.string.q23,R.string.a23));
+        faqs.add(new FAQItemView.FAQItem(R.string.q24,R.string.a24));
 
         FAQAdapter adapter = new FAQAdapter(faqs);
         recyclerView.setAdapter(adapter);
