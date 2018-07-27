@@ -123,7 +123,7 @@ public class ProductsRecyclerAdapter extends RecyclerView.Adapter<ProductsRecycl
         }
 
         public void bind(final ProductModel model) {
-            image.setImageResource(R.drawable.etka_logo_wide);
+            image.setImageResource(R.drawable.product_place_holder);
             name.setText(model.getTitle());
             price1.setText(model.getStrikeThruPrice());
             StringUtils.setStrikeThruTextView(price1);

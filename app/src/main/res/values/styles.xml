@@ -39,7 +39,7 @@
     <style name="commonLayoutRootStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/mainBackgeoundColor</item>
+        <item name="android:background">@color/mainBackgroundColor</item>
         <item name="android:orientation">vertical</item>
     </style>
 

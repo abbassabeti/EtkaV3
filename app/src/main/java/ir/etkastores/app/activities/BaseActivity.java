@@ -13,8 +13,6 @@ import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.IntentHelper;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import static ir.etkastores.app.ui.dialogs.MessageDialog.MessageDialogCallbacks.RIGHT_BUTTON;
-
 /**
  * Created by Sajad on 9/3/17.
  */
@@ -24,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(R.color.mainBackgeoundColor);
+        getWindow().setBackgroundDrawableResource(R.color.mainBackgroundColor);
         overridePendingTransition(0, 0);
         checkForceUpdate();
     }

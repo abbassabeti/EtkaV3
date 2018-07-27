@@ -8,7 +8,7 @@
     <color name="etkaThemeColor">#EC4F1B</color>
     <color name="etkaThemeDarkColor">#CE4619</color>
 
-    <color name="mainBackgeoundColor">#F1F1F1</color>
+    <color name="mainBackgroundColor">#F1F1F1</color>
     <color name="lightColorPrimary">#FDDED1</color>
 
     <color name="white">@android:color/white</color>

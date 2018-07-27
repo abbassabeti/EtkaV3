@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="hekmat_city_names">
+
+        <!--1-->
+        <item>"تهران"</item>
+        <!--2-->
+        <item>"اصفهان"</item>
+        <!--3-->
+        <item>"فارس"</item>
+        <!--4-->
+        <item>"كرمانشاه"</item>
+        <!--5-->
+        <item>"خراسان رضوي"</item>
+        <!--6-->
+        <item>"آذربايجان شرقي"</item>
+        <!--7-->
+        <item>"آذربايجان غربي"</item>
+        <!--8-->
+        <item>"خوزستان"</item>
+        <!--9-->
+        <item>"اردبيل"</item>
+        <!--10-->
+        <item>"همدان"</item>
+        <!--11-->
+        <item>"كهكيلويه و بويراحمد"</item>
+        <!--13-->
+        <item>"بوشهر"</item>
+        <!--14-->
+        <item>"هرمزگان"</item>
+        <!--15-->
+        <item>"گلستان"</item>
+        <!--17-->
+        <item>"چهار محال و بختياري"</item>
+        <!--18-->
+        <item>"قم"</item>
+        <!--20-->
+        <item>"مرکزي"</item>
+        <!--21-->
+        <item>"ايلام"</item>
+        <!--22-->
+        <item>"لرستان"</item>
+        <!--23-->
+        <item>"گيلان"</item>
+        <!--24-->
+        <item>"قزوين"</item>
+        <!--25-->
+        <item>"زنجان"</item>
+        <!--26-->
+        <item>"سيستان و بلوچستان"</item>
+        <!--27-->
+        <item>"کرمان"</item>
+        <!--28-->
+        <item>"يزد"</item>
+        <!--29-->
+        <item>"کردستان"</item>
+        <!--30-->
+        <item>"مازندران"</item>
+        <!--31-->
+        <item>"سمنان"</item>
+        <!--32-->
+        <item>"خراسان شمالي"</item>
+        <!--33-->
+        <item>"خراسان جنوبي"</item>
+        <!--34-->
+        <item>"حكمت كارت"</item>
+        <!--35-->
+        <item>"البرز"</item>
+
+    </string-array>
+
+    <integer-array name="hekmat_city_codes">
+
+        <!--<item>"تهران"</item>-->
+        <item>1</item>
+        <!--<item>"اصفهان"</item>-->
+        <item>2</item>
+        <!--<item>"فارس"</item>-->
+        <item>3</item>
+        <!--<item>"كرمانشاه"</item>-->
+        <item>4</item>
+        <!--<item>"خراسان رضوي"</item>-->
+        <item>5</item>
+        <!--<item>"آذربايجان شرقي"</item>-->
+        <item>6</item>
+        <!--<item>"آذربايجان غربي"</item>-->
+        <item>7</item>
+        <!--<item>"خوزستان"</item>-->
+        <item>8</item>
+        <!--<item>"اردبيل"</item>-->
+        <item>9</item>
+        <!--<item>"همدان"</item>-->
+        <item>10</item>
+        <!--<item>"كهكيلويه و بويراحمد"</item>-->
+        <item>11</item>
+        <!--<item>"بوشهر"</item>-->
+        <item>13</item>
+        <!--<item>"هرمزگان"</item>-->
+        <item>14</item>
+        <!--<item>"گلستان"</item>-->
+        <item>15</item>
+        <!--<item>"چهار محال و بختياري"</item>-->
+        <item>17</item>
+        <!--<item>"قم"</item>-->
+        <item>18</item>
+        <!--<item>"مرکزي"</item>-->
+        <item>20</item>
+        <!--<item>"ايلام"</item>-->
+        <item>21</item>
+        <!--<item>"لرستان"</item>-->
+        <item>22</item>
+        <!--<item>"گيلان"</item>-->
+        <item>23</item>
+        <!--<item>"قزوين"</item>-->
+        <item>24</item>
+        <!--<item>"زنجان"</item>-->
+        <item>25</item>
+        <!--<item>"سيستان و بلوچستان"</item>-->
+        <item>26</item>
+        <!--<item>"کرمان"</item>-->
+        <item>27</item>
+        <!--<item>"يزد"</item>-->
+        <item>28</item>
+        <!--<item>"کردستان"</item>-->
+        <item>29</item>
+        <!--<item>"مازندران"</item>-->
+        <item>30</item>
+        <!--<item>"سمنان"</item>-->
+        <item>31</item>
+        <!--<item>"خراسان شمالي"</item>-->
+        <item>32</item>
+        <!--<item>"خراسان جنوبي"</item>-->
+        <item>33</item>
+        <!--<item>"حكمت كارت"</item>-->
+        <item>34</item>
+        <!--<item>"البرز"</item>-->
+        <item>35</item>
+
+    </integer-array>
+
+</resources>
