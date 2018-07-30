@@ -13,6 +13,7 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
+import ir.etkastores.app.utils.UserSettings;
 import okhttp3.CertificatePinner;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -240,13 +241,13 @@ public class ApiProvider {
     }
 
     private static void addTLSSocketFactory(OkHttpClient.Builder httpBuilder) {
-        TLSSocketFactory tlsSocketFactory;
-        try {
-            tlsSocketFactory = new TLSSocketFactory();
-            httpBuilder.sslSocketFactory(tlsSocketFactory, tlsSocketFactory.systemDefaultTrustManager());
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
+//        TLSSocketFactory tlsSocketFactory;
+//        try {
+//            tlsSocketFactory = new TLSSocketFactory();
+//            httpBuilder.sslSocketFactory(tlsSocketFactory, tlsSocketFactory.systemDefaultTrustManager());
+//        } catch (Exception err) {
+//            err.printStackTrace();
+//        }
     }
 
     private static void setTimeOuts(OkHttpClient.Builder httpClient){

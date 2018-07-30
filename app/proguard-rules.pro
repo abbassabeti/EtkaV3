@@ -97,8 +97,6 @@
 
 #other
 -keepattributes LineNumberTable
--keep class com.sheypoor.mobile.items.** { *; }
--keep class com.sheypoor.mobile.network.** { *; }
 -dontwarn okio.**
 -keepclassmembers enum * {
     public static **[] values();

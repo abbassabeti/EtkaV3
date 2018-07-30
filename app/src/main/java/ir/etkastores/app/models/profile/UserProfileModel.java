@@ -192,39 +192,39 @@ public class UserProfileModel {
         this.nationalCode = nationalCode;
     }
 
-    public String getFirstNameAndLastName(){
-        return firstName+" "+lastName;
+    public String getFirstNameAndLastName() {
+        return firstName + " " + lastName;
     }
 
-    public String getGenderValue(){
+    public String getGenderValue() {
         if (getGender() == null) return "-";
-        if (getGender() == 0){
+        if (getGender() == 0) {
             return EtkaApp.getInstance().getResources().getString(R.string.male);
-        }else{
+        } else {
             return EtkaApp.getInstance().getResources().getString(R.string.female);
         }
     }
 
-    public XCalendar getBirthDateXCalendar(){
+    public XCalendar getBirthDateXCalendar() {
         try {
             String dt = getBirthDate();
-            if (dt.contains("T")){
-                dt = dt.substring(0,dt.indexOf("T"));
+            if (dt.contains("T")) {
+                dt = dt.substring(0, dt.indexOf("T"));
             }
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dt);
             XCalendar xCalendar = new XCalendar(date.getTime());
             CalendarRepoInterface c = xCalendar.getCalendar(XCalendar.GregorianType);
-            if (c.getYear() == 1){
+            if (c.getYear() == 1) {
                 return null;
-            }else{
+            } else {
                 return xCalendar;
             }
-        }catch (Exception err){
+        } catch (Exception err) {
             return null;
         }
     }
 
-    public static class EducationItems{
+    public static class EducationItems {
         public static final String Illiterate = "Illiterate";
         public static final String Diploma = "Diploma";
         public static final String AssociateDegree = "AssociateDegree";
@@ -233,8 +233,8 @@ public class UserProfileModel {
         public static final String PHD = "PHD";
     }
 
-    public static String translateEducation(String education){
-        switch (education){
+    public static String translateEducation(String education) {
+        switch (education) {
             case EducationItems.Illiterate:
                 return "زیر دیپلم";
 
@@ -251,6 +251,24 @@ public class UserProfileModel {
                 return "فوق لیسانس";
 
             case EducationItems.PHD:
+                return "دکتری و بالاتر";
+
+            case "0":
+                return "زیر دیپلم";
+
+            case "1":
+                return "دیپلم";
+
+            case "2":
+                return "فوق دیپلم";
+
+            case "3":
+                return "لیسانس";
+
+            case "4":
+                return "فوق لیسانس";
+
+            case "5":
                 return "دکتری و بالاتر";
 
         }
