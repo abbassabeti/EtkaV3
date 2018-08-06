@@ -153,7 +153,7 @@ public class EtkaToolbar extends Toolbar {
     public void showScannerButton(boolean state) {
         if (state) {
             scannerButton.setVisibility(VISIBLE);
-            scannerIcon.setColorFilter(ContextCompat.getColor(getContext(),R.color.white));
+            scannerIcon.setColorFilter(ContextCompat.getColor(getContext(), R.color.white));
         } else {
             scannerButton.setVisibility(GONE);
         }
@@ -181,6 +181,10 @@ public class EtkaToolbar extends Toolbar {
         void onToolbarBackClick();
 
         void onActionClick(int actionCode);
+    }
+
+    public String getTitle() {
+        return titleTv.getText().toString();
     }
 
 }

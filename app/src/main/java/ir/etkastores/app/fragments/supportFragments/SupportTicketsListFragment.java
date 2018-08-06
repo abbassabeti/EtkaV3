@@ -113,13 +113,13 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
-//        if (ProfileManager.isGuest()) {
-//            showNeedToLogin();
-//        } else {
-//            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
-//            NewTicketActivity.show(getActivity(), NewTicketActivity.SUPPORT_TYPE);
-//        }
-        Toaster.showLong(getActivity(),R.string.commingSoonMessage);
+        if (ProfileManager.isGuest()) {
+            showNeedToLogin();
+        } else {
+            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
+            NewTicketActivity.show(getActivity(), NewTicketActivity.SUPPORT_TYPE);
+        }
+//        Toaster.showLong(getActivity(),R.string.commingSoonMessage);
     }
 
     @Override

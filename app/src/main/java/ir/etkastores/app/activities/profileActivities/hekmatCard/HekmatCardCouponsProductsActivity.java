@@ -31,9 +31,13 @@ import retrofit2.Response;
 public class HekmatCardCouponsProductsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     private static final String MODEL = "MODEL";
+    private static final String PROVINCE_ID = "PROVINCE_ID";
+    private static final String PROVINCE_NAME = "PROVINCE_NAME";
 
-    public static void show(Context context) {
+    public static void show(Context context, int provinceId, String provinceName) {
         Intent intent = new Intent(context, HekmatCardCouponsProductsActivity.class);
+        intent.putExtra(PROVINCE_NAME, provinceName);
+        intent.putExtra(PROVINCE_ID, provinceId);
         context.startActivity(intent);
     }
 
@@ -55,6 +59,9 @@ public class HekmatCardCouponsProductsActivity extends BaseActivity implements E
     private Call<OauthResponse<List<HekmatCoupons>>> req;
     private AlertDialog loadingDialog;
 
+    private int provinceId;
+    private String provinceName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +69,10 @@ public class HekmatCardCouponsProductsActivity extends BaseActivity implements E
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
         model = HekmatCouponsResponseModel.fromJson(getIntent().getStringExtra(MODEL));
+        provinceId = getIntent().getIntExtra(PROVINCE_ID, 1);
+        provinceName = getIntent().getStringExtra(PROVINCE_NAME);
         adapter = new HekmatCouponsAdapter(this);
+        toolbar.setTitle(toolbar.getTitle() + " - " + provinceName);
         recyclerView.setAdapter(adapter);
         initViews();
     }
@@ -78,7 +88,7 @@ public class HekmatCardCouponsProductsActivity extends BaseActivity implements E
 
     private void loadData() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inLoadingData);
-        req = ApiProvider.getAuthorizedApi().getHekmatCoupons();
+        req = ApiProvider.getAuthorizedApi().getHekmatCoupons(provinceId);
         req.enqueue(new Callback<OauthResponse<List<HekmatCoupons>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<HekmatCoupons>>> call, Response<OauthResponse<List<HekmatCoupons>>> response) {

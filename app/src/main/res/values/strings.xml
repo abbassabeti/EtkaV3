@@ -302,5 +302,7 @@
     <string name="paymented">پرداختی</string>
     <string name="militaryRemainedCredit">مانده تخفیف نیروهای مسلح</string>
     <string name="pensionaryRemainedCredit">مانده تخفیف بازنشستگان</string>
+    <string name="selectYourProvince">استان خود را انتخاب کنید</string>
+    <string name="select">انتخاب</string>
 
 </resources>

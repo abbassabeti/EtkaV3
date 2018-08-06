@@ -5,4 +5,4 @@
     android:gravity="right|center_vertical"
     android:padding="8dp"
     android:textColor="@color/darkGray"
-    android:textSize="@dimen/textSizeSmall" />
+    android:textSize="@dimen/textSizeMedium" />

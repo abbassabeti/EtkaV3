@@ -215,6 +215,6 @@ public interface EtkaApi {
     Call<OauthResponse<String>> changeHekmatPassword(@Body HekmatChangePasswordRequest requestModel);
 
     @GET(ApiStatics.HEKMAT_GET_COUPONS)
-    Call<OauthResponse<List<HekmatCoupons>>> getHekmatCoupons();
+    Call<OauthResponse<List<HekmatCoupons>>> getHekmatCoupons(@Query("ProvinceId") int provinceid);
 
 }

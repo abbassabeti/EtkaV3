@@ -18,6 +18,7 @@ import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.HekmatCardLoginModel;
 import ir.etkastores.app.models.hekmat.card.HekmatRemainingsModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
+import ir.etkastores.app.ui.dialogs.SelectProvinceDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
@@ -187,7 +188,15 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     @OnClick(R.id.kalabargHayeElamShodeButton)
     public void kalabargHayeElamShodeButtonClick() {
-        HekmatCardCouponsProductsActivity.show(this);
+        final SelectProvinceDialog dialog = new SelectProvinceDialog();
+        dialog.show(getSupportFragmentManager(), new SelectProvinceDialog.OnButtonClickListener() {
+            @Override
+            public void onSelectButton(int id, String name) {
+                if (isFinishing()) return;
+                HekmatCardCouponsProductsActivity.show(HekmatActivity.this, id, name);
+                dialog.getDialog().cancel();
+            }
+        });
     }
 
     @OnClick(R.id.hekmatTransactionsButton)

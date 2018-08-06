@@ -246,7 +246,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
                 break;
 
             case R.id.saveMinusButton:
-                if (saveCountValue == 0) return;
+                if (saveCountValue == 1) return;
                 saveCountValue--;
                 updateSaveCountValue();
                 break;
