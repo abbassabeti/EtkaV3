@@ -292,7 +292,7 @@
     <string name="yourRequestInX">درخواست شما در %s :</string>
     <string name="openInBrowser">مشاهده در مرورگر</string>
     <string name="totalFactorPrice">مبلغ کل فاکتور:</string>
-    <string name="totalDiscount">تخفیف کل:</string>
+    <string name="totalDiscount">سود شما از این خرید:</string>
     <string name="tax">مالیات:</string>
     <string name="customerPayment">پرداخت مشتری:</string>
     <string name="writeYourMessage">پیام خود را بنویسید</string>

@@ -142,6 +142,8 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
                             onProductClickListener.onProductClick(productModels.get(getAdapterPosition()));
                     }
                 });
+
+                price2.setTypeface(FontUtils.getBoldTypeFace());
             }
 
             public void bind(final ProductModel model) {
@@ -155,7 +157,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 //                }else{
 //                    scoreValue.setText("");
 //                }
-                if (model.getImageUrl() != null && model.getImageUrl().size() > 0){
+                if (model.getImageUrl() != null && model.getImageUrl().size() > 0) {
                     ImageLoader.loadProductImage(getContext(), image, model.getImageUrl());
                 }
                 if (BuildConfig.DEBUG)

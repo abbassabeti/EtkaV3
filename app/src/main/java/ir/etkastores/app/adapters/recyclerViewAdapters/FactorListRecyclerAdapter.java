@@ -113,6 +113,9 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         @BindView(R.id.totalDiscount)
         TextView totalDiscount;
 
+        @BindView(R.id.totalDiscountTitle)
+        TextView totalDiscountTitle;
+
         @BindView(R.id.totalTax)
         TextView totalTax;
 
@@ -122,6 +125,8 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         public FooterViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            totalDiscountTitle.setTypeface(FontUtils.getBoldTypeFace());
+            totalDiscount.setTypeface(FontUtils.getBoldTypeFace());
         }
 
         public void bind(){
@@ -161,12 +166,12 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             count.setText(String.valueOf(productModel.getCount()));
             discount.setText(productModel.getDiscount());
             totalPrice.setText(productModel.getTotalPrice());
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ProductActivity.show(context,productModel.getBarCode());
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    ProductActivity.show(context,productModel.getBarCode());
+//                }
+//            });
         }
 
     }
