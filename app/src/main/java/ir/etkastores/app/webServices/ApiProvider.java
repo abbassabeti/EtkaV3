@@ -13,7 +13,6 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
-import ir.etkastores.app.utils.UserSettings;
 import okhttp3.CertificatePinner;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -129,7 +128,6 @@ public class ApiProvider {
                     if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401) {
                         synchronized (httpClient) {
                             if (ApiStatics.getLastToken() == null) {
-//                                Call<AccessToken> call = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
                                 ProfileManager.clearProfile();
                                 Call<AccessToken> call = ApiProvider.guestLogin();
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
@@ -148,13 +146,6 @@ public class ApiProvider {
                                 lastToken = null;
                                 ApiStatics.saveToken(null);
                                 EtkaApi tokenClient = createService(EtkaApi.class);
-//                                Call<AccessToken> call = tokenClient.getToken(
-//                                        ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
-//                                        "",
-//                                        "",
-//                                        ApiStatics.CLIENT_ID,
-//                                        "",
-//                                        refreshToken);
 
                                 Call<AccessToken> call = tokenClient.getToken(
                                         ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
@@ -216,7 +207,6 @@ public class ApiProvider {
     }
 
     public static Call<AccessToken> getLoginWithSMSVerification(String mobilePhone, String verificationCode) {
-//        return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, mobilePhone + "-" + verificationCode, "", ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
         String vc = "";
         if (!TextUtils.isEmpty(mobilePhone) && !TextUtils.isEmpty(verificationCode)) {
             vc = mobilePhone + "-" + verificationCode;
@@ -225,7 +215,6 @@ public class ApiProvider {
     }
 
     public static Call<AccessToken> guestLogin() {
-//        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, userName, password, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
         return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ProfileManager.GUEST_USER_NAME, ProfileManager.GUEST_USER_PASSWORD, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
     }
 
@@ -241,13 +230,13 @@ public class ApiProvider {
     }
 
     private static void addTLSSocketFactory(OkHttpClient.Builder httpBuilder) {
-//        TLSSocketFactory tlsSocketFactory;
-//        try {
-//            tlsSocketFactory = new TLSSocketFactory();
-//            httpBuilder.sslSocketFactory(tlsSocketFactory, tlsSocketFactory.systemDefaultTrustManager());
-//        } catch (Exception err) {
-//            err.printStackTrace();
-//        }
+        TLSSocketFactory tlsSocketFactory;
+        try {
+            tlsSocketFactory = new TLSSocketFactory();
+            httpBuilder.sslSocketFactory(tlsSocketFactory, tlsSocketFactory.systemDefaultTrustManager());
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
     }
 
     private static void setTimeOuts(OkHttpClient.Builder httpClient){
