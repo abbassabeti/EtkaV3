@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,9 @@ public class TicketConversationAdapter extends RecyclerView.Adapter<RecyclerView
             }
             date.setText(item.getDate());
             if (item.getAnswer() != null) {
-                body.setText(item.getAnswer().getMessage());
+                body.setText(item.getAnswer().getMessage().trim());
+            }else if (!TextUtils.isEmpty(item.getMessage())){
+                body.setText(item.getMessage().trim());
             }
         }
 

@@ -103,7 +103,7 @@ public class TicketConversationActivity extends BaseActivity implements EtkaTool
             public void onResponse(Call<OauthResponse<List<TicketItem>>> call, Response<OauthResponse<List<TicketItem>>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-
+                        adapter.addItems(response.body().getData());
                     } else {
 
                     }
@@ -135,7 +135,8 @@ public class TicketConversationActivity extends BaseActivity implements EtkaTool
         reqModel.setParentId(ticketItem.getId());
         reqModel.setDepartmentRef(ticketItem.getDepartmentRef());
         reqModel.setTitle(ticketItem.getTitle());
-        new TicketResponseDialog().show(getSupportFragmentManager(), new TicketResponseDialog.TicketResponseCallback() {
+        TicketResponseDialog ticketResponseDialog = new TicketResponseDialog();
+        ticketResponseDialog.show(getSupportFragmentManager(), new TicketResponseDialog.TicketResponseCallback() {
             @Override
             public void onSendButtonClick(String message) {
                 reqModel.setMessage(message);

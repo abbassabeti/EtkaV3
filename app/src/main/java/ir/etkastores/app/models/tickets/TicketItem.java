@@ -39,7 +39,7 @@ public class TicketItem {
     @SerializedName("answer")
     private RequestProductAnswerModel answer;
 
-    @SerializedName("UserTicket")
+    @SerializedName("userTicket")
     private boolean isUserTicket;
 
     public int getId() {
