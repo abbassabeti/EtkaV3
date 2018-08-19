@@ -129,11 +129,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
                     if (response.body().isSuccessful()) {
                         fillViews();
                     } else {
-                        boolean hasRetry = true;
-                        if (response.body().getMeta().getStatusCode() == 500) {
-                            hasRetry = false;
-                        }
-                        showRetry(response.body().getMeta().getMessage(), hasRetry);
+                        showRetry(response.body().getMeta().getMessage(), false);
                     }
                 } else {
                     onFailure(call, null);
