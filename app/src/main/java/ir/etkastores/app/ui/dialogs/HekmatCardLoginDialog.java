@@ -49,7 +49,7 @@ public class HekmatCardLoginDialog extends BaseDialog {
         ButterKnife.bind(this, view);
         String lastCardNumber = DiskDataHelper.getLastHekmatCardNumber();
         if (!TextUtils.isEmpty(lastCardNumber)) hekmatCardNumberEt.setText(lastCardNumber);
-        SpannableString resetPasswordText = new SpannableString(getResources().getString(R.string.forgotYourPassword_resetNow));
+        SpannableString resetPasswordText = new SpannableString(getResources().getString(R.string.forgotPassword));
         resetPasswordText.setSpan(new UnderlineSpan(), 0, resetPasswordText.length(), 0);
         resetPassword.setText(resetPasswordText);
         return view;

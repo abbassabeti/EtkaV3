@@ -304,5 +304,6 @@
     <string name="pensionaryRemainedCredit">مانده تخفیف بازنشستگان</string>
     <string name="selectYourProvince">استان خود را انتخاب کنید</string>
     <string name="select">انتخاب</string>
+    <string name="forgotPassword">فراموشی رمز عبور</string>
 
 </resources>

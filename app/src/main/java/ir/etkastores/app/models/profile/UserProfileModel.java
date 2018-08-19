@@ -64,6 +64,9 @@ public class UserProfileModel {
     @SerializedName("nationalCode")
     String nationalCode;
 
+    @SerializedName("barCode")
+    String barCode;
+
     public String getUserName() {
         return userName;
     }
@@ -273,6 +276,10 @@ public class UserProfileModel {
 
         }
         return "";
+    }
+
+    public String getBarCode() {
+        return barCode;
     }
 
 }

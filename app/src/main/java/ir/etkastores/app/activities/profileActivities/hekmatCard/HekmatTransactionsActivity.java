@@ -143,3 +143,11 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
     }
 
 }
+
+//public enum TransactionType
+//{
+//    Credit = 0, etbeari
+//    Installment = 1, riali
+//    Debit = 2, aghsati
+//    Coupon = 3 kalabarg
+//}

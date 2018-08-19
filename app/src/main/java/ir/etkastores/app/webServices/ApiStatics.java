@@ -56,7 +56,7 @@ public class ApiStatics {
     public static final String DEPARTMENTS = "/api/v1/Ticket/Departments";
     public static final String DEVICE_GROUP_TOKEN = "/api/v1/Notification/DeviceGroup";
     public static final String ACTIVATION_CODE = "/api/v1/Account/GetActivationCode";
-    public static final String CREDIT_TRANSACTION = "/api/v1/hekmat/GetCreditTransaction";
+    public static final String CREDIT_TRANSACTION = "/api/v1/hekmat/GetTransaction";
     public static final String INSTALLMENT_TRANSACTION = "/api/v1/hekmat/GetInstallmentTransaction";
     public static final String HEKMAT_LOGIN = "/api/v1/hekmat/HekmatCardLogin2";
     public static final String HEKMAT_REGISTER = "/api/v1/hekmat/HekmatRegister";
