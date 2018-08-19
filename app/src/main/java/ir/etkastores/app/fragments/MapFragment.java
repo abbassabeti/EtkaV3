@@ -115,6 +115,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         map.setOnMarkerClickListener(this);
         map.setOnMapClickListener(this);
 
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.683333,51.416667),4));
+
         if (StoresManager.getInstance().getStores().size() > 0) {
             addStoresToMap(StoresManager.getInstance().getStores());
         } else {
