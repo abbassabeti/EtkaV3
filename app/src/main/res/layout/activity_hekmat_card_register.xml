@@ -112,6 +112,16 @@
                 android:textColor="@color/darkGray"
                 android:textSize="@dimen/textSizeSmall" />
 
+            <Button
+                android:id="@+id/iHavePasswordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/rect_round4dp_white"
+                android:text="@string/iHaveHekmatCardPassword"
+                android:textColor="@color/darkGray"
+                android:textSize="@dimen/textSizeSmall" />
+
         </LinearLayout>
 
     </ScrollView>
