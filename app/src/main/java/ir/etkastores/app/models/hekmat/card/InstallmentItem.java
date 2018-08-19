@@ -1,5 +1,7 @@
 package ir.etkastores.app.models.hekmat.card;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.text.DecimalFormat;
@@ -31,8 +33,8 @@ public class InstallmentItem {
     @SerializedName("dateTime")
     private String dateTime;
 
-    @SerializedName("IsCreadit")
-    private boolean isCreadit;
+    @SerializedName("transactionType")
+    private String transactionType;
 
     public String getAmount() {
         return amount;
@@ -58,10 +60,6 @@ public class InstallmentItem {
         return dateTime;
     }
 
-    public boolean isCreadit() {
-        return isCreadit;
-    }
-
     public String getFormattedDate() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -84,4 +82,37 @@ public class InstallmentItem {
             return "--";
         }
     }
+
+    public String getTransactionType() {
+        if (TextUtils.isEmpty(transactionType)) return "-";
+        switch (transactionType) {
+            case "0":
+                return EtkaApp.getInstance().getResources().getString(R.string.etebari);
+
+            case "Credit":
+                return EtkaApp.getInstance().getResources().getString(R.string.etebari);
+
+            case "1":
+                return EtkaApp.getInstance().getResources().getString(R.string.riali);
+
+            case "Installment":
+                return EtkaApp.getInstance().getResources().getString(R.string.riali);
+
+            case "2":
+                return EtkaApp.getInstance().getResources().getString(R.string.aghsati);
+
+            case "Debit":
+                return EtkaApp.getInstance().getResources().getString(R.string.aghsati);
+
+            case "3":
+                return EtkaApp.getInstance().getResources().getString(R.string.kalabarg);
+
+            case "Coupon":
+                return EtkaApp.getInstance().getResources().getString(R.string.kalabarg);
+
+        }
+
+        return "-";
+    }
+
 }

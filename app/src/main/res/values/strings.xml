@@ -305,5 +305,8 @@
     <string name="selectYourProvince">استان خود را انتخاب کنید</string>
     <string name="select">انتخاب</string>
     <string name="forgotPassword">فراموشی رمز عبور</string>
+    <string name="riali">ریالی</string>
+    <string name="aghsati">اقساطی</string>
+    <string name="kalabarg">کالابرگ</string>
 
 </resources>
