@@ -308,5 +308,6 @@
     <string name="riali">ریالی</string>
     <string name="aghsati">اقساطی</string>
     <string name="kalabarg">کالابرگ</string>
+    <string name="pricesInRialUnit">قیمت ها بر حسب ریال</string>
 
 </resources>

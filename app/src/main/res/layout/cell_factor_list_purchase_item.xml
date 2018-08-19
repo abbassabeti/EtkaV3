@@ -14,9 +14,7 @@
         android:layout_weight="2"
         android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="center"
-        android:maxLines="2"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
+        android:lines="2"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/textSizeVerySmall" />
 
@@ -27,9 +25,7 @@
         android:layout_weight="2"
         android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="center"
-        android:maxLines="2"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
+        android:lines="2"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/textSizeVerySmall" />
 
@@ -40,9 +36,7 @@
         android:layout_weight="1"
         android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="center"
-        android:maxLines="2"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
+        android:lines="2"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/textSizeVerySmall" />
 
@@ -53,21 +47,19 @@
         android:layout_weight="2"
         android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="center"
-        android:maxLines="2"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
+        android:lines="2"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/textSizeVerySmall" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="5"
         android:background="@drawable/rect_trans_bordered_gray"
         android:gravity="right"
-        android:maxLines="2"
-        android:padding="4dp"
+        android:lines="2"
+        android:paddingRight="4dp"
         android:textColor="@color/darkGray"
         android:textSize="@dimen/textSizeVerySmall" />
 
