@@ -25,10 +25,13 @@
             android:id="@+id/selectProvinceRow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rect_rounded_theme_white_bg"
             android:paddingLeft="8dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp">
+            android:paddingRight="8dp">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/locationIcon"
@@ -36,14 +39,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
                 app:srcCompat="@drawable/ic_my_location_orange_24dp" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/downIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@id/locationIcon"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/locationIcon"
+                android:layout_toLeftOf="@id/downIcon"
                 android:background="@null" />
 
         </RelativeLayout>
