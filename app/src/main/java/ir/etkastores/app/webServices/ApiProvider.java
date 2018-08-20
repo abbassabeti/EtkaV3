@@ -13,6 +13,7 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
+import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import okhttp3.CertificatePinner;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -215,6 +216,7 @@ public class ApiProvider {
     }
 
     public static Call<AccessToken> guestLogin() {
+        EtkaPushNotificationConfig.registerGuests();
         return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ProfileManager.GUEST_USER_NAME, ProfileManager.GUEST_USER_PASSWORD, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
     }
 

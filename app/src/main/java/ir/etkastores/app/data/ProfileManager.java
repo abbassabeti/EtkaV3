@@ -9,6 +9,7 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.utils.DiskDataHelper;
+import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.webServices.ApiStatics;
 
 /**
@@ -36,7 +37,9 @@ public class ProfileManager {
             String str = new Gson().toJson(model);
             EtkaApp.getPreference().edit().putString(PROFILE_KEY, str).apply();
             profileModel = model;
+            EtkaPushNotificationConfig.unregisterGuests();
         } catch (Exception err) {
+            err.printStackTrace();
         }
     }
 

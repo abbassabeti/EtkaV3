@@ -12,6 +12,8 @@ public class EtkaPushNotificationConfig {
     private static final String HEKMAT_TOPIC = "hekmat";
     private static final String GLOBAL_TOPIC = "global";
     private static final String DEV_TOPIC = "dev";
+    private static final String LOGIN_USER = "logins";
+    private static final String GUEST = "guests";
 
     public static void registerHekmat(){
         FirebaseMessaging.getInstance().subscribeToTopic(HEKMAT_TOPIC);
@@ -60,5 +62,16 @@ public class EtkaPushNotificationConfig {
     public static boolean isHekmatSubscribed(){
         return DiskDataHelper.getBool(HEKMAT_TOPIC);
     }
+
+    public static void unregisterGuests(){
+        FirebaseMessaging.getInstance().subscribeToTopic(LOGIN_USER);
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(GUEST);
+    }
+
+    public static void registerGuests(){
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(LOGIN_USER);
+        FirebaseMessaging.getInstance().subscribeToTopic(GUEST);
+    }
+
 
 }
