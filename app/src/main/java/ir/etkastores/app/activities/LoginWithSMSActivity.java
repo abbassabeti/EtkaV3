@@ -108,7 +108,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         Toaster.showLong(LoginWithSMSActivity.this, response.body().getMeta().getMessage());
-                        if (!response.body().getData().isNewUser()) showGetInvitationCodeView();
+                        if (response.body().getData().isNewUser()) showGetInvitationCodeView();
                         setupEnterVerifyCode();
                         isVerifyStep = true;
                         startTimer();
