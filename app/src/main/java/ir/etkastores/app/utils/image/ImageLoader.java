@@ -39,6 +39,7 @@ public class ImageLoader {
 
     public static void loadProductImage(Context context, AppCompatImageView imageView, String url) {
         try {
+            imageView.setImageResource(R.drawable.product_place_holder);
             if (TextUtils.isEmpty(url)){
                 imageView.setImageResource(R.drawable.product_place_holder);
             }else{
@@ -63,8 +64,8 @@ public class ImageLoader {
     private static RequestOptions getRequestOptions() {
         if (requestOptionsProducts == null) {
             requestOptionsProducts = new RequestOptions();
-            requestOptionsProducts.placeholder(R.drawable.product_place_holder);
-            requestOptionsProducts.error(R.drawable.product_place_holder);
+            requestOptionsProducts = requestOptionsProducts.placeholder(R.drawable.product_place_holder);
+            requestOptionsProducts = requestOptionsProducts.error(R.drawable.product_place_holder);
         }
         return requestOptionsProducts;
     }
