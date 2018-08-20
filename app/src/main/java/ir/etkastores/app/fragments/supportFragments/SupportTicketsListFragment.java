@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.tickets.TicketFilterModel;
 import ir.etkastores.app.models.tickets.TicketItem;
-import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
@@ -40,8 +40,14 @@ import retrofit2.Response;
 
 public class SupportTicketsListFragment extends Fragment implements TicketsListAdapter.OnTicketsListCallbacks, SwipeRefreshLayout.OnRefreshListener {
 
-    public static SupportTicketsListFragment newInstance() {
-        return new SupportTicketsListFragment();
+    private static final String TICKET_CODE = "TICKET_CODE";
+
+    public static SupportTicketsListFragment newInstance(String ticketCode) {
+        SupportTicketsListFragment fragment = new SupportTicketsListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(TICKET_CODE, ticketCode);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @BindView(R.id.recyclerView)
@@ -70,6 +76,14 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
     private TicketFilterModel requestModel;
 
     private final static int PAGE_SIZE = 20;
+
+    private String selectedTicketCode;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        selectedTicketCode = getArguments().getString(TICKET_CODE);
+    }
 
     @Nullable
     @Override
@@ -119,7 +133,6 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
             NewTicketActivity.show(getActivity(), NewTicketActivity.SUPPORT_TYPE);
         }
-//        Toaster.showLong(getActivity(),R.string.commingSoonMessage);
     }
 
     @Override
@@ -163,6 +176,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
                         } else {
                             listIsEmpty = false;
                             adapter.addItems(response.body().getData());
+                            checkToOpenReply(response.body().getData());
                             if (response.body().getData().size() == PAGE_SIZE) {
                                 adapter.setLoadMoreEnabled(true);
                             }
@@ -265,6 +279,16 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
 
             }
         });
+    }
+
+    private void checkToOpenReply(List<TicketItem> items) {
+        if (TextUtils.isEmpty(selectedTicketCode)) return;
+        for (TicketItem item : items) {
+            if (item.getTicketCode().contentEquals(selectedTicketCode)) {
+                TicketConversationActivity.show(getActivity(), item, TicketConversationActivity.SUPPORT_REQUEST);
+                break;
+            }
+        }
     }
 
 }

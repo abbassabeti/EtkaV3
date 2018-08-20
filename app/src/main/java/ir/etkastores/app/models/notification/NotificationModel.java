@@ -28,13 +28,10 @@ public class NotificationModel {
     public final static int ACTION_OPEN_FAQ = 7;
     public final static int ACTION_OPEN_EDIT_PROFILE = 8;
     public final static int ACTION_OPEN_CONSUME_YOUR_POINTS = 9;
-    public final static int ACTION_OPEN_HEKMAT_ACCOUNT = 10;
     public final static int ACTION_OPEN_NEXT_SHOPPING = 11;
     public final static int ACTION_OPEN_SHOPPING_HISTORY = 12;
     public final static int ACTION_OPEN_INVITE_FRIENDS = 13;
     public final static int ACTION_OPEN_SUPPORT = 14;
-    public final static int ACTION_OPEN_TICKET = 15;
-    public final static int ACTION_OPEN_NEW_TICKET = 16;
     public final static int ACTION_OPEN_PROFILE_SETTING = 17;
     public final static int ACTION_OPEN_ABOUT_ETKA_STORES = 18;
     public final static int ACTION_OPEN_USER_PRIVACY = 19;
@@ -43,9 +40,15 @@ public class NotificationModel {
     public final static int ACTION_OPEN_NEWS_LIST = 22;
     public final static int ACTION_OPEN_NEWS = 23;
     public final static int ACTION_OPEN_GALLERY = 24;
-    public final static int ACTION_OPEN_SEARCH_RESULT = 25;
     public final static int ACTION_OPEN_LOGIN = 26;
     public final static int ACTION_OPEN_SURVEY = 27;
+
+    public final static int ACTION_OPEN_SUPPORT_TICKET = 28;
+    public final static int ACTION_OPEN_REQUEST_PRODUCT_TICKET = 29;
+    public final static int ACTION_OPEN_SUPPORT_REPLY_TICKET = 30;
+    public final static int ACTION_OPEN_PRODUCT_REQUEST_REPLY_TICKET = 31;
+    public final static int ACTION_OPEN_NEW_SUPPORT_TICKET = 32;
+    public final static int ACTION_OPEN_NEW_PRODUCT_REQUEST_TICKET = 33;
 
     public static NotificationModel fromJson(String json) {
         try {

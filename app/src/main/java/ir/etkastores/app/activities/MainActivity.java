@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,15 +17,15 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
 import ir.etkastores.app.activities.profileActivities.FAQActivity;
 import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
+import ir.etkastores.app.activities.profileActivities.NewTicketActivity;
 import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
 import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
 import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.TextInfoActivity;
-import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatActivity;
+import ir.etkastores.app.activities.profileActivities.survey.SurveyListActivity;
 import ir.etkastores.app.data.StoresManager;
-import ir.etkastores.app.data.TicketsDepartmentsManager;
 import ir.etkastores.app.fragments.MapFragment;
 import ir.etkastores.app.fragments.ProfileFragment;
 import ir.etkastores.app.fragments.home.HekmatWaresSlide;
@@ -38,7 +35,6 @@ import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.store.StoreModel;
-import ir.etkastores.app.models.tickets.DepartmentModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
@@ -93,21 +89,6 @@ public class MainActivity extends BaseActivity {
         }
 
         StoresManager.getInstance().fetchStores(null);
-
-        //TODO remote below code
-        TicketsDepartmentsManager.getInstance().fetchDepartments(new TicketsDepartmentsManager.OnDepartmentCallback() {
-            @Override
-            public void onDepartmentsFetched(List<DepartmentModel> departments) {
-                Log.e("size", "" + departments.size());
-            }
-
-            @Override
-            public void onDepartmentsFailure(String message) {
-                Log.e("message", "" + message);
-            }
-        });
-
-//        startService(new Intent(this, EtkaBeaconService.class));
 
     }
 
@@ -224,11 +205,6 @@ public class MainActivity extends BaseActivity {
                 ScoresActivity.start(this);
                 break;
 
-            case NotificationModel.ACTION_OPEN_HEKMAT_ACCOUNT:
-                HekmatActivity.show(this, "", "");
-                // TODO need to handle
-                break;
-
             case NotificationModel.ACTION_OPEN_NEXT_SHOPPING:
                 NextShoppingListActivity.show(this);
                 break;
@@ -242,16 +218,40 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case NotificationModel.ACTION_OPEN_SUPPORT:
-                SupportActivity.show(this, SupportActivity.TICKET_LIST);
+                SupportActivity.show(this, SupportActivity.CONTACT_US, null);
                 break;
 
-            case NotificationModel.ACTION_OPEN_TICKET:
-
+            case NotificationModel.ACTION_OPEN_NEW_SUPPORT_TICKET:
+                NewTicketActivity.show(this, NewTicketActivity.SUPPORT_TYPE);
                 break;
 
-//            case NotificationModel.ACTION_OPEN_NEW_TICKET:
-//                NewTicketActivity.show(this,);
-//                break;
+            case NotificationModel.ACTION_OPEN_NEW_PRODUCT_REQUEST_TICKET:
+                NewTicketActivity.show(this, NewTicketActivity.REQUEST_PRODUCT_TYPE);
+                break;
+
+            case NotificationModel.ACTION_OPEN_SUPPORT_TICKET:
+                SupportActivity.show(this, SupportActivity.SUPPORT_TICKET, null);
+                break;
+
+            case NotificationModel.ACTION_OPEN_REQUEST_PRODUCT_TICKET:
+                SupportActivity.show(this, SupportActivity.REQUEST_PRODUCT, null);
+                break;
+
+            case NotificationModel.ACTION_OPEN_SUPPORT_REPLY_TICKET:
+                SupportActivity.show(this, SupportActivity.SUPPORT_TICKET, notificationModel.getData());
+                break;
+
+            case NotificationModel.ACTION_OPEN_PRODUCT_REQUEST_REPLY_TICKET:
+                SupportActivity.show(this, SupportActivity.REQUEST_PRODUCT, notificationModel.getData());
+                break;
+
+            case NotificationModel.ACTION_OPEN_LOGIN:
+                LoginWithSMSActivity.show(this);
+                break;
+
+            case NotificationModel.ACTION_OPEN_SURVEY:
+                SurveyListActivity.show(this);
+                break;
 
             case NotificationModel.ACTION_OPEN_PROFILE_SETTING:
                 ProfileSettingActivity.show(this);

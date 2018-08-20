@@ -204,7 +204,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @OnClick(R.id.supportMenu)
     public void onSupportMenuClick() {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenSupport);
-        SupportActivity.show(getActivity(), SupportActivity.TICKET_LIST);
+        SupportActivity.show(getActivity(), SupportActivity.SUPPORT_TICKET,null);
     }
 
     @OnClick(R.id.surveyMenu)

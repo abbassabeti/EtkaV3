@@ -5,10 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,8 +42,14 @@ import retrofit2.Response;
 
 public class ProductRequestTicketsListFragment extends Fragment implements TicketsListAdapter.OnTicketsListCallbacks, SwipeRefreshLayout.OnRefreshListener {
 
-    public static ProductRequestTicketsListFragment newInstance() {
-        return new ProductRequestTicketsListFragment();
+    private static final String TICKET_CODE = "TICKET_CODE";
+
+    public static ProductRequestTicketsListFragment newInstance(String ticketCode) {
+        ProductRequestTicketsListFragment fragment = new ProductRequestTicketsListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(TICKET_CODE, ticketCode);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @BindView(R.id.recyclerView)
@@ -67,6 +76,14 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
     private int reqPage = 1;
 
     private boolean listIsEmpty = false;
+
+    private String selectedTicketCode;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        selectedTicketCode = getArguments().getString(TICKET_CODE);
+    }
 
     @Nullable
     @Override
@@ -159,6 +176,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
                             listIsEmpty = false;
                         }
                         adapter.addItems(response.body().getData().getItems());
+                        checkToOpenReply(response.body().getData().getItems());
                         if (response.body().getData().getTotalItemsCount() > adapter.getItemCount()) {
                             adapter.setLoadMoreEnabled(true);
                             reqPage++;
@@ -256,6 +274,16 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
 
             }
         });
+    }
+
+    private void checkToOpenReply(List<TicketItem> items) {
+        if (TextUtils.isEmpty(selectedTicketCode)) return;
+        for (TicketItem item : items) {
+            if (item.getTicketCode().contentEquals(selectedTicketCode)) {
+                TicketConversationActivity.show(getActivity(), item, TicketConversationActivity.PRODUCT_REQUEST);
+                break;
+            }
+        }
     }
 
 }
