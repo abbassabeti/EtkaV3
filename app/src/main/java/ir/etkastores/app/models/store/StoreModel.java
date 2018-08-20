@@ -58,7 +58,7 @@ public class StoreModel implements Cloneable {
     String managerImage;
 
     @SerializedName("inStoreModeUrl")
-    private String inStoreModeUrl;
+    String inStoreModeUrl;
 
     @SerializedName("GeofenceArea")
     private int geofenceArea;
@@ -68,15 +68,15 @@ public class StoreModel implements Cloneable {
 
     int ic = -1;
 
-    public static StoreModel fromJson(String  json){
+    public static StoreModel fromJson(String json) {
         try {
-            return new Gson().fromJson(json,StoreModel.class);
-        }catch (Exception err){
+            return new Gson().fromJson(json, StoreModel.class);
+        } catch (Exception err) {
             return null;
         }
     }
 
-    public StoreModel(long id, long code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage) {
+    public StoreModel(long id, long code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage, String inStoreModeUrl) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -91,6 +91,7 @@ public class StoreModel implements Cloneable {
         this.ranking = ranking;
         this.storeImage = storeImage;
         this.managerImage = managerImage;
+        this.inStoreModeUrl = inStoreModeUrl;
     }
 
     public long getId() {
@@ -150,7 +151,7 @@ public class StoreModel implements Cloneable {
     }
 
     public int getIcon() {
-        if (ic>0) return ic;
+        if (ic > 0) return ic;
         switch (getRanking()) {
             case "اتکا ممتاز":
                 ic = R.drawable.marker_green;
@@ -171,14 +172,14 @@ public class StoreModel implements Cloneable {
 
     @Override
     public StoreModel clone() {
-        return new StoreModel(id, code, name, parentName, managerName, provinceName, contactInfo, openingHours, features, latitude, longitude, ranking, storeImage, managerImage);
+        return new StoreModel(id, code, name, parentName, managerName, provinceName, contactInfo, openingHours, features, latitude, longitude, ranking, storeImage, managerImage, inStoreModeUrl);
     }
 
     public String getInStoreModeUrl() {
         return inStoreModeUrl;
     }
 
-    public boolean hasInStoreMode(){
+    public boolean hasInStoreMode() {
         return !TextUtils.isEmpty(getInStoreModeUrl());
     }
 

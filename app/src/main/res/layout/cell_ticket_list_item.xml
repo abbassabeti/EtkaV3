@@ -40,6 +40,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="right"
+                android:gravity="right"
                 android:ellipsize="end"
                 android:paddingRight="8dp"
                 android:paddingLeft="8dp"
