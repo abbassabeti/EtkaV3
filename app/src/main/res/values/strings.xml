@@ -310,5 +310,6 @@
     <string name="kalabarg">کالابرگ</string>
     <string name="pricesInRialUnit">قیمت ها بر حسب ریال</string>
     <string name="iHaveHekmatCardPassword">قبلا رمز عبور از کیوسک دریافت نموده ام</string>
+    <string name="loginToAccountOrRegister">ورود به حساب کاربری / ثبت نام</string>
 
 </resources>

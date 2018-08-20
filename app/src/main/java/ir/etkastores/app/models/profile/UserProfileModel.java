@@ -1,5 +1,7 @@
 package ir.etkastores.app.models.profile;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.text.SimpleDateFormat;
@@ -279,6 +281,7 @@ public class UserProfileModel {
     }
 
     public String getBarCode() {
+        if (TextUtils.isEmpty(barCode)) return "0000000000000000";
         return barCode;
     }
 

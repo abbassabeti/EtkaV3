@@ -1,6 +1,7 @@
 package ir.etkastores.app.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
@@ -25,7 +27,6 @@ import ir.etkastores.app.activities.profileActivities.InviteFriendsActivity;
 import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
 import ir.etkastores.app.activities.profileActivities.OtherPagesActivity;
 import ir.etkastores.app.activities.profileActivities.ProfileSettingActivity;
-import ir.etkastores.app.activities.profileActivities.ScoresActivity;
 import ir.etkastores.app.activities.profileActivities.ShoppingHistoryActivity;
 import ir.etkastores.app.activities.profileActivities.SupportActivity;
 import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatActivity;
@@ -65,6 +66,12 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @BindView(R.id.userBarcodeId)
     AppCompatImageView userBarcodeIdImage;
 
+    @BindView(R.id.loginButton)
+    Button loginButton;
+
+    @BindView(R.id.barcodeHolder)
+    View barcodeHolder;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -95,17 +102,24 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         UserProfileModel profile = ProfileManager.getProfile();
         userName.setText(profile.getFirstName() + " " + profile.getLastName());
         scoreMenu.setText(String.format(getResources().getString(R.string.youHaveXScore), profile.getTotalPoints()));
+        barcodeHolder.setVisibility(View.VISIBLE);
+        loginButton.setVisibility(View.GONE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!isAdded()) return;
+                if (!ProfileManager.isGuest()){
+                    BarcodeUtils.generateBarcodeBitmap(ProfileManager.getProfile().getBarCode(), BarcodeFormat.CODABAR, userBarcodeIdImage);
+                }
+            }
+        },500);
     }
 
     private void initGuestUser() {
         userName.setText(R.string.guestUser);
         scoreMenu.setText(getResources().getString(R.string.yourScore));
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        BarcodeUtils.generateBarcodeBitmap("00000000000", BarcodeFormat.CODABAR, userBarcodeIdImage);
+        barcodeHolder.setVisibility(View.GONE);
+        loginButton.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.hekmatMenu)
@@ -148,7 +162,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 //            AdjustHelper.sendAdjustEvent(AdjustHelper.OpenPoints);
 //            ScoresActivity.start(getActivity());
 //        }
-        Toaster.show(getContext(),R.string.commingSoonMessage);
+        Toaster.show(getContext(), R.string.commingSoonMessage);
     }
 
     @OnClick(R.id.nextShoppingListMenu)
@@ -260,6 +274,11 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @OnClick(R.id.userBarcodeId)
     public void onUserIdBarcodeClick() {
 
+    }
+
+    @OnClick(R.id.loginButton)
+    public void onLoginButtonClick() {
+        LoginWithSMSActivity.show(getActivity());
     }
 
 

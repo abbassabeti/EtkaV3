@@ -24,71 +24,93 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/userName"
+            <Button
+                android:id="@+id/loginButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:paddingBottom="24dp" />
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingBottom="16dp"
-                        android:text="@string/profileBarcodeMessage"
-                        android:textSize="@dimen/textSizeSmall" />
-
-                    <ImageView
-                        android:id="@+id/userBarcodeId"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:background="@color/white" />
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@color/lightYellow"
-                app:cardCornerRadius="4dp">
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rec_them_round4dp"
+                android:text="@string/loginToAccountOrRegister"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizeMedium" />
 
-                <ir.etkastores.app.ui.views.CustomRowMenuItem
-                    android:id="@+id/scoreMenu"
+            <LinearLayout
+                android:id="@+id/barcodeHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:rowIcon="@drawable/ic_star_circle_gold_24dp"
-                    app:rowText="@string/youHaveXScore" />
+                    android:gravity="right"
+                    android:paddingBottom="24dp" />
 
-            </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="4dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
-                android:text="@string/profileConvertRateMessage"
-                android:textSize="@dimen/textSizeSmall" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingBottom="16dp"
+                            android:text="@string/profileBarcodeMessage"
+                            android:textSize="@dimen/textSizeSmall" />
+
+                        <ImageView
+                            android:id="@+id/userBarcodeId"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:background="@color/white" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="16dp"
+                    app:cardBackgroundColor="@color/lightYellow"
+                    app:cardCornerRadius="4dp">
+
+                    <ir.etkastores.app.ui.views.CustomRowMenuItem
+                        android:id="@+id/scoreMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:rowIcon="@drawable/ic_star_circle_gold_24dp"
+                        app:rowText="@string/youHaveXScore" />
+
+                </android.support.v7.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:text="@string/profileConvertRateMessage"
+                    android:textSize="@dimen/textSizeSmall" />
+
+            </LinearLayout>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
