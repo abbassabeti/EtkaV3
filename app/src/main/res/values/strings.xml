@@ -311,5 +311,7 @@
     <string name="pricesInRialUnit">قیمت ها بر حسب ریال</string>
     <string name="iHaveHekmatCardPassword">قبلا رمز عبور از کیوسک دریافت نموده ام</string>
     <string name="loginToAccountOrRegister">ورود به حساب کاربری / ثبت نام</string>
+    <string name="enterInvitationCodeHere" >کد معرف خود را وارد کنید</string>
+    <string name="ifYouHaveInvitationCodeWriteHere">در صورت داشتن کد معرف، آن را در قسمت زیر وارد کنید</string>
 
 </resources>

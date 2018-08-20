@@ -59,6 +59,36 @@
                 android:textColorHint="@color/white"
                 android:textSize="@dimen/textSizeSmall" />
 
+            <LinearLayout
+                android:id="@+id/invitationCodeHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSizeVerySmall"
+                    android:textColor="@color/white"
+                    android:text="@string/ifYouHaveInvitationCodeWriteHere"/>
+
+                <EditText
+                    android:id="@+id/invitationCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:hint="@string/enterInvitationCodeHere"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:lines="1"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/textSizeSmall" />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/submitVerification"
                 android:layout_width="match_parent"

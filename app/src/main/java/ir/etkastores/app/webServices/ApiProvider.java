@@ -207,11 +207,12 @@ public class ApiProvider {
         return logging;
     }
 
-    public static Call<AccessToken> getLoginWithSMSVerification(String mobilePhone, String verificationCode) {
+    public static Call<AccessToken> getLoginWithSMSVerification(String mobilePhone, String verificationCode, String invitationCode) {
         String vc = "";
         if (!TextUtils.isEmpty(mobilePhone) && !TextUtils.isEmpty(verificationCode)) {
             vc = mobilePhone + "-" + verificationCode;
         }
+        if (!TextUtils.isEmpty(invitationCode)) vc += "-" + invitationCode;
         return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, vc, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
     }
 
@@ -241,7 +242,7 @@ public class ApiProvider {
         }
     }
 
-    private static void setTimeOuts(OkHttpClient.Builder httpClient){
+    private static void setTimeOuts(OkHttpClient.Builder httpClient) {
         httpClient.connectTimeout(30, TimeUnit.SECONDS);
         httpClient.readTimeout(30, TimeUnit.SECONDS);
         httpClient.writeTimeout(30, TimeUnit.SECONDS);

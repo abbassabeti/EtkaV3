@@ -5,6 +5,7 @@ import com.google.android.gms.common.api.Api;
 import java.util.List;
 
 import ir.etkastores.app.models.CategoryModel;
+import ir.etkastores.app.models.GetVerificationCodeResponse;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.models.factor.FactorModel;
@@ -176,7 +177,7 @@ public interface EtkaApi {
 
     //28
     @POST(ApiStatics.ACTIVATION_CODE)
-    Call<OauthResponse<String>> requestVerificationCode(@Query("PhoneNumber") String phoneNumber);
+    Call<OauthResponse<GetVerificationCodeResponse>> requestVerificationCode(@Query("PhoneNumber") String phoneNumber);
 
     //29
     @POST(ApiStatics.SUPPORT_TICKET)

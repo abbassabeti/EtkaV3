@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.models.GetVerificationCodeResponse;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.ui.Toaster;
@@ -58,7 +59,13 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     @BindView(R.id.countDownTimer)
     TextView countDownTimerTv;
 
-    private Call<OauthResponse<String>> verificationReq;
+    @BindView(R.id.invitationCode)
+    EditText invitationCodeEt;
+
+    @BindView(R.id.invitationCodeHolder)
+    View invitationCodeHolder;
+
+    private Call<OauthResponse<GetVerificationCodeResponse>> verificationReq;
     private boolean isVerifyStep = false;
     private AlertDialog loadingDialog;
 
@@ -93,14 +100,15 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
         hideKeyboard(phoneEt);
         showLoading(getResources().getString(R.string.inSendinfVerificationCode));
         verificationReq = ApiProvider.getApi().requestVerificationCode(phoneEt.getText().toString());
-        verificationReq.enqueue(new Callback<OauthResponse<String>>() {
+        verificationReq.enqueue(new Callback<OauthResponse<GetVerificationCodeResponse>>() {
             @Override
-            public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
+            public void onResponse(Call<OauthResponse<GetVerificationCodeResponse>> call, Response<OauthResponse<GetVerificationCodeResponse>> response) {
                 if (isFinishing()) return;
                 hideLoading();
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         Toaster.showLong(LoginWithSMSActivity.this, response.body().getMeta().getMessage());
+                        if (!response.body().getData().isNewUser()) showGetInvitationCodeView();
                         setupEnterVerifyCode();
                         isVerifyStep = true;
                         startTimer();
@@ -113,7 +121,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             }
 
             @Override
-            public void onFailure(Call<OauthResponse<String>> call, Throwable t) {
+            public void onFailure(Call<OauthResponse<GetVerificationCodeResponse>> call, Throwable t) {
                 if (isFinishing()) return;
                 hideLoading();
                 showRetryVerification(getResources().getString(R.string.errorInSendingVerificationCode));
@@ -124,7 +132,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     public void loginWithVerificationCode() {
         hideKeyboard(verifyEt);
         showLoading(getResources().getString(R.string.inLogin));
-        Call<AccessToken> login = ApiProvider.getLoginWithSMSVerification(phoneEt.getText().toString(), verifyEt.getText().toString());
+        Call<AccessToken> login = ApiProvider.getLoginWithSMSVerification(phoneEt.getText().toString(), verifyEt.getText().toString(), invitationCodeEt.getText().toString());
         login.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
@@ -223,7 +231,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     void showRetryVerification(String message) {
         if (isFinishing()) return;
         final MessageDialog messageDialog = MessageDialog.errorRetry(message);
-        EventsManager.sendEvent("Dev","Verification err","|"+phoneEt.getText().toString()+"|"+message);
+        EventsManager.sendEvent("Dev", "Verification err", "|" + phoneEt.getText().toString() + "|" + message);
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
@@ -264,9 +272,9 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             counter--;
             int min = counter / 60;
             int sec = counter % 60;
-            if (min>0){
-                countDownTimerTv.setText(String.format(getResources().getString(R.string.youCanRequestActivationCodeAfterXMinAndXSecond), min,sec));
-            }else{
+            if (min > 0) {
+                countDownTimerTv.setText(String.format(getResources().getString(R.string.youCanRequestActivationCodeAfterXMinAndXSecond), min, sec));
+            } else {
                 countDownTimerTv.setText(String.format(getResources().getString(R.string.youCanRequestActivationCodeAfterXSecond), sec));
             }
         }
@@ -279,5 +287,9 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
             countDownTimerTv.setText("");
         }
     };
+
+    private void showGetInvitationCodeView() {
+        invitationCodeHolder.setVisibility(View.VISIBLE);
+    }
 
 }
