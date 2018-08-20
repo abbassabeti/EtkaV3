@@ -60,6 +60,17 @@
             android:layout_height="match_parent"
             android:layout_above="@id/replyButton" />
 
+        <ir.etkastores.app.ui.views.MessageView
+            android:id="@+id/messageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/circularProgress"
+            style="@style/circularProgressStyle"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
     </RelativeLayout>
 
 </LinearLayout>
