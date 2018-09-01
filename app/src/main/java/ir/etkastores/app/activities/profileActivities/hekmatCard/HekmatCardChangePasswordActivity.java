@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.HekmatChangePasswordRequest;
 import ir.etkastores.app.ui.Toaster;
@@ -51,6 +52,10 @@ public class HekmatCardChangePasswordActivity extends BaseActivity implements Et
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_hekmat_card_change_password);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);

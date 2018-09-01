@@ -15,6 +15,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.survey.SurveyListRecyclerAdapter;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.survey.SurveyModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -48,6 +49,10 @@ public class SurveyListActivity extends BaseActivity implements EtkaToolbar.Etka
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_survey_list);
         ButterKnife.bind(this);
         initViews();
@@ -131,6 +136,6 @@ public class SurveyListActivity extends BaseActivity implements EtkaToolbar.Etka
     @Override
     public void onSurveyClick(SurveyModel surveyModel) {
         if (isFinishing()) return;
-        SurveyActivity.show(this,surveyModel);
+        SurveyActivity.show(this, surveyModel);
     }
 }

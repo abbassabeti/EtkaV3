@@ -5,16 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.CompoundButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.BaseActivity;
-import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
@@ -22,7 +22,6 @@ import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.procalendar.XCalendar;
-import ir.etkastores.app.data.ProfileManager;
 
 public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -64,6 +63,10 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_profile_setting);
         ButterKnife.bind(this);
     }
@@ -159,14 +162,14 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         hekmatSwitch.performClick();
     }
 
-    SwitchCompat.OnCheckedChangeListener hekmatChangeListener = new SwitchCompat.OnCheckedChangeListener(){
+    SwitchCompat.OnCheckedChangeListener hekmatChangeListener = new SwitchCompat.OnCheckedChangeListener() {
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (EtkaPushNotificationConfig.isHekmatSubscribed()){
+            if (EtkaPushNotificationConfig.isHekmatSubscribed()) {
                 AdjustHelper.sendAdjustEvent(AdjustHelper.DisableHekmatNotifications);
                 EtkaPushNotificationConfig.unregisterHekmat();
-            }else{
+            } else {
                 AdjustHelper.sendAdjustEvent(AdjustHelper.EnableHekmatNotifications);
                 EtkaPushNotificationConfig.registerHekmat();
             }
@@ -174,16 +177,16 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     };
 
-    private void showSureToLogoutDialog(){
+    private void showSureToLogoutDialog() {
         final MessageDialog messageDialog = MessageDialog.sureToLogout();
         messageDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 if (isFinishing()) return;
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     AdjustHelper.sendAdjustEvent(AdjustHelper.Logout);
                     ProfileManager.logOut();
-                    Toaster.show(ProfileSettingActivity.this,R.string.logOutSuccessFully);
+                    Toaster.show(ProfileSettingActivity.this, R.string.logOutSuccessFully);
                     onBackPressed();
                 }
                 messageDialog.getDialog().cancel();

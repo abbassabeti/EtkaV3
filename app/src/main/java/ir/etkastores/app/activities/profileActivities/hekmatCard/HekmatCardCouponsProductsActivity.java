@@ -17,6 +17,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatCouponsAdapter;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.HekmatCoupons;
 import ir.etkastores.app.models.hekmat.card.HekmatCouponsResponseModel;
@@ -65,6 +66,10 @@ public class HekmatCardCouponsProductsActivity extends BaseActivity implements E
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_hekmat_card_coupons_products);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);

@@ -68,6 +68,10 @@ public class HekmatCardRegisterActivity extends BaseActivity implements EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_hekmat_card_register);
         ButterKnife.bind(this);
         cardNumber = getIntent().getExtras().getString(CARD_NUMBER, "");

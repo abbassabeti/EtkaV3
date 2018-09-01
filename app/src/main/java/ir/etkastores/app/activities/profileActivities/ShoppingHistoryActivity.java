@@ -58,6 +58,10 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_shopping_history);
         ButterKnife.bind(this);
         initViews();

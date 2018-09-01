@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.HekmatSetPasswordRequest;
 import ir.etkastores.app.ui.Toaster;
@@ -60,6 +61,10 @@ public class HekmatCardResetPasswordActivity extends BaseActivity implements Etk
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_hekmat_kard_reset_password);
         ButterKnife.bind(this);
         cardNumber = getIntent().getExtras().getString(CARD_NUMBER, "");

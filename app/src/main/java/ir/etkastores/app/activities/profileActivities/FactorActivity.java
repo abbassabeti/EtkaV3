@@ -13,6 +13,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.FactorListRecyclerAdapter;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 
@@ -37,6 +38,10 @@ public class FactorActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_factor);
         ButterKnife.bind(this);
         factorModel = FactorModel.fromJson(getIntent().getStringExtra(MODEL));
@@ -51,7 +56,7 @@ public class FactorActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        FactorListRecyclerAdapter adapter = new FactorListRecyclerAdapter(this,factorModel);
+        FactorListRecyclerAdapter adapter = new FactorListRecyclerAdapter(this, factorModel);
         recyclerView.setAdapter(adapter);
     }
 

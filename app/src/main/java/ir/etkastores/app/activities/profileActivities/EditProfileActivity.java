@@ -18,12 +18,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
-import ir.etkastores.app.R;
-import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.Toaster;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
@@ -31,7 +32,6 @@ import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.procalendar.XCalendar;
 import ir.etkastores.app.utils.procalendar.repositories.CalendarRepoInterface;
 import ir.etkastores.app.webServices.ApiProvider;
-import ir.etkastores.app.data.ProfileManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -99,6 +99,10 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
         initViews();
@@ -126,7 +130,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         if (birthDayXCalendar != null) {
             calendar = birthDayXCalendar.getCalendar(XCalendar.JalaliType);
             selectedDay = calendar.getDay();
-            selectedMonth = calendar.getMonth()-1;
+            selectedMonth = calendar.getMonth() - 1;
             selectedYear = calendar.getYear();
         } else {
             calendar = new XCalendar().getCalendar(XCalendar.JalaliType);
@@ -179,8 +183,8 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         educationItems.add(UserProfileModel.translateEducation(UserProfileModel.EducationItems.PHD));
         educationAdapter = generateArrayAdapter(educationItems);
         educationSpinner.setAdapter(educationAdapter);
-        if (!TextUtils.isEmpty(selectedEducation)){
-            switch (selectedEducation){
+        if (!TextUtils.isEmpty(selectedEducation)) {
+            switch (selectedEducation) {
 
                 case UserProfileModel.EducationItems.Illiterate:
                     educationSpinner.setSelection(1);
@@ -378,8 +382,8 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         profileModel.setGender(selectedGender);
         profileModel.setEducation(selectedEducation);
         String selectedBirthDate = null;
-        if (selectedYear != NOT_SET && selectedMonth != NOT_SET && selectedDay != NOT_SET){
-            XCalendar selectedDateCalendar = XCalendar.fromJalali(selectedYear,selectedMonth,selectedDay);
+        if (selectedYear != NOT_SET && selectedMonth != NOT_SET && selectedDay != NOT_SET) {
+            XCalendar selectedDateCalendar = XCalendar.fromJalali(selectedYear, selectedMonth, selectedDay);
             selectedBirthDate = selectedDateCalendar.getCalendar(XCalendar.GregorianType).getYYYYMMDD("-");
         }
         profileModel.setBirthDate(selectedBirthDate);
@@ -388,23 +392,23 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         sendUpdateRequest();
     }
 
-    private void sendUpdateRequest(){
-        loadingDialog = DialogHelper.showLoading(this,R.string.inUpdatingUserProfile);
+    private void sendUpdateRequest() {
+        loadingDialog = DialogHelper.showLoading(this, R.string.inUpdatingUserProfile);
         updateReq = ApiProvider.getAuthorizedApi().editUserProfile(newProfileInfo);
         updateReq.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
                 if (loadingDialog == null) return;
-                if (response.isSuccessful()){
-                    if (response.body().isSuccessful()){
+                if (response.isSuccessful()) {
+                    if (response.body().isSuccessful()) {
                         ProfileManager.saveProfile(newProfileInfo);
-                        Toaster.show(EditProfileActivity.this,R.string.profileUpdatedSuccessfully);
+                        Toaster.show(EditProfileActivity.this, R.string.profileUpdatedSuccessfully);
                         onBackPressed();
-                    }else{
+                    } else {
                         showUpdateProfileError(response.body().getMeta().getMessage());
                     }
-                }else{
-                    onFailure(call,null);
+                } else {
+                    onFailure(call, null);
                 }
                 loadingDialog.cancel();
             }
@@ -419,13 +423,13 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         });
     }
 
-    private void showUpdateProfileError(String message){
-        final MessageDialog retryDialog = MessageDialog.warningRetry(getResources().getString(R.string.error),message);
+    private void showUpdateProfileError(String message) {
+        final MessageDialog retryDialog = MessageDialog.warningRetry(getResources().getString(R.string.error), message);
         retryDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 retryDialog.getDialog().cancel();
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     sendUpdateRequest();
                 }
             }

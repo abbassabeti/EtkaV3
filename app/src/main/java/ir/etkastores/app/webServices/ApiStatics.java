@@ -1,8 +1,8 @@
 package ir.etkastores.app.webServices;
 
-import android.text.TextUtils;
-
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.utils.DiskDataHelper;
+import ir.etkastores.app.utils.StringXORer;
 
 /**
  * Created by Sajad on 9/3/17.
@@ -65,8 +65,10 @@ public class ApiStatics {
     public static final String HEKMAT_GET_COUPONS = "/api/v1/hekmat/GetCoupons";
 
 
-    public static final String CLIENT_ID = "AS1zb49R43RTIn5934dn34Prxxa34RT";
-    public static final String CLIENT_SECRET = "AS85dwD5asd8E4ESD85";
+    private static final String CLIENT_ID = "KCEfHxZfWCFAXCAxOkBUSUNdFkBWQDsTCwwOQVEheg==";
+    private static final String CLIENT_SECRET = "KCEWUBAcJUYVHBZdNhokIzRRRw==";
+    private static final String GUEST_USER_NAME = "LgdLFgA+EhYG";
+    private static final String GUEST_USER_PASSWORD = "LAZxRgEYC0RMPBc=";
 
     public static final String GRAND_TYPE_PASSWORD = "password";
     public static final String GRAND_TYPE_VERIFY = "verify";
@@ -82,6 +84,26 @@ public class ApiStatics {
     public static void saveToken(AccessToken token) {
         DiskDataHelper.saveLastToken(token);
         lastToken = token;
+    }
+
+    public static String getClientId() {
+        return decode(CLIENT_ID);
+    }
+
+    public static String getClientSecret() {
+        return decode(CLIENT_SECRET);
+    }
+
+    public static String getGuestUserName() {
+        return decode(GUEST_USER_NAME);
+    }
+
+    public static String getGuestPassword() {
+        return decode(GUEST_USER_PASSWORD);
+    }
+
+    private static String decode(String str) {
+        return new StringXORer().decode(str, BuildConfig.APPLICATION_ID);
     }
 
 }

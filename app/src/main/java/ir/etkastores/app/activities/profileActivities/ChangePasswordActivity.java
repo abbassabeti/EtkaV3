@@ -3,7 +3,6 @@ package ir.etkastores.app.activities.profileActivities;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
@@ -12,22 +11,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.ChangePasswordRequestModel;
-import ir.etkastores.app.R;
-import ir.etkastores.app.models.profile.UserProfileModel;
-import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.Toaster;
+import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
-import ir.etkastores.app.utils.AdjustHelper;
-import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.DiskDataHelper;
-import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
@@ -54,6 +47,10 @@ public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_change_password);
         ButterKnife.bind(this);
         initViews();

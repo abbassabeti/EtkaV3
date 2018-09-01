@@ -22,6 +22,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.activities.StoresListActivity;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.data.TicketsDepartmentsManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.store.StoreModel;
@@ -79,6 +80,10 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_new_ticket);
         ButterKnife.bind(this);
         type = getIntent().getExtras().getInt(TYPE);
@@ -143,17 +148,17 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
             return;
         }
 
-        if (type == SUPPORT_TYPE && selectedDepartment == null){
+        if (type == SUPPORT_TYPE && selectedDepartment == null) {
             Toaster.showLong(this, R.string.pleaseSelectDepartment);
             return;
         }
 
         reqModel = new TicketRequestModel();
 
-        if (type == SUPPORT_TYPE){
-            reqModel = new TicketRequestModel(titleEt.getText().toString(),bodyEt.getText().toString(),selectedDepartment.getId());
-        }else{
-            reqModel = new TicketRequestModel(titleEt.getText().toString(),bodyEt.getText().toString(),selectedStore.getId());
+        if (type == SUPPORT_TYPE) {
+            reqModel = new TicketRequestModel(titleEt.getText().toString(), bodyEt.getText().toString(), selectedDepartment.getId());
+        } else {
+            reqModel = new TicketRequestModel(titleEt.getText().toString(), bodyEt.getText().toString(), selectedStore.getId());
         }
 
         if (type == REQUEST_PRODUCT_TYPE) {
@@ -249,13 +254,13 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     }
 
     private void sendRequestProductTicket() {
-        loadingDialog = DialogHelper.showLoading(this,R.string.inSendingRequest);
+        loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
         req = ApiProvider.getAuthorizedApi().sendRequestProduct(reqModel);
         req.enqueue(reqCallback);
     }
 
     private void sendSupportTicket() {
-        loadingDialog = DialogHelper.showLoading(this,R.string.inSendingRequest);
+        loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
         req = ApiProvider.getAuthorizedApi().sendSupportTicket(reqModel);
         req.enqueue(reqCallback);
     }
@@ -264,15 +269,15 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         @Override
         public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {
             if (isFinishing()) return;
-            if (response.isSuccessful()){
-                if (response.body().isSuccessful()){
-                    Toaster.show(NewTicketActivity.this,R.string.ticketSendSuccessfully);
+            if (response.isSuccessful()) {
+                if (response.body().isSuccessful()) {
+                    Toaster.show(NewTicketActivity.this, R.string.ticketSendSuccessfully);
                     finish();
-                }else{
-                    showErrorDialog(response.body().getMeta().getMessage(),false);
+                } else {
+                    showErrorDialog(response.body().getMeta().getMessage(), false);
                 }
-            }else{
-                onFailure(call,null);
+            } else {
+                onFailure(call, null);
             }
             loadingDialog.cancel();
         }
@@ -281,7 +286,7 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
         public void onFailure(Call<OauthResponse<Long>> call, Throwable t) {
             if (isFinishing()) return;
             loadingDialog.cancel();
-            showErrorDialog(getResources().getString(R.string.errorInSendingRequest),true);
+            showErrorDialog(getResources().getString(R.string.errorInSendingRequest), true);
         }
     };
 

@@ -39,8 +39,6 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
 
-//import ir.etkastores.app.services.EtkaBeaconService;
-
 public class MainActivity extends BaseActivity {
 
     public static void show(Context context, NotificationModel notificationModel) {
@@ -291,6 +289,5 @@ public class MainActivity extends BaseActivity {
 
         }
     }
-
 }
 

@@ -18,8 +18,6 @@ import ir.etkastores.app.webServices.ApiStatics;
 
 public class ProfileManager {
 
-    public static final String GUEST_USER_NAME = "GuestUser";
-    public static final String GUEST_USER_PASSWORD = "Et_#usj78Se";
     //    private static final String USER_NAME = "USER_NAME";
 //    private static final String USER_PASSWORD = "USER_PASSWORD";
     private final static String PROFILE_KEY = "PROFILE_KEY";

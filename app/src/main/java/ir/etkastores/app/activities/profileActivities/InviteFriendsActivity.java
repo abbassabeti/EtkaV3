@@ -9,10 +9,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
-import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.IntentHelper;
 
 public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
@@ -31,6 +31,10 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_invite_friends);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
@@ -57,7 +61,7 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
     public void onShareButtonClick() {
         String message = String.format(getResources().getString(R.string.shareInvitationCodeMessage), ProfileManager.getProfile().getInvitationCode()) +
                 "\n" + getResources().getString(R.string.cafebazaarAppUrl);
-        IntentHelper.share(this,getResources().getString(R.string.etkaStoreAppInvitation),message);
+        IntentHelper.share(this, getResources().getString(R.string.etkaStoreAppInvitation), message);
     }
 
 }

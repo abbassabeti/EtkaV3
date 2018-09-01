@@ -151,8 +151,8 @@ public class ApiProvider {
                                 Call<AccessToken> call = tokenClient.getToken(
                                         ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
                                         "",
-                                        ApiStatics.CLIENT_ID,
-                                        ApiStatics.CLIENT_SECRET,
+                                        ApiStatics.getClientId(),
+                                        ApiStatics.getClientSecret(),
                                         refreshToken);
 
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
@@ -213,12 +213,12 @@ public class ApiProvider {
             vc = mobilePhone + "-" + verificationCode;
         }
         if (!TextUtils.isEmpty(invitationCode)) vc += "-" + invitationCode;
-        return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, vc, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+        return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, vc, ApiStatics.getClientId(), ApiStatics.getClientSecret(), "");
     }
 
     public static Call<AccessToken> guestLogin() {
         EtkaPushNotificationConfig.registerGuests();
-        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ProfileManager.GUEST_USER_NAME, ProfileManager.GUEST_USER_PASSWORD, ApiStatics.CLIENT_ID, ApiStatics.CLIENT_SECRET, "");
+        return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ApiStatics.getGuestUserName(), ApiStatics.getGuestPassword(), ApiStatics.getClientId(), ApiStatics.getClientSecret(), "");
     }
 
     public static CertificatePinner certificatePinner = null;

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 
 import com.google.gson.Gson;
 
@@ -18,6 +17,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.survey.SurveyRecyclerAdapter;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.survey.QuestionIdAnswerIDModel;
 import ir.etkastores.app.models.survey.QuestionModel;
@@ -69,6 +69,10 @@ public class SurveyActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_survey);
         surveyModel = SurveyModel.fromJson(getIntent().getStringExtra(SURVEY));
         ButterKnife.bind(this);

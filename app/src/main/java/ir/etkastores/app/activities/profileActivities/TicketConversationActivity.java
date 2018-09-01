@@ -21,6 +21,7 @@ import butterknife.OnClick;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketConversationAdapter;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.tickets.TicketItem;
 import ir.etkastores.app.models.tickets.TicketRequestModel;
@@ -82,6 +83,10 @@ public class TicketConversationActivity extends BaseActivity implements EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_ticket_conversation);
         ButterKnife.bind(this);
         ticketItem = TicketItem.fromJson(getIntent().getExtras().getString(TICKET_ITEM, ""));

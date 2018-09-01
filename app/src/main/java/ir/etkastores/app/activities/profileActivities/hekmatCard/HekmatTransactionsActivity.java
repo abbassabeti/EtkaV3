@@ -14,6 +14,7 @@ import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatTransactionRecyclerAdapter;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.card.InstallmentItem;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
@@ -48,6 +49,10 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (ProfileManager.isGuest()) {
+            finish();
+            return;
+        }
         setContentView(R.layout.activity_hekmat_transactions);
         ButterKnife.bind(this);
         initViews();

@@ -313,5 +313,6 @@
     <string name="loginToAccountOrRegister">ورود به حساب کاربری / ثبت نام</string>
     <string name="enterInvitationCodeHere" >کد معرف خود را وارد کنید</string>
     <string name="ifYouHaveInvitationCodeWriteHere">در صورت داشتن کد معرف، آن را در قسمت زیر وارد کنید</string>
+    <string name="rootedDeviceCantUseApp">استفاده از این اپلیکیشن برای دستگاه های روت شده امکان پذیر نمیباشد!</string>
 
 </resources>

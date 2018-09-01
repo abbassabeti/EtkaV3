@@ -56,54 +56,67 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".activities.LoginRegisterActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.EditProfileActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.ProfileSettingActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.FAQActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.InviteFriendsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.NextShoppingListActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.ShoppingHistoryActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.OtherPagesActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.ScoresActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.SupportActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.RequestsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.TextInfoActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
@@ -121,62 +134,77 @@
         </activity>
         <activity
             android:name=".activities.ProductActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.HekmatProductsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.ScannerActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.hekmatCard.HekmatActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".activities.profileActivities.NewTicketActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".activities.StoresListActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".activities.profileActivities.ChangePasswordActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.GalleryActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.InStoreModeActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.NewsListActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.NewsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.WalkthroughActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.Light" />
         <activity
             android:name=".activities.profileActivities.FactorActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.CategoriesFilterActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".activities.profileActivities.survey.SurveyActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
 
@@ -185,6 +213,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <service android:name=".services.EtkaFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -202,38 +231,47 @@
 
         <activity
             android:name=".activities.FinishActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.LoginWithSMSActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.survey.SurveyListActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.hekmatCard.HekmatCardCouponsProductsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.hekmatCard.HekmatTransactionsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.TicketConversationActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar.WhiteParentStyle" />
         <activity
             android:name=".activities.profileActivities.hekmatCard.HekmatCardRegisterActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.hekmatCard.HekmatCardResetPasswordActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
             android:name=".activities.profileActivities.hekmatCard.HekmatCardChangePasswordActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
     </application>
