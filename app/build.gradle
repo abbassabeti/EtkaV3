@@ -27,8 +27,8 @@ android {
         applicationId "ir.etkastores.app"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 24
-        versionName "3.0.0 Test 25.1"
+        versionCode 25
+        versionName "3.0.0 Test 25.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
