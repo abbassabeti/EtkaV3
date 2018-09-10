@@ -13,18 +13,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.HekmatProductsActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatRecyclerAdapter;
 import ir.etkastores.app.data.HekmatProductsManager;
-import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.hekmat.HekmatModel;
-import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
-import ir.etkastores.app.webServices.ApiProvider;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Sajad on 12/2/17.
@@ -73,7 +68,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
     private void loadData() {
         showLoading();
         messageView.hide();
-        HekmatProductsManager.getInstance().getProducts(this,null);
+        HekmatProductsManager.getInstance().getProducts(this, null);
     }
 
     private void showLoading() {
@@ -102,24 +97,28 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
         HekmatProductsActivity.show(getActivity(), hekmatModel);
     }
 
-    private void showErrorView(String message) {
-        messageView.show(R.drawable.ic_warning_orange_48dp, message, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
-            @Override
-            public void onMessageViewButtonClick() {
-                loadData();
-            }
-        });
+    private void showErrorView(String message, boolean showRetry) {
+        if (showRetry) {
+            messageView.show(R.drawable.ic_warning_orange_48dp, message, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
+                @Override
+                public void onMessageViewButtonClick() {
+                    loadData();
+                }
+            });
+        } else {
+            messageView.show(R.drawable.ic_warning_orange_48dp, message, null, null);
+        }
     }
 
     @Override
     public void onProductsLoaded(List<HekmatModel> products) {
         if (!isAdded()) return;
         hideLoading();
-        if (products != null && products.size()>0){
+        if (products != null && products.size() > 0) {
             adapter.setItems(products);
             isDataLoaded = true;
-        }else{
-            showErrorView(getResources().getString(R.string.thereIsNotResultAvailable));
+        } else {
+            showErrorView(getResources().getString(R.string.thereIsNotResultAvailable),false);
         }
     }
 
@@ -127,7 +126,7 @@ public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.
     public void onLoadFailure() {
         if (!isAdded()) return;
         hideLoading();
-        showErrorView(getResources().getString(R.string.errorHappendInReceivingData));
+        showErrorView(getResources().getString(R.string.errorHappendInReceivingData),true);
     }
 
 }

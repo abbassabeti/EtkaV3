@@ -255,7 +255,6 @@ public class CategoriesFilterActivity extends BaseActivity implements
             @Override
             public void onFailure(Call<OauthResponse<List<CategoryModel>>> call, Throwable throwable) {
                 if (isFinishing() || call.isCanceled()) return;
-
             }
         });
     }
