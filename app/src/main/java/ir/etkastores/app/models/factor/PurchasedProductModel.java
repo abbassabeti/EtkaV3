@@ -17,7 +17,7 @@ public class PurchasedProductModel {
     private String price;
 
     @SerializedName("count")
-    private int count;
+    private String count;
 
     @SerializedName("imageUrl")
     private String imageUrl;
@@ -41,7 +41,7 @@ public class PurchasedProductModel {
         return price;
     }
 
-    public int getCount() {
+    public String getCount() {
         return count;
     }
 

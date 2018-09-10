@@ -59,11 +59,11 @@ public class EtkaApp extends MultiDexApplication {
                 .build());
     }
 
-    public synchronized static SharedPreferences getPreference(){
-        return instance.getSharedPreferences("PREFERENCES",MODE_PRIVATE);
+    public synchronized static SharedPreferences getPreference() {
+        return instance.getSharedPreferences("PREFERENCES", MODE_PRIVATE);
     }
 
-    private void initAdjust(){
+    private void initAdjust() {
         String appToken = "uoflo2801534";
         String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
         if (!BuildConfig.DEBUG) environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
@@ -83,11 +83,11 @@ public class EtkaApp extends MultiDexApplication {
         return mTracker;
     }
 
-    public void screenView(String screenName){
+    public void screenView(String screenName) {
         EventsManager.screenView(screenName);
     }
 
-    private static final class AdjustLifecycleCallbacks implements ActivityLifecycleCallbacks{
+    private static final class AdjustLifecycleCallbacks implements ActivityLifecycleCallbacks {
 
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

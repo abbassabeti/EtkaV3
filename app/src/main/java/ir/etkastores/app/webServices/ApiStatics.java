@@ -1,6 +1,8 @@
 package ir.etkastores.app.webServices;
 
-import ir.etkastores.app.BuildConfig;
+import android.text.TextUtils;
+
+import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.StringXORer;
 
@@ -12,22 +14,22 @@ public class ApiStatics {
 
     private static final String BASE_URL_KEY = "BASE_URL";
     //        private static String BASE_URL = "http://46.209.6.91:4102";
-//    private static String BASE_URL = "https://api.ecrmapp.ir/";
-    private static String BASE_URL = "http://77.104.103.165:4102";
+    private static String BASE_URL = "https://api.ecrmapp.ir/";
+//    private static String BASE_URL = "http://77.104.103.165:4102";
 
     public static String getBaseUrl() {
-//        String savedUrl = DiskDataHelper.getString(BASE_URL_KEY);
-//        if (TextUtils.isEmpty(savedUrl)) {
-//            return BASE_URL;
-//        } else {
-//            BASE_URL = savedUrl;
-//        }
+        String savedUrl = DiskDataHelper.getString(BASE_URL_KEY);
+        if (TextUtils.isEmpty(savedUrl)) {
+            return BASE_URL;
+        } else {
+            BASE_URL = savedUrl;
+        }
         return BASE_URL;
     }
 
     public static void setBaseUrl(String url) {
-//        DiskDataHelper.putString(BASE_URL_KEY, url);
-//        BASE_URL = url;
+        DiskDataHelper.putString(BASE_URL_KEY, url);
+        BASE_URL = url;
     }
 
     public static final String TOKEN = "/Token";
@@ -103,7 +105,7 @@ public class ApiStatics {
     }
 
     private static String decode(String str) {
-        return new StringXORer().decode(str, BuildConfig.APPLICATION_ID);
+        return new StringXORer().decode(str, EtkaApp.getInstance().getPackageName());
     }
 
 }

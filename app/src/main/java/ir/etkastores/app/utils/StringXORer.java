@@ -21,7 +21,6 @@ public class StringXORer {
         return out;
     }
 
-    @SuppressLint("NewApi")
     private byte[] base64Decode(String s) {
         try {
             return Base64.decode(s, Base64.DEFAULT);
@@ -30,7 +29,6 @@ public class StringXORer {
         }
     }
 
-    @SuppressLint("NewApi")
     private String base64Encode(byte[] bytes) {
         return Base64.encodeToString(bytes, Base64.DEFAULT).replaceAll("\\s", "");
     }

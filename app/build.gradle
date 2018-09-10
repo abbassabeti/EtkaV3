@@ -7,8 +7,10 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
+
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -26,7 +28,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 24
-        versionName "3.0.0 Beta 24"
+        versionName "3.0.0 Test 25.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
@@ -108,6 +110,7 @@ dependencies {
 
     compile 'com.adjust.sdk:adjust-android:4.12.4'
     compile 'com.android.installreferrer:installreferrer:1.0'
+
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
