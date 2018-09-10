@@ -13,9 +13,7 @@ import ir.etkastores.app.utils.StringXORer;
 public class ApiStatics {
 
     private static final String BASE_URL_KEY = "BASE_URL";
-    //        private static String BASE_URL = "http://46.209.6.91:4102";
     private static String BASE_URL = "https://api.ecrmapp.ir/";
-//    private static String BASE_URL = "http://77.104.103.165:4102";
 
     public static String getBaseUrl() {
         String savedUrl = DiskDataHelper.getString(BASE_URL_KEY);
