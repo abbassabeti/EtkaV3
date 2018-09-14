@@ -178,11 +178,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.SolidSystemBar" />
         <activity
-            android:name=".activities.NewsListActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.SolidSystemBar" />
-        <activity
             android:name=".activities.NewsActivity"
             android:exported="false"
             android:screenOrientation="portrait"

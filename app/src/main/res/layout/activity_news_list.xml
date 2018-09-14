@@ -3,16 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="ir.etkastores.app.activities.NewsActivity">
-
-    <ir.etkastores.app.ui.views.EtkaToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:showBack="true"
-        app:title="@string/news"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,12 +13,12 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <ir.etkastores.app.ui.views.MessageView
             android:id="@+id/messageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <ProgressBar
             android:id="@+id/circularProgress"
@@ -34,10 +26,10 @@
 
         <ProgressBar
             android:id="@+id/linearProgress"
+            style="@style/linearProgressStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            style="@style/linearProgressStyle" />
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

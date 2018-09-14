@@ -276,7 +276,8 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case NotificationModel.ACTION_OPEN_NEWS_LIST:
-                NewsListActivity.show(this);
+                //TODO Handle new News fragment
+//                NewsListActivity.show(this);
                 break;
 
             case NotificationModel.ACTION_OPEN_GALLERY:

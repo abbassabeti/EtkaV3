@@ -1,23 +1,26 @@
-package ir.etkastores.app.activities;
+package ir.etkastores.app.fragments.home;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.activities.NewsActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.NewsListRecyclerAdapter;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.news.NewsItem;
 import ir.etkastores.app.models.news.NewsRequestModel;
 import ir.etkastores.app.models.news.NewsResponseModel;
-import ir.etkastores.app.ui.dialogs.MessageDialog;
-import ir.etkastores.app.ui.views.EtkaToolbar;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.webServices.ApiProvider;
@@ -25,15 +28,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, NewsListRecyclerAdapter.OnNewsListCallbackListener {
+public class NewsListFragment extends Fragment implements NewsListRecyclerAdapter.OnNewsListCallbackListener {
 
-    public static void show(Context context) {
-        Intent intent = new Intent(context, NewsListActivity.class);
-        context.startActivity(intent);
+    public static Fragment newInstance() {
+        return new NewsListFragment();
     }
-
-    @BindView(R.id.toolbar)
-    EtkaToolbar toolbar;
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -51,38 +50,27 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     private NewsRequestModel requestModel;
     private NewsListRecyclerAdapter adapter;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_list);
-        ButterKnife.bind(this);
-        toolbar.setActionListeners(this);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_news_list, container, false);
+        ButterKnife.bind(this, view);
         initViews();
+        return view;
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        EtkaApp.getInstance().screenView("News List Activity");
+        EtkaApp.getInstance().screenView("News List Fragment");
     }
 
     private void initViews() {
         requestModel = new NewsRequestModel(null, 1);
-        adapter = new NewsListRecyclerAdapter(this);
+        adapter = new NewsListRecyclerAdapter(getActivity());
         adapter.setCallback(this);
         recyclerView.setAdapter(adapter);
         loadNews();
-    }
-
-
-    @Override
-    public void onToolbarBackClick() {
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onActionClick(int actionCode) {
-
     }
 
     private void loadNews() {
@@ -91,7 +79,7 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         newsReq.enqueue(new Callback<OauthResponse<NewsResponseModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<NewsResponseModel>> call, Response<OauthResponse<NewsResponseModel>> response) {
-                if (isFinishing()) return;
+                if (!isAdded()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         adapter.addItems(response.body().getData().getItems());
@@ -104,9 +92,9 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
                         }
                     } else {
                         if (adapter.getItemCount() == 0) {
-                            showRetryMessageView(response.body().getMeta().getMessage());
+                            showMessageView(response.body().getMeta().getMessage(), false);
                         } else {
-                            showRetryDialog(response.body().getMeta().getMessage());
+                            Toaster.show(getActivity(), response.body().getMeta().getMessage());
                         }
                     }
                 } else {
@@ -117,13 +105,13 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
 
             @Override
             public void onFailure(Call<OauthResponse<NewsResponseModel>> call, Throwable throwable) {
-                if (isFinishing()) return;
+                if (!isAdded()) return;
                 hideLoading();
                 String message = getResources().getString(R.string.errorInReceivingNews);
                 if (adapter.getItemCount() == 0) {
-                    showRetryMessageView(message);
+                    showMessageView(message, true);
                 } else {
-                    showRetryDialog(message);
+                    Toaster.show(getActivity(), message);
                 }
             }
         });
@@ -134,31 +122,12 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
         loadNews();
     }
 
-    private void showRetryDialog(String message) {
+    private void showMessageView(String message, boolean hasRetry) {
         messageView.show(R.drawable.ic_warning_orange_48dp, message, getResources().getString(R.string.retry), new MessageView.OnMessageViewButtonClick() {
             @Override
             public void onMessageViewButtonClick() {
-                if (isFinishing()) return;
+                if (!isAdded()) return;
                 loadNews();
-            }
-        });
-    }
-
-    private void showRetryMessageView(String message) {
-        final MessageDialog messageDialog = MessageDialog.errorRetry(message);
-        messageDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
-            @Override
-            public void onDialogMessageButtonsClick(int button) {
-                if (isFinishing()) return;
-                if (button == RIGHT_BUTTON) {
-                    loadNews();
-                }
-                messageDialog.getDialog().cancel();
-            }
-
-            @Override
-            public void onDialogMessageDismiss() {
-
             }
         });
     }
@@ -166,7 +135,7 @@ public class NewsListActivity extends BaseActivity implements EtkaToolbar.EtkaTo
     @Override
     public void onNewsClicked(NewsItem item) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewsDetail);
-        NewsActivity.show(this, item);
+        NewsActivity.show(getActivity(), item);
     }
 
     private void showLoading() {

@@ -1,6 +1,7 @@
 package ir.etkastores.app.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -69,8 +70,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @BindView(R.id.storeInfoHolder)
     View storeInfoHolder;
 
-    @BindView(R.id.infoStoreName)
-    TextView storeName;
+//    @BindView(R.id.infoStoreName)
+//    TextView storeName;
 
     @BindView(R.id.storeSearchInput)
     AutoCompleteTextView storeSearchInput;
@@ -191,7 +192,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public boolean onMarkerClick(Marker marker) {
         clearSelectedMarker();
         selectedStore = storesHashMap.get(marker);
-        storeName.setText(selectedStore.getName());
+//        storeName.setText(selectedStore.getName());
         storeInfoHolder.setVisibility(View.VISIBLE);
         selectedMarker = marker;
         marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker));
@@ -291,6 +292,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                         .build());
     }
 
+    @SuppressLint("MissingPermission")
     private void findUserLocation(){
         try{
             map.setMyLocationEnabled(true);

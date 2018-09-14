@@ -314,5 +314,10 @@
     <string name="enterInvitationCodeHere">کد معرف خود را وارد کنید</string>
     <string name="ifYouHaveInvitationCodeWriteHere">در صورت داشتن کد معرف، آن را در قسمت زیر وارد کنید</string>
     <string name="rootedDeviceCantUseApp">استفاده از این اپلیکیشن برای دستگاه های روت شده امکان پذیر نمیباشد!</string>
+    <string name="product">کالا</string>
+    <string name="virtualTourOfStore">تور مجازی فروشگاه</string>
+    <string name="stores">فروشگاه ها</string>
+    <string name="customer">مشتری</string>
+    <string name="products">کالاها</string>
 
 </resources>
