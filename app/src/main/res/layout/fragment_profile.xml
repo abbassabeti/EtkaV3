@@ -191,7 +191,7 @@
                         android:layout_height="wrap_content"
                         app:rowIcon="@drawable/ic_invite_friends_grey_24dp"
                         app:rowText="@string/inviteFriends"
-                        app:scoreText="@string/score5"
+                        app:scoreText="@string/score1"
                         app:showScore="true"
                         app:showScoreStar="true" />
 
@@ -211,7 +211,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:rowIcon="@drawable/ic_support_grey_24dp"
-                        app:rowText="@string/ticketsAndSendRequest" />
+                        app:rowText="@string/ticketsAndSendProductRequest" />
 
                 </LinearLayout>
 

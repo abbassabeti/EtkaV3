@@ -19,7 +19,7 @@ public class StoreModel implements Cloneable {
     long id;
 
     @SerializedName("code")
-    long code;
+    String code;
 
     @SerializedName("name")
     String name;
@@ -76,7 +76,7 @@ public class StoreModel implements Cloneable {
         }
     }
 
-    public StoreModel(long id, long code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage, String inStoreModeUrl) {
+    public StoreModel(long id, String code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage, String inStoreModeUrl) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -98,7 +98,7 @@ public class StoreModel implements Cloneable {
         return id;
     }
 
-    public long getCode() {
+    public String getCode() {
         return code;
     }
 

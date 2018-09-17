@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatHorizontalRecyclerListAdapter;
 import ir.etkastores.app.data.HekmatProductsManager;
 import ir.etkastores.app.data.StaticsData;
@@ -35,7 +36,6 @@ import ir.etkastores.app.models.GalleryItemsModel;
 import ir.etkastores.app.models.hekmat.HekmatModel;
 import ir.etkastores.app.models.store.FeatureModel;
 import ir.etkastores.app.models.store.StoreModel;
-import ir.etkastores.app.R;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
@@ -43,16 +43,23 @@ import ir.etkastores.app.ui.views.StorePagerSliderView;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
 import ir.etkastores.app.utils.FontUtils;
-import ir.etkastores.app.utils.image.ImageLoader;
 import ir.etkastores.app.utils.IntentHelper;
+import ir.etkastores.app.utils.image.ImageLoader;
 
 public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, StoresManager.StoresCallback, StorePagerSliderView.OnStoreImageClickListener {
 
     private final static String STORE_KEY = "STORE_KEY";
+    private final static String STORE_CODE_KEY = "STORE_CODE_KEY";
 
     public static void show(Activity activity, StoreModel storeModel) {
         Intent intent = new Intent(activity, StoreActivity.class);
         intent.putExtra(STORE_KEY, new Gson().toJson(storeModel));
+        activity.startActivity(intent);
+    }
+
+    public static void show(Activity activity, String storeCode) {
+        Intent intent = new Intent(activity, StoreActivity.class);
+        intent.putExtra(STORE_CODE_KEY, storeCode);
         activity.startActivity(intent);
     }
 
@@ -97,7 +104,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
 
     private StoreModel storeModel;
 
-    private long storeCode = 0;
+    private String storeCode = null;
 
     private AlertDialog loadingDialog;
 
@@ -108,6 +115,10 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         ButterKnife.bind(this);
 
         storeModel = new Gson().fromJson(getIntent().getStringExtra(STORE_KEY), StoreModel.class);
+
+        if (storeModel == null) {
+            storeCode = getIntent().getStringExtra(STORE_CODE_KEY);
+        }
 
         toolbar.setActionListeners(this);
 
@@ -125,15 +136,17 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
             url = url.replace(StaticsData.etkaStoreScheme, "");
             url = url.trim();
             try {
-                long code = Long.parseLong(url);
-                storeCode = code;
+                storeCode = url;
                 loadStore();
             } catch (Exception err) {
                 finish();
             }
+        } else if (!TextUtils.isEmpty(storeCode)) {
+            loadStore();
         } else {
             finish();
         }
+
     }
 
     @Override
@@ -289,7 +302,7 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         hideLoading();
         boolean storeIsAvailable = false;
         for (StoreModel store : stores) {
-            if (store.getCode() == storeCode) {
+            if (store.getCode().contentEquals(storeCode)) {
                 storeModel = store;
                 storeIsAvailable = true;
                 break;
@@ -346,15 +359,15 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
     }
 
     @OnClick(R.id.managerPhoto)
-    public void onManagerPhotoClick(){
-        GalleryItemsModel galleryItemsModel = new GalleryItemsModel(storeModel.getManagerName(),storeModel.getManagerImage(),0);
-        GalleryActivity.show(this,galleryItemsModel);
+    public void onManagerPhotoClick() {
+        GalleryItemsModel galleryItemsModel = new GalleryItemsModel(storeModel.getManagerName(), storeModel.getManagerImage(), 0);
+        GalleryActivity.show(this, galleryItemsModel);
     }
 
     @Override
     public void onStoreImageClick(int position, String img) {
-        GalleryItemsModel galleryItemsModel = new GalleryItemsModel(storeModel.getName(),img,position);
-        GalleryActivity.show(this,galleryItemsModel);
+        GalleryItemsModel galleryItemsModel = new GalleryItemsModel(storeModel.getName(), img, position);
+        GalleryActivity.show(this, galleryItemsModel);
     }
 
 }

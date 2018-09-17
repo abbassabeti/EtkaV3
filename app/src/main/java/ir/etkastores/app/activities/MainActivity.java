@@ -268,7 +268,7 @@ public class MainActivity extends BaseActivity {
                 break;
 
             case NotificationModel.ACTION_OPEN_STORE_PROFILE:
-                StoreActivity.show(this, StoreModel.fromJson(notificationModel.getData()));
+                StoreActivity.show(this,notificationModel.getData());
                 break;
 
             case NotificationModel.ACTION_OPEN_NEWS:

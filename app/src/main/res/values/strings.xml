@@ -41,7 +41,7 @@
     <string name="yourShoppingHistory">سابقه خرید های شما</string>
     <string name="inviteFriends">دعوت از دوستان</string>
     <string name="faq">سوالات متداول</string>
-    <string name="ticketsAndSendRequest">تیکت و ارسال درخواست</string>
+    <string name="ticketsAndSendProductRequest">تیکت و درخواست کالا</string>
     <string name="youHaveXScore">شما %d امتیاز دارید.</string>
     <string name="score5">۵ امتیاز</string>
     <string name="editProfileInfo">ویرایش اطلاعات کاربری</string>
@@ -51,7 +51,7 @@
     <string name="sendNewRequest">ارسال درخواست جدید</string>
     <string name="support">پشتیبانی</string>
     <string name="ticket">تیکت</string>
-    <string name="inviteFriendsHeaderMessage">کافیست دوستانتان با کد معرف شما در اپلیکیشن همراه فروشگاه اتکا ثبت نام کنند تا شما به ازای هر یک، ۲۰ امتیاز دریافت کنید.</string>
+    <string name="inviteFriendsHeaderMessage">کافیست دوستانتان با کد معرف شما در اپلیکیشن همراه فروشگاه اتکا ثبت نام کنند تا شما به ازای هر یک، ۱ امتیاز در باشگاه دریافت کنید.</string>
     <string name="yourInvitationCode_endWithColon">کد معرف شما:</string>
     <string name="sharing">اشتراک گذاری</string>
     <string name="aboutEtkaStores">درباره شرکت فروشگاه های زنجیره ای اتکا</string>
@@ -321,5 +321,6 @@
     <string name="stores">فروشگاه‌ها</string>
     <string name="customer">مشتری</string>
     <string name="products">کالاها</string>
+    <string name="score1">۱ امتیاز</string>
 
 </resources>
