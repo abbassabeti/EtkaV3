@@ -163,7 +163,7 @@ public class HekmatCardRegisterActivity extends BaseActivity implements EtkaTool
                     if (response.body().isSuccessful()) {
                         Toaster.show(HekmatCardRegisterActivity.this, R.string.registerSuccessful);
                         DiskDataHelper.setLastHekmatCardNumber(requestModel.getPAN());
-                        HekmatActivity.show(HekmatCardRegisterActivity.this, requestModel.getConfirmPassword(), requestModel.getPassword());
+                        HekmatActivity.show(HekmatCardRegisterActivity.this, requestModel.getPAN(), requestModel.getPassword());
                         finish();
                     } else {
                         showRetry(response.body().getMeta().getMessage(), false);
