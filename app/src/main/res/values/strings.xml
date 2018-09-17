@@ -90,7 +90,7 @@
     <string name="inStoreMap">نقشه‌داخل‌شعبه</string>
     <string name="nationalCode">کد ملی</string>
     <string name="forYou">برای‌شما</string>
-    <string name="specialOffers">فروش‌ویژه</string>
+    <string name="specialOffers">پرفروشترین‌ها</string>
     <string name="hekmatWares">کالاهای‌طرح‌حکمت</string>
     <string name="availableHekmatWaresInStore">کالاهای طرح حکمت موجود در شعبه:</string>
     <string name="etkaٰExclusiveWares">کالاهای‌انحصاری‌اتکا</string>
@@ -102,6 +102,7 @@
     <string name="registerSuccessful">ثبت نام با موفقیت انجام شد.</string>
     <string name="registerFailTryLater">خطایی در ثبت نام رخ داده است، لطفا دوباره تلاش کنید.</string>
     <string name="hekmatCard">حکمت کارت</string>
+    <string name="hekmatCardTest">حکمت کارت (نسخه آزمایشی)</string>
     <string name="totalPrice">قیمت کل:</string>
     <string name="errorInLoginTryLater">خطا در ورود به حساب کاربری، دوباره تلاش کنید</string>
     <string name="factorDate">تاریخ خرید: %s</string>

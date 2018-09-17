@@ -122,7 +122,7 @@ public class HomeSliderItemView extends LinearLayout {
         }
     }
 
-    CountDownTimer timer = new CountDownTimer(2000, 2000) {
+    CountDownTimer timer = new CountDownTimer(3000, 3000) {
         @Override
         public void onTick(long millisUntilFinished) {
 
