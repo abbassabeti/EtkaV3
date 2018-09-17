@@ -39,12 +39,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.activities.StoreActivity;
-import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.R;
+import ir.etkastores.app.activities.StoreActivity;
+import ir.etkastores.app.data.StoresManager;
+import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.SuggestionArrayAdapter;
-import ir.etkastores.app.data.StoresManager;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
@@ -70,8 +70,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @BindView(R.id.storeInfoHolder)
     View storeInfoHolder;
 
-//    @BindView(R.id.infoStoreName)
-//    TextView storeName;
+    @BindView(R.id.infoStoreName)
+    TextView storeName;
 
     @BindView(R.id.storeSearchInput)
     AutoCompleteTextView storeSearchInput;
@@ -79,7 +79,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @BindView(R.id.findMyLocationButton)
     AppCompatImageView findMyLocationButton;
 
-    String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION};
+    String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
     private final static int PERMISSION_REQ_CODE = 1006;
 
@@ -116,7 +116,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         map.setOnMarkerClickListener(this);
         map.setOnMapClickListener(this);
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.683333,51.416667),4));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.683333, 51.416667), 4));
 
         if (StoresManager.getInstance().getStores().size() > 0) {
             addStoresToMap(StoresManager.getInstance().getStores());
@@ -124,10 +124,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             StoresManager.getInstance().fetchStores(this);
         }
 
-        if (!EasyPermissions.hasPermissions(getActivity(),permissions)){
+        if (!EasyPermissions.hasPermissions(getActivity(), permissions)) {
             findMyLocationButton.setVisibility(View.GONE);
             requestLocationPermission();
-        }else{
+        } else {
             findMyLocationButton.setVisibility(View.VISIBLE);
             findUserLocation();
         }
@@ -142,17 +142,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         marker.anchor(0.5f, 0.5f);
         Marker m = map.addMarker(marker);
         storesHashMap.put(m, store);
-        markersHashMap.put(store,m);
+        markersHashMap.put(store, m);
     }
 
-    public void addStoresToMap(List<StoreModel> stores){
+    public void addStoresToMap(List<StoreModel> stores) {
         if (!isAdded()) return;
         List<SuggestionArrayAdapter.SearchViewItem> searchViewItems = new ArrayList<>();
-        for (StoreModel store : stores){
+        for (StoreModel store : stores) {
             addMarker(store);
             searchViewItems.add(new SuggestionArrayAdapter.SearchViewItem(store));
         }
-        searchAdapter = new SuggestionArrayAdapter(getActivity(),searchViewItems);
+        searchAdapter = new SuggestionArrayAdapter(getActivity(), searchViewItems);
         storeSearchInput.setAdapter(searchAdapter);
         storeSearchInput.setOnItemClickListener(this);
     }
@@ -168,8 +168,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-    public void animateCameraToStore(StoreModel store){
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(store.getLatitude(),store.getLongitude()), 17));
+    public void animateCameraToStore(StoreModel store) {
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(store.getLatitude(), store.getLongitude()), 17));
         onMarkerClick(markersHashMap.get(store));
     }
 
@@ -192,7 +192,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public boolean onMarkerClick(Marker marker) {
         clearSelectedMarker();
         selectedStore = storesHashMap.get(marker);
-//        storeName.setText(selectedStore.getName());
+        storeName.setText(getResources().getString(R.string.virtualTourOfStore) + " " + selectedStore.getName());
         storeInfoHolder.setVisibility(View.VISIBLE);
         selectedMarker = marker;
         marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker));
@@ -217,8 +217,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    private void clearSelectedMarker(){
-        if (selectedStore != null){
+    private void clearSelectedMarker() {
+        if (selectedStore != null) {
             if (!isAdded()) return;
             selectedMarker.setIcon(bitmapDescriptorFromVector(selectedStore.getIcon()));
             selectedMarker = null;
@@ -259,7 +259,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.SelectStoreFromSearchSuggestion);
-        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(storeSearchInput.getWindowToken(), 0);
         animateCameraToStore(searchAdapter.getItem(position).getStoreModel());
     }
@@ -267,7 +267,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     @Override
@@ -283,7 +283,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    private void requestLocationPermission(){
+    private void requestLocationPermission() {
         EasyPermissions.requestPermissions(
                 new PermissionRequest.Builder(this, PERMISSION_REQ_CODE, permissions)
                         .setRationale(R.string.locationPermissionRationalMessage)
@@ -293,11 +293,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     @SuppressLint("MissingPermission")
-    private void findUserLocation(){
-        try{
+    private void findUserLocation() {
+        try {
             map.setMyLocationEnabled(true);
             map.setOnMyLocationChangeListener(this);
-        }catch (Exception err){
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
@@ -306,17 +306,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public void onMyLocationChange(Location location) {
         try {
             map.setOnMyLocationChangeListener(null);
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), 13));
-        }catch (Exception err){
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
 
     @OnClick(R.id.findMyLocationButton)
-    public void onFindMyLocationButtonClick(){
-        if (map.getMyLocation() != null){
+    public void onFindMyLocationButtonClick() {
+        if (map.getMyLocation() != null) {
             onMyLocationChange(map.getMyLocation());
-        }else{
+        } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.FindMyLocationInMap);
             findUserLocation();
         }
