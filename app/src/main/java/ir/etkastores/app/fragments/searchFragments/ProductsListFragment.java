@@ -69,9 +69,14 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestModel = SearchProductRequestModel.fromJson(getArguments().getString(REQUEST_MODEL));
-        requestModel.setPage(1);
-        requestModel.setTake(MAX_PRODUCT_NEEDED);
+        requestModel = getOriginalRequestModel();
+    }
+
+    private SearchProductRequestModel getOriginalRequestModel() {
+        SearchProductRequestModel model = SearchProductRequestModel.fromJson(getArguments().getString(REQUEST_MODEL));
+        model.setPage(1);
+        model.setTake(MAX_PRODUCT_NEEDED);
+        return model;
     }
 
     @Nullable
@@ -202,10 +207,14 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
 
     public void refreshResult(SearchProductRequestModel searchProductRequestModel) {
         if (req != null && req.isExecuted()) req.cancel();
-        requestModel = searchProductRequestModel;
         productsAdapter.clear();
-        requestModel.setPage(1);
-        requestModel.setTake(MAX_PRODUCT_NEEDED);
+        if (searchProductRequestModel.getCategoryId() == null || searchProductRequestModel.getCategoryId().isEmpty()) {
+            requestModel = getOriginalRequestModel();
+        } else {
+            requestModel = searchProductRequestModel;
+            requestModel.setPage(1);
+            requestModel.setTake(MAX_PRODUCT_NEEDED);
+        }
         loadProducts();
     }
 
