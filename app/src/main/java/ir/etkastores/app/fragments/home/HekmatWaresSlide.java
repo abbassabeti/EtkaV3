@@ -27,7 +27,7 @@ import ir.etkastores.app.utils.AdjustHelper;
 
 public class HekmatWaresSlide extends Fragment implements HekmatRecyclerAdapter.OnHekmatItemClickListener, HekmatProductsManager.OnHekmatCallbacksListener {
 
-    public static int TAB_POSITION_ID = 2;
+    public final static int TAB_POSITION_ID = 2;
 
     public static HekmatWaresSlide newInstance() {
         return new HekmatWaresSlide();

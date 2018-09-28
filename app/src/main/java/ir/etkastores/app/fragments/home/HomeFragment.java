@@ -25,6 +25,16 @@ import ir.etkastores.app.ui.views.RTLTabLayout;
 
 public class HomeFragment extends Fragment {
 
+    private final static String SELECTED_TAB_KEY = "SELECTED_TAB";
+
+    public static HomeFragment newInstance(int selectedTab) {
+        HomeFragment homeFragment = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(SELECTED_TAB_KEY, selectedTab);
+        homeFragment.setArguments(bundle);
+        return homeFragment;
+    }
+
     private View view;
 
     @BindView(R.id.tabs)
@@ -35,6 +45,14 @@ public class HomeFragment extends Fragment {
 
     List<FragmentTitleModel> pages = new ArrayList<>();
     GlobalFragmentPagerAdapter pagerAdapter;
+
+    private int selectedTab;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        selectedTab = getArguments().getInt(SELECTED_TAB_KEY);
+    }
 
     @Nullable
     @Override
@@ -58,10 +76,7 @@ public class HomeFragment extends Fragment {
     private void createPages() {
         pages = new ArrayList<>();
 
-//        pages.add(new FragmentTitleModel(ForYouSlide.newInstance(),R.string.forYou));
         pages.add(new FragmentTitleModel(SpecialOffersSlide.newInstance(), R.string.specialOffers));
-//        pages.add(new FragmentTitleModel(TopSalesSlide.newInstance(),R.string.topSales));
-//        pages.add(new FragmentTitleModel(EtkaExclusiveWaresSlide.newInstance(),R.string.etkaٰExclusiveWares));
         pages.add(new FragmentTitleModel(HekmatWaresSlide.newInstance(), R.string.hekmatWares));
         pages.add(new FragmentTitleModel(NewsListFragment.newInstance(), R.string.news));
 
@@ -69,6 +84,22 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOffscreenPageLimit(pages.size());
         tabLayout.setupWithViewPager(viewPager);
+
+        switch (selectedTab) {
+
+            case SpecialOffersSlide.TAB_POSITION_ID:
+                viewPager.setCurrentItem(2);
+                break;
+
+            case HekmatWaresSlide.TAB_POSITION_ID:
+                viewPager.setCurrentItem(1);
+                break;
+
+            case NewsListFragment.TAB_POSITION_ID:
+                viewPager.setCurrentItem(0);
+                break;
+
+        }
     }
 
 }

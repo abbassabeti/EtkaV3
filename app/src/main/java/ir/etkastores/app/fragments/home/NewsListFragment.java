@@ -30,6 +30,8 @@ import retrofit2.Response;
 
 public class NewsListFragment extends Fragment implements NewsListRecyclerAdapter.OnNewsListCallbackListener {
 
+    public final static int TAB_POSITION_ID = 3;
+
     public static Fragment newInstance() {
         return new NewsListFragment();
     }
