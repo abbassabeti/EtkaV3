@@ -10,22 +10,19 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
-
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.models.home.HomeItemsModel;
-import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
 import ir.etkastores.app.ui.views.HomeSliderItemView;
 import ir.etkastores.app.ui.views.MessageView;
 import ir.etkastores.app.utils.AdjustHelper;
-import ir.etkastores.app.utils.EtkaLogger;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,7 +96,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
             public void onResponse(Call<OauthResponse<List<HomeItemsModel>>> call, Response<OauthResponse<List<HomeItemsModel>>> response) {
                 if (!isAdded()) return;
                 hideLoading();
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
                         if (response.body().getData().size() == 0) {
                             showMessageView(getResources().getString(R.string.thereIsNotResultAvailable), false);
@@ -110,7 +107,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
                     } else {
                         onFailure(call, null);
                     }
-                }else{
+                } else {
                     onFailure(call, null);
                 }
             }

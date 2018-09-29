@@ -67,7 +67,8 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
     }
 
     private void init(AttributeSet attrs) {
-        View.inflate(getContext(), R.layout.view_category_group_horizontal, this);
+        LayoutInflater.from(getContext()).inflate(R.layout.view_category_group_horizontal, this, true);
+//        View.inflate(getContext(), R.layout.view_category_group_horizontal, this);
         ButterKnife.bind(this, this);
 
         if (productModels == null) return;
@@ -157,7 +158,7 @@ public class CategoryGroupHorizontalView extends RelativeLayout {
 //                }else{
 //                    scoreValue.setText("");
 //                }
-                if (model.getImageUrl() != null && model.getImageUrl().size() > 0) {
+                if (model.getImageUrl() != null && !model.getImageUrl().isEmpty()) {
                     ImageLoader.loadProductImage(getContext(), image, model.getImageUrl());
                 }
                 if (BuildConfig.DEBUG)

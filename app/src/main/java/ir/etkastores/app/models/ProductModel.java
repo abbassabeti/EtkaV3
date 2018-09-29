@@ -5,8 +5,6 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -66,6 +64,9 @@ public class ProductModel {
     @SerializedName("relatedIsFake")
     boolean relatedIsFake = false;
 
+    @SerializedName("categoryId")
+    private long categoryId;
+
     public static ProductModel fromJson(String json) {
         try {
             return new Gson().fromJson(json, ProductModel.class);
@@ -74,7 +75,7 @@ public class ProductModel {
         }
     }
 
-    public ProductModel(long id, String code, String barCode, String title, String description, List<String> imageUrl, String originalPrice, String etkaPrice, String offerPrice, String categoryTitle, String supplierName, int point, int proprietaryPoint, int discountPercentage, int savedCount, boolean relatedIsFake) {
+    public ProductModel(long id, String code, String barCode, String title, String description, List<String> imageUrl, String originalPrice, String etkaPrice, String offerPrice, String categoryTitle, String supplierName, int point, int proprietaryPoint, int discountPercentage, int savedCount, boolean relatedIsFake, long categoryId) {
         this.id = id;
         this.code = code;
         this.barCode = barCode;
@@ -91,6 +92,7 @@ public class ProductModel {
         this.discountPercentage = discountPercentage;
         this.savedCount = savedCount;
         this.relatedIsFake = relatedIsFake;
+        this.categoryId = categoryId;
     }
 
     public void setId(long id) {
@@ -235,6 +237,10 @@ public class ProductModel {
         return savedCount;
     }
 
+    public long getCategoryId() {
+        return categoryId;
+    }
+
     public List<ProductModel> getRelatedProducts() {
         return relatedProducts;
     }
@@ -268,7 +274,7 @@ public class ProductModel {
     }
 
     public ProductModel getCopy() {
-        return new ProductModel(id, code, barCode, title, description, imageUrl, originalPrice, etkaPrice, offerPrice, categoryTitle, supplierName, point, proprietaryPoint, discountPercentage, savedCount, relatedIsFake);
+        return new ProductModel(id, code, barCode, title, description, imageUrl, originalPrice, etkaPrice, offerPrice, categoryTitle, supplierName, point, proprietaryPoint, discountPercentage, savedCount, relatedIsFake, categoryId);
     }
 
 }

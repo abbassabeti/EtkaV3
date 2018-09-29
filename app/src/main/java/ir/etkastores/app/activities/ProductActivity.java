@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,6 +27,8 @@ import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.ProductModel;
 import ir.etkastores.app.models.saveProduct.SaveProductRequestModel;
+import ir.etkastores.app.models.search.ProductSearchResponseModel;
+import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CategoryGroupHorizontalView;
@@ -92,8 +97,10 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     private AlertDialog loadingDialog;
     private Call<OauthResponse<ProductModel>> productReq;
     private Call<OauthResponse<Long>> addToNextShoppingListReq;
+    private Call<OauthResponse<ProductSearchResponseModel>> relatedReq;
     private MessageDialog messageDialog;
     private int saveCountValue = 1;
+    private boolean isRelatedLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,12 +143,19 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         saveCountValue = productModel.getSavedCount();
         mDescriptionTitle.setTypeface(FontUtils.getBoldTypeFace());
         updateSaveCountValue();
-        if (productModel.getRelatedProducts() != null && productModel.getRelatedProducts().size() > 0) {
-            CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), productModel.getRelatedProducts(), null);
-            relatedProducts.setBackgroundResource(R.color.lightGray);
-            relatedProducts.setOnProductClickListener(this);
-            extrasHolder.addView(relatedProducts);
+        if (productModel.getRelatedProducts() != null && !productModel.getRelatedProducts().isEmpty()) {
+            addRelated(productModel.getRelatedProducts());
+        } else {
+            loadRelatedProducts();
         }
+    }
+
+    private void addRelated(List<ProductModel> relateds) {
+        CategoryGroupHorizontalView relatedProducts = new CategoryGroupHorizontalView(this, getResources().getString(R.string.relatedProducts), relateds, null);
+        relatedProducts.setBackgroundResource(R.color.lightGray);
+        relatedProducts.setOnProductClickListener(this);
+        extrasHolder.addView(relatedProducts);
+        isRelatedLoaded = true;
     }
 
     private void initFromCode() {
@@ -341,6 +355,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         super.onPause();
         if (addToNextShoppingListReq != null) addToNextShoppingListReq.cancel();
         if (productReq != null) productReq.cancel();
+        if (relatedReq != null) relatedReq.cancel();
     }
 
     @Override
@@ -355,6 +370,38 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
     public void onProductImageClick(int position, String img) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProductImage);
         GalleryActivity.show(this, productModel, position);
+    }
+
+    private void loadRelatedProducts() {
+        if (isRelatedLoaded) return;
+        SearchProductRequestModel requestModel = new SearchProductRequestModel()
+                .setTake(10)
+                .addCategoryId(productModel.getCategoryId())
+                .setPage(1);
+        relatedReq = ApiProvider.getAuthorizedApi().searchProduct(requestModel);
+        relatedReq.enqueue(new Callback<OauthResponse<ProductSearchResponseModel>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<ProductSearchResponseModel>> call, Response<OauthResponse<ProductSearchResponseModel>> response) {
+                if (isFinishing()) return;
+                if (response.isSuccessful()
+                        && response.body().isSuccessful()
+                        && response.body().getData().getItems() != null
+                        && !response.body().getData().getItems().isEmpty()) {
+
+                    List<ProductModel> result = new ArrayList<>();
+                    for (ProductModel product : response.body().getData().getItems()) {
+                        if (product.getId() != productModel.getId())
+                            result.add(product);
+                    }
+                    addRelated(result);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<ProductSearchResponseModel>> call, Throwable t) {
+                if (isFinishing()) return;
+            }
+        });
     }
 
 }
