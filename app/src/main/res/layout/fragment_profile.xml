@@ -12,7 +12,7 @@
         app:showBack="false"
         app:showMoreButton="true"
         app:showSettingButton="true"
-        app:title="@string/profile" />
+        app:title="@string/customer" />
 
     <ScrollView
         android:layout_width="match_parent"

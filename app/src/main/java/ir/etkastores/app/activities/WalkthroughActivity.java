@@ -65,8 +65,8 @@ public class WalkthroughActivity extends BaseActivity {
         enterButton.setTypeface(FontUtils.getBoldTypeFace());
         List<PagerSliderModel> items = new ArrayList<>();
         items.add(new PagerSliderModel(R.drawable.walk_img_map, "همراه فروشگاه اتکا", "جزئیات کالاهای موجود در شعب فروشگاه های اتکا، مکان و جزئیات شعب، سوابق خرید، اطلاعات کاربری و سایر خدمات را در جیب خود داشته باشید."));
-        items.add(new PagerSliderModel(R.drawable.walk_img_shopping, "خرید از راه دور، به زودی...", "شما می‌توانید قبل از حضور در شعب منتخب اتکا، لیست خرید بعدی را تکمیل نموده تا کارکنان شعب سبد خرید مورد نظر را پیش از حضور شما در فروشگاه آماده تحویل نمایند"));
-        items.add(new PagerSliderModel(R.drawable.walk_img_crm, "باشگاه‌مشتریان", "با هر خرید کالا از شعب اتکا، امتیاز کسب می کنید و در خرید‌های بعدی می توانید از تخفیف ویژه باشگاه‌مشتریان بهره‌مند شوید."));
+        items.add(new PagerSliderModel(R.drawable.walk_img_shopping, "خرید از راه دور، به زودی...", "شما می‌توانید قبل از حضور در شعب منتخب اتکا، لیست خرید بعدی را تکمیل نموده تا کارکنان شعب سبد خرید مورد نظر را پیش از حضور شما در فروشگاه آماده تحویل نمایند."));
+        items.add(new PagerSliderModel(R.drawable.walk_img_crm, "باشگاه مشتریان", "با هر خرید کالا از شعب اتکا، امتیاز کسب می کنید و در خرید‌های بعدی می توانید از تخفیف ویژه باشگاه‌مشتریان بهره‌مند شوید."));
         items.add(new PagerSliderModel(R.drawable.walk_img_hekmat, "حکمت کارت", "خانواده های محترم نیروهای مسلح می توانند از طریق این اپلیکیشن، از حساب های چندگانه کارت حکمت خویش مطلع شوند."));
         items.add(new PagerSliderModel(R.drawable.walk_img_support, "پشتیبانی و ارسال درخواست", "از طریق این اپلیکیشن می توانید به راحتی پیشنهاد، انتقاد و یا درخواست خود را ارسال تا بلافاصله پس از بررسی آن توسط واحد ارتباط با مشتریان، از نتیجه مطلع شوید."));
         Collections.reverse(items);
