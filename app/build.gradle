@@ -28,7 +28,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 26
-        versionName "3.0.0 Test 26"
+        versionName "3.0.0 Test 26.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         android.defaultConfig.vectorDrawables.useSupportLibrary = true
@@ -99,7 +99,7 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:11.4.0'
     compile 'com.google.firebase:firebase-core:11.4.0'
     compile 'com.google.firebase:firebase-config:11.4.0'
-    compile 'com.android.support:multidex:1.0.2'
+    compile 'com.android.support:multidex:1.0.3'
     compile 'com.romandanylyk:pageindicatorview:0.0.9'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     compile 'me.dm7.barcodescanner:zxing:1.9.8'
