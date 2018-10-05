@@ -2,6 +2,7 @@ package ir.etkastores.app.webServices;
 
 import android.text.TextUtils;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.StringXORer;
@@ -10,6 +11,7 @@ import ir.etkastores.app.utils.StringXORer;
  * Created by Sajad on 9/3/17.
  */
 
+@Obfuscate
 public class ApiStatics {
 
     private static final String BASE_URL_KEY = "BASE_URL";

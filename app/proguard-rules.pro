@@ -117,7 +117,7 @@
 -dontwarn android.net.http.SslError
 -dontwarn android.webkit.WebViewClient
 
--keep public class com.adjust.sdk.** { *; }
+#-keep public class com.adjust.sdk.** { *; }
 -keep class com.google.android.gms.common.ConnectionResult {
     int SUCCESS;
 }

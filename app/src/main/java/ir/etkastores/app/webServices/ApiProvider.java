@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
@@ -34,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Sajad on 9/3/17.
  */
 
+@Obfuscate
 public class ApiProvider {
 
     private static OkHttpClient.Builder httpClient;

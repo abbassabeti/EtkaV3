@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.PushTokenManager;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.IntentHelper;
@@ -70,22 +71,8 @@ public class BaseActivity extends AppCompatActivity {
 
     private void checkRootedDevice() {
         if (RootUtils.isRooted(this)) {
-            MessageDialog message = MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
-                    null,
-                    getResources().getString(R.string.rootedDeviceCantUseApp),
-                    getResources().getString(R.string.closeApp),
-                    null);
-            message.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
-                @Override
-                public void onDialogMessageButtonsClick(int button) {
-                    finish();
-                }
-
-                @Override
-                public void onDialogMessageDismiss() {
-
-                }
-            });
+            Toaster.showLong(this, R.string.rootedDeviceCantUseApp);
+            finish();
             return;
         }
     }

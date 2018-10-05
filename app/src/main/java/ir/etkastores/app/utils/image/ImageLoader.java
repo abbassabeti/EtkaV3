@@ -9,6 +9,7 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+
 import java.util.List;
 
 import ir.etkastores.app.R;
@@ -19,35 +20,38 @@ import ir.etkastores.app.R;
 
 public class ImageLoader {
 
-    public static void loadImage(Context context, AppCompatImageView imageView, String url){
+    public static void loadImage(Context context, AppCompatImageView imageView, String url) {
         try {
+            Glide.with(context).clear(imageView);
             Glide.with(context).load(url.trim()).into(imageView);
-        }catch (Exception err){
+        } catch (Exception err) {
             err.printStackTrace();
-            Log.e("load image crash",""+err.getLocalizedMessage());
+            Log.e("load image crash", "" + err.getLocalizedMessage());
         }
     }
 
-    public static void loadImage(Context context, String url, Target<Drawable> target){
+    public static void loadImage(Context context, String url, Target<Drawable> target) {
         try {
+            Glide.with(context).clear(target);
             Glide.with(context).load(url.trim()).into(target);
-        }catch (Exception err){
+        } catch (Exception err) {
             err.printStackTrace();
-            Log.e("load image crash2",""+err.getLocalizedMessage());
+            Log.e("load image crash2", "" + err.getLocalizedMessage());
         }
     }
 
     public static void loadProductImage(Context context, AppCompatImageView imageView, String url) {
         try {
+            Glide.with(context).clear(imageView);
             imageView.setImageResource(R.drawable.product_place_holder);
-            if (TextUtils.isEmpty(url)){
+            if (TextUtils.isEmpty(url)) {
                 imageView.setImageResource(R.drawable.product_place_holder);
-            }else{
+            } else {
                 Glide.with(context).load(url.trim()).apply(getRequestOptions()).into(imageView);
             }
         } catch (Exception err) {
             err.printStackTrace();
-            Log.e("load image crash3",""+err.getLocalizedMessage());
+            Log.e("load image crash3", "" + err.getLocalizedMessage());
         }
     }
 

@@ -9,6 +9,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'io.michaelrocks.paranoid'
 apply plugin: 'io.fabric'
 
 
