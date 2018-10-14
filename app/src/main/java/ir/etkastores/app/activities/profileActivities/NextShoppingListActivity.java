@@ -13,6 +13,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
@@ -32,6 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class NextShoppingListActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, ProductsRecyclerAdapter.ProductsRecyclerCallbacks {
 
     public static void show(Activity activity) {

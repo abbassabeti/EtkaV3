@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
@@ -23,6 +24,7 @@ import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
 import ir.etkastores.app.utils.procalendar.XCalendar;
 
+@Obfuscate
 public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public static void show(Activity activity) {

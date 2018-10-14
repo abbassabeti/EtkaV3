@@ -17,6 +17,7 @@ import com.google.zxing.Result;
 
 import java.util.List;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
@@ -26,6 +27,7 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import pub.devrel.easypermissions.PermissionRequest;
 
+@Obfuscate
 public class ScannerActivity extends BaseActivity implements ZXingScannerView.ResultHandler, EasyPermissions.PermissionCallbacks {
 
     public static final String FORMAT = "FORMAT";

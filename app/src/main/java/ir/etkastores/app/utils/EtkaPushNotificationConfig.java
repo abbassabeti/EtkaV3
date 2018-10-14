@@ -3,10 +3,13 @@ package ir.etkastores.app.utils;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import io.michaelrocks.paranoid.Obfuscate;
+
 /**
  * Created by garshasbi on 3/1/18.
  */
 
+@Obfuscate
 public class EtkaPushNotificationConfig {
 
     private static final String HEKMAT_TOPIC = "hekmat";

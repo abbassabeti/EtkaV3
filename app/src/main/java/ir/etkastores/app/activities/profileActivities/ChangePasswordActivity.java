@@ -10,6 +10,7 @@ import android.text.method.PasswordTransformationMethod;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
@@ -22,6 +23,7 @@ import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.DiskDataHelper;
 import retrofit2.Call;
 
+@Obfuscate
 public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public static void show(BaseActivity activity) {

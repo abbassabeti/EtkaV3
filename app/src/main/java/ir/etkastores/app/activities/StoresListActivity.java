@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.StoresRecyclerAdapter;
@@ -24,6 +25,7 @@ import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 
+@Obfuscate
 public class StoresListActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener,
         StoresRecyclerAdapter.OnStoreSelectListener,
         StoresManager.StoresCallback {

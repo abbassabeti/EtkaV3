@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.GalleryRecyclerHorizontalListAdapter;
@@ -20,6 +21,7 @@ import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.widgets.ZoomableViewPager;
 import ir.etkastores.app.utils.ZoomOutSlidePagerTransformer;
 
+@Obfuscate
 public class GalleryActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener,
         GalleryRecyclerHorizontalListAdapter.OnImageSelectListener,
         ViewPager.OnPageChangeListener {

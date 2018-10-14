@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ProfileManager;
@@ -43,6 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, CategoryGroupHorizontalView.OnProductClickListener, ProductImagesSliderView.OnProductImageClickListener {
 
     private final static int ACTION_LOAD_PRODUCT = 0;

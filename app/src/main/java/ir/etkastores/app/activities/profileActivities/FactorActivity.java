@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
@@ -17,6 +18,7 @@ import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 
+@Obfuscate
 public class FactorActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     private final static String MODEL = "MODEL";

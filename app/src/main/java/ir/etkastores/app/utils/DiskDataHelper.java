@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.webServices.AccessToken;
@@ -12,6 +13,7 @@ import ir.etkastores.app.webServices.AccessToken;
  * Created by Sajad on 9/8/17.
  */
 
+@Obfuscate
 public class DiskDataHelper {
 
     public static void putString(String key, String value) {

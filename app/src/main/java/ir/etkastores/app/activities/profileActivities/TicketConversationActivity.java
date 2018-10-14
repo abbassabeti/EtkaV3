@@ -18,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.TicketConversationAdapter;
@@ -36,6 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class TicketConversationActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public final static String PRODUCT_REQUEST = "PRODUCT_REQUEST";

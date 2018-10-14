@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
@@ -36,6 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class EditProfileActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public static void show(Activity activity) {

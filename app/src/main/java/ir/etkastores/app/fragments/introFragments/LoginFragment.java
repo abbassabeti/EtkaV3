@@ -24,9 +24,7 @@ import ir.etkastores.app.ui.dialogs.ResetPasswordDialog;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
-import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
-import ir.etkastores.app.utils.UserSettings;
 import ir.etkastores.app.webServices.AccessToken;
 import ir.etkastores.app.webServices.ApiProvider;
 import ir.etkastores.app.webServices.ApiStatics;
@@ -96,15 +94,15 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
     @Override
     public void onResume() {
         super.onResume();
-        String userEmail = UserSettings.getEmailAddress();
-        String password = UserSettings.getPasswrod();
-        if (!TextUtils.isEmpty(userEmail)) {
-            emailAddressInput.setText(userEmail);
-        }
-
-        if (!TextUtils.isEmpty(password)) {
-            passwordInput.setText(password);
-        }
+//        String userEmail = UserSettings.getEmailAddress();
+//        String password = UserSettings.getPasswrod();
+//        if (!TextUtils.isEmpty(userEmail)) {
+//            emailAddressInput.setText(userEmail);
+//        }
+//
+//        if (!TextUtils.isEmpty(password)) {
+//            passwordInput.setText(password);
+//        }
     }
 
     private void initToolbar() {

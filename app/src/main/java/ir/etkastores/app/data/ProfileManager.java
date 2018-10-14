@@ -18,8 +18,6 @@ import ir.etkastores.app.webServices.ApiStatics;
 
 public class ProfileManager {
 
-    //    private static final String USER_NAME = "USER_NAME";
-//    private static final String USER_PASSWORD = "USER_PASSWORD";
     private final static String PROFILE_KEY = "PROFILE_KEY";
     private final static String IS_FIRST_RUN = "IS_FIRST_RUN";
 
@@ -79,7 +77,6 @@ public class ProfileManager {
     }
 
     public static void logOut() {
-//        saveUserNameAndPassword("","");
         clearProfile();
         new Thread(new Runnable() {
             @Override
@@ -95,27 +92,6 @@ public class ProfileManager {
             }
         }).start();
     }
-
-//    public static String getUserName() {
-//        if (isGuest()) {
-//            return GUEST_USER_NAME;
-//        } else {
-//            return DiskDataHelper.getString(USER_NAME);
-//        }
-//    }
-//
-//    public static String getUserPassword() {
-//        if (isGuest()) {
-//            return GUEST_USER_PASSWORD;
-//        } else {
-//            return DiskDataHelper.getString(USER_PASSWORD);
-//        }
-//    }
-
-//    public static void saveUserNameAndPassword(String userName, String password) {
-//        DiskDataHelper.putString(USER_NAME, userName);
-//        DiskDataHelper.putString(USER_PASSWORD, password);
-//    }
 
     public static boolean isFirstRun() {
         if (BuildConfig.DEBUG) return true;

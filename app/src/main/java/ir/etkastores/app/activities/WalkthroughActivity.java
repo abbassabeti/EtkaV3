@@ -22,12 +22,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.FontUtils;
 
+@Obfuscate
 public class WalkthroughActivity extends BaseActivity {
 
     public static void show(Context context) {

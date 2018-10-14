@@ -8,12 +8,14 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.data.ProfileManager;
 
+@Obfuscate
 public class ScoresActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public static void start(Activity activity){

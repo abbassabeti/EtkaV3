@@ -26,6 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatHorizontalRecyclerListAdapter;
@@ -46,6 +47,7 @@ import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.utils.image.ImageLoader;
 
+@Obfuscate
 public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, StoresManager.StoresCallback, StorePagerSliderView.OnStoreImageClickListener {
 
     private final static String STORE_KEY = "STORE_KEY";

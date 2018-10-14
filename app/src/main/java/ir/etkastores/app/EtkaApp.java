@@ -15,6 +15,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 
 import io.fabric.sdk.android.Fabric;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.utils.EventsManager;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -22,6 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  * Created by Sajad on 7/8/17.
  */
 
+@Obfuscate
 public class EtkaApp extends MultiDexApplication {
 
     private static EtkaApp instance;

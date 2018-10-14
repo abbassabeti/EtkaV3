@@ -166,12 +166,6 @@ public class FactorListRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
             count.setText(String.valueOf(productModel.getCount()));
             discount.setText(productModel.getDiscount());
             totalPrice.setText(productModel.getTotalPrice());
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    ProductActivity.show(context,productModel.getBarCode());
-//                }
-//            });
         }
 
     }

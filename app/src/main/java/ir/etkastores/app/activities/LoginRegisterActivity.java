@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.fragments.introFragments.LoginFragment;
 import ir.etkastores.app.fragments.introFragments.RegisterFragment;
@@ -13,6 +14,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
 
+@Obfuscate
 public class LoginRegisterActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     private final static String TYPE = "TYPE";

@@ -259,7 +259,7 @@
     <string name="store">فروشگاه</string>
     <string name="pleaseSelectDepartment">لطفا دپارتمان مورد نظر را نتخاب کنید</string>
     <string name="sujectsComma">"مشمولین: "</string>
-    <string name="validUntil">"اعتبار تا: "</string>
+    <string name="validUntil">"اعتبار : "</string>
     <string name="inCheckingHekmatData">درحال بررسی اطلاعات کارت حکمت شما...</string>
     <string name="errorInLogginHekmatCard">خطا در ورود به حساب کارت حکمت، دوباره تلاش کنید</string>
     <string name="number">شماره</string>

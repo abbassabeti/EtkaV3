@@ -13,8 +13,8 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.google.gson.Gson;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
@@ -24,6 +24,7 @@ import ir.etkastores.app.models.notification.NotificationModel;
  * Created by Sajad on 2/11/18.
  */
 
+@Obfuscate
 public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
 
     private final static String ETKA_NOTIFICATION_OBJECT = "etkaNotificationObject";
@@ -32,7 +33,7 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             Log.e("FCM Sender", "messae received: " + remoteMessage.getFrom());
         }
 

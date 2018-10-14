@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.store.StoreModel;
@@ -23,6 +24,7 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.IntentHelper;
 
+@Obfuscate
 public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     private final static String STORE_MODEL = "STORE_MODEL";

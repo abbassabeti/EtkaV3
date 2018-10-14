@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.adapters.recyclerViewAdapters.productFilter.ProductFilterListRecyclerAdapter;
@@ -32,6 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class CategoriesFilterActivity extends BaseActivity implements
         EtkaToolbar.EtkaToolbarActionsListener,
         CategoriesFragment.OnCategoryItemClickListener,

@@ -7,7 +7,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
-import ir.etkastores.app.BuildConfig;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ContactUsManager;
 import ir.etkastores.app.webServices.ApiStatics;
@@ -16,6 +16,7 @@ import ir.etkastores.app.webServices.ApiStatics;
  * Created by garshasbi on 5/7/18.
  */
 
+@Obfuscate
 public class EtkaRemoteConfigManager {
 
     public static void checkRemoteConfigs() {
@@ -40,7 +41,7 @@ public class EtkaRemoteConfigManager {
                     DiskDataHelper.setMinForceUpdateVersion(minAppVersion);
                     DiskDataHelper.setForceUpdateUrl(updateUrl);
                     ApiStatics.setBaseUrl(baseUrl);
-                }else{
+                } else {
                     DiskDataHelper.setMinForceUpdateVersion(1);
                 }
             }

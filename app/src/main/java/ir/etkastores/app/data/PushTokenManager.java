@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
@@ -13,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class PushTokenManager {
 
     private final static String LAST_REFRESHED_TOKEN = "LAST_REFRESHED_TOKEN";
@@ -42,7 +44,7 @@ public class PushTokenManager {
         try {
             String token = FirebaseInstanceId.getInstance().getToken();
             String lastRefreshed = getLastRefreshedToken();
-            if (!lastRefreshed.contentEquals(token)){
+            if (!lastRefreshed.contentEquals(token)) {
                 DiskDataHelper.putString(LAST_REFRESHED_TOKEN, token);
             }
         } catch (Exception err) {

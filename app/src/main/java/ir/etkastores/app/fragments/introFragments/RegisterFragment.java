@@ -24,7 +24,6 @@ import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.ActivityUtils;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
-import ir.etkastores.app.utils.UserSettings;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,8 +133,8 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
                     if (response.body().isSuccessful()){
                         AdjustHelper.sendAdjustEvent(AdjustHelper.Register);
                         Toaster.showLong(getActivity(),R.string.registerSuccessful);
-                        UserSettings.setEmailAddress(requestModel.getEmail());
-                        UserSettings.setPasswrod(requestModel.getPassword());
+//                        UserSettings.setEmailAddress(requestModel.getEmail());
+//                        UserSettings.setPasswrod(requestModel.getPassword());
                         onToolbarBackClick();
                     }else{
                         showRetryDialog(response.body().getMeta().getMessage());

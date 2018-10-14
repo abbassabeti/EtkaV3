@@ -11,6 +11,7 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.data.ProfileManager;
@@ -25,6 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class HekmatCardChangePasswordActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public static void show(Context context) {

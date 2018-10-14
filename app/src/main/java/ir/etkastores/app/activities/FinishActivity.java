@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.R;
 
+@Obfuscate
 public class FinishActivity extends AppCompatActivity {
 
     public static void show(Context context) {

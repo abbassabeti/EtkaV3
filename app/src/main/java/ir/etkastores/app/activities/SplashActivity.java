@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.google.android.gms.maps.MapView;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.data.PushTokenManager;
@@ -26,6 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class SplashActivity extends BaseActivity {
 
     private NotificationModel notificationModel;

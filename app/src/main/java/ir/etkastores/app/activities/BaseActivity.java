@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.PushTokenManager;
@@ -19,6 +20,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
  * Created by Sajad on 9/3/17.
  */
 
+@Obfuscate
 public class BaseActivity extends AppCompatActivity {
 
     @Override

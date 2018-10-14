@@ -3,10 +3,13 @@ package ir.etkastores.app.utils;
 import com.adjust.sdk.Adjust;
 import com.adjust.sdk.AdjustEvent;
 
+import io.michaelrocks.paranoid.Obfuscate;
+
 /**
  * Created by garshasbi on 4/21/18.
  */
 
+@Obfuscate
 public class AdjustHelper {
 
     //1

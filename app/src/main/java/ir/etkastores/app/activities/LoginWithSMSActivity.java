@@ -14,6 +14,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.R;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.GetVerificationCodeResponse;
@@ -32,6 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Obfuscate
 public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public static void show(Context context) {

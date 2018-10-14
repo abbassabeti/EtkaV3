@@ -4,6 +4,7 @@ import com.google.android.gms.common.api.Api;
 
 import java.util.List;
 
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.GetVerificationCodeResponse;
 import ir.etkastores.app.models.OauthResponse;
@@ -50,6 +51,7 @@ import retrofit2.http.Query;
  * Created by Sajad on 9/3/17.
  */
 
+@Obfuscate
 public interface EtkaApi {
 
     //1

@@ -2,7 +2,6 @@ package ir.etkastores.app.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
@@ -18,6 +17,7 @@ import com.google.zxing.BarcodeFormat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
@@ -47,6 +47,7 @@ import ir.etkastores.app.utils.DiskDataHelper;
  * Created by Sajad on 9/1/17.
  */
 
+@Obfuscate
 public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbarActionsListener {
 
     private View view;
@@ -108,11 +109,11 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
             @Override
             public void run() {
                 if (!isAdded()) return;
-                if (!ProfileManager.isGuest()){
+                if (!ProfileManager.isGuest()) {
                     BarcodeUtils.generateBarcodeBitmap(ProfileManager.getProfile().getBarCode(), BarcodeFormat.CODABAR, userBarcodeIdImage);
                 }
             }
-        },500);
+        }, 500);
     }
 
     private void initGuestUser() {
@@ -204,7 +205,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @OnClick(R.id.supportMenu)
     public void onSupportMenuClick() {
         AdjustHelper.sendAdjustEvent(AdjustHelper.OpenSupport);
-        SupportActivity.show(getActivity(), SupportActivity.SUPPORT_TICKET,null);
+        SupportActivity.show(getActivity(), SupportActivity.SUPPORT_TICKET, null);
     }
 
     @OnClick(R.id.surveyMenu)

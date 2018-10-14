@@ -58,9 +58,4 @@ public class ContactUsFragment extends Fragment {
         IntentHelper.sendEmail(getActivity(), ContactUsManager.getInstance().getEmail(),"","");
     }
 
-//    @OnClick(R.id.webSiteButton)
-//    public void webSiteButtonClick(){
-//
-//    }
-
 }

@@ -5,8 +5,11 @@ import android.os.Build;
 
 import java.io.File;
 
+import io.michaelrocks.paranoid.Obfuscate;
+
 import static io.fabric.sdk.android.services.common.CommonUtils.isEmulator;
 
+@Obfuscate
 public class RootUtils {
 
     public static boolean isRooted(Context context) {

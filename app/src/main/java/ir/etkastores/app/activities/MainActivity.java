@@ -13,6 +13,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.activities.profileActivities.EditProfileActivity;
@@ -42,6 +43,7 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
 
+@Obfuscate
 public class MainActivity extends BaseActivity {
 
     public static void show(Context context, NotificationModel notificationModel) {

@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatProductSecondLevelRecyclerAdapter;
 import ir.etkastores.app.models.hekmat.HekmatModel;
@@ -17,6 +18,7 @@ import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 
+@Obfuscate
 public class HekmatProductsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener, HekmatProductSecondLevelRecyclerAdapter.OnHekmatProductClickListener {
 
     private final static String HEKMAT_PRODUCT = "HEKMAT_PRODUCT";

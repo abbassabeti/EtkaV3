@@ -7,12 +7,14 @@ import android.os.Bundle;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.R;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 
+@Obfuscate
 public class OtherPagesActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
     public static void start(Activity activity){
