@@ -10,24 +10,27 @@ import ir.etkastores.app.EtkaApp;
 
 public class EventsManager {
 
-    public static void screenView(String screenName){
+    public static void screenView(String screenName) {
         try {
             EtkaApp.getInstance().getGoogleAnalyticsTracker().setScreenName(screenName);
             EtkaApp.getInstance().getGoogleAnalyticsTracker().send(new HitBuilders.ScreenViewBuilder().build());
-        }catch (Exception err){
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
 
-    public static void sendEvent(String category, String action, String label){
-        sendGoogleAnalyticsEvent(category,action,label);
+    public static void sendEvent(String category, String action, String label) {
+        sendGoogleAnalyticsEvent(category, action, label);
     }
 
-
-    private static void sendGoogleAnalyticsEvent(String category, String action, String label){
+    private static void sendGoogleAnalyticsEvent(String category, String action, String label) {
         try {
-
-        }catch (Exception err){
+            EtkaApp.getInstance().getGoogleAnalyticsTracker().send(new HitBuilders.EventBuilder()
+                    .setCategory(category)
+                    .setAction(action)
+                    .setLabel(label)
+                    .build());
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }

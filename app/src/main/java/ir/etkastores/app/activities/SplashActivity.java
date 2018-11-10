@@ -108,7 +108,6 @@ public class SplashActivity extends BaseActivity {
         initMap();
     }
 
-
     Call<AccessToken> loginRequest;
 
     private void login() {

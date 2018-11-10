@@ -40,8 +40,7 @@ public class ProfileManager {
     }
 
     public static boolean hasSavedProfile() {
-        initProfile();
-        if (profileModel == null) {
+        if (getProfile() == null) {
             return false;
         } else {
             return true;
@@ -61,6 +60,7 @@ public class ProfileManager {
         try {
             EtkaApp.getPreference().edit().remove(PROFILE_KEY).apply();
             ApiStatics.saveToken(null);
+            DiskDataHelper.setLastHekmatCardNumber("");
             profileModel = null;
         } catch (Exception err) {
             err.printStackTrace();
@@ -82,8 +82,8 @@ public class ProfileManager {
             @Override
             public void run() {
                 try {
-                    PushTokenManager.getInstance().clearLastStates();
                     FirebaseInstanceId.getInstance().deleteInstanceId();
+                    PushTokenManager.getInstance().clearLastStates();
                     if (BuildConfig.DEBUG) Log.i("instance id Deleted", "....");
                 } catch (Exception err) {
                     if (BuildConfig.DEBUG)

@@ -24,7 +24,7 @@
             android:paddingBottom="1dp"
             app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="2dp"
-            app:tabMode="scrollable"
+            app:tabMode="fixed"
             app:tabTextAppearance="@style/tabStripTextAppearance"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/transWhiteA" />

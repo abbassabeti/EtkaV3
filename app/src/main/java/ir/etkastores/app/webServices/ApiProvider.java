@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
 import io.michaelrocks.paranoid.Obfuscate;
@@ -15,17 +14,14 @@ import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
+import ir.etkastores.app.utils.EventsManager;
+import ir.etkastores.app.utils.IntercentorHelper;
 import okhttp3.CertificatePinner;
-import okhttp3.Headers;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
-import okio.Buffer;
-import okio.BufferedSource;
-import okio.GzipSource;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -93,44 +89,19 @@ public class ApiProvider {
                     Request request = requestBuilder.build();
                     Response proceed = chain.proceed(request);
 
-
-                    BufferedSource source = proceed.body().source();
-                    source.request(Long.MAX_VALUE); // Buffer the entire body.
-                    Buffer buffer = source.buffer();
-
-                    Headers headers = proceed.headers();
-                    Long gzippedLength = null;
-                    if ("gzip".equalsIgnoreCase(headers.get("Content-Encoding"))) {
-                        gzippedLength = buffer.size();
-                        GzipSource gzippedResponseBody = null;
-                        try {
-                            gzippedResponseBody = new GzipSource(buffer.clone());
-                            buffer = new Buffer();
-                            buffer.writeAll(gzippedResponseBody);
-                        } finally {
-                            if (gzippedResponseBody != null) {
-                                gzippedResponseBody.close();
-                            }
-                        }
-                    }
-
-                    final Charset UTF8 = Charset.forName("UTF-8");
-                    Charset charset = UTF8;
-                    MediaType contentType = proceed.body().contentType();
-                    if (contentType != null) {
-                        charset = contentType.charset(UTF8);
-                    }
-                    String jsonResponse = buffer.clone().readString(charset);
                     OauthResponse<Object> response = null;
                     try {
-                        response = new Gson().fromJson(jsonResponse, new TypeToken<OauthResponse<Object>>() {
+                        response = new Gson().fromJson(IntercentorHelper.getResponseBody(proceed), new TypeToken<OauthResponse<Object>>() {
+
                         }.getType());
                     } catch (Exception err) {
                         err.printStackTrace();
+                        EventsManager.sendEvent("dev", "INTERCEPTOR_PARS_FAILED", "" + err.getLocalizedMessage());
                     }
                     if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401) {
                         synchronized (httpClient) {
                             if (ApiStatics.getLastToken() == null) {
+                                EventsManager.sendEvent("dev", "INTERCEPTOR_PARSED_CODE_410", "SAVED_TOKEN_NULL!!");
                                 ProfileManager.clearProfile();
                                 Call<AccessToken> call = ApiProvider.guestLogin();
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
@@ -158,14 +129,16 @@ public class ApiProvider {
                                         refreshToken);
 
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
+                                EventsManager.sendEvent("dev", "INTERCEPTOR_PARSED_CODE_410", "REFRESHED_TOKEN_CODE_" + tokenResponse.code());
                                 if (tokenResponse.code() == 200) {
                                     AccessToken newToken = tokenResponse.body();
                                     lastToken = newToken;
                                     ApiStatics.saveToken(lastToken);
                                     request = request.newBuilder()
+                                            .header("Accept", "application/json")
+                                            .header("Content-type", "application/json")
                                             .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
                                             .build();
-
                                     proceed = chain.proceed(request);
                                 }
                             }

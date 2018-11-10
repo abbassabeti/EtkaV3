@@ -42,6 +42,7 @@ import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.EtkaRemoteConfigManager;
+import ir.etkastores.app.utils.FontUtils;
 
 @Obfuscate
 public class MainActivity extends BaseActivity {
@@ -72,9 +73,10 @@ public class MainActivity extends BaseActivity {
         EtkaRemoteConfigManager.checkRemoteConfigs();
 
         bottomNavigationView.enableAnimation(false);
-        bottomNavigationView.enableItemShiftingMode(false);
         bottomNavigationView.setTextVisibility(true);
-        bottomNavigationView.enableShiftingMode(false);
+        bottomNavigationView.setLabelVisibilityMode(1);
+        bottomNavigationView.setItemHorizontalTranslationEnabled(false);
+        bottomNavigationView.setTypeface(FontUtils.getCommonTypeFace());
         bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
 
         notificationModel = getNotificationModel();
