@@ -49,7 +49,7 @@ public class ChangePasswordActivity extends BaseActivity implements EtkaToolbar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }

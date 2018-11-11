@@ -100,7 +100,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
     @Override
     public void onResume() {
         super.onResume();
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             swipeRefresh.setEnabled(false);
             messageView.show(R.drawable.ic_warning_orange_48dp, getResources().getString(R.string.loginRequiredForThisSection), null, null);
             hideLoading();
@@ -121,7 +121,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showNeedToLogin();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
@@ -161,7 +161,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
         if (!isAdded()) return;
         showLoading();
         messageView.hide();
-        ticketReq = ApiProvider.getAuthorizedApi().getProductsTicketList(reqPage);
+        ticketReq = ApiProvider.getInstance().getAuthorizedApi().getProductsTicketList(reqPage);
 
         ticketReq.enqueue(new Callback<OauthResponse<TicketResponseModel>>() {
             @Override
@@ -245,7 +245,7 @@ public class ProductRequestTicketsListFragment extends Fragment implements Ticke
     }
 
     private void checkToLoadDataViews() {
-        if (adapter.getItemCount() == 0 && !listIsEmpty && !ProfileManager.isGuest() && (ticketReq == null || ticketReq.isCanceled())) {
+        if (adapter.getItemCount() == 0 && !listIsEmpty && !ProfileManager.getInstance().isGuest() && (ticketReq == null || ticketReq.isCanceled())) {
             loadTickets();
         }
     }

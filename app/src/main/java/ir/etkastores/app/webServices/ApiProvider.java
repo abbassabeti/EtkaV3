@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.models.ErrorModel;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.EtkaPushNotificationConfig;
@@ -34,12 +35,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Obfuscate
 public class ApiProvider {
 
-    private static OkHttpClient.Builder httpClient;
-    private static Retrofit.Builder builder;
+    private OkHttpClient.Builder httpClient;
+    private Retrofit.Builder builder;
 
     public static AccessToken lastToken;
 
-    public static <S> S createService(Class<S> serviceClass) {
+    private static ApiProvider instance;
+
+    private boolean isInTokenRefreshing = false;
+
+    synchronized public static ApiProvider getInstance() {
+        if (instance == null) instance = new ApiProvider();
+        return instance;
+    }
+
+    public <S> S createService(Class<S> serviceClass) {
         httpClient = new OkHttpClient.Builder();
         builder = new Retrofit.Builder()
                 .baseUrl(ApiStatics.getBaseUrl())
@@ -59,7 +69,7 @@ public class ApiProvider {
         return retrofit.create(serviceClass);
     }
 
-    public static <S> S createService(Class<S> serviceClass, AccessToken accessToken) {
+    public <S> S createService(Class<S> serviceClass, AccessToken accessToken) {
         httpClient = new OkHttpClient.Builder();
         builder = new Retrofit.Builder()
                 .baseUrl(ApiStatics.getBaseUrl())
@@ -98,14 +108,14 @@ public class ApiProvider {
                         err.printStackTrace();
                         EventsManager.sendEvent("dev", "INTERCEPTOR_PARS_FAILED", "" + err.getLocalizedMessage());
                     }
-                    if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401) {
+                    if (response != null && response.getMeta() != null && response.getMeta().getStatusCode() == 401 & !isInTokenRefreshing) {
                         synchronized (httpClient) {
                             if (ApiStatics.getLastToken() == null) {
                                 EventsManager.sendEvent("dev", "INTERCEPTOR_PARSED_CODE_410", "SAVED_TOKEN_NULL!!");
-                                ProfileManager.clearProfile();
-                                Call<AccessToken> call = ApiProvider.guestLogin();
+                                Call<AccessToken> call = guestLogin();
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
                                 if (tokenResponse.code() == 200) {
+                                    ProfileManager.getInstance().clearProfile();
                                     AccessToken newToken = tokenResponse.body();
                                     lastToken = newToken;
                                     ApiStatics.saveToken(lastToken);
@@ -115,21 +125,26 @@ public class ApiProvider {
 
                                     proceed = chain.proceed(request);
                                 }
+                                isInTokenRefreshing = false;
                             } else {
+                                isInTokenRefreshing = true;
                                 String refreshToken = ApiStatics.getLastToken().getRefreshToken();
-                                lastToken = null;
-                                ApiStatics.saveToken(null);
                                 EtkaApi tokenClient = createService(EtkaApi.class);
 
                                 Call<AccessToken> call = tokenClient.getToken(
                                         ApiStatics.GRAND_TYPE_REFRESH_TOKEN,
-                                        "",
                                         ApiStatics.getClientId(),
                                         ApiStatics.getClientSecret(),
                                         refreshToken);
 
                                 retrofit2.Response<AccessToken> tokenResponse = call.execute();
                                 EventsManager.sendEvent("dev", "INTERCEPTOR_PARSED_CODE_410", "REFRESHED_TOKEN_CODE_" + tokenResponse.code());
+                                ErrorModel errorModel = null;
+                                try {
+                                    errorModel = new Gson().fromJson(tokenResponse.errorBody().charStream(), ErrorModel.class);
+                                } catch (Exception err) {
+                                    err.printStackTrace();
+                                }
                                 if (tokenResponse.code() == 200) {
                                     AccessToken newToken = tokenResponse.body();
                                     lastToken = newToken;
@@ -140,7 +155,24 @@ public class ApiProvider {
                                             .header("Authorization", newToken.getTokenType() + " " + newToken.getAccessToken())
                                             .build();
                                     proceed = chain.proceed(request);
+                                } else if (tokenResponse.code() == 400 &&
+                                        errorModel != null &&
+                                        !TextUtils.isEmpty(errorModel.getError())) {
+                                    Call<AccessToken> callGust = guestLogin();
+                                    retrofit2.Response<AccessToken> guestResponse = callGust.execute();
+                                    if (guestResponse.code() == 200) {
+                                        ProfileManager.getInstance().clearProfile();
+                                        AccessToken guestToken = guestResponse.body();
+                                        lastToken = guestToken;
+                                        ApiStatics.saveToken(lastToken);
+                                        request = request.newBuilder()
+                                                .header("Authorization", guestToken.getTokenType() + " " + guestToken.getAccessToken())
+                                                .build();
+
+                                        proceed = chain.proceed(request);
+                                    }
                                 }
+                                isInTokenRefreshing = false;
                             }
                         }
                     }
@@ -162,27 +194,27 @@ public class ApiProvider {
         return retrofit.create(serviceClass);
     }
 
-    public static EtkaApi getApi() {
+    public EtkaApi getApi() {
         return createService(EtkaApi.class);
     }
 
-    public static EtkaApi getAuthorizedApi() {
+    public EtkaApi getAuthorizedApi() {
         return createService(EtkaApi.class, DiskDataHelper.getLastToken());
     }
 
-    private static HttpLoggingInterceptor getBodyLogInterceptor() {
+    private HttpLoggingInterceptor getBodyLogInterceptor() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return logging;
     }
 
-    private static HttpLoggingInterceptor getHeadersLogInterceptor() {
+    private HttpLoggingInterceptor getHeadersLogInterceptor() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.HEADERS);
         return logging;
     }
 
-    public static Call<AccessToken> getLoginWithSMSVerification(String mobilePhone, String verificationCode, String invitationCode) {
+    public Call<AccessToken> getLoginWithSMSVerification(String mobilePhone, String verificationCode, String invitationCode) {
         String vc = "";
         if (!TextUtils.isEmpty(mobilePhone) && !TextUtils.isEmpty(verificationCode)) {
             vc = mobilePhone + "-" + verificationCode;
@@ -191,14 +223,14 @@ public class ApiProvider {
         return getApi().getToken(ApiStatics.GRAND_TYPE_VERIFY, vc, ApiStatics.getClientId(), ApiStatics.getClientSecret(), "");
     }
 
-    public static Call<AccessToken> guestLogin() {
+    public Call<AccessToken> guestLogin() {
         EtkaPushNotificationConfig.registerGuests();
         return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ApiStatics.getGuestUserName(), ApiStatics.getGuestPassword(), ApiStatics.getClientId(), ApiStatics.getClientSecret(), "");
     }
 
-    public static CertificatePinner certificatePinner = null;
+    public CertificatePinner certificatePinner = null;
 
-    private static CertificatePinner getPinnedCertificate() {
+    private CertificatePinner getPinnedCertificate() {
         if (certificatePinner == null && ApiStatics.getBaseUrl().contains("https://")) {
             certificatePinner = new CertificatePinner.Builder()
                     .add(ApiStatics.getBaseUrl().replace("https://", ""), "sha256/EC6FcYlSSdciVUvdR4NqRZIYvcdmbqdqYUQDZJP04Xk=")
@@ -207,7 +239,7 @@ public class ApiProvider {
         return certificatePinner;
     }
 
-    private static void addTLSSocketFactory(OkHttpClient.Builder httpBuilder) {
+    private void addTLSSocketFactory(OkHttpClient.Builder httpBuilder) {
         TLSSocketFactory tlsSocketFactory;
         try {
             tlsSocketFactory = new TLSSocketFactory();
@@ -217,7 +249,7 @@ public class ApiProvider {
         }
     }
 
-    private static void setTimeOuts(OkHttpClient.Builder httpClient) {
+    private void setTimeOuts(OkHttpClient.Builder httpClient) {
         httpClient.connectTimeout(30, TimeUnit.SECONDS);
         httpClient.readTimeout(30, TimeUnit.SECONDS);
         httpClient.writeTimeout(30, TimeUnit.SECONDS);

@@ -45,7 +45,7 @@ public class StoresManager {
     }
 
     private void loadData() {
-        req = ApiProvider.getAuthorizedApi().getStores();
+        req = ApiProvider.getInstance().getAuthorizedApi().getStores();
         req.enqueue(new Callback<OauthResponse<List<StoreModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<StoreModel>>> call, Response<OauthResponse<List<StoreModel>>> response) {

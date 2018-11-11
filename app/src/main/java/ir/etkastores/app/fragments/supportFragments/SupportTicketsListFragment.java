@@ -100,7 +100,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
     @Override
     public void onResume() {
         super.onResume();
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             swipeRefresh.setEnabled(false);
             messageView.show(R.drawable.ic_warning_orange_48dp, getResources().getString(R.string.loginRequiredForThisSection), null, null);
             hideLoading();
@@ -120,14 +120,14 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
         requestModel = new TicketFilterModel();
         requestModel.setPage(0);
         requestModel.setTake(PAGE_SIZE);
-        if (!ProfileManager.isGuest()) {
-            requestModel.setUserId(ProfileManager.getProfile().getId());
+        if (!ProfileManager.getInstance().isGuest()) {
+            requestModel.setUserId(ProfileManager.getInstance().getProfile().getId());
         }
     }
 
     @OnClick(R.id.addNewTicketFab)
     public void onAddNewTicketButtonClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showNeedToLogin();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNewTicket);
@@ -163,7 +163,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
         if (!isAdded()) return;
         showLoading();
         messageView.hide();
-        ticketReq = ApiProvider.getAuthorizedApi().getSupportTicketList(requestModel);
+        ticketReq = ApiProvider.getInstance().getAuthorizedApi().getSupportTicketList(requestModel);
         ticketReq.enqueue(new Callback<OauthResponse<List<TicketItem>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<TicketItem>>> call, Response<OauthResponse<List<TicketItem>>> response) {
@@ -251,7 +251,7 @@ public class SupportTicketsListFragment extends Fragment implements TicketsListA
     }
 
     private void checkToLoadDataViews() {
-        if (adapter.getItemCount() == 0 && !listIsEmpty && !ProfileManager.isGuest() && (ticketReq == null || ticketReq.isCanceled())) {
+        if (adapter.getItemCount() == 0 && !listIsEmpty && !ProfileManager.getInstance().isGuest() && (ticketReq == null || ticketReq.isCanceled())) {
             loadTickets();
         }
     }

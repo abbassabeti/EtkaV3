@@ -37,6 +37,7 @@ public class EtkaRemoteConfigManager {
                     final String updateUrl = firebaseRemoteConfig.getString("v3_force_update_url");
                     ContactUsManager.getInstance().saveEmail(firebaseRemoteConfig.getString("v3_contact_us_email"));
                     ContactUsManager.getInstance().savePhone(firebaseRemoteConfig.getString("v3_contact_us_phone"));
+
                     int minAppVersion = Integer.parseInt(minVersion);
                     DiskDataHelper.setMinForceUpdateVersion(minAppVersion);
                     DiskDataHelper.setForceUpdateUrl(updateUrl);

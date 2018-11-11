@@ -70,7 +70,7 @@ public class HekmatCardRegisterActivity extends BaseActivity implements EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -91,7 +91,7 @@ public class HekmatCardRegisterActivity extends BaseActivity implements EtkaTool
         toolbar.setActionListeners(this);
         passwordEt.setTransformationMethod(new PasswordTransformationMethod());
         confirmPasswordEt.setTransformationMethod(new PasswordTransformationMethod());
-        phoneNumberEt.setText(ProfileManager.getProfile().getCellPhone());
+        phoneNumberEt.setText(ProfileManager.getInstance().getProfile().getCellPhone());
         cardNumberEt.setText(cardNumber);
         passwordEt.setText(password);
         phoneNumberEt.requestFocus();
@@ -156,7 +156,7 @@ public class HekmatCardRegisterActivity extends BaseActivity implements EtkaTool
 
     private void sendRequest() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inRegistering);
-        req = ApiProvider.getAuthorizedApi().registerHekmatCard(requestModel);
+        req = ApiProvider.getInstance().getAuthorizedApi().registerHekmatCard(requestModel);
         req.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {

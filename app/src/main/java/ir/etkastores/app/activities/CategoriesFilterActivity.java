@@ -234,7 +234,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
     }
 
     private void loadMenuCategories(final long id) {
-        categoryReq = ApiProvider.getAuthorizedApi().getCategory(id);
+        categoryReq = ApiProvider.getInstance().getAuthorizedApi().getCategory(id);
         categoryReq.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {

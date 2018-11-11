@@ -65,7 +65,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -82,7 +82,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        UserProfileModel profile = ProfileManager.getProfile();
+        UserProfileModel profile = ProfileManager.getInstance().getProfile();
         if (profile == null) return;
         if (TextUtils.isEmpty(profile.getFirstNameAndLastName())) {
             firstNameAndLastName.setLeftText("-");
@@ -187,7 +187,7 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
                 if (isFinishing()) return;
                 if (button == RIGHT_BUTTON) {
                     AdjustHelper.sendAdjustEvent(AdjustHelper.Logout);
-                    ProfileManager.logOut();
+                    ProfileManager.getInstance().logOut();
                     Toaster.show(ProfileSettingActivity.this, R.string.logOutSuccessFully);
                     onBackPressed();
                 }

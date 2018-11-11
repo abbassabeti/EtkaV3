@@ -33,14 +33,14 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
         setContentView(R.layout.activity_invite_friends);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
-        invitationCode.setText(ProfileManager.getProfile().getInvitationCode());
+        invitationCode.setText(ProfileManager.getInstance().getProfile().getInvitationCode());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
 
     @OnClick(R.id.shareButton)
     public void onShareButtonClick() {
-        String message = String.format(getResources().getString(R.string.shareInvitationCodeMessage), ProfileManager.getProfile().getInvitationCode()) +
+        String message = String.format(getResources().getString(R.string.shareInvitationCodeMessage), ProfileManager.getInstance().getProfile().getInvitationCode()) +
                 "\n" + getResources().getString(R.string.cafebazaarAppUrl);
         IntentHelper.share(this, getResources().getString(R.string.etkaStoreAppInvitation), message);
     }

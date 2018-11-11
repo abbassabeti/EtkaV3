@@ -101,7 +101,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     private void sendVerificationCode() {
         hideKeyboard(phoneEt);
         showLoading(getResources().getString(R.string.inSendinfVerificationCode));
-        verificationReq = ApiProvider.getApi().requestVerificationCode(phoneEt.getText().toString());
+        verificationReq = ApiProvider.getInstance().getApi().requestVerificationCode(phoneEt.getText().toString());
         verificationReq.enqueue(new Callback<OauthResponse<GetVerificationCodeResponse>>() {
             @Override
             public void onResponse(Call<OauthResponse<GetVerificationCodeResponse>> call, Response<OauthResponse<GetVerificationCodeResponse>> response) {
@@ -134,7 +134,7 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     public void loginWithVerificationCode() {
         hideKeyboard(verifyEt);
         showLoading(getResources().getString(R.string.inLogin));
-        Call<AccessToken> login = ApiProvider.getLoginWithSMSVerification(phoneEt.getText().toString(), verifyEt.getText().toString(), invitationCodeEt.getText().toString());
+        Call<AccessToken> login = ApiProvider.getInstance().getLoginWithSMSVerification(phoneEt.getText().toString(), verifyEt.getText().toString(), invitationCodeEt.getText().toString());
         login.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
@@ -161,14 +161,14 @@ public class LoginWithSMSActivity extends BaseActivity implements EtkaToolbar.Et
     private void loadProfile() {
         showLoading(getResources().getString(R.string.inLoadingUserProfile));
         loadingDialog = DialogHelper.showLoading(this, R.string.inLoadingUserProfileInfo);
-        ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
+        ApiProvider.getInstance().getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
                 if (isFinishing()) return;
                 hideLoading();
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        ProfileManager.saveProfile(response.body().getData());
+                        ProfileManager.getInstance().saveProfile(response.body().getData());
                         Toaster.showLong(LoginWithSMSActivity.this, R.string.loginSuccessfulMessage);
                         LoginWithSMSActivity.this.finish();
                     } else {

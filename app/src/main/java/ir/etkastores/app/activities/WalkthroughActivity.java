@@ -63,7 +63,7 @@ public class WalkthroughActivity extends BaseActivity {
     }
 
     private void initViews() {
-        ProfileManager.setIsFirstRun(false);
+        ProfileManager.getInstance().setIsFirstRun(false);
         enterButton.setTypeface(FontUtils.getBoldTypeFace());
         List<PagerSliderModel> items = new ArrayList<>();
         items.add(new PagerSliderModel(R.drawable.walk_img_map, "همراه فروشگاه اتکا", "جزئیات کالاهای موجود در شعب فروشگاه های اتکا، مکان و جزئیات شعب، سوابق خرید، اطلاعات کاربری و سایر خدمات را در جیب خود داشته باشید."));

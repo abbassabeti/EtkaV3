@@ -82,7 +82,7 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -257,13 +257,13 @@ public class NewTicketActivity extends BaseActivity implements EtkaToolbar.EtkaT
 
     private void sendRequestProductTicket() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
-        req = ApiProvider.getAuthorizedApi().sendRequestProduct(reqModel);
+        req = ApiProvider.getInstance().getAuthorizedApi().sendRequestProduct(reqModel);
         req.enqueue(reqCallback);
     }
 
     private void sendSupportTicket() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
-        req = ApiProvider.getAuthorizedApi().sendSupportTicket(reqModel);
+        req = ApiProvider.getInstance().getAuthorizedApi().sendSupportTicket(reqModel);
         req.enqueue(reqCallback);
     }
 

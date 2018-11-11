@@ -40,7 +40,7 @@ public class FactorActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }

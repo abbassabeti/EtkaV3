@@ -60,7 +60,7 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -82,7 +82,7 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
         recyclerView.setAdapter(adapter);
         requestModel = new FactorRequestModel();
         requestModel.setTake(10);
-        requestModel.setUserId(ProfileManager.getProfile().getCrmUserId());
+        requestModel.setUserId(ProfileManager.getInstance().getProfile().getCrmUserId());
         loadData();
     }
 
@@ -100,7 +100,7 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
         showLoading();
         messageView.hide();
         requestModel.setSkip(page);
-        factorRequest = ApiProvider.getAuthorizedApi().getFactor(requestModel);
+        factorRequest = ApiProvider.getInstance().getAuthorizedApi().getFactor(requestModel);
         factorRequest.enqueue(new Callback<OauthResponse<List<FactorModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<FactorModel>>> call, Response<OauthResponse<List<FactorModel>>> response) {

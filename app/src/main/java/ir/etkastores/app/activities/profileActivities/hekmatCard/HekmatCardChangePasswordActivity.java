@@ -54,7 +54,7 @@ public class HekmatCardChangePasswordActivity extends BaseActivity implements Et
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -125,7 +125,7 @@ public class HekmatCardChangePasswordActivity extends BaseActivity implements Et
 
     private void sendRequest() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
-        req = ApiProvider.getAuthorizedApi().changeHekmatPassword(requestModel);
+        req = ApiProvider.getInstance().getAuthorizedApi().changeHekmatPassword(requestModel);
         req.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {

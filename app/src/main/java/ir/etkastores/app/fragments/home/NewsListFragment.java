@@ -76,7 +76,7 @@ public class NewsListFragment extends Fragment implements NewsListRecyclerAdapte
     }
 
     private void loadNews() {
-        newsReq = ApiProvider.getAuthorizedApi().getNews(requestModel);
+        newsReq = ApiProvider.getInstance().getAuthorizedApi().getNews(requestModel);
         showLoading();
         newsReq.enqueue(new Callback<OauthResponse<NewsResponseModel>>() {
             @Override

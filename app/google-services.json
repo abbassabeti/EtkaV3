@@ -1,58 +1,27 @@
 {
   "project_info": {
-    "project_number": "473097796320",
-    "firebase_url": "https://etka-v3.firebaseio.com",
-    "project_id": "etka-v3",
-    "storage_bucket": "etka-v3.appspot.com"
+    "project_number": "579172489728",
+    "firebase_url": "https://etka-app-v3.firebaseio.com",
+    "project_id": "etka-app-v3",
+    "storage_bucket": "etka-app-v3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:473097796320:android:8304366985999537",
-        "android_client_info": {
-          "package_name": "ir.etkastores.appDemo"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "473097796320-v45d8otau7978optfv6nit1akevdo0bs.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCUbqEezKy_IaZweYamj20sOFBvMUvLwqY"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:473097796320:android:49d40920a7abfae5",
+        "mobilesdk_app_id": "1:579172489728:android:49d40920a7abfae5",
         "android_client_info": {
           "package_name": "ir.etkastores.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "473097796320-v45d8otau7978optfv6nit1akevdo0bs.apps.googleusercontent.com",
+          "client_id": "579172489728-l48vrlotqo0qfdv49o7enprhpbc38m2q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCUbqEezKy_IaZweYamj20sOFBvMUvLwqY"
+          "current_key": "AIzaSyDFKkr8ccTXqRqD6tz02dINR_e4MJQIO1c"
         }
       ],
       "services": {

@@ -92,7 +92,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     public void onResume() {
         super.onResume();
         EtkaApp.getInstance().screenView("Profile Fragment");
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             initGuestUser();
         } else {
             initLoginUser();
@@ -100,7 +100,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     }
 
     private void initLoginUser() {
-        UserProfileModel profile = ProfileManager.getProfile();
+        UserProfileModel profile = ProfileManager.getInstance().getProfile();
         userName.setText(profile.getFirstName() + " " + profile.getLastName());
         scoreMenu.setText(String.format(getResources().getString(R.string.youHaveXScore), profile.getTotalPoints()));
         barcodeHolder.setVisibility(View.VISIBLE);
@@ -109,8 +109,8 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
             @Override
             public void run() {
                 if (!isAdded()) return;
-                if (!ProfileManager.isGuest()) {
-                    BarcodeUtils.generateBarcodeBitmap(ProfileManager.getProfile().getBarCode(), BarcodeFormat.CODABAR, userBarcodeIdImage);
+                if (!ProfileManager.getInstance().isGuest()) {
+                    BarcodeUtils.generateBarcodeBitmap(ProfileManager.getInstance().getProfile().getBarCode(), BarcodeFormat.CODABAR, userBarcodeIdImage);
                 }
             }
         }, 500);
@@ -125,7 +125,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.hekmatMenu)
     public void onHekmatMenuClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showLoginRequiredDialog();
         } else {
             final HekmatCardLoginDialog dialog = HekmatCardLoginDialog.newInstance();
@@ -168,7 +168,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.nextShoppingListMenu)
     public void onNextShoppingListMenuClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showLoginRequiredDialog();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNextShoppingList);
@@ -178,7 +178,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.shoppingHistoryMenu)
     public void onShoppingHistoryMenuClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showLoginRequiredDialog();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenFactors);
@@ -188,7 +188,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.inviteFriendsMenu)
     public void onInviteFriendsMenuClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showLoginRequiredDialog();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenInviteFriend);
@@ -210,7 +210,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @OnClick(R.id.surveyMenu)
     public void onSurveyClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showLoginRequiredDialog();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenSurvey);
@@ -220,7 +220,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     @Override
     public void onToolbarBackClick() {
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showLoginRequiredDialog();
         } else {
             getActivity().onBackPressed();
@@ -237,7 +237,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
                 break;
 
             case SETTING_BUTTON:
-                if (ProfileManager.isGuest()) {
+                if (ProfileManager.getInstance().isGuest()) {
                     showLoginRequiredDialog();
                 } else {
                     AdjustHelper.sendAdjustEvent(AdjustHelper.OpenProfileSetting);

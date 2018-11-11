@@ -26,14 +26,13 @@ public class SuggestionArrayAdapter extends ArrayAdapter {
 
     private List<SearchViewItem> originalDataList;
     private List<SearchViewItem> dataList;
-    private Context context;
     private LayoutInflater inflater;
 
     public SuggestionArrayAdapter(Context context, List<SearchViewItem> storeDataLst) {
         super(context, R.layout.store_suggestion_row_item, storeDataLst);
         originalDataList = storeDataLst;
         dataList = getCopyFromOriginalList();
-        this.context = context;
+        Context context1 = context;
         this.inflater = LayoutInflater.from(context);
     }
 

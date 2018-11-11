@@ -41,7 +41,7 @@ public class TicketsDepartmentsManager {
     private int retryCounter = MAX_RETRY_COUNT;
 
     private void loadData() {
-        req = ApiProvider.getAuthorizedApi().getDepartments();
+        req = ApiProvider.getInstance().getAuthorizedApi().getDepartments();
         req.enqueue(new Callback<OauthResponse<List<DepartmentModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<DepartmentModel>>> call, Response<OauthResponse<List<DepartmentModel>>> response) {

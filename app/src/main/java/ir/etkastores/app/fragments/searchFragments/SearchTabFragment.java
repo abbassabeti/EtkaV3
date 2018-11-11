@@ -96,7 +96,7 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
         adapter = new CategoryRecyclerAdapter(getActivity());
         adapter.setOnCategoryItemClickListener(this);
         recyclerView.setAdapter(adapter);
-        request = ApiProvider.getAuthorizedApi().getCategoryAtLevel(1);
+        request = ApiProvider.getInstance().getAuthorizedApi().getCategoryAtLevel(1);
         showLoading();
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override

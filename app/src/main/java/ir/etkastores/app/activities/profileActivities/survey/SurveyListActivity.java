@@ -51,7 +51,7 @@ public class SurveyListActivity extends BaseActivity implements EtkaToolbar.Etka
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -86,7 +86,7 @@ public class SurveyListActivity extends BaseActivity implements EtkaToolbar.Etka
 
     private void loadData() {
         showLoading();
-        req = ApiProvider.getAuthorizedApi().getSurveys();
+        req = ApiProvider.getInstance().getAuthorizedApi().getSurveys();
         req.enqueue(new Callback<OauthResponse<List<SurveyModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<SurveyModel>>> call, Response<OauthResponse<List<SurveyModel>>> response) {

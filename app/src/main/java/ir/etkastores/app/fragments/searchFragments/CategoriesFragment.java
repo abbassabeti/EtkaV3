@@ -106,7 +106,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
 
     private void loadCategory() {
         showLoading();
-        request = ApiProvider.getAuthorizedApi().getCategory(categoryId);
+        request = ApiProvider.getInstance().getAuthorizedApi().getCategory(categoryId);
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {
@@ -132,7 +132,7 @@ public class CategoriesFragment extends Fragment implements CategoryRecyclerAdap
     private void loadCategoryAtRootLevel() {
         showLoading();
         messageView.hide();
-        request = ApiProvider.getAuthorizedApi().getCategoryAtLevel(1);
+        request = ApiProvider.getInstance().getAuthorizedApi().getCategoryAtLevel(1);
         request.enqueue(new Callback<OauthResponse<List<CategoryModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<CategoryModel>>> call, Response<OauthResponse<List<CategoryModel>>> response) {

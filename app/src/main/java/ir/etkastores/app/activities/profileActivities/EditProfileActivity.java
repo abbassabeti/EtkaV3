@@ -101,7 +101,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -118,7 +118,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
 
     private void initViews() {
         toolbar.setActionListeners(this);
-        UserProfileModel profile = ProfileManager.getProfile();
+        UserProfileModel profile = ProfileManager.getInstance().getProfile();
         if (!TextUtils.isEmpty(profile.getFirstName()))
             firstNameInputEt.setText(profile.getFirstName());
         if (!TextUtils.isEmpty(profile.getLastName())) lastNameEt.setText(profile.getLastName());
@@ -128,7 +128,7 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
         if (!TextUtils.isEmpty(profile.getCellPhone()))
             mobilePhoneEt.setText(profile.getCellPhone());
 
-        XCalendar birthDayXCalendar = ProfileManager.getProfile().getBirthDateXCalendar();
+        XCalendar birthDayXCalendar = ProfileManager.getInstance().getProfile().getBirthDateXCalendar();
         if (birthDayXCalendar != null) {
             calendar = birthDayXCalendar.getCalendar(XCalendar.JalaliType);
             selectedDay = calendar.getDay();
@@ -396,14 +396,14 @@ public class EditProfileActivity extends BaseActivity implements EtkaToolbar.Etk
 
     private void sendUpdateRequest() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inUpdatingUserProfile);
-        updateReq = ApiProvider.getAuthorizedApi().editUserProfile(newProfileInfo);
+        updateReq = ApiProvider.getInstance().getAuthorizedApi().editUserProfile(newProfileInfo);
         updateReq.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {
                 if (loadingDialog == null) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        ProfileManager.saveProfile(newProfileInfo);
+                        ProfileManager.getInstance().saveProfile(newProfileInfo);
                         Toaster.show(EditProfileActivity.this, R.string.profileUpdatedSuccessfully);
                         onBackPressed();
                     } else {

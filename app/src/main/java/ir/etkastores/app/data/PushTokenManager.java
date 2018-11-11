@@ -59,7 +59,7 @@ public class PushTokenManager {
             }
             if (TextUtils.isEmpty(getLastRefreshedToken())) return;
         }
-        if (ProfileManager.isGuest()) return;
+        if (ProfileManager.getInstance().isGuest()) return;
         if (req != null && req.isExecuted()) return;
         if (!isTokenSynced()) sendRequest();
     }
@@ -71,7 +71,7 @@ public class PushTokenManager {
 
     private void sendRequest() {
         final String token = getLastRefreshedToken();
-        req = ApiProvider.getAuthorizedApi().syncLastPushToken(token);
+        req = ApiProvider.getInstance().getAuthorizedApi().syncLastPushToken(token);
         req.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {

@@ -64,7 +64,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -110,7 +110,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
 
     private void loadProducts() {
         showLoading();
-        savedProductsReq = ApiProvider.getAuthorizedApi().getSavedProducts();
+        savedProductsReq = ApiProvider.getInstance().getAuthorizedApi().getSavedProducts();
         savedProductsReq.enqueue(new Callback<OauthResponse<List<ProductModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<ProductModel>>> call, Response<OauthResponse<List<ProductModel>>> response) {
@@ -201,7 +201,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
         AdjustHelper.sendAdjustEvent(AdjustHelper.DeleteFromNextShoppingList);
         tempProductForDelete = productModel;
         loadingDialog = DialogHelper.showLoading(NextShoppingListActivity.this, R.string.inDeletingProductFromYourNextShoppingList);
-        deleteProductReq = ApiProvider.getAuthorizedApi().deleteSavedProduct(productModel.getId());
+        deleteProductReq = ApiProvider.getInstance().getAuthorizedApi().deleteSavedProduct(productModel.getId());
         deleteProductReq.enqueue(new Callback<OauthResponse<Long>>() {
             @Override
             public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {

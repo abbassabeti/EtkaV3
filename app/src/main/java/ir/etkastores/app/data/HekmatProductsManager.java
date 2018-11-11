@@ -38,7 +38,7 @@ public class HekmatProductsManager {
 
     private void request() {
         isLoading = true;
-        ApiProvider.getAuthorizedApi().getHekmat().enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
+        ApiProvider.getInstance().getAuthorizedApi().getHekmat().enqueue(new Callback<OauthResponse<List<HekmatModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<HekmatModel>>> call, Response<OauthResponse<List<HekmatModel>>> response) {
                 if (response.isSuccessful()) {

@@ -9,11 +9,11 @@ import com.google.android.gms.maps.MapView;
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
-import ir.etkastores.app.data.PushTokenManager;
+import ir.etkastores.app.R;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.notification.NotificationModel;
 import ir.etkastores.app.models.profile.UserProfileModel;
-import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DiskDataHelper;
@@ -22,7 +22,6 @@ import ir.etkastores.app.utils.EtkaRemoteConfigManager;
 import ir.etkastores.app.webServices.AccessToken;
 import ir.etkastores.app.webServices.ApiProvider;
 import ir.etkastores.app.webServices.ApiStatics;
-import ir.etkastores.app.data.ProfileManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,9 +38,9 @@ public class SplashActivity extends BaseActivity {
         EtkaPushNotificationConfig.registerGlobal();
         EtkaRemoteConfigManager.checkRemoteConfigs();
 
-        if (BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             EtkaPushNotificationConfig.registerDev();
-        }else{
+        } else {
             EtkaPushNotificationConfig.unregisterDev();
         }
 
@@ -64,7 +63,7 @@ public class SplashActivity extends BaseActivity {
                     if (isFinishing()) return;
                     gotoApp();
                 }
-            },3000);
+            }, 3000);
         }
 
     }
@@ -112,13 +111,13 @@ public class SplashActivity extends BaseActivity {
 
     private void login() {
 //        loginRequest = ApiProvider.getLogin(ProfileManager.getUserName(), ProfileManager.getUserPassword());
-        loginRequest = ApiProvider.guestLogin();
+        loginRequest = ApiProvider.getInstance().guestLogin();
         loginRequest.enqueue(new Callback<AccessToken>() {
             @Override
             public void onResponse(Call<AccessToken> call, Response<AccessToken> response) {
                 if (response.isSuccessful()) {
                     ApiStatics.saveToken(response.body());
-                    if (ProfileManager.isGuest()) {
+                    if (ProfileManager.getInstance().isGuest()) {
                         gotoApp();
                     } else {
                         loadProfile();
@@ -156,12 +155,12 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void loadProfile() {
-        ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
+        ApiProvider.getInstance().getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        ProfileManager.saveProfile(response.body().getData());
+                        ProfileManager.getInstance().saveProfile(response.body().getData());
                         gotoApp();
                     } else {
                         showRetryDialog(response.body().getMeta().getMessage());
@@ -179,7 +178,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void gotoApp() {
-        if (ProfileManager.isFirstRun() && notificationModel == null) {
+        if (ProfileManager.getInstance().isFirstRun() && notificationModel == null) {
             WalkthroughActivity.show(this);
         } else {
             MainActivity.show(this, notificationModel);

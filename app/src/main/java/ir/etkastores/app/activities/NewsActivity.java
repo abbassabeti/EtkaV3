@@ -126,7 +126,7 @@ public class NewsActivity extends BaseActivity implements EtkaToolbar.EtkaToolba
     private void loadNews() {
         showLoading();
         messageView.hide();
-        req = ApiProvider.getAuthorizedApi().getNews(requestedNewId);
+        req = ApiProvider.getInstance().getAuthorizedApi().getNews(requestedNewId);
         req.enqueue(new Callback<OauthResponse<NewsItem>>() {
             @Override
             public void onResponse(Call<OauthResponse<NewsItem>> call, Response<OauthResponse<NewsItem>> response) {

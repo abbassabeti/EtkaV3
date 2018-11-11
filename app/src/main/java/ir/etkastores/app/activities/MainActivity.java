@@ -279,7 +279,7 @@ public class MainActivity extends BaseActivity {
 
             case NotificationModel.ACTION_OPEN_LOGIN: // TEST
                 setHomeTabDefault();
-                if (ProfileManager.isGuest()) LoginWithSMSActivity.show(this);
+                if (ProfileManager.getInstance().isGuest()) LoginWithSMSActivity.show(this);
                 break;
 
             case NotificationModel.ACTION_OPEN_SURVEY: // TESTED

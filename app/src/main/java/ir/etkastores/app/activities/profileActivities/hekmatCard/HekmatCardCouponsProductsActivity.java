@@ -68,7 +68,7 @@ public class HekmatCardCouponsProductsActivity extends BaseActivity implements E
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -95,7 +95,7 @@ public class HekmatCardCouponsProductsActivity extends BaseActivity implements E
 
     private void loadData() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inLoadingData);
-        req = ApiProvider.getAuthorizedApi().getHekmatCoupons(provinceId);
+        req = ApiProvider.getInstance().getAuthorizedApi().getHekmatCoupons(provinceId);
         req.enqueue(new Callback<OauthResponse<List<HekmatCoupons>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<HekmatCoupons>>> call, Response<OauthResponse<List<HekmatCoupons>>> response) {

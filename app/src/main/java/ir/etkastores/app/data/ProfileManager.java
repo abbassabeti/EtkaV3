@@ -21,14 +21,25 @@ public class ProfileManager {
     private final static String PROFILE_KEY = "PROFILE_KEY";
     private final static String IS_FIRST_RUN = "IS_FIRST_RUN";
 
-    private static UserProfileModel profileModel;
+    private static ProfileManager instance;
 
-    public static UserProfileModel getProfile() {
+    private ProfileManager() {
+
+    }
+
+    synchronized public static ProfileManager getInstance() {
+        if (instance == null) instance = new ProfileManager();
+        return instance;
+    }
+
+    private UserProfileModel profileModel;
+
+    public UserProfileModel getProfile() {
         initProfile();
         return profileModel;
     }
 
-    public static void saveProfile(UserProfileModel model) {
+    public void saveProfile(UserProfileModel model) {
         try {
             String str = new Gson().toJson(model);
             EtkaApp.getPreference().edit().putString(PROFILE_KEY, str).apply();
@@ -39,7 +50,7 @@ public class ProfileManager {
         }
     }
 
-    public static boolean hasSavedProfile() {
+    public boolean hasSavedProfile() {
         if (getProfile() == null) {
             return false;
         } else {
@@ -47,7 +58,7 @@ public class ProfileManager {
         }
     }
 
-    private static void initProfile() {
+    private void initProfile() {
         if (profileModel != null) return;
         try {
             profileModel = new Gson().fromJson(EtkaApp.getPreference().getString(PROFILE_KEY, null), UserProfileModel.class);
@@ -56,7 +67,7 @@ public class ProfileManager {
         }
     }
 
-    public static void clearProfile() {
+    public void clearProfile() {
         try {
             EtkaApp.getPreference().edit().remove(PROFILE_KEY).apply();
             ApiStatics.saveToken(null);
@@ -67,7 +78,7 @@ public class ProfileManager {
         }
     }
 
-    public static boolean isGuest() {
+    public boolean isGuest() {
         UserProfileModel profile = getProfile();
         if (profile == null) {
             return true;
@@ -76,7 +87,7 @@ public class ProfileManager {
         }
     }
 
-    public static void logOut() {
+    public void logOut() {
         clearProfile();
         new Thread(new Runnable() {
             @Override
@@ -93,12 +104,12 @@ public class ProfileManager {
         }).start();
     }
 
-    public static boolean isFirstRun() {
+    public boolean isFirstRun() {
         if (BuildConfig.DEBUG) return true;
         return !DiskDataHelper.getBool(IS_FIRST_RUN);
     }
 
-    public static void setIsFirstRun(boolean isFirstRun) {
+    public void setIsFirstRun(boolean isFirstRun) {
         DiskDataHelper.putBool(IS_FIRST_RUN, !isFirstRun);
     }
 

@@ -123,7 +123,7 @@ public class RegisterFragment extends Fragment implements EtkaToolbar.EtkaToolba
         requestModel.setPassword(passwordInput.getText().toString());
         requestModel.setFirstName(firsNameInput.getText().toString());
         requestModel.setLastName(lastNameInput.getText().toString());
-        registerApi = ApiProvider.getApi().registerNewUser(requestModel);
+        registerApi = ApiProvider.getInstance().getApi().registerNewUser(requestModel);
         registerApi.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {

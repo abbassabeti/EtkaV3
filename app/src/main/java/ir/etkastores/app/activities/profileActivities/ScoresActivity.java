@@ -35,7 +35,7 @@ public class ScoresActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -52,7 +52,7 @@ public class ScoresActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     private void initViews(){
         toolbar.setActionListeners(this);
-        yourRate.setText(String.format(getResources().getString(R.string.youHaveXScore), ProfileManager.getProfile().getTotalPoints()));
+        yourRate.setText(String.format(getResources().getString(R.string.youHaveXScore), ProfileManager.getInstance().getProfile().getTotalPoints()));
     }
 
     @Override

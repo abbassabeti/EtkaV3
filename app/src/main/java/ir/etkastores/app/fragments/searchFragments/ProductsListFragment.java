@@ -99,7 +99,7 @@ public class ProductsListFragment extends Fragment implements ProductsRecyclerAd
     private void loadProducts() {
         showLoading();
         messageView.hide();
-        req = ApiProvider.getAuthorizedApi().searchProduct(requestModel);
+        req = ApiProvider.getInstance().getAuthorizedApi().searchProduct(requestModel);
         productsAdapter.setLoadMoreEnabled(false);
         req.enqueue(new Callback<OauthResponse<ProductSearchResponseModel>>() {
             @Override

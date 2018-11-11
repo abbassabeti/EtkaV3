@@ -85,7 +85,7 @@ public class TicketConversationActivity extends BaseActivity implements EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -122,7 +122,7 @@ public class TicketConversationActivity extends BaseActivity implements EtkaTool
     private void loadSupportTickets() {
         messageView.hide();
         circularProgress.setVisibility(View.VISIBLE);
-        Call<OauthResponse<List<TicketItem>>> req = ApiProvider.getAuthorizedApi().getConversation(ticketItem.getTicketCode());
+        Call<OauthResponse<List<TicketItem>>> req = ApiProvider.getInstance().getAuthorizedApi().getConversation(ticketItem.getTicketCode());
         req.enqueue(new Callback<OauthResponse<List<TicketItem>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<TicketItem>>> call, Response<OauthResponse<List<TicketItem>>> response) {
@@ -183,7 +183,7 @@ public class TicketConversationActivity extends BaseActivity implements EtkaTool
 
     private void sendReply() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inSendingData);
-        ApiProvider.getAuthorizedApi().sendSupportTicket(reqModel).enqueue(new Callback<OauthResponse<Long>>() {
+        ApiProvider.getInstance().getAuthorizedApi().sendSupportTicket(reqModel).enqueue(new Callback<OauthResponse<Long>>() {
             @Override
             public void onResponse(Call<OauthResponse<Long>> call, Response<OauthResponse<Long>> response) {
                 if (isFinishing()) return;

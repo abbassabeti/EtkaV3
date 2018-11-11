@@ -63,7 +63,7 @@ public class HekmatCardResetPasswordActivity extends BaseActivity implements Etk
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -140,7 +140,7 @@ public class HekmatCardResetPasswordActivity extends BaseActivity implements Etk
 
     private void sendRequest() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inSendingRequest);
-        req = ApiProvider.getAuthorizedApi().resetHekmatPassword(requestModel);
+        req = ApiProvider.getInstance().getAuthorizedApi().resetHekmatPassword(requestModel);
         req.enqueue(new Callback<OauthResponse<String>>() {
             @Override
             public void onResponse(Call<OauthResponse<String>> call, Response<OauthResponse<String>> response) {

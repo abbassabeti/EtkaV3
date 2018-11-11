@@ -150,7 +150,7 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
         resetPasswordDialog.show(getChildFragmentManager(), new ResetPasswordDialog.OnUserEnterPhoneNumberToResetListener() {
             @Override
             public void onUserSetPhoneNumberToReset(String phone) {
-                resetPasswordReq = ApiProvider.getApi().resetPassword(phone);
+                resetPasswordReq = ApiProvider.getInstance().getApi().resetPassword(phone);
                 sendResetPasswordRequest();
             }
         });
@@ -296,13 +296,13 @@ public class LoginFragment extends Fragment implements EtkaToolbar.EtkaToolbarAc
 
     private void loadProfile() {
         loadingDialog = DialogHelper.showLoading(getActivity(), R.string.inLoadingUserProfileInfo);
-        ApiProvider.getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
+        ApiProvider.getInstance().getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
                 if (!isAdded()) return;
                 if (response.isSuccessful()) {
                     if (response.body().isSuccessful()) {
-                        ProfileManager.saveProfile(response.body().getData());
+                        ProfileManager.getInstance().saveProfile(response.body().getData());
                         Toaster.showLong(getActivity(), R.string.loginSuccessfulMessage);
                         getActivity().finish();
                     } else {

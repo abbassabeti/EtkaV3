@@ -90,7 +90,7 @@ public class SpecialOffersSlide extends Fragment implements CategoryGroupHorizon
     private void loadOffers() {
         showLoading();
         messageView.hide();
-        offersReq = ApiProvider.getAuthorizedApi().getOffers("Offers");
+        offersReq = ApiProvider.getInstance().getAuthorizedApi().getOffers("Offers");
         offersReq.enqueue(new Callback<OauthResponse<List<HomeItemsModel>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<HomeItemsModel>>> call, Response<OauthResponse<List<HomeItemsModel>>> response) {

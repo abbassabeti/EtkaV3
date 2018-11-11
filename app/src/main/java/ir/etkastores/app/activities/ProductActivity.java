@@ -182,7 +182,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
     private void loadProduct() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inLoadingProductInfo);
-        productReq = ApiProvider.getAuthorizedApi().getProductByBarcode(productBarcodeCode);
+        productReq = ApiProvider.getInstance().getAuthorizedApi().getProductByBarcode(productBarcodeCode);
         productReq.enqueue(new Callback<OauthResponse<ProductModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<ProductModel>> call, Response<OauthResponse<ProductModel>> response) {
@@ -254,7 +254,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
         switch (view.getId()) {
             case R.id.addToNextShoppingListButton:
                 AdjustHelper.sendAdjustEvent(AdjustHelper.AddToNextShoppingList);
-                if (ProfileManager.isGuest()) {
+                if (ProfileManager.getInstance().isGuest()) {
                     showNeedToLoginDialog();
                 } else {
                     sendAddToNextShoppingListRequest();
@@ -280,12 +280,12 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
 
     private void sendAddToNextShoppingListRequest() {
         if (isFinishing()) return;
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             showNeedToLoginDialog();
             return;
         }
         loadingDialog = DialogHelper.showLoading(this, R.string.inSavingToNextShoppingList);
-        addToNextShoppingListReq = ApiProvider.getAuthorizedApi().saveProduct(new SaveProductRequestModel(productModel.getId(), saveCountValue));
+        addToNextShoppingListReq = ApiProvider.getInstance().getAuthorizedApi().saveProduct(new SaveProductRequestModel(productModel.getId(), saveCountValue));
         loadingDialog.show();
         addToNextShoppingListReq.enqueue(new Callback<OauthResponse<Long>>() {
             @Override
@@ -380,7 +380,7 @@ public class ProductActivity extends BaseActivity implements EtkaToolbar.EtkaToo
                 .setTake(10)
                 .addCategoryId(productModel.getCategoryId())
                 .setPage(1);
-        relatedReq = ApiProvider.getAuthorizedApi().searchProduct(requestModel);
+        relatedReq = ApiProvider.getInstance().getAuthorizedApi().searchProduct(requestModel);
         relatedReq.enqueue(new Callback<OauthResponse<ProductSearchResponseModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<ProductSearchResponseModel>> call, Response<OauthResponse<ProductSearchResponseModel>> response) {

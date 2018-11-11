@@ -51,7 +51,7 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -82,7 +82,7 @@ public class HekmatTransactionsActivity extends BaseActivity implements EtkaTool
 
     private void loadData() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inLoadingData);
-        req = ApiProvider.getAuthorizedApi().getHekmatTransactions();
+        req = ApiProvider.getInstance().getAuthorizedApi().getHekmatTransactions();
         req.enqueue(new Callback<OauthResponse<List<InstallmentItem>>>() {
             @Override
             public void onResponse(Call<OauthResponse<List<InstallmentItem>>> call, Response<OauthResponse<List<InstallmentItem>>> response) {

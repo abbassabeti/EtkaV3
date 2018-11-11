@@ -78,7 +78,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (ProfileManager.isGuest()) {
+        if (ProfileManager.getInstance().isGuest()) {
             finish();
             return;
         }
@@ -125,7 +125,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
 
     private void login() {
         loadingDialog = DialogHelper.showLoading(this, R.string.inCheckingHekmatData);
-        loginReq = ApiProvider.getAuthorizedApi().hekmatLogin(new HekmatCardLoginModel(cardNumber, password));
+        loginReq = ApiProvider.getInstance().getAuthorizedApi().hekmatLogin(new HekmatCardLoginModel(cardNumber, password));
         loginReq.enqueue(new Callback<OauthResponse<HekmatRemainingsModel>>() {
             @Override
             public void onResponse(Call<OauthResponse<HekmatRemainingsModel>> call, Response<OauthResponse<HekmatRemainingsModel>> response) {
