@@ -248,7 +248,7 @@
     <string name="requestActivationCode">دریافت کد فعال سازی</string>
     <string name="enterActivationCodeHere">کد فعالسازی را اینجا وارد کنید</string>
     <string name="checkActivationCode">بررسی کد فعالسازی</string>
-    <string name="enterPhoneNumberMessageForVerify">برای ورود یا ثبت نام در اتکا، شماره موبایل خود را وارد کنید.</string>
+    <string name="enterPhoneNumberMessageForVerify">برای ورود یا ثبت نام در اپلیکیشن، شماره موبایل خود را وارد کنید.</string>
     <string name="enterVerificationCode">کد تائیدی را که تا لحظاتی دیگر برای شما پیامک می شود در کادر زیر وارد کنید.</string>
     <string name="pleaseEnterVerificationCode">لطفا کد تایید را وارد کنید</string>
     <string name="_default">پیشفرض</string>
