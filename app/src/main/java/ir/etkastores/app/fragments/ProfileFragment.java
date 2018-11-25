@@ -73,6 +73,9 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     @BindView(R.id.barcodeHolder)
     View barcodeHolder;
 
+    @BindView(R.id.appVersionTv)
+    TextView appVersion;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -86,6 +89,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
 
     private void initViews() {
         toolbar.setActionListeners(this);
+        appVersion.setText(getResources().getString(R.string.applicationVersionComma) + " " + BuildConfig.VERSION_NAME);
     }
 
     @Override
@@ -103,23 +107,25 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         UserProfileModel profile = ProfileManager.getInstance().getProfile();
         userName.setText(profile.getFirstName() + " " + profile.getLastName());
         scoreMenu.setText(String.format(getResources().getString(R.string.youHaveXScore), profile.getTotalPoints()));
-        barcodeHolder.setVisibility(View.VISIBLE);
+//        barcodeHolder.setVisibility(View.VISIBLE);
+        userName.setVisibility(View.VISIBLE);
         loginButton.setVisibility(View.GONE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (!isAdded()) return;
-                if (!ProfileManager.getInstance().isGuest()) {
-                    BarcodeUtils.generateBarcodeBitmap(ProfileManager.getInstance().getProfile().getBarCode(), BarcodeFormat.CODABAR, userBarcodeIdImage);
-                }
-            }
-        }, 500);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (!isAdded()) return;
+//                if (!ProfileManager.getInstance().isGuest()) {
+//                    BarcodeUtils.generateBarcodeBitmap(ProfileManager.getInstance().getProfile().getBarCode(), BarcodeFormat.CODABAR, userBarcodeIdImage);
+//                }
+//            }
+//        }, 500);
     }
 
     private void initGuestUser() {
         userName.setText(R.string.guestUser);
         scoreMenu.setText(getResources().getString(R.string.yourScore));
-        barcodeHolder.setVisibility(View.GONE);
+//        barcodeHolder.setVisibility(View.GONE);
+        userName.setVisibility(View.GONE);
         loginButton.setVisibility(View.VISIBLE);
     }
 

@@ -5,9 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatEditText;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +47,6 @@ public class HekmatCardLoginDialog extends BaseDialog {
         ButterKnife.bind(this, view);
         String lastCardNumber = DiskDataHelper.getLastHekmatCardNumber();
         if (!TextUtils.isEmpty(lastCardNumber)) hekmatCardNumberEt.setText(lastCardNumber);
-        SpannableString resetPasswordText = new SpannableString(getResources().getString(R.string.forgotPassword));
-        resetPasswordText.setSpan(new UnderlineSpan(), 0, resetPasswordText.length(), 0);
-        resetPassword.setText(resetPasswordText);
         return view;
     }
 
@@ -67,14 +62,14 @@ public class HekmatCardLoginDialog extends BaseDialog {
     }
 
     @OnClick(R.id.registerButton)
-    public void onRegisterClick(){
+    public void onRegisterClick() {
         if (callbackListener != null)
             callbackListener.onHekmatRegisterButton(hekmatCardNumberEt.getText().toString(), hekmatCardPasswordEt.getText().toString());
     }
 
     @OnClick(R.id.resetPasswordButton)
-    public void onResetPasswordClick(){
-        HekmatCardResetPasswordActivity.show(getContext(),hekmatCardNumberEt.getText().toString());
+    public void onResetPasswordClick() {
+        HekmatCardResetPasswordActivity.show(getContext(), hekmatCardNumberEt.getText().toString());
     }
 
     public interface OnHekmatCardCallbackListener {

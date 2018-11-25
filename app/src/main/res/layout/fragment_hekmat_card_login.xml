@@ -16,17 +16,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="@string/hekmatCard"
+            android:text="@string/hekmatCardPort"
             android:textColor="@color/darkGray"
             android:textSize="@dimen/textSizeMedium" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="@string/enterHekmatCardInformationMessage"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/textSizeSmall" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/hekmatCardNumberEt"
@@ -51,24 +43,31 @@
             app:backgroundTint="@color/gray" />
 
         <TextView
-            android:id="@+id/resetPasswordButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/forgotPassword"
-            android:textColor="@color/gray"
+            android:text="@string/hekmatCardPasswordWarningMessage"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeSmall" />
+
+        <TextView
+            android:id="@+id/enterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rect_rounded_theme_white_bg"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingBottom="3dp"
+            android:text="@string/enter"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeMedium" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/registerButton"
@@ -80,13 +79,14 @@
                 android:textSize="@dimen/textSizeSmall" />
 
             <TextView
-                android:id="@+id/enterButton"
+                android:id="@+id/resetPasswordButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_toRightOf="@id/registerButton"
-                android:text="@string/enter"
-                android:textColor="@color/colorPrimary"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="@string/haveNotPortPassword"
+                android:textColor="@color/darkGray"
                 android:textSize="@dimen/textSizeSmall" />
 
         </RelativeLayout>

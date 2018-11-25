@@ -184,7 +184,7 @@
     <string name="productAddedToNextShoppingListSuccessfully">محصول با موفقیت به لیست خرید بعدی اضافه شد.</string>
     <string name="errorInAddingToNextShoppingList">خطا در اضافه کردن محصول به لیست خرید بعدی، لطفا دوباره تلاش کنید.</string>
     <string name="setProductCounts">تعداد محصولات را مشخص کنید</string>
-    <string name="youHaveNotAnyShoppingHistory">سابقه خریدی برای شما موجود نیست.</string>
+    <string name="youHaveNotAnyShoppingHistory">در حال حاضر سابقه خریدی برای شما ثبت نشده است، برای مشاهده فاکتور خرید از این پس باید شماره تلفن همراه خود را به صندوق دار فروشگاه در هنگام خرید اعلام نمایید.</string>
     <string name="yourNextShoppingListIsEmpty">لیست خرید بعدی شما خالی است.</string>
     <string name="news">اخبار</string>
     <string name="iKnow">بلدم</string>
@@ -322,5 +322,9 @@
     <string name="customer">مشتری</string>
     <string name="products">کالاها</string>
     <string name="score1">۱ امتیاز</string>
+    <string name="applicationVersionComma">نسخه اپلیکیشن:</string>
+    <string name="hekmatCardPasswordWarningMessage">کاربر گرامی، رمز عبور درگاه با رمز کارت و رمز کیوسک متفاوت است</string>
+    <string name="hekmatCardPort">درگاه حکمت همراه فروشگاه</string>
+    <string name="haveNotPortPassword">رمز درگاه ندارید؟</string>
 
 </resources>

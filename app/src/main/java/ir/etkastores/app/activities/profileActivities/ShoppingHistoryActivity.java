@@ -13,13 +13,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
 import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.FactorsAdapter;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.factor.FactorModel;
 import ir.etkastores.app.models.factor.FactorRequestModel;
-import ir.etkastores.app.models.OauthResponse;
-import ir.etkastores.app.R;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.ui.views.MessageView;
@@ -122,7 +122,7 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
                             page++;
                         }
                     } else {
-                        showErrorMessageView(response.body().getMeta().getMessage(),true);
+                        showErrorMessageView(response.body().getMeta().getMessage(), true);
                     }
                 } else {
                     onFailure(call, null);
@@ -133,9 +133,9 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
             @Override
             public void onFailure(Call<OauthResponse<List<FactorModel>>> call, Throwable t) {
                 if (isFinishing()) return;
-                if (adapter.getItemCount() == 0){
-                    showErrorMessageView(getResources().getString(R.string.errorHappendInReceivingData),true);
-                }else{
+                if (adapter.getItemCount() == 0) {
+                    showErrorMessageView(getResources().getString(R.string.errorHappendInReceivingData), true);
+                } else {
                     showErrorMessageDialog();
                 }
                 hideLoading();
@@ -143,19 +143,19 @@ public class ShoppingHistoryActivity extends BaseActivity implements EtkaToolbar
         });
     }
 
-    private void showErrorMessageView(String message, boolean showRetry){
+    private void showErrorMessageView(String message, boolean showRetry) {
         String retry = getResources().getString(R.string.retry);
         if (!showRetry) retry = null;
         messageView.show(R.drawable.ic_warning_orange_48dp, message, retry, this);
     }
 
-    private void showErrorMessageDialog(){
-        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error),getResources().getString(R.string.errorHappendInReceivingData));
+    private void showErrorMessageDialog() {
+        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error), getResources().getString(R.string.errorHappendInReceivingData));
         messageDialog.show(getSupportFragmentManager(), true, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
                 if (isFinishing()) return;
-                if (button == RIGHT_BUTTON){
+                if (button == RIGHT_BUTTON) {
                     loadData();
                 }
                 messageDialog.getDialog().cancel();

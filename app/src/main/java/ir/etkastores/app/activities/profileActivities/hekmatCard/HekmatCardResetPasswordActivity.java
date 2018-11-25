@@ -84,7 +84,7 @@ public class HekmatCardResetPasswordActivity extends BaseActivity implements Etk
         cardNumberEt.setText(cardNumber);
         passwordEt.setTransformationMethod(new PasswordTransformationMethod());
         confirmPasswordEt.setTransformationMethod(new PasswordTransformationMethod());
-
+        cardNumberEt.requestFocus();
     }
 
     @Override
