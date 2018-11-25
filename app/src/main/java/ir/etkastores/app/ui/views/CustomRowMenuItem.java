@@ -48,66 +48,66 @@ public class CustomRowMenuItem extends RelativeLayout {
         init(attrs);
     }
 
-    private void init(AttributeSet attrs){
-        View.inflate(getContext(),R.layout.view_profile_menu_row_item_layout,this);
+    private void init(AttributeSet attrs) {
+        View.inflate(getContext(), R.layout.view_profile_menu_row_item_layout, this);
         ButterKnife.bind(this);
 
-        if (attrs !=null){
+        if (attrs != null) {
             TypedArray a = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.CustomRowMenuItem, 0, 0);
             setText(a.getString(R.styleable.CustomRowMenuItem_rowText));
             setScoreText(a.getString(R.styleable.CustomRowMenuItem_scoreText));
-            showIcon(a.getBoolean(R.styleable.CustomRowMenuItem_showIcon,false));
-            setIcon(a.getResourceId(R.styleable.CustomRowMenuItem_rowIcon,0));
-            showScore(a.getBoolean(R.styleable.CustomRowMenuItem_showScore,false));
-            showScoreStar(a.getBoolean(R.styleable.CustomRowMenuItem_showScoreStar,false));
-            hideLeftIcon(a.getBoolean(R.styleable.CustomRowMenuItem_hideLeftIcon,false));
+            showIcon(a.getBoolean(R.styleable.CustomRowMenuItem_showIcon, false));
+            setIcon(a.getResourceId(R.styleable.CustomRowMenuItem_rowIcon, 0));
+            showScore(a.getBoolean(R.styleable.CustomRowMenuItem_showScore, false));
+            showScoreStar(a.getBoolean(R.styleable.CustomRowMenuItem_showScoreStar, false));
+            hideLeftIcon(a.getBoolean(R.styleable.CustomRowMenuItem_hideLeftIcon, false));
             setLeftText(a.getString(R.styleable.CustomRowMenuItem_leftText));
-            setLeftIcon(a.getResourceId(R.styleable.CustomRowMenuItem_leftIcon,0));
+            setLeftIcon(a.getResourceId(R.styleable.CustomRowMenuItem_leftIcon, 0));
             a.recycle();
         }
     }
 
-    public void setText(String textValue){
+    public void setText(String textValue) {
         if (textValue == null) return;
         this.text.setText(textValue);
     }
 
-    public void setScoreText(String scoreValue){
+    public void setScoreText(String scoreValue) {
         if (scoreValue == null) return;
         scoreText.setText(scoreValue);
     }
 
-    public void showScore(boolean state){
-        if (state){
+    public void showScore(boolean state) {
+        if (state) {
             scoreHolder.setVisibility(VISIBLE);
-        }else{
+        } else {
             scoreHolder.setVisibility(GONE);
         }
     }
 
-    public void showScoreStar(boolean state){
-        if (state){
+    public void showScoreStar(boolean state) {
+        if (state) {
             starIcon.setVisibility(VISIBLE);
-        }else{
+        } else {
             starIcon.setVisibility(GONE);
         }
     }
 
-    public void setIcon(int iconResId){
-        if (iconResId == 0 ) return;
+    public void setIcon(int iconResId) {
+        if (iconResId == 0) return;
         showIcon(true);
         icon.setImageResource(iconResId);
     }
 
-    public void showIcon(boolean state){
-        if (state){
+    public void showIcon(boolean state) {
+        if (state) {
             icon.setVisibility(VISIBLE);
-        }else{
+        } else {
             icon.setVisibility(GONE);
         }
     }
 
-    public void setLeftText(String text){
+    public void setLeftText(String text) {
         if (text == null) return;
         leftIcon.setVisibility(GONE);
         scoreHolder.setVisibility(GONE);
@@ -116,16 +116,16 @@ public class CustomRowMenuItem extends RelativeLayout {
         icon.setVisibility(GONE);
     }
 
-    public void hideLeftIcon(boolean state){
-        if (state){
+    public void hideLeftIcon(boolean state) {
+        if (state) {
             leftIcon.setVisibility(GONE);
-        }else{
+        } else {
             leftIcon.setVisibility(VISIBLE);
         }
     }
 
-    public void setLeftIcon(int icon){
-        if (icon>0) leftIcon.setImageResource(icon);
+    public void setLeftIcon(int icon) {
+        if (icon > 0) leftIcon.setImageResource(icon);
     }
 
 }

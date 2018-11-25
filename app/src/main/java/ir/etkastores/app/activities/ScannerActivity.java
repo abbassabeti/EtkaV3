@@ -4,13 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.media.ToneGenerator;
-import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.google.zxing.Result;
@@ -54,16 +51,18 @@ public class ScannerActivity extends BaseActivity implements ZXingScannerView.Re
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mScannerView = new ZXingScannerView(this);
+        // this paramter will make your HUAWEI phone works great!
+        mScannerView.setAspectTolerance(0.5f);
         setContentView(mScannerView);
     }
 
     @Override
     public void handleResult(Result result) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.ScanBarcode);
-        try{
+        try {
             ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 200);
-            toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD,200);
-        }catch (Exception err){
+            toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
+        } catch (Exception err) {
             err.printStackTrace();
         }
         if (BuildConfig.DEBUG) {

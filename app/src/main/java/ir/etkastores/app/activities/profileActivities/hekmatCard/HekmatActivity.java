@@ -130,7 +130,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
             @Override
             public void onResponse(Call<OauthResponse<HekmatRemainingsModel>> call, Response<OauthResponse<HekmatRemainingsModel>> response) {
                 if (isFinishing()) return;
-                loadingDialog.cancel();
+                if (loadingDialog != null && loadingDialog.isShowing()) loadingDialog.cancel();
                 if (response.isSuccessful()) {
                     responseModel = response.body().getData();
                     if (response.body().isSuccessful()) {

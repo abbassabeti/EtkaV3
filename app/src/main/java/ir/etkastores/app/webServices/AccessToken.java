@@ -35,7 +35,7 @@ public class AccessToken {
     }
 
     public String getAccessToken() {
-        return  accessToken;
+        return accessToken;
     }
 
     public String getTokenType() {
