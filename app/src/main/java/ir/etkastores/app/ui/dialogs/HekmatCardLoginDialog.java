@@ -9,13 +9,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ir.etkastores.app.R;
-import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatCardResetPasswordActivity;
+import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.utils.DiskDataHelper;
 
 public class HekmatCardLoginDialog extends BaseDialog {
@@ -30,8 +29,8 @@ public class HekmatCardLoginDialog extends BaseDialog {
     @BindView(R.id.hekmatCardPasswordEt)
     AppCompatEditText hekmatCardPasswordEt;
 
-    @BindView(R.id.resetPasswordButton)
-    TextView resetPassword;
+//    @BindView(R.id.resetPasswordButton)
+//    TextView resetPassword;
 
     private OnHekmatCardCallbackListener callbackListener;
 
@@ -57,8 +56,13 @@ public class HekmatCardLoginDialog extends BaseDialog {
 
     @OnClick(R.id.enterButton)
     public void onEnterClick() {
-        if (callbackListener != null)
+        if (callbackListener != null) {
+            if (hekmatCardNumberEt.getText().length() != 16) {
+                Toaster.show(getActivity(),R.string.enterHekmatCardNumberCorreclty);
+                return;
+            }
             callbackListener.onHekmatCardLoginDialogSubmitButton(hekmatCardNumberEt.getText().toString(), hekmatCardPasswordEt.getText().toString());
+        }
     }
 
     @OnClick(R.id.registerButton)
@@ -67,10 +71,10 @@ public class HekmatCardLoginDialog extends BaseDialog {
             callbackListener.onHekmatRegisterButton(hekmatCardNumberEt.getText().toString(), hekmatCardPasswordEt.getText().toString());
     }
 
-    @OnClick(R.id.resetPasswordButton)
-    public void onResetPasswordClick() {
-        HekmatCardResetPasswordActivity.show(getContext(), hekmatCardNumberEt.getText().toString());
-    }
+//    @OnClick(R.id.resetPasswordButton)
+//    public void onResetPasswordClick() {
+//        HekmatCardResetPasswordActivity.show(getContext(), hekmatCardNumberEt.getText().toString());
+//    }
 
     public interface OnHekmatCardCallbackListener {
         void onHekmatCardLoginDialogSubmitButton(String cardNumber, String password);

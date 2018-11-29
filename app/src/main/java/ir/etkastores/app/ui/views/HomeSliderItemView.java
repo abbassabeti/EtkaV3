@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.rd.PageIndicatorView;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +37,9 @@ public class HomeSliderItemView extends LinearLayout {
 
     @BindView(R.id.pager)
     ViewPager16x9 pager;
+
+    @BindView(R.id.pageIndicatorView)
+    PageIndicatorView indicatorView;
 
     private CategoryAdapter adapter;
 
@@ -73,6 +78,8 @@ public class HomeSliderItemView extends LinearLayout {
         pager.setOffscreenPageLimit(items.size());
         pager.setCurrentItem(items.size() - 1);
         if (adapter.getCount() > 0) timer.start();
+        indicatorView.setViewPager(pager);
+        if (adapter.getCount() < 2) indicatorView.setVisibility(GONE);
     }
 
     private class CategoryAdapter extends PagerAdapter {
@@ -122,7 +129,7 @@ public class HomeSliderItemView extends LinearLayout {
         }
     }
 
-    CountDownTimer timer = new CountDownTimer(3000, 3000) {
+    CountDownTimer timer = new CountDownTimer(4000, 4000) {
         @Override
         public void onTick(long millisUntilFinished) {
 

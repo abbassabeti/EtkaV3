@@ -65,31 +65,14 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeMedium" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/registerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:text="@string/register"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeSmall" />
-
-            <TextView
-                android:id="@+id/resetPasswordButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="@string/haveNotPortPassword"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeSmall" />
-
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/needToPassword_register"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/textSizeSmall" />
 
     </LinearLayout>
 

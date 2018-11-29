@@ -147,7 +147,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
             public void onFailure(Call<OauthResponse<HekmatRemainingsModel>> call, Throwable t) {
                 if (isFinishing()) return;
                 loadingDialog.cancel();
-                showRetry(getResources().getString(R.string.errorInLogginHekmatCard), true);
+                showRetry(getResources().getString(R.string.errorInLoginHekmatCard), true);
             }
         });
     }

@@ -84,6 +84,14 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="@string/hekmatPasswordHint"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSizeVerySmall" />
+
             <android.support.design.widget.TextInputLayout
                 style="@style/loginRegisterEditTextLayoutStyle"
                 android:layout_width="match_parent"
@@ -108,19 +116,19 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@drawable/rect_round4dp_white"
-                android:text="@string/register"
+                android:text="@string/registerHekmatCard"
                 android:textColor="@color/darkGray"
                 android:textSize="@dimen/textSizeSmall" />
 
-            <Button
-                android:id="@+id/iHavePasswordButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/rect_round4dp_white"
-                android:text="@string/iHaveHekmatCardPassword"
-                android:textColor="@color/darkGray"
-                android:textSize="@dimen/textSizeSmall" />
+            <!--<Button-->
+            <!--android:id="@+id/iHavePasswordButton"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:background="@drawable/rect_round4dp_white"-->
+            <!--android:text="@string/iHaveHekmatCardPassword"-->
+            <!--android:textColor="@color/darkGray"-->
+            <!--android:textSize="@dimen/textSizeSmall" />-->
 
         </LinearLayout>
 

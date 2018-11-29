@@ -51,7 +51,7 @@
     <string name="sendNewRequest">ارسال درخواست جدید</string>
     <string name="support">پشتیبانی</string>
     <string name="ticket">تیکت</string>
-    <string name="inviteFriendsHeaderMessage">کافیست دوستانتان با کد معرف شما در اپلیکیشن همراه فروشگاه اتکا ثبت نام کنند تا شما به ازای هر یک، ۱ امتیاز در باشگاه دریافت کنید.</string>
+    <string name="inviteFriendsHeaderMessage">کافیست دوستانتان با کد معرف شما در اپلیکیشن همراه فروشگاه اتکا ثبت نام کنند تا شما به ازای هر یک، ۱۰ امتیاز در باشگاه دریافت کنید.</string>
     <string name="yourInvitationCode_endWithColon">کد معرف شما:</string>
     <string name="sharing">اشتراک گذاری</string>
     <string name="aboutEtkaStores">درباره شرکت فروشگاه های زنجیره ای اتکا</string>
@@ -166,7 +166,7 @@
     <string name="continue_">ادامه</string>
     <string name="currentPassword">رمز عبور فعلی</string>
     <string name="newPassword">رمز عبور جدید</string>
-    <string name="confirmPassword">تکرار رمز عبور جدید</string>
+    <string name="confirmPassword">تکرار رمز عبور</string>
     <string name="inSendingChangePassword">در حال ارسال درخواست تغییر رمز عبور...</string>
     <string name="fillCurrentPassword">رمز عبور فعلی را وارد کنید</string>
     <string name="fillNewPassword">رمز عبور جدید را وارد کنید</string>
@@ -244,7 +244,7 @@
     <string name="enterHekmatCardInformationMessage">برای ورود به این بخش ابتدا باید کارت حکمت خود را ثبت کنید</string>
     <string name="submitAndEnter">ثبت و ورود</string>
     <string name="hekmatCard16digitNumber">شماره ۱۶ رقمی حکمت کارت</string>
-    <string name="hekmatCardPassword">رمز عبور حکمت کارت</string>
+    <string name="hekmatCardPassword">رمز عبور درگاه حکمت</string>
     <string name="requestActivationCode">دریافت کد فعال سازی</string>
     <string name="enterActivationCodeHere">کد فعالسازی را اینجا وارد کنید</string>
     <string name="checkActivationCode">بررسی کد فعالسازی</string>
@@ -261,7 +261,7 @@
     <string name="sujectsComma">"مشمولین: "</string>
     <string name="validUntil">"اعتبار : "</string>
     <string name="inCheckingHekmatData">درحال بررسی اطلاعات کارت حکمت شما...</string>
-    <string name="errorInLogginHekmatCard">خطا در ورود به حساب کارت حکمت، دوباره تلاش کنید</string>
+    <string name="errorInLoginHekmatCard">خطا در ورود به حساب کارت حکمت، دوباره تلاش کنید</string>
     <string name="number">شماره</string>
     <string name="startDate">تاریخ اعلام</string>
     <string name="expireDate">تاریخ انقضاء</string>
@@ -273,7 +273,7 @@
     <string name="fiCustomer">فی مصرف کننده</string>
     <string name="discount">تخفیف</string>
     <string name="storeX">فروشگاه: %s</string>
-    <string name="registerHekmatCard">ثبت نام کارت حکمت</string>
+    <string name="registerHekmatCard">ثبت نام درگاه حکمت</string>
     <string name="employeeNumber">کد پرسنلی</string>
     <string name="password">رمز عبور</string>
     <string name="enterPhoneNumberCorrectly">شماره موبایل خود را به درستی وارد کنید!</string>
@@ -317,14 +317,15 @@
     <string name="ifYouHaveInvitationCodeWriteHere">در صورت داشتن کد معرف، آن را در قسمت زیر وارد کنید</string>
     <string name="rootedDeviceCantUseApp">استفاده از این اپلیکیشن برای دستگاه های روت شده امکان پذیر نمیباشد!</string>
     <string name="product">کالا</string>
-    <string name="virtualTourOfStore">تور مجازی فروشگاه</string>
     <string name="stores">فروشگاه‌ها</string>
     <string name="customer">مشتری</string>
     <string name="products">کالاها</string>
-    <string name="score1">۱ امتیاز</string>
+    <string name="score10">۱۰ امتیاز</string>
     <string name="applicationVersionComma">نسخه اپلیکیشن:</string>
     <string name="hekmatCardPasswordWarningMessage">کاربر گرامی، رمز عبور درگاه با رمز کارت و رمز کیوسک متفاوت است</string>
     <string name="hekmatCardPort">درگاه حکمت همراه فروشگاه</string>
-    <string name="haveNotPortPassword">رمز درگاه ندارید؟</string>
+    <string name="needToPassword_register">رمز درگاه ندارید؟ ثبت نام</string>
+    <string name="hekmatPasswordHint">حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف بزرگ و کوچک لاتین</string>
+    <string name="virtualTour">تور مجازی</string>
 
 </resources>
