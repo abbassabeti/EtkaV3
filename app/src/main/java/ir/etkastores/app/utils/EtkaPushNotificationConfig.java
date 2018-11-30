@@ -4,6 +4,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import io.michaelrocks.paranoid.Obfuscate;
+import ir.etkastores.app.BuildConfig;
 
 /**
  * Created by garshasbi on 3/1/18.
@@ -85,6 +86,7 @@ public class EtkaPushNotificationConfig {
     public static void registerGlobal() {
         try {
             FirebaseMessaging.getInstance().subscribeToTopic(GLOBAL_TOPIC);
+            FirebaseMessaging.getInstance().subscribeToTopic("v"+BuildConfig.VERSION_NAME);
         } catch (Exception e) {
             e.printStackTrace();
         }
