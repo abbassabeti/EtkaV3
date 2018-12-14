@@ -224,7 +224,7 @@ public class ApiProvider {
     }
 
     public Call<AccessToken> guestLogin() {
-        EtkaPushNotificationConfig.registerGuests();
+        EtkaPushNotificationConfig.subscribeGuests();
         return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ApiStatics.getGuestUserName(), ApiStatics.getGuestPassword(), ApiStatics.getClientId(), ApiStatics.getClientSecret(), "");
     }
 

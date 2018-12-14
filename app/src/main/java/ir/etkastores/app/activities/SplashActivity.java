@@ -35,13 +35,13 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        EtkaPushNotificationConfig.registerGlobal();
+        EtkaPushNotificationConfig.checkSubscribes();
         EtkaRemoteConfigManager.checkRemoteConfigs();
 
         if (BuildConfig.DEBUG) {
-            EtkaPushNotificationConfig.registerDev();
+            EtkaPushNotificationConfig.subscribeDev();
         } else {
-            EtkaPushNotificationConfig.unregisterDev();
+            EtkaPushNotificationConfig.unSubscribeDev();
         }
 
         if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {

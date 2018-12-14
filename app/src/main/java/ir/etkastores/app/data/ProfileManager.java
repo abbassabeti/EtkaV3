@@ -44,7 +44,7 @@ public class ProfileManager {
             String str = new Gson().toJson(model);
             EtkaApp.getPreference().edit().putString(PROFILE_KEY, str).apply();
             profileModel = model;
-            EtkaPushNotificationConfig.unregisterGuests();
+            EtkaPushNotificationConfig.unSubscribeGuests();
         } catch (Exception err) {
             err.printStackTrace();
         }

@@ -11,32 +11,37 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.michaelrocks.paranoid.Obfuscate;
-import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.EtkaToolbar;
-import ir.etkastores.app.utils.IntentHelper;
+import ir.etkastores.app.webServices.ApiStatics;
 
-@Obfuscate
 public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
 
-    private final static String STORE_MODEL = "STORE_MODEL";
+    private static String MODEL = "MODEL";
 
     public static void show(Context context, StoreModel storeModel) {
         Intent intent = new Intent(context, InStoreModeActivity.class);
-        intent.putExtra(STORE_MODEL, new Gson().toJson(storeModel));
+        intent.putExtra(MODEL, storeModel.toJson());
         context.startActivity(intent);
     }
 
     @BindView(R.id.toolbar)
     EtkaToolbar toolbar;
+
+    @BindView(R.id.inStoreMapButton)
+    View inStoreMapButton;
+
+    @BindView(R.id.inStoreSurveyButton)
+    View inStoreSurveyButton;
+
+    @BindView(R.id.inStoreOffersButton)
+    View inStoreOffersButton;
 
     @BindView(R.id.webView)
     WebView webView;
@@ -44,26 +49,85 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
-    private StoreModel storeModel;
+    StoreModel storeModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_store_mode);
-        storeModel = StoreModel.fromJson(getIntent().getExtras().getString(STORE_MODEL));
         ButterKnife.bind(this);
-        toolbar.setActionListeners(this);
+        storeModel = StoreModel.fromJson(getIntent().getStringExtra(MODEL));
         initViews();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        EtkaApp.getInstance().screenView("In Store Mode Activity");
     }
 
     private void initViews() {
         toolbar.setTitle(String.format(getResources().getString(R.string.InStoreModeForBranchX), storeModel.getName()));
+        toolbar.setActionListeners(this);
+        if (storeModel.isHasInStoreMap()) {
+            onInStoreMapButtonClick();
+        } else if (storeModel.isHasInStoreSurvey()) {
+            onInStoreSurveyButtonClick();
+        } else {
+            onInStoreOffersButtonClick();
+        }
+
+        if (!storeModel.isHasInStoreMap()) {
+            inStoreMapButton.setVisibility(View.INVISIBLE);
+        }
+
+        if (!storeModel.isHasInStoreSurvey()) {
+            inStoreSurveyButton.setVisibility(View.INVISIBLE);
+        }
+
+        if (!storeModel.isHasInStoreOffer()) {
+            inStoreOffersButton.setVisibility(View.GONE);
+        }
+    }
+
+    @OnClick(R.id.inStoreMapButton)
+    public void onInStoreMapButtonClick() {
+        if (inStoreMapButton.isSelected() || !storeModel.isHasInStoreMap()) return;
+        setAllToDefault();
+        inStoreMapButton.setBackgroundResource(R.color.colorPrimaryDark);
+        inStoreMapButton.setSelected(true);
+        loadUrl(ApiStatics.getInStoreMapUrl(storeModel.getCode()));
+    }
+
+    @OnClick(R.id.inStoreSurveyButton)
+    public void onInStoreSurveyButtonClick() {
+
+        if (!storeModel.isHasInStoreSurvey()) return;
+        if (ProfileManager.getInstance().isGuest()) {
+            LoginWithSMSActivity.show(this);
+            return;
+        }
+
+        if (inStoreSurveyButton.isSelected()) return;
+        setAllToDefault();
+        inStoreSurveyButton.setBackgroundResource(R.color.colorPrimaryDark);
+        inStoreSurveyButton.setSelected(true);
+        loadUrl(ApiStatics.getInStoreSurveyUrl(storeModel.getCode()));
+    }
+
+    @OnClick(R.id.inStoreOffersButton)
+    public void onInStoreOffersButtonClick() {
+        if (inStoreOffersButton.isSelected() || !storeModel.isHasInStoreOffer()) return;
+        setAllToDefault();
+        inStoreOffersButton.setBackgroundResource(R.color.colorPrimaryDark);
+        inStoreOffersButton.setSelected(true);
+        loadUrl(ApiStatics.getInStoreOffersUrl(storeModel.getCode()));
+    }
+
+    private void setAllToDefault() {
+        inStoreMapButton.setBackgroundResource(R.color.transparent);
+        inStoreMapButton.setSelected(false);
+        inStoreSurveyButton.setBackgroundResource(R.color.transparent);
+        inStoreSurveyButton.setSelected(false);
+        inStoreOffersButton.setBackgroundResource(R.color.transparent);
+        inStoreOffersButton.setSelected(false);
+    }
+
+    private void loadUrl(final String url) {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -84,36 +148,21 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
                 super.onReceivedError(view, request, error);
                 if (isFinishing()) return;
                 progressBar.setVisibility(View.GONE);
-                showLoadingErrorDialog();
+                showLoadingErrorDialog(url);
             }
         });
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(storeModel.getInStoreModeUrl());
+        webView.loadUrl(url);
     }
 
-    @Override
-    public void onToolbarBackClick() {
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onActionClick(int actionCode) {
-
-    }
-
-    @OnClick(R.id.openInBrowserButton)
-    public void onOpenInInBrowserClick(){
-        IntentHelper.showWeb(this,storeModel.getInStoreModeUrl());
-    }
-
-    private void showLoadingErrorDialog() {
-        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error),getResources().getString(R.string.errorInLoadingInStoreMode));
+    private void showLoadingErrorDialog(final String url) {
+        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error), getResources().getString(R.string.errorInLoadingInStoreMode));
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {
-                if (button == RIGHT_BUTTON){
-                    initViews();
-                }else{
+                if (button == RIGHT_BUTTON) {
+                    loadUrl(url);
+                } else {
                     finish();
                 }
                 messageDialog.getDialog().cancel();
@@ -126,4 +175,13 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
         });
     }
 
+    @Override
+    public void onToolbarBackClick() {
+        onBackPressed();
+    }
+
+    @Override
+    public void onActionClick(int actionCode) {
+
+    }
 }

@@ -1,10 +1,10 @@
 package ir.etkastores.app.utils;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
+import ir.etkastores.app.data.ProfileManager;
 
 /**
  * Created by garshasbi on 3/1/18.
@@ -19,7 +19,7 @@ public class EtkaPushNotificationConfig {
     private static final String LOGIN_USER = "logins";
     private static final String GUEST = "guests";
 
-    public static void registerHekmat() {
+    public static void subscribeHekmat() {
         try {
             FirebaseMessaging.getInstance().subscribeToTopic(HEKMAT_TOPIC);
             DiskDataHelper.putBool(HEKMAT_TOPIC, true);
@@ -28,32 +28,16 @@ public class EtkaPushNotificationConfig {
         }
     }
 
-    public static void unregisterHekmat() {
+    public static void unSubscribeHekmat() {
         try {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(HEKMAT_TOPIC);
-            DiskDataHelper.putBool(HEKMAT_TOPIC, false);
+            DiskDataHelper.putBool(HEKMAT_TOPIC + "KEY", true);
         } catch (Exception err) {
             err.printStackTrace();
         }
     }
 
-    public static void registerUserIdTopic() {
-        try {
-            FirebaseMessaging.getInstance().subscribeToTopic(DiskDataHelper.getLastToken().getUserId());
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-    }
-
-    public static void unregisterUserIdTopic() {
-        try {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic(DiskDataHelper.getLastToken().getUserId());
-        } catch (Exception err) {
-            err.printStackTrace();
-        }
-    }
-
-    public static void registerDev() {
+    public static void subscribeDev() {
         try {
             FirebaseMessaging.getInstance().subscribeToTopic(DEV_TOPIC);
         } catch (Exception err) {
@@ -61,7 +45,7 @@ public class EtkaPushNotificationConfig {
         }
     }
 
-    public static void unregisterDev() {
+    public static void unSubscribeDev() {
         try {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(DEV_TOPIC);
         } catch (Exception err) {
@@ -69,34 +53,20 @@ public class EtkaPushNotificationConfig {
         }
     }
 
-    public static void deleteInstanceId() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    FirebaseInstanceId.getInstance().deleteInstanceId();
-                } catch (Exception err) {
-                    err.printStackTrace();
-                }
-            }
-        }).start();
-
-    }
-
-    public static void registerGlobal() {
+    public static void subscribeGlobal() {
         try {
             FirebaseMessaging.getInstance().subscribeToTopic(GLOBAL_TOPIC);
-            FirebaseMessaging.getInstance().subscribeToTopic("v"+BuildConfig.VERSION_NAME);
+            FirebaseMessaging.getInstance().subscribeToTopic("v" + BuildConfig.VERSION_NAME);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static boolean isHekmatSubscribed() {
-        return DiskDataHelper.getBool(HEKMAT_TOPIC);
+        return !DiskDataHelper.getBool(HEKMAT_TOPIC + "KEY");
     }
 
-    public static void unregisterGuests() {
+    public static void unSubscribeGuests() {
         try {
             FirebaseMessaging.getInstance().subscribeToTopic(LOGIN_USER);
             FirebaseMessaging.getInstance().unsubscribeFromTopic(GUEST);
@@ -105,13 +75,37 @@ public class EtkaPushNotificationConfig {
         }
     }
 
-    public static void registerGuests() {
+    public static void subscribeGuests() {
         try {
             FirebaseMessaging.getInstance().unsubscribeFromTopic(LOGIN_USER);
             FirebaseMessaging.getInstance().subscribeToTopic(GUEST);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void checkSubscribes() {
+
+        subscribeGlobal();
+
+        if (isHekmatSubscribed()) {
+            subscribeHekmat();
+        } else {
+            unSubscribeHekmat();
+        }
+
+        if (ProfileManager.getInstance().isGuest()) {
+            subscribeGuests();
+        } else {
+            unSubscribeGuests();
+        }
+
+        if (BuildConfig.DEBUG) {
+            subscribeDev();
+        } else {
+            unSubscribeDev();
+        }
+
     }
 
 

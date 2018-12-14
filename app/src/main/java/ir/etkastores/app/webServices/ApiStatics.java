@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.utils.DiskDataHelper;
 import ir.etkastores.app.utils.StringXORer;
 
@@ -106,6 +107,26 @@ public class ApiStatics {
 
     private static String decode(String str) {
         return new StringXORer().decode(str, EtkaApp.getInstance().getPackageName());
+    }
+
+    public static String getInStoreMapUrl(String storeCode) {
+        return "http://77.104.103.164:8581/store/map/" + storeCode + getPhoneQueryString();
+    }
+
+    public static String getInStoreSurveyUrl(String storeCode) {
+        return "http://77.104.103.164:8581/store/polling/" + storeCode + getPhoneQueryString();
+    }
+
+    public static String getInStoreOffersUrl(String storeCode) {
+        return "http://77.104.103.164:8581/store/menu/" + storeCode + getPhoneQueryString();
+    }
+
+    private static String getPhoneQueryString() {
+        if (ProfileManager.getInstance().isGuest()) {
+            return "";
+        } else {
+            return "?m=" + ProfileManager.getInstance().getProfile().getCellPhone();
+        }
     }
 
 }

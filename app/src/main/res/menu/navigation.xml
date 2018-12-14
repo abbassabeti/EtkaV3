@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_search_barcode_white_24dp"
+        android:icon="@drawable/ic_search_barcode_24dp"
         android:title="@string/products" />
 
     <item

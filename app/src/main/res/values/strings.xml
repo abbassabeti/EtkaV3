@@ -327,5 +327,7 @@
     <string name="needToPassword_register">رمز درگاه ندارید؟ ثبت نام</string>
     <string name="hekmatPasswordHint">حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف بزرگ و کوچک لاتین</string>
     <string name="virtualTour">تور مجازی</string>
+    <string name="instoreModeView">حالت درون فروشگاه</string>
+    <string name="offers">فروش‌ویژه</string>
 
 </resources>
