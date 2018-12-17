@@ -1,5 +1,6 @@
 package ir.etkastores.app.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -49,6 +50,15 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    @BindView(R.id.inStoreMapButtonIndicator)
+    View inStoreMapButtonIndicator;
+
+    @BindView(R.id.inStoreSurveyButtonIndicator)
+    View inStoreSurveyButtonIndicator;
+
+    @BindView(R.id.inStoreOffersButtonIndicator)
+    View inStoreOffersButtonIndicator;
+
     StoreModel storeModel;
 
     @Override
@@ -88,9 +98,9 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     public void onInStoreMapButtonClick() {
         if (inStoreMapButton.isSelected() || !storeModel.isHasInStoreMap()) return;
         setAllToDefault();
-        inStoreMapButton.setBackgroundResource(R.color.colorPrimaryDark);
         inStoreMapButton.setSelected(true);
         loadUrl(ApiStatics.getInStoreMapUrl(storeModel.getCode()));
+        inStoreMapButtonIndicator.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.inStoreSurveyButton)
@@ -104,29 +114,30 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
 
         if (inStoreSurveyButton.isSelected()) return;
         setAllToDefault();
-        inStoreSurveyButton.setBackgroundResource(R.color.colorPrimaryDark);
         inStoreSurveyButton.setSelected(true);
         loadUrl(ApiStatics.getInStoreSurveyUrl(storeModel.getCode()));
+        inStoreSurveyButtonIndicator.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.inStoreOffersButton)
     public void onInStoreOffersButtonClick() {
         if (inStoreOffersButton.isSelected() || !storeModel.isHasInStoreOffer()) return;
         setAllToDefault();
-        inStoreOffersButton.setBackgroundResource(R.color.colorPrimaryDark);
         inStoreOffersButton.setSelected(true);
         loadUrl(ApiStatics.getInStoreOffersUrl(storeModel.getCode()));
+        inStoreOffersButtonIndicator.setVisibility(View.VISIBLE);
     }
 
     private void setAllToDefault() {
-        inStoreMapButton.setBackgroundResource(R.color.transparent);
         inStoreMapButton.setSelected(false);
-        inStoreSurveyButton.setBackgroundResource(R.color.transparent);
         inStoreSurveyButton.setSelected(false);
-        inStoreOffersButton.setBackgroundResource(R.color.transparent);
         inStoreOffersButton.setSelected(false);
+        inStoreMapButtonIndicator.setVisibility(View.INVISIBLE);
+        inStoreOffersButtonIndicator.setVisibility(View.INVISIBLE);
+        inStoreSurveyButtonIndicator.setVisibility(View.INVISIBLE);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void loadUrl(final String url) {
         webView.setWebViewClient(new WebViewClient() {
             @Override

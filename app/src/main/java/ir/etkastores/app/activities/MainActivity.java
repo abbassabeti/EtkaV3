@@ -70,6 +70,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        if (getSupportFragmentManager().findFragmentById(R.id.homeActivityFragmentsHolder) != null){
+            return;
+        }
+
         EtkaRemoteConfigManager.checkRemoteConfigs();
 
         bottomNavigationView.enableAnimation(false);

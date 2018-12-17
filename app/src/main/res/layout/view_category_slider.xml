@@ -17,9 +17,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="16dp"
-        app:piv_animationType="worm"
-        app:piv_radius="6dp"
+        app:piv_animationType="thinWorm"
+        app:piv_radius="4dp"
         app:piv_selectedColor="@color/colorPrimary"
-        app:piv_unselectedColor="@color/gray" />
+        app:piv_unselectedColor="@color/transWhite5" />
 
 </RelativeLayout>

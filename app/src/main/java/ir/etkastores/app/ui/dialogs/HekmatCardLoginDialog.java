@@ -50,6 +50,7 @@ public class HekmatCardLoginDialog extends BaseDialog {
     }
 
     public void show(FragmentManager fragmentManager, OnHekmatCardCallbackListener callbackListener) {
+        if (!isAdded()) return;
         this.callbackListener = callbackListener;
         show(fragmentManager, "HekmatCardLoginDialog");
     }
@@ -58,7 +59,7 @@ public class HekmatCardLoginDialog extends BaseDialog {
     public void onEnterClick() {
         if (callbackListener != null) {
             if (hekmatCardNumberEt.getText().length() != 16) {
-                Toaster.show(getActivity(),R.string.enterHekmatCardNumberCorreclty);
+                Toaster.show(getActivity(), R.string.enterHekmatCardNumberCorreclty);
                 return;
             }
             callbackListener.onHekmatCardLoginDialogSubmitButton(hekmatCardNumberEt.getText().toString(), hekmatCardPasswordEt.getText().toString());

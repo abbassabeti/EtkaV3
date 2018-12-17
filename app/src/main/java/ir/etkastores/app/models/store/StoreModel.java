@@ -55,19 +55,19 @@ public class StoreModel implements Cloneable {
     @SerializedName("managerImage")
     private String managerImage;
 
-    @SerializedName("GeofenceArea")
+    @SerializedName("geofenceArea")
     private int geofenceArea;
 
-    @SerializedName("GeofenceEnabled")
+    @SerializedName("geofenceEnabled")
     private boolean geofenceEnabled;
 
-    @SerializedName("HasInStoreMap")
+    @SerializedName("hasInStoreMap")
     private boolean hasInStoreMap;
 
-    @SerializedName("HasInStoreOffer")
+    @SerializedName("hasInStoreOffer")
     private boolean hasInStoreOffer;
 
-    @SerializedName("HasInStoreSurvey")
+    @SerializedName("hasInStoreSurvey")
     private boolean hasInStoreSurvey;
 
     int ic = -1;
