@@ -73,10 +73,10 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     private void initViews() {
         toolbar.setTitle(String.format(getResources().getString(R.string.InStoreModeForBranchX), storeModel.getName()));
         toolbar.setActionListeners(this);
-        if (storeModel.isHasInStoreMap()) {
-            onInStoreMapButtonClick();
-        } else if (storeModel.isHasInStoreSurvey()) {
+        if (storeModel.isHasInStoreSurvey()) {
             onInStoreSurveyButtonClick();
+        } else if (storeModel.isHasInStoreMap()) {
+            onInStoreMapButtonClick();
         } else {
             onInStoreOffersButtonClick();
         }

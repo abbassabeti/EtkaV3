@@ -29,9 +29,6 @@ public class HekmatCardLoginDialog extends BaseDialog {
     @BindView(R.id.hekmatCardPasswordEt)
     AppCompatEditText hekmatCardPasswordEt;
 
-//    @BindView(R.id.resetPasswordButton)
-//    TextView resetPassword;
-
     private OnHekmatCardCallbackListener callbackListener;
 
     @Override
@@ -50,7 +47,6 @@ public class HekmatCardLoginDialog extends BaseDialog {
     }
 
     public void show(FragmentManager fragmentManager, OnHekmatCardCallbackListener callbackListener) {
-        if (!isAdded()) return;
         this.callbackListener = callbackListener;
         show(fragmentManager, "HekmatCardLoginDialog");
     }
@@ -71,11 +67,6 @@ public class HekmatCardLoginDialog extends BaseDialog {
         if (callbackListener != null)
             callbackListener.onHekmatRegisterButton(hekmatCardNumberEt.getText().toString(), hekmatCardPasswordEt.getText().toString());
     }
-
-//    @OnClick(R.id.resetPasswordButton)
-//    public void onResetPasswordClick() {
-//        HekmatCardResetPasswordActivity.show(getContext(), hekmatCardNumberEt.getText().toString());
-//    }
 
     public interface OnHekmatCardCallbackListener {
         void onHekmatCardLoginDialogSubmitButton(String cardNumber, String password);

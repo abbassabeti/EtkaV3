@@ -31,22 +31,22 @@
             android:textSize="@dimen/textSizeSmall" />
 
         <TextView
-            android:id="@+id/inStoreSurveyButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/survey"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSizeSmall" />
-
-        <TextView
             android:id="@+id/inStoreOffersButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/offers"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSizeSmall" />
+
+        <TextView
+            android:id="@+id/inStoreSurveyButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/survey"
             android:textColor="@color/white"
             android:textSize="@dimen/textSizeSmall" />
 
@@ -67,14 +67,14 @@
             android:background="@color/white" />
 
         <View
-            android:id="@+id/inStoreSurveyButtonIndicator"
+            android:id="@+id/inStoreOffersButtonIndicator"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white" />
 
         <View
-            android:id="@+id/inStoreOffersButtonIndicator"
+            android:id="@+id/inStoreSurveyButtonIndicator"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
