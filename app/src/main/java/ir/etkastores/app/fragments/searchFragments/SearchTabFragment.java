@@ -22,21 +22,21 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
+import ir.etkastores.app.R;
+import ir.etkastores.app.activities.CategoriesFilterActivity;
 import ir.etkastores.app.activities.ProductActivity;
 import ir.etkastores.app.activities.ScannerActivity;
-import ir.etkastores.app.BuildConfig;
-import ir.etkastores.app.activities.CategoriesFilterActivity;
-import ir.etkastores.app.activities.StoreActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.CategoryRecyclerAdapter;
 import ir.etkastores.app.data.StaticsData;
 import ir.etkastores.app.models.CategoryModel;
 import ir.etkastores.app.models.OauthResponse;
-import ir.etkastores.app.R;
 import ir.etkastores.app.models.search.SearchProductRequestModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.EventsManager;
 import ir.etkastores.app.utils.IntentHelper;
 import ir.etkastores.app.utils.StringUtils;
 import ir.etkastores.app.webServices.ApiProvider;
@@ -139,10 +139,10 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
             case ScannerActivity.SCAN_REQUEST_CODE:
                 String format = data.getStringExtra(ScannerActivity.FORMAT);
                 String code = data.getStringExtra(ScannerActivity.DATA);
-                if (code.startsWith(StaticsData.etkaStoreScheme)){
-                    IntentHelper.showWeb(getActivity(),code);
-                }else{
-                    ProductActivity.show(getActivity(),code);
+                if (code.startsWith(StaticsData.etkaStoreScheme)) {
+                    IntentHelper.showWeb(getActivity(), code);
+                } else {
+                    ProductActivity.show(getActivity(), code);
                 }
                 Log.i("scanned code is", "" + format + " | " + code);
                 break;
@@ -169,12 +169,14 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
         }
         String txt = searchInput.getText().toString();
         if (txt.startsWith("#")) {
+            EventsManager.sendEvent("Search", "typed barcode", searchInput.getText().toString());
             ProductActivity.show(getActivity(), StringUtils.toEnglishDigit(txt.replace("#", "")));
         } else {
+            EventsManager.sendEvent("Search", "keyword", searchInput.getText().toString());
             AdjustHelper.sendAdjustEvent(AdjustHelper.SearchKeyword);
             SearchProductRequestModel searchProductRequestModel = new SearchProductRequestModel();
             searchProductRequestModel.setTitle(searchInput.getText().toString());
-            CategoriesFilterActivity.show(getActivity(),searchProductRequestModel);
+            CategoriesFilterActivity.show(getActivity(), searchProductRequestModel);
         }
     }
 
@@ -184,11 +186,11 @@ public class SearchTabFragment extends Fragment implements TextView.OnEditorActi
         CategoriesFilterActivity.show(getActivity(), model);
     }
 
-    private void showLoading(){
+    private void showLoading() {
         circularProgress.setVisibility(View.VISIBLE);
     }
 
-    private void hideLoading(){
+    private void hideLoading() {
         circularProgress.setVisibility(View.GONE);
     }
 

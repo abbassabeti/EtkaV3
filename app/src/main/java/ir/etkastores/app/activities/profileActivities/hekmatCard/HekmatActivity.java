@@ -25,6 +25,7 @@ import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
 import ir.etkastores.app.utils.DialogHelper;
+import ir.etkastores.app.utils.EventsManager;
 import ir.etkastores.app.webServices.ApiProvider;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -164,6 +165,7 @@ public class HekmatActivity extends BaseActivity implements EtkaToolbar.EtkaTool
     private void showRetry(String message, boolean hasRetry) {
         String rightButton = getResources().getString(R.string.retry);
         if (!hasRetry) rightButton = null;
+        EventsManager.sendEvent("HekmatCard", "Login error", "" + message);
         final MessageDialog messageDialog = MessageDialog.newInstance(R.drawable.ic_warning_orange_48dp,
                 getResources().getString(R.string.error),
                 message,

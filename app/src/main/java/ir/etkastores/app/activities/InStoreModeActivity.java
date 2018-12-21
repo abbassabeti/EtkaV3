@@ -73,10 +73,10 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     private void initViews() {
         toolbar.setTitle(String.format(getResources().getString(R.string.InStoreModeForBranchX), storeModel.getName()));
         toolbar.setActionListeners(this);
-        if (storeModel.isHasInStoreSurvey()) {
-            onInStoreSurveyButtonClick();
-        } else if (storeModel.isHasInStoreMap()) {
+        if (storeModel.isHasInStoreMap()) {
             onInStoreMapButtonClick();
+        } else if (storeModel.isHasInStoreSurvey()) {
+            onInStoreSurveyButtonClick();
         } else {
             onInStoreOffersButtonClick();
         }
@@ -90,8 +90,9 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
         }
 
         if (!storeModel.isHasInStoreOffer()) {
-            inStoreOffersButton.setVisibility(View.GONE);
+            inStoreOffersButton.setVisibility(View.INVISIBLE);
         }
+        progressBar.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.inStoreMapButton)
@@ -144,21 +145,21 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 if (isFinishing()) return;
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 if (isFinishing()) return;
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
                 super.onReceivedError(view, request, error);
                 if (isFinishing()) return;
-                progressBar.setVisibility(View.GONE);
+//                progressBar.setVisibility(View.GONE);
                 showLoadingErrorDialog(url);
             }
         });
@@ -167,7 +168,7 @@ public class InStoreModeActivity extends BaseActivity implements EtkaToolbar.Etk
     }
 
     private void showLoadingErrorDialog(final String url) {
-        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error), getResources().getString(R.string.errorInLoadingInStoreMode));
+        final MessageDialog messageDialog = MessageDialog.warningRetry(getResources().getString(R.string.error), getResources().getString(R.string.anErrorHappendInServerConnection));
         messageDialog.show(getSupportFragmentManager(), false, new MessageDialog.MessageDialogCallbacks() {
             @Override
             public void onDialogMessageButtonsClick(int button) {

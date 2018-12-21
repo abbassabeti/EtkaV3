@@ -19,6 +19,7 @@ import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
 import ir.etkastores.app.models.notification.NotificationModel;
+import ir.etkastores.app.utils.EventsManager;
 
 /**
  * Created by Sajad on 2/11/18.
@@ -41,14 +42,16 @@ public class EtkaFirebaseMessagingService extends FirebaseMessagingService {
 
         if (!TextUtils.isEmpty(remoteMessage.getData().get(ETKA_NOTIFICATION_OBJECT))) {
             NotificationModel notificationModel = NotificationModel.fromJson(remoteMessage.getData().get(ETKA_NOTIFICATION_OBJECT));
-            showNotification(notificationModel);
+            showNotification(notificationModel, remoteMessage.getFrom());
         }
 
     }
 
-    public void showNotification(NotificationModel notification) {
+    public void showNotification(NotificationModel notification, String sender) {
 
         if (notification.getIntent() == null) return;
+
+        EventsManager.sendEvent("PushDelivery", sender, notification.getAction() + " | " + notification.getTitle());
 
         Context context = EtkaApp.getInstance().getApplicationContext();
 
