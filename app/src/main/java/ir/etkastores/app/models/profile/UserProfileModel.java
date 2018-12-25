@@ -86,6 +86,7 @@ public class UserProfileModel {
     }
 
     public String getInvitationCode() {
+        if (TextUtils.isEmpty(invitationCode)) return "";
         return invitationCode;
     }
 
