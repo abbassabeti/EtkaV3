@@ -9,6 +9,7 @@
         <attr name="showNewsButton" format="boolean"/>
         <attr name="showFilterButton" format="boolean"/>
         <attr name="showScannerButton" format="boolean"/>
+        <attr name="showBillButton" format="boolean"/>
     </declare-styleable>
 
 </resources>

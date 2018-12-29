@@ -42,6 +42,9 @@ public class EtkaToolbar extends Toolbar {
     @BindView(R.id.toolbarScannerButton)
     View scannerButton;
 
+    @BindView(R.id.toolbarMakeBill)
+    View billButton;
+
     @BindView(R.id.scannerIcon)
     AppCompatImageView scannerIcon;
 
@@ -76,6 +79,7 @@ public class EtkaToolbar extends Toolbar {
             showNewsButton(a.getBoolean(R.styleable.EtkaToolbar_showNewsButton, false));
             showFilter(a.getBoolean(R.styleable.EtkaToolbar_showFilterButton, false));
             showScannerButton(a.getBoolean(R.styleable.EtkaToolbar_showScannerButton, false));
+            showBillButton(a.getBoolean(R.styleable.EtkaToolbar_showBillButton, false));
             a.recycle();
         }
     }
@@ -108,6 +112,11 @@ public class EtkaToolbar extends Toolbar {
     @OnClick(R.id.toolbarScannerButton)
     void onScannerButtonClick() {
         if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.SCANNER_BUTTON);
+    }
+
+    @OnClick(R.id.toolbarMakeBill)
+    void onMakeBillButtonClick() {
+        if (callback != null) callback.onActionClick(EtkaToolbarActionsListener.BILL_BUTTON);
     }
 
     public void showFilter(boolean state) {
@@ -150,6 +159,14 @@ public class EtkaToolbar extends Toolbar {
         }
     }
 
+    public void showBillButton(boolean state) {
+        if (state) {
+            billButton.setVisibility(VISIBLE);
+        } else {
+            billButton.setVisibility(GONE);
+        }
+    }
+
     public void showScannerButton(boolean state) {
         if (state) {
             scannerButton.setVisibility(VISIBLE);
@@ -177,6 +194,7 @@ public class EtkaToolbar extends Toolbar {
         int NEWS_BUTTON = 3;
         int MENU_BUTTON = 4;
         int SCANNER_BUTTON = 5;
+        int BILL_BUTTON = 6;
 
         void onToolbarBackClick();
 

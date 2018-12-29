@@ -9,6 +9,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.github.sumimakito.awesomeqr.option.RenderOption;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,6 +74,7 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
         setContentView(R.layout.activity_next_shopping_list);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
+        toolbar.showBillButton(true);
         initViews();
     }
 
@@ -101,7 +105,19 @@ public class NextShoppingListActivity extends BaseActivity implements EtkaToolba
 
     @Override
     public void onActionClick(int actionCode) {
-
+        if (actionCode == BILL_BUTTON){
+            RenderOption renderOption = new RenderOption();
+            renderOption.setContent("Special, thus awesome."); // content to encode
+            renderOption.setSize(800); // size of the final QR code image
+            renderOption.setBorderWidth(20); // width of the empty space around the QR code
+            renderOption.setEcl(ErrorCorrectionLevel.M); // (optional) specify an error correction level
+            renderOption.setPatternScale(0.35f); // (optional) specify a scale for patterns
+            renderOption.setRoundedPatterns(true); // (optional) if true, blocks will be drawn as dots instead
+            renderOption.setClearBorder(true); // if set to true, the background will NOT be drawn on the border area
+            //renderOption.setColor(color); // set a color palette for the QR code
+            //renderOption.setBackground(background); // set a background, keep reading to find more about it
+            //renderOption.setLogo(logo); // set a logo, keep reading to find more about it
+        }
     }
 
     private void showEmptyMessage() {

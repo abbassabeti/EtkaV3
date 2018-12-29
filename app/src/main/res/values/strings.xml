@@ -234,6 +234,7 @@
     <string name="title_activity_finish">FinishActivity</string>
     <string name="storeIsNotValid">فروشگاه مورد نظر معتبر نیست!</string>
     <string name="barcodeScan">اسکن بارکد</string>
+    <string name="makeBill">صدور فاکتور</string>
     <string name="remainedCredit">مانده اعتبار</string>
     <string name="mojodiBoneRiali">موجودی بن ریالی</string>
     <string name="saghfeEtebar">سقف اعتبار</string>
