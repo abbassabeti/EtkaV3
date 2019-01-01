@@ -1,5 +1,6 @@
 package ir.etkastores.app.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -178,7 +179,12 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
             showLoginRequiredDialog();
         } else {
             AdjustHelper.sendAdjustEvent(AdjustHelper.OpenNextShoppingList);
-            NextShoppingListActivity.show(getActivity());
+            try {
+                Intent intent = new Intent(getActivity(), NextShoppingListActivity.class);
+                getActivity().startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

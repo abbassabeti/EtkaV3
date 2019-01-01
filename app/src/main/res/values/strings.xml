@@ -38,6 +38,7 @@
     <string name="presenterCode">کد معرف (اختیاری)</string>
     <string name="cardPassword">رمز عبور کارت</string>
     <string name="nextShoppingList">لیست خرید بعدی</string>
+    <string name="loadShopFactor">بارگزاری فاکتور خرید</string>
     <string name="yourShoppingHistory">سابقه خریدهای شما</string>
     <string name="inviteFriends">دعوت از دوستان</string>
     <string name="faq">سوالات متداول</string>

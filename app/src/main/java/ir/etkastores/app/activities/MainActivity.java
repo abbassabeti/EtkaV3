@@ -229,7 +229,7 @@ public class MainActivity extends BaseActivity {
 
             case NotificationModel.ACTION_OPEN_NEXT_SHOPPING: // TESTED
                 setHomeTabDefault();
-                NextShoppingListActivity.show(this);
+                NextShoppingListActivity.Companion.show(this);
                 break;
 
             case NotificationModel.ACTION_OPEN_SHOPPING_HISTORY: // TESTED
