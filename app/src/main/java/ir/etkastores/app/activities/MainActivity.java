@@ -71,7 +71,9 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        if (getSupportFragmentManager().findFragmentById(R.id.homeActivityFragmentsHolder) != null){
+        bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
+
+        if (getSupportFragmentManager().findFragmentById(R.id.homeActivityFragmentsHolder) != null) {
             return;
         }
 
@@ -82,7 +84,7 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setLabelVisibilityMode(1);
         bottomNavigationView.setItemHorizontalTranslationEnabled(false);
         bottomNavigationView.setTypeface(FontUtils.getCommonTypeFace());
-        bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
+
 
         notificationModel = getNotificationModel();
 

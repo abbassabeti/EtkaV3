@@ -65,7 +65,7 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
     @OnClick(R.id.shareButton)
     public void onShareButtonClick() {
         String message = String.format(getResources().getString(R.string.shareInvitationCodeMessage), ProfileManager.getInstance().getProfile().getInvitationCode()) +
-                "\n" + getResources().getString(R.string.cafebazaarAppUrl);
+                "\n" + getResources().getString(R.string.appDownloadUrl);
         IntentHelper.share(this, getResources().getString(R.string.etkaStoreAppInvitation), message);
     }
 

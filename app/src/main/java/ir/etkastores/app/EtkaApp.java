@@ -17,7 +17,6 @@ import com.google.android.gms.analytics.Tracker;
 import io.fabric.sdk.android.Fabric;
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.utils.EventsManager;
-import ir.etkastores.app.utils.procalendar.XCalendar;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
