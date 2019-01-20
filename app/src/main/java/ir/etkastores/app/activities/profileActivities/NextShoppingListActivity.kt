@@ -4,20 +4,13 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.util.Base64
+import android.util.Base64OutputStream
 import android.view.View
-import android.widget.ProgressBar
 
-import com.github.sumimakito.awesomeqr.option.RenderOption
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
-
-import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.Optional
-import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
-import com.github.sumimakito.awesomeqr.RenderResult
+import io.fabric.sdk.android.services.network.HttpRequest
 import io.michaelrocks.paranoid.Obfuscate
 import ir.etkastores.app.EtkaApp
 import ir.etkastores.app.R
@@ -30,20 +23,21 @@ import ir.etkastores.app.models.ProductModel
 import ir.etkastores.app.ui.Toaster
 import ir.etkastores.app.ui.dialogs.MessageDialog
 import ir.etkastores.app.ui.views.EtkaToolbar
-import ir.etkastores.app.ui.views.MessageView
+import ir.etkastores.app.utils.AESHelper.decryption
+import ir.etkastores.app.utils.AESHelper.encryption
 import ir.etkastores.app.utils.AdjustHelper
 import ir.etkastores.app.utils.DialogHelper
 import ir.etkastores.app.webServices.ApiProvider
 import kotlinx.android.synthetic.main.activity_next_shopping_list.*
-import kotlinx.android.synthetic.main.activity_qr_code_generated.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.zip.Deflater
+import java.util.zip.GZIPInputStream
 import java.util.zip.GZIPOutputStream
-import java.util.zip.Inflater
 
 @Obfuscate
 class NextShoppingListActivity : BaseActivity(), EtkaToolbar.EtkaToolbarActionsListener, ProductsRecyclerAdapter.ProductsRecyclerCallbacks {
@@ -118,7 +112,9 @@ class NextShoppingListActivity : BaseActivity(), EtkaToolbar.EtkaToolbarActionsL
                     if (response.body()!!.isSuccessful) {
                         adapter!!.addItems(response.body()!!.data)
                         val content = response.body()!!.data.map { it.barCode }.joinToString("-")
-                        barcodeContent = compressString(content)
+                        barcodeContent = encryption(compressString(content))
+                        val value = barcodeContent ?: ""
+                        val decomp = decompress(decryption(value))
                         if (adapter!!.itemCount == 0) showEmptyMessage()
                     } else {
                         showLoadingErrorDialog(response.body()!!.meta.message)
@@ -274,7 +270,30 @@ class NextShoppingListActivity : BaseActivity(), EtkaToolbar.EtkaToolbarActionsL
             gos.close()
             val compressed = os.toByteArray()
             os.close()
-            return compressed.toString()
+            return Base64.encodeToString(os.toByteArray(),Base64.NO_WRAP)
+        }
+
+        @Throws(IOException::class)
+        fun decompress(zipText: String): String {
+            val compressed = Base64.decode(zipText,Base64.NO_WRAP)
+            if (compressed.size > 4) {
+                val gzipInputStream = GZIPInputStream(
+                        ByteArrayInputStream(compressed))
+
+                val baos = ByteArrayOutputStream()
+                var value = 0
+                while (value != -1) {
+                    value = gzipInputStream.read()
+                    if (value != -1) {
+                        baos.write(value)
+                    }
+                }
+                gzipInputStream.close()
+                baos.close()
+                return String(baos.toByteArray())
+            } else {
+                return ""
+            }
         }
 
         fun show(activity: Activity) {
