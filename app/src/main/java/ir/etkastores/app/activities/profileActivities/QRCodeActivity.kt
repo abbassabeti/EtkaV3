@@ -61,10 +61,10 @@ class QRCodeActivity : BaseActivity(), EtkaToolbar.EtkaToolbarActionsListener{
         renderOption.size = 800 // size of the final QR code image
         renderOption.borderWidth = 20 // width of the empty space around the QR code
         renderOption.ecl = ErrorCorrectionLevel.M // (optional) specify an error correction level
-        renderOption.patternScale = 0.35f // (optional) specify a scale for patterns
-        renderOption.roundedPatterns = true // (optional) if true, blocks will be drawn as dots instead
+        renderOption.patternScale = 0.95f // (optional) specify a scale for patterns
+        renderOption.roundedPatterns = false // (optional) if true, blocks will be drawn as dots instead
         renderOption.clearBorder = true // if set to true, the background will NOT be drawn on the border area
-        renderOption.color = Color(false,ContextCompat.getColor(this,R.color.white),ContextCompat.getColor(this,R.color.gray),ContextCompat.getColor(this,R.color.black)) // set a color palette for the QR code
+        renderOption.color = Color(false,ContextCompat.getColor(this,R.color.white),ContextCompat.getColor(this,R.color.white),ContextCompat.getColor(this,R.color.black)) // set a color palette for the QR code
         //renderOption.setBackground(background); // set a background, keep reading to find more about it
         //renderOption.setLogo(logo); // set a logo, keep reading to find more about it
 
