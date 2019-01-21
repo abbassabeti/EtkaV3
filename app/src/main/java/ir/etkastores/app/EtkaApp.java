@@ -66,7 +66,8 @@ public class EtkaApp extends MultiDexApplication {
     }
 
     private void initAdjust() {
-        String appToken = "uoflo2801534";
+//        String appToken = "uoflo2801534"; // old
+        String appToken = "s20be4m17aio"; // new
         String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
         if (!BuildConfig.DEBUG) environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
         AdjustConfig config = new AdjustConfig(this, appToken, environment);

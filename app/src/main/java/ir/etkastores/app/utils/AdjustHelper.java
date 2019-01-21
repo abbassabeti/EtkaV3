@@ -51,7 +51,7 @@ public class AdjustHelper {
     //19
     public final static String OpenInviteFriend = "k1b86n";
     //20
-    public final static String Login = "6c7p9o";
+    public final static String Login = "d9ipus";
     //21
     public final static String Logout = "d4xo4r";
     //22
