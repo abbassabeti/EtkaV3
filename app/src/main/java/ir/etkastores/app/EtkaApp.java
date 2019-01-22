@@ -71,6 +71,7 @@ public class EtkaApp extends MultiDexApplication {
         String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
         if (!BuildConfig.DEBUG) environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
         AdjustConfig config = new AdjustConfig(this, appToken, environment);
+        config.setAppSecret(1, 343603687, 1571206015, 2010524332, 474861284);
         if (!BuildConfig.DEBUG) config.setLogLevel(LogLevel.SUPRESS);
         config.setReadMobileEquipmentIdentity(true);
         config.setSendInBackground(true);
