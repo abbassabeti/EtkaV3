@@ -112,7 +112,7 @@ class NextShoppingListActivity : BaseActivity(), EtkaToolbar.EtkaToolbarActionsL
                     if (response.body()!!.isSuccessful) {
                         adapter!!.addItems(response.body()!!.data)
                         val content = response.body()!!.data.map { it.barCode }.joinToString("-")
-                        barcodeContent = encryption(compressString(content))
+                        barcodeContent = compressString(content)
                         val value = barcodeContent ?: ""
                         val decomp = decompress(decryption(value))
                         if (adapter!!.itemCount == 0) showEmptyMessage()
@@ -270,7 +270,7 @@ class NextShoppingListActivity : BaseActivity(), EtkaToolbar.EtkaToolbarActionsL
             gos.close()
             val compressed = os.toByteArray()
             os.close()
-            return Base64.encodeToString(os.toByteArray(),Base64.NO_WRAP)
+            return Base64.encodeToString(compressed,Base64.NO_WRAP)
         }
 
         @Throws(IOException::class)
