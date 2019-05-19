@@ -233,7 +233,7 @@ public class ApiProvider {
     private CertificatePinner getPinnedCertificate() {
         if (certificatePinner == null && ApiStatics.getBaseUrl().contains("https://")) {
             certificatePinner = new CertificatePinner.Builder()
-                    .add(ApiStatics.getBaseUrl().replace("https://", ""), "sha256/EC6FcYlSSdciVUvdR4NqRZIYvcdmbqdqYUQDZJP04Xk=")
+                    .add(ApiStatics.getBaseUrl().replace("https://", ""), "sha256/8ld6zKiNGWinT3KNSS+UMMPXOJrnATh9IFdFT9udNG8=")//8ld6zKiNGWinT3KNSS+UMMPXOJrnATh9IFdFT9udNG8=
                     .build();
         }
         return certificatePinner;
