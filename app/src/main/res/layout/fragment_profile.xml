@@ -182,7 +182,7 @@
                         android:layout_height="wrap_content"
                         app:rowIcon="@drawable/ic_invite_friends_grey_24dp"
                         app:rowText="@string/inviteFriends"
-                        app:scoreText="@string/score1"
+                        app:scoreText="@string/score10"
                         app:showScore="true"
                         app:showScoreStar="true" />
 

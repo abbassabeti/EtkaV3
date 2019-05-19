@@ -224,7 +224,7 @@ public class ApiProvider {
     }
 
     public Call<AccessToken> guestLogin() {
-        EtkaPushNotificationConfig.registerGuests();
+        EtkaPushNotificationConfig.subscribeGuests();
         return getApi().getToken(ApiStatics.GRAND_TYPE_PASSWORD, ApiStatics.getGuestUserName(), ApiStatics.getGuestPassword(), ApiStatics.getClientId(), ApiStatics.getClientSecret(), "");
     }
 
@@ -233,7 +233,7 @@ public class ApiProvider {
     private CertificatePinner getPinnedCertificate() {
         if (certificatePinner == null && ApiStatics.getBaseUrl().contains("https://")) {
             certificatePinner = new CertificatePinner.Builder()
-                    .add(ApiStatics.getBaseUrl().replace("https://", ""), "sha256/EC6FcYlSSdciVUvdR4NqRZIYvcdmbqdqYUQDZJP04Xk=")
+                    .add(ApiStatics.getBaseUrl().replace("https://", ""), "sha256/8ld6zKiNGWinT3KNSS+UMMPXOJrnATh9IFdFT9udNG8=")//8ld6zKiNGWinT3KNSS+UMMPXOJrnATh9IFdFT9udNG8=
                     .build();
         }
         return certificatePinner;

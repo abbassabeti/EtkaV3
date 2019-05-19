@@ -148,12 +148,6 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         showSureToLogoutDialog();
     }
 
-//    @OnClick(R.id.changePasswordButton)
-//    public void onChangePasswordButtonClick() {
-//        AdjustHelper.sendAdjustEvent(AdjustHelper.OpenChangePassword);
-//        ChangePasswordActivity.show(this);
-//    }
-
     @OnClick({R.id.specialOfferNotificationButton})
     public void onSpecialOfferNotificationButtonClick() {
         specialOfferSwitch.performClick();
@@ -170,10 +164,10 @@ public class ProfileSettingActivity extends BaseActivity implements EtkaToolbar.
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (EtkaPushNotificationConfig.isHekmatSubscribed()) {
                 AdjustHelper.sendAdjustEvent(AdjustHelper.DisableHekmatNotifications);
-                EtkaPushNotificationConfig.unregisterHekmat();
+                EtkaPushNotificationConfig.unSubscribeHekmat();
             } else {
                 AdjustHelper.sendAdjustEvent(AdjustHelper.EnableHekmatNotifications);
-                EtkaPushNotificationConfig.registerHekmat();
+                EtkaPushNotificationConfig.subscribeHekmat();
             }
         }
 

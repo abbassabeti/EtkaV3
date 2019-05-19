@@ -2,7 +2,6 @@ package ir.etkastores.app.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatImageView;
@@ -12,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.zxing.BarcodeFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +31,7 @@ import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatActivity;
 import ir.etkastores.app.activities.profileActivities.hekmatCard.HekmatCardRegisterActivity;
 import ir.etkastores.app.activities.profileActivities.survey.SurveyListActivity;
 import ir.etkastores.app.data.ProfileManager;
+import ir.etkastores.app.models.OauthResponse;
 import ir.etkastores.app.models.profile.UserProfileModel;
 import ir.etkastores.app.ui.Toaster;
 import ir.etkastores.app.ui.dialogs.HekmatCardLoginDialog;
@@ -41,8 +39,12 @@ import ir.etkastores.app.ui.dialogs.MessageDialog;
 import ir.etkastores.app.ui.views.CustomRowMenuItem;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.AdjustHelper;
-import ir.etkastores.app.utils.BarcodeUtils;
 import ir.etkastores.app.utils.DiskDataHelper;
+import ir.etkastores.app.webServices.ApiProvider;
+import ir.etkastores.app.webServices.ApiStatics;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Sajad on 9/1/17.
@@ -91,6 +93,7 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
     private void initViews() {
         toolbar.setActionListeners(this);
         appVersion.setText(getResources().getString(R.string.applicationVersionComma) + " " + BuildConfig.VERSION_NAME);
+        loadProfile();
     }
 
     @Override
@@ -294,5 +297,21 @@ public class ProfileFragment extends Fragment implements EtkaToolbar.EtkaToolbar
         LoginWithSMSActivity.show(getActivity());
     }
 
+    private void loadProfile() {
+        if (ProfileManager.getInstance().isGuest()) return;
+        ApiProvider.getInstance().getAuthorizedApi().getUserProfile(ApiStatics.getLastToken().getUserId()).enqueue(new Callback<OauthResponse<UserProfileModel>>() {
+            @Override
+            public void onResponse(Call<OauthResponse<UserProfileModel>> call, Response<OauthResponse<UserProfileModel>> response) {
+                if (response.isSuccessful() && response.body().isSuccessful()) {
+                    ProfileManager.getInstance().saveProfile(response.body().getData());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OauthResponse<UserProfileModel>> call, Throwable t) {
+
+            }
+        });
+    }
 
 }

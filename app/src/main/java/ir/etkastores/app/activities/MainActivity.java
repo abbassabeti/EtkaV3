@@ -70,6 +70,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
+
+        if (getSupportFragmentManager().findFragmentById(R.id.homeActivityFragmentsHolder) != null) {
+            return;
+        }
+
         EtkaRemoteConfigManager.checkRemoteConfigs();
 
         bottomNavigationView.enableAnimation(false);
@@ -77,7 +84,7 @@ public class MainActivity extends BaseActivity {
         bottomNavigationView.setLabelVisibilityMode(1);
         bottomNavigationView.setItemHorizontalTranslationEnabled(false);
         bottomNavigationView.setTypeface(FontUtils.getCommonTypeFace());
-        bottomNavigationView.setOnNavigationItemSelectedListener(selectedListener);
+
 
         notificationModel = getNotificationModel();
 

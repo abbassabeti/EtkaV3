@@ -210,10 +210,10 @@ public class HekmatCardRegisterActivity extends BaseActivity implements EtkaTool
         });
     }
 
-    @OnClick(R.id.iHavePasswordButton)
-    public void onIHavePasswordButtonClick(){
-        HekmatCardResetPasswordActivity.show(this,cardNumberEt.getText().toString());
-        finish();
-    }
+//    @OnClick(R.id.iHavePasswordButton)
+//    public void onIHavePasswordButtonClick(){
+//        HekmatCardResetPasswordActivity.show(this,cardNumberEt.getText().toString());
+//        finish();
+//    }
 
 }

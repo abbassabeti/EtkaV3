@@ -1,7 +1,5 @@
 package ir.etkastores.app.models.store;
 
-import android.text.TextUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,55 +14,61 @@ import ir.etkastores.app.R;
 public class StoreModel implements Cloneable {
 
     @SerializedName("id")
-    long id;
+    private long id;
 
     @SerializedName("code")
-    String code;
+    private String code;
 
     @SerializedName("name")
-    String name;
+    private String name;
 
     @SerializedName("parentName")
-    String parentName;
+    private String parentName;
 
     @SerializedName("managerName")
-    String managerName;
+    private String managerName;
 
     @SerializedName("provinceName")
-    String provinceName;
+    private String provinceName;
 
     @SerializedName("contactInfo")
-    ContactInfoModel contactInfo;
+    private ContactInfoModel contactInfo;
 
     @SerializedName("openingHours")
-    OpeningHoursModel openingHours;
+    private OpeningHoursModel openingHours;
 
     @SerializedName("features")
-    List<FeatureModel> features;
+    private List<FeatureModel> features;
 
     @SerializedName("latitude")
-    double latitude;
+    private double latitude;
 
     @SerializedName("longitude")
-    double longitude;
+    private double longitude;
 
     @SerializedName("ranking")
-    String ranking;
+    private String ranking;
 
     @SerializedName("storeImage")
-    String storeImage;
+    private String storeImage;
 
     @SerializedName("managerImage")
-    String managerImage;
+    private String managerImage;
 
-    @SerializedName("inStoreModeUrl")
-    String inStoreModeUrl;
-
-    @SerializedName("GeofenceArea")
+    @SerializedName("geofenceArea")
     private int geofenceArea;
 
-    @SerializedName("GeofenceEnabled")
+    @SerializedName("geofenceEnabled")
     private boolean geofenceEnabled;
+
+    @SerializedName("hasInStoreMap")
+    private boolean hasInStoreMap;
+
+    @SerializedName("hasInStoreOffer")
+    private boolean hasInStoreOffer;
+
+    @SerializedName("hasInStoreSurvey")
+    private boolean hasInStoreSurvey;
 
     int ic = -1;
 
@@ -76,7 +80,7 @@ public class StoreModel implements Cloneable {
         }
     }
 
-    public StoreModel(long id, String code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage, String inStoreModeUrl) {
+    public StoreModel(long id, String code, String name, String parentName, String managerName, String provinceName, ContactInfoModel contactInfo, OpeningHoursModel openingHours, List<FeatureModel> features, double latitude, double longitude, String ranking, String storeImage, String managerImage, boolean hasInStoreMap, boolean hasInStoreOffer, boolean hasInStoreSurvey) {
         this.id = id;
         this.code = code;
         this.name = name;
@@ -91,7 +95,9 @@ public class StoreModel implements Cloneable {
         this.ranking = ranking;
         this.storeImage = storeImage;
         this.managerImage = managerImage;
-        this.inStoreModeUrl = inStoreModeUrl;
+        this.hasInStoreMap = hasInStoreMap;
+        this.hasInStoreOffer = hasInStoreOffer;
+        this.hasInStoreSurvey = hasInStoreSurvey;
     }
 
     public long getId() {
@@ -172,15 +178,11 @@ public class StoreModel implements Cloneable {
 
     @Override
     public StoreModel clone() {
-        return new StoreModel(id, code, name, parentName, managerName, provinceName, contactInfo, openingHours, features, latitude, longitude, ranking, storeImage, managerImage, inStoreModeUrl);
+        return new StoreModel(id, code, name, parentName, managerName, provinceName, contactInfo, openingHours, features, latitude, longitude, ranking, storeImage, managerImage, hasInStoreMap, hasInStoreOffer, hasInStoreSurvey);
     }
 
-    public String getInStoreModeUrl() {
-        return inStoreModeUrl;
-    }
-
-    public boolean hasInStoreMode() {
-        return !TextUtils.isEmpty(getInStoreModeUrl());
+    public String toJson() {
+        return new Gson().toJson(this);
     }
 
     public int getGeofenceArea() {
@@ -191,4 +193,15 @@ public class StoreModel implements Cloneable {
         return geofenceEnabled;
     }
 
+    public boolean isHasInStoreMap() {
+        return hasInStoreMap;
+    }
+
+    public boolean isHasInStoreOffer() {
+        return hasInStoreOffer;
+    }
+
+    public boolean isHasInStoreSurvey() {
+        return hasInStoreSurvey;
+    }
 }

@@ -44,6 +44,7 @@ import ir.etkastores.app.activities.StoreActivity;
 import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.models.store.StoreModel;
 import ir.etkastores.app.utils.AdjustHelper;
+import ir.etkastores.app.utils.FontUtils;
 import ir.etkastores.app.utils.SuggestionArrayAdapter;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -78,6 +79,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @BindView(R.id.findMyLocationButton)
     AppCompatImageView findMyLocationButton;
+
+    @BindView(R.id.virtualTourButton)
+    TextView virtualTourButton;
 
     String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
@@ -131,6 +135,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             findMyLocationButton.setVisibility(View.VISIBLE);
             findUserLocation();
         }
+        virtualTourButton.setTypeface(FontUtils.getBoldTypeFace());
 
     }
 
@@ -192,7 +197,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public boolean onMarkerClick(Marker marker) {
         clearSelectedMarker();
         selectedStore = storesHashMap.get(marker);
-        storeName.setText(getResources().getString(R.string.virtualTourOfStore) + " " + selectedStore.getName());
+        storeName.setText(selectedStore.getName());
         storeInfoHolder.setVisibility(View.VISIBLE);
         selectedMarker = marker;
         marker.setIcon(bitmapDescriptorFromVector(R.drawable.ic_selected_marker));

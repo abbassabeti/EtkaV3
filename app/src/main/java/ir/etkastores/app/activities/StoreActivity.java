@@ -27,10 +27,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.michaelrocks.paranoid.Obfuscate;
+import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
 import ir.etkastores.app.R;
+import ir.etkastores.app.activities.profileActivities.NextShoppingListActivity;
 import ir.etkastores.app.adapters.recyclerViewAdapters.HekmatHorizontalRecyclerListAdapter;
 import ir.etkastores.app.data.HekmatProductsManager;
+import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.data.StaticsData;
 import ir.etkastores.app.data.StoresManager;
 import ir.etkastores.app.models.GalleryItemsModel;
@@ -104,6 +107,9 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
     @BindView(R.id.extraItemHolder)
     LinearLayout extraItemHolder;
 
+    @BindView(R.id.inStoreModeButton)
+    View inStoreModeButton;
+
     private StoreModel storeModel;
 
     private String storeCode = null;
@@ -166,6 +172,13 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
                 add(storeModel.getStoreImage());
             }});
         }
+
+        if (storeModel.isHasInStoreOffer() || storeModel.isHasInStoreSurvey() || BuildConfig.DEBUG) {
+            inStoreModeButton.setVisibility(View.VISIBLE);
+        } else {
+            inStoreModeButton.setVisibility(View.GONE);
+        }
+
         storeCategory.setText(storeModel.getRanking());
         storeName.setText(storeModel.getName());
         storeAddress.setText(storeModel.getContactInfo().getAddress());
@@ -262,14 +275,32 @@ public class StoreActivity extends BaseActivity implements EtkaToolbar.EtkaToolb
         IntentHelper.openWayTracer(this, storeModel.getLatitude(), storeModel.getLongitude(), storeModel.getName());
     }
 
-    @OnClick(R.id.btn_inStoreMode)
-    public void onInStoreModeClick() {
-        if (storeModel.hasInStoreMode()) {
+    @OnClick(R.id.btn_inStoreMap)
+    public void onInStoreMapClick() {
+        if (storeModel.isHasInStoreMap()) {
             AdjustHelper.sendAdjustEvent(AdjustHelper.InStoreMode);
-            InStoreModeActivity.show(this, storeModel);
+            InStoreMapActivity.show(this, storeModel);
         } else {
             Toaster.show(this, R.string.thisStoreNotSupportInStoreModeYet);
         }
+    }
+
+    @OnClick(R.id.inStoreModeButton)
+    public void onInStoreModeButtonClick() {
+        if (storeModel.isHasInStoreSurvey() && !storeModel.isHasInStoreMap() && !storeModel.isHasInStoreOffer()) {
+            LoginWithSMSActivity.show(this);
+            return;
+        }
+        InStoreModeActivity.show(this, storeModel);
+    }
+
+    @OnClick(R.id.nextShoppingListButton)
+    public void onNextShoppingListButtonClick() {
+        if (ProfileManager.getInstance().isGuest()) {
+            LoginWithSMSActivity.show(this);
+            return;
+        }
+        NextShoppingListActivity.show(this);
     }
 
     private void addPhone(final String phoneNumber) {

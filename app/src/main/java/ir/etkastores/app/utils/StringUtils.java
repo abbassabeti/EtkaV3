@@ -1,6 +1,7 @@
 package ir.etkastores.app.utils;
 
 import android.graphics.Paint;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 /**
@@ -9,37 +10,39 @@ import android.widget.TextView;
 
 public class StringUtils {
 
-    public static String toEnglishDigit(String str){
+    public static String toEnglishDigit(String str) {
+        if (TextUtils.isEmpty(str)) return "";
         String s = str;
-        s = s.replace("۰","0");
-        s = s.replace("۱","1");
-        s = s.replace("۲","2");
-        s = s.replace("۳","3");
-        s = s.replace("۴","4");
-        s = s.replace("۵","5");
-        s = s.replace("۶","6");
-        s = s.replace("۷","7");
-        s = s.replace("۸","8");
-        s = s.replace("۹","9");
+        s = s.replace("۰", "0");
+        s = s.replace("۱", "1");
+        s = s.replace("۲", "2");
+        s = s.replace("۳", "3");
+        s = s.replace("۴", "4");
+        s = s.replace("۵", "5");
+        s = s.replace("۶", "6");
+        s = s.replace("۷", "7");
+        s = s.replace("۸", "8");
+        s = s.replace("۹", "9");
         return s;
     }
 
-    public static String toPersianDigit(String str){
+    public static String toPersianDigit(String str) {
+        if (TextUtils.isEmpty(str)) return "";
         String s = str;
-        s = s.replace("0","۰");
-        s = s.replace("1","۱");
-        s = s.replace("2","۲");
-        s = s.replace("3","۳");
-        s = s.replace("4","۴");
-        s = s.replace("5","۵");
-        s = s.replace("6","۶");
-        s = s.replace("7","۷");
-        s = s.replace("8","۸");
-        s = s.replace("9","۹");
+        s = s.replace("0", "۰");
+        s = s.replace("1", "۱");
+        s = s.replace("2", "۲");
+        s = s.replace("3", "۳");
+        s = s.replace("4", "۴");
+        s = s.replace("5", "۵");
+        s = s.replace("6", "۶");
+        s = s.replace("7", "۷");
+        s = s.replace("8", "۸");
+        s = s.replace("9", "۹");
         return s;
     }
 
-    public static void setStrikeThruTextView(TextView textView){
+    public static void setStrikeThruTextView(TextView textView) {
         textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 

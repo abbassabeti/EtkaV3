@@ -17,7 +17,6 @@ import com.google.android.gms.analytics.Tracker;
 import io.fabric.sdk.android.Fabric;
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.utils.EventsManager;
-import ir.etkastores.app.utils.procalendar.XCalendar;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
@@ -67,10 +66,12 @@ public class EtkaApp extends MultiDexApplication {
     }
 
     private void initAdjust() {
-        String appToken = "uoflo2801534";
+//        String appToken = "uoflo2801534"; // old
+        String appToken = "s20be4m17aio"; // new
         String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
         if (!BuildConfig.DEBUG) environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
         AdjustConfig config = new AdjustConfig(this, appToken, environment);
+        config.setAppSecret(1, 343603687, 1571206015, 2010524332, 474861284);
         if (!BuildConfig.DEBUG) config.setLogLevel(LogLevel.SUPRESS);
         config.setReadMobileEquipmentIdentity(true);
         config.setSendInBackground(true);

@@ -52,14 +52,14 @@ public class CategoriesFilterActivity extends BaseActivity implements
     }
 
     public static void show(Context context, SearchProductRequestModel searchProductRequestModel) {
-        show(context,searchProductRequestModel,"");
+        show(context, searchProductRequestModel, "");
     }
 
     public static void show(Context context, SearchProductRequestModel searchProductRequestModel, String title) {
         Intent intent = new Intent(context, CategoriesFilterActivity.class);
         intent.putExtra(SEARCH_REQUEST, new Gson().toJson(searchProductRequestModel));
         intent.putExtra(IS_SEARCH, true);
-        intent.putExtra(TITLE,title);
+        intent.putExtra(TITLE, title);
         context.startActivity(intent);
     }
 
@@ -115,11 +115,11 @@ public class CategoriesFilterActivity extends BaseActivity implements
             lockDrawer();
             if (!TextUtils.isEmpty(productRequestModel.getTitle())) {
                 toolbar.setTitle(productRequestModel.getTitle());
-            }else if (!TextUtils.isEmpty(title)){
+            } else if (!TextUtils.isEmpty(title)) {
                 toolbar.setTitle(title);
             }
         } else {
-            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(),categoryModel.getTitle());
+            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(), categoryModel.getTitle());
             categoriesFragment.setOnCategoryItemClickListener(this);
             ActivityUtils.addFragment(this, R.id.categoriesFrame, categoriesFragment, "CATEGORY_FILTER", false);
             toolbar.setTitle(categoryModel.getTitle());
@@ -157,7 +157,7 @@ public class CategoriesFilterActivity extends BaseActivity implements
     public void onCategoryClicked(CategoryModel categoryModel) {
         AdjustHelper.sendAdjustEvent(AdjustHelper.SelectCategoryFromSearch);
         if (categoryModel.hasChild()) {
-            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(),categoryModel.getTitle());
+            CategoriesFragment categoriesFragment = CategoriesFragment.newInstance(categoryModel.getId(), categoryModel.getTitle());
             categoriesFragment.setOnCategoryItemClickListener(this);
             addFragmentToBackStack(categoriesFragment);
             lockDrawer();

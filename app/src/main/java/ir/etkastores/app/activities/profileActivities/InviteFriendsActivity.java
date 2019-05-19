@@ -2,6 +2,7 @@ package ir.etkastores.app.activities.profileActivities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import ir.etkastores.app.activities.BaseActivity;
 import ir.etkastores.app.data.ProfileManager;
 import ir.etkastores.app.ui.views.EtkaToolbar;
 import ir.etkastores.app.utils.IntentHelper;
+import ir.etkastores.app.utils.StringUtils;
 
 @Obfuscate
 public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.EtkaToolbarActionsListener {
@@ -40,7 +42,8 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
         setContentView(R.layout.activity_invite_friends);
         ButterKnife.bind(this);
         toolbar.setActionListeners(this);
-        invitationCode.setText(ProfileManager.getInstance().getProfile().getInvitationCode());
+        invitationCode.setText(StringUtils.toEnglishDigit(ProfileManager.getInstance().getProfile().getInvitationCode()));
+        invitationCode.setTypeface(Typeface.DEFAULT);
     }
 
     @Override
@@ -62,7 +65,7 @@ public class InviteFriendsActivity extends BaseActivity implements EtkaToolbar.E
     @OnClick(R.id.shareButton)
     public void onShareButtonClick() {
         String message = String.format(getResources().getString(R.string.shareInvitationCodeMessage), ProfileManager.getInstance().getProfile().getInvitationCode()) +
-                "\n" + getResources().getString(R.string.cafebazaarAppUrl);
+                "\n" + getResources().getString(R.string.appDownloadUrl);
         IntentHelper.share(this, getResources().getString(R.string.etkaStoreAppInvitation), message);
     }
 

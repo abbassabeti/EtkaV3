@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import com.google.android.gms.maps.MapView;
-
 import io.michaelrocks.paranoid.Obfuscate;
 import ir.etkastores.app.BuildConfig;
 import ir.etkastores.app.EtkaApp;
@@ -35,13 +33,13 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        EtkaPushNotificationConfig.registerGlobal();
+        EtkaPushNotificationConfig.checkSubscribes();
         EtkaRemoteConfigManager.checkRemoteConfigs();
 
         if (BuildConfig.DEBUG) {
-            EtkaPushNotificationConfig.registerDev();
+            EtkaPushNotificationConfig.subscribeDev();
         } else {
-            EtkaPushNotificationConfig.unregisterDev();
+            EtkaPushNotificationConfig.unSubscribeDev();
         }
 
         if (getIntent() != null && getIntent().hasExtra(NotificationModel.IS_FROM_NOTIFICATION)) {
@@ -55,7 +53,7 @@ public class SplashActivity extends BaseActivity {
         if (DiskDataHelper.getForceUpdateVersion() > BuildConfig.VERSION_CODE) return;
 
         if (ApiStatics.getLastToken() == null) {
-            prepareAppForRun();
+            showLogin();
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -87,24 +85,6 @@ public class SplashActivity extends BaseActivity {
                 }
             }
         }, 500);
-    }
-
-    private void initMap() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    MapView mapView = new MapView(SplashActivity.this);
-                    mapView.onCreate(null);
-                    showLogin();
-                } catch (Exception err) {
-                }
-            }
-        }, 100);
-    }
-
-    private void prepareAppForRun() {
-        initMap();
     }
 
     Call<AccessToken> loginRequest;
